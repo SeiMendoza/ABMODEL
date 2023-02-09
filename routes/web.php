@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PedidoUsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/*****************************
+  Rutas Para Menú de usuario
+******************************/
+Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
+->name('usuario_pedido.create');
