@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoUsuarioController;
 use App\Http\Controllers\PlatillosyBebidasController;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+/**Home */
+Route::get('/', [HomeController::class, 'index'])
+->name('index');
+Route::get('/tabla', [HomeController::class, 't'])
+->name('t');
+Route::get('/billing', [HomeController::class, 'b'])
+->name('b');
+Route::get('/dashboard', [HomeController::class, 'd'])
+->name('d');
+Route::get('/profile', [HomeController::class, 'p'])
+->name('p');
+Route::get('/sing', [HomeController::class, 's'])
+->name('s');
+Route::get('/rtl', [HomeController::class, 'r'])
+->name('r');
 
 
 /*****************************

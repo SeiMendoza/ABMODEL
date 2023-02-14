@@ -26,13 +26,13 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href={{ asset("css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
+<link href={{ asset("css/nucleo-svg.css") }} rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+  <link id="pagestyle" href="css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -42,7 +42,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
           <div class="container-fluid">
-            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="../pages/dashboard.html">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href={{route("index")}}>
               Argon Dashboard 2
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,13 +55,13 @@
             <div class="collapse navbar-collapse" id="navigation">
               <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="../pages/dashboard.html">
+                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href={{route("d")}}>
                     <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
                     Dashboard
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-2" href="../pages/profile.html">
+                  <a class="nav-link me-2" href={{route("p")}}>
                     <i class="fa fa-user opacity-6 text-dark me-1"></i>
                     Profile
                   </a>
@@ -73,7 +73,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-2" href="../pages/sign-in.html">
+                  <a class="nav-link me-2" href={{route("s")}}>
                     <i class="fas fa-key opacity-6 text-dark me-1"></i>
                     Sign In
                   </a>
@@ -141,10 +141,11 @@
     </section>
   </main>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src={{ asset("js/core/popper.min.js") }}></script>
+  <script src={{ asset("js/core/bootstrap.min.js") }}></script>
+
+  <script src={{ asset("js/plugins/perfect-scrollbar.min.js") }}></script>
+  <script src={{ asset("js/plugins/smooth-scrollbar.min.js") }}></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
