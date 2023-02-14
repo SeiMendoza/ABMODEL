@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PedidoUsuarioController;
+use App\Http\Controllers\PlatillosyBebidasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,12 @@ Route::get('/', function () {
 ******************************/
 Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
+
+/*****************************
+  Rutas Para Platillos y Bebidas
+******************************/
+Route::get('/bebidasyplatillos/nuevo', [PlatillosyBebidasController::class, 'create'])
+->name('bebidasyplatillos.create');
+
+Route::post('/bebidasyplatillos/nuevo',[PlatillosyBebidasController::class, 'store'])
+    ->name('bebidasyplatillos.store');
