@@ -26,6 +26,9 @@ Route::get('/', function () {
 Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
 
+Route::get('/menu/usuario', [PedidoUsuarioController::class, 'index'])
+->name('usuario_menu.index');/*Ruta de visualizacion de menu*/
+
 /*****************************
   Rutas Para Platillos y Bebidas
 ******************************/
