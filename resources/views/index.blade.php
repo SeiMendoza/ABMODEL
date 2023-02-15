@@ -286,13 +286,13 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Menú del Dia</p>
                     <h5 class="font-weight-bolder">
-                      2,300
+                    Menú 
                     </h5>
                     <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+3%</span>
-                      since last week
+                      <span class="text-success text-sm font-weight-bolder"></span>
+                      <a href={{route("usuario_menu.index")}} class="btn badge-primary">Ver</a>
                     </p>
                   </div>
                 </div>

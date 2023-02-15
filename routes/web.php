@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoUsuarioController;
+use App\Http\Controllers\MenuUsuarioController;
 use App\Http\Controllers\PlatillosyBebidasController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,8 +41,14 @@ Route::get('/registro', [HomeController::class, 'registro'])
 Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
 
-Route::get('/menu/usuario', [PedidoUsuarioController::class, 'index'])
+ /*****************************
+  Rutas Para Menu de usuario
+******************************/
+
+Route::get('/menu/usuario', [MenuUsuarioController::class, 'index'])
 ->name('usuario_menu.index');/*Ruta de visualizacion de menu*/
+Route::get('/menu/busqueda', [MenuUsuarioController::class,'search'])
+->name('menu.search');
 
 /*****************************
   Rutas Para Platillos y Bebidas
@@ -51,3 +58,4 @@ Route::get('/bebidasyplatillos/nuevo', [PlatillosyBebidasController::class, 'cre
 
 Route::post('/bebidasyplatillos/nuevo',[PlatillosyBebidasController::class, 'store'])
     ->name('bebidasyplatillos.store');
+ 
