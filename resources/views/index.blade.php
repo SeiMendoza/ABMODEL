@@ -53,6 +53,14 @@
           </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link " href={{route("registro")}}>
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Registro plantilla</span>
+            </a>
+          </li>
+        <li class="nav-item">
           <a class="nav-link " href={{route("t")}}>
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
@@ -251,14 +259,15 @@
             <div class="card-body p-3">
               <div class="row">
                 <div class="col-8">
-                  <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
+                  <div class="numbers" >
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Registro
+                    </p>
                     <h5 class="font-weight-bolder">
-                      $53,000
+                      Comidas y bebidas
                     </h5>
                     <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+55%</span>
-                      since yesterday
+                      <span class="text-success text-sm font-weight-bolder"></span>
+                      <a href={{route("bebidasyplatillos.create")}} class="btn badge-primary">Registrar</a>
                     </p>
                   </div>
                 </div>

@@ -32,7 +32,7 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href={{assets("css/argon-dashboard.css?v=2.0.4")}} rel="stylesheet"/>
+  <link id="pagestyle" href="css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -255,17 +255,18 @@
             <div class="card-body p-3">
               <div class="row">
                 <div class="col-8">
-                  <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
-                    <h5 class="font-weight-bolder">
-                      $53,000
-                    </h5>
-                    <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+55%</span>
-                      since yesterday
-                    </p>
+                    <div class="numbers" >
+                      <p class="text-sm mb-0 text-uppercase font-weight-bold">Registro
+                      </p>
+                      <h5 class="font-weight-bolder">
+                        Comidas y bebidas
+                      </h5>
+                      <p class="mb-0">
+                        <span class="text-success text-sm font-weight-bolder"></span>
+                        <a href={{route("bebidasyplatillos.create")}} class="btn badge-primary">Registrar</a>
+                      </p>
+                    </div>
                   </div>
-                </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
                     <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>

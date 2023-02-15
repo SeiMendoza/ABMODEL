@@ -33,4 +33,7 @@ class HomeController extends Controller
     public function r(){
         return view("pages.rtl");
     }
+    public function registro(){
+        return view("pages.registro");
+    }
 }

@@ -1,5 +1,4 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
-integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link href="{{ asset("css/argon-dashboard.css") }}" rel="stylesheet">
 
 <div class="x_content">
     <br />
@@ -11,7 +10,7 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
                         {{$error}}
                     </li>
                 @endforeach
-            </ul>
+            </ul>n
         </div>
     @endif
     <form method="post"  action="" enctype="multipart/form-data">
@@ -103,7 +102,7 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
                 <label class="col-form-label" style="margin-left: 2%;float:left; width:10%">Tamaño:</label>
                 <div class="">
                     <input type="text" id="tamanio" name="tamanio" required="required" class="form-control "
-                    value="{{old('tamanio')}}" style="float:left; width:20%" 
+                    value="{{old('tamanio')}}" style="float:left; width:20%"
                     placeholder="Ingrese el tamaño" maxlength="100" minlength="3">
                 </div>
             </div>
@@ -112,7 +111,7 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
 
             <!--Seleccionado por refresco-->
             <div style="display: none;" id="refresco" style="width:90%; margin-left: 5%;">
-                
+
                 <div style="width:90%; margin-left: 5%;">
                     <label class="col-form-label" style="float:left; width:10%">Cantidad:</label>
                     <div class="">

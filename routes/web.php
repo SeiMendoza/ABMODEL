@@ -31,7 +31,8 @@ Route::get('/sing', [HomeController::class, 's'])
 ->name('s');
 Route::get('/rtl', [HomeController::class, 'r'])
 ->name('r');
-
+Route::get('/registro', [HomeController::class, 'registro'])
+->name('registro');
 
 /*****************************
   Rutas Para Menú de usuario
