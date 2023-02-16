@@ -18,8 +18,8 @@ class HomeController extends Controller
         return view("pages.tables");
     }
 
-    public function d(){
-        return view("pages.dashboard");
+    public function admonRestaurante(){
+        return view("/Menu/Admon/admon_Restaurante");
     }
 
     public function p(){
