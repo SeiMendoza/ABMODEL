@@ -42,13 +42,13 @@ Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
 
  /*****************************
-  Rutas Para Menu de usuario
+  Rutas Para Menu de cliente
 ******************************/
 
-Route::get('/menu/usuario', [MenuUsuarioController::class, 'index'])
-->name('usuario_menu.index');/*Ruta de visualizacion de menu*/
-Route::get('/menu/busqueda', [MenuUsuarioController::class,'search'])
-->name('menu.search');
+Route::get('/menu/cliente', [MenuUsuarioController::class, 'index'])
+->name('cliente_menu.index');/*Ruta de visualizacion de menu*/
+//Route::get('/menu', [MenuUsuarioController::class,'search'])
+//->name('menu.search');
 
 /*****************************
   Rutas Para Platillos y Bebidas
