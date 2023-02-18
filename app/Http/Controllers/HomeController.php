@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PlatillosyBebidas;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,7 +20,9 @@ class HomeController extends Controller
     }
 
     public function admonRestaurante(){
-        return view("/Menu/Admon/admon_Restaurante");
+
+        $platillos = PlatillosyBebidas::all();
+        return view("/Menu/Admon/admon_Restaurante")->with('platillos', $platillos);
     }
 
     public function p(){

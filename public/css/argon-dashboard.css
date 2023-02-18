@@ -9,7 +9,7 @@
   --bs-indigo: #596CFF;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
-  --bs-red: #F56565;
+  --bs-red: #fa0000;
   --bs-orange: #fd7e14;
   --bs-yellow: #FBD38D;
   --bs-green: #81E6D9;
@@ -52,6 +52,7 @@
   --bs-font-sans-serif: "Open Sans", sans-serif;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-gradient-menu: linear-gradient(180deg, #D2001A, #e8263d);
   --bs-body-font-family: var(--bs-font-sans-serif);
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
@@ -74,6 +75,15 @@
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fcf8e3;
 }
+
+/***** Colores de Fondo *****/
+
+.bg-menu {
+  background-color: #D2001A !important;
+}
+
+/***** End Colores de Fondo *****/
+
 
 *,
 *::before,
@@ -99,6 +109,7 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 
 hr {
   margin: 1rem 0;
@@ -3674,6 +3685,22 @@ fieldset:disabled .btn {
   --bs-btn-disabled-color: #000;
   --bs-btn-disabled-bg: #5e72e4;
   --bs-btn-disabled-border-color: #5e72e4;
+}
+
+.btn-menu {
+  --bs-btn-color: #D2001A;
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #D2001A;
+  --bs-btn-hover-color: #D2001A;
+  --bs-btn-hover-bg: #ffffff;
+  --bs-btn-focus-shadow: D2001A;
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: #D2001A;
+  --bs-btn-active-border-color: #ffffff;
+  --bs-btn-active-shadow: none;
+  --bs-btn-disabled-color: #ffffff;
+  --bs-btn-disabled-bg: #D2001A;
+  --bs-btn-disabled-border-color: #ffffff;
 }
 
 .btn-secondary {

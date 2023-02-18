@@ -1,0 +1,26 @@
+
+/***** Estilos para el Menu *****/
+
+.bg-menu {
+  background-color: #D2001A !important;
+}
+
+.bg-gradient-menu {
+  background-image: var(--bs-gradient-menu) !important;
+}
+
+.icon-shape-menu {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  border-radius: 0.75rem;
+}
+
+.icon-shape-menu i {
+  color: #fff;
+  opacity: 0.8;
+  top: 10px;
+  position: relative;
+}
+
+/***** End Section *****/
