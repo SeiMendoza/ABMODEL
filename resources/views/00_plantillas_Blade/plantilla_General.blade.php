@@ -130,8 +130,46 @@
 
     <main class="main-content position-relative border-radius-lg">
         <p class="mb-0 col-12 text-start">
+            <div>
             <span class="text-success text-sm font-weight-bolder "></span>
-            <a href={{ route('bebidasyplatillos.create') }} class="btn btn-menu my-3">Registrar Comida o Bebida</a>
+                 <a href={{ route('bebidasyplatillos.create') }} class="btn btn-menu my-3">Registrar Comida o Bebida</a>
+
+                 <div style=" display:block; float:right; padding-top:19px"> 
+                    <form action="{{ route('busqueda.index') }}" method="get" role="search" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 270px" placeholder="Buscar por nombre" aria-label="Search" aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($busqueda)) echo $busqueda; ?>" />
+                            <div class="input-group-append">
+                                <button class="btn btn-success my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>   
+                            </div>
+                    </form>
+              
+                    <form class="form-inline"> 
+                         <select style="outline: 0; padding: 0px; border-radius: 9px; height: 40px; margin-left: 12px; border: 2px solid rgb(85, 178, 85">
+                              <option value="FILTRAR POR"><strong>FILTRAR POR</strong></option>
+                              <option value="Orden Alfabético">Orden Alfabético</option>
+                              <option value="Precio más alto">Precio más alto</option>
+                              <option value="Precio más bajo">Precio más bajo</option>
+                              <option value="Mas Reciente">Mas reciente</option>
+                              <option value="Mas antiguo">Mas antiguo</option>  
+                        </select>
+                    </form>  
+              
+                    <form>
+                        <div class="form-check form-check-inline">
+                             <input class="form-check-input" type="checkbox" id="1" value="option1" style="margin-left: 0.0px">
+                             <label class="form-check-label" for="1" style="color:black"><strong>Platillos</strong></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                             <input class="form-check-input" type="checkbox" id="2" value="option2" style="margin-left: 0.0px">
+                             <label class="form-check-label" for="2" style="color:black"><strong>Bebidas</strong></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                             <input class="form-check-input" type="checkbox" id="3" value="option3" style="margin-left: 0.0px">
+                             <label class="form-check-label" for="3" style="color:black"><strong>Combos</strong></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </p>
         @yield('contend')
     </main>

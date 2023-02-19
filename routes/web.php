@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoUsuarioController;
 use App\Http\Controllers\MenuUsuarioController;
 use App\Http\Controllers\PlatillosyBebidasController;
+use App\Http\Controllers\BusquedaAdmonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,4 +59,10 @@ Route::get('/bebidasyplatillos/nuevo', [PlatillosyBebidasController::class, 'cre
 
 Route::post('/bebidasyplatillos/nuevo',[PlatillosyBebidasController::class, 'store'])
     ->name('bebidasyplatillos.store');
+
+/*****************************
+  Rutas Para Administración
+******************************/
+Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])
+    ->name('busqueda.index');
  
