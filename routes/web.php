@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoUsuarioController;
 use App\Http\Controllers\MenuUsuarioController;
 use App\Http\Controllers\PlatillosyBebidasController;
+use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,18 @@ Route::get('/bebidasyplatillos/nuevo', [PlatillosyBebidasController::class, 'cre
 
 Route::post('/bebidasyplatillos/nuevo',[PlatillosyBebidasController::class, 'store'])
     ->name('bebidasyplatillos.store');
+
+/*****************************
+  Rutas Para Combos
+******************************/
+Route::get('/combos/nuevo', [ComboController::class, 'create'])
+->name('combo.create');
+
+Route::post('/combos/nuevo',[ComboController::class, 'store'])
+    ->name('combo.store');
+
+  Route::post('/combos/temporal',[ComboController::class, 'temporal'])
+    ->name('combo.temporal');
 
 /*****************************
   Rutas Para Administración
