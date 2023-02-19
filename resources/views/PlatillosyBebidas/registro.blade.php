@@ -1,193 +1,120 @@
-<link href="{{ asset("css/argon-dashboard.css") }}" rel="stylesheet">
+@extends('00_plantillas_blade.plantilla_General1')
+@section('contend')
+    <div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
+        <br><br>
+        <div class="wrapper wrapper--w960" >
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Registro de Platillos y Bebidas</h2>
+                    <form method="post"  action="" enctype="multipart/form-data">
+                        @csrf
 
-<div class="x_content">
-    <br />
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>
-                        {{$error}}
-                    </li>
-                @endforeach
-            </ul>n
-        </div>
-    @endif
-    <form method="post"  action="" enctype="multipart/form-data">
-        @csrf
-        <div class="item form-group">
-            <h1><center>Creacion de Platillos y Bebidas</center></h1>
-            <br><br>
-            <div style="width:90%; margin-left: 5%;">
-                <div style="float:left; width:10%">
-                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tipo:</label>
-                </div>
-                <div class="col-md-6 col-sm-6" style="float:left; width:90%">
-                    <select name="tipo" id="tipo" required="required" class="form-control" onchange="producto()">
-                        @if(old('tipo') === 0 )
-                            <option value="0" style="display:none">Comida</option>
-                        @else
-                            @if(old('tipo') === 1 )
-                                <option value="1" style="display:none">Bebida</option>
-                            @else
-                                <option value="" style="display:none">--Seleccione una opción--</option>
-                            @endif
-                        @endif
-                        <option value="0">Comida</option>
-                        <option value="1">Bebida</option>
-                    </select>
-                </div>
-            </div>
+                        <div style="width:200px;float:left">
+                            <img src="" alt="" width="200px" height="200px" id="imagenmostrada">
+                            <br>
+                            <input type="file" id="imagen" name="imagen" accept="image/*" required
+                            value="{{old('imagenPrevisualizacion')}}" style="color: white;width: 200px;" > 
+                            @error('imagen')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror                           
+                        </div>
 
-<br><br><br>
-
-            <div style="width:90%; margin-left: 5%;">
-                <label class="col-form-label" style="float:left; width:10%">Nombre:</label>
-                <div class="">
-                    <input maxlength="50" type="text" id="nombre" name="nombre" required="required" class="form-control "
-                    value="{{old('nombre')}}" minlength="3" style="float:left; width:40%"
-                    placeholder="Ingrese el nombre">
-                </div>
-
-                <label class="col-form-label" style="margin-left: 2%;float:left; width:10%">Precio:</label>
-                <div class="">
-                    <input type="number" id="precio" name="precio" required="required" class="form-control "
-                    value="{{old('precio')}}" style="float:left; width:20%" min="1" max="1000"
-                    placeholder="0.00">
-                </div>
-
-            </div>
-
-            <div style="width:10%; margin-right: 5%; float: right;">
-                <div style="float: right;">
-                    <img src="" alt="" width="200px" height="200px" style="float: left;" id="imagenmostrada">
-                    <br>
-                    <input type="file" id="imagen" name="imagen" accept="image/*"
-                     value="{{old('imagenPrevisualizacion')}}" style="float: left; color: white;width: 200px;" >
-                </div>
-            </div>
-
-            <script>
-                const $seleccionArchivos = document.querySelector("#imagen"),
-                $imagenPrevisualizacion = document.querySelector("#imagenmostrada");
-
-                // Escuchar cuando cambie
-                $seleccionArchivos.addEventListener("change", () => {
-                // Los archivos seleccionados, pueden ser muchos o uno
-                const archivos = $seleccionArchivos.files;
-                // Si no hay archivos salimos de la función y quitamos la imagen
-                if (!archivos || !archivos.length) {
-                    $imagenPrevisualizacion.src = "";
-                    return;
-                }
-                // Ahora tomamos el primer archivo, el cual vamos a previsualizar
-                const primerArchivo = archivos[0];
-                // Lo convertimos a un objeto de tipo objectURL
-                const objectURL = URL.createObjectURL(primerArchivo);
-                // Y a la fuente de la imagen le ponemos el objectURL
-                $imagenPrevisualizacion.src = objectURL;
-                });
-            </script>
-
-<br><br><br>
-
-            <div style="width:90%; margin-left: 5%;">
-                <label class="col-form-label" style="float:left; width:10%">Descripcion:</label>
-                <div class="">
-                    <input maxlength="100" type="text" id="descripcion" name="descripcion" required="required" class="form-control "
-                    value="{{old('descripcion')}}" minlength="3" style="float:left; width:40%"
-                    placeholder="Ingrese la descripcion">
-                </div>
-
-                <label class="col-form-label" style="margin-left: 2%;float:left; width:10%">Tamaño:</label>
-                <div class="">
-                    <input type="text" id="tamanio" name="tamanio" required="required" class="form-control "
-                    value="{{old('tamanio')}}" style="float:left; width:20%"
-                    placeholder="Ingrese el tamaño" maxlength="100" minlength="3">
-                </div>
-            </div>
-
-<br><br><br>
-
-            <!--Seleccionado por refresco-->
-            <div style="display: none;" id="refresco" style="width:90%; margin-left: 5%;">
-
-                <div style="width:90%; margin-left: 5%;">
-                    <label class="col-form-label" style="float:left; width:10%">Cantidad:</label>
-                    <div class="">
-                        <input type="number" id="cantidad" name="cantidad" required="required" class="form-control "
-                        value="{{old('cantidad')}}" style="float:left; width:72%" min="1" max="1000"
-                        placeholder="Ingrese la cantidad">
-                    </div>
-                </div>
-            </div>
-
-            <!--Seleccionado por comida-->
-            <div style="display: none;" id="comida" style="width:90%; margin-left: 5%;">
-                <div style="width:90%; margin-left: 5%;">
-                    <label class="col-form-label" style="float:left; width:10%">Disponible:</label>
-                    <div class="">
-                        <input type="number" id="disponible" name="disponible" required="required" class="form-control "
-                        value="{{old('disponible')}}" style="float:left; width:72%" min="1" max="1000"
-                        placeholder="Ingrese la cantidad de platillos disponibles">
-                    </div>
-                </div>
-            </div>
-
+                        <div style="margin-left:2%;float:left;width:35%">
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="tipo" id="tipo" required onchange="producto();quitarerror()">
+                                @if(old('tipo'))
+                                    @if(old('tipo') == 0 )
+                                        <option disabled="disabled" selected="selected" value="0">Comida</option>
+                                    @else
+                                        @if(old('tipo') == 1 )
+                                            <option disabled="disabled" selected="selected" value="1">Bebida</option>
+                                        @endif
+                                    @endif
+                                @else
+                                    <option disabled="disabled" selected="selected" value="">Tipo de producto</option>
+                                @endif
+                                    <option value="1">Bebida</option>
+                                    <option value="0">Comida</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>                            
+                            @error('tipo')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+<br>
+                            <input class="input--style-2" type="text" placeholder="Nombre" name="nombre" value="{{old('nombre')}}" 
+                            maxlength="25" required onkeypress="quitarerror()">
+                            @error('nombre')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
 <br><br>
+                            <textarea class="textarea--style-2" type="text" placeholder="Descripcion" name="descripcion" maxlength="100"
+                            value="{{old('descripcion')}}" required onkeypress="quitarerror()"></textarea>
+                            @error('descripcion')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+<br><br>
+                            <input class="input--style-2" type="number" placeholder="Precio" name="precio"
+                            value="{{old('precio')}}" onkeypress="quitarerror()"
+                            required onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000">
+                            @error('precio')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
 
-            <div style="width:95%; margin-left: 5%;">
-                <button type="submit" class="btn btn-success">Guardar</button>
-                <a type="button" href="javascript:location.reload()" class="btn btn-warning">Limpiar</a>
+                        </div>
+
+                        <div style="margin-left:2%;float:left;width:35%">
+                        <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="tamanio" required onchange="quitarerror()">
+                                @if(old('tamanio') == 'Grande' )
+                                    <option disabled="disabled" selected="selected" value="Grande">Grande</option>
+                                @else
+                                    @if(old('tamanio') == 'Mediano' )
+                                        <option disabled="disabled" selected="selected" value="Mediano">Mediano</option>
+                                    @else
+                                        @if(old('tamanio') == 'Pequeño' )
+                                            <option disabled="disabled" selected="selected" value="Pequeño">Pequeño</option>
+                                        @else
+                                            <option disabled="disabled" selected="selected">Tamaño</option>
+                                        @endif
+                                    @endif
+                                @endif
+                                <option value="Grande">Grande</option>
+                                <option value="Mediano">Mediano</option>
+                                <option value="Pequeño">Pequeño</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                            @error('tamanio')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+<br>
+                            <input class="input--style-2" type="number" placeholder="Cantidad" name="cantidad" id="cantidad" 
+                            value="{{old('cantidad')}}" onkeypress="quitarerror()"
+                            onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000" disabled>
+                            @error('cantidad')
+                                <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+<br><br>
+                            
+                            <input class="input--style-2" type="number" placeholder="Platillos disponible" name="disponible" id="disponible" 
+                            value="{{old('disponible')}}" onkeypress="quitarerror()"
+                            onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000" disabled>
+                            @error('disponible')
+                                <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+
+                            <br><br><br>
+                            <div style="float:right">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a type="button" href="" class="btn btn-warning">Regresar</a>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
-
-            <script>
-                window.addEventListener('load', function() {
-                    var cod = document.getElementById("tipo").value;
-
-                    var c = document.getElementById("comida");
-                    var r = document.getElementById("refresco");
-
-                    if (cod == 1) {
-                        r.style.display = "block";
-                        document.getElementById("disponible").removeAttribute("required");
-                        document.getElementById("cantidad").setAttribute("required", true);
-                        c.style.display = "none";
-                    } else {
-                        if (cod == 0) {
-                            c.style.display = "block";
-                            document.getElementById("cantidad").removeAttribute("required");
-                            document.getElementById("disponible").setAttribute("required", true);
-                            r.style.display = "none";
-                        }
-                    }
-                });
-
-
-                function producto(){
-                    var cod = document.getElementById("tipo").value;
-                    var c = document.getElementById("comida");
-                    var r = document.getElementById("refresco");
-
-                    if (cod == 1) {
-                        document.getElementById("disponible").value = "";
-                        r.style.display = "block";
-                        document.getElementById("disponible").removeAttribute("required");
-                        document.getElementById("cantidad").setAttribute("required", true);
-                        c.style.display = "none";
-                    } else {
-                        if (cod == 0) {
-                            document.getElementById("cantidad").value = "";
-                            c.style.display = "block";
-                            document.getElementById("cantidad").removeAttribute("required");
-                            document.getElementById("disponible").setAttribute("required", true);
-                            r.style.display = "none";
-                        }
-                    }
-                }
-            </script>
-
         </div>
-
-    </form>
-</div>
+    </div>
+@stop
