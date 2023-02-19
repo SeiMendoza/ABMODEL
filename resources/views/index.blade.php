@@ -345,13 +345,13 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Registro</p>
                                     <h5 class="font-weight-bolder">
-                                        +3,462
+                                        Combos
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                        since last quarter
+                                        <a href={{ route('combo.create') }}
+                                            class="btn badge-primary">Registrar</a>
                                     </p>
                                 </div>
                             </div>
