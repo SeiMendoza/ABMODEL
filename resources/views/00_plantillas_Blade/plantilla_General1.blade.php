@@ -18,6 +18,9 @@
       <link id="pagestyle" href="{{ asset("css/argon-dashboard.css") }}" rel="stylesheet" />
       <link href={{ asset("css/font-awesome.css") }} rel="stylesheet" type="text/css">
       <link href={{ asset("css/app.css") }} rel="stylesheet" type="text/css">
+
+      <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
+
       </head>
 <style>
   body{
@@ -35,5 +38,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src={{ asset("js/scripts.js") }}></script>
         <script src={{ asset("js/app.js") }}></script>
+        
 </body>
 </html>

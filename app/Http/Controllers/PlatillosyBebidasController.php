@@ -97,7 +97,7 @@ class PlatillosyBebidasController extends Controller
         $creado = $platillos->save();
 
         if ($creado) {
-            return redirect()->route('bebidasyplatillos.create')
+            return redirect()->route('index')
                 ->with('mensaje', 'El platillo fue creada exitosamente');
         } else {
 

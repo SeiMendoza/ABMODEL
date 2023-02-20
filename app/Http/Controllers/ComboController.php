@@ -50,6 +50,7 @@ class ComboController extends Controller
         ];
 
         $mensaje=[
+            'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.max' => 'El nombre es muy extenso',
             'nombre.min' => 'El nombre es muy corto',
             'descripcion.required' => 'La descripcion no puede estar vacío',
@@ -100,7 +101,7 @@ class ComboController extends Controller
 
             }
 
-            return redirect()->route('combo.create')
+            return redirect()->route('index')
                 ->with('mensaje', 'El combo fue creada exitosamente');
 
         }

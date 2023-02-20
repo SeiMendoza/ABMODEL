@@ -1,5 +1,23 @@
 @extends('00_plantillas_blade.plantilla_General1')
 @section('contend')
+
+<script>
+    var msg = '{{Session::get('mensaje')}}';
+    var exist = '{{Session::has('mensaje')}}';
+    if(exist){
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: msg,
+            showConfirmButton: false,
+            toast: true,
+            background: '#1c8b57',
+            timer: 3500
+        })
+    }
+</script>
+
+
     <div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
         <br><br>
         <div class="wrapper wrapper--w960" >
@@ -108,7 +126,7 @@
                             <br><br><br>
                             <div style="float:right">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a type="button" href="" class="btn btn-warning">Regresar</a>
+                                <a type="button" href="/" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
                         

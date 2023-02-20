@@ -1,5 +1,21 @@
 @extends('00_plantillas_blade.plantilla_General1')
 @section('contend')
+
+<script>
+    var msg = '{{Session::get('mensaje')}}';
+    var exist = '{{Session::has('mensaje')}}';
+    if(exist){
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: msg,
+            showConfirmButton: false,
+            toast: true,
+            background: '#1c8b57',
+            timer: 3500
+        })
+    }
+</script>
     <div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
         <br><br>
         <div class="wrapper wrapper--w960" >
@@ -13,7 +29,7 @@
                         <div style="width:200px;float:left">
                             <img src="" alt="" width="200px" height="200px" id="imagenmostrada">
                             <br>
-                            <input type="file" id="imagen" name="imagen" accept="image/*" required
+                            <input type="file" id="imagen" name="imagen" accept="image/*" required onkeypress="quitarerror()"
                             value="{{old('imagenPrevisualizacion')}}" style="color: white;width: 200px;" > 
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -62,19 +78,23 @@
                                 </thead>
                                 <tbody>
                                     @forelse($componentes as $m=> $compo)
+                                    <tr>
                                     <td>{{++$m}}</td>
                                     <td>{{$compo->componente->nombre}}</td>
                                     <td>{{$compo->componente->tamanio}}</td>
                                     <td>{{$compo->cantidad}}</td>
+                                    </tr>
                                     @empty
+                                        <tr>
                                         <td colspan="4">No hay datos</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
 
                             <div style="float:right">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a type="button" href="" class="btn btn-warning">Regresar</a>
+                                <a type="button" href="/" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
                         
@@ -92,7 +112,7 @@
         @csrf
         <div class="modal-body">
             
-            <select name="complemento" required>
+            <select name="complemento" onchange="quitarerror()" required>
                 <option disabled="disabled" selected="selected" value="">Selecciona la comida o bebida</option>
                 @foreach($complementos as $c)
                     <option value="{{$c->id}}">{{$c->nombre}} {{$c->tamanio}}</option>
@@ -104,9 +124,9 @@
             <strong class="menerr" style="color:red">{{ $message }}</strong>
         @enderror
 
-        <input class="input--style-2" type="number" placeholder="Cantidad" name="cantidad"
-        value="{{old('cantidad')}}" style="width:92%;margin-left:4%"
-        required onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000">
+        <input class="input--style-2" type="number" placeholder="Cantidad" name="cantidad" required
+        value="{{old('cantidad')}}" style="width:92%;margin-left:4%" onkeypress="quitarerror()"
+        onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000">
         @error('cantidad')
             <strong class="menerr" style="color:red">{{ $message }}</strong>
         @enderror

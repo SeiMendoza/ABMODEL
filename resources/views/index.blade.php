@@ -26,12 +26,27 @@
     <!-- Icons -->
     <link href={{ asset('css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
     <link href={{ asset('css/nucleo-svg.css') }} rel="stylesheet" />
-
+    <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
+        <script>
+        var msg = '{{Session::get('mensaje')}}';
+        var exist = '{{Session::has('mensaje')}}';
+        if(exist){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: msg,
+                showConfirmButton: false,
+                toast: true,
+                background: '#1c8b57',
+                timer: 3500
+            })
+        }
+    </script>
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
