@@ -32,10 +32,10 @@
                             <img src="" alt="" width="200px" height="200px" id="imagenmostrada">
                             <br>
                             <input type="file" id="imagen" name="imagen" accept="image/*" required
-                            value="{{old('imagenPrevisualizacion')}}" style="color: white;width: 200px;" > 
+                            value="{{old('imagenPrevisualizacion')}}" style="color: white;width: 200px;" >
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror                           
+                            @enderror
                         </div>
 
                         <div style="margin-left:2%;float:left;width:35%">
@@ -56,18 +56,18 @@
                                     <option value="0">Comida</option>
                                 </select>
                                 <div class="select-dropdown"></div>
-                            </div>                            
+                            </div>
                             @error('tipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
 <br>
-                            <input class="input--style-2" type="text" placeholder="Nombre" name="nombre" value="{{old('nombre')}}" 
+                            <input class="input--style-2" type="text" placeholder="Nombre" name="nombre" value="{{old('nombre')}}"
                             maxlength="25" required onkeypress="quitarerror()">
                             @error('nombre')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
 <br><br>
-                            <textarea class="textarea--style-2" type="text" placeholder="Descripcion" name="descripcion" maxlength="100"
+                            <textarea class="textarea--style-2" type="text" placeholder="Descripción" name="descripcion" maxlength="100"
                             value="{{old('descripcion')}}" required onkeypress="quitarerror()"></textarea>
                             @error('descripcion')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -108,15 +108,15 @@
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
 <br>
-                            <input class="input--style-2" type="number" placeholder="Cantidad" name="cantidad" id="cantidad" 
+                            <input class="input--style-2" type="number" placeholder="Cantidad" name="cantidad" id="cantidad"
                             value="{{old('cantidad')}}" onkeypress="quitarerror()"
                             onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000" disabled>
                             @error('cantidad')
                                 <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
 <br><br>
-                            
-                            <input class="input--style-2" type="number" placeholder="Platillos disponible" name="disponible" id="disponible" 
+
+                            <input class="input--style-2" type="number" placeholder="Platillos disponibles" name="disponible" id="disponible"
                             value="{{old('disponible')}}" onkeypress="quitarerror()"
                             onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000" disabled>
                             @error('disponible')
@@ -129,7 +129,7 @@
                                 <a type="button" href="/" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

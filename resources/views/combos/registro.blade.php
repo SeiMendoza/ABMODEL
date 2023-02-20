@@ -30,14 +30,14 @@
                             <img src="" alt="" width="200px" height="200px" id="imagenmostrada">
                             <br>
                             <input type="file" id="imagen" name="imagen" accept="image/*" required onkeypress="quitarerror()"
-                            value="{{old('imagenPrevisualizacion')}}" style="color: white;width: 200px;" > 
+                            value="{{old('imagenPrevisualizacion')}}" style="color: white;width: 200px;" >
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror                           
+                            @enderror
                         </div>
 
                         <div style="margin-left:2%;float:left;width:72%">
-                            <input class="input--style-2" type="text" placeholder="Nombre del combo" name="nombre" value="{{old('nombre')}}" 
+                            <input class="input--style-2" type="text" placeholder="Nombre del combo" name="nombre" value="{{old('nombre')}}"
                             maxlength="25" required onkeypress="quitarerror()">
                             @error('nombre')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -45,7 +45,7 @@
                         </div>
 <br><br>
                         <div style="margin-left:2%;float:left;width:35%">
-                            <textarea class="textarea--style-2" type="text" placeholder="Descripcion" name="descripcion" maxlength="100"
+                            <textarea class="textarea--style-2" type="text" placeholder="Descripción" name="descripcion" maxlength="100"
                             value="{{old('descripcion')}}" required onkeypress="quitarerror()"></textarea>
                             @error('descripcion')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -60,7 +60,7 @@
                             @error('precio')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
-                                
+
                             <br>
                         </div>
 
@@ -97,7 +97,7 @@
                                 <a type="button" href="/" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
-                        
+
                     </form>
 
 <!-- Modal -->
@@ -111,7 +111,7 @@
       <form method="post" action="{{route('combo.temporal')}}">
         @csrf
         <div class="modal-body">
-            
+
             <select name="complemento" onchange="quitarerror()" required>
                 <option disabled="disabled" selected="selected" value="">Selecciona la comida o bebida</option>
                 @foreach($complementos as $c)
@@ -119,7 +119,7 @@
                 @endforeach
             </select>
             <div class="select-dropdown"></div>
-        </div>                            
+        </div>
         @error('complemento')
             <strong class="menerr" style="color:red">{{ $message }}</strong>
         @enderror
