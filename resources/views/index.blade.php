@@ -23,12 +23,12 @@
     <title>
         Argon Dashboard 2 by Creative Tim
     </title>
-    <!-- Icons -->
-    <link href={{ asset('css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
-    <link href={{ asset('css/nucleo-svg.css') }} rel="stylesheet" />
-    <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
-    <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" />
+   <!-- Nucleo Icons -->
+  <link href={{ asset("css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
+  <link href={{ asset("css/nucleo-svg.css") }} rel="stylesheet" />
+ 
+  <!-- CSS Files -->
+  <link id="pagestyle" href="css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -99,7 +99,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link " href="{{route("d")}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-app text-info text-sm opacity-10"></i>

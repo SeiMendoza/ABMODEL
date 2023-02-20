@@ -11,6 +11,8 @@
         </title>
 
       <!-- Icons -->
+      <link href="fontawesome-free/css/all.min.css" rel="stylesheet">
+      <link href= "assets/fontawesome/css/fontawesome.css" rel="stylesheet">
       <link href={{ asset("css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
       <link href={{ asset("css/nucleo-svg.css") }} rel="stylesheet" />
       <link href={{ asset("css/main.css") }} rel="stylesheet" />
@@ -30,14 +32,23 @@
 </style>
 </head>
 <main class="main-content border-radius-lg">
-<body >
+<body>
   <div class="bg-danger">
     @yield('contend')
   </main>
   </div>   
+    <!-- Jquery JS-->
+    <script src="assets/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="assets/select2/select2.min.js"></script>
+    <script src="assets/datepicker/moment.min.js"></script>
+    <script src="assets/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src={{ asset("js/scripts.js") }}></script>
         <script src={{ asset("js/app.js") }}></script>
-        
+        <script src="/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
 </html>

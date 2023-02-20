@@ -28,7 +28,7 @@ class HomeController extends Controller
     }
 
     public function p(){
-        return view("pages.profile");
+        return view('pages.profile');
     }
 
     public function s(){
@@ -37,6 +37,9 @@ class HomeController extends Controller
 
     public function r(){
         return view("pages.rtl");
+    }
+    public function d(){
+        return view("pages.dashboard");
     }
     public function registro(){
         return view("pages.registro");
