@@ -48,7 +48,7 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href={{ route('admonRestaurante') }}>
+                    <a class="nav-link" href={{ route('admonRestaurante') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -291,7 +291,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Registro
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
                                     </p>
                                     <h5 class="font-weight-bolder">
                                         Comidas y bebidas
