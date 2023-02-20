@@ -98,7 +98,7 @@ class PlatillosyBebidasController extends Controller
 
         if ($creado) {
             return redirect()->route('index')
-                ->with('mensaje', 'El platillo fue creada exitosamente');
+                ->with('mensaje', 'El platillo o bebida fue creada exitosamente');
         } else {
 
         }
