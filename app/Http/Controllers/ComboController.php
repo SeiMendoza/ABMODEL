@@ -18,9 +18,14 @@ class ComboController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $combos = Combo::all();
+        $text = trim($request->get('/'));
+        $combos = Combo::where('nombre', 'like', '%' . $text . '%')
+            ->orWhere('tamanio', 'like', '%' . $text . '%')
+            ->orWhere('tipo', 'like', '%' . $text . '%')->paginate(10);
+        return view('Menu/Cliente/Menu', compact('combos', 'text'));
     }
 
     /**
@@ -42,14 +47,14 @@ class ComboController extends Controller
      */
     public function store(Request $request)
     {
-        $rules=[
+        $rules = [
             'nombre' => 'required|max:100|min:3',
-            'descripcion' => 'required|max:100|min:3',   
+            'descripcion' => 'required|max:100|min:3',
             'precio' => 'required|min:1|max:1000|numeric',
             'imagen' => 'required',
         ];
 
-        $mensaje=[
+        $mensaje = [
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.max' => 'El nombre es muy extenso',
             'nombre.min' => 'El nombre es muy corto',
@@ -64,7 +69,7 @@ class ComboController extends Controller
             'imagen.mimes' => 'La imagen debe de ser una imagen',
         ];
 
-        $this->validate($request,$rules,$mensaje);
+        $this->validate($request, $rules, $mensaje);
 
         $combo = new Combo();
 
@@ -74,48 +79,45 @@ class ComboController extends Controller
 
         $file = $request->file('imagen');
         $destinationPath = 'images/';
-        $filename = time().'.'.$file->getClientOriginalName();
-        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+        $filename = time() . '.' . $file->getClientOriginalName();
+        $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
 
-        $combo->imagen = 'images/'.$filename;
+        $combo->imagen = 'images/' . $filename;
 
         $creado = $combo->save();
 
         if ($creado) {
-            
+
 
             $anteriorcomplemnto = Componentestemporalcombo::all();
 
-            foreach($anteriorcomplemnto as $ac){
+            foreach ($anteriorcomplemnto as $ac) {
                 $complemento = new Componentescombo();
 
                 $complemento->id_complemento = $ac->id_complemento;
                 $complemento->cantidad = $ac->cantidad;
                 $complemento->id_combo = $combo->id;
 
-                $creado2=$complemento->save();
+                $creado2 = $complemento->save();
 
-                if($creado2){
+                if ($creado2) {
                     Componentestemporalcombo::destroy($ac->id);
                 }
-
             }
 
             return redirect()->route('index')
                 ->with('mensaje', 'El combo fue creada exitosamente');
-
         }
-
     }
 
     public function temporal(Request $request)
     {
-        $rules=[
-            'complemento' => 'required|exists:platillosy_bebidas,id',            
+        $rules = [
+            'complemento' => 'required|exists:platillosy_bebidas,id',
             'cantidad' => 'required|min:1|max:1000|numeric',
         ];
 
-        $mensaje=[
+        $mensaje = [
             'complemento.required' => 'La comida o bebida es obligatoria',
             'complemento.exists' => 'La comida o bebida no existe',
             'cantidad.required' => 'La cantidad es obligatoria',
@@ -124,7 +126,7 @@ class ComboController extends Controller
             'cantidad.numeric' => 'La cantidad debe de ser numerico',
         ];
 
-        $this->validate($request,$rules,$mensaje);
+        $this->validate($request, $rules, $mensaje);
 
         $complementos = new Componentestemporalcombo();
 
@@ -137,9 +139,7 @@ class ComboController extends Controller
             return redirect()->route('combo.create')
                 ->with('mensaje', 'El complemento fue creada exitosamente');
         } else {
-
         }
-        
     }
 
 

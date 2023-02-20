@@ -3,15 +3,24 @@
 @section('contend')
 <!-- Menú de comidas y bebidas -->
 <div>
-    <h5 style="text-align: center;">Menú del Dia</h5>
-    <form action="{{route('cliente_menu.index')}}" method="get" role="search" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-80 navbar-search">
-        <div class="input-group">
-            <input size="5" class="form-control" type="text" id="busqueda" name="/" style="width: 405px; size: 6px;" placeholder="Buscar por nombre, tamaño o tipo de comida/bebida" aria-label="Buscar por nombre" aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) echo $text; ?>" />
-            <button class="btn btn-primary" type="submit" id="b" type="button">b</button>
-            @if($text!="")
-            <a href="{{route('cliente_menu.index')}}" class="btn btn-secondary">Borrar Busqueda</a>
-            @endif
-        </div>
+    <h5 style="text-align: center;">Menú del Dia  <a class="btn btn-menu my-2 my-sm-0" href="{{route('index')}}">Volver</a></h5>
+    <form action="{{ route('cliente_menu.index') }}" method="get" role="search"
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input class="form-control" type="search" id="busqueda" name="/"
+                                style="width: 405px; position:right; display:flex;" placeholder="Buscar por nombre, tamaño o tipo de comida/bebida" aria-label="Search"
+                                aria-describedby="basic-addon2" maxlength="50" required
+                                value="<?php if (isset($text)) {
+                                    echo $text;
+                                } ?>" />
+                            <div class="input-group-append">
+                                <button class="btn btn-menu my-2 my-sm-0"
+                                    type="submit"><strong>Buscar</strong></button>
+                                    @if($text!="")
+                                    <a href="{{route('cliente_menu.index')}}" class="btn btn-secondary">Borrar Busqueda</a>
+                                    @endif
+                                </div>
+                    </form>
 </div>
  
 </form>
@@ -72,26 +81,8 @@
 
                                                     {{-- Edit --}}
                                                     <div class="col">
-                                                        <button class="col-8 btn btn-danger form" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cancelar</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <input type="num" width="8">
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                            
-                                                                        <a href="{{route('cliente_menu.index')}}" class="btn btn-primary">ok</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
+                                                      <button class="col-8 btn btn-danger form" id="btn-agregar" >Agregar</button> 
+  
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,8 +96,21 @@
                 </div>
             </div>
         </div>
+         
     </div>
 </div>
 @endforeach
 
+<script>
+     //Añadir producto al carrito
+     agregar(e);
+        e.preventDefault();
+        //Delegado para agregar al carrito
+        if(e.target.classList.contains('btn-agregar')){
+            const producto = e.target.parentElement;
+            //Enviamos el producto seleccionado para tomar sus datos
+            this.leerDatosProducto(producto);
+        }
+    
+</script>
 @endsection
