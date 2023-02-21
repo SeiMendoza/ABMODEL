@@ -41,7 +41,7 @@ class PlatillosyBebidasController extends Controller
     public function store(Request $request)
     {
         $rules=[
-            'tipo' => 'required|in:0,1',
+            'tipo' => 'required|in:2,1',
             'nombre' => 'required|max:100|min:3',
             'descripcion' => 'required|max:100|min:3',   
             'precio' => 'required|min:1|max:1000|numeric',   

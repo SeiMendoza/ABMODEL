@@ -113,7 +113,7 @@ class ComboController extends Controller
     public function temporal(Request $request)
     {
         $rules = [
-            'complemento' => 'required|exists:platillosy_bebidas,id',
+            'complemento' => 'required|exists:platillosbebidas,id',
             'cantidad' => 'required|min:1|max:1000|numeric',
         ];
 

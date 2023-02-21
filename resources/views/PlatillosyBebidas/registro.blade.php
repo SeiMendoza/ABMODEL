@@ -137,7 +137,7 @@
                             <div id="espacio"><br><br><br><br></div>
                             <div style="float:right">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <button type="button" onclick="cancelar('/')" class="btn btn-warning">Regresar</button>
+                                <button type="button" onclick="cancelar('/')" class="btn btn-warning">Cancelar</button>
                             </div>
                         </div>
 

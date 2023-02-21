@@ -94,7 +94,7 @@
 
                             <div style="float:right">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a type="button" href="/" class="btn btn-warning">Regresar</a>
+                                <button type="button" onclick="cancelar('/')" class="btn btn-warning">Cancelar</button>
                             </div>
                         </div>
 

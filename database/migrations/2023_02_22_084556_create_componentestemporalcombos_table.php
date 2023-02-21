@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('componentestemporalcombos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_complemento');
-            $table->foreign("id_complemento")->references("id")->on("platillosy_bebidas");
+            //$table->foreign("id_complemento")->references("id")->on("platillosbebidas");
             $table->integer('cantidad');
             $table->timestamps();
         });
