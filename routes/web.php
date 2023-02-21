@@ -45,6 +45,8 @@ Route::get('/registro', [HomeController::class, 'registro'])
 ******************************/
 Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
+Route::get('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store'])
+->name('usuario_pedido.store');
 
  /*****************************
   Rutas Para Menu de cliente
