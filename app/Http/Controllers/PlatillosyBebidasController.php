@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\PlatillosyBebidas;
+use App\Models\Platillo;
+use App\Models\Bebida;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePlatillosyBebidasRequest;
@@ -45,7 +47,6 @@ class PlatillosyBebidasController extends Controller
             'precio' => 'required|min:1|max:1000|numeric',   
             'tamanio' => 'required|max:100|min:3', 
             'imagen' => 'required',
-            
             'cantidad' => 'nullable|min:1|max:1000|numeric',
             'disponible' => 'nullable|min:1|max:1000|numeric',
         ];
@@ -67,9 +68,9 @@ class PlatillosyBebidasController extends Controller
             'tamanio.min' => 'El tamanio es muy corto',
             'imagen.required' => 'La imagen no puede estar vacío',
             'imagen.mimes' => 'La imagen debe de ser una imagen',
-            'cantidad.max' => 'La cantidad es muy grande',
-            'cantidad.min' => 'La cantidad es muy pequeño',
-            'cantidad.numeric' => 'La cantidad debe de ser numerico',
+            'cantidad.max' => 'El numero de bebidas disponibles es muy grande',
+            'cantidad.min' => 'El numero de bebidas disponibles es muy pequeño',
+            'cantidad.numeric' => 'El numero de bebidas disponibles debe de ser numerico',
             'disponible.max' => 'El numero de platillos disponibles es muy grande',
             'disponible.min' => 'El numero de platillos disponibles es muy pequeño',
             'disponible.numeric' => 'El numero de platillos disponibles debe de ser numerico',
@@ -77,30 +78,51 @@ class PlatillosyBebidasController extends Controller
 
         $this->validate($request,$rules,$mensaje);
 
-        $platillos = new PlatillosyBebidas();
+        if ($request->input('tipo') == 2) {
+            $platillos = new Platillo();
 
-        $platillos->tipo = $request->input('tipo');
-        $platillos->nombre = $request->input('nombre');
-        $platillos->descripcion = $request->input('descripcion');
-        $platillos->precio = $request->input('precio');
-        $platillos->tamanio = $request->input('tamanio');
-        $platillos->cantidad = $request->input('cantidad');
-        $platillos->disponible = $request->input('disponible');
+            $platillos->nombre = $request->input('nombre');
+            $platillos->descripcion = $request->input('descripcion');
+            $platillos->precio = $request->input('precio');
+            $platillos->tamanio = $request->input('tamanio');
+            $platillos->disponible = $request->input('disponible');
 
-        $file = $request->file('imagen');
-        $destinationPath = 'images/';
-        $filename = time().'.'.$file->getClientOriginalName();
-        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+            $file = $request->file('imagen');
+            $destinationPath = 'images/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
 
-        $platillos->imagen = 'images/'.$filename;
+            $platillos->imagen = 'images/'.$filename;
 
-        $creado = $platillos->save();
+            $creado = $platillos->save();
 
-        if ($creado) {
-            return redirect()->route('index')
-                ->with('mensaje', 'El platillo o bebida fue creada exitosamente');
-        } else {
+            if ($creado) {
+                return redirect()->route('index')
+                    ->with('mensaje', 'El platillo fue creada exitosamente');
+            }
 
+        }else{
+            $platillos = new Bebida();
+            
+            $platillos->nombre = $request->input('nombre');
+            $platillos->descripcion = $request->input('descripcion');
+            $platillos->precio = $request->input('precio');
+            $platillos->tamanio = $request->input('tamanio');
+            $platillos->disponible = $request->input('cantidad');
+
+            $file = $request->file('imagen');
+            $destinationPath = 'images/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+
+            $platillos->imagen = 'images/'.$filename;
+
+            $creado = $platillos->save();
+
+            if ($creado) {
+                return redirect()->route('index')
+                    ->with('mensaje', 'La bebida fue creada exitosamente');
+            }
         }
     }
 

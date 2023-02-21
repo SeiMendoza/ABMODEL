@@ -11,10 +11,11 @@
             title: msg,
             showConfirmButton: false,
             toast: true,
-            background: '#1c8b57',
+            background: '#0be004ab',
             timer: 3500
         })
     }
+
 </script>
 
 
@@ -42,10 +43,10 @@
                             <div class="rs-select2 js-select-simple select--no-search">
                                 <select name="tipo" id="tipo" required onchange="producto();quitarerror()">
                                 @if(old('tipo'))
-                                    @if(old('tipo') == 0 )
-                                        <option disabled="disabled" selected="selected" value="0">Comida</option>
+                                    @if(old('tipo') === 2 )
+                                        <option disabled="disabled" selected="selected" value="2">Comida</option>
                                     @else
-                                        @if(old('tipo') == 1 )
+                                        @if(old('tipo') === 1 )
                                             <option disabled="disabled" selected="selected" value="1">Bebida</option>
                                         @endif
                                     @endif
@@ -53,7 +54,7 @@
                                     <option disabled="disabled" selected="selected" value="">Tipo de producto</option>
                                 @endif
                                     <option value="1">Bebida</option>
-                                    <option value="0">Comida</option>
+                                    <option value="2">Comida</option>
                                 </select>
                                 <div class="select-dropdown"></div>
                             </div>
@@ -68,35 +69,31 @@
                             @enderror
 <br><br>
                             <textarea class="textarea--style-2" type="text" placeholder="Descripción" name="descripcion" maxlength="100"
-                            value="{{old('descripcion')}}" required onkeypress="quitarerror()"></textarea>
+                            required onkeypress="quitarerror()">{{old('descripcion')}}</textarea>
                             @error('descripcion')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
 <br><br>
-                            <input class="input--style-2" type="number" placeholder="Precio" name="precio"
-                            value="{{old('precio')}}" onkeypress="quitarerror()"
-                            required onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000">
-                            @error('precio')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
 
                         </div>
 
                         <div style="margin-left:2%;float:left;width:35%">
                         <div class="rs-select2 js-select-simple select--no-search">
                                 <select name="tamanio" required onchange="quitarerror()">
-                                @if(old('tamanio') == 'Grande' )
-                                    <option disabled="disabled" selected="selected" value="Grande">Grande</option>
-                                @else
-                                    @if(old('tamanio') == 'Mediano' )
-                                        <option disabled="disabled" selected="selected" value="Mediano">Mediano</option>
+                                @if(old('tamanio'))
+                                    @if(old('tamanio') === 'Grande' )
+                                        <option disabled="disabled" selected="selected" value="Grande">Grande</option>
                                     @else
-                                        @if(old('tamanio') == 'Pequeño' )
-                                            <option disabled="disabled" selected="selected" value="Pequeño">Pequeño</option>
+                                        @if(old('tamanio') === 'Mediano' )
+                                            <option disabled="disabled" selected="selected" value="Mediano">Mediano</option>
                                         @else
-                                            <option disabled="disabled" selected="selected">Tamaño</option>
+                                            @if(old('tamanio') === 'Pequeño' )
+                                                <option disabled="disabled" selected="selected" value="Pequeño">Pequeño</option>
+                                            @endif
                                         @endif
                                     @endif
+                                @else
+                                    <option disabled="disabled" selected="selected" value="">Tamaño</option>
                                 @endif
                                 <option value="Grande">Grande</option>
                                 <option value="Mediano">Mediano</option>
@@ -108,25 +105,39 @@
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
 <br>
-                            <input class="input--style-2" type="number" placeholder="Cantidad" name="cantidad" id="cantidad"
-                            value="{{old('cantidad')}}" onkeypress="quitarerror()"
-                            onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000" disabled>
-                            @error('cantidad')
-                                <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-<br><br>
-
-                            <input class="input--style-2" type="number" placeholder="Platillos disponibles" name="disponible" id="disponible"
-                            value="{{old('disponible')}}" onkeypress="quitarerror()"
-                            onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000" disabled>
-                            @error('disponible')
-                                <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
+                            <input class="input--style-2" type="number" placeholder="Precio" name="precio"
+                            value="{{old('precio')}}" onkeypress="quitarerror()"
+                            required onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000">
+                            @error('precio')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
 
-                            <br><br><br>
+                            <div id="bebida" style="display:none">
+                                <br>
+                                <input class="input--style-2" type="number" placeholder="Bebidas disponibles" name="cantidad" id="cantidad"
+                                value="{{old('cantidad')}}" onkeypress="quitarerror()"
+                                onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000" disabled>
+                                @error('cantidad')
+                                    <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
+                                @enderror
+                                <br><br>
+                            </div>
+
+                            <div id="comida" style="display:none">
+                                <br>
+                                <input class="input--style-2" type="number" placeholder="Platillos disponibles" name="disponible" id="disponible"
+                                value="{{old('disponible')}}" onkeypress="quitarerror()"
+                                onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000" disabled>
+                                @error('disponible')
+                                    <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
+                                @enderror
+                                <br><br>
+                            </div>
+
+                            <div id="espacio"><br><br><br><br></div>
                             <div style="float:right">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a type="button" href="/" class="btn btn-warning">Regresar</a>
+                                <button type="button" onclick="cancelar('/')" class="btn btn-warning">Regresar</button>
                             </div>
                         </div>
 

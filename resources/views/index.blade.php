@@ -29,6 +29,8 @@
  
   <!-- CSS Files -->
   <link id="pagestyle" href="css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
+
+  <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -42,8 +44,8 @@
                 title: msg,
                 showConfirmButton: false,
                 toast: true,
-                background: '#1c8b57',
-                timer: 3500
+                background: '#0be004ab',
+                timer: 5500
             })
         }
     </script>

@@ -13,20 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('platillosy_bebidas', function (Blueprint $table) {
+        Schema::create('platillos', function (Blueprint $table) {
             $table->id();
-            $table->boolean("tipo")->default(0);
-
             $table->string("nombre");
             $table->string("descripcion");
             $table->double("precio");
             $table->string("tamanio");
             $table->string("imagen");
-
-            $table->integer("cantidad")->nullable();
-
-            $table->integer("disponible")->nullable();
-
+            $table->integer("disponible");
+            $table->date("fecha")->nullable();
             $table->timestamps();
         });
     }
@@ -38,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('platillosy_bebidas');
+        Schema::dropIfExists('platillos');
     }
 };

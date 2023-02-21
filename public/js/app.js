@@ -1,3 +1,4 @@
+    
 const $seleccionArchivos = document.querySelector("#imagen"),
 $imagenPrevisualizacion = document.querySelector("#imagenmostrada");
 
@@ -20,40 +21,57 @@ $imagenPrevisualizacion.src = objectURL;
 
 window.addEventListener('load', function() {
     var cod = document.getElementById("tipo").value;
+    var x = document.getElementById("comida");
+    var y = document.getElementById("bebida");
 
     if (cod == 1) {
+        var z = document.getElementById("espacio");
+        z.style.display = "none";
         document.getElementById('cantidad').disabled = false;
         document.getElementById('disponible').disabled = true;
         document.getElementById('disponible').value = '';
         document.getElementById("disponible").removeAttribute("required");
         document.getElementById("cantidad").setAttribute("required", true);
+        x.style.display = "none";
+        y.style.display = "block";
     } else {
-        if (cod == 0) {
+        if (cod == 2) {
+            var z = document.getElementById("espacio");
+            z.style.display = "none";
             document.getElementById('cantidad').disabled = true;
             document.getElementById('disponible').disabled = false;
             document.getElementById('cantidad').value = '';
             document.getElementById("cantidad").removeAttribute("required");
             document.getElementById("disponible").setAttribute("required", true);
+            x.style.display = "block";
+            y.style.display = "none";
         }
     }
 });
 
 function producto(){
+    var z = document.getElementById("espacio");
+    z.style.display = "none";
     var cod = document.getElementById("tipo").value;
-
+    var x = document.getElementById("comida");
+    var y = document.getElementById("bebida");
     if (cod == 1) {
         document.getElementById('cantidad').disabled = false;
         document.getElementById('disponible').disabled = true;
         document.getElementById('disponible').value = '';
         document.getElementById("disponible").removeAttribute("required");
         document.getElementById("cantidad").setAttribute("required", true);
+        x.style.display = "none";
+        y.style.display = "block";
     } else {
-        if (cod == 0) {
+        if (cod == 2) {
             document.getElementById('cantidad').disabled = true;
             document.getElementById('disponible').disabled = false;
             document.getElementById('cantidad').value = '';
             document.getElementById("cantidad").removeAttribute("required");
             document.getElementById("disponible").setAttribute("required", true);
+            x.style.display = "block";
+            y.style.display = "none";
         }
     }
 }
@@ -63,4 +81,26 @@ function quitarerror(){
     while (elements[0]){
         elements[0].parentNode.removeChild(elements[0]);
     }
+}
+//funcion para el alerta para regresar
+function cancelar(ruta){
+
+    Swal
+    .fire({
+        title: "¿Cancelar registro?",
+        text: "¿Desea cancelar el proceso de registro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: "Si",
+        cancelButtonText: "No",
+    })
+    .then(resultado => {
+        if (resultado.value) {
+            // Hicieron click en "Sí"
+            window.location.href = ruta;
+        } else {
+            // Dijeron que no
+        }
+    });
+
 }

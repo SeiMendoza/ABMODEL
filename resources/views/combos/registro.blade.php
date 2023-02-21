@@ -11,7 +11,7 @@
             title: msg,
             showConfirmButton: false,
             toast: true,
-            background: '#1c8b57',
+            background: '#0be004ab',
             timer: 3500
         })
     }
