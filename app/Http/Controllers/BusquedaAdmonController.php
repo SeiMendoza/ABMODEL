@@ -10,8 +10,9 @@ class BusquedaAdmonController extends Controller
 {
     public function index(Request $request){
             $platillos = PlatillosyBebidas::all();
+            $combos = PlatillosyBebidas::all();
             $busqueda =trim($request->get('busqueda'));
             $platillos = PlatillosyBebidas::where('nombre', 'like', '%'.$busqueda.'%');
-            return view('Menu/Admon/admon_Restaurante', compact('platillos', 'busqueda'));
+            return view('Menu/Admon/admon_Restaurante', compact('platillos', 'busqueda', 'combos'));
    }
 }

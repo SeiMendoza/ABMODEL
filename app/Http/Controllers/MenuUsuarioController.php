@@ -19,6 +19,6 @@ class MenuUsuarioController extends Controller
         $menu = PlatillosyBebidas::where('nombre', 'like', '%' . $text . '%')
             ->orWhere('tamanio', 'like', '%' . $text . '%')
             ->orWhere('tipo', 'like', '%' . $text . '%')->paginate(10);
-        return view('Menu/Cliente/Menu', compact('menu', 'text'));
+        return view('Menu/Cliente/Menu', compact('menu', 'text', 'combos'));
     }
 }
