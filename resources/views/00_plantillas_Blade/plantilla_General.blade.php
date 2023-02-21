@@ -139,6 +139,9 @@
 
                 <span class="text-success text-sm font-weight-bolder "></span>
                 <a href={{ route('combo.create') }} class="btn btn-menu my-3">Registrar Combo</a>
+
+                <span class="text-success text-sm font-weight-bolder "></span>
+                <a href={{ route('cliente_menu.qr') }} class="btn btn-menu my-3">Ver QR</a>
                 
                 <!-- ========== End Botones de Registro ========== -->
 

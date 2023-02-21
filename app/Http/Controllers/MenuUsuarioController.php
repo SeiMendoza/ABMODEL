@@ -21,4 +21,7 @@ class MenuUsuarioController extends Controller
             ->orWhere('tipo', 'like', '%' . $text . '%')->paginate(10);
         return view('Menu/Cliente/Menu', compact('menu', 'text', 'combos'));
     }
+     public function qr(){
+        return view('Menu/Admon/QR_Menu');
+     }
 }
