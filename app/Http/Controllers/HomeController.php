@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bebida;
 use App\Models\Combo;
-use App\Models\PlatillosyBebidas;
+use App\Models\Platillo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,9 +23,10 @@ class HomeController extends Controller
 
     public function admonRestaurante(){
 
-        $platillos = PlatillosyBebidas::all();
+        $platillos = Platillo::all();
+        $bebidas = Bebida::all();
         $combos = Combo::all();
-        return view("/Menu/Admon/admon_Restaurante")->with(['platillos'=> $platillos, 'combos' => $combos]);
+        return view("/Menu/Admon/admon_Restaurante")->with(['platillos'=> $platillos, 'bebidas'=>$bebidas, 'combos' => $combos]);
     }
 
     public function p(){
