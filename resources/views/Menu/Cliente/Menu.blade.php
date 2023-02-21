@@ -24,15 +24,16 @@
      </div>
 
      <br><br>
+     
      <div class="container-fluid px-4">
          <div class="card-group row" style="display: flex; align:left">
 
              @foreach ($menu as $m)
 
-             <div class="row">
+             <div class="row items">
                  <div class="col-xl-6 col-sm-6 mb-xl-4 mb-4">
-                     <div class="card my-3 ">
-                         <div class="card-body p-3">
+                     <div class="card my-3">
+                         <div class="card-body p-3 " >
                              {{-- foodIcon --}}
                              <div class="col-12 text-end">
                                  <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
@@ -61,7 +62,7 @@
                                                  <div class="col-12">
                                                      <div>
                                                          <div class="text-center">
-                                                             <h3 class="card-title">{{ $m->nombre }}</h3>
+                                                             <h3 class="title">{{ $m->nombre }}</h3>
                                                              <p align="center"> {{ $m->descripcion }}</p>
 
                                                              {{-- Precio, Disponibilidad y edicion --}}
@@ -83,7 +84,7 @@
 
                                                                  {{-- Edit --}}
                                                                  <div class="col">
-                                                                     <button class="col-6 btn btn-danger button" id="btn-agregar">Agregar</button>
+                                                                     <button class="col-6 btn btn-danger button" data-id="{{$m->id}}" id="btn-agregar">Agregar</button>
 
                                                                  </div>
                                                              </div>
@@ -186,6 +187,6 @@
  </div>
 
  </div>
- <script src="{{ asset("js/carrito.js") }}"></script>
+
  <script src="{{ asset("js/compras.js") }}"></script>
  @endsection

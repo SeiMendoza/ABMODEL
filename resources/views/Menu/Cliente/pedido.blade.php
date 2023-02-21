@@ -53,7 +53,7 @@
                                             <th>Eliminar</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="tbody">
                                                 <input type="text" name="tuplas" class="form-control @error('tuplas') is-invalid @enderror"
                                                 id="tuplas" hidden value="{{old('tuplas')}}">
                                                 @error('tuplas')
@@ -114,6 +114,6 @@
 
     <!-- Main JS-->
     <script src={{ asset("/js/core/bootstrap.min.js") }}></script>
-    <script src="{{ asset("js/carrito.js") }}"></script>
+    <script src="{{ asset("js/compras.js") }}"></script>
 </body>
 </html>
