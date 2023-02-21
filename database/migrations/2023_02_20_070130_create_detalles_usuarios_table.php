@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('detalles_usuarios', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('cantidad');
+            $table->string('precio');
             $table->timestamps();
         });
     }

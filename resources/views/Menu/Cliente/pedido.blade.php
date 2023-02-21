@@ -9,13 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Pedido</title>
- 
-    <!-- Nucleo Icons -->
-    <link href={{ asset("css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
-    <link href={{ asset("css/nucleo-svg.css") }} rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
-     <link href="/css/main.css" rel="stylesheet" media="all">
+    <link href="/css/main.css" rel="stylesheet" media="all">
 
 </head>
 <body>
@@ -27,8 +23,12 @@
                     <h2 class="title">Datos del Pedido:</h2>
                     <form method="POST">
                         <div>
+                            <div style="display: none">
+                                <input type="number" id="quiosco">
+                                <input type="number" id="mesa">
+                            </div>
                             <div class=" form-floating">
-                                <input type="name" class="form-control form-control-lg @error('name') is-invalid @enderror"
+                                <input type="text" id="name" class="form-control form-control-lg @error('name') is-invalid @enderror"
                                  placeholder="Ingrese su nombre aquí">
                                 <label for="name">Ingrese su nombre completo</label>
                                 @error('name')
@@ -36,7 +36,7 @@
                                 <strong>{{ $message }}</strong>
                                 </small>
                                 @enderror
-                            </div>    
+                            </div>
                         </div>
                         <div class="p-t-30">
                             <button class="btn btn--radius btn--green" type="submit">Search</button>
@@ -47,12 +47,7 @@
         </div>
     </div>
 
-    <!-- Jquery JS-->
-    <script src="/assets/jquery/jquery.min.js"></script>
     <!-- Main JS-->
-    <script src="/js/global.js"></script>
     <script src={{ asset("/js/core/bootstrap.min.js") }}></script>
-    <script src="/js/argon-dashboard.min.js?v=2.0.4"></script>
-  
 </body>
 </html>
