@@ -31,9 +31,11 @@
   }
 </style>
 </head>
-<main class="main-content border-radius-lg">
+<main class="main-content position-relative border-radius-lg">
 <body>
-  <div class="bg-danger">
+ 
+                      <div class="bg-danger">
+                          
     @yield('contend')
   </main>
   </div>   
