@@ -10,6 +10,7 @@
 
     <title>Pedido</title>
     <!-- CSS Files -->
+    <script src="{{ asset("js/compras.js") }}"></script>
     <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
     <link href="/css/main.css" rel="stylesheet" media="all">
 
@@ -114,6 +115,6 @@
 
     <!-- Main JS-->
     <script src={{ asset("/js/core/bootstrap.min.js") }}></script>
-    <script src="{{ asset("js/compras.js") }}"></script>
+   
 </body>
 </html>

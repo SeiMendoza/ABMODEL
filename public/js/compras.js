@@ -26,7 +26,7 @@ function addToCarritoItem(e) {
 
 function addItemCarrito(newItem) {
 
-    const InputElemnto = tbody.getElementsByClassName('input_Element');
+    const InputElemnto = tbody.getElementsByClassName('inputE');
     for (let i = 0; i < carrito.length; i++) {
         if (carrito[i].id.trim() === newItem.id.trim()) {
             carrito[i].cantidad++;
@@ -52,20 +52,19 @@ function renderCarrito() {
         const Content = `
                     <td colspan="3" class="titulo">${item.title}</td>
                     <td>
-                        <input type="number" min="1" style ="width :40px;" value ="${item.cantidad}"
-                         class="input_Element"> </input>
+                        <input type="number" min="1" style ="width :40px;" value ="${item.cantidad}" class="inputE"> </input>
                     </td>
                     <td  width="140">${item.precio}</td>
                     <td  width="140">${total_producto.toFixed(2)}</td>
                     <td  width="140">
-                        <a href="#" class="borrar-producto   fas fa-times-circle" data-id="${item.id}"></a>
+                        <a href="#" class="borrar   fas fa-times-circle" data-id="${item.id}"></a>
                     </td>
-                        <input name="detalle-` + i + `" type="text" value="${item.id} ${item.cantidad}" readonly style="display:none">
+                        <input name="det-` + i + `" type="text" value="${item.id} ${item.cantidad}" readonly style="display:none">
                     `;
         tr.innerHTML = Content;
         tbody.append(tr);
-        tr.querySelector(".borrar-producto").addEventListener('click', removeItemCarrito);
-        tr.querySelector(".input_Element").addEventListener('change', sumaCantidad);
+        tr.querySelector(".borrar").addEventListener('click', removeItemCarrito);
+        tr.querySelector(".inputE").addEventListener('change', sumaCantidad);
         i++;
     });
     document.formulario_ventas.tuplas.value = factura.length;

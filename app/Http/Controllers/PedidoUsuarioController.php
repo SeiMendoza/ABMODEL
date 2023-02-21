@@ -35,7 +35,7 @@ class PedidoUsuarioController extends Controller
 
 
         for ($i=0; $i < intval($request->input("tuplas")) ; $i++) {
-            $array = explode ( ' ', $request->input("detalle-".$i) );
+            $array = explode ( ' ', $request->input("det-".$i) );
             $detalle = new DetallesUsuario();
             $detalle->nombre = $pedido->id;
             $detalle->cantidad = $array[0];
