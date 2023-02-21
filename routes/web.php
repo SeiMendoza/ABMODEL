@@ -76,6 +76,15 @@ Route::post('/combos/nuevo',[ComboController::class, 'store'])
     ->name('combo.temporal');
 
 /*****************************
+  Rutas De estado
+******************************/
+Route::get('/estado/nuevo', [ComboController::class, 'estado'])
+->name('estado.create');
+
+Route::post('/estado/nuevo',[ComboController::class, 'estadoactualizar'])
+    ->name('estado.store');
+
+/*****************************
   Rutas Para Administración
 ******************************/
 Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])

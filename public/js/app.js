@@ -88,7 +88,7 @@ function cancelar(ruta){
     Swal
     .fire({
         title: "¿Cancelar registro?",
-        text: "¿Desea cancelar el proceso de registro?",
+        text: "¿Desea cancelar lo que esta haciendo?",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: "Si",

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Combo;
+use App\Models\Producto;
+use App\Models\Platillo;
+use App\Models\Bebida;
 use Illuminate\Http\Request;
 use App\Models\Componentescombo;
 use App\Models\PlatillosyBebidas;
@@ -10,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreComboRequest;
 use App\Http\Requests\UpdateComboRequest;
 use App\Models\Componentestemporalcombo;
+use Illuminate\Support\Facades\DB;
 
 class ComboController extends Controller
 {
@@ -142,49 +146,39 @@ class ComboController extends Controller
         }
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Combo  $combo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Combo $combo)
-    {
-        //
+    public function estado(){
+        $platillos = Producto::all();
+        return view('estado/listado')->with('productos', $platillos);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Combo  $combo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Combo $combo)
-    {
-        //
+    public function estadoactualizar(Request $request){
+
+        $Producto= Producto::All();
+
+        foreach($Producto as $pro){
+            if ($pro->id_platillo) {
+                $aux=Platillo::findOrFail($pro->id_platillo);
+            } else {
+                if ($pro->id_bebidas) {
+                    $aux=Bebida::findOrFail($pro->id_bebidas);
+                } else {
+                    if ($pro->id_combo) {
+                        $aux=Combo::findOrFail($pro->id_combo);
+                    }
+                }
+            }
+            $dat =  $request->input($pro->id);
+            if($dat == true){
+                $aux->estado = 0;
+            }else{
+                $aux->estado = 1;
+            }
+            $creado = $aux->save(); 
+        }
+
+        return redirect()->route('index')
+        ->with('mensaje', 'Los datos fueron actualizados');
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateComboRequest  $request
-     * @param  \App\Models\Combo  $combo
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateComboRequest $request, Combo $combo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Combo  $combo
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Combo $combo)
-    {
-        //
-    }
 }

@@ -100,7 +100,7 @@
                         <span class="nav-link-text ms-1">Billing</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li cFlass="nav-item">
                     <a class="nav-link " href="{{route("d")}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -388,13 +388,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
                                     <h5 class="font-weight-bolder">
-                                        $103,430
+                                        Estado de productos
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+5%</span> than last
-                                        month
+                                    <a href={{ route('estado.create') }}
+                                            class="btn badge-primary">Cambiar</a>
                                     </p>
                                 </div>
                             </div>

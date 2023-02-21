@@ -17,11 +17,11 @@ class CreateViewPlatillosBebidasTable extends Migration
         SELECT *, ROW_NUMBER() OVER(ORDER BY nombre) id
         FROM (
         	SELECT nombre,descripcion,'platillos' AS tipo, precio, id AS id_platillo, NULL AS id_bebidas,
-			tamanio, imagen, disponible, fecha, created_at, updated_at
+			tamanio, imagen, disponible, fecha, created_at, updated_at, estado
 			FROM platillos
 			UNION 
 			SELECT nombre,descripcion, 'bebidas' AS tipo, precio, NULL AS id_platillo, id AS id_bebidas,
-			tamanio, imagen, disponible, fecha, created_at, updated_at
+			tamanio, imagen, disponible, fecha, created_at, updated_at, estado
 			FROM bebidas
        )a
        

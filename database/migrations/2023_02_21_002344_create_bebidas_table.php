@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("imagen");
             $table->integer("disponible");
             $table->date("fecha")->nullable();
+            $table->boolean('estado')->default(0);
             $table->timestamps();
         });
     }
