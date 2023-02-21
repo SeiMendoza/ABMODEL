@@ -54,6 +54,8 @@ Route::get('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store
 
 Route::get('/menu/cliente', [MenuUsuarioController::class, 'index'])
 ->name('cliente_menu.index');/*Ruta de visualizacion de menu*/
+Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])
+->name('cliente_menu.qr');
 //Route::get('/menu', [MenuUsuarioController::class,'search'])
 //->name('menu.search');
 
