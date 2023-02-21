@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuUsuarioController;
 use App\Http\Controllers\PlatillosyBebidasController;
 use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
+use App\Http\Controllers\EditarPlatilloBebidaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,4 +90,14 @@ Route::post('/estado/nuevo',[ComboController::class, 'estadoactualizar'])
 ******************************/
 Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])
     ->name('busqueda.index');
+
+/****************************************
+  Rutas Para Editar Platillos y Bebidas
+*****************************************/
+Route::get('platilloybebida/{id}/editar', [EditarPlatilloBebidaController::class, 'edit'])
+      ->name('platobebida.editar');
+
+Route::put('platilloybebida/{id}/edicion', [EditarPlatilloBebidaController::class, 'update'])
+      ->name('platobebida.update');
+
  

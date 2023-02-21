@@ -230,7 +230,7 @@
 
                                                                     {{-- Edit --}}
                                                                     <div class="col">
-                                                                        <a class="col-12 btn btn-danger form">Editar</a>
+                                                                        <a class="col-12 btn btn-danger form" href="{{ route('platobebida.editar', $p->id)  }}">Editar</a>
                                                                     </div>
                                                                 </div>
                                                                 {{-- Fin Precio... --}}
