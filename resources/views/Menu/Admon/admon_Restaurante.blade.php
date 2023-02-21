@@ -1,61 +1,55 @@
 @extends('00_plantillas_Blade.plantilla_General')
-@section('contend')
-    <!-- ========== Start Cantidad de Platillos Disponibles ========== -->
+@section('info')
+    <div class="col float-right">
 
-    <div>
-        <div class="col p-1">
+        <div class="row justify-contend-rigth text-center ">
+            <h5 class="breadcrumb-item text-lg text-white" style="text-white" style="text-background: #ffffff;">
+                Cantidad de Platillos</h5>
+        </div>
 
-            <div class="card col">
+        <div class="row justify-contend-rigth p-1">
 
-                <div class="row justify-contend-center text-center ">
-                    <h5 style="text-white" style="text-background: #ffffff;">Cantidad de Platillos</h5>
-                </div>
+            <div class="row align-items-center" style="display: flex">
+                <p class="col text-center text-sm text-white"
+                    style="  
+                    padding-right: 10px;
+                    padding-left: 10px;">
+                    Platillos:</p>
+                <p class="col text-center text-sm text-white"
+                    style="  
+                    padding-right: 10px;
+                    padding-left: 10px;">
+                    Bebidas: </p>
+                <p class="col text-center text-sm text-white"
+                    style="  
+                    padding-right: 10px;
+                    padding-left: 10px;">
+                    Combos: </p>
+            </div>
 
-                <div class="row justify-contend-center">
-
-                    <div class="row align-items-center" style="display: flex">
-                        <p class="col text-center"
-                            style="  
-                padding-right: 40px;
-                padding-left: 40px;">
-                            Platillos:</p>
-                        <p class="col text-center"
-                            style="  
-                    padding-right: 40px;
-                    padding-left: 40px;">
-                            Bebidas: </p>
-                        <p class="col text-center"
-                            style="  
-                    padding-right: 40px;
-                    padding-left: 40px;">
-                            Combos: </p>
-                    </div>
-
-                    <div class="row align-items-center" style="display: flex">
-                        <p class="col text-center"
-                            style="  
-                padding-right: 40px;
-                padding-left: 40px;">
-                            {{ $platillos->where('tipo', '0')->count() }}</p>
-                        <p class="col text-center"
-                            style="  
-                    padding-right: 40px;
-                    padding-left: 40px;">
-                            {{ $platillos->where('tipo', '1')->count() }}</p>
-                        <p class="col text-center"
-                            style="  
-                    padding-right: 40px;
-                    padding-left: 40px;">
-                            {{ $combos->count() }}</p>
-                    </div>
-
-                </div>
+            <div class="row align-items-center" style="display: flex">
+                <p class="col text-center text-sm text-white font-weight-bolder"
+                    style="  
+                padding-right: 10px;
+                padding-left: 10px;">
+                    {{ $platillos->count() }}</p>
+                <p class="col text-center text-sm text-white font-weight-bolder"
+                    style="  
+                    padding-right: 10px;
+                    padding-left: 10px;">
+                    {{ $bebidas->count() }}</p>
+                <p class="col text-center text-sm text-white font-weight-bolder"
+                    style="  
+                    padding-right: 10px;
+                    padding-left: 10px;">
+                    {{ $combos->count() }}</p>
             </div>
 
         </div>
     </div>
-
-    <!-- ========== End Cantidad de Platillos Disponibles ========== -->
+@endsection
+@section('contend')
+    <!-- ========== Start Cards ========== -->
 
     <div class="container ">
 
@@ -64,7 +58,6 @@
             <div class="row">
 
                 {{-- Cards Platillos --}}
-                {{-- Contenedor Tarjetas Comidas --}}
                 <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 align-items-start">
                     @foreach ($platillos as $p)
                         <div class="card my-3 ">
@@ -78,7 +71,7 @@
                                 </div>
 
                                 {{-- Imagen --}}
-                                <div class="col-4 align-items-center">
+                                <div class="align-items-center">
                                     <div class="card">
                                         <div>
                                             <div>
@@ -90,9 +83,99 @@
                                     </div>
                                 </div>
 
-                                <div class="col" style="display:block">
+                                <div style="display:block">
                                     {{-- Informacion --}}
-                                    <div class="row-12">
+                                    <div>
+                                        <div class="card col-12 text-end">
+                                            <div class="col-12 p-4">
+                                                <div>
+                                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                                        Disponibles: {{ $p->cantidad }}
+                                                    </p>
+                                                    <div class="col-12">
+                                                        <div>
+                                                            <div class="text-center">
+                                                                <h3>{{ $p->nombre }}</h3>
+                                                                <p align="center"> {{ $p->descripcion }}</p>
+
+                                                                {{-- Precio, Disponibilidad y edicion --}}
+
+                                                                {{-- Precio --}}
+                                                                <div class="col">
+                                                                    <h4 class="col">L {{ $p->precio }}.00</h4>
+                                                                </div>
+
+                                                                <div class="row">
+
+                                                                    {{-- Check --}}
+                                                                    <div class="card col">
+                                                                        <div class="row-12">
+                                                                            <div
+                                                                                class="justify-content-center form-switch form-check">
+                                                                                <input class="form-check-input"
+                                                                                    type="checkbox"
+                                                                                    name="chckBox_disponible"
+                                                                                    id="disponible">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row-12">
+                                                                            <div>
+                                                                                <label
+                                                                                    class="form-check-label font-weight-bold"
+                                                                                    for="flexSwitchCheck">Disponible</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    {{-- Edit --}}
+                                                                    <div class="col">
+                                                                        <a class="col-12 btn btn-danger form">Editar</a>
+                                                                    </div>
+                                                                </div>
+                                                                {{-- Fin Precio... --}}
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Cards Bebidas --}}
+                <div class="col-xl-3 col-sm-6 mb-xl-4 mb-4 align-items-start">
+                    @foreach ($bebidas as $p)
+                        <div class="card my-3 ">
+                            <div class="row card-body p-3">
+
+                                {{-- foodIcon --}}
+                                <div class="text-end">
+                                    <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
+                                        <i class="ni ni-bell-55 text-lg opacity-10" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+
+                                {{-- Imagen --}}
+                                <div class="align-items-center">
+                                    <div class="card">
+                                        <div>
+                                            <div>
+                                                <img src="{{ asset($p->imagen) }}" alt="..."
+                                                    class="rounded float-center image-center image-fluid"
+                                                    style="width: 100% ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="display:block">
+                                    {{-- Informacion --}}
+                                    <div>
                                         <div class="card col-12 text-end">
                                             <div class="col-12 p-4">
                                                 <div>
@@ -156,8 +239,7 @@
 
 
                 {{-- Cards Combos --}}
-                {{-- Contenedor Tarjetas Comidas --}}
-                <div class="col-xl-5 col-sm-6 mb-xl-4 mb-4">
+                <div class="col-xl-5  col-sm-6 mb-xl-4 mb-4">
                     @foreach ($combos as $p)
                         <div class="card my-3 ">
                             <div class="card-body p-3">
@@ -230,7 +312,8 @@
 
                                                                     {{-- Edit --}}
                                                                     <div class="col">
-                                                                        <a class="col-12 btn btn-danger form" href="{{ route('platobebida.editar', $p->id)  }}">Editar</a>
+                                                                        <a class="col-12 btn btn-danger form"
+                                                                            href="{{ route('platobebida.editar', $p->id) }}">Editar</a>
                                                                     </div>
                                                                 </div>
                                                                 {{-- Fin Precio... --}}
@@ -250,6 +333,8 @@
                 </div>
 
             </div>
-
         </div>
-    @endsection
+    </div>
+
+    <!-- ========== End Cards ========== -->
+@endsection
