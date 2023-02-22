@@ -19,174 +19,281 @@
              @endif
          </div>
      </form>
+
      <div style="display:block;   float:right">
+     <a href="{{route("index")}}" class="btn btn-menu"><i class="ni ni-palette"></i> Inicio</a>
+     
          <a href="{{route("usuario_pedido.create")}}" class="btn btn-primary"><i class="ni ni-air-baloon"></i>Ver Pedido</a>
      </div>
 
      <br><br>
-     
-     <div class="container-fluid px-4">
-         <div class="card-group row" style="display: flex; align:left">
 
-             @foreach ($menu as $m)
+     <div class="container ">
 
-             <div class="row items">
-                 <div class="col-xl-6 col-sm-6 mb-xl-4 mb-4">
-                     <div class="card my-3">
-                         <div class="card-body p-3 " >
-                             {{-- foodIcon --}}
-                             <div class="col-12 text-end">
-                                 <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
-                                     <i class="ni ni-bell-55 text-lg opacity-10" aria-hidden="true"></i>
-                                 </div>
-                             </div>
-                             <div class="row" style="display:flex">
-                                 {{-- Imagen --}}
-                                 <div class="col align-items-center">
-                                     <div class="card col-12 row-12">
-                                         <div>
-                                             <div class="square">
-                                                 <img src="{{ asset($m->imagen) }}" alt="..." class="rounded float-start image-center image-fluid" style="width: 100%">
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 {{-- Informacion --}}
-                                 <div class="col">
-                                     <div class="card col-12 text-end">
-                                         <div class="col-12 p-4">
-                                             <div>
-                                                 <p class="text-sm mb-0 text-uppercase font-weight-bold" aling>
+<div class="card-group row" style="display: flex">
 
-                                                 </p>
-                                                 <div class="col-12">
-                                                     <div>
-                                                         <div class="text-center">
-                                                             <h3 class="title">{{ $m->nombre }}</h3>
-                                                             <p align="center"> {{ $m->descripcion }}</p>
+    <div class="row">
 
-                                                             {{-- Precio, Disponibilidad y edicion --}}
+        {{-- Cards Platillos --}}
+        <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 align-items-start">
+            @foreach ($platillos as $p)
+                <div class="card my-3 ">
+                    <div class="row card-body p-3">
 
-                                                             {{-- Precio --}}
-                                                             <div class="col">
-                                                                 <h4 class="col precio">L {{ $m->precio }}.00</h4>
-                                                             </div>
+                        {{-- foodIcon --}}
+                        <div class="text-end">
+                            <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
+                                <i class="ni ni-bell-55 text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                        </div>
 
-                                                             <div class="row">
+                        {{-- Imagen --}}
+                        <div class="align-items-center">
+                            <div class="card">
+                                <div>
+                                    <div>
+                                        <img src="{{ asset($p->imagen) }}" alt="..."
+                                            class="rounded float-center image-center image-fluid"
+                                            style="width: 100% ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:block">
+                            {{-- Informacion --}}
+                            <div>
+                                <div class="card col-12 text-end">
+                                    <div class="col-12 p-4">
+                                        <div>
+                                            <div class="col-12">
+                                                <div>
+                                                    <div class="text-center">
+                                                        <h3>{{ $p->nombre }}</h3>
+                                                        <p align="center"> {{ $p->descripcion }}</p>
+
+                                                        {{-- Precio, Disponibilidad y edicion --}}
+
+                                                        {{-- Precio --}}
+                                                        <div class="col">
+                                                            <h4 class="col">L {{ $p->precio }}.00</h4>
+                                                        </div>
+
+                                                        <div class="row">
+
+                                                            {{-- Check --}}
+                                                            <div class="card col">
+                                                                <div class="row-12">
+                                                                    <div> 
+                                                                    <h5 style="text-align: center;" class="card-title">{{ $p->tamanio }}</h5>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div>
+                                                                         
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            {{-- Edit --}}
+                                                            <div class="col">
+                                                                <a class="col-12 btn btn-danger form">Agregar</a>
+                                                            </div>
+                                                        </div>
+                                                        {{-- Fin Precio... --}}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Cards Bebidas --}}
+        <div class="col-xl-3 col-sm-6 mb-xl-4 mb-4 align-items-start">
+            @foreach ($bebidas as $p)
+                <div class="card my-3 ">
+                    <div class="row card-body p-3">
+
+                        {{-- foodIcon --}}
+                        <div class="text-end">
+                            <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
+                                <i class="ni ni-bell-55 text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                        </div>
+
+                        {{-- Imagen --}}
+                        <div class="align-items-center">
+                            <div class="card">
+                                <div>
+                                    <div>
+                                        <img src="{{ asset($p->imagen) }}" alt="..."
+                                            class="rounded float-center image-center image-fluid"
+                                            style="width: 100% ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:block">
+                            {{-- Informacion --}}
+                            <div>
+                                <div class="card col-12 text-end">
+                                    <div class="col-12 p-4">
+                                        <div>
+                                            
+                                            <div class="col-12">
+                                                <div>
+                                                    <div class="text-center">
+                                                        <h3>{{ $p->nombre }}</h3>
+                                                        <p align="center"> {{ $p->descripcion }}</p>
+
+                                                        {{-- Precio, Disponibilidad y edicion --}}
+
+                                                        {{-- Precio --}}
+                                                        <div class="col">
+                                                            <h4 class="col">L {{ $p->precio }}.00</h4>
+                                                        </div>
+
+                                                        <div class="row">
+
+                                                            {{-- Check --}}
+                                                            <div class="card col">
+                                                                <div class="row-12">
+                                                                    <div>
+                                                                    <h5 class="card-title">{{ $p->tamanio }}</h5>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row-12">
+                                                                    <div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            {{-- Edit --}}
+                                                            <div class="col">
+                                                                <a class="col-12 btn btn-danger Button">Agregar</a>
+                                                            </div>
+                                                        </div>
+                                                        {{-- Fin Precio... --}}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
 
-                                                                 <div>
-                                                                     <div>
+        {{-- Cards Combos --}}
+        <div class="col-xl-5  col-sm-6 mb-xl-4 mb-4">
+            @foreach ($combos as $p)
+                <div class="card my-3 ">
+                    <div class="card-body p-3">
 
-                                                                     </div>
+                        {{-- foodIcon --}}
+                        <div class="col-12 text-end">
+                            <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
+                                <i class="ni ni-box-2 text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                        </div>
 
-                                                                 </div>
+                        <div class="row" style="display:flex">
+                            {{-- Imagen --}}
+                            <div class="col align-items-center">
+                                <div class="card col-12 row-12">
+                                    <div>
+                                        <div class="square">
+                                            <img src="{{ asset($p->imagen) }}" alt="..."
+                                                class="rounded float-start image-center image-fluid"
+                                                style="width: 100%">
 
-                                                                 {{-- Edit --}}
-                                                                 <div class="col">
-                                                                     <button class="col-6 btn btn-danger button" data-id="{{$m->id}}" id="btn-agregar">Agregar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                                                 </div>
-                                                             </div>
-                                                         </div>
+                            {{-- Informacion --}}
+                            <div class="col">
+                                <div class="card col-12 text-end">
+                                    <div class="col-12 p-4">
+                                        <div>
+                                            <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                                Disponibles:
+                                            </p>
+                                            <div class="col-12">
+                                                <div>
+                                                    <div class="text-center">
+                                                        <h3>{{ $p->nombre }}</h3>
+                                                        <p align="center"> {{ $p->descripcion }}</p>
 
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
+                                                        {{-- Precio, Disponibilidad y edicion --}}
 
-                 </div>
-             </div>
-             @endforeach
-         </div>
-         {{-- Cards Combos --}}
-         {{-- Contenedor Tarjetas Comidas --}}
-         <div class="col-xl-5 col-sm-6 mb-xl-4 mb-4">
-             @foreach ($combos as $c)
-             <div class="card my-3 ">
-                 <div class="card-body p-3">
+                                                        {{-- Precio --}}
+                                                        <div class="col">
+                                                            <h4 class="col">L {{ $p->precio }}.00
+                                                            </h4>
+                                                        </div>
 
-                     {{-- foodIcon --}}
-                     <div class="col-12 text-end">
-                         <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
-                             <i class="ni ni-box-2 text-lg opacity-10" aria-hidden="true"></i>
-                         </div>
-                     </div>
+                                                        <div class="row">
 
-                     <div class="row" style="display:flex">
-                         {{-- Imagen --}}
-                         <div class="col align-items-center">
-                             <div class="card col-12 row-12">
-                                 <div>
-                                     <div class="square">
-                                         <img src="{{ asset($c->imagen) }}" alt="..." class="rounded float-start image-center image-fluid" style="width: 100%">
+                                                            {{-- Check --}}
+                                                            <div class="card col">
+                                                                <div class="row-12">
+                                                                    <div
+                                                                        class="justify-content-center form-switch form-check">
+                                                                        <input class="form-check-input"
+                                                                            type="checkbox"
+                                                                            name="chckBox_disponible"
+                                                                            id="disponible">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row-12">
+                                                                    <div>
+                                                                        <label
+                                                                            class="form-check-label font-weight-bold"
+                                                                            for="flexSwitchCheck">Disponible</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
+                                                            {{-- Edit --}}
+                                                            <div class="col">
+                                                                <a class="col-12 btn btn-danger form"
+                                                                    href="{{ route('platobebida.editar', $p->id) }}">Editar</a>
+                                                            </div>
+                                                        </div>
+                                                        {{-- Fin Precio... --}}
 
-                         {{-- Informacion --}}
-                         <div class="col">
-                             <div class="card col-12 text-end">
-                                 <div class="col-12 p-4">
-                                     <div>
-                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                         </p>
-                                         <div class="col-12">
-                                             <div>
-                                                 <div class="text-center">
-                                                     <h3 class="card-title">{{ $c->nombre }}</h3>
-                                                     <p align="center"> {{ $c->descripcion }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
-                                                     {{-- Precio, Disponibilidad y edicion --}}
-
-                                                     {{-- Precio --}}
-                                                     <div class="col">
-                                                         <h4 class="col precio">L {{ $c->precio }}.00
-                                                         </h4>
-                                                     </div>
-
-                                                     <div class="row">
-
-
-                                                         <div class="row-12">
-                                                             <div>
-
-                                                             </div>
-                                                         </div>
-                                                     </div>
-
-                                                     {{-- Edit --}}
-                                                     <div class="col">
-                                                         <button class="col-6 btn btn-danger button" id="btn-agregar">Agregar</button>
-                                                     </div>
-                                                 </div>
-                                                 {{-- Fin Precio... --}}
-
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-
-             </div>
-         </div>
-         @endforeach
-     </div>
-
- </div>
-
- </div>
-
+    </div>
+</div>
+</div>
  <script src="{{ asset("js/compras.js") }}"></script>
  @endsection
