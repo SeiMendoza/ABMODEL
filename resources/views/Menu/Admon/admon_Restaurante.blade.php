@@ -106,7 +106,6 @@
                                                                 </div>
 
                                                                 <div class="row">
-
                                                                     {{-- Check --}}
                                                                     <div class="card col">
                                                                         <div class="row-12">
@@ -129,10 +128,16 @@
 
                                                                     {{-- Edit --}}
                                                                     <div class="col">
-                                                                        <a class="col-12 btn btn-danger form">Editar</a>
+                                                                        <a class="col-12 btn btn-menu form">Editar</a>
                                                                     </div>
                                                                 </div>
                                                                 {{-- Fin Precio... --}}
+
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <a class="col-12 btn btn-danger form">Eliminar</a>
+                                                                    </div>
+                                                                </div>
 
                                                             </div>
                                                         </div>
@@ -219,10 +224,16 @@
 
                                                                     {{-- Edit --}}
                                                                     <div class="col">
-                                                                        <a class="col-12 btn btn-danger form">Editar</a>
+                                                                        <a class="col-12 btn btn-menu form">Editar</a>
                                                                     </div>
                                                                 </div>
                                                                 {{-- Fin Precio... --}}
+
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <a class="col-12 btn btn-danger form">Eliminar</a>
+                                                                    </div>
+                                                                </div>
 
                                                             </div>
                                                         </div>
@@ -288,35 +299,46 @@
                                                                     </h4>
                                                                 </div>
 
-                                                                <div class="row">
+                                                                <div class="col">
 
-                                                                    {{-- Check --}}
-                                                                    <div class="card col">
-                                                                        <div class="row-12">
-                                                                            <div
-                                                                                class="justify-content-center form-switch form-check">
-                                                                                <input class="form-check-input"
-                                                                                    type="checkbox"
-                                                                                    name="chckBox_disponible"
-                                                                                    id="disponible">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row-12">
+                                                                    <div class="row ">
+                                                                        {{-- Check --}}
+                                                                        <div class="col card">
                                                                             <div>
-                                                                                <label
-                                                                                    class="form-check-label font-weight-bold"
-                                                                                    for="flexSwitchCheck">Disponible</label>
+                                                                                <div
+                                                                                    class="justify-content-center form-switch form-check">
+                                                                                    <input class="form-check-input"
+                                                                                        type="checkbox"
+                                                                                        name="chckBox_disponible"
+                                                                                        id="disponible">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div>
+                                                                                <div>
+                                                                                    <label
+                                                                                        class="form-check-label font-weight-bold"
+                                                                                        for="flexSwitchCheck">Disponible</label>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
+
+                                                                        {{-- Edit --}}
+                                                                        <div class="col">
+                                                                            <a class=" btn btn-menu form"
+                                                                                href="{{ route('platobebida.editar', $p->id) }}">Editar</a>
+                                                                        </div>
+
                                                                     </div>
 
-                                                                    {{-- Edit --}}
-                                                                    <div class="col">
-                                                                        <a class="col-12 btn btn-danger form"
-                                                                            href="{{ route('platobebida.editar', $p->id) }}">Editar</a>
-                                                                    </div>
+
                                                                 </div>
                                                                 {{-- Fin Precio... --}}
+
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <a class="col-12 btn btn-danger form">Eliminar</a>
+                                                                    </div>
+                                                                </div>
 
                                                             </div>
                                                         </div>
