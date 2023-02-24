@@ -23,4 +23,8 @@ class DetallesUsuario extends Model
     {
         return $this->belongsTo(PlatillosyBebidas::class);
     }
+    public function platillo()
+    {
+        return $this->belongsTo(Platillo::class);
+    }
 }
