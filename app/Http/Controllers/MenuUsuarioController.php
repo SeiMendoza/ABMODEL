@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Bebida;
 use App\Models\Combo;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use App\Models\Platillo;
 
@@ -25,4 +26,5 @@ class MenuUsuarioController extends Controller
      public function qr(){
         return view('Menu/Admon/QR_Menu');
      }
+      
 }

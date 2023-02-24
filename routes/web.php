@@ -47,7 +47,8 @@ Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
 Route::get('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store'])
 ->name('usuario_pedido.store');
-
+Route::get('/menu/pedido', [PedidoUsuarioController::class, 'pedido'])
+->name('pedidost.pedido');
  /*****************************
   Rutas Para Menu de cliente
 ******************************/
@@ -56,6 +57,7 @@ Route::get('/menu/cliente', [MenuUsuarioController::class, 'index'])
 ->name('cliente_menu.index');/*Ruta de visualizacion de menu*/
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])
 ->name('cliente_menu.qr');
+ 
 //Route::get('/menu', [MenuUsuarioController::class,'search'])
 //->name('menu.search');
 

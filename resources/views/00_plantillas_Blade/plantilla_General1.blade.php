@@ -27,14 +27,13 @@
 <style>
   body{
     Overflow-x: hidden;
-     
   }
 </style>
 </head>
 <main class="main-content position-relative border-radius-lg">
-<body>
+<body class="bg-danger">
  
-                      <div class="bg-danger">
+                      <div>
                           
     @yield('contend')
   </main>

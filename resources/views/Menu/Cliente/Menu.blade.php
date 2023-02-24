@@ -3,14 +3,16 @@
 
  <!-- Menú de comidas y bebidas -->
 
- <h5 style="text-align: center;">Menú del Dia</h5>
+ <h5 class="card class-4 text-lg text-center" 
+ style="text-backgroun: #ffffff; position: relative;
+top: 7px; ">Menú del Dia</h5>
 
  <div style="padding-top:19px; margin: 10px;">
      <form action="{{ route('cliente_menu.index') }}" method="get" role="search" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
          <div class="input-group">
              <input class="form-control" type="search" id="busqueda" name="/" style="width: 350px" placeholder="Buscar por nombre, tamaño, comida/bebida" aria-label="Search" aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {
                                                                                                                                                                                                                                                     echo $text;
-                                                                                                                                                                                                                                                } ?>" />
+                                                                                                                                                                                                                                        } ?>" />
              <div class="input-group-append">
                  <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>
              </div>
@@ -23,11 +25,11 @@
      <div style="display:block;   float:right">
      <a href="{{route("index")}}" class="btn btn-menu"><i class="ni ni-palette"></i> Inicio</a>
      
-         <a href="{{route("usuario_pedido.create")}}" class="btn btn-primary"><i class="ni ni-air-baloon"></i>Ver Pedido</a>
-     </div>
-
+         <a href="{{route("usuario_pedido.create")}}" class="btn btn-menu"><i class="ni ni-air-baloon"></i>Ver Pedido</a>
+        </div>
+          
      <br><br>
-
+ 
      <div class="container ">
 
 <div class="card-group row" style="display: flex">
@@ -76,7 +78,7 @@
 
                                                         {{-- Precio --}}
                                                         <div class="col">
-                                                            <h4 class="col">L {{ $p->precio }}.00</h4>
+                                                            <h4 class="col precio">L {{ $p->precio }}.00</h4>
                                                         </div>
 
                                                         <div class="row">
@@ -97,7 +99,7 @@
 
                                                             {{-- Edit --}}
                                                             <div class="col">
-                                                                <a class="col-12 btn btn-danger form">Agregar</a>
+                                                                <a class="col-12 btn btn-danger button">Agregar</a>
                                                             </div>
                                                         </div>
                                                         {{-- Fin Precio... --}}
@@ -151,14 +153,14 @@
                                             <div class="col-12">
                                                 <div>
                                                     <div class="text-center">
-                                                        <h3>{{ $p->nombre }}</h3>
+                                                        <h3 class="title">{{ $p->nombre }}</h3>
                                                         <p align="center"> {{ $p->descripcion }}</p>
 
                                                         {{-- Precio, Disponibilidad y edicion --}}
 
                                                         {{-- Precio --}}
                                                         <div class="col">
-                                                            <h4 class="col">L {{ $p->precio }}.00</h4>
+                                                            <h4 class="col precio">L {{ $p->precio }}.00</h4>
                                                         </div>
 
                                                         <div class="row">
@@ -179,7 +181,7 @@
 
                                                             {{-- Edit --}}
                                                             <div class="col">
-                                                                <a class="col-12 btn btn-danger Button">Agregar</a>
+                                                                <a class="col-12 btn btn-danger button">Agregar</a>
                                                             </div>
                                                         </div>
                                                         {{-- Fin Precio... --}}
@@ -237,14 +239,14 @@
                                             <div class="col-12">
                                                 <div>
                                                     <div class="text-center">
-                                                        <h3>{{ $p->nombre }}</h3>
+                                                        <h3 class="title">{{ $p->nombre }}</h3>
                                                         <p align="center"> {{ $p->descripcion }}</p>
 
                                                         {{-- Precio, Disponibilidad y edicion --}}
 
                                                         {{-- Precio --}}
                                                         <div class="col">
-                                                            <h4 class="col">L {{ $p->precio }}.00
+                                                            <h4 class="col precio">L {{ $p->precio }}.00
                                                             </h4>
                                                         </div>
 
