@@ -25,20 +25,19 @@
                     <h2 class="title">Registro de Combos</h2>
                     <form method="post"  action="" enctype="multipart/form-data">
                         @csrf
-
                         <div style="width:200px;float:left">
-                            <img src="" alt="" width="200px" height="200px" id="imagenmostrada">
+                            <img src="@if(Session::has('imagens')){{Session::get('imagens')}}@endif" alt="" width="200px" height="200px" id="imagenmostrada">
                             <br>
                             <input type="file" id="imagen" name="imagen" accept="image/*" required onkeypress="quitarerror()"
-                            value="{{old('imagenPrevisualizacion')}}" style="color: white;width: 200px;" >
+                            value="@if(Session::has('imagens')){{Session::get('imagens')}}@endif"  >
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
-
                         <div style="margin-left:2%;float:left;width:72%">
-                            <input class="input--style-2" type="text" placeholder="Nombre del combo" name="nombre" value="{{old('nombre')}}"
-                            maxlength="25" required onkeypress="quitarerror()">
+                            <input class="input--style-2" type="text" placeholder="Nombre del combo" name="nombre" id="nombre"
+                            value="@if(Session::has('nombre')){{Session::get('nombre')}}@else{{old('nombre')}}@endif"
+                            maxlength="25"  onkeypress="quitarerror()">
                             @error('nombre')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -46,7 +45,8 @@
 <br><br>
                         <div style="margin-left:2%;float:left;width:35%">
                             <textarea class="textarea--style-2" type="text" placeholder="Descripción" name="descripcion" maxlength="100"
-                            value="{{old('descripcion')}}" required onkeypress="quitarerror()"></textarea>
+                            required onkeypress="quitarerror()" id="descripcion"
+                            >@if(Session::has('descripcion')){{Session::get('descripcion')}}@else{{old('descripcion')}}@endif</textarea>
                             @error('descripcion')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -54,8 +54,9 @@
 
                         <div style="margin-left:2%;float:left;width:35%">
 
-                            <input class="input--style-2" type="number" placeholder="Precio" name="precio"
-                            value="{{old('precio')}}" onkeypress="quitarerror()"
+                            <input class="input--style-2" type="number" placeholder="Precio" name="precio" id="precio"
+                            value="@if(Session::has('precio')){{Session::get('precio')}}@else{{old('precio')}}@endif"
+                            onkeypress="quitarerror()"
                             required onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000">
                             @error('precio')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -66,7 +67,7 @@
 
                         <div style="margin-left:2%;float:left;width:72%">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarproducto">
+                        <button type="button" class="btn btn-primary" onclick="rellenar()" data-bs-toggle="modal" data-bs-target="#agregarproducto">
                         Agregar
                         </button>
                         <table class="table align-items-center mb-0">
@@ -94,7 +95,7 @@
 
                             <div style="float:right">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <button type="button" onclick="cancelar('/')" class="btn btn-warning">Cancelar</button>
+                                <button type="button" onclick="cancelar('admonRestaurante')" class="btn btn-warning">Cancelar</button>
                             </div>
                         </div>
 
@@ -111,6 +112,13 @@
       <form method="post" action="{{route('combo.temporal')}}">
         @csrf
         <div class="modal-body">
+
+        <div style="display:none">
+        <input type="text" name="imagen2" id="imagen2" readonly>
+            <input type="text" name="nombre2" id="nombre2" readonly>
+            <input type="text" name="descripcion2" id="descripcion2" readonly>
+            <input type="text" name="precio2" id="precio2" readonly>
+        </div>
 
             <select name="complemento" onchange="quitarerror()" required>
                 <option disabled="disabled" selected="selected" value="">Selecciona la comida o bebida</option>

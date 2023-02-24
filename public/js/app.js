@@ -1,4 +1,9 @@
-    
+function rellenar(){
+    document.getElementById("nombre2").value = document.getElementById("nombre").value;
+    document.getElementById("descripcion2").value = document.getElementById("descripcion").value;
+    document.getElementById("precio2").value = document.getElementById("precio").value;
+}
+
 const $seleccionArchivos = document.querySelector("#imagen"),
 $imagenPrevisualizacion = document.querySelector("#imagenmostrada");
 
@@ -97,7 +102,7 @@ function cancelar(ruta){
     .then(resultado => {
         if (resultado.value) {
             // Hicieron click en "Sí"
-            window.location.href = ruta;
+            window.location.href = '/'+ruta;
         } else {
             // Dijeron que no
         }

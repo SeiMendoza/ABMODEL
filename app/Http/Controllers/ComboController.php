@@ -109,7 +109,7 @@ class ComboController extends Controller
                 }
             }
 
-            return redirect()->route('index')
+            return redirect()->route('admonRestaurante')
                 ->with('mensaje', 'El combo fue creada exitosamente');
         }
     }
@@ -139,9 +139,18 @@ class ComboController extends Controller
 
         $creado = $complementos->save();
 
+        $nombre= $request->input('nombre2');
+        $descripcion= $request->input('descripcion2');
+        $precio= $request->input('precio2');
+        $imagens= $request->input('imagen2');
+
         if ($creado) {
             return redirect()->route('combo.create')
-                ->with('mensaje', 'El complemento fue creada exitosamente');
+                ->with('mensaje', 'El complemento fue creada exitosamente')
+                ->with('nombre', $nombre)
+                ->with('descripcion', $descripcion)
+                ->with('imagens', $imagens)
+                ->with('precio', $precio);
         } else {
         }
     }
@@ -176,7 +185,7 @@ class ComboController extends Controller
             $creado = $aux->save(); 
         }
 
-        return redirect()->route('index')
+        return redirect()->route('admonRestaurante')
         ->with('mensaje', 'Los datos fueron actualizados');
 
     }

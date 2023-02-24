@@ -34,7 +34,7 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-        <script>
+    <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
         if(exist){

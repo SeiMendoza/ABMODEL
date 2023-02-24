@@ -1,6 +1,21 @@
 @extends('00_plantillas_Blade.plantilla_General')
 @section('info')
     <div class="col float-center">
+    <script>
+        var msg = '{{Session::get('mensaje')}}';
+        var exist = '{{Session::has('mensaje')}}';
+        if(exist){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: msg,
+                showConfirmButton: false,
+                toast: true,
+                background: '#0be004ab',
+                timer: 5500
+            })
+        }
+    </script>
 
         <div class="row justify-contend-rigth text-center ">
             <h5 class="card class-12 text-lg text-center text-uppercase" style="text-white" style="text-background: #ffffff;">
