@@ -1,26 +1,26 @@
 @extends('00_plantillas_Blade.plantilla_General')
 @section('info')
-    <div class="col float-right">
+    <div class="col float-center">
 
         <div class="row justify-contend-rigth text-center ">
-            <h5 class="breadcrumb-item text-lg text-white" style="text-white" style="text-background: #ffffff;">
-                Cantidad de Platillos</h5>
+            <h5 class="card class-12 text-lg text-center text-uppercase" style="text-white" style="text-background: #ffffff;">
+                Cantidades Disponibles</h5>
         </div>
 
         <div class="row justify-contend-rigth p-1">
 
             <div class="row align-items-center" style="display: flex">
-                <p class="col text-center text-sm text-white"
+                <p class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center text-sm text-white"
                     style="  
                     padding-right: 10px;
                     padding-left: 10px;">
                     Platillos:</p>
-                <p class="col text-center text-sm text-white"
+                <p class="col-xl-3 col-sm-6 mb-xl-4 mb-4 text-center text-sm text-white"
                     style="  
                     padding-right: 10px;
                     padding-left: 10px;">
                     Bebidas: </p>
-                <p class="col text-center text-sm text-white"
+                <p class="col-xl-5 col-sm-6 mb-xl-4 mb-4 text-center text-sm text-white"
                     style="  
                     padding-right: 10px;
                     padding-left: 10px;">
@@ -28,23 +28,27 @@
             </div>
 
             <div class="row align-items-center" style="display: flex">
-                <p class="col text-center text-sm text-white font-weight-bolder"
+                <p class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center text-sm text-white font-weight-bolder"
                     style="  
                 padding-right: 10px;
                 padding-left: 10px;">
                     {{ $platillos->count() }}</p>
-                <p class="col text-center text-sm text-white font-weight-bolder"
+                <p class="col-xl-3 col-sm-6 mb-xl-4 mb-4 text-center text-sm text-white font-weight-bolder"
                     style="  
                     padding-right: 10px;
                     padding-left: 10px;">
                     {{ $bebidas->count() }}</p>
-                <p class="col text-center text-sm text-white font-weight-bolder"
+                <p class="col-xl-5 col-sm-6 mb-xl-4 mb-4 text-center text-sm text-white font-weight-bolder"
                     style="  
                     padding-right: 10px;
                     padding-left: 10px;">
                     {{ $combos->count() }}</p>
             </div>
 
+        </div>
+
+        <div class="row justify-contend-rigth text-center ">
+            <hr class="card class-12 text-lg text-center text-uppercase" style="text-white" style="text-background: #ffffff;"/>
         </div>
     </div>
 @endsection
@@ -59,7 +63,7 @@
 
                 {{-- Cards Platillos --}}
                 <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 align-items-start">
-                    @foreach ($platillos as $p)
+                    @forelse ($platillos as $p)
                         <div class="card my-3 ">
                             <div class="row card-body p-3">
 
@@ -149,7 +153,9 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay Platillos agregados</div>
+                    @endforelse
                 </div>
 
                 {{-- Cards Bebidas --}}
@@ -250,7 +256,7 @@
 
 
                 {{-- Cards Combos --}}
-                <div class="col-xl-5  col-sm-6 mb-xl-4 mb-4">
+                <div class="col-xl-5 col-sm-6 mb-xl-4 mb-4">
                     @foreach ($combos as $p)
                         <div class="card my-3 ">
                             <div class="card-body p-3">

@@ -25,7 +25,7 @@
 
 <body class="g-sidenav-show bg-gray-100">
 
-    <div class="min-height-600 bg-menu position-absolute w-100"></div>
+    <div class="min-height-250 bg-menu position-absolute w-100"></div>
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
         id="sidenav-main">
@@ -165,7 +165,7 @@
 
                     <div class="row">
                         <!-- ========== Start Barra de busqueda y filtros ========== -->
-    
+
                         <div style=" display:block; float:right; padding-top:20px">
                             <form action="{{ route('busqueda.index') }}" method="get" role="search"
                                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -181,7 +181,7 @@
                                             type="submit"><strong>Buscar</strong></button>
                                     </div>
                             </form>
-    
+
                             <form class="form-inline">
                                 <select
                                     style="outline: 0; padding: 0px; border-radius: 9px; height: 40px; margin-left: 12px; border: 2px solid rgb(85, 178, 85">
@@ -193,7 +193,7 @@
                                     <option value="Mas antiguo">Mas antiguo</option>
                                 </select>
                             </form>
-    
+
                             <form>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="1" value="option1"
@@ -215,18 +215,15 @@
                                 </div>
                             </form>
                         </div>
-    
+
                         <!-- ========== End Barra de busqueda y filtros ========== -->
                     </div>
-                    <div class="row float-right p-3">
-                        {{-- Cantidad de Platillos disponibles --}}
-                        @yield('info')
-                    </div>
-                    
-
-
                 </div>
             </div>
+        </div>
+        <div class="row float-center p-3">
+            {{-- Cantidad de Platillos disponibles --}}
+            @yield('info')
         </div>
         @yield('contend')
     </main>
