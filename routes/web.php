@@ -106,4 +106,7 @@ Route::get('platilloybebida/{id}/editar', [EditarPlatilloBebidaController::class
 Route::put('platilloybebida/{id}/edicion', [EditarPlatilloBebidaController::class, 'update'])
       ->name('platobebida.update');
 
+
+
+
  

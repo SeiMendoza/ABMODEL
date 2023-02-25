@@ -12,11 +12,11 @@ class EditarPlatilloBebidaController extends Controller
 {
     //
     public function edit($id){
-
-        $PlatillosyBebidas= PlatillosyBebidas::findOrFail($id);
-
-        return view('Menu/Admon/editarPlatilloyBebida') -> with('PlatillosyBebidas', $PlatillosyBebidas);
+        $PlatillosyBebidas = Platillo::findOrFail($id);
+        return view('Menu/Admon/editarPlatilloyBebida') 
+              -> with('PlatillosyBebidas', $PlatillosyBebidas);
     }
+
 
     public function update(Request $request, $id){
 
@@ -31,10 +31,8 @@ class EditarPlatilloBebidaController extends Controller
             'disponible' => 'nullable|min:1|max:1000|numeric'
         ]);
 
-        $actualizacion = PlatillosyBebidas::findOrFail($id);
-
         if ($request->input('tipo') == 2) {
-            $actualizacion = new Platillo();
+            $actualizacion = Platillo::findOrFail($id);
 
         $actualizacion->nombre = $request->input('nombre');
         $actualizacion->descripcion = $request->input('descripcion');
@@ -51,13 +49,13 @@ class EditarPlatilloBebidaController extends Controller
 
         $creado = $actualizacion -> save();
 
-        if ($creado) {
-            return redirect()->route('admonRestaurante')
+            if ($creado) {
+               return redirect()->route('admonRestaurante')
                 ->with('mensaje', 'El platillo fue modificado exitosamente');
-            }
+            } 
 
         }else{
-            $actualizacion = new Bebida();
+            $actualizacion= Bebida::FindOrFail($id);
             
             $actualizacion->nombre = $request->input('nombre');
             $actualizacion->descripcion = $request->input('descripcion');

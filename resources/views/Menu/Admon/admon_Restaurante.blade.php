@@ -147,7 +147,7 @@
 
                                                                     {{-- Edit --}}
                                                                     <div class="col">
-                                                                        <a class="col-12 btn btn-menu form">Editar</a>
+                                                                        <a class="col-12 btn btn-menu form" href="{{ route('platobebida.editar', ['id'=> $p -> id]) }}">Editar</a>
                                                                     </div>
                                                                 </div>
                                                                 {{-- Fin Precio... --}}
@@ -245,7 +245,7 @@
 
                                                                     {{-- Edit --}}
                                                                     <div class="col">
-                                                                        <a class="col-12 btn btn-menu form">Editar</a>
+                                                                        <a class="col-12 btn btn-menu form" href="{{ route('platobebida.editar', ['id'=> $p-> id]) }}">Editar</a>
                                                                     </div>
                                                                 </div>
                                                                 {{-- Fin Precio... --}}
@@ -346,7 +346,7 @@
                                                                         {{-- Edit --}}
                                                                         <div class="col">
                                                                             <a class=" btn btn-menu form"
-                                                                                href="{{ route('platobebida.editar', $p->id) }}">Editar</a>
+                                                                            href="{{ route('platobebida.editar', ['id'=> $p-> id]) }}" >Editar</a>
                                                                         </div>
 
                                                                     </div>
