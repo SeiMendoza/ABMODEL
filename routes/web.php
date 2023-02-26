@@ -47,6 +47,8 @@ Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
 Route::get('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store'])
 ->name('usuario_pedido.store');
+Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
+->name('terminar.terminarp')->where('id','[0-9]+');
 Route::get('/menu/pedidot', [PedidoUsuarioController::class, 'pedido_terminados'])
 ->name('pedidost.pedido');
 Route::get('/menu/pedidop', [PedidoUsuarioController::class, 'pedido_pendientes'])
@@ -66,6 +68,8 @@ Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])
 /*****************************
   Rutas Para Platillos y Bebidas
 ******************************/
+Route::get('/menu/cliente', [PlatillosyBebidasController::class, 'index'])
+->name('cliente_menu.index');
 Route::get('/bebidasyplatillos/nuevo', [PlatillosyBebidasController::class, 'create'])
 ->name('bebidasyplatillos.create');
 

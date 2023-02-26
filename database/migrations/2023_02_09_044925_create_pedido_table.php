@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nombreCliente');
             $table->double('imp');
             $table->double('total');
-            $table->string('t')->default('0');
+            $table->integer('t')->default('0');
             $table->timestamps();
         });
     }

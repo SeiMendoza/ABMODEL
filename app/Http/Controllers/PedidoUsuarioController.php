@@ -53,4 +53,15 @@ class PedidoUsuarioController extends Controller
         $pedido = Pedido::all();
         return view('Cosina/Pedidospendientes',compact('pedido'));
      }
+     public function terminarp(Request $request,  $id){
+        $activar = Pedido::findOrfail($id);
+        $activar->t = $request->input('0');
+
+        $create = $activar->save();
+
+        if($create){
+            return redirect()->route('pedidost.pedido')->with('mensaje', 'El pedido fue terminado exitosamente');
+        }
+
+    }
 }

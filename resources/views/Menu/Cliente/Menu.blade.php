@@ -71,7 +71,7 @@ top: 7px; ">Menú del Dia</h5>
                                             <div class="col-12">
                                                 <div>
                                                     <div class="text-center">
-                                                        <h3>{{ $p->nombre }}</h3>
+                                                        <h3 class="title">{{ $p->nombre }}</h3>
                                                         <p align="center"> {{ $p->descripcion }}</p>
 
                                                         {{-- Precio, Disponibilidad y edicion --}}
