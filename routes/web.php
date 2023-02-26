@@ -47,8 +47,10 @@ Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
 Route::get('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store'])
 ->name('usuario_pedido.store');
-Route::get('/menu/pedido', [PedidoUsuarioController::class, 'pedido'])
+Route::get('/menu/pedidot', [PedidoUsuarioController::class, 'pedido_terminados'])
 ->name('pedidost.pedido');
+Route::get('/menu/pedidop', [PedidoUsuarioController::class, 'pedido_pendientes'])
+->name('pedidosp.pedido');
  /*****************************
   Rutas Para Menu de cliente
 ******************************/

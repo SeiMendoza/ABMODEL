@@ -45,8 +45,12 @@ class PedidoUsuarioController extends Controller
 
         return redirect()->route("cliente_menu.index");
     }
-    public function pedido(){
+    public function pedido_terminados(){
         $pedido = Pedido::all();
         return view('Cosina/Pedidosterminados',compact('pedido'));
+     }
+     public function pedido_pendientes(){
+        $pedido = Pedido::all();
+        return view('Cosina/Pedidospendientes',compact('pedido'));
      }
 }
