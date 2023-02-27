@@ -285,7 +285,7 @@
                                                 <div class="col-12 p-4">
                                                     <div>
                                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                                            Disponibles: {{ $p->cantidad }}
+                                                            Disponibles: {{ $p->disponible }}
                                                         </p>
                                                         <div class="col-12">
                                                             <div>
@@ -389,7 +389,7 @@
                                             <div class="col-12 p-4">
                                                 <div>
                                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                                        Disponibles:
+                                                        Disponibles:{{ $p->disponible }}
                                                     </p>
                                                     <div class="col-12">
                                                         <div>
