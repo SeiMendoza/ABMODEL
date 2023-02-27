@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DetallesUsuario;
 use App\Models\Pedido;
 use Database\Seeders\PlatillosyBebidasSeeder;
- 
+
 use Illuminate\Http\Request;
 
 class PedidoUsuarioController extends Controller
@@ -17,16 +17,16 @@ class PedidoUsuarioController extends Controller
 
     public function store(Request $request)
     {
-        $request ->validate([
+        $request->validate([
             'name' => ['required'],
             'tuplas' => ['required'],
-        ],[
+        ], [
             'name.required' => 'No tiene un nombre ingresado',
             'tuplas.required' => 'El pedido esta vacio',
         ]);
 
         $pedido = new Pedido();
-        $pedido->mesa= $request->input('mesa');
+        $pedido->mesa = $request->input('mesa');
         $pedido->quiosco = $request->input('quiosco');
         $pedido->nombreCliente = $request->input('name');
         $pedido->imp = $request->input('imp');
@@ -34,8 +34,8 @@ class PedidoUsuarioController extends Controller
         $pedido->save();
 
 
-        for ($i=0; $i < intval($request->input("tuplas")) ; $i++) {
-            $array = explode ( ' ', $request->input("det-".$i) );
+        for ($i = 0; $i < intval($request->input("tuplas")); $i++) {
+            $array = explode(' ', $request->input("det-" . $i));
             $detalle = new DetallesUsuario();
             $detalle->nombre = $pedido->id;
             $detalle->cantidad = $array[0];
@@ -45,23 +45,36 @@ class PedidoUsuarioController extends Controller
 
         return redirect()->route("cliente_menu.index");
     }
-    public function pedido_terminados(){
+    public function pedido_terminados()
+    {
         $pedido = Pedido::all();
-        return view('Cosina/Pedidosterminados',compact('pedido'));
-     }
-     public function pedido_pendientes(){
+        return view('Menu/Cocina/Pedidosterminados', compact('pedido'));
+    }
+    public function pedido_pendientes()
+    {
         $pedido = Pedido::all();
-        return view('Cosina/Pedidospendientes',compact('pedido'));
-     }
-     public function terminarp(Request $request,  $id){
+        return view('Menu/Cocina/Pedidospendientes', compact('pedido'));
+    }
+    public function terminarp(Request $request,  $id)
+    {
         $activar = Pedido::findOrfail($id);
-        $activar->t = $request->input('0');
+        $activar->t = $request->input('t');
 
         $create = $activar->save();
 
-        if($create){
-            return redirect()->route('pedidost.pedido')->with('mensaje', 'El pedido fue terminado exitosamente');
+        if ($create) {
+            return redirect()->route('pedidost.pedido')->with('mensaje', 'El pedido fue terminado exitosamente!');
         }
+    }
+    public function pedidosPendientes_Cocina(Request $request,  $id)
+    {
+        $activar = Pedido::findOrfail($id);
+        $activar->t = $request->input('t');
 
+        $create = $activar->save();
+
+        if ($create) {
+            return redirect()->route('pedidosp.pedido')->with('mensaje', 'El pedido fue completado con exito!');
+        }
     }
 }

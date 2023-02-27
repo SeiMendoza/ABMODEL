@@ -58,6 +58,8 @@ Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
 ->name('terminar.terminarp')->where('id','[0-9]+');
 Route::get('/menu/pedidot', [PedidoUsuarioController::class, 'pedido_terminados'])
 ->name('pedidost.pedido');
+Route::put('/menu/{id}/pendiente_cocina', [PedidoUsuarioController::class,'pedidosPendientes_Cocina'])
+->name('pedidosPendientes_Cocina.pedidosPendientes_Cocina')->where('id','[0-9]+');
 
 Route::get('/menu/pedidop', [PedidoUsuarioController::class, 'pedido_pendientes'])
 ->name('pedidosp.pedido');
