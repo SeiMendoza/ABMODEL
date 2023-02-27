@@ -157,7 +157,7 @@ class ComboController extends Controller
 
     public function estado(){
         $platillos = Producto::all();
-        return view('estado/listado')->with('productos', $platillos);
+        return view('Menu/Admon/listado')->with('productos', $platillos);
     }
 
     public function estadoactualizar(Request $request){

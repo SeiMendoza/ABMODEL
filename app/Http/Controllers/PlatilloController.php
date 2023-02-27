@@ -25,7 +25,7 @@ class PlatilloController extends Controller
         $create = $platillo->save();
 
         if ($create) {
-            return redirect()->route('menuAdmon.index')->with('mensaje', [$platillo->nombre, " ", $operacion, " satisfactoriamente"]);
+            return redirect()->route('menuAdmon.index')->with('mensaje', 'Accion realizada correctamente');
         }
 
     }
