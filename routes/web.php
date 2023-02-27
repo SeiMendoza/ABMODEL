@@ -52,7 +52,7 @@ Route::get('/registro', [HomeController::class, 'registro'])
 ******************************/
 Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
-Route::get('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store'])
+Route::post('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store'])
 ->name('usuario_pedido.store');
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
 ->name('terminar.terminarp')->where('id','[0-9]+');
@@ -73,6 +73,8 @@ Route::get('/menu/cliente', [MenuUsuarioController::class, 'index'])
 ->name('cliente_menu.index');/*Ruta de visualizacion de menu*/
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])
 ->name('cliente_menu.qr');
+Route::get('/menu/prueba', [MenuUsuarioController::class, 'prueba'])
+->name('cliente_prueba');
  
 //Route::get('/menu', [MenuUsuarioController::class,'search'])
 //->name('menu.search');

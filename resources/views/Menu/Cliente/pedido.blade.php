@@ -10,8 +10,11 @@
 
     <title>Pedido</title>
     <!-- CSS Files -->
-    <script src="{{ asset("js/compras.js") }}"></script>
+  
     <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
+    <link href={{ asset("css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
+    <link href={{ asset("css/nucleo-svg.css") }} rel="stylesheet" />
+    <link href={{ asset("css/main.css") }} rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" media="all">
 
 </head>
@@ -83,26 +86,7 @@
                                         class="btn btn-success">Guardar</a></div>
                                     <div>
                                     <div style="display: block; float:right">
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" 
-                                        data-bs-target="#staticBackdrop">Cancelar</button>
-                                    </div>
-                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="background-color: rgb(221, 221, 221)">
-                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cancelar</h1>
-                                                        <button type="button" class="btn-danger btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                    ¿Está seguro de cancelar el pedido?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                                    <a href="{{route("cliente_menu.index")}}" class="btn btn-primary">Si</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <button type="button" onclick="cancelar('/');" class="btn btn-warning">Cancelar</button>
                                     </div>
                                 </div>
                             </div>
@@ -113,8 +97,9 @@
         </div>
     </div>
 
-    <!-- Main JS-->
     <script src={{ asset("/js/core/bootstrap.min.js") }}></script>
+    <script src= "/js/compras.js"></script>
+    <script src="/js/app.js"></script>
    
 </body>
 </html>

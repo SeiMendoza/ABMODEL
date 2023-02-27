@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Platillo extends Model
 {
     use HasFactory;
+    public function detalle_compras()
+    {
+        return $this->hasMany(DetallesUsuario::class);
+    }
 }

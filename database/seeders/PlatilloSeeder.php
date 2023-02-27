@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Bebida;
+use App\Models\Platillo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BebidasSeeder extends Seeder
+class PlatilloSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class BebidasSeeder extends Seeder
      */
     public function run()
     {
-        Bebida::factory(20)->create();
+        Platillo::factory(20)->create();
     }
 }

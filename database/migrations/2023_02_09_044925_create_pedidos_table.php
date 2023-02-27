@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detalles_usuarios', function (Blueprint $table) {
+        Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('cantidad');
-            $table->string('precio');
+            $table->integer('mesa');
+            $table->integer('quiosco');
+            $table->string('nombreCliente');
+            $table->double('imp')->default('0');
+            $table->double('total')->default('0');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalles_usuarios');
+        Schema::dropIfExists('pedidos');
     }
 };

@@ -536,6 +536,7 @@ class ComposerStaticInit4191fb8cd9db91586e276693d8f85b63
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\BebidaController' => __DIR__ . '/../..' . '/app/Http/Controllers/BebidaController.php',
         'App\\Http\\Controllers\\BusquedaAdmonController' => __DIR__ . '/../..' . '/app/Http/Controllers/BusquedaAdmonController.php',
         'App\\Http\\Controllers\\ComboController' => __DIR__ . '/../..' . '/app/Http/Controllers/ComboController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
@@ -544,6 +545,7 @@ class ComposerStaticInit4191fb8cd9db91586e276693d8f85b63
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MenuUsuarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/MenuUsuarioController.php',
         'App\\Http\\Controllers\\PedidoUsuarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/PedidoUsuarioController.php',
+        'App\\Http\\Controllers\\PlatilloController' => __DIR__ . '/../..' . '/app/Http/Controllers/PlatilloController.php',
         'App\\Http\\Controllers\\PlatillosyBebidasController' => __DIR__ . '/../..' . '/app/Http/Controllers/PlatillosyBebidasController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

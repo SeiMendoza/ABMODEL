@@ -8,29 +8,31 @@ Clickbutton.forEach(btn => {
 
 
 function addToCarritoItem(e) {
-    const button = e.target
-    const item = button.closest('.items')
-    const itemTitle = item.querySelector('.title').textContent;
+    const button = e.target;
+    const item = button.closest('.c')
+    const itemTitle = item.querySelector(".title").textContent;
     const itemPrice = item.querySelector('.precio').textContent;
-    const itemid = item.querySelector('.button').getAttribute('data-id');
+    const itemImg = item.querySelector('.imag').src;
+    const itemId = item.querySelector(".idcard").getAttribute('data-id');
 
     const newItem = {
-        id: itemid,
+        id: itemId,
         title: itemTitle,
         precio: itemPrice,
+        img: itemImg,
         cantidad: 1
     }
 
     addItemCarrito(newItem)
 }
 
-function addItemCarrito(newItem) {
 
-    const InputElemnto = tbody.getElementsByClassName('inputE');
+function addItemCarrito(newItem) {
+    const inputCantidad = tbody.getElementsByClassName('cant')
     for (let i = 0; i < carrito.length; i++) {
-        if (carrito[i].id.trim() === newItem.id.trim()) {
+        if (carrito[i].title.trim() === newItem.title.trim()) {
             carrito[i].cantidad++;
-            const inputValue = InputElemnto[i]
+            const inputValue = inputCantidad[i]
             inputValue.value++;
             CarritoTotal()
             renderCarrito()
@@ -38,54 +40,64 @@ function addItemCarrito(newItem) {
         }
     }
 
-    carrito.push(newItem);
-    renderCarrito();
+    carrito.push(newItem)
+
+    renderCarrito()
 }
+
 
 function renderCarrito() {
     tbody.innerHTML = '';
     var i = 0;
-    factura.map(item => {
+    carrito.map(item => {
         const tr = document.createElement('tr');
-        tr.classList.add('itemCarrito');
-        var total_producto = Number(item.precio.replace("L.", "")) * Number(item.cantidad);
+        tr.classList.add('ItemCarrito');
+        var total = Number(item.cantidad) * Number(item.precio.replace("L", ""));
         const Content = `
-                    <td colspan="3" class="titulo">${item.title}</td>
-                    <td>
-                        <input type="number" min="1" style ="width :40px;" value ="${item.cantidad}" class="inputE"> </input>
-                    </td>
-                    <td  width="140">${item.precio}</td>
-                    <td  width="140">${total_producto.toFixed(2)}</td>
-                    <td  width="140">
-                        <a href="#" class="borrar   fas fa-times-circle" data-id="${item.id}"></a>
-                    </td>
-                        <input name="det-` + i + `" type="text" value="${item.id} ${item.cantidad}" readonly style="display:none">
-                    `;
+    
+    <th scope="row">1</th>
+            <td class="table__productos">
+              <img src=${item.img}  alt="" style="width: 100px">
+              <h6 class="title">${item.title}</h6>
+            </td>
+            <td class="table_price"><p>${item.precio}</p></td>
+            <td class="table_cantidad">
+              <input onchange="renderCarrito()" type="number" min="1" style ="width :70px;" value=${item.cantidad} class="cant">
+            </td>
+            <td>${total}</td>
+            <td><a href="#" class="delete btn btn-danger" data-id="${item.id}">Quitar</a></td>
+            <input name="det-` + i + `" type="number" value=${item.cantidad} readonly style="display:none">
+    
+    `
         tr.innerHTML = Content;
         tbody.append(tr);
-        tr.querySelector(".borrar").addEventListener('click', removeItemCarrito);
-        tr.querySelector(".inputE").addEventListener('change', sumaCantidad);
-        i++;
+
+        tr.querySelector(".delete").addEventListener('click', removeItemCarrito);
+        tr.querySelector(".cant").addEventListener('change', sumaCantidad);
     });
-    document.formulario_ventas.tuplas.value = factura.length;
+    document.formulario.tuplas.value = carrito.length;
     CarritoTotal()
+    i++;
 }
 
 function CarritoTotal() {
     let Total = 0;
-    const itemCartTotal = document.querySelector('.total')
+    let sub = 0;
+    const itemCartTotal = document.querySelector('.itemCartTotal')
     carrito.forEach((item) => {
-        const precio = Number(item.precio.replace("$", ''))
-        Total = Total + precio * item.cantidad
-    })
+        let precio = Number(item.precio.replace("L", ""));
+        let cant = Number(item.cantidad);
+        sub = precio * cant;
+        Total = Total + precio * cant;
+    });
 
-    itemCartTotal.innerHTML = `Total $${Total}`
+    itemCartTotal.innerHTML = `Total L ${Total.toFixed(2)}`;
     addLocalStorage()
 }
 
 function removeItemCarrito(e) {
     const buttonDelete = e.target
-    const tr = buttonDelete.closest(".itemCarrito")
+    const tr = buttonDelete.closest(".ItemCarrito")
     const title = tr.querySelector('.title').textContent;
     for (let i = 0; i < carrito.length; i++) {
 
@@ -94,20 +106,13 @@ function removeItemCarrito(e) {
         }
     }
 
-    const alert = document.querySelector('.remove')
-
-    setTimeout(function() {
-        alert.classList.add('remove')
-    }, 2000)
-    alert.classList.remove('remove')
-
-    tr.remove()
+    tr.remove();
     CarritoTotal()
 }
 
 function sumaCantidad(e) {
     const sumaInput = e.target
-    const tr = sumaInput.closest(".itemCarrito")
+    const tr = sumaInput.closest(".ItemCarrito")
     const title = tr.querySelector('.title').textContent;
     carrito.forEach(item => {
         if (item.title.trim() === title) {
@@ -128,4 +133,33 @@ window.onload = function() {
         carrito = storage;
         renderCarrito()
     }
+}
+
+function guardar() {
+    var formul = document.getElementById("formulario");
+    formul.submit();
+    tbody.innerHTML = '';
+    localStorage.clear();
+}
+
+function cancelar(ruta) {
+    // var c = document.getElementById('cancelar');
+    Swal
+        .fire({
+            title: "¿Cancelar registro?",
+            text: "¿Desea cancelar lo que esta haciendo?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+        })
+        .then(resultado => {
+            if (resultado.value) {
+                // Hicieron click en "Sí"
+                window.location.href = '/' + ruta;
+            } else {
+                // Dijeron que no
+            }
+        });
+    localStorage.clear();
 }

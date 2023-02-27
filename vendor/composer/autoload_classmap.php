@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\BebidaController' => $baseDir . '/app/Http/Controllers/BebidaController.php',
     'App\\Http\\Controllers\\BusquedaAdmonController' => $baseDir . '/app/Http/Controllers/BusquedaAdmonController.php',
     'App\\Http\\Controllers\\ComboController' => $baseDir . '/app/Http/Controllers/ComboController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
@@ -16,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\MenuUsuarioController' => $baseDir . '/app/Http/Controllers/MenuUsuarioController.php',
     'App\\Http\\Controllers\\PedidoUsuarioController' => $baseDir . '/app/Http/Controllers/PedidoUsuarioController.php',
+    'App\\Http\\Controllers\\PlatilloController' => $baseDir . '/app/Http/Controllers/PlatilloController.php',
     'App\\Http\\Controllers\\PlatillosyBebidasController' => $baseDir . '/app/Http/Controllers/PlatillosyBebidasController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',

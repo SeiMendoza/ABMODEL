@@ -362,12 +362,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Registro</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Cliente</p>
                                     <h5 class="font-weight-bolder">
-                                        Combos
+                                        Prueba Menú
                                     </h5>
                                     <p class="mb-0">
-                                        <a href={{ route('combo.create') }}
+                                        <a href={{ route("cliente_prueba") }}
                                             class="btn badge-primary">Registrar</a>
                                     </p>
                                 </div>

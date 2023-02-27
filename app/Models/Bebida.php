@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Bebida extends Model
 {
     use HasFactory;
+    protected $table = 'bebidas';
+    public function detalle_compra()
+    {
+        return $this->hasMany(DetallesUsuario::class);
+    }
 }

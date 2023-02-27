@@ -26,5 +26,20 @@ class MenuUsuarioController extends Controller
      public function qr(){
         return view('Menu/Admon/QR_Menu');
      }
+
+     
+     public function prueba(Request $request){
+        $platillos = Platillo::all();
+        $bebidas = Bebida::all();
+        $combos = Combo::all();
+        $text = trim($request->get('busqueda'));
+        $platillos = Platillo::where('nombre', 'like', '%' . $text . '%')
+            ->orWhere('tamanio', 'like', '%' . $text . '%')->paginate(10);
+            $bebidas = Platillo::where('nombre', 'like', '%' . $text . '%')
+            ->orWhere('tamanio', 'like', '%' . $text . '%')->paginate(10);
+            $combos = Platillo::where('nombre', 'like', '%' . $text . '%')
+            ->orWhere('tamanio', 'like', '%' . $text . '%')->paginate(10);
+        return view("Menu.Cliente.Prueba", compact('platillos', 'text', 'combos','bebidas'));
+     }
       
 }

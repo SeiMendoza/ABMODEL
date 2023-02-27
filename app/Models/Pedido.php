@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     use HasFactory;
-    protected $table = 'pedido';
+    protected $table = 'pedidos';
     public function detalle()
     {
         return $this->hasMany(DetallesUsuario::class,'pedido_id');
