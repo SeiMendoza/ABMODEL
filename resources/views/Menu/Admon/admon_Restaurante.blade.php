@@ -109,7 +109,7 @@
                                             <div class="col-12 p-4">
                                                 <div>
                                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                                        Disponibles: {{ $p->cantidad }}
+                                                        Disponibles: {{ $p->disponible }}
                                                     </p>
                                                     <div class="col-12">
                                                         <div>
@@ -169,7 +169,7 @@
                             </div>
                         </div>
                     @empty
-                        <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay Platillos agregados</div>
+                        <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
                     @endforelse
                 </div>
 
@@ -206,7 +206,7 @@
                                             <div class="col-12 p-4">
                                                 <div>
                                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                                        Disponibles: {{ $p->cantidad }}
+                                                        Disponibles: {{ $p->disponible }}
                                                     </p>
                                                     <div class="col-12">
                                                         <div>
@@ -304,7 +304,7 @@
                                             <div class="col-12 p-4">
                                                 <div>
                                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                                        Disponibles:
+                                                        Disponibles: {{ $p->disponible }}
                                                     </p>
                                                     <div class="col-12">
                                                         <div>
