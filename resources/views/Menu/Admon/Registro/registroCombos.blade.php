@@ -95,7 +95,7 @@
 
                             <div style="float:right">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <button type="button" onclick="cancelar('admonRestaurante')" class="btn btn-warning">Cancelar</button>
+                                <button type="button" onclick="cancelar('menuAdmon.index')" class="btn btn-warning">Cancelar</button>
                             </div>
                         </div>
 

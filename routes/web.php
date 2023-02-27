@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoUsuarioController;
 use App\Http\Controllers\MenuUsuarioController;
+use App\Http\Controllers\PlatilloController;
 use App\Http\Controllers\PlatillosyBebidasController;
 use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
@@ -27,8 +28,14 @@ Route::get('/tabla', [HomeController::class, 't'])
 ->name('t');
 Route::get('/billing', [HomeController::class, 'b'])
 ->name('b');
-Route::get('/admonRestaurante', [HomeController::class, 'admonRestaurante'])
-->name('admonRestaurante');
+
+/* Rutas Administracion de Restaurante */
+Route::get('/admonRestaurante', [HomeController::class, 'indexAdmon'])
+->name('menuAdmon.index');
+Route::put('admonRestaurante/{id}/activar', [PlatilloController::class, 'activar'])
+->name('menuAdmon.activar');
+
+
 Route::get('/profile', [HomeController::class, 'p'])
 ->name('p');
 Route::get('/sing', [HomeController::class, 's'])
@@ -51,8 +58,11 @@ Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
 ->name('terminar.terminarp')->where('id','[0-9]+');
 Route::get('/menu/pedidot', [PedidoUsuarioController::class, 'pedido_terminados'])
 ->name('pedidost.pedido');
+
 Route::get('/menu/pedidop', [PedidoUsuarioController::class, 'pedido_pendientes'])
 ->name('pedidosp.pedido');
+
+
  /*****************************
   Rutas Para Menu de cliente
 ******************************/

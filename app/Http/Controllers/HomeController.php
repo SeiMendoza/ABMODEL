@@ -9,41 +9,51 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view("index");
     }
 
-    public function b(){
+    public function b()
+    {
         return view("pages.billing");
     }
 
-    public function t(){
+    public function t()
+    {
         return view("pages.tables");
     }
 
-    public function admonRestaurante(){
+    public function indexAdmon()
+    {
 
         $platillos = Platillo::all();
         $bebidas = Bebida::all();
         $combos = Combo::all();
-        return view("/Menu/Admon/admon_Restaurante")->with(['platillos'=> $platillos, 'bebidas'=>$bebidas, 'combos' => $combos]);
+        return view("/Menu/Admon/admon_Restaurante")->with(['platillos' => $platillos, 'bebidas' => $bebidas, 'combos' => $combos]);
     }
 
-    public function p(){
+
+    public function p()
+    {
         return view('pages.profile');
     }
 
-    public function s(){
+    public function s()
+    {
         return view("pages.sign-in");
     }
 
-    public function r(){
+    public function r()
+    {
         return view("pages.rtl");
     }
-    public function d(){
+    public function d()
+    {
         return view("pages.dashboard");
     }
-    public function registro(){
+    public function registro()
+    {
         return view("pages.registro");
     }
 }

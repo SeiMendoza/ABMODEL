@@ -27,7 +27,7 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #5e72e4;
+  --bs-primary: #ff0000b1;
   --bs-secondary: #8392ab;
   --bs-success: #2dce89;
   --bs-info: #11cdef;
@@ -79,7 +79,7 @@
 /***** Colores de Fondo *****/
 
 .bg-menu {
-  background-color: #0000ff9c !important;
+  background-color: #4c24dbfd !important;
 }
 
 /***** End Colores de Fondo *****/
@@ -3020,7 +3020,7 @@ textarea.form-control-lg {
 }
 
 .form-check-input:checked[type="checkbox"] {
-  background-image: linear-gradient(310deg, #5e72e4 0%, #825ee4 100%);
+  background-image: linear-gradient(310deg, #c21010ee 0%, #c21010ee 100%);
 }
 
 .form-check-input:checked[type="radio"] {
@@ -3028,8 +3028,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input[type="checkbox"]:indeterminate {
-  background-color: #5e72e4;
-  border-color: #5e72e4;
+  background-color: #c21010ee;
+  border-color: #c21010ee;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
 
@@ -3688,18 +3688,18 @@ fieldset:disabled .btn {
 }
 
 .btn-menu {
-  --bs-btn-color: #D2001A;
+  --bs-btn-color: #c21010ee;
   --bs-btn-bg: #ffffff;
-  --bs-btn-border-color: #D2001A;
-  --bs-btn-hover-color: #D2001A;
+  --bs-btn-border-color: #c21010ee;
+  --bs-btn-hover-color: #c21010ee;
   --bs-btn-hover-bg: #ffffff;
   --bs-btn-focus-shadow: D2001A;
   --bs-btn-active-color: #ffffff;
-  --bs-btn-active-bg: #D2001A;
+  --bs-btn-active-bg: #c21010ee;
   --bs-btn-active-border-color: #ffffff;
   --bs-btn-active-shadow: none;
   --bs-btn-disabled-color: #ffffff;
-  --bs-btn-disabled-bg: #D2001A;
+  --bs-btn-disabled-bg: #c21010ee;
   --bs-btn-disabled-border-color: #ffffff;
 }
 
@@ -21620,7 +21620,7 @@ fieldset:disabled .btn {
 .form-switch .form-check-input {
   border: 1px solid #e9ecef;
   position: relative;
-  background-color: rgba(33, 37, 41, 0.1);
+  background-color: #c21010ee;
   height: 1.25em;
 }
 

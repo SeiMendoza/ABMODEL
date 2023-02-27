@@ -13,7 +13,7 @@ class EditarPlatilloBebidaController extends Controller
     //
     public function edit($id){
         $PlatillosyBebidas = Platillo::findOrFail($id);
-        return view('Menu/Admon/editarPlatilloyBebida') 
+        return view('Menu/Admon/edicion/editarPlatilloyBebida') 
               -> with('PlatillosyBebidas', $PlatillosyBebidas);
     }
 
@@ -50,7 +50,7 @@ class EditarPlatilloBebidaController extends Controller
         $creado = $actualizacion -> save();
 
             if ($creado) {
-               return redirect()->route('admonRestaurante')
+               return redirect()->route('menuAdmon.index')
                 ->with('mensaje', 'El platillo fue modificado exitosamente');
             } 
 

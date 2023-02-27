@@ -29,7 +29,7 @@ class PlatillosyBebidasController extends Controller
      */
     public function create()
     {
-        return view('PlatillosyBebidas/registro');
+        return view('/Menu/Admon/Registro/registroPlatillosYBebidas');
     }
 
     /**
@@ -97,7 +97,7 @@ class PlatillosyBebidasController extends Controller
             $creado = $platillos->save();
 
             if ($creado) {
-                return redirect()->route('admonRestaurante')
+                return redirect()->route('menuAdmon.index')
                     ->with('mensaje', 'El platillo fue creada exitosamente');
             }
 
@@ -120,7 +120,7 @@ class PlatillosyBebidasController extends Controller
             $creado = $platillos->save();
 
             if ($creado) {
-                return redirect()->route('admonRestaurante')
+                return redirect()->route('menuAdmon.index')
                     ->with('mensaje', 'La bebida fue creada exitosamente');
             }
         }

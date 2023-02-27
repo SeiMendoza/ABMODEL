@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("descripcion");
             $table->double("precio");
             $table->string("imagen");
-            $table->boolean('estado')->default(0);
+            $table->boolean('estado')->default(1);
             $table->timestamps();
         });
     }

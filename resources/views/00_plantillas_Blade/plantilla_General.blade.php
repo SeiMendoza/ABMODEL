@@ -8,9 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
         <link rel="icon" type="image/png" href="./assets/img/favicon.png">
-        <title>
-            Villa Crisol
-        </title>
+        <title>Villa Crisol - @yield('title') </title>
 
         <!-- Icons -->
         <link href={{ asset('css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
@@ -27,7 +25,7 @@
 
 <body class="g-sidenav-show bg-gray-100">
 
-    <div class="min-height-250 bg-menu position-absolute w-100"></div>
+    <div class="min-height-300 position-absolute w-100" style="background-color: #c21010ee"></div>
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
         id="sidenav-main">
@@ -43,7 +41,7 @@
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href={{ route('admonRestaurante') }}>
+                    <a class="nav-link active" href={{ route('menuAdmon.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -224,12 +222,19 @@
             </div>
         </div>
         <div class="row float-center p-3">
+
             {{-- Cantidad de Platillos disponibles --}}
             @yield('info')
+
         </div>
-        @yield('contend')
+        
+        @yield('activatedMenu')
+        @yield('disabledMenu')
+
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src={{ asset("js/scripts.js") }}></script>
 
 </body>
 

@@ -1,9 +1,5 @@
 /***** Estilos para el Menu *****/
 
-.bg-menu {
-    background-color: #eaff009c !important;
-}
-
 .bg-gradient-menu {
     background-image: var(--bs-gradient-menu) !important;
 }

@@ -41,7 +41,7 @@ class ComboController extends Controller
     {
         $complementos = PlatillosyBebidas::all();
         $componentes = Componentestemporalcombo::all();
-        return view('combos/registro')->with('componentes', $componentes)->with('complementos', $complementos);
+        return view('/Menu/Admon/Registro/registroCombos')->with('componentes', $componentes)->with('complementos', $complementos);
     }
     /**
      * Store a newly created resource in storage.
@@ -109,7 +109,7 @@ class ComboController extends Controller
                 }
             }
 
-            return redirect()->route('admonRestaurante')
+            return redirect()->route('menuAdmon.index')
                 ->with('mensaje', 'El combo fue creada exitosamente');
         }
     }
@@ -185,7 +185,7 @@ class ComboController extends Controller
             $creado = $aux->save(); 
         }
 
-        return redirect()->route('admonRestaurante')
+        return redirect()->route('menuAdmon.index')
         ->with('mensaje', 'Los datos fueron actualizados');
 
     }
