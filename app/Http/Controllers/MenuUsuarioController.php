@@ -39,7 +39,7 @@ class MenuUsuarioController extends Controller
             ->orWhere('tamanio', 'like', '%' . $text . '%')->paginate(10);
             $combos = Platillo::where('nombre', 'like', '%' . $text . '%')
             ->orWhere('tamanio', 'like', '%' . $text . '%')->paginate(10);
-        return view("Menu.Cliente.Prueba", compact('platillos', 'text', 'combos','bebidas'));
+        return view("Menu.Cliente.Menu", compact('platillos', 'text', 'combos','bebidas'));
      }
       
 }
