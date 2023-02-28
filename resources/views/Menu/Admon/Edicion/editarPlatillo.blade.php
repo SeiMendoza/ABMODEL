@@ -24,17 +24,17 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Editando Registro</h2>
-                    <form method="post" action="{{ route('platobebida.update', ['id' => $PlatillosyBebidas->id]) }}"
+                    <form method="post" action="{{ route('plato.update', ['id' => $Platillos->id]) }}"
                         enctype="multipart/form-data">
                         @method('put')
                         @csrf
 
                         <div style="width:200px;float:left">
-                            <img src="/imagenes/menu/{{ $PlatillosyBebidas->imagen }}" alt="" width="200px"
+                            <img src="/imagenes/menu/{{ $Platillos->imagen }}" alt="" width="200px"
                                 height="200px" id="imagenmostrada">
                             <br>
                             <input type="file" id="imagen" name="imagen" required
-                                value="{{ old('imagen', $PlatillosyBebidas->imagen) }}"
+                                value="{{ old('imagen', $Platillos->imagen) }}"
                                 style="color: white;width: 200px;">
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -55,11 +55,11 @@
                                         @endif
                                     @else
                                         <option disabled="disabled" selected="selected"
-                                            value="{{ $PlatillosyBebidas->tipo }}">Tipo de producto</option>
+                                            value="{{ $Platillos->tipo }}">Tipo de producto</option>
                                     @endif
-                                    <option value="1"{{ $PlatillosyBebidas->tipo == '1' ? 'selected' : '' }}>Bebida
+                                    <option value="1"{{ $Platillos->tipo == '1' ? 'selected' : '' }}>Bebida
                                     </option>
-                                    <option value="2"{{ $PlatillosyBebidas->tipo == '2' ? 'selected' : '' }}>Comida
+                                    <option value="2"{{ $Platillos->tipo == '2' ? 'selected' : '' }}>Comida
                                     </option>
                                 </select>
                                 <div class="select-dropdown"></div>
@@ -69,14 +69,14 @@
                             @enderror
                             <br>
                             <input class="input--style-2" type="text" placeholder="Nombre" name="nombre"
-                                value="{{ old('nombre', $PlatillosyBebidas->nombre) }}" maxlength="25" required
+                                value="{{ old('nombre', $Platillos->nombre) }}" maxlength="25" required
                                 onkeypress="quitarerror()">
                             @error('nombre')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                             <br><br>
                             <textarea class="textarea--style-2" type="text" placeholder="Descripción" name="descripcion" maxlength="100" required
-                                onkeypress="quitarerror()">{{ old('descripcion', $PlatillosyBebidas->descripcion) }}</textarea>
+                                onkeypress="quitarerror()">{{ old('descripcion', $Platillos->descripcion) }}</textarea>
                             @error('descripcion')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -103,15 +103,15 @@
                                         @endif
                                     @else
                                         <option disabled="disabled" selected="selected"
-                                            value="{{ $PlatillosyBebidas->tamanio }}">Tamaño</option>
+                                            value="{{ $Platillos->tamanio }}">Tamaño</option>
                                     @endif
-                                    <option value="Grande"{{ $PlatillosyBebidas->tamanio === 'Grande' ? 'selected' : '' }}>
+                                    <option value="Grande"{{ $Platillos->tamanio === 'Grande' ? 'selected' : '' }}>
                                         Grande</option>
                                     <option
-                                        value="Mediano"{{ $PlatillosyBebidas->tamanio === 'Mediano' ? 'selected' : '' }}>
+                                        value="Mediano"{{ $Platillos->tamanio === 'Mediano' ? 'selected' : '' }}>
                                         Mediano</option>
                                     <option
-                                        value="Pequeño"{{ $PlatillosyBebidas->tamanio === 'Pequeño' ? 'selected' : '' }}>
+                                        value="Pequeño"{{ $Platillos->tamanio === 'Pequeño' ? 'selected' : '' }}>
                                         Pequeño</option>
                                 </select>
                                 <div class="select-dropdown"></div>
@@ -121,7 +121,7 @@
                             @enderror
                             <br>
                             <input class="input--style-2" type="number" placeholder="Precio" name="precio"
-                                value="{{ old('precio', $PlatillosyBebidas->precio) }}" onkeypress="quitarerror()" required
+                                value="{{ old('precio', $Platillos->precio) }}" onkeypress="quitarerror()" required
                                 onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
                                 max="1000">
                             @error('precio')
@@ -132,7 +132,7 @@
                                 <br>
                                 <input class="input--style-2" type="number" placeholder="Bebidas disponibles"
                                     name="cantidad" id="cantidad"
-                                    value="{{ old('cantidad', $PlatillosyBebidas->cantidad) }}" onkeypress="quitarerror()"
+                                    value="{{ old('cantidad', $Platillos->cantidad) }}" onkeypress="quitarerror()"
                                     onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
                                     max="1000" disabled>
                                 @error('cantidad')
@@ -145,7 +145,7 @@
                                 <br>
                                 <input class="input--style-2" type="number" placeholder="Platillos disponibles"
                                     name="disponible" id="disponible"
-                                    value="{{ old('disponible', $PlatillosyBebidas->disponible) }}"
+                                    value="{{ old('disponible', $Platillos->disponible) }}"
                                     onkeypress="quitarerror()"
                                     onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
                                     max="1000" disabled>

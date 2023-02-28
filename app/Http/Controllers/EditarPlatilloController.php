@@ -8,13 +8,13 @@ use App\Models\PlatillosyBebidas;
 use App\Models\Platillo;
 use App\Models\Bebida;
 
-class EditarPlatilloBebidaController extends Controller
+class EditarPlatilloController extends Controller
 {
     //
     public function edit($id){
-        $PlatillosyBebidas = Platillo::findOrFail($id);
-        return view('Menu/Admon/edicion/editarPlatilloyBebida') 
-              -> with('PlatillosyBebidas', $PlatillosyBebidas);
+        $Platillos = Platillo::findOrFail($id);
+        return view('Menu/Admon/edicion/editarPlatillo') 
+              -> with('Platillos', $Platillos);
     }
 
 

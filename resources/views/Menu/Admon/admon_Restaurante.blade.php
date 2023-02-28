@@ -221,7 +221,7 @@
                                                                         {{-- Edit --}}
                                                                         <div class="col">
                                                                             <a class="col-12 btn btn-menu form"
-                                                                                href="{{ route('platobebida.editar', ['id' => $p->id]) }}">Editar</a>
+                                                                                href="{{ route('plato.editar', ['id' => $p->id]) }}">Editar</a>
                                                                         </div>
                                                                     </div>
                                                                     {{-- Fin Precio... --}}
@@ -324,8 +324,7 @@
 
                                                                         {{-- Edit --}}
                                                                         <div class="col">
-                                                                            <a class="col-12 btn btn-menu form"
-                                                                                href="{{ route('platobebida.editar', ['id' => $p->id]) }}">Editar</a>
+                                                                            <a class="col-12 btn btn-menu form">Editar</a>
                                                                         </div>
                                                                     </div>
                                                                     {{-- Fin Precio... --}}
@@ -430,8 +429,7 @@
 
                                                                         {{-- Edit --}}
                                                                         <div class="col">
-                                                                            <a class=" btn btn-menu form"
-                                                                                href="{{ route('platobebida.editar', ['id' => $p->id]) }}">Editar</a>
+                                                                            <a class=" btn btn-menu form">Editar</a>
                                                                         </div>
 
                                                                     </div>
@@ -630,7 +628,7 @@
                                                                         {{-- Edit --}}
                                                                         <div class="col">
                                                                             <a class="col-12 btn btn-secondary form"
-                                                                                href="{{ route('platobebida.editar', ['id' => $p->id]) }}">Editar</a>
+                                                                                href="{{ route('plato.editar', ['id' => $p->id]) }}">Editar</a>
                                                                         </div>
                                                                     </div>
                                                                     {{-- Fin Precio... --}}
@@ -694,7 +692,7 @@
                                                 <div class="col-12 p-4">
                                                     <div>
                                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                                            Disponibles: {{ $p->cantidad }}
+                                                            Disponibles: {{ $p->disponible }}
                                                         </p>
                                                         <div class="col-12">
                                                             <div>
@@ -734,8 +732,7 @@
 
                                                                         {{-- Edit --}}
                                                                         <div class="col">
-                                                                            <a class="col-12 btn btn-menu form"
-                                                                                href="{{ route('platobebida.editar', ['id' => $p->id]) }}">Editar</a>
+                                                                            <a class="col-12 btn btn-menu form">Editar</a>
                                                                         </div>
                                                                     </div>
                                                                     {{-- Fin Precio... --}}
@@ -799,7 +796,7 @@
                                             <div class="col-12 p-4">
                                                 <div>
                                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                                        Disponibles:
+                                                        Disponibles:{{ $p->disponible }}
                                                     </p>
                                                     <div class="col-12">
                                                         <div>
@@ -840,8 +837,7 @@
 
                                                                         {{-- Edit --}}
                                                                         <div class="col">
-                                                                            <a class=" btn btn-menu form"
-                                                                                href="{{ route('platobebida.editar', ['id' => $p->id]) }}">Editar</a>
+                                                                            <a class=" btn btn-menu form">Editar</a>
                                                                         </div>
 
                                                                     </div>

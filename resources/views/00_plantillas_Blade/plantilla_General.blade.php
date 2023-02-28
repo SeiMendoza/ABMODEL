@@ -177,18 +177,17 @@
                                         aria-describedby="basic-addon2" maxlength="50" required
                                         value="<?php if (isset($busqueda)) {
                                             echo $busqueda;
-                                        } ?>" />                                   
+                                        } ?>" />  
+                                        <button class="btn btn-menu my-2 my-sm-0 " type="submit" style="border-radius: 2.5px">Buscar</button>                                 
                             </form>
 
                             <form class="form-inline">
                                 <select
-                                    style="outline: 0; padding: 0px; border-radius: 9px; height: 40px; margin-left: 12px; border: 2px solid rgb(85, 178, 85">
-                                    <option value="FILTRAR POR"><strong>FILTRAR POR</strong></option>
-                                    <option value="Orden Alfabético">Orden Alfabético</option>
+                                    style="outline: 0; padding: 0px; border-radius: 9px; height: 40px; margin-left: 12px; border: 2px solid rgb(165, 4, 25)">
+                                    <option value="FILTRAR POR"><strong>Ordenar Por:</strong></option>
                                     <option value="Precio más alto">Precio más alto</option>
                                     <option value="Precio más bajo">Precio más bajo</option>
                                     <option value="Mas Reciente">Mas reciente</option>
-                                    <option value="Mas antiguo">Mas antiguo</option>
                                 </select>
                             </form>                    
                         </div>
@@ -197,18 +196,7 @@
                     </div>
                 </div>
 
-                {{-- Barra de busqueda nueva --}}
-                <div class="col" style="display:inline-block;">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control" type="search" id="busqueda" name="busqueda"
-                        style="width: 200px" placeholder="Buscar por nombre" aria-label="Search"
-                        aria-describedby="basic-addon2" maxlength="50" required
-                        value="<?php if (isset($busqueda)) {
-                            echo $busqueda;
-                        } ?>">
-                        <button class="btn btn-menu my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
+              
                 
             </div>
         </div>
