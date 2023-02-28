@@ -18,7 +18,7 @@
         <link id="pagestyle" href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" />
         <link rel="stylesheet" href={{ asset('css/menuStyles.css') }} type="text/css">
 
-        <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
+        <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     </head>
 
 </head>
@@ -26,6 +26,7 @@
 <body class="g-sidenav-show bg-gray-100">
 
     <div class="min-height-300 position-absolute w-100" style="background-color: #c21010ee"></div>
+
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
         id="sidenav-main">
@@ -131,22 +132,25 @@
     <main class="main-content position-relative border-radius-lg">
 
         <div class="mb-0 col-12 text-start">
-            <div class="row" style="display:flex; justify-content: space-between;">
 
-                <div class="col-4">
+            <div class="row text-center container pt-2">
+                <h1 class="text-white text-uppercase p-2" style="" style="font-size: 3rem;">
+                    Menu</h1>
+            </div>
 
+            <div class="row">
+
+                <div class="col" style="display:inline-block;">
                     <div class="row" style="display:flex; justify-content: space-between; align-items:center">
 
                         <!-- ========== Start Botones de Registro ========== -->
 
                         <div class="col">
-                            <span class=" text-success text-sm font-weight-bolder "></span>
                             <a href={{ route('bebidasyplatillos.create') }} class="btn btn-menu my-3">Registrar Comida
                                 o Bebida</a>
                         </div>
 
-                        <div class="col">
-                            <span class="col-4 text-success text-sm font-weight-bolder "></span>
+                        <div class="col">                            
                             <a href={{ route('combo.create') }} class="btn btn-menu my-3">Registrar Combo</a>
                         </div>
 
@@ -161,11 +165,9 @@
 
                 </div>
 
-                <div class=" col-8" style="display:flex; ">
-
-                    <div class="row">
+                <div class=" col" style="display:inline-block;">
+                    <div>
                         <!-- ========== Start Barra de busqueda y filtros ========== -->
-
                         <div style=" display:block; float:right; padding-top:20px">
                             <form action="{{ route('busqueda.index') }}" method="get" role="search"
                                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -175,11 +177,7 @@
                                         aria-describedby="basic-addon2" maxlength="50" required
                                         value="<?php if (isset($busqueda)) {
                                             echo $busqueda;
-                                        } ?>" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-menu my-2 my-sm-0"
-                                            type="submit"><strong>Buscar</strong></button>
-                                    </div>
+                                        } ?>" />                                   
                             </form>
 
                             <form class="form-inline">
@@ -192,33 +190,26 @@
                                     <option value="Mas Reciente">Mas reciente</option>
                                     <option value="Mas antiguo">Mas antiguo</option>
                                 </select>
-                            </form>
-
-                            <form>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="1" value="option1"
-                                        style="margin-left: 0.0px">
-                                    <label class="form-check-label" for="1"
-                                        style="color:black"><strong>Platillos</strong></label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="2" value="option2"
-                                        style="margin-left: 0.0px">
-                                    <label class="form-check-label" for="2"
-                                        style="color:black"><strong>Bebidas</strong></label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="3" value="option3"
-                                        style="margin-left: 0.0px">
-                                    <label class="form-check-label" for="3"
-                                        style="color:black"><strong>Combos</strong></label>
-                                </div>
-                            </form>
+                            </form>                    
                         </div>
 
                         <!-- ========== End Barra de busqueda y filtros ========== -->
                     </div>
                 </div>
+
+                {{-- Barra de busqueda nueva --}}
+                <div class="col" style="display:inline-block;">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control" type="search" id="busqueda" name="busqueda"
+                        style="width: 200px" placeholder="Buscar por nombre" aria-label="Search"
+                        aria-describedby="basic-addon2" maxlength="50" required
+                        value="<?php if (isset($busqueda)) {
+                            echo $busqueda;
+                        } ?>">
+                        <button class="btn btn-menu my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+                
             </div>
         </div>
         <div class="row float-center p-3">
@@ -227,14 +218,15 @@
             @yield('info')
 
         </div>
-        
+
         @yield('activatedMenu')
         @yield('disabledMenu')
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src={{ asset("js/scripts.js") }}></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    <script src={{ asset('js/scripts.js') }}></script>
 
 </body>
 

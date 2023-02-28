@@ -21,7 +21,7 @@ class PlatilloFactory extends Factory
             'descripcion'=>$this->faker->words(10, true),
             'precio'=>$this->faker->numberBetween(0, 100),
             'tamanio'=>$this->faker->randomElement(['Pequeño','Mediano','Grande']),
-            'imagen'=>$this->faker->image(),
+            'imagen'=>$this->faker->imageUrl(150, 150),
             'disponible'=>$this->faker->randomElement([1,2]),
             'fecha'=>$this->faker->date(),
             'estado'=>$this->faker->boolean()

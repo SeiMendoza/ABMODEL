@@ -20,7 +20,7 @@ class ComboFactory extends Factory
             'nombre'=>$this->faker->word,
             'descripcion'=>$this->faker->words(10, true),
             'precio'=>$this->faker->numberBetween(0, 100),
-            'imagen'=>$this->faker->image(),
+            'imagen'=>$this->faker->imageUrl(200, 200),
             'estado'=>$this->faker->boolean()
         ];
     }

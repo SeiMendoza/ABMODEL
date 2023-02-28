@@ -34,6 +34,14 @@ class HomeController extends Controller
     }
 
 
+    public function pruebaAdmon(){
+        $platillos = Platillo::all();
+        $bebidas = Bebida::all();
+        $combos = Combo::all();
+        return view("/Menu/Admon/pruebaAdmon")->with(['platillos' => $platillos, 'bebidas' => $bebidas, 'combos' => $combos]);
+    }
+
+
     public function p()
     {
         return view('pages.profile');

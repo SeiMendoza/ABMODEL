@@ -35,6 +35,10 @@ Route::get('/admonRestaurante', [HomeController::class, 'indexAdmon'])
 Route::put('admonRestaurante/{id}/activar', [PlatilloController::class, 'activar'])
 ->name('menuAdmon.activar');
 
+/** Rutas de Prueba AmonMenu */
+Route::get('/pruebaAdmon', [HomeController::class, 'pruebaAdmon'])
+->name('menuAdmon.prueba');
+
 
 Route::get('/profile', [HomeController::class, 'p'])
 ->name('p');
