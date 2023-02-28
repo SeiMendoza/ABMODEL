@@ -19,7 +19,7 @@
         <link id="pagestyle" href="/css/argon-dashboard.css" rel="stylesheet" />
         <link rel="stylesheet" href="/css/menuStyles/menuStyles.css" type="text/css">
 
-        <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
+        <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script>
 </head>
 <body>
     <script>
@@ -36,7 +36,7 @@
                 timer: 3500
             })
         }
-    
+
     </script>
     <header class="container-fluid d-flex justify-content-center bg-primary position-absolute top-0 ">
         <ul
@@ -86,9 +86,9 @@
         </ul>
     </header>
       <br><br><br>
-      
+
     <main class="main-content position-relative border-radius-lg">
-        
+
        <div class="tab-content" id="pills-tabContent">
             <!-- ========== Home ========== -->
             <div
@@ -100,24 +100,24 @@
                 <div class="text-center"><img src="/images/1676864657.scorpions.jpg" alt="imagen" style="height: 300px;">
                 </div><br>
                 <div class="text-center">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, rerum eligendi, 
-                        nam molestiae minima perferendis autem ipsam saepe sapiente fugit aut facere facilis 
-                        sint iusto iure asperiores aspernatur! Vitae, adipisci. Lorem, ipsum dolor sit amet consectetur 
-                        adipisicing elit. Recusandae, numquam mollitia dicta non aperiam aliquam blanditiis quae aspernatur hic suscipit 
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, rerum eligendi,
+                        nam molestiae minima perferendis autem ipsam saepe sapiente fugit aut facere facilis
+                        sint iusto iure asperiores aspernatur! Vitae, adipisci. Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Recusandae, numquam mollitia dicta non aperiam aliquam blanditiis quae aspernatur hic suscipit
                         incidunt provident et explicabo quisquam illo voluptas, deserunt quasi dolore.
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, rerum eligendi, 
-                        nam molestiae minima perferendis autem ipsam saepe sapiente fugit aut facere facilis 
-                        sint iusto iure asperiores aspernatur! Vitae, adipisci. Lorem, ipsum dolor sit amet consectetur 
-                        adipisicing elit. Recusandae, numquam mollitia dicta non aperiam aliquam blanditiis quae aspernatur hic suscipit 
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, rerum eligendi,
+                        nam molestiae minima perferendis autem ipsam saepe sapiente fugit aut facere facilis
+                        sint iusto iure asperiores aspernatur! Vitae, adipisci. Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Recusandae, numquam mollitia dicta non aperiam aliquam blanditiis quae aspernatur hic suscipit
                         incidunt provident et explicabo quisquam illo voluptas, deserunt quasi dolore.
                     </p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, rerum eligendi, 
-                        nam molestiae minima perferendis autem ipsam saepe sapiente fugit aut facere facilis 
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, rerum eligendi,
+                        nam molestiae minima perferendis autem ipsam saepe sapiente fugit aut facere facilis
                         sint iusto iure asperiores aspernatur! Vitae, adipisci.
                     </p>
                     <br>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, rerum eligendi, 
-                        nam molestiae minima perferendis autem ipsam saepe sapiente fugit aut facere facilis 
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque, rerum eligendi,
+                        nam molestiae minima perferendis autem ipsam saepe sapiente fugit aut facere facilis
                         sint iusto iure asperiores aspernatur! Vitae, adipisci.
                     </p>
                 </div>
@@ -137,7 +137,7 @@
                               id="pills-menu"
                               role="tablist"
 
-                            > 
+                            >
                             <li class="nav-item" role="presentation">
                                 <a
                                   class="nav-link active"
@@ -179,16 +179,16 @@
                               </li>
                                 <li class="justify-content-end">
                                     <div style="display:block;">
-                                        <form action="{{ route("cliente_menu.search") }}" method="get" role="search" 
+                                        <form action="{{ route("cliente_menu.search") }}" method="get" role="search"
                                             class="navbar-search">
                                             <div class="input-group">
-                                                <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
-                                                placeholder="Buscar por nombre, tamaño, comida/bebida" aria-label="Search" 
+                                                <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px"
+                                                placeholder="Buscar por nombre, tamaño, comida/bebida" aria-label="Search"
                                                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>" />
-                                                <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>    
-                                                <a href="{{route('cliente_prueba')}}" style="display:block; float:right"  
+                                                <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>
+                                                <a href="{{route('cliente_prueba')}}" style="display:block; float:right"
                                                 class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
-                                            </div>   
+                                            </div>
                                         </form>
                                     </div>
                                 </li>
@@ -197,7 +197,7 @@
                                         <a href="{{route("index")}}" class="btn btn-menu"><i class="ni ni-palette"></i> Inicio</a>
                                     </div>
                                 </li>
-                                
+
                             </ul>
                         </header> <br><br><br><br>
                     </div>
@@ -207,7 +207,7 @@
                         role="tabpanel"
                         aria-labelledby="pills-platillos-tab">
                         <div class="card-group row" style="display: flex">
-                            <div class="row">   
+                            <div class="row">
                                 <!-- ========== Platillos ========== -->
                                 @forelse ($platillos as $p)
                                     <div class="col d-flex justify-content-center mb-4">
@@ -216,80 +216,23 @@
                                             <img src="/images/1676991488.Pollo-chuco-principal.png" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <p class="card-text description">{{$p->descripcion}}</p>
-                                                <h5 class="text-primary">Precio: <span class="precio">L. {{$p->precio}}</span></h5>
+                                                <h5 class="text-primary">Precio: <span class="precio">L. {{$p->precio}}.00</span></h5>
                                                 <div class="d-grid gap-2">
                                                     <button  class="btn btn-primary button">Añadir a Carrito</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 @empty
                                     <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
-                                @endforelse               
+                                @endforelse
                             </div>
                         </div>
                     </div>
-                    <div
-                        class="tab-pane fade"
-                        id="pills-bebidas"
-                        role="tabpanel"
-                        aria-labelledby="pills-bebidas-tab">
-                        <div class="card-group row" style="display: flex">
-                            <div class="row">   
-                                <!-- ========== Platillos ========== -->
-                                @forelse ($bebidas as $p)
-                                    <div class="col d-flex justify-content-center mb-4">
-                                        <div class="card shadow mb-1 bg-light rounded" style="width: 20rem;">
-                                            <h5 class="card-title pt-2 text-center text-primary">{{$p->nombre}}</h5>
-                                            <img src="/images/1676991488.Pollo-chuco-principal.png" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <p class="card-text description">{{$p->descripcion}}</p>
-                                                <h5 class="text-primary">Precio: <span class="precio">{{$p->precio}}</span></h5>
-                                                <div class="d-grid gap-2">
-                                                    <button  class="btn btn-primary button">Añadir a Carrito</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                @empty
-                                    <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
-                                @endforelse               
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                    class="tab-pane fade"
-                    id="pills-combos"
-                    role="tabpanel"
-                    aria-labelledby="pills-combos-tab">
-                        <div class="card-group row" style="display: flex">
-                            <div class="row">   
-                                <!-- ========== Platillos ========== -->
-                                @forelse ($combos as $p)
-                                    <div class="col d-flex justify-content-center mb-4">
-                                        <div class="card shadow mb-1 bg-light rounded" style="width: 20rem;">
-                                            <h5 class="card-title pt-2 text-center text-primary">{{$p->nombre}}</h5>
-                                            <img src="/images/1676991488.Pollo-chuco-principal.png" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <p class="card-text description">{{$p->descripcion}}</p>
-                                                <h5 class="text-primary">Precio: <span class="precio">{{$p->precio}}</span></h5>
-                                                <div class="d-grid gap-2">
-                                                    <button  class="btn btn-primary button">Añadir a Carrito</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                @empty
-                                    <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
-                                @endforelse               
-                            </div>
-                        </div>
-                    </div>
-                    
                 </div>
-            
+
                 <!-- ========== End Cards ========== -->
-    
+
             </div>
             <!-- ========== Carrito ========== -->
             <div
@@ -332,7 +275,7 @@
                                                 <th scope="col">Quitar</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="tbody">   
+                                        <tbody class="tbody">
                                         </tbody>
                                     </table>
                                     <input type="text" name="tuplas" class="form-control @error('tuplas') is-invalid @enderror"
@@ -361,7 +304,7 @@
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </main>
