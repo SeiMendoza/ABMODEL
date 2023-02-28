@@ -30,7 +30,7 @@ function addToCarritoItem(e) {
 function addItemCarrito(newItem) {
     const inputCantidad = tbody.getElementsByClassName('cant')
     for (let i = 0; i < carrito.length; i++) {
-        if (carrito[i].title.trim() === newItem.title.trim()) {
+        if (carrito[i].id.trim() === newItem.id.trim()) {
             carrito[i].cantidad++;
             const inputValue = inputCantidad[i]
             inputValue.value++;
@@ -55,7 +55,7 @@ function renderCarrito() {
         var total = Number(item.cantidad) * Number(item.precio.replace("L", ""));
         const Content = `
     
-    <th scope="row">1</th>
+    <th scope="row">${i++}</th>
             <td class="table__productos">
               <img src=${item.img}  alt="" style="width: 100px">
               <h6 class="title">${item.title}</h6>
@@ -66,7 +66,7 @@ function renderCarrito() {
             </td>
             <td>${total}</td>
             <td><a href="#" class="delete btn btn-danger" data-id="${item.id}">Quitar</a></td>
-            <input name="det-` + i + `" type="number" value=${item.cantidad} readonly style="display:none">
+            <input name="det-` + i + `" type="number" value=${item.id} readonly style="display:none">
     
     `
         tr.innerHTML = Content;

@@ -73,8 +73,8 @@ Route::get('/menu/pedidop', [PedidoUsuarioController::class, 'pedido_pendientes'
   Rutas Para Menu de cliente
 ******************************/
 
-Route::get('/menu/cliente', [MenuUsuarioController::class, 'index'])
-->name('cliente_menu.index');/*Ruta de visualizacion de menu*/
+Route::get('/menu/cliente/buscar', [MenuUsuarioController::class, 'search'])
+->name('cliente_menu.search');
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])
 ->name('cliente_menu.qr');
 Route::get('/menu/prueba', [MenuUsuarioController::class, 'prueba'])

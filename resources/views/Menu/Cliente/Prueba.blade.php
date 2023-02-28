@@ -32,13 +32,13 @@
                 title: msg,
                 showConfirmButton: false,
                 toast: true,
-                background: '#0be004ab',
+                background: '#fff',
                 timer: 3500
             })
         }
     
     </script>
-    <header class="container-fluid bg-primary position-absolute top-0">
+    <header class="container-fluid d-flex justify-content-center bg-primary position-absolute top-0 ">
         <ul
           class="nav nav-pills mb-3 py-3 container"
           id="pills-tab"
@@ -128,235 +128,164 @@
                 id="pills-profile"
                 role="tabpanel"
                 aria-labelledby="pills-profile-tab">
-                <h2 class="h4 m-4 text-primary">Productos</h2>
-                <div style="padding-top:19px; margin: 10px;">
-                    <form action="{{ route("cliente_prueba") }}" method="get" role="search" 
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
-                            placeholder="Buscar por nombre, tamaño, comida/bebida" aria-label="Search" 
-                            aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>" />
-                            <div class="input-group-append">
-                                <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>
-                            </div>
-                            @if($text!="")
-                            <a href="{{route('cliente_prueba')}}" class="btn btn-secondary">Borrar Busqueda</a>
-                            @endif
-                        </div>
-                    </form>
-            
-                    <div style="display:block;   float:right">
-                    <a href="{{route("index")}}" class="btn btn-menu"><i class="ni ni-palette"></i> Inicio</a>
-                    </div>
-                </div>
+                <h2 class="h4 m-4 text-primary text-xl-center">Menu del Día</h2>
                 <div class="container-fluid">
-                    <div class="card-group row" style="display: flex">
-                        <div class="row">
+                    <div>
+                        <header class="container bg-light position-absolute d-flex justify-content-center">
+                            <ul
+                              class="nav"
+                              id="pills-menu"
+                              role="tablist"
 
-                            {{-- Cards Platillos --}}
-                            <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 align-items-start c">
+                            > 
+                            <li class="nav-item" role="presentation">
+                                <a
+                                  class="nav-link active"
+                                  id="pills-platillos-tab"
+                                  data-bs-toggle="pill"
+                                  data-bs-target="#pills-platillos"
+                                  type="button"
+                                  role="tab"
+                                  aria-controls="pills-platillos"
+                                  aria-selected="true"
+                                  >Platillos</a
+                                >
+                              </li>
+                              <li class="nav-item text-primary" role="presentation">
+                                <a
+                                  class="nav-link "
+                                  id="pills-bebidas-tab"
+                                  data-bs-toggle="pill"
+                                  data-bs-target="#pills-bebidas"
+                                  type="button"
+                                  role="tab"
+                                  aria-controls="pills-bebidas"
+                                  aria-selected="false"
+                                  >Bebidas</a
+                                >
+                              </li>
+                              <li class="nav-item" role="presentation">
+                                <a
+                                  class="nav-link"
+                                  id="pills-combos-tab"
+                                  data-bs-toggle="pill"
+                                  data-bs-target="#pills-combos"
+                                  type="button"
+                                  role="tab"
+                                  aria-controls="pills-combos"
+                                  aria-selected="false"
+                                  >Combos</a
+                                >
+                              </li>
+                                <li class="justify-content-end">
+                                    <div style="display:block;">
+                                        <form action="{{ route("cliente_menu.search") }}" method="get" role="search" 
+                                            class="navbar-search">
+                                            <div class="input-group">
+                                                <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
+                                                placeholder="Buscar por nombre, tamaño, comida/bebida" aria-label="Search" 
+                                                aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>" />
+                                                <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>    
+                                                <a href="{{route('cliente_prueba')}}" style="display:block; float:right"  
+                                                class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
+                                            </div>   
+                                        </form>
+                                    </div>
+                                </li>
+                                <li class="justify-content-end">
+                                    <div style="">
+                                        <a href="{{route("index")}}" class="btn btn-menu"><i class="ni ni-palette"></i> Inicio</a>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </header> <br><br><br><br>
+                    </div>
+                    <div
+                        class="tab-pane fade show active container"
+                        id="pills-platillos"
+                        role="tabpanel"
+                        aria-labelledby="pills-platillos-tab">
+                        <div class="card-group row" style="display: flex">
+                            <div class="row">   
+                                <!-- ========== Platillos ========== -->
                                 @forelse ($platillos as $p)
-                                    <div class="card my-3 ">
-                                        <div class="row card-body p-3">
-            
-                                            {{-- foodIcon --}}
-                                            <div class="text-end">
-                                                <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
-                                                    <i class="ni ni-bell-55 text-lg opacity-10" aria-hidden="true"></i>
-                                                </div>
-                                            </div>
-            
-                                            {{-- Imagen --}}
-                                            <div class="align-items-center">
-                                                <div class="card">
-                                                    <div>
-                                                        <div>
-                                                            <img src="{{ asset($p->imagen) }}" alt="..."
-                                                                class="rounded float-center image-center image-fluid imag"
-                                                                style="width: 100% ">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-            
-                                            <div style="display:block">
-                                                {{-- Informacion --}}
-                                                <div>
-                                                    <div class="card col-12 text-end">
-                                                        <div class="col-12 p-4">
-                                                            <div>
-                                                                <div class="col-12">
-                                                                    <div>
-                                                                        <div class="text-center">
-                                                                            <h3 class="title">{{ $p->nombre }}</h3>
-                                                                            <p align="center"> {{ $p->descripcion }}</p>    
-                                                                            <p class="idcard" style="display: none" data-id="{{$p->id}}"> </p>
-                                                                            {{-- Precio y agregar --}}
-            
-                                                                            {{-- Precio --}}
-                                                                            <div class="col">
-                                                                                <h4 class="col precio">L {{ $p->precio }}.00</h4>
-                                                                            </div>
-            
-                                                                            {{-- Agregar... --}}
-                                                                            <div class="row">
-                                                                                <div class="col">
-                                                                                    <a class="col-12 btn btn-primary form button">Agregar</a>
-                                                                                </div>
-                                                                            </div>
-            
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                    <div class="col d-flex justify-content-center mb-4">
+                                        <div class="card shadow mb-1 bg-light rounded" style="width: 20rem;">
+                                            <h5 class="card-title pt-2 text-center text-primary">{{$p->nombre}}</h5>
+                                            <img src="/images/1676991488.Pollo-chuco-principal.png" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <p class="card-text description">{{$p->descripcion}}</p>
+                                                <h5 class="text-primary">Precio: <span class="precio">L. {{$p->precio}}</span></h5>
+                                                <div class="d-grid gap-2">
+                                                    <button  class="btn btn-primary button">Añadir a Carrito</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
                                 @empty
                                     <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
-                                @endforelse
+                                @endforelse               
                             </div>
-                
-                            {{-- Cards Bebidas --}}
-                            <div class="col-xl-3 col-sm-6 mb-xl-4 mb-4 align-items-start c">
-                                @foreach ($bebidas as $p)
-                                    <div class="card my-3 ">
-                                        <div class="row card-body p-3">
-            
-                                            {{-- foodIcon --}}
-                                            <div class="text-end">
-                                                <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
-                                                    <i class="ni ni-bell-55 text-lg opacity-10" aria-hidden="true"></i>
-                                                </div>
-                                            </div>
-            
-                                            {{-- Imagen --}}
-                                            <div class="align-items-center">
-                                                <div class="card">
-                                                    <div>
-                                                        <div>
-                                                            <img src="{{ asset($p->imagen) }}" alt="..."
-                                                                class="rounded float-center image-center image-fluid imag"
-                                                                style="width: 100% ">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-            
-                                            <div style="display:block">
-                                                {{-- Informacion --}}
-                                                <div>
-                                                    <div class="card col-12 text-end">
-                                                        <div class="col-12 p-4">
-                                                            <div>
-                                                            
-                                                                <div class="col-12">
-                                                                    <div>
-                                                                        <div class="text-center">
-                                                                            <h3 class="title">{{ $p->nombre }}</h3>
-                                                                            <p align="center"> {{ $p->descripcion }}</p>
-                                                                            <p class="idcard" style="display: none" data-id="{{$p->id}}"> </p>
-                                                                            {{-- Precio y agregar --}}
-            
-                                                                            {{-- Precio --}}
-                                                                            <div class="col">
-                                                                                <h4 class="col precio">L {{ $p->precio }}.00</h4>
-                                                                            </div>
-
-                                                                            {{-- Agregar --}}
-                                                                            <div class="row">
-                                                                                <div class="col">
-                                                                                    <a class="col-12 btn btn-primary form button">Agregar</a>
-                                                                                </div>
-                                                                            </div>
-            
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                
-                            {{-- Cards Combos --}}
-                            <div class="col-xl-5 col-sm-6 mb-xl-4 mb-4 c">
-                                @foreach ($combos as $p)
-                                    <div class="card my-3 ">
-                                        <div class="card-body p-3">
-            
-                                            {{-- foodIcon --}}
-                                            <div class="col-12 text-end">
-                                                <div class="icon icon-shape-menu bg-gradient-menu shadow-primary text-center">
-                                                    <i class="ni ni-box-2 text-lg opacity-10" aria-hidden="true"></i>
-                                                </div>
-                                            </div>
-            
-                                            <div class="row" style="display:flex">
-                                                {{-- Imagen --}}
-                                                <div class="col align-items-center">
-                                                    <div class="card col-12 row-12">
-                                                        <div>
-                                                            <div class="square">
-                                                                <img src="{{ asset($p->imagen) }}" alt="..."
-                                                                    class="rounded float-start image-center image-fluid imag"
-                                                                    style="width: 100%">
-            
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-            
-                                                {{-- Informacion --}}
-                                                <div class="col">
-                                                    <div class="card col-12 text-end">
-                                                        <div class="col-12 p-4">
-                                                            <div>
-                                                                <div class="col-12">
-                                                                    <div>
-                                                                        <div class="text-center">
-                                                                            <h3 class="title">{{ $p->nombre }}</h3>
-                                                                            <p align="center"> {{ $p->descripcion }}</p>
-                                                                            <p class="idcard" style="display: none" data-id="{{$p->id}}"> </p>
-                                                                            {{-- Precio y agregar--}}
-            
-                                                                            {{-- Precio --}}
-                                                                            <div class="col">
-                                                                                <h4 class="col precio">L {{ $p->precio }}.00
-                                                                                </h4>
-                                                                            </div>
-            
-                                                                            {{-- Agregar... --}}
-            
-                                                                            <div class="row">
-                                                                                <div class="col">
-                                                                                    <a class="col-12 btn btn-primary form button">Agregar</a>
-                                                                                </div>
-                                                                            </div>
-            
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-            
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                
                         </div>
                     </div>
+                    <div
+                        class="tab-pane fade"
+                        id="pills-bebidas"
+                        role="tabpanel"
+                        aria-labelledby="pills-bebidas-tab">
+                        <div class="card-group row" style="display: flex">
+                            <div class="row">   
+                                <!-- ========== Platillos ========== -->
+                                @forelse ($bebidas as $p)
+                                    <div class="col d-flex justify-content-center mb-4">
+                                        <div class="card shadow mb-1 bg-light rounded" style="width: 20rem;">
+                                            <h5 class="card-title pt-2 text-center text-primary">{{$p->nombre}}</h5>
+                                            <img src="/images/1676991488.Pollo-chuco-principal.png" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <p class="card-text description">{{$p->descripcion}}</p>
+                                                <h5 class="text-primary">Precio: <span class="precio">{{$p->precio}}</span></h5>
+                                                <div class="d-grid gap-2">
+                                                    <button  class="btn btn-primary button">Añadir a Carrito</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                @empty
+                                    <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
+                                @endforelse               
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                    class="tab-pane fade"
+                    id="pills-combos"
+                    role="tabpanel"
+                    aria-labelledby="pills-combos-tab">
+                        <div class="card-group row" style="display: flex">
+                            <div class="row">   
+                                <!-- ========== Platillos ========== -->
+                                @forelse ($combos as $p)
+                                    <div class="col d-flex justify-content-center mb-4">
+                                        <div class="card shadow mb-1 bg-light rounded" style="width: 20rem;">
+                                            <h5 class="card-title pt-2 text-center text-primary">{{$p->nombre}}</h5>
+                                            <img src="/images/1676991488.Pollo-chuco-principal.png" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <p class="card-text description">{{$p->descripcion}}</p>
+                                                <h5 class="text-primary">Precio: <span class="precio">{{$p->precio}}</span></h5>
+                                                <div class="d-grid gap-2">
+                                                    <button  class="btn btn-primary button">Añadir a Carrito</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                @empty
+                                    <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
+                                @endforelse               
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             
                 <!-- ========== End Cards ========== -->
