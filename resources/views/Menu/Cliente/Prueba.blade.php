@@ -65,8 +65,7 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="row" style="position:absolute; bottom:0%; background-color: rgba(218, 0, 0, 0.79);">
+                <div class="row" style="position:absolute; bottom:0%; width: 1040px; background-color: rgba(218, 0, 0, 0.79);">
                     <footer class="container-fluid">
                         <ul
                         class="nav d-flex justify-content-center h4 text-center"
@@ -265,9 +264,9 @@
                             </div>
                         </div>
                            
-                        <div class="row table-responsive" style="height: 560px; width:500px; margin:0; padding:0; overflow-y:scroll;">
+                        <div class="row table-responsive" style="height: 560px; width:510px; margin:0; padding:0;">
                             <table class="table table-striped">
-                            <thead style="padding-top: 2px">
+                            <thead style="padding-top: 2px;" >
                                 <tr class="text-dark">
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Cantidad</th>
@@ -275,7 +274,7 @@
                                     <th scope="col">Quitar</th>
                                 </tr>
                             </thead>
-                            <tbody class="tbody">
+                            <tbody class="tbody" style=" overflow-y: scroll;">
                             </tbody>
                             </table>
                             <input type="text" name="tuplas" class="form-control @error('tuplas') is-invalid @enderror"
@@ -292,11 +291,11 @@
                                 <h3 class="total text-black">Total: 0</h3>
                             </div>
                         </div>
-                        <div class="col" style="text-align: center">
+                        <div class="col" style="text-align: center; width:510px; background-color:rgba(155, 155, 155, 0.566); position:absolute; bottom:0%;">
                             <a href="#" onclick="cancelar('menu/prueba')" id="cancelar"
-                            class="btn btn-danger btn-bold px-4 float-right mt-2 mt-lg-0 mr-2">Cancelar</a>
-                        <a href="#" onclick="guardar()" id="procesar-compra"
-                                class="btn btn-success btn-bold px-4 float-right mt-3 mt-lg-0 mr-2">Guardar</a>
+                            class="btn btn-danger px-6" style="margin: 4px 1px 4px 1px">Cancelar</a>
+                            <a href="#" onclick="guardar()" id="procesar-compra"
+                                class="btn btn-success px-6" style="margin: 4px 1px 4px 1px">Guardar</a>
                         </div>
                     </form>
                 </div>  

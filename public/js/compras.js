@@ -20,7 +20,6 @@ function addItemLista(itemId, itemTitulo, itemCantidad, itemPrecio) {
     const elemento = tbody.getElementsByClassName('nombre');
     for (let i = 0; i < elemento.length; i++) {
         if (elemento[i].innerText.trim() === itemTitulo.trim()) {
-            elemento[i].itemcantidad++;
             const input = elemento[i];
             input.value++;
             total();
