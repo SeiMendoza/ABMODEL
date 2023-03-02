@@ -21,7 +21,7 @@
 
         <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script>
 </head>
-<body style="background-color:rgba(207, 207, 207, 0.34)">
+<body style="background-color:rgba(207, 207, 207, 0.34); padding:0px; overflow:hidden" class="container-fluid">
     <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
@@ -39,60 +39,13 @@
 
     </script>
     
-    <div class="col-sm-11">
-        <h2 style="background-color: rgba(65, 0, 218, 0.293)" class="h4 text-primary text-xl-center">Menu del Día</h2>
+    <div class="col-12 d-flex justify-content-center" style="padding:0px">
         <div class="row">
-            <div class="col-sm-8" style="padding-right: 0px">
-                <div class="form-group row">
-                    <div style="margin:0px">
-                        <footer class="container">
-                            <ul
-                            class="nav d-flex justify-content-center h4 text-center"
-                            role="tablist">
-                            <li class="nav-item text-primary" role="presentation">
-                                <a
-                                class="nav-link "
-                                id="pills-home-tab"
-                                data-bs-toggle="pill"
-                                data-bs-target="#pills-home"
-                                type="button"
-                                role="tab"
-                                aria-controls="pills-home"
-                                aria-selected="true"
-                                >Bebidas</a
-                                >
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a
-                                class="nav-link active"
-                                id="pills-profile-tab"
-                                data-bs-toggle="pill"
-                                data-bs-target="#pills-profile"
-                                type="button"
-                                role="tab"
-                                aria-controls="pills-profile"
-                                aria-selected="false"
-                                >Platillos</a
-                                >
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a
-                                class="nav-link"
-                                id="pills-contact-tab"
-                                data-bs-toggle="pill"
-                                data-bs-target="#pills-contact"
-                                type="button"
-                                role="tab"
-                                aria-controls="pills-contact"
-                                aria-selected="false"
-                                >Combos</a
-                                >
-                            </li>
-                            </ul>
-                        </footer>
-                    </div>
-                    <div class="input-group col d-flex justify-content-center" style="width: 400px">
-                        <div style="display:block;">
+            <h2 style="background-color: rgba(160, 0, 0, 0.866); padding:0; margin:0;" class="h4 text-light text-xl-center col-12">Menu del Día</h2>
+            <div class="col-8" style="padding-right: 0px; ">
+                <div class="row container-fluid" style="margin: 0px; padding:0; ">
+                    <div class="nav d-flex justify-content-center" style="width: 1100px; background-color: rgba(218, 0, 0, 0.79);">
+                        <div class="nav-item" style="margin: 10px 0 0 10px">
                             <form action="{{ route("cliente_menu.search") }}" method="get" role="search" 
                                 class="navbar-search">
                                 <div class="input-group">
@@ -105,15 +58,64 @@
                                 </div>   
                             </form>
                         </div>
-                        <div style="">
+                        <div style="margin: 10px 0 0 10px;" class=" nav-link-icon">
                             <a href="{{route("index")}}" class="btn btn-menu"><i class="ni ni-palette"></i> Inicio</a>
                         </div>
                     </div>
                 </div>
+                <div class="row" style="position:absolute; bottom:0%; background-color: rgba(218, 0, 0, 0.79);">
+                    <footer class="container-fluid">
+                        <ul
+                        class="nav d-flex justify-content-center h4 text-center"
+                        role="tablist"
+                        style="width: 1005px;">
+                        <li class="nav-item" role="presentation">
+                            <a
+                            class="nav-link text-white"
+                            id="pills-home-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-home"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-home"
+                            aria-selected="true"
+                            >Bebidas</a
+                            >
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a
+                            class="nav-link text-white"
+                            id="pills-profile-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-profile"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-profile"
+                            aria-selected="false"
+                            >Platillos</a
+                            >
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a
+                            class="nav-link text-white"
+                            id="pills-contact-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-contact"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-contact"
+                            aria-selected="false"
+                            >Combos</a
+                            >
+                        </li>
+                        </ul>
+                    </footer>
+                </div>
                 
                 <!-- Catalogo de Productos -->
-                <div class="table-responsive" style=" height: 550px; overflow:scroll;">
-                    <section class="NovidadesSection">     
+                <div class="table-responsive" style="height: 580px; overflow-y: scroll; overflow-x: hidden;
+                    scroll-behavior: smooth;">
+                    <section class="NovidadesSection" style="">     
                         <main class="main-content position-relative border-radius-lg">   
                             <div class="tab-content" id="pills-tabContent">
                                 <!-- ========== Bebidas ========== -->
@@ -124,34 +126,30 @@
                                     aria-labelledby="pills-home-tab">
                                     <div class="container-fluid" style="padding: 0px">
                                         <div class="productos" id="productos"
-                                            style="display: grid; grid-template-columns: 150px 150px 155px 155px 150px 150px">
+                                            style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
                                             @foreach($bebidas as $pro)
-                                            <div class="agregarLista" id=""
-                                                    style="display:block;  height: 180px; width: 150px; padding: 3px ">
-                                                <div class="card h-100 btn btn-light col d-flex justify-content-center mb-4" data-id="{{$pro->id}}" style="padding: 0px">
-                                                    <div class="" style="text-align:center;">
-                                                        <div class="text-center">
+                                            <div class="container-fluid agregarCarrito" id=""
+                                                    style="display:block;  height: 200px; width: 200px; padding: 3px ">
+                                                <div class="card h-100 btn btnCard" 
+                                                data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
+                                                background: url('/images/1676990534.horchata-1-FP.jpg') top center/cover no-repeat;">
+                                                    <div class="text-center" 
+                                                            style="text-align:center; ">
                                                             <!-- Nombre -->
-                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre">
-                                                                <strong style="font-size: 20px">{{$pro->nombre}}</strong>
-                                                            </p>
-                                                            <!-- Imagen -->
-                                                            <div class="img">
-                                                                <img src="/images/1676990334.Pollo-chuco-principal.png"  alt=""
-                                                                class="img img-responsive"
-                                                                style="width: 100%">
-                                                            </div>
+                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre"> 
+                                                                <strong style="font-size: 20px; width:194px;
+                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
+                                                            </p>                        
                                                             <!-- Precio -->
-                                                            <div class="proposito">
-                                                                <span id="prop" class="precio text-primary text-decoration-line">
-                                                                    <strong style="font-size: 15px">Precio: L{{$pro->precio}}.00</strong>
-                                                                </span>
-                                                            </div>
-                                                        </div>
+                                                            <p id="precio" class="text-primary text-decoration-line">
+                                                                <strong class="precio" style="font-size: 15px; width:194px;
+                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                position: absolute; bottom: 0; left:0;">L {{$pro->precio}}.00</strong>
+                                                            </p>                        
                                                     </div>
                                                 </div>
                                             </div>
-
                                             @endforeach
                                         </div>
                                     </div>
@@ -166,30 +164,27 @@
                                     style="padding: 0px; margin:0px; border:0px">
                                     <div class="container-fluid" style="padding: 0px">
                                         <div class="productos" id="productos"
-                                            style="display: grid; grid-template-columns: 150px 150px 155px 155px 150px 150px">
+                                            style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
                                             @foreach($platillos as $pro)
-                                            <div class="agregarLista" id=""
-                                                    style="display:block;  height: 180px; width: 150px; padding: 3px ">
-                                                <div class="card h-100 btn btn-light col d-flex justify-content-center mb-4" data-id="{{$pro->id}}" style="padding: 0px">
-                                                    <div class="" style="text-align:center;">
-                                                        <div class="text-center">
+                                            <div class="container-fluid agregarCarrito" id=""
+                                                    style="display:block;  height: 200px; width: 200px; padding: 3px ">
+                                                <div class="card h-100 btn btnCard" 
+                                                data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
+                                                background: url('/images/1676990334.Pollo-chuco-principal.png') top center/cover no-repeat;">
+                                                    <div class="text-center" 
+                                                            style="text-align:center; ">
                                                             <!-- Nombre -->
-                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre">
-                                                                <strong style="font-size: 20px">{{$pro->nombre}}</strong>
-                                                            </p>
-                                                            <!-- Imagen -->
-                                                            <div class="img">
-                                                                <img src="/images/1676990334.Pollo-chuco-principal.png"  alt=""
-                                                                class="img img-responsive"
-                                                                style="width: 100%">
-                                                            </div>
+                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre"> 
+                                                                <strong style="font-size: 20px; width:194px;
+                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
+                                                            </p>                        
                                                             <!-- Precio -->
-                                                            <div class="proposito">
-                                                                <span id="prop" class="precio text-primary text-decoration-line">
-                                                                    <strong style="font-size: 15px">Precio: L{{$pro->precio}}.00</strong>
-                                                                </span>
-                                                            </div>
-                                                        </div>
+                                                            <p id="precio" class="text-primary text-decoration-line">
+                                                                <strong class="precio" style="font-size: 15px; width:194px;
+                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                position: absolute; bottom: 0; left:0;">L {{$pro->precio}}.00</strong>
+                                                            </p>                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,30 +202,27 @@
                                     aria-labelledby="pills-contact-tab">
                                     <div class="container-fluid" style="padding: 0px">
                                         <div class="productos" id="productos"
-                                            style="display: grid; grid-template-columns: 150px 150px 155px 155px 150px 150px">
+                                            style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
                                             @foreach($combos as $pro)
-                                            <div class="agregarLista" id=""
-                                                    style="display:block;  height: 180px; width: 150px; padding: 3px ">
-                                                <div class="card h-100 btn btn-light col d-flex justify-content-center mb-4" data-id="{{$pro->id}}" style="padding: 0px">
-                                                    <div class="" style="text-align:center;">
-                                                        <div class="text-center">
+                                            <div class="container-fluid agregarCarrito" id=""
+                                                    style="display:block;  height: 200px; width: 200px; padding: 3px ">
+                                                <div class="card h-100 btn btnCard" 
+                                                data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
+                                                background: url('/images/1677456792.tacos.jpg') top center/cover no-repeat;">
+                                                    <div class="text-center" 
+                                                            style="text-align:center; ">
                                                             <!-- Nombre -->
-                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre">
-                                                                <strong style="font-size: 20px">{{$pro->nombre}}</strong>
-                                                            </p>
-                                                            <!-- Imagen -->
-                                                            <div class="img">
-                                                                <img src="/images/1676990334.Pollo-chuco-principal.png"  alt=""
-                                                                class="img img-responsive"
-                                                                style="width: 100%">
-                                                            </div>
+                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre"> 
+                                                                <strong style="font-size: 20px; width:194px;
+                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
+                                                            </p>                        
                                                             <!-- Precio -->
-                                                            <div class="proposito">
-                                                                <span id="prop" class="precio text-primary text-decoration-line">
-                                                                    <strong style="font-size: 15px">Precio: L{{$pro->precio}}.00</strong>
-                                                                </span>
-                                                            </div>
-                                                        </div>
+                                                            <p id="precio" class="precio text-primary text-decoration-line">
+                                                                <strong class="precio" style="font-size: 15px; width:194px;
+                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                position: absolute; bottom: 0; left:0;">L{{$pro->precio}}.00</strong>
+                                                            </p>                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -247,64 +239,52 @@
                 </div>
             </div>
 
-            <div class="col-sm-4" style="padding: 2px; height: 680px; background-color:rgba(207, 207, 207, 0.34); width: 500;">
-                <div class="container-fluid" style="padding: 0px;">
-                    <div class="wrapper wrapper--w960">
-                                <h2 class="h4 text-primary text-xl-center title">Datos del Pedido:</h2>
-                                <form action="{{ route("usuario_pedido.store") }}" id="formulario" name="formulario" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <br>
-                                    <div class="row">
-                                        <div style="display: none">
-                                            <input type="number" id="quiosco" name="quiosco" value="1">
-                                            <input type="number" id="mesa" name="mesa" value="1">
-                                        </div>
-                                        <div class="form-floating">
-                                            <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
-                                            placeholder="Ingrese su nombre aquí" value="{{old('name')}}" style="width:300px;">
-                                            <label for="name">Ingrese su nombre completo para recibir el pedido</label>
-                                            @error('name')
-                                            <small class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                            </small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row" style="height: 450px; width:300px;">
-                                        <table class="table">
-                                        <thead>
-                                            <tr class="text-primary">
-                                                <th scope="col">Nombre</th>
-                                                <th scope="col">Precio</th>
-                                                <th scope="col">Cantidad</th>
-                                                <th scope="col">Quitar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                        </tbody>
-                                        </table>
-                                        <input type="text" name="tuplas" class="form-control @error('tuplas') is-invalid @enderror"
-                                                id="tuplas" hidden>
-                                            @error('tuplas')
-                                                <small class="invalid-feedback">
-                                                    <strong>{{ $message }}</strong>
-                                                </small>
-                                            @enderror
-                                    <br><br>
-                                    </div>
-                                    <div class="row mx-3">
-                                        <div class="col d-flex justify-content-end">
-                                            <h3 class="itemCartTotal text-black">Total: 0</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col" style="text-align: center">
-                                        <a href="#" onclick="cancelar('menu/prueba')" id="cancelar"
-                                        class="btn btn-danger btn-bold px-4 float-right mt-2 mt-lg-0 mr-2">Cancelar</a>
-                                    <a href="#" onclick="guardar()" id="procesar-compra"
-                                            class="btn btn-success btn-bold px-4 float-right mt-3 mt-lg-0 mr-2">Guardar</a>
-                                    </div>
-                                </form>
-                    </div>
+            <div class="col-4 container-fluid" style="padding: 2px; height: 710px; background-color:rgba(207, 207, 207, 0.34); width: 500px; margin:0">
+                <div class="container-fluid" style="">
+                    <h2 class="h4 text-xl-center title">Datos del Pedido:</h2>
+                    <form action="{{ route("usuario_pedido.store") }}" id="formulario" name="formulario" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <br>
+                        <div class="row">
+                            <div style="display: none">
+                                <input type="number" id="quiosco" name="quiosco" value="1">
+                                <input type="number" id="mesa" name="mesa" value="1">
+                            </div>
+                        </div>
+                        <div class="row table-responsive" style="height: 550px; width:480px; overflow-y:scroll;">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr class="text-dark">
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Quitar</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                            </tbody>
+                            </table>
+                            <input type="text" name="tuplas" class="form-control @error('tuplas') is-invalid @enderror"
+                                    id="tuplas" hidden>
+                                @error('tuplas')
+                                    <small class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                @enderror
+                        <br><br>
+                        </div>
+                        <div class="row mx-3">
+                            <div class="col d-flex justify-content-end">
+                                <h3 class="total text-black">Total: 0</h3>
+                            </div>
+                        </div>
+                        <div class="col" style="text-align: center">
+                            <a href="#" onclick="cancelar('menu/prueba')" id="cancelar"
+                            class="btn btn-danger btn-bold px-4 float-right mt-2 mt-lg-0 mr-2">Cancelar</a>
+                        <a href="#" onclick="guardar()" id="procesar-compra"
+                                class="btn btn-success btn-bold px-4 float-right mt-3 mt-lg-0 mr-2">Guardar</a>
+                        </div>
+                    </form>
                 </div>  
             </div>
         </div>

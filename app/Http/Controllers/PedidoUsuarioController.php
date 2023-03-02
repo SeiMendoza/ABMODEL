@@ -18,7 +18,6 @@ class PedidoUsuarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required'],
             'tuplas' => ['required'],
         ], [
             'name.required' => 'No tiene un nombre ingresado',
@@ -28,7 +27,7 @@ class PedidoUsuarioController extends Controller
         $pedido = new Pedido();
         $pedido->mesa = $request->input('mesa');
         $pedido->quiosco = $request->input('quiosco');
-        $pedido->nombreCliente = $request->input('name');
+        $pedido->nombreCliente = "fulano";
         $pedido->imp = 0.00;
         $pedido->total = 100;
         $pedido->save();
