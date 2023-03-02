@@ -63,6 +63,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="row" style="position:absolute; bottom:0%; background-color: rgba(218, 0, 0, 0.79);">
                     <footer class="container-fluid">
                         <ul

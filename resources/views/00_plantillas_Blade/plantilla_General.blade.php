@@ -16,16 +16,14 @@
 
         <!-- CSS Files -->
         <link id="pagestyle" href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" />
-        <link rel="stylesheet" href={{ asset('css/menuStyles.css') }} type="text/css">
+        <link rel="stylesheet" href={{ asset('css/menuStyles/menuStyles.css') }} type="text/css">
 
         <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     </head>
 
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
-
-    <div class="min-height-300 position-absolute w-100" style="background-color: #c21010ee"></div>
+<body class=" g-sidenav-show bg-gray-100">
 
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
@@ -129,86 +127,75 @@
         </div>
     </aside>
 
-    <main class="main-content position-relative border-radius-lg">
+    <main class="container main-content position-relative border-radius-lg">
 
         <div class="mb-0 col-12 text-start">
 
             <div class="row text-center container pt-2">
-                <h1 class="text-white text-uppercase p-2" style="" style="font-size: 3rem;">
-                    Menu</h1>
+                <h1 class=" card bg-menu-red text-white text-uppercase p-2" style="" style="font-size: 3rem;">Menu
+                </h1>
             </div>
 
-            <div class="row">
+            <div class="col" style="padding-right: 0px">
+                <div class="form-group row">
 
-                <div class="col" style="display:inline-block;">
-                    <div class="row" style="display:flex; justify-content: space-between; align-items:center">
-
-                        <!-- ========== Start Botones de Registro ========== -->
-
-                        <div class="col">
-                            <a href={{ route('bebidasyplatillos.create') }} class="btn btn-menu my-3">Registrar Comida
-                                o Bebida</a>
+                    <div class="input-group col d-flex justify-content-center" style="width: 400px ">
+                        <div style="">
+                            <a href="{{ route('index') }}" class="btn btn-menu ni ni-palette" style="margin: 4px">
+                                Inicio</a>
                         </div>
 
-                        <div class="col">                            
-                            <a href={{ route('combo.create') }} class="btn btn-menu my-3">Registrar Combo</a>
+                        <div class="">
+                            <a href={{ route('bebidasyplatillos.create') }} class="btn btn-menu"
+                                style="margin: 4px">Registrar Comida o Bebida</a>
                         </div>
 
-
-                        <!-- ========== End Botones de Registro ========== -->
-                        <div class="col">
-                            <span class="col-4 text-success text-sm font-weight-bolder "></span>
-                            <a href={{ route('cliente_menu.qr') }} class="btn btn-menu my-3">Ver QR</a>
+                        <div class="">
+                            <a href={{ route('combo.create') }} class="btn btn-menu" style="margin: 4px">Registrar
+                                Combo</a>
                         </div>
-                        {{-- Boton QR --}}
-                    </div>
 
-                </div>
+                        <div class="">
+                            <a href={{ route('cliente_menu.qr') }} class="btn btn-menu" style="margin: 4px">Ver
+                                QR</a>
+                        </div>
 
-                <div class=" col" style="display:inline-block;">
-                    <div>
-                        <!-- ========== Start Barra de busqueda y filtros ========== -->
-                        <div style=" display:block; float:right; padding-top:20px">
-                            <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div style="display:block;">
+                            <form action="{{ route('cliente_menu.search') }}" method="get" role="search"
+                                class="navbar-search" style="margin: 4px">
                                 <div class="input-group">
                                     <input class="form-control" type="search" id="busqueda" name="busqueda"
                                         style="width: 200px" placeholder="Buscar por nombre" aria-label="Search"
                                         aria-describedby="basic-addon2" maxlength="50" required
                                         value="<?php if (isset($busqueda)) {
                                             echo $busqueda;
-                                        } ?>" />  
-                                        <button class="btn btn-menu my-2 my-sm-0 " type="submit" style="border-radius: 2.5px">Buscar</button>                                 
+                                        } ?>" />
+                                    <button class="btn btn-menu my-2 my-sm-0 " type="submit"
+                                        style="border-radius: 2.5px">Buscar</button>
+                                    <a href="{{ route('cliente_prueba') }}" style="display:block; float:right"
+                                        class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
+                                </div>
                             </form>
+                        </div>
 
+                        <div class="">
                             <form class="form-inline">
                                 <select
-                                    style="outline: 0; padding: 0px; border-radius: 9px; height: 40px; margin-left: 12px; border: 2px solid rgb(165, 4, 25)">
+                                    style="margin: 4px; border-radius: 9px; height: 40px; margin-left: 12px; background-color:white ">
                                     <option value="FILTRAR POR"><strong>Ordenar Por:</strong></option>
                                     <option value="Precio más alto">Precio más alto</option>
                                     <option value="Precio más bajo">Precio más bajo</option>
                                     <option value="Mas Reciente">Mas reciente</option>
                                 </select>
-                            </form>                    
+                            </form>
                         </div>
-
-                        <!-- ========== End Barra de busqueda y filtros ========== -->
                     </div>
                 </div>
-
-              
-                
             </div>
+
+            @yield('activatedMenu')
+            @yield('disabledMenu')
         </div>
-        <div class="row float-center p-3">
-
-            {{-- Cantidad de Platillos disponibles --}}
-            @yield('info')
-
-        </div>
-
-        @yield('activatedMenu')
-        @yield('disabledMenu')
 
     </main>
 
