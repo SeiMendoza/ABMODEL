@@ -84,7 +84,7 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <a
-                            class="nav-link text-white"
+                            class="nav-link active text-white"
                             id="pills-profile-tab"
                             data-bs-toggle="pill"
                             data-bs-target="#pills-profile"
@@ -113,7 +113,7 @@
                 </div>
                 
                 <!-- Catalogo de Productos -->
-                <div class="table-responsive" style="height: 580px; overflow-y: scroll; overflow-x: hidden;
+                <div class="table-responsive" style="height: 595px; overflow-y: scroll; overflow-x: hidden;
                     scroll-behavior: smooth;">
                     <section class="NovidadesSection" style="">     
                         <main class="main-content position-relative border-radius-lg">   
@@ -136,15 +136,15 @@
                                                     <div class="text-center" 
                                                             style="text-align:center; ">
                                                             <!-- Nombre -->
-                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre"> 
+                                                            <p class="nombre card-title pt-2 text-center text-white" id="nombre"> 
                                                                 <strong style="font-size: 20px; width:194px;
-                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                background-color:rgba(95, 95, 95, 0.651);
                                                                 position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
                                                             </p>                        
                                                             <!-- Precio -->
-                                                            <p id="precio" class="text-primary text-decoration-line">
+                                                            <p id="precio" class="text-white text-decoration-line">
                                                                 <strong class="precio" style="font-size: 15px; width:194px;
-                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                background-color:rgba(95, 95, 95, 0.651);
                                                                 position: absolute; bottom: 0; left:0;">L {{$pro->precio}}.00</strong>
                                                             </p>                        
                                                     </div>
@@ -174,13 +174,13 @@
                                                     <div class="text-center" 
                                                             style="text-align:center; ">
                                                             <!-- Nombre -->
-                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre"> 
+                                                            <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
                                                                 <strong style="font-size: 20px; width:194px;
                                                                 background-color:rgba(255, 255, 255, 0.677);
                                                                 position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
                                                             </p>                        
                                                             <!-- Precio -->
-                                                            <p id="precio" class="text-primary text-decoration-line">
+                                                            <p id="precio" class="text-dark text-decoration-line">
                                                                 <strong class="precio" style="font-size: 15px; width:194px;
                                                                 background-color:rgba(255, 255, 255, 0.677);
                                                                 position: absolute; bottom: 0; left:0;">L {{$pro->precio}}.00</strong>
@@ -196,7 +196,7 @@
                                 </div>
                                 <!-- ========== Combos ========== -->
                                 <div
-                                    class="tab-pane fade carrito"
+                                    class="tab-pane fade"
                                     id="pills-contact"
                                     role="tabpanel"
                                     aria-labelledby="pills-contact-tab">
@@ -212,15 +212,15 @@
                                                     <div class="text-center" 
                                                             style="text-align:center; ">
                                                             <!-- Nombre -->
-                                                            <p class="nombre card-title pt-2 text-center text-primary" id="nombre"> 
+                                                            <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
                                                                 <strong style="font-size: 20px; width:194px;
-                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                background-color:rgba(255, 255, 255, 0.736);
                                                                 position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
                                                             </p>                        
                                                             <!-- Precio -->
-                                                            <p id="precio" class="precio text-primary text-decoration-line">
+                                                            <p id="precio" class="precio text-dark text-decoration-line">
                                                                 <strong class="precio" style="font-size: 15px; width:194px;
-                                                                background-color:rgba(255, 255, 255, 0.677);
+                                                                background-color:rgba(255, 255, 255, 0.727);
                                                                 position: absolute; bottom: 0; left:0;">L{{$pro->precio}}.00</strong>
                                                             </p>                        
                                                     </div>
@@ -239,21 +239,32 @@
                 </div>
             </div>
 
-            <div class="col-4 container-fluid" style="padding: 2px; height: 710px; background-color:rgba(207, 207, 207, 0.34); width: 500px; margin:0">
-                <div class="container-fluid" style="">
-                    <h2 class="h4 text-xl-center title">Datos del Pedido:</h2>
+            <div class="col-4 container-fluid" style="padding: 0px; height: 720px; background-color:rgba(207, 207, 207, 0.34); width: 509px; margin:0">
+                <div class="container-fluid" style="padding: 0px;">
                     <form action="{{ route("usuario_pedido.store") }}" id="formulario" name="formulario" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <br>
-                        <div class="row">
-                            <div style="display: none">
+                        <div class="nav d-flex justify-content-center" style="background-color:rgba(155, 155, 155, 0.566); height: 67px">
+                            <Label class="h4 text-xl-center title col-form-label col-auto" style="width: 270px;" for="mesa">Pedido de la Mesa:</Label>
+                            <input type="text" style="width: 40px;" id="mesa" name="mesa" readonly
+                            value="1" class="form-control @error('mesa') is-invalid @enderror h4 text-xl-center title col-auto">
+                                @error('mesa')
+                                        <small class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </small>
+                                @enderror
+                        
+                            <br>
+                            </div>
+                        <div class="row"style="display: none">
+                            <div>
                                 <input type="number" id="quiosco" name="quiosco" value="1">
-                                <input type="number" id="mesa" name="mesa" value="1">
+                                
                             </div>
                         </div>
-                        <div class="row table-responsive" style="height: 550px; width:480px; overflow-y:scroll;">
+                           
+                        <div class="row table-responsive" style="height: 560px; width:500px; margin:0; padding:0; overflow-y:scroll;">
                             <table class="table table-striped">
-                            <thead>
+                            <thead style="padding-top: 2px">
                                 <tr class="text-dark">
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Cantidad</th>
