@@ -53,8 +53,10 @@
                                     placeholder="Buscar por nombre, tamaño, comida/bebida" aria-label="Search" 
                                     aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>" />
                                     <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>    
+                                    @if(isset($text)!="")
                                     <a href="{{route('cliente_prueba')}}" style="display:block; float:right"  
                                     class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
+                                @endif
                                 </div>   
                             </form>
                         </div>

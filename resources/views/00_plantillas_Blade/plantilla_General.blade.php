@@ -58,12 +58,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href={{ route('t') }}>
+                    <a class="nav-link " href={{ route('pedidosp.pedido') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Tables</span>
+                        <span class="nav-link-text ms-1">Pedidos Cocina</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href={{ route('pedidost.pedido') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Pedidos Caja</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -172,9 +181,11 @@
                                         } ?>" />
                                     <button class="btn btn-menu my-2 my-sm-0 " type="submit"
                                         style="border-radius: 2.5px">Buscar</button>
+                                        @if(isset($text)!="")
                                     <a href="{{ route('cliente_prueba') }}" style="display:block; float:right"
                                         class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
-                                </div>
+                                @endif
+                                    </div>
                             </form>
                         </div>
 

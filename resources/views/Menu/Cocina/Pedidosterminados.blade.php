@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
-    <title>Pedidos caja</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <title>Pedidos</title>
      <!-- Icons -->
      <link href="fontawesome-free/css/all.min.css" rel="stylesheet">
       <link href= "assets/fontawesome/css/fontawesome.css" rel="stylesheet">
@@ -21,7 +22,7 @@
 
       <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
  </head>
- <body style="background: rgb(220, 82, 68);">
+ <body style="background: #fff;">
  <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
@@ -39,18 +40,19 @@
     </script>
     
 <h5 class="card class-4 text-lg text-center" 
- style="text-backgroun: #ffffff; position: relative;
-top: 7px; ">Lista de pedidos pendientes en caja</h5>
+ style="background-color: #ff6666; color:aliceblue; position: relative;
+top: 10px; ">Lista de pedidos pendientes en caja</h5>
 <br>
+ 
 <div style="display:block;   float:right">
-    <a href="{{route("index")}}" class="btn btn-menu"><i class="ni ni-palette"></i> Inicio</a>
+    <a href="{{route("menuAdmon.index")}}" class="btn btn-menu"><i class="ni ni-palette"></i> Inicio</a>
 </div>
 <!--------Lista de pedidos---------------->
-
+ 
 <div class="card-body">
     <div class="table-responsive container-fluid">
-        <table class="table" id="table">
-            <thead class="card-header border border-light" style="color:aliceblue; text-align:center;">
+        <table class="table" id="table" style="background-color: #ff6666;">
+            <thead class="card-header border border-" style="color:aliceblue; text-align:center;">
                 <tr>
                     <th scope="col">Número de orden</th>
                     <th scope="col">Nombre del cliente</th>
@@ -62,11 +64,11 @@ top: 7px; ">Lista de pedidos pendientes en caja</h5>
             </thead>
             <tbody>
                 @forelse($pedido as $p)
-                @if(($p->t)=="1")
+                @if(($p->t)=="0")
                 <tr class="border border-light" style="color:aliceblue; text-align:center;">
                     <th scope="col">{{$p->id}}</th>
-                    <td scope="col">{{$p->nombreCliente}}</td>
-                    <td scope="col"></td>
+                    <td scope="col">{{$p->detalle->nombreCliente}}</td>
+                    <td scope="col">{{$p->detalle->producto_id}}</td>
                     <td scope="col">{{$p->cantidad}}</td>
                     <td ><input type="checkbox" name="term" {{ !old('term') ?: 'checked' }} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}"
                     style="background:#ffffff; width:20px; height:20px;">
@@ -89,10 +91,10 @@ top: 7px; ">Lista de pedidos pendientes en caja</h5>
                                                     @method('put')
                                                     @csrf
                                                     <div style="display: none">
-                                                        <input type="text" id="t" name="t" value="0">
+                                                        <input type="text" id="t" name="t" value="1">
                                                     </div>
-                                                    <input type="submit" class="btn btn-danger w-15" value="Si">
-                                                <button type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
+                                                    <input type="submit" class="btn btn-primary w-15" value="Si">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                                             </div>
                                             </form>
                                         </div>
@@ -107,16 +109,16 @@ top: 7px; ">Lista de pedidos pendientes en caja</h5>
             </tbody>
         </table>
     </div>
-<div style="background-color: rgba(139,0,0,0.34);"> 
-    <h5 class="card class-4 text-lg text-center" style="text-backgroun: #ffffff; position: relative;
+<div> 
+    <h5 class="card class-4 text-lg text-center" style="background: #ff6666; color:aliceblue; position: relative;
 top: 7px; ">Lista de pedidos terminados</h5>
 <br>
 
 
         <div class="card-body">
     <div class="table-responsive container-fluid">
-        <table class="table" id="table">
-            <thead class="card-header border border-light" style="color:aliceblue; text-align:center">
+        <table class="table" id="table" style="background-color: #ff9999;">
+            <thead class="card-header border border-light" style="color:aliceblue;">
                 <tr>
                     <th scope="col">Número de orden</th>
                     <th scope="col">Nombre del cliente</th>
@@ -128,13 +130,13 @@ top: 7px; ">Lista de pedidos terminados</h5>
             </thead>
             <tbody>
                 @forelse($pedido as $p)
-                @if(($p->t)=="0")
-                <tr class="border border-light" style="color:aliceblue; text-align:center">
+                @if(($p->t)=="1")
+                <tr class="border border-light" style="color:aliceblue;">
                     <th scope="col">{{$p->id}}</th>
-                    <td scope="col">{{$p->nombreCliente}}</td>
-                    <td scope="col"></td>
+                    <td scope="col">{{$p->detalle->nombreCliente}}</td>
+                    <td scope="col">{{$p->detalle->producto_id}}</td>
                     <td scope="col">{{$p->Cantidad}}</td>
-                    <td><input type="checkbox" name="term" {{ old('term') ?: 'checked' }} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}"
+                    <td><input disabled type="checkbox" name="term" {{ old('term') ?: 'checked' }} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}"
                     style="background:#ffffff; width:20px; height:20px;"></input></td>
                     <td></td>
                 </tr>

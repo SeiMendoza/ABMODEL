@@ -47,12 +47,12 @@ class PedidoUsuarioController extends Controller
     }
     public function pedido_terminados()
     {
-        $pedido = Pedido::all();
+        $pedido = Pedido::with('detalle_usuario');
         return view('Menu/Cocina/Pedidosterminados', compact('pedido'));
     }
     public function pedido_pendientes()
     {
-        $pedido = Pedido::all();
+        $pedido = Pedido::with('detalle_usuario');
         return view('Menu/Cocina/Pedidospendientes', compact('pedido'));
     }
     public function terminarp(Request $request,  $id)
