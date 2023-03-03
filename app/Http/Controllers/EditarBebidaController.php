@@ -8,15 +8,14 @@ use App\Models\PlatillosyBebidas;
 use App\Models\Platillo;
 use App\Models\Bebida;
 
-class EditarPlatilloController extends Controller
+class EditarBebidaController extends Controller
 {
     //
     public function edit($id){
-        $Platillos = Platillo::findOrFail($id);
-        return view('Menu/Admon/edicion/editarPlatillo') 
-              -> with('Platillos', $Platillos);
+        $Bebidas = Bebida::findOrFail($id);
+        return view('Menu/Admon/edicion/editarBebida') 
+              -> with('Bebidas', $Bebidas);
     }
-
 
     public function update(Request $request, $id){
 
@@ -54,29 +53,28 @@ class EditarPlatilloController extends Controller
             'disponible.numeric' => 'El numero de platillos disponibles debe de ser numerico',
         ]);
 
-      
-        $actualizacion = Platillo::findOrFail($id);
+            $actualizacion= Bebida::FindOrFail($id);
+            
+            $actualizacion->nombre = $request->input('nombre');
+            $actualizacion->descripcion = $request->input('descripcion');
+            $actualizacion->precio = $request->input('precio');
+            $actualizacion->tamanio = $request->input('tamanio');
+            $actualizacion->disponible = $request->input('cantidad');
 
-        $actualizacion->nombre = $request->input('nombre');
-        $actualizacion->descripcion = $request->input('descripcion');
-        $actualizacion->precio = $request->input('precio');
-        $actualizacion->tamanio = $request->input('tamanio');
-        $actualizacion->disponible = $request->input('disponible');
+            $file = $request->file('imagen');
+            $destinationPath = 'images/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
 
-        $file = $request->file('imagen');
-        $destinationPath = 'images/';
-        $filename = time().'.'.$file->getClientOriginalName();
-        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+            $actualizacion -> imagen = 'images/'.$filename;
 
-        $actualizacion -> imagen = 'images/'.$filename;
+            $creado = $actualizacion -> save();
 
-        $creado = $actualizacion -> save();
-
-        if ($creado) {
-               return redirect()->route('menuAdmon.prueba')
-                ->with('mensaje', "".$actualizacion->nombre." se actualizo correctamente");
-        } 
-        
+            if ($creado) {
+                return redirect()->route('menuAdmon.index')
+                    ->with('mensaje', 'La bebida fue modificada exitosamente');
+            }
     }
  }
+
 
