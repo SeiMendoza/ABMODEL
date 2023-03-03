@@ -49,6 +49,8 @@ Route::get('/rtl', [HomeController::class, 'r'])
 ->name('r');
 Route::get('dashboard', [HomeController::class, 'd'])
 ->name('d');
+Route::get('/sing-up', [HomeController::class, 'u'])
+->name('u');
 Route::get('/registro', [HomeController::class, 'registro'])
 ->name('registro');
 

@@ -64,4 +64,8 @@ class HomeController extends Controller
     {
         return view("pages.registro");
     }
+    public function u()
+    {
+        return view("pages.sign-up");
+    }
 }
