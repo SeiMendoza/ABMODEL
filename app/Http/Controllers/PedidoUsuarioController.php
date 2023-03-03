@@ -27,7 +27,7 @@ class PedidoUsuarioController extends Controller
         $pedido = new Pedido();
         $pedido->mesa = $request->input('mesa');
         $pedido->quiosco = $request->input('quiosco');
-        $pedido->nombreCliente = "fulano";
+        $pedido->nombreCliente = 'fulano';
         $pedido->imp = 0.00;
         $pedido->total = 100;
         $pedido->save();
@@ -47,18 +47,18 @@ class PedidoUsuarioController extends Controller
     }
     public function pedido_terminados()
     {
-        $pedido = Pedido::with('detalle_usuario');
+        $pedido = Pedido::all();
         return view('Menu/Cocina/Pedidosterminados', compact('pedido'));
     }
     public function pedido_pendientes()
     {
-        $pedido = Pedido::with('detalle_usuario');
+        $pedido = Pedido::paginate(10);
         return view('Menu/Cocina/Pedidospendientes', compact('pedido'));
     }
     public function terminarp(Request $request,  $id)
     {
         $activar = Pedido::findOrfail($id);
-        $activar->t = $request->input('t');
+        $activar->estado = $request->input('estado');
 
         $create = $activar->save();
 
@@ -69,7 +69,7 @@ class PedidoUsuarioController extends Controller
     public function pedidosPendientes_Cocina(Request $request,  $id)
     {
         $activar = Pedido::findOrfail($id);
-        $activar->t = $request->input('t');
+        $activar->estado = $request->input('estado');
 
         $create = $activar->save();
 
