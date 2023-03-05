@@ -17,6 +17,127 @@
         }
     </script>
 
+
+
+
+    <div class="card col-3 align-items-center" style="display:inline-block; margin: 5px; height: 550px; width: 25%;">
+        <div class="card-body p-3">
+            <!-- Imagen -->
+            <div class="align-items-center">
+                <img src="{{ asset($p->imagen) }}" alt="..." class="rounded float-center image-center image-fluid"
+                    style="width: 100% ">
+            </div>
+
+            <!-- Informacion -->
+            <div style="display:block">
+                <div>
+                    <div class="">
+                        <div class="p-3">
+                            <div>
+                                <p class="text-sm mb-0 text-uppercase text-end font-weight-bold">
+                                    Disponibles: {{ $p->disponible }}
+                                </p>
+                                <div class="col-12">
+                                    <div>
+                                        <div class="text-center">
+                                            <h3>{{ $p->nombre }}</h3>
+
+                                            <div class="col">
+                                                <h4 class="col">L {{ $p->precio }}.00</h4>
+                                            </div>
+
+                                            <div class="row">
+
+                                                {{-- Check --}}
+                                                <div class="col">
+                                                    <div class="row-12">
+                                                        <div class="justify-content-center form-switch form-check">
+
+                                                            <input data-bs-toggle="modal"
+                                                                data-bs-target="#modalactivarproducto{{ $p->id }}"
+                                                                class="form-check-input" checked='true' type="checkbox"
+                                                                name="chckBox_disponible" id="disponible">
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade"
+                                                                id="modalactivarproducto{{ $p->id }}" tabindex="-1"
+                                                                aria-labelledby="ModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title text-center"
+                                                                                id="exampleModalLabel">
+                                                                                Disponibilidad
+                                                                            </h5>
+                                                                            <button type="button" class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            ¿Deseea quitar
+                                                                            <strong>{{ $p->nombre }}</strong>
+                                                                            del menú?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+
+                                                                            <form
+                                                                                action="{{ route('menuAdmon.index', ['id' => $p->id]) }}"
+                                                                                method="POST">
+                                                                                @method('put')
+                                                                                @csrf
+                                                                                <div style="display: none">
+                                                                                    <input id="activar" name="activar"
+                                                                                        value="1">
+                                                                                </div>
+                                                                                <button type="button" class="btn btn-menu"
+                                                                                    data-bs-dismiss="modal">No</button>
+                                                                                <input type="submit" class="btn btn-danger"
+                                                                                    value="Si">
+                                                                            </form>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-12">
+                                                        <div>
+                                                            <label class="form-check-label font-weight-bold"
+                                                                for="flexSwitchCheck">Disponible</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {{-- Edit --}}
+                                                <div class="col">
+                                                    <a class="col-12 btn btn-menu form"
+                                                        href="{{ route('plato.editar', ['id' => $p->id]) }}">Editar</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a class="col-12 btn btn-danger form">Eliminar</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 @endsection
 
 @section('activatedMenu')
@@ -28,10 +149,8 @@
                     type="button" role="tab" aria-controls="pills-bebidas" aria-selected="true">Bebidas</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link active " id="pills-bebidas-tab" data-bs-toggle="pill"
-                    data-bs-target="#pills-bebidas"
-                    type="button" role="tab"
-                    aria-controls="pills-platillo" aria-selected="false">Platillos</a>
+                <a class="nav-link active " id="pills-bebidas-tab" data-bs-toggle="pill" data-bs-target="#pills-bebidas"
+                    type="button" role="tab" aria-controls="pills-platillo" aria-selected="false">Platillos</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="pills-combos-tab" data-bs-toggle="pill" data-bs-target="#pills-combos"
@@ -40,137 +159,133 @@
         </ul>
     </div>
 
-    <div class="tab-content" id="pills-tabContent" style="height: 595px; overflow-y: scroll; overflow-x: hidden;
+    <div class="tab-content" id="pills-tabContent"
+        style="height: 595px; overflow-y: scroll; overflow-x: hidden;
     scroll-behavior: smooth;">
-        <!-- ========== Cards Platillos ========== -->  
+        <!-- ========== Cards Platillos ========== -->
         @if (!empty($platillos))
             {{-- Cards Platillos --}}
-                <div class="container tab-pane fade in active" id="pills-platillo" role="tabpanel"
-                    aria-labelledby="pills-platillos-tab">
-                        <!-- Platillos -->
-                        @forelse ($platillos as $p)
-                            <div class="card col-3 align-items-center" style="display:inline-block; margin: 5px; height: 550px; width: 25%;">
-                                <div class="card-body p-3">                             
-                                    <!-- Imagen -->
-                                    <div class="align-items-center">
-                                        <div>
-                                            <div>
-                                                <img src="{{ asset($p->imagen) }}" alt="..."
-                                                    class="rounded float-center image-center image-fluid"
-                                                    style="width: 100% ">
-                                            </div>
-                                        </div>
+            <div class="container tab-pane fade in active" id="pills-platillo" role="tabpanel"
+                aria-labelledby="pills-platillos-tab">
+                <!-- Platillos -->
+                @forelse ($platillos as $p)
+                    <div class="card col-3 align-items-center"
+                        style="display:inline-block; margin: 5px; height: 550px; width: 25%;">
+                        <div class="card-body p-3">
+                            <!-- Imagen -->
+                            <div class="align-items-center">
+                                <div>
+                                    <div>
+                                        <img src="{{ asset($p->imagen) }}" alt="..."
+                                            class="rounded float-center image-center image-fluid" style="width: 100% ">
                                     </div>
+                                </div>
+                            </div>
 
-                                    <!-- Informacion -->
-                                    <div style="display:block">                                    
-                                        <div>
-                                            <div class="">
-                                                <div class="p-3">
+                            <!-- Informacion -->
+                            <div style="display:block">
+                                <div>
+                                    <div class="">
+                                        <div class="p-3">
+                                            <div>
+                                                <p class="text-sm mb-0 text-uppercase text-end font-weight-bold">
+                                                    Disponibles: {{ $p->disponible }}
+                                                </p>
+                                                <div class="col-12">
                                                     <div>
-                                                        <p class="text-sm mb-0 text-uppercase text-end font-weight-bold">
-                                                            Disponibles: {{ $p->disponible }}
-                                                        </p>
-                                                        <div class="col-12">
-                                                            <div>
-                                                                <div class="text-center">
-                                                                    <h3>{{ $p->nombre }}</h3>
-                                                                    
-                                                                    <div class="col">
-                                                                        <h4 class="col">L {{ $p->precio }}.00</h4>
-                                                                    </div>
+                                                        <div class="text-center">
+                                                            <h3>{{ $p->nombre }}</h3>
 
-                                                                    <div class="row">
+                                                            <div class="col">
+                                                                <h4 class="col">L {{ $p->precio }}.00</h4>
+                                                            </div>
 
-                                                                        {{-- Check --}}
-                                                                        <div class="col">
-                                                                            <div class="row-12">
-                                                                                <div
-                                                                                    class="justify-content-center form-switch form-check">
+                                                            <div class="row">
 
-                                                                                    <input data-bs-toggle="modal"
-                                                                                        data-bs-target="#modalactivarproducto{{ $p->id }}"
-                                                                                        class="form-check-input" checked='true'
-                                                                                        type="checkbox"
-                                                                                        name="chckBox_disponible"
-                                                                                        id="disponible">
+                                                                {{-- Check --}}
+                                                                <div class="col">
+                                                                    <div class="row-12">
+                                                                        <div
+                                                                            class="justify-content-center form-switch form-check">
 
-                                                                                    <!-- Modal -->
-                                                                                    <div class="modal fade"
-                                                                                        id="modalactivarproducto{{ $p->id }}"
-                                                                                        tabindex="-1"
-                                                                                        aria-labelledby="ModalLabel"
-                                                                                        aria-hidden="true">
-                                                                                        <div class="modal-dialog">
-                                                                                            <div class="modal-content">
-                                                                                                <div class="modal-header">
-                                                                                                    <h5 class="modal-title text-center"
-                                                                                                        id="exampleModalLabel">
-                                                                                                        Disponibilidad
-                                                                                                    </h5>
-                                                                                                    <button type="button"
-                                                                                                        class="btn-close"
-                                                                                                        data-bs-dismiss="modal"
-                                                                                                        aria-label="Close"></button>
+                                                                            <input data-bs-toggle="modal"
+                                                                                data-bs-target="#modalactivarproducto{{ $p->id }}"
+                                                                                class="form-check-input" checked='true'
+                                                                                type="checkbox" name="chckBox_disponible"
+                                                                                id="disponible">
+
+                                                                            <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="modalactivarproducto{{ $p->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="ModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title text-center"
+                                                                                                id="exampleModalLabel">
+                                                                                                Disponibilidad
+                                                                                            </h5>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            ¿Deseea quitar
+                                                                                            <strong>{{ $p->nombre }}</strong>
+                                                                                            del menú?
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+
+                                                                                            <form
+                                                                                                action="{{ route('menuAdmon.prueba', ['id' => $p->id]) }}"
+                                                                                                method="POST">
+                                                                                                @method('put')
+                                                                                                @csrf
+                                                                                                <div style="display: none">
+                                                                                                    <input id="activar"
+                                                                                                        name="activar"
+                                                                                                        value="1">
                                                                                                 </div>
-                                                                                                <div class="modal-body">
-                                                                                                    ¿Deseea quitar
-                                                                                                    <strong>{{ $p->nombre }}</strong>
-                                                                                                    del menú?
-                                                                                                </div>
-                                                                                                <div class="modal-footer">
+                                                                                                <button type="button"
+                                                                                                    class="btn btn-menu"
+                                                                                                    data-bs-dismiss="modal">No</button>
+                                                                                                <input type="submit"
+                                                                                                    class="btn btn-danger"
+                                                                                                    value="Si">
+                                                                                            </form>
 
-                                                                                                    <form
-                                                                                                        action="{{ route('menuAdmon.activar', ['id' => $p->id]) }}"
-                                                                                                        method="POST">
-                                                                                                        @method('put')
-                                                                                                        @csrf
-                                                                                                        <div
-                                                                                                            style="display: none">
-                                                                                                            <input
-                                                                                                                id="activar"
-                                                                                                                name="activar"
-                                                                                                                value="1">
-                                                                                                        </div>
-                                                                                                        <button type="button"
-                                                                                                            class="btn btn-menu"
-                                                                                                            data-bs-dismiss="modal">No</button>
-                                                                                                        <input type="submit"
-                                                                                                            class="btn btn-danger"
-                                                                                                            value="Si">
-                                                                                                    </form>
-
-                                                                                                </div>
-                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
-
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row-12">
-                                                                                <div>
-                                                                                    <label
-                                                                                        class="form-check-label font-weight-bold"
-                                                                                        for="flexSwitchCheck">Disponible</label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
 
-                                                                        {{-- Edit --}}
-                                                                        <div class="col">
-                                                                            <a class="col-12 btn btn-menu form"
-                                                                                href="{{ route('plato.editar', ['id' => $p->id]) }}">Editar</a>
                                                                         </div>
                                                                     </div>
-
-                                                                    <div class="row">
-                                                                        <div class="col">
-                                                                            <a class="col-12 btn btn-danger form">Eliminar</a>
+                                                                    <div class="row-12">
+                                                                        <div>
+                                                                            <label
+                                                                                class="form-check-label font-weight-bold"
+                                                                                for="flexSwitchCheck">Disponible</label>
                                                                         </div>
                                                                     </div>
+                                                                </div>
 
+                                                                {{-- Edit --}}
+                                                                <div class="col">
+                                                                    <a class="col-12 btn btn-menu form"
+                                                                        href="{{ route('plato.editar', ['id' => $p->id]) }}">Editar</a>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a class="col-12 btn btn-danger form">Eliminar</a>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -179,151 +294,145 @@
                                     </div>
                                 </div>
                             </div>
-                        @empty
-                            <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
-                        @endforelse
+                        </div>
                     </div>
-                </div>
+                @empty
+                    <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
+                @endforelse
             </div>
-        @else
-            <div class="text-center text-uppercase ">
-                <p class="p-4" style="font-size: 1.5rem"> <strong>No hay Platillos agregados mostrar</strong></p>
-            </div>
-        @endif    
+    </div>
+    </div>
+@else
+    <div class="text-center text-uppercase ">
+        <p class="p-4" style="font-size: 1.5rem"> <strong>No hay Platillos agregados mostrar</strong></p>
+    </div>
+    @endif
 
-        <!-- ========== Cards Bebidas ========== -->
-        @if (!empty($bebidas))
-                <div class="container tab-pane fade in active" id="pills-bebidas" role="tabpanel"
-                    aria-labelledby="pills-bebidas-tab">
-                        <!-- Platillos -->
-                        @forelse ($bebidas as $p)
-                            <div class="card col-3 align-items-center" style="display:inline-block; margin: 5px; height: 550px; width: 25%;">
-                                <div class="card-body p-3">                             
-                                    <!-- Imagen -->
-                                    <div class="align-items-center">
+    <!-- ========== Cards Bebidas ========== -->
+    @if (!empty($bebidas))
+        <div class="container tab-pane fade in active" id="pills-bebidas" role="tabpanel"
+            aria-labelledby="pills-bebidas-tab">
+            <!-- Platillos -->
+            @forelse ($bebidas as $p)
+                <div class="card col-3 align-items-center"
+                    style="display:inline-block; margin: 5px; height: 550px; width: 25%;">
+                    <div class="card-body p-3">
+                        <!-- Imagen -->
+                        <div class="align-items-center">
+                            <div>
+                                <div>
+                                    <img src="{{ asset($p->imagen) }}" alt="..."
+                                        class="rounded float-center image-center image-fluid" style="width: 100% ">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Informacion -->
+                        <div style="display:block">
+                            <div>
+                                <div class="">
+                                    <div class="p-3">
                                         <div>
-                                            <div>
-                                                <img src="{{ asset($p->imagen) }}" alt="..."
-                                                    class="rounded float-center image-center image-fluid"
-                                                    style="width: 100% ">
-                                            </div>
-                                        </div>
-                                    </div>
+                                            <p class="text-sm mb-0 text-uppercase text-end font-weight-bold">
+                                                Disponibles: {{ $p->disponible }}
+                                            </p>
+                                            <div class="col-12">
+                                                <div>
+                                                    <div class="text-center">
+                                                        <h3>{{ $p->nombre }}</h3>
 
-                                    <!-- Informacion -->
-                                    <div style="display:block">                                    
-                                        <div>
-                                            <div class="">
-                                                <div class="p-3">
-                                                    <div>
-                                                        <p class="text-sm mb-0 text-uppercase text-end font-weight-bold">
-                                                            Disponibles: {{ $p->disponible }}
-                                                        </p>
-                                                        <div class="col-12">
-                                                            <div>
-                                                                <div class="text-center">
-                                                                    <h3>{{ $p->nombre }}</h3>
-                                                                    
 
-                                                                    {{-- Precio, Disponibilidad y edicion --}}
+                                                        {{-- Precio, Disponibilidad y edicion --}}
 
-                                                                    {{-- Precio --}}
-                                                                    <div class="col">
-                                                                        <h4 class="col">L {{ $p->precio }}.00</h4>
-                                                                    </div>
+                                                        {{-- Precio --}}
+                                                        <div class="col">
+                                                            <h4 class="col">L {{ $p->precio }}.00</h4>
+                                                        </div>
 
-                                                                    <div class="row">
+                                                        <div class="row">
 
-                                                                        {{-- Check --}}
-                                                                        <div class="col">
-                                                                            <div class="row-12">
-                                                                                <div
-                                                                                    class="justify-content-center form-switch form-check">
+                                                            {{-- Check --}}
+                                                            <div class="col">
+                                                                <div class="row-12">
+                                                                    <div
+                                                                        class="justify-content-center form-switch form-check">
 
-                                                                                    <input data-bs-toggle="modal"
-                                                                                        data-bs-target="#modalactivarproducto{{ $p->id }}"
-                                                                                        class="form-check-input" checked='true'
-                                                                                        type="checkbox"
-                                                                                        name="chckBox_disponible"
-                                                                                        id="disponible">
+                                                                        <input data-bs-toggle="modal"
+                                                                            data-bs-target="#modalactivarproducto{{ $p->id }}"
+                                                                            class="form-check-input" checked='true'
+                                                                            type="checkbox" name="chckBox_disponible"
+                                                                            id="disponible">
 
-                                                                                    <!-- Modal -->
-                                                                                    <div class="modal fade"
-                                                                                        id="modalactivarproducto{{ $p->id }}"
-                                                                                        tabindex="-1"
-                                                                                        aria-labelledby="ModalLabel"
-                                                                                        aria-hidden="true">
-                                                                                        <div class="modal-dialog">
-                                                                                            <div class="modal-content">
-                                                                                                <div class="modal-header">
-                                                                                                    <h5 class="modal-title text-center"
-                                                                                                        id="exampleModalLabel">
-                                                                                                        Disponibilidad
-                                                                                                    </h5>
-                                                                                                    <button type="button"
-                                                                                                        class="btn-close"
-                                                                                                        data-bs-dismiss="modal"
-                                                                                                        aria-label="Close"></button>
-                                                                                                </div>
-                                                                                                <div class="modal-body">
-                                                                                                    ¿Deseea quitar
-                                                                                                    <strong>{{ $p->nombre }}</strong>
-                                                                                                    del menú?
-                                                                                                </div>
-                                                                                                <div class="modal-footer">
-
-                                                                                                    <form
-                                                                                                        action="{{ route('menuAdmon.activar', ['id' => $p->id]) }}"
-                                                                                                        method="POST">
-                                                                                                        @method('put')
-                                                                                                        @csrf
-                                                                                                        <div
-                                                                                                            style="display: none">
-                                                                                                            <input
-                                                                                                                id="activar"
-                                                                                                                name="activar"
-                                                                                                                value="1">
-                                                                                                        </div>
-                                                                                                        <button type="button"
-                                                                                                            class="btn btn-menu"
-                                                                                                            data-bs-dismiss="modal">No</button>
-                                                                                                        <input type="submit"
-                                                                                                            class="btn btn-danger"
-                                                                                                            value="Si">
-                                                                                                    </form>
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
+                                                                        <!-- Modal -->
+                                                                        <div class="modal fade"
+                                                                            id="modalactivarproducto{{ $p->id }}"
+                                                                            tabindex="-1" aria-labelledby="ModalLabel"
+                                                                            aria-hidden="true">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title text-center"
+                                                                                            id="exampleModalLabel">
+                                                                                            Disponibilidad
+                                                                                        </h5>
+                                                                                        <button type="button"
+                                                                                            class="btn-close"
+                                                                                            data-bs-dismiss="modal"
+                                                                                            aria-label="Close"></button>
                                                                                     </div>
+                                                                                    <div class="modal-body">
+                                                                                        ¿Deseea quitar
+                                                                                        <strong>{{ $p->nombre }}</strong>
+                                                                                        del menú?
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
 
+                                                                                        <form
+                                                                                            action="{{ route('menuAdmon.activar', ['id' => $p->id]) }}"
+                                                                                            method="POST">
+                                                                                            @method('put')
+                                                                                            @csrf
+                                                                                            <div style="display: none">
+                                                                                                <input id="activar"
+                                                                                                    name="activar"
+                                                                                                    value="1">
+                                                                                            </div>
+                                                                                            <button type="button"
+                                                                                                class="btn btn-menu"
+                                                                                                data-bs-dismiss="modal">No</button>
+                                                                                            <input type="submit"
+                                                                                                class="btn btn-danger"
+                                                                                                value="Si">
+                                                                                        </form>
+
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row-12">
-                                                                                <div>
-                                                                                    <label
-                                                                                        class="form-check-label font-weight-bold"
-                                                                                        for="flexSwitchCheck">Disponible</label>
-                                                                                </div>
-                                                                            </div>
                                                                         </div>
 
-                                                                        {{-- Edit --}}
-                                                                        <div class="col">
-                                                                            <a class="col-12 btn btn-menu form"
-                                                                            href="{{ route('bebida.editar', ['id' => $p->id]) }}">Editar</a>
-                                                                        </div>
                                                                     </div>
-
-                                                                    <div class="row">
-                                                                        <div class="col">
-                                                                            <a class="col-12 btn btn-danger form">Eliminar</a>
-                                                                        </div>
+                                                                </div>
+                                                                <div class="row-12">
+                                                                    <div>
+                                                                        <label class="form-check-label font-weight-bold"
+                                                                            for="flexSwitchCheck">Disponible</label>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
+
+                                                            {{-- Edit --}}
+                                                            <div class="col">
+                                                                <a class="col-12 btn btn-menu form"
+                                                                    href="{{ route('bebida.editar', ['id' => $p->id]) }}">Editar</a>
+                                                            </div>
                                                         </div>
+
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a class="col-12 btn btn-danger form">Eliminar</a>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,18 +440,21 @@
                                     </div>
                                 </div>
                             </div>
-                        @empty
-                            <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
-                        @endforelse
+                        </div>
                     </div>
                 </div>
-            </div>
-        @else
-            <div class="text-center text-uppercase ">
-                <p class="p-4" style="font-size: 1.5rem"> <strong>No hay Platillos agregados mostrar</strong></p>
-            </div>
-        @endif
-    </div> 
+            @empty
+                <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay registros</div>
+            @endforelse
+        </div>
+        </div>
+        </div>
+    @else
+        <div class="text-center text-uppercase ">
+            <p class="p-4" style="font-size: 1.5rem"> <strong>No hay Platillos agregados mostrar</strong></p>
+        </div>
+    @endif
+    </div>
 
 
 @endsection
@@ -607,7 +719,7 @@
                                                                         {{-- Edit --}}
                                                                         <div class="col">
                                                                             <a class="col-12 btn btn-menu form"
-                                                                            href="{{ route('bebida.editar', ['id' => $p->id]) }}">Editar</a>
+                                                                                href="{{ route('bebida.editar', ['id' => $p->id]) }}">Editar</a>
                                                                         </div>
                                                                     </div>
                                                                     {{-- Fin Precio... --}}
@@ -671,7 +783,7 @@
                                             <div class="col-12 p-4">
                                                 <div>
                                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                                        Disponibles:{{$p->disponible}}
+                                                        Disponibles:{{ $p->disponible }}
                                                     </p>
                                                     <div class="col-12">
                                                         <div>
@@ -806,3 +918,48 @@
                     </div>
 
                 @endsection
+
+
+
+                <div class="justify-content-center form-switch form-check">
+
+                    <input data-bs-toggle="modal" data-bs-target="#modalactivarproducto{{ $p->id }}"
+                        class="form-check-input" checked='true' type="checkbox" name="chckBox_disponible"
+                        id="disponible">
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalactivarproducto{{ $p->id }}" tabindex="-1"
+                        aria-labelledby="ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-center" id="exampleModalLabel">
+                                        Disponibilidad
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Deseea quitar
+                                    <strong>{{ $p->nombre }}</strong>
+                                    del menú?
+                                </div>
+                                <div class="modal-footer">
+
+                                    <form action="{{ route('menuAdmon.index', ['id' => $p->id]) }}" method="POST">
+                                        @method('put')
+                                        @csrf
+                                        <div style="display: none">
+                                            <input id="activar" name="activar" value="1">
+                                        </div>
+                                        <button type="button" class="btn btn-menu"
+                                            data-bs-dismiss="modal">No</button>
+                                        <input type="submit" class="btn btn-danger" value="Si">
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>

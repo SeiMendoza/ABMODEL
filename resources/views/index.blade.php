@@ -327,7 +327,7 @@
                                     </h5>
                                     <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder"></span>
-                                        <a href={{ route('menuAdmon.prueba') }} class="btn badge-primary">Ver</a>
+                                        <a href={{ route('menuAdmon.index') }} class="btn badge-primary">Ver</a>
                                     </p>
                                 </div>
                             </div>

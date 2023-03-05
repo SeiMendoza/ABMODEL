@@ -23,8 +23,7 @@
 
 </head>
 
-<body class=" g-sidenav-show bg-gray-100">
-
+<body class="g-sidenav-show bg-gray-100">
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
         id="sidenav-main">
@@ -141,7 +140,10 @@
         <div class="mb-0 col-12 text-start">
 
             <div class="row text-center container pt-2">
-                <h1 class=" card bg-menu-red text-white text-uppercase p-2" style="" style="font-size: 3rem;">Menu
+                <h1 
+                class="card bg-menu-red text-white text-uppercase p-2" 
+                style="font-size: 3rem;"
+                >Menu
                 </h1>
             </div>
 
