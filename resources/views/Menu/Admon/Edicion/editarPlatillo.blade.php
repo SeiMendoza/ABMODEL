@@ -28,6 +28,7 @@
                         enctype="multipart/form-data">
                         @method('put')
                         @csrf
+                        <br>
 
                         <div style="width:200px;float:left">
                             <img src="{{asset( $Platillos->imagen) }}" alt="" width="200px"
@@ -43,13 +44,13 @@
 
                         <div style="margin-left:2%;float:left;width:35%">
                             <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="tipo" id="tipo" required onchange="producto();quitarerror()">
+                             <select name="tipo" id="tipo" required onchange="producto();quitarerror()">
                                     @if (old('tipo'))
                                         @if (old('tipo') === 2)
-                                            <option disabled="disabled" selected="selected" value="2">Comida</option>
+                                            <option disabled="disabled" selected="selected" value="2"{{ $Platillos->tipo == '1' ? 'selected' : '' }}>Comida</option>
                                         @else
                                             @if (old('tipo') === 1)
-                                                <option disabled="disabled" selected="selected" value="1">Bebida
+                                                <option disabled="disabled" selected="selected" value="1">{{ $Platillos->tipo == '2' ? 'selected' : '' }}Bebida
                                                 </option>
                                             @endif
                                         @endif
@@ -57,11 +58,9 @@
                                         <option disabled="disabled" selected="selected"
                                             value="{{ $Platillos->tipo }}">Tipo de producto</option>
                                     @endif
-                                    <option value="1"{{ $Platillos->tipo == '1' ? 'selected' : '' }}>Bebida
-                                    </option>
-                                    <option value="2"{{ $Platillos->tipo == '2' ? 'selected' : '' }}>Comida
-                                    </option>
-                                </select>
+                                    <option value="1"{{ $Platillos->tipo == '1' ? 'selected' : '' }}>Bebida </option>
+                                    <option value="2"{{ $Platillos->tipo == '2' ? 'selected' : '' }}>Comida </option>
+                                </select> 
                                 <div class="select-dropdown"></div>
                             </div>
                             @error('tipo')
@@ -139,9 +138,8 @@
 
                             <div id="espacio"><br><br><br><br></div>
                             <div style="float:right">
-                                <button type="submit" class="btn btn-success"
-                                    href="{{ route('menuAdmon.prueba') }}">Guardar</button>
-                                <button type="button" onclick="cancelar('menuAdmon.prueba')"
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <button type="button" onclick="cancelar('admonRestaurante')"
                                     class="btn btn-warning">Cancelar</button>
                             </div>
                         </div>

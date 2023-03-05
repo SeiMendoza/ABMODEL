@@ -169,37 +169,36 @@
                                 QR</a>
                         </div>
 
-                        <div style="display:block;">
-                            <form action="{{ route('cliente_menu.search') }}" method="get" role="search"
-                                class="navbar-search" style="margin: 4px">
+                       <div  style="display:block; padding-top:5px">
+                           <form action="{{ route('busqueda.index') }}" method="get" role="search"
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="margin: 4px">
                                 <div class="input-group">
-                                    <input class="form-control" type="search" id="busqueda" name="busqueda"
+                                    <input class="btn btn-rounded btn-menu" id="busqueda" name="busqueda"
                                         style="width: 200px" placeholder="Buscar por nombre" aria-label="Search"
                                         aria-describedby="basic-addon2" maxlength="50" required
                                         value="<?php if (isset($busqueda)) {
                                             echo $busqueda;
                                         } ?>" />
-                                    <button class="btn btn-menu my-2 my-sm-0 " type="submit"
-                                        style="border-radius: 2.5px">Buscar</button>
-                                        @if(isset($text)!="")
-                                    <a href="{{ route('cliente_prueba') }}" style="display:block; float:right"
-                                        class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
-                                @endif
-                                    </div>
+                                        <button class="btn btn-rounded btn-menu" type="submit">Buscar</button>
+                                        @if(isset($busqueda)!="")
+                                        <a href="{{route('busqueda.index')}}" 
+                                        class="btn btn-rounded btn-success">Borrar Busqueda</a>
+                                    @endif 
+                            
+                                </div>
                             </form>
-                        </div>
+                        </div> 
 
-                        <div class="">
+                        
                             <form class="form-inline">
                                 <select
-                                    style="margin: 4px; border-radius: 9px; height: 40px; margin-left: 12px; background-color:white ">
+                                    style="margin: 4px; border-radius: 9px; height: 40px; margin-left: 12px; background-color:white;  border-color:white">
                                     <option value="FILTRAR POR"><strong>Ordenar Por:</strong></option>
                                     <option value="Precio más alto">Precio más alto</option>
                                     <option value="Precio más bajo">Precio más bajo</option>
                                     <option value="Mas Reciente">Mas reciente</option>
                                 </select>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>

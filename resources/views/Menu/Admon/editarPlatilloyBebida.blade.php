@@ -136,7 +136,7 @@
 
                             <div id="espacio"><br><br><br><br></div>
                             <div style="float:right">
-                                <button type="submit" class="btn btn-success" href="{{ route('admonRestaurante') }}">Guardar</button>
+                                <button type="submit" class="btn btn-success" >Guardar</button>
                                 <button type="button" onclick="cancelar('admonRestaurante')" class="btn btn-warning">Cancelar</button>
                             </div>
                         </div>

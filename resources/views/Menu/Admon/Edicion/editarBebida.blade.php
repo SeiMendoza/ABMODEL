@@ -28,6 +28,7 @@
                         enctype="multipart/form-data">
                         @method('put')
                         @csrf
+                        <br>
 
                         <div style="width:200px;float:left">
                             <img src="{{asset( $Bebidas->imagen) }}" alt="" width="200px"
@@ -136,9 +137,8 @@
 
                             <div id="espacio"><br><br><br><br></div>
                             <div style="float:right">
-                                <button type="submit" class="btn btn-success"
-                                    href="{{ route('menuAdmon.prueba') }}">Guardar</button>
-                                <button type="button" onclick="cancelar('menuAdmon.prueba')"
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <button type="button" onclick="cancelar('admonRestaurante')"
                                     class="btn btn-warning">Cancelar</button>
                             </div>
                         </div>
