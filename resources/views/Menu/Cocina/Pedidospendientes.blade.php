@@ -1,24 +1,7 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Pedidos-cocina')
-@section('contend')
-
-     <!-- Icons -->
-     <link href="fontawesome-free/css/all.min.css" rel="stylesheet">
-      <link href= "assets/fontawesome/css/fontawesome.css" rel="stylesheet">
-      <link href={{ asset("css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
-      <link href={{ asset("css/nucleo-svg.css") }} rel="stylesheet" />
-      <link href={{ asset("css/main.css") }} rel="stylesheet" />
-      <!-- CSS Files -->
-      <link id="pagestyle" href="{{ asset("css/argon-dashboard.css") }}" rel="stylesheet" />
-      <link href={{ asset("css/font-awesome.css") }} rel="stylesheet" type="text/css">
-      <link href={{ asset("css/app.css") }} rel="stylesheet" type="text/css">
-
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
-
-      <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
-
-    </head>
- <body>
+@section('activatedMenu')
+ 
      <script>
          var msg = '{{Session::get('mensaje ')}}';
          var exist = '{{Session::has('mensaje ')}}';
@@ -34,10 +17,9 @@
              })
          }
      </script>
-     <h5 class="card class-4 text-lg text-center" style="background-color: #fff; color:teal; position: relative;
-top: 10px; ">Lista de pedidos pendientes en cocina</h5>
-     <br>
-      
+     <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
+      position: relative;">Lista de pedidos pendientes en cocina</h5>
+     
      <!--------Lista de pedidos---------------->
 
      <div class="card-body">

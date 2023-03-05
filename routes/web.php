@@ -61,15 +61,15 @@ Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
 Route::post('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store'])
 ->name('usuario_pedido.store');
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
-->name('terminar.terminarp')->where('id','[0-9]+');
+->name('terminar.terminarp')->where('id','[0-9]+');/*terminar pedidos en caja*/
 Route::get('/menu/pedidot', [PedidoUsuarioController::class, 'pedido_terminados'])
-->name('pedidost.pedido');
+->name('pedidost.pedido');/*lista de pedidos pendientes de terminar en caja*/
 Route::put('/menu/{id}/pendiente_cocina', [PedidoUsuarioController::class,'pedidosPendientes_Cocina'])
-->name('pedidosPendientes_Cocina.pedidosPendientes_Cocina')->where('id','[0-9]+');
-
+->name('pedidosPendientes_Cocina.pedidosPendientes_Cocina')->where('id','[0-9]+');/*terminar pedido en cocina*/
 Route::get('/menu/pedidop', [PedidoUsuarioController::class, 'pedido_pendientes'])
-->name('pedidosp.pedido');
-
+->name('pedidosp.pedido');/*lista de pedidos pendientes en cocina*/
+Route::get('/menu/pedidos/terminados', [PedidoUsuarioController::class, 'terminados'])
+->name('terminados.terminados'); /*lista de pedidos terminados*/
 
  /*****************************
   Rutas Para Menu de cliente

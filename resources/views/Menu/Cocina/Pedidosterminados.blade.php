@@ -1,22 +1,7 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Pedidos-cocina')
-@section('contend')
-     <!-- Icons -->
-     <link href="fontawesome-free/css/all.min.css" rel="stylesheet">
-      <link href= "assets/fontawesome/css/fontawesome.css" rel="stylesheet">
-      <link href={{ asset("css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
-      <link href={{ asset("css/nucleo-svg.css") }} rel="stylesheet" />
-      <link href={{ asset("css/main.css") }} rel="stylesheet" />
-      <!-- CSS Files -->
-      <link id="pagestyle" href="{{ asset("css/argon-dashboard.css") }}" rel="stylesheet" />
-      <link href={{ asset("css/font-awesome.css") }} rel="stylesheet" type="text/css">
-      <link href={{ asset("css/app.css") }} rel="stylesheet" type="text/css">
-
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
-
-      <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script> 
- </head>
- <body style="background: #fff;">
+@section('activatedMenu')
+   
  <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
@@ -27,22 +12,22 @@
                 title: msg,
                 showConfirmButton: false,
                 toast: true,
-                background: '#0be004ab',
+                background: '#fff',
                 timer: 5500
             })
         }
     </script>
     
-<h5 class="card class-4 text-lg text-center" 
- style="background-color: #fff; color:teal; position: relative;
-top: 10px; ">Lista de pedidos pendientes en caja</h5>
-<br>
+<h5 class="card class-2 text-lg text-center" 
+ style="background-color: #fff; color:#fff; background:rgb(255,179,71); position: relative;"
+ >Lista de pedidos pendientes en caja</h5>
+ 
 <!--------Lista de pedidos---------------->
  
 <div class="card-body">
     <div class="table-responsive container-fluid">
         <table class="table" id="table" style="background-color: #fff;">
-            <thead class="card-header border border-" style="background-color: #fff; color:teal; text-align:center;">
+            <thead class="card-header border " style="background-color: #fff; color:teal; text-align:center;">
                 <tr>
                     <th scope="col">Número de mesa</th>
                     <th scope="col">Nombre del cliente</th>
@@ -86,7 +71,7 @@ top: 10px; ">Lista de pedidos pendientes en caja</h5>
                                                     @method('put')
                                                     @csrf
                                                     <div style="display: none">
-                                                        <input type="text" id="estado" name="estado" value="1">
+                                                        <input type="text" id="estado" name="estado" value="2">
                                                     </div>
                                                     <input type="submit" class="btn btn-primary w-15" value="Si">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
@@ -103,52 +88,11 @@ top: 10px; ">Lista de pedidos pendientes en caja</h5>
             @endforelse
             </tbody>
         </table>
-    </div>
-<div> 
-    <h5 class="card class-4 text-lg text-center" style="background-color: #fff; color:teal; position: relative;
-top: 7px; ">Lista de pedidos terminados</h5>
-<br>
-
-
-        <div class="card-body">
-    <div class="table-responsive container-fluid">
-        <table class="table" id="table" style="background-color: #ff9999;">
-            <thead class="card-header border border-light" style="background-color: #fff; color:teal;text-align:center;">
-                <tr>
-                    <th scope="col">Número de mesa</th>
-                    <th scope="col">Nombre del cliente</th>
-                    <th scope="col">Orden</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Terminado</th>
-                    <th scope="col">Detalles</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($pedido as $p)
-                @if(($p->estado)=="1")
-                <tr class="border border-light" style="background-color: #fff; color:teal;text-align:center;">
-                    <th scope="col">{{$p->mesa}}</th>
-                    <td scope="col">{{$p->nombreCliente}}</td>
-                    <td></td>
-                         <td></td>
-                         @foreach($p->detalle as $d)
-                         <td scope="col">{{$d->producto_id}}</td>
-                         <td scope="col">{{$d->cantidad}}</td>
-                         @endforeach
-                    <td><input disabled type="checkbox" name="term" {{ old('term') ?: 'checked' }} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}"
-                    style="background:#ffffff; width:20px; height:20px;"></input></td>
-                    <td></td>
-                </tr>
-                @endif
-                @empty
-                <tr>
-                    <td colspan="7" style="text-align: center;color:white;">No hay pedidos terminados</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+        <div class="pagination justify-content-end"> 
+        {{$pedido->links()}}
         </div>
-      
+    </div>
+</div>
 
+ 
 @endsection
