@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
 use App\Http\Controllers\Controller;
 use App\Models\PlatillosyBebidas;
 use App\Models\Platillo;
@@ -68,12 +69,12 @@ class EditarPlatilloController extends Controller
         $filename = time().'.'.$file->getClientOriginalName();
         $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
 
-        $actualizacion -> imagen = 'images/'.$filename;
-
+        $actualizacion -> imagen = 'images/'.$filename; 
+               
         $creado = $actualizacion -> save();
 
         if ($creado) {
-               return redirect()->route('menuAdmon.prueba')
+               return redirect()->route('menuAdmon.index')
                 ->with('mensaje', "".$actualizacion->nombre." se actualizo correctamente");
         } 
         

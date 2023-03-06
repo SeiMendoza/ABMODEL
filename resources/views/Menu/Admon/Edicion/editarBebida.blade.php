@@ -54,11 +54,10 @@
                                             @endif
                                         @endif
                                     @else
-                                        <option disabled="disabled" selected="selected"
-                                            value="{{ $Bebidas->tipo }}">Tipo de producto</option>
+                                       
                                     @endif
-                                    <option value="1"{{ $Bebidas->tipo == '1' ? 'selected' : '' }}>Bebida </option>
-                                    <option value="2"{{ $Bebidas->tipo == '2' ? 'selected' : '' }}>Comida</option>
+                                    <option value="1"{{ $Bebidas->tipo == "1" ? 'selected' : '' }}>Bebida </option>
+                                    <option value="2"{{ $Bebidas->tipo == "2" ? 'selected' : '' }}>Comida</option>
                                 </select>
                                 <div class="select-dropdown"></div>
                             </div>

@@ -31,11 +31,11 @@
                         <br>
 
                         <div style="width:200px;float:left">
-                            <img src="{{asset( $Platillos->imagen) }}" alt="" width="200px"
+                            <img src="{{asset( $Platillos->imagen ) }}" alt="" width="200px"
                                 height="250px" id="imagenmostrada">
                             <br>
-                            <input type="file" id="imagen" name="imagen" required
-                                value="{{ old('imagen', $Platillos->imagen) }}"
+                            <input type="file" id="imagen" name="imagen"
+                                value="{{old('imagen',$Platillos->imagen)}}"
                                 style="color: white;width: 200px;">
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -44,22 +44,21 @@
 
                         <div style="margin-left:2%;float:left;width:35%">
                             <div class="rs-select2 js-select-simple select--no-search">
-                             <select name="tipo" id="tipo" required onchange="producto();quitarerror()">
+                             <select name="tipo" id="tipo" onchange="producto();quitarerror()">
                                     @if (old('tipo'))
                                         @if (old('tipo') === 2)
-                                            <option disabled="disabled" selected="selected" value="2"{{ $Platillos->tipo == '1' ? 'selected' : '' }}>Comida</option>
+                                            <option disabled="disabled" selected="selected" value="2">Comida</option>
                                         @else
                                             @if (old('tipo') === 1)
-                                                <option disabled="disabled" selected="selected" value="1">{{ $Platillos->tipo == '2' ? 'selected' : '' }}Bebida
+                                                <option disabled="disabled" selected="selected" value="1">Bebida
                                                 </option>
                                             @endif
                                         @endif
                                     @else
-                                        <option disabled="disabled" selected="selected"
-                                            value="{{ $Platillos->tipo }}">Tipo de producto</option>
+                                       
                                     @endif
-                                    <option value="1"{{ $Platillos->tipo == '1' ? 'selected' : '' }}>Bebida </option>
-                                    <option value="2"{{ $Platillos->tipo == '2' ? 'selected' : '' }}>Comida </option>
+                                    <option value="2"{{ $Platillos->tipo == "2" ? 'selected' : '' }}>Comida </option>
+                                    <option value="1"{{ $Platillos->tipo == "1" ? 'selected' : '' }}>Bebida </option>
                                 </select> 
                                 <div class="select-dropdown"></div>
                             </div>
