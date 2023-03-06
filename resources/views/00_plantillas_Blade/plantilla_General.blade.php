@@ -155,12 +155,7 @@
                             <a href="{{ route('index') }}" class="btn btn-menu ni ni-palette" style="margin: 4px">
                                 Inicio</a>
                         </div>
-
-                        <div class="">
-                            <a href={{ route('bebidasyplatillos.create') }} class="btn btn-menu"
-                                style="margin: 4px">Registrar Comida o Bebida</a>
-                        </div>
-
+                        
                         <div class="">
                             <a href={{ route('combo.create') }} class="btn btn-menu" style="margin: 4px">Registrar
                                 Combo</a>
@@ -169,28 +164,7 @@
                         <div class="">
                             <a href={{ route('cliente_menu.qr') }} class="btn btn-menu" style="margin: 4px">Ver
                                 QR</a>
-                        </div>
-
-                       <div  style="display:block; padding-top:5px">
-                           <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="margin: 4px">
-                                <div class="input-group">
-                                    <input class="btn btn-rounded btn-menu" id="busqueda" name="busqueda"
-                                        style="width: 200px" placeholder="Buscar por nombre" aria-label="Search"
-                                        aria-describedby="basic-addon2" maxlength="50" required
-                                        value="<?php if (isset($busqueda)) {
-                                            echo $busqueda;
-                                        } ?>" />
-                                        <button class="btn btn-rounded btn-menu" type="submit">Buscar</button>
-                                        @if(isset($busqueda)!="")
-                                        <a href="{{route('busqueda.index')}}" 
-                                        class="btn btn-rounded btn-success">Borrar Busqueda</a>
-                                    @endif 
-                            
-                                </div>
-                            </form>
-                        </div> 
-
+                        </div>                       
                         
                             <form class="form-inline">
                                 <select

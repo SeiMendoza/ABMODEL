@@ -11,22 +11,21 @@ class PlatilloController extends Controller
     public function activar(Request $request, $id)
     {
         $platillo = Platillo::findOrfail($id);
-        $operacion = "activado";
-
-        if ($platillo->estado == 0) {
-            //Si estaba desactivado lo activamos
-            $platillo->estado = 1;
-        } else {
-            //Si estaba activado lo desactivamos
-            $platillo->estado = 0;
-            $operacion = 'desactivado';
-        }
-
+        $platillo->estado = $request->input('activar');
         $create = $platillo->save();
 
         if ($create) {
             return redirect()->route('menuAdmon.index')->with('mensaje', 'Accion realizada correctamente');
         }
+
+    }
+
+    public function destroy($id){
+
+        $platillo = Platillo::findOrFail($id);
+        $platillo->delete();
+
+        return redirect()->route('menuAdmon.index')->with('mensaje', 'Platillo borrado correctamente');
 
     }
 }

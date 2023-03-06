@@ -147,5 +147,8 @@ Route::put('bebida/{id}/edicion', [EditarBebidaController::class, 'update'])
     ->name('bebida.update');
   
 
-
- 
+/****************************************
+  Rutas Para eliminar Platillos y Bebidas
+*****************************************/
+ Route::get('platillo/{id}/borrar', [PlatilloController::class, 'destroy'])
+    ->name('platillo.borrar');

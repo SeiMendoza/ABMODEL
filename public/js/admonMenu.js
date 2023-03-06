@@ -1,0 +1,1 @@
+$('modalactivarproducto{{ $p->id }}').modal({backdrop: 'static', keyboard: false})
