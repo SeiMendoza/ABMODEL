@@ -53,10 +53,12 @@ class PedidoUsuarioController extends Controller
         $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
         return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
     }
-    public function terminados()
+    public function terminados(Request $request)
     {
-        $pedido = Pedido::all();
-        return view('Menu/Cocina/Terminados', compact('pedido'));
+        //recuperar datos del filtro
+        $texto=trim($request->get('busqueda'));
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->get();
+        return view('Menu/Cocina/Terminados', compact('pedido','texto'));
     }
     public function pedido_pendientes(Request $request)
     {
@@ -97,5 +99,10 @@ class PedidoUsuarioController extends Controller
     public function detalle_pedido_pendientes($id){
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detallecocina', compact('pedido'));
+    }
+
+    public function detalle_terminados($id){
+        $pedido = Pedido::findOrfail($id);
+        return view('Menu/Cocina/detalleterminado', compact('pedido'));
     }
 }

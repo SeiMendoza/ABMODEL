@@ -4,6 +4,27 @@
 <div> 
     <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff; position: relative;
  ">Lista de pedidos terminados</h5>
+
+ <!--Filtro de busqueda-->
+
+ <div class="nav-item" style="margin: 10px 25px 10px 25px;">
+    <form action="{{ route("terminados.terminados") }}" method="get" role="search" 
+        class="navbar-search">
+        <div class="input-group">
+            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
+            placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
+            aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>" />
+            <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>    
+            @if(isset($texto))
+                @if($texto != null)
+                    <a href="{{route('terminados.terminados')}}" style="display:block; float:right"  
+                    class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
+                @endif
+            @endif
+        </div>   
+    </form>
+</div>
+
  
         <div class="card-body">
     <div class="table-responsive container-fluid">
@@ -32,7 +53,11 @@
                          @endforeach
                     <td><input disabled type="checkbox" name="term" {{ old('term') ?: 'checked' }} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}"
                     style="background:#ffffff; width:20px; height:20px;"></input></td>
-                    <td></td>
+                    <td>
+                        <a type="buttom" class="btn btn-light" href="{{route('terminados.detalle',['id'=>$p->id])}}">
+                            <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
+                        </a>
+                    </td>
                 </tr>
                 @endif
                 @empty
