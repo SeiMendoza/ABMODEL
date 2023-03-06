@@ -121,7 +121,7 @@
                                     <td>{{$compo->componente->tamanio}}</td>
                                     <td>{{$compo->cantidad}}</td>
                                     <td>
-                                        <form action="{{route('combo.destroy',['id'=>$compo->id])}}" method="post">
+                                        <form action="{{route('combo.destroy',['id'=>$compo->id])}}" method="post" id="elim{{$compo->id}}">
                                             @csrf
                                             <div style="display:none">
                                                 <input type="text" name="nombre3" id="nombre3" readonly>
@@ -129,9 +129,29 @@
                                                 <input type="text" name="precio3" id="precio3" readonly>
                                             </div>
 
-                                            <button type="submit" class="btn btn-danger" onclick="rellenar2()">
+                                            <button type="button" class="btn btn-danger" onclick="rellenar2();eliminarproducto('elim{{$compo->id}}');">
                                                 X
                                             </button>
+
+                                            <script>
+                                                function eliminarproducto(name){                                                    
+                                                    Swal.fire({
+                                                        title: "¿Eliminar {{$compo->componente->nombre}}?",
+                                                        text: "¿Desea eliminar el producto seleccionado?",
+                                                        icon: 'question',
+                                                        showCancelButton: true,
+                                                        confirmButtonText: "Si",
+                                                        cancelButtonText: "No",
+                                                    }).then(resultado => {
+                                                        if (resultado.value) {
+                                                            // Hicieron click en "Sí"
+                                                            document.getElementById(name).submit();
+                                                        } else {
+                                                            // Dijeron que no
+                                                        }
+                                                    });
+                                                }
+                                            </script>
 
                                         </form>
                                     </td>
