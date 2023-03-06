@@ -88,4 +88,14 @@ class PedidoUsuarioController extends Controller
             return redirect()->route('pedidosp.pedido')->with('mensaje', 'El pedido fue completado con exito!');
         }
     }
+
+    public function detalle_pedido_terminados($id){
+        $pedido = Pedido::findOrfail($id);
+        return view('Menu/Cocina/detallecaja', compact('pedido'));
+    }
+
+    public function detalle_pedido_pendientes($id){
+        $pedido = Pedido::findOrfail($id);
+        return view('Menu/Cocina/detallecocina', compact('pedido'));
+    }
 }

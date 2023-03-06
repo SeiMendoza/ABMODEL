@@ -69,6 +69,11 @@
                          <td scope="col">{{$d->cantidad}}</td>
                          @endforeach
                          <td><input type="checkbox" name="term" value="!old('term') ?: 'checked' }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}" style="background:teal; width:20px; height:20px;"></td>
+                        <td>
+                            <a type="buttom" class="btn btn-light" href="{{route('pedidosp.detalle',['id'=>$p->id])}}">
+                                <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
+                            </a>
+                        </td>
                         </tr>
                         <div class="modal fade" id="staticBackdrop{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -103,7 +108,7 @@
                  </tbody>
                 </table>
                 <div style="display:block; float:right;"> 
-                    {{$pedido->links()}}
+                    {{$pedido->appends(['busqueda' => $texto])->links()}}
                 </div>
             </div>
 

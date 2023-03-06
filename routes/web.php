@@ -71,6 +71,11 @@ Route::get('/menu/pedidop', [PedidoUsuarioController::class, 'pedido_pendientes'
 Route::get('/menu/pedidos/terminados', [PedidoUsuarioController::class, 'terminados'])
 ->name('terminados.terminados'); /*lista de pedidos terminados*/
 
+Route::get('/menu/pedidot/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])
+->name('pedidost.detalle');/*detalle de pedidos pendientes de terminar en caja*/
+Route::get('/menu/pedidop/{id}', [PedidoUsuarioController::class, 'detalle_pedido_pendientes'])
+->name('pedidosp.detalle');/*detalle de pedidos pendientes en cocina*/
+
  /*****************************
   Rutas Para Menu de cliente
 ******************************/
