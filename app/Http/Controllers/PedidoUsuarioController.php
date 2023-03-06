@@ -45,20 +45,26 @@ class PedidoUsuarioController extends Controller
 
         return redirect()->route("cliente_prueba")->with('mensaje', 'El pedido fue enviado exitosamente');
     }
-    public function pedido_terminados()
+    public function pedido_terminados(Request $request)
     {
-        $pedido = Pedido::paginate(10);
-        return view('Menu/Cocina/Pedidosterminados', compact('pedido'));
+        //recuperar datos del filtro
+        $texto=trim($request->get('busqueda'));
+
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
+        return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
     }
     public function terminados()
     {
         $pedido = Pedido::all();
         return view('Menu/Cocina/Terminados', compact('pedido'));
     }
-    public function pedido_pendientes()
+    public function pedido_pendientes(Request $request)
     {
-        $pedido = Pedido::paginate(10);
-        return view('Menu/Cocina/Pedidospendientes', compact('pedido'));
+        //recuperar datos del filtro
+        $texto=trim($request->get('busqueda'));
+
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
+        return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
     }
     public function terminarp(Request $request,  $id)
     {

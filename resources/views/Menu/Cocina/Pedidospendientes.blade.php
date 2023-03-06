@@ -19,7 +19,28 @@
      </script>
      <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
       position: relative;">Lista de pedidos pendientes en cocina</h5>
-     
+    
+    <!--Filtro de busqueda-->
+
+    <div class="nav-item" style="margin: 10px 25px 10px 25px;">
+        <form action="{{ route("pedidosp.pedido") }}" method="get" role="search" 
+            class="navbar-search">
+            <div class="input-group">
+                <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
+                placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
+                aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>" />
+                <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>    
+                @if(isset($texto))
+                    @if($texto != null)
+                        <a href="{{route('pedidosp.pedido')}}" style="display:block; float:right"  
+                        class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
+                    @endif
+                @endif
+            </div>   
+        </form>
+    </div>
+
+
      <!--------Lista de pedidos---------------->
 
      <div class="card-body">
