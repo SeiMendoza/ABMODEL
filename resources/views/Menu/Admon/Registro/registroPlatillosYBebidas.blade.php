@@ -39,25 +39,22 @@
                         </div>
 
                         <div style="margin-left:2%;float:left;width:35%">
-                            <div class="rs-select2 js-select-simple select--no-search">
+                            <div class="">
                                 <select name="tipo" id="tipo" required onchange="producto();quitarerror()">
                                     @if (old('tipo'))
                                         @if (old('tipo') === 2)
                                             <option disabled="disabled" selected="selected" value="2">Comida</option>
                                         @else
                                             @if (old('tipo') === 1)
-                                                <option disabled="disabled" selected="selected" value="1">Bebida
-                                                </option>
+                                                <option disabled="disabled" selected="selected" value="1">Bebida</option>
                                             @endif
                                         @endif
                                     @else
-                                        <option disabled="disabled" selected="selected" value="">Tipo de producto
-                                        </option>
+                                        <option disabled="disabled" selected="selected" value="">Tipo de producto</option>
                                     @endif
                                     <option value="1">Bebida</option>
                                     <option value="2">Comida</option>
                                 </select>
-                                <div class="select-dropdown"></div>
                             </div>
                             @error('tipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -79,7 +76,7 @@
                         </div>
 
                         <div style="margin-left:2%;float:left;width:35%">
-                            <div class="rs-select2 js-select-simple select--no-search">
+                            <div class="">
                                 <select name="tamanio" required onchange="quitarerror()">
                                     @if (old('tamanio'))
                                         @if (old('tamanio') === 'Grande')
@@ -102,7 +99,6 @@
                                     <option value="Mediano">Mediano</option>
                                     <option value="Pequeño">Pequeño</option>
                                 </select>
-                                <div class="select-dropdown"></div>
                             </div>
                             @error('tamanio')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>

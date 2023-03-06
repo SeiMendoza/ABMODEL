@@ -190,4 +190,19 @@ class ComboController extends Controller
 
     }
 
+    public function destroy(Request $request, $id)
+    {
+        $nombre= $request->input('nombre3');
+        $descripcion= $request->input('descripcion3');
+        $precio= $request->input('precio3');
+
+        Componentestemporalcombo::destroy($id);
+
+        return redirect()->route('combo.create')
+                ->with('mensaje', 'El complemento fue eliminado exitosamente')
+                ->with('nombre', $nombre)
+                ->with('descripcion', $descripcion)
+                ->with('precio', $precio);
+    }
+
 }

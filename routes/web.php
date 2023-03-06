@@ -105,8 +105,11 @@ Route::get('/combos/nuevo', [ComboController::class, 'create'])
 Route::post('/combos/nuevo',[ComboController::class, 'store'])
     ->name('combo.store');
 
-  Route::post('/combos/temporal',[ComboController::class, 'temporal'])
+Route::post('/combos/temporal',[ComboController::class, 'temporal'])
     ->name('combo.temporal');
+
+Route::post('/combos/{id}',[ComboController::class, 'destroy'])
+  ->name('combo.destroy');
 
 /*****************************
   Rutas De estado

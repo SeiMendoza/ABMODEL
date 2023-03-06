@@ -4,6 +4,12 @@ function rellenar(){
     document.getElementById("precio2").value = document.getElementById("precio").value;
 }
 
+function rellenar2(){
+    document.getElementById("nombre3").value = document.getElementById("nombre").value;
+    document.getElementById("descripcion3").value = document.getElementById("descripcion").value;
+    document.getElementById("precio3").value = document.getElementById("precio").value;
+}
+
 const $seleccionArchivos = document.querySelector("#imagen"),
 $imagenPrevisualizacion = document.querySelector("#imagenmostrada");
 
