@@ -59,7 +59,7 @@
             </thead>
             <tbody>
                 @forelse($pedido as $p)
-                @if(($p->estado)=="0")
+                @if(($p->estado)=="1")
                 <tr class="border border-light" style="background-color: #fff; color:teal; text-align:center;">
                     <th scope="col">{{$p->mesa}}</th>
                     <td scope="col">{{$p->nombreCliente}}</td>
@@ -97,7 +97,7 @@
                                                     <div style="display: none">
                                                         <input type="text" id="estado" name="estado" value="2">
                                                     </div>
-                                                    <input type="submit" class="btn btn-primary w-15" value="Si">
+                                                    <input type="submit" class="btn btn-danger w-15" value="Si">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                                             </div>
                                             </form>
