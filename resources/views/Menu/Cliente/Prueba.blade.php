@@ -135,20 +135,20 @@
                                                 <div class="card h-100 btn btnCard" 
                                                 data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
                                                 background: url('/images/1676990534.horchata-1-FP.jpg') top center/cover no-repeat;">
-                                                    <div class="text-center" 
-                                                            style="text-align:center; ">
-                                                            <!-- Nombre -->
+                                                    <div class="text-center" style="text-align:center; ">
+   
+                                                        <!-- Nombre -->
                                                             <p class="nombre card-title pt-2 text-center text-white" id="nombre"> 
                                                                 <strong style="font-size: 20px; width:194px;
                                                                 background-color:rgba(95, 95, 95, 0.651);
                                                                 position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
                                                             </p>                        
-                                                            <!-- Precio -->
+                                                        <!-- Precio -->
                                                             <p id="precio" class="text-white text-decoration-line">
                                                                 <strong class="precio" style="font-size: 15px; width:194px;
                                                                 background-color:rgba(95, 95, 95, 0.651);
                                                                 position: absolute; bottom: 0; left:0;">L {{$pro->precio}}.00</strong>
-                                                            </p>                        
+                                                            </p>         
                                                     </div>
                                                 </div>
                                             </div>
