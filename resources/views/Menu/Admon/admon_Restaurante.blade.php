@@ -442,7 +442,7 @@
                                         <!--Boton editar-->
                                         <a 
                                             class="btn btn-menu form btn-xs"
-                                            href="{{ route('plato.editar', ['id' => $p->id]) }}"
+                                            href="{{ route('bebida.editar', ['id' => $p->id]) }}"
                                             style="position:absolute; bottom: 27.5%; left:220px"
                                             >Editar</a
                                         >

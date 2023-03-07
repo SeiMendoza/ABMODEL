@@ -17,63 +17,58 @@
         }
     </script>
 
+
     <div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
         <br><br>
         <div class="wrapper wrapper--w960">
             <div class="card card-2">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h2  class="text-center">Editando a: {{$Bebidas->nombre}}</h2>
-                    <form method="post" action="{{ route('bebida.update', ['id' => $Bebidas->id]) }}"
-                        enctype="multipart/form-data">
+                    <h2 class="text-center">Editando a: {{$Bebidas->nombre}}</h2>
+                    <form method="post" action="{{route('bebida.update', ['id'=> $Bebidas->id])}}" enctype="multipart/form-data">
                         @method('put')
                         @csrf
                         <br>
 
                         <div style="width:200px;float:left">
-                            <img src="{{asset( $Bebidas->imagen) }}" alt="" width="200px"
-                                height="250px" id="imagenmostrada">
+                            <img src="{{asset($Bebidas->imagen)}}" alt="" width="200px" height="200px" id="imagenmostrada">
                             <br>
-                            <input type="file" id="imagen" name="imagen"
-                                value="{{old('imagen', $Bebidas->imagen)}}"
-                                style="color: white;width: 200px;">
+                            <input type="file" id="imagen" name="imagen" accept="image/*" 
+                                value="{{ old('imagenPrevisualizacion', $Bebidas->imagen) }}" style="color: white;width: 200px;">
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
 
                         <div style="margin-left:2%;float:left;width:35%">
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="tipo" id="tipo" required onchange="producto();quitarerror()">
+                            <div class="">
+                                <select name="tipo" id="tipo" onchange="producto();quitarerror()">
                                     @if (old('tipo'))
-                                        @if (old('tipo') === '2')
+                                        @if (old('tipo') === 2)
                                             <option disabled="disabled" selected="selected" value="2">Comida</option>
                                         @else
-                                            @if (old('tipo') === '1')
+                                            @if (old('tipo') === 1)
                                                 <option disabled="disabled" selected="selected" value="1">Bebida</option>
                                             @endif
                                         @endif
                                     @else
-                                       
                                     @endif
-                                    <option value="1"{{ $Bebidas->tipo == "1" ? 'selected' : '' }}>Bebida </option>
-                                    <option value="2"{{ $Bebidas->tipo == "2" ? 'selected' : '' }}>Comida</option>
+                                    <option value="1"{{$Bebidas->tipo === "1" ? 'selected' : ''}}>Bebida</option>
+                                    <option value="2"{{$Bebidas->tipo === "2" ? 'selected' : ''}}>Comida</option>
                                 </select>
-                                <div class="select-dropdown"></div>
                             </div>
                             @error('tipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                             <br>
                             <input class="input--style-2" type="text" placeholder="Nombre" name="nombre"
-                                value="{{ old('nombre', $Bebidas->nombre) }}" maxlength="25" required
-                                onkeypress="quitarerror()">
+                                value="{{ old('nombre', $Bebidas->nombre) }}" maxlength="25" onkeypress="quitarerror()">
                             @error('nombre')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                             <br><br>
-                            <textarea class="textarea--style-2" type="text" placeholder="Descripción" name="descripcion" maxlength="100" required
-                                onkeypress="quitarerror()">{{ old('descripcion', $Bebidas->descripcion) }}</textarea>
+                            <textarea class="textarea--style-2" type="text" placeholder="Descripción" name="descripcion" maxlength="100" 
+                                onkeypress="quitarerror()">{{ old('descripcion',$Bebidas->descripcion) }}</textarea>
                             @error('descripcion')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -82,8 +77,8 @@
                         </div>
 
                         <div style="margin-left:2%;float:left;width:35%">
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="tamanio" required onchange="quitarerror()">
+                            <div class="">
+                                <select name="tamanio" onchange="quitarerror()">
                                     @if (old('tamanio'))
                                         @if (old('tamanio') === 'Grande')
                                             <option disabled="disabled" selected="selected" value="Grande">Grande</option>
@@ -99,40 +94,34 @@
                                             @endif
                                         @endif
                                     @else
-                                        <option disabled="disabled" selected="selected"
-                                            value="{{ $Bebidas->tamanio }}">Tamaño</option>
+                                        <option disabled="disabled" selected="selected" value="{{$Bebidas->tamanio}}">Tamaño</option>
                                     @endif
-                                    <option value="Grande"{{ $Bebidas->tamanio === 'Grande' ? 'selected' : '' }}>
-                                        Grande</option>
-                                    <option
-                                        value="Mediano"{{ $Bebidas->tamanio === 'Mediano' ? 'selected' : '' }}>
-                                        Mediano</option>
-                                    <option
-                                        value="Pequeño"{{ $Bebidas->tamanio === 'Pequeño' ? 'selected' : '' }}>
-                                        Pequeño</option>
+                                    <option value="Grande"{{$Bebidas->tamanio === 'Grande' ? 'selected' : ''}}>Grande</option>
+                                    <option value="Mediano"{{$Bebidas->tamanio === 'Mediano' ? 'selected' : ''}}>Mediano</option>
+                                    <option value="Pequeño"{{$Bebidas->tamanio === 'Pequeño' ? 'selected' : ''}}>Pequeño</option>
                                 </select>
-                                <div class="select-dropdown"></div>
                             </div>
                             @error('tamanio')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                             <br>
                             <input class="input--style-2" type="number" placeholder="Precio" name="precio"
-                                value="{{ old('precio',$Bebidas ->precio) }}" onkeypress="quitarerror()" required
+                                value="{{ old('precio', $Bebidas->precio) }}" onkeypress="quitarerror()" 
                                 onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
                                 max="1000">
                             @error('precio')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
-                            <br><br>
+                                <br><br>
 
                             <input class="input--style-2" type="number" placeholder="Bebidas disponibles" name="cantidad"
-                                   value="{{ old('disponible', $Bebidas->disponible) }}" onkeypress="quitarerror()" required
-                                    onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"  max="1000">
-                               @error('disponible')
-                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                @enderror
-                            <br><br>
+                                value="{{ old('disponible', $Bebidas->disponible) }}" onkeypress="quitarerror()"
+                                 onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"  max="1000">
+                            @error('disponible')
+                                  <strong class="menerr" style="color:red">{{ $message }}</strong>
+                             @enderror
+                            <br><br>   
+                            </div>
 
                             <div id="espacio"><br><br><br><br></div>
                             <div style="float:right">
@@ -141,9 +130,12 @@
                                     class="btn btn-warning">Cancelar</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 @stop
+
+               
