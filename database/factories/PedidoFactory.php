@@ -17,7 +17,12 @@ class PedidoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'mesa'=>$this->faker->numberBetween(1, 20),
+            'quiosco'=>$this->faker->numberBetween(1, 10),
+            'nombreCliente'=>$this->faker->name,
+            'imp'=>$this->faker->numberBetween(10, 100),
+            'total'=>$this->faker->numberBetween(10,100),
+            'estado'=>$this->faker->numberBetween(0,1)
         ];
     }
 }

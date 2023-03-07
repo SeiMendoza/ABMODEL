@@ -12,9 +12,11 @@ class DetallesUsuario extends Model
     protected $fillable = [
         'id',
         'pedido_id',
-        'producto_id',
+        'platillo_id',
         'cantidad',
         'precio',
+        'created_at',
+        'updated_at'
     ];
 
     public function pedido()
@@ -34,6 +36,6 @@ class DetallesUsuario extends Model
     }
     public function platillos()
     {
-        return $this->belongsTo(Platillo::class);
+        return $this->belongsTo(Platillo::class,'platillo:id');
     }
 }

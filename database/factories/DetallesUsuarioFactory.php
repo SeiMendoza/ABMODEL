@@ -17,7 +17,10 @@ class DetallesUsuarioFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'pedido_id'=>$this->faker->numberBetween(0, 100),
+            'platillo_id'=>$this->faker->numberBetween(0, 100),
+            'cantidad'=>$this->faker->numberBetween(1, 100),
+            'precio'=>$this->faker->numberBetween(1,100)
         ];
     }
 }
