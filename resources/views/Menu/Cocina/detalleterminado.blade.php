@@ -44,6 +44,12 @@
         </td>
     </tr>
     <tr>
+        <td class="titulo">Hora del pedido: </td>
+        <td class="informacion">{{date('h:i:s a',strtotime($pedido->created_at))}}</td>
+        <td class="titulo">Hora de entrega:</td>
+        <td class="informacion" id="tiempo"> {{date('h:i:s a',strtotime($pedido->updated_at))}} </td>
+    </tr>
+    <tr>
         <td class="titulo">Impuesto: </td>
         <td class="informacion">L. {{number_format($pedido->imp, 2, '.', ',')}}</td>
         <td class="titulo">Total:</td>
