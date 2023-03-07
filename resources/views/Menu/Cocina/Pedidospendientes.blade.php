@@ -3,8 +3,8 @@
 @section('activatedMenu')
  
      <script>
-         var msg = '{{Session::get('mensaje ')}}';
-         var exist = '{{Session::has('mensaje ')}}';
+         var msg = "{{Session::get('mensaje ')}}";
+         var exist = "{{Session::has('mensaje ')}}";
          if (exist) {
              Swal.fire({
                  position: 'top-end',
@@ -12,7 +12,7 @@
                  title: msg,
                  showConfirmButton: false,
                  toast: true,
-                 background: '#0be004ab',
+                 background: '#fff',
                  timer: 5500
              })
          }
@@ -28,7 +28,7 @@
     <!--Filtro de busqueda-->
 
     <div class="nav-item" style="margin: 10px 25px 10px 25px;">
-        <form action="{{ route("pedidosp.pedido") }}" method="get" role="search" 
+        <form action="{{ route('pedidosp.pedido')}}" method="get" role="search" 
             class="navbar-search">
             <div class="input-group">
                 <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 

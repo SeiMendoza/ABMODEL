@@ -1,15 +1,18 @@
 @extends('00_plantillas_Blade.plantilla_General2')
-@section('title', 'Pedidos-cocina')
+@section('title', 'Pedidos-terminados')
 @section('activatedMenu')
-<div> 
-    <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff; position: relative;
- ">Lista de pedidos terminados</h5>
+<div class="mb-0 col-11 text-start">
+
+<div class="row text-center container pt-2">
+        <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos terminados
+        </h3>
+</div>
 
  <!--Filtro de busqueda-->
 
  <div class="nav-item" style="margin: 10px 25px 10px 25px;">
     <form action="{{ route("terminados.terminados") }}" method="get" role="search" 
-        class="navbar-search">
+        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
             <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
             placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
@@ -62,11 +65,13 @@
                 @endif
                 @empty
                 <tr>
-                    <td colspan="7" style="text-align: center;color:white;">No hay pedidos terminados</td>
+                    <td colspan="7" style="text-align: center;color:teal;">No hay pedidos terminados</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
-        </div>
+</div>
+<a style="position: absolute; right:700px;" class="btn btn-danger" href="{{route('pedidost.pedido')}}">Volver</a>
+     
  @endsection

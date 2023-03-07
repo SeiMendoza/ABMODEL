@@ -1,10 +1,10 @@
 @extends('00_plantillas_Blade.plantilla_General2')
-@section('title', 'Pedidos-cocina')
+@section('title', 'Pedidos-caja')
 @section('activatedMenu')
    
  <script>
-        var msg = '{{Session::get('mensaje')}}';
-        var exist = '{{Session::has('mensaje')}}';
+        var msg = "{{Session::get('mensaje')}}";
+        var exist = "{{Session::has('mensaje')}}";
         if(exist){
             Swal.fire({
                 position: 'top-end',
@@ -28,8 +28,8 @@
      <!--Filtro de busqueda-->
              
      <div class="nav-item" style="margin: 10px 25px 10px 25px;">
-        <form action="{{ route("pedidost.pedido") }}" method="get" role="search" 
-            class="navbar-search">
+        <form action="{{ route('pedidost.pedido')}}" method="get" role="search" 
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
                 <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
                 placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
@@ -43,6 +43,9 @@
                 @endif
             </div>   
         </form>
+        <a style="position: absolute; right:180px;" href="{{route('terminados.terminados')}}" 
+    class="btn btn-menu"> <i class="ni ni-single-copy-04 text-success text-sm opacity-10">
+    </i> Pedidos terminados</a> 
     </div>
     
 <h5 class="card class-2 text-lg text-center" 

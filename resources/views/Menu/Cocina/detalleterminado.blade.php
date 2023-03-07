@@ -16,9 +16,14 @@
         line-height: 60px;
     }
 </style>
+<div class="mb-0 col-11 text-start">
 
+    <div class="row text-center container pt-6">
 <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
       position: relative;">Detalle de pedidos terminado de: {{$pedido->nombreCliente}}</h5>
+             
+    </div>
+
 
 <table class="table">
     <tr>
