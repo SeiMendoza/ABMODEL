@@ -17,9 +17,14 @@
              })
          }
      </script>
-     <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
-      position: relative;">Lista de pedidos pendientes en cocina</h5>
     
+<div class="mb-0 col-11 text-start">
+
+    <div class="row text-center container pt-2">
+            <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos
+            </h3>
+    </div>
+
     <!--Filtro de busqueda-->
 
     <div class="nav-item" style="margin: 10px 25px 10px 25px;">
@@ -40,6 +45,9 @@
         </form>
     </div>
 
+
+     <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
+      position: relative;">Lista de pedidos pendientes en cocina</h5>
 
      <!--------Lista de pedidos---------------->
 
@@ -102,7 +110,7 @@
                         @endif
                         @empty
                         <tr>
-                            <td colspan="7" style="text-align: center;color:white;">No hay pedidos</td>
+                            <td colspan="7" style="text-align: center;color: teal;">No hay pedidos</td>
                         </tr>
                      @endforelse
                  </tbody>
