@@ -104,10 +104,10 @@
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                             <br>
-                            <input class="input--style-2" type="number" placeholder="Precio" name="precio"
-                                value="{{ old('precio') }}" onkeypress="quitarerror()" required
-                                onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
-                                max="1000">
+                            <input class="input--style-2" type="text" placeholder="Precio" name="precio" id="precio"
+                            onkeypress="quitarerror()"
+                            onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000"
+                            value="{{ old('precio') }}"  required>
                             @error('precio')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
