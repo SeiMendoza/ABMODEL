@@ -69,14 +69,15 @@
                      @if(($p->estado)=="0") 
                      <tr class="border border-light" style="color:teal; text-align:center">
                          <th scope="col">{{$p->mesa}}</th>
-                         <td scope="col">{{$p->nombreCliente}}</td>
-                         <td></td>
-                         <td></td>
-                         @foreach($p->detalle as $d)
-                         <td scope="col">{{$d->producto_id}}</td>
-                         <td scope="col">{{$d->cantidad}}</td>
-                         @endforeach
-                         <td><input type="checkbox" name="term" value="!old('term') ?: 'checked' }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}" style="background:teal; width:20px; height:20px;"></td>
+                         <td scope="col">{{$p->nombreCliente}}</td> 
+                         <td>@foreach($p->detalle as $d)
+                              {{$d->producto_id}}
+                          @endforeach</td> 
+                          <td>@foreach($p->detalle as $d)
+                              {{$d->cantidad}}
+                              @endforeach</td>
+                               
+                              <td><input type="checkbox" id="term" name="term" value="{{!old('term') ?: 'checked'}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}" style="background:teal; width:20px; height:20px;"></td>
                         <td>
                             <a type="buttom" class="btn btn-light" href="{{route('pedidosp.detalle',['id'=>$p->id])}}">
                                 <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
@@ -101,7 +102,7 @@
                                                 <input type="text" id="estado" name="estado" value="1">
                                             </div>
                                             <input type="submit" class="btn btn-danger w-15" value="Si">
-                                            <button  type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
+                                            <button onclick="setTimeout(function(){location.reload();}, 00);" type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
                                         </div>
                                     </form>
                                 </div>
@@ -119,5 +120,9 @@
                     {{$pedido->appends(['busqueda' => $texto])->links()}}
                 </div>
             </div>
+
+ <script>
+    
+ </script>
 
 @endsection

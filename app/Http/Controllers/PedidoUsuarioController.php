@@ -64,7 +64,6 @@ class PedidoUsuarioController extends Controller
     {
         //recuperar datos del filtro
         $texto=trim($request->get('busqueda'));
-
         $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
         return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
     }

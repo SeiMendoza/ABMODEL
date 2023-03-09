@@ -48,12 +48,12 @@
                 <tr class="border border-light" style="background-color: #fff; color:teal;text-align:center;">
                     <th scope="col">{{$p->mesa}}</th>
                     <td scope="col">{{$p->nombreCliente}}</td>
-                    <td></td>
-                         <td></td>
-                         @foreach($p->detalle as $d)
-                         <td scope="col">{{$d->producto_id}}</td>
-                         <td scope="col">{{$d->cantidad}}</td>
-                         @endforeach
+                    <td>@foreach($p->detalle as $d)
+                              {{$d->producto_id}}
+                          @endforeach</td> 
+                          <td>@foreach($p->detalle as $d)
+                              {{$d->cantidad}}
+                              @endforeach</td>
                     <td><input disabled type="checkbox" name="term" {{ old('term') ?: 'checked' }} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}"
                     style="background:#ffffff; width:20px; height:20px;"></input></td>
                     <td>
