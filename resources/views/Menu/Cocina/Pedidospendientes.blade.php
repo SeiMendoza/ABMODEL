@@ -57,9 +57,8 @@
                  <thead class="card-header border border-radius" style="color:teal; text-align:center">
                      <tr>
                          <th scope="col">Número de mesa</th>
+                         <th scope="col">Quiosco</th>
                          <th scope="col">Nombre del cliente</th>
-                         <th scope="col">Orden</th>
-                         <th scope="col">Cantidad</th>
                          <th scope="col">Terminado</th>
                          <th scope="col">Detalles</th>
                      </tr>
@@ -69,13 +68,8 @@
                      @if(($p->estado)=="0") 
                      <tr class="border border-light" style="color:teal; text-align:center">
                          <th scope="col">{{$p->mesa}}</th>
+                         <td scope="col">{{$p->quiosco}}</td> 
                          <td scope="col">{{$p->nombreCliente}}</td> 
-                         <td>@foreach($p->detalle as $d)
-                              {{$d->producto_id}}
-                          @endforeach</td> 
-                          <td>@foreach($p->detalle as $d)
-                              {{$d->cantidad}}
-                              @endforeach</td>
                                
                               <td><input type="checkbox" id="term" name="term" value="{{!old('term') ?: 'checked'}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}" style="background:teal; width:20px; height:20px;"></td>
                         <td>
