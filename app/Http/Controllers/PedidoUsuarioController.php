@@ -27,7 +27,7 @@ class PedidoUsuarioController extends Controller
         $pedido = new Pedido();
         $pedido->mesa = $request->input('mesa');
         $pedido->quiosco = $request->input('quiosco');
-        $pedido->nombreCliente = 'fulano';
+        $pedido->nombreCliente = 'Sutano';
         $pedido->imp = 0.00;
         $pedido->total = 100;
         $pedido->save();

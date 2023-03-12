@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BebidaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoUsuarioController;
 use App\Http\Controllers\MenuUsuarioController;
@@ -33,11 +34,16 @@ Route::get('/billing', [HomeController::class, 'b'])
 /* Rutas Administracion de Restaurante */
 Route::get('/admonRestaurante', [HomeController::class, 'indexAdmon'])
 ->name('menuAdmon.index');
-Route::put('admonRestaurante/{id}/activar', [PlatilloController::class, 'activar'])
-->name('menuAdmon.activar');
+Route::put('admonRestaurante/{id}/activarBebida', [BebidaController::class, 'activar'])
+->name('menuAdmon.activarBebida');
+Route::put('admonRestaurante/{id}/activarPlatillo', [PlatilloController::class, 'activar'])
+->name('menuAdmon.activarPlatillo');
+Route::put('admonRestaurante/{id}/activarCombo', [ComboController::class, 'activar'])
+->name('menuAdmon.activarCombo');
 
 /** Rutas de Prueba AmonMenu */
-
+Route::get('/pruebaAdmon', [HomeController::class, 'pruebaAdmon'])
+->name('menuAdmon.prueba');
 
 
 Route::get('/profile', [HomeController::class, 'p'])
@@ -117,6 +123,9 @@ Route::post('/combos/temporal',[ComboController::class, 'temporal'])
 Route::post('/combos/{id}',[ComboController::class, 'destroy'])
   ->name('combo.destroy');
 
+  Route::get('combo/{id}/borrar', [ComboController::class, 'destroyC'])
+  ->name('combo.borrar');
+
 /*****************************
   Rutas De estado
 ******************************/
@@ -126,11 +135,15 @@ Route::get('/estado/nuevo', [ComboController::class, 'estado'])
 Route::post('/estado/nuevo',[ComboController::class, 'estadoactualizar'])
     ->name('estado.store');
 
+
+
 /*****************************
   Rutas Para Administración
 ******************************/
 Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])
     ->name('busqueda.index');
+
+
 
 /****************************************
   Rutas Para Editar Platillos y Bebidas
@@ -146,6 +159,8 @@ Route::get('bebida/{id}/editar', [EditarBebidaController::class, 'edit'])
   
 Route::put('bebida/{id}/edicion', [EditarBebidaController::class, 'update'])
     ->name('bebida.update');
+
+
   
 
 /****************************************
@@ -153,3 +168,5 @@ Route::put('bebida/{id}/edicion', [EditarBebidaController::class, 'update'])
 *****************************************/
  Route::get('platillo/{id}/borrar', [PlatilloController::class, 'destroy'])
     ->name('platillo.borrar');
+ Route::get('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
+    ->name('bebida.borrar');

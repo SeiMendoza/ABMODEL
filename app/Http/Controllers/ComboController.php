@@ -205,4 +205,26 @@ class ComboController extends Controller
                 ->with('precio', $precio);
     }
 
+
+    public function activar(Request $request, $id)
+    {
+        $platillo = Combo::findOrfail($id);
+        $platillo->estado = $request->input('activar');
+        $create = $platillo->save();
+
+        if ($create) {
+            return redirect()->route('menuAdmon.index')->with('mensaje', 'Accion realizada correctamente');
+        }
+
+    }
+
+    public function destroyC($id){
+
+        $platillo = Combo::findOrFail($id);
+        $platillo->delete();
+
+        return redirect()->route('menuAdmon.index')->with('mensaje', 'Platillo borrado correctamente');
+
+    }
+
 }

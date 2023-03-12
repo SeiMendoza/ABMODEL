@@ -146,14 +146,6 @@
 
         <div class="mb-0 col-12 text-start">
 
-            <div class="row text-center container pt-2">
-                <h1 
-                class="card bg-menu-red text-white text-uppercase p-2" 
-                style="font-size: 3rem;"
-                >Menu
-                </h1>
-            </div>
-
             <div class="col" style="padding-right: 0px">
                 <div class="form-group row">
 
@@ -162,28 +154,22 @@
                             <a href="{{ route('index') }}" class="btn btn-menu ni ni-palette" style="margin: 4px">
                                 Inicio</a>
                         </div>
-                        
-                        <div class="">
-                            <a href={{ route('combo.create') }} class="btn btn-menu" style="margin: 4px">Registrar
-                                Combo</a>
-                        </div>
 
                         <div class="">
                             <a href={{ route('cliente_menu.qr') }} class="btn btn-menu" style="margin: 4px">Ver
                                 QR</a>
                         </div>                       
-                        
-                            <form class="form-inline">
-                                <select
-                                    style="margin: 4px; border-radius: 9px; height: 40px; margin-left: 12px; background-color:white;  border-color:white">
-                                    <option value="FILTRAR POR"><strong>Ordenar Por:</strong></option>
-                                    <option value="Precio más alto">Precio más alto</option>
-                                    <option value="Precio más bajo">Precio más bajo</option>
-                                    <option value="Mas Reciente">Mas reciente</option>
-                                </select>
-                            </form>
+                                                   
                     </div>
                 </div>
+            </div>
+
+            <div class="row text-center container pt-2">
+                <h1 
+                class="card bg-menu-red text-white text-uppercase p-2" 
+                style="font-size: 2rem;"
+                >Menu de Productos Disponibles
+                </h1>
             </div>
 
             @yield('activatedMenu')
@@ -194,7 +180,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
-    <script src={{ asset('js/scripts.js') }}></script>
+    <script src="/js/admonMenu.js"></script>
 
 </body>
 
