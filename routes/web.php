@@ -12,6 +12,8 @@ use App\Http\Controllers\BusquedaAdmonController;
 use App\Http\Controllers\EditarPlatilloController;
 use App\Http\Controllers\EditarBebidaController;
 use App\Http\Controllers\PiscinaController;
+use App\Http\Controllers\MesaController;
+use App\Http\Controllers\ReservacionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -179,28 +181,45 @@ Route::get('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detal
 *****************************************/
  Route::get('platillo/{id}/borrar', [PlatilloController::class, 'destroy'])
     ->name('platillo.borrar');
- Route::get('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
-    ->name('bebida.borrar');
 
-    
 /****************************************
-  Rutas Para Kioskos
+  Rutas Para Mesas
 *****************************************/
-  Route::get('/kioskos', [KioskoController::class, 'index'])->
-  name('kiosko.index');
 
-  Route::get('/kioskos/create', [KioskoController::class, 'create'])->
-  name('kiosko.create');
+/**
+ * Registro de mesas
+*/
 
-  Route::post('/kiosko', [KioskoController::class, 'store'])->
-  name('kiosko.store');
+Route::get('/mesas/registro', [MesaController::class, 'index'])
+->name('mesas_reg.index');
 
-  /****************************************
-  Rutas Para Piscina
-*****************************************/
-  Route::get('/piscina/create', [PiscinaController::class, 'create'])->
-  name('piscina.create');
+Route::post('/mesas/registro/nuevo',[MesaController::class, 'store'])
+->name('mesas_reg.store');
 
-  Route::post('/piscina/create', [PiscinaController::class, 'store'])->
-  name('piscina.store');
-    
+Route::put('/mesas/registro/{id}/edicion', [MesaController::class, 'update'])
+->name('mesas_reg.update')->where('id','[0-9]+');
+
+Route::delete('/mesas/registro/{id}/borrar', [MesaController::class, 'destroy'])
+->name('mesas_reg.destroy')->where('id','[0-9]+');
+
+Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])
+->name('mesas_reg.search');
+
+/**
+ * Reservaciones de mesas
+*/
+
+Route::get('/mesas/reservaciones', [ReservacionController::class, 'index2'])
+->name('mesas_res.index');
+
+Route::post('/mesas/reservaciones/nuevo',[ReservacionController::class, 'store'])
+->name('mesas_res.store');
+
+Route::put('/mesas/reservaciones/{id}/edicion', [ReservacionController::class, 'update'])
+->name('mesas_res.update')->where('id','[0-9]+');
+
+Route::delete('/mesas/reservaciones/{id}/borrar', [ReservacionController::class, 'destroy'])
+->name('mesas_res.destroy')->where('id','[0-9]+');
+
+Route::get('/mesas/reservaciones/buscar', [ReservacionController::class, 'search2'])
+->name('mesas_res.search');

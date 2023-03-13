@@ -1,7 +1,7 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Pedidos-terminados')
 @section('activatedMenu')
-<div class="mb-0 col-11 text-start">
+<div class="mb-0 col-12 text-start">
 
 <div class="row text-center container pt-2">
         <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos terminados

@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,9 +17,9 @@
 
         <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     </head>
-<body class=" g-sidenav-show bg-gray-100" style="overflow-x: hidden;">
+<body class=" g-sidenav-show bg-gray-100" style="">
     <aside
-        class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
+        class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl fixed-start"
         id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -138,18 +135,13 @@
         </div>
         
     </aside>
-    <main class="container main-content position-relative border-radius-lg">
-
-       
+    <main class="main-content" style="padding: 0px 0px 0px 0px; margin: 0px 0px 0px 250px">
             @yield('activatedMenu')
             @yield('disabledMenu')
-        </div>
-
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
-    <script src={{ asset('js/scripts.js') }}></script>
 
 </body>
 
