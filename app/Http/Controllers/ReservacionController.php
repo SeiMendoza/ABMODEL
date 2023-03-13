@@ -10,13 +10,13 @@ class ReservacionController extends Controller
 {
     public function index2()
     {
-        $reservaciones = Reservacion::all();
+        $reservaciones = Reservacion::paginate(5);
         return view('Reservaciones.ReserAdmon.Mesas.mesasReservaciones',  compact('reservaciones'));
     }
     public function search2(Request $request)
     {
         $text = trim($request->get('buscar'));
-        $reservaciones = Reservacion::where('nombre', 'like', '%' . $text . '%')->paginate(10);
+        $reservaciones = Reservacion::where('nombre', 'like', '%' . $text . '%')->paginate(5);
         return view("Reservaciones.ReserAdmon.Mesas.mesasReservaciones", compact('reservaciones', 'text'));
     }
     public function store(Request $request){

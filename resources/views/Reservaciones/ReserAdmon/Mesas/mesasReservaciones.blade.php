@@ -167,10 +167,14 @@
                 </table>
             </div>
         </div>
-        <div class="pagination justify-content-end"> 
-           
+    </div>
+    <!-- ========== End Cards ========== --> 
+@endsection
+
+@section('pie')
+    <div class="pagination justify-content-end"> 
+        <div style="display:block; float:right;"> 
+            {{$reservaciones->links()}}
         </div>
     </div>
-    <!-- ========== End Cards ========== -->
-    
 @endsection

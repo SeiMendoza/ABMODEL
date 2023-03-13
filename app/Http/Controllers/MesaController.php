@@ -17,7 +17,7 @@ class MesaController extends Controller
     {
         $text = trim($request->get('busqueda'));
         $registros = Mesa::where('nombre', 'like', '%' . $text . '%')
-            ->orWhere('cantidad', 'like', '%' . $text . '%')->paginate(10);
+            ->orWhere('cantidad', 'like', '%' . $text . '%')->paginate(12);
         return view("Reservaciones.ReserAdmon.Mesas.mesasRegistro", compact('registros', 'text'));
     }
     public function store(Request $request){

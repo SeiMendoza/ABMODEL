@@ -66,8 +66,10 @@
         <div class="" style="padding: 0; margin:0;">
             @yield('content')
         </div>
-              
-        </div>
+    </div>
+     <!-- paginacion -->
+     <div class="row container-fluid footer" style="padding: 0; margin:0;">
+        @yield('pie')
     </div>
 
     <script src="/assets/jquery/jquery.js"></script>

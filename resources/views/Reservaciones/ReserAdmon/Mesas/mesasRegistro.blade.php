@@ -76,11 +76,11 @@
                 </div>
             </div>
             <!-- ========== Cards ========== -->
-            <div class="">
+            <div class="" style="padding: 0">
                 @forelse ($registros as $r)
                     <div class="d-flex justify-content-center mb-0" style="display: block; float:left; padding: 0px 0px 10px 10px;">
                         <div class="card mb-1 bg-light rounded" 
-                            style="background: url('/images/ivancik.jpg') top center/cover no-repeat; height:250px; width:200px;">
+                            style="background: url('/images/ivancik.jpg') top center/cover no-repeat; height:240px; width:200px;">
                             <h5 class="card-title pt-2 text-center text-white" style="background-color: rgba(2, 102, 0, 0.727);">{{$r->nombre}}</h5>
                             <div class="card-body" style="padding:0px;">
                                 <h6 class="text-white text-center" style="position: absolute; width:200px; bottom: 19%;
@@ -176,10 +176,14 @@
                     </div>
                 @endforelse
             </div>
-            <div class="pagination justify-content-end"> 
-               
-                </div>
-            <!-- ========== End Cards ========== -->
         </div>
     <!-- ========== End ========== -->
+@endsection
+
+@section('pie')
+    <div class="pagination justify-content-end"> 
+        <div style="display:block; float:right;"> 
+            {{$registros->links()}}
+        </div>
+    </div>
 @endsection
