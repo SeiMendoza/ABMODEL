@@ -27,7 +27,7 @@ class EditarPlatilloController extends Controller
             'descripcion' => 'required|max:100|min:3',   
             'precio' => 'required|min:1|max:1000|numeric',   
             'tamanio' => 'required|max:100|min:3', 
-            'imagen' => 'required',
+            'imagen' => '',
             'cantidad' => 'nullable|min:1|max:1000|numeric',
             'disponible' => 'nullable|min:1|max:1000|numeric'
         ],[
@@ -45,8 +45,6 @@ class EditarPlatilloController extends Controller
             'tamanio.required' => 'El tamanio no puede estar vacío',
             'tamanio.max' => 'El tamanio es muy extenso',
             'tamanio.min' => 'El tamanio es muy corto',
-            'imagen.required' => 'La imagen no puede estar vacío',
-            'imagen.mimes' => 'La imagen debe de ser una imagen',
             'cantidad.max' => 'El numero de bebidas disponibles es muy grande',
             'cantidad.min' => 'El numero de bebidas disponibles es muy pequeño',
             'cantidad.numeric' => 'El numero de bebidas disponibles debe de ser numerico',
@@ -63,13 +61,6 @@ class EditarPlatilloController extends Controller
         $actualizacion->precio = $request->input('precio');
         $actualizacion->tamanio = $request->input('tamanio');
         $actualizacion->disponible = $request->input('disponible');
-
-        $file = $request->file('imagen');
-        $destinationPath = 'images/';
-        $filename = time().'.'.$file->getClientOriginalName();
-        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
-
-        $actualizacion -> imagen = 'images/'.$filename; 
                
         $creado = $actualizacion -> save();
 
