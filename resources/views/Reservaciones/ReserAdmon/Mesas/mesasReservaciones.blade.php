@@ -1,7 +1,7 @@
 @extends('Reservaciones.ReserAdmon.Mesas.mesasIndex')
 @section('content')
     <!-- ========== Reservaciones ========== -->
-    <div class="container-fluid"  id="reserva" style="">  
+    <div class=""  id="reserva" style="">  
         <div class="nav d-flex justify-content-end " style="">
             <div class="" style="margin: 10px 0 0 10px">
                 <form action="{{ route('mesas_res.search') }}" method="get" role="search" 
@@ -57,6 +57,11 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div style="margin: 11px 0 0 10px;" class="nav-link-icon">                            
+                <a href="{{ route('index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:80px; padding:6px;">
+                    <i class="ni ni-bold-left text-sm text-center opacity-10"></i>
+                    Inicio</a>
             </div>
         </div>
          <!-- ========== Cards ========== -->

@@ -9,7 +9,7 @@
                         <div class="input-group">
                             <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
                             placeholder="Buscar por nombre" aria-label="Search" 
-                            aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>" />
+                            aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>"/>
                             <button class="bg-success border-radius-md" type="submit" 
                                 style="border: 0; color:aliceblue"><strong>Buscar</strong>
                             </button>    
@@ -68,6 +68,11 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div style="margin: 11px 0 0 10px;" class="nav-link-icon">                            
+                    <a href="{{ route('index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:80px; padding:6px;">
+                        <i class="ni ni-bold-left text-sm text-center opacity-10"></i>
+                        Inicio</a>
                 </div>
             </div>
             <!-- ========== Cards ========== -->

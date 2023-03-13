@@ -54,7 +54,7 @@
                     <a class="nav-link " href={{ route('cliente_prueba') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-badge text-danger text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58 text-danger text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Cliente</span>
                     </a>
@@ -63,7 +63,7 @@
                     <a class="nav-link " href={{ route('pedidost.pedido') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tablet-button text-success text-sm opacity-10"></i>
+                            <i class="ni ni-archive-2 text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Caja</span>
                     </a>
@@ -72,7 +72,7 @@
                     <a class="nav-link " href={{ route('pedidosp.pedido') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tablet-button text-success text-sm opacity-10"></i>
+                            <i class="ni ni-tablet-button text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Cocina</span>
                     </a>
@@ -84,16 +84,16 @@
                     <a class="nav-link " href={{ route('kiosko.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-shop text-success text-sm opacity-10"></i>
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Kioskos</span>
                     </a>
                 </li>
                 <li cFlass="nav-item">
-                    <a class="nav-link " href="{{route("mesas_res.index")}}">
+                    <a class="nav-link " href="{{route('mesas_res.index')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-info text-sm opacity-10"></i>
+                            <i class="ni ni-app text-sm text-primary opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Mesas</span>
                     </a>
@@ -139,7 +139,6 @@
                 </li>
             </ul>
         </div>
-        
     </aside>
 
     <main class="container main-content position-relative border-radius-lg">

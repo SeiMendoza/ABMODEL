@@ -80,7 +80,7 @@
                     <a class="nav-link " href={{ route('cliente_prueba') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-badge text-danger text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58 text-danger text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Cliente</span>
                     </a>
@@ -89,7 +89,7 @@
                     <a class="nav-link " href={{ route('pedidost.pedido') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tablet-button text-success text-sm opacity-10"></i>
+                            <i class="ni ni-archive-2 text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Caja</span>
                     </a>
@@ -98,7 +98,7 @@
                     <a class="nav-link " href={{ route('pedidosp.pedido') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tablet-button text-success text-sm opacity-10"></i>
+                            <i class="ni ni-tablet-button text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Cocina</span>
                     </a>
@@ -110,7 +110,7 @@
                     <a class="nav-link " href={{ route('kiosko.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-shop text-success text-sm opacity-10"></i>
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Kioskos</span>
                     </a>
@@ -119,7 +119,7 @@
                     <a class="nav-link " href="{{route('mesas_res.index')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-info text-sm opacity-10"></i>
+                            <i class="ni ni-app text-sm text-primary opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Mesas</span>
                     </a>
@@ -305,7 +305,7 @@
         <div class="row mt-3">
             <div class="row container-fluid pt-3 d-flex justify-content-center">
                 <H4 style="text-align: center;" class=" bg-white text-primary">RESTAURANTE</H4>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
                     <div class="card height-200 card-2" style="">
                         <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
                             <div class="row">
@@ -331,7 +331,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
                     <div class="card height-200 card-2" style="">
                         <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
                             <div class="row">
@@ -344,7 +344,7 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
-                                        class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                        class="icon icon-shape bg-gradient-danger shadow-success text-center rounded-circle">
                                         <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
                                         </i>
                                     </div>
@@ -357,7 +357,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
                     <div class="card height-200 card-2" style="">
                         <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
                             <div class="row">
@@ -370,15 +370,41 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
-                                        class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
+                                        class="icon icon-shape bg-gradient-warning shadow-success text-center rounded-circle">
+                                        <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true">
                                         </i>
                                     </div>
                                 </div>
                             </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Card</h4>
+                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">CAJA</h4>
                         </div>
-                        <a href="#" class="mb-0 card-footer text-center text-danger font-weight-bold h4 bg-gradient-light btn-primary"
+                        <a href="{{route('pedidost.pedido')}}" class="mb-0 card-footer text-center text-warning font-weight-bold h4 bg-gradient-light btn-primary"
+                           style="height: 60px" >Ver
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
+                    <div class="card height-200 card-2" style="">
+                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                            Administrador
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-warning shadow-success text-center rounded-circle">
+                                        <i class="ni ni-tablet-button text-lg opacity-10" aria-hidden="true">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">COCINA</h4>
+                        </div>
+                        <a href="{{route('pedidosp.pedido')}}" class="mb-0 card-footer text-center text-warning font-weight-bold h4 bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
@@ -400,14 +426,14 @@
                                 <div class="col-4 text-end">
                                     <div
                                         class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
+                                        <i class="ni ni-app text-lg opacity-10" aria-hidden="true">
                                         </i>
                                     </div>
                                 </div>
                             </div>
                             <h4 class="text mb-0 text-uppercase text-center font-weight-bold">MESAS</h4>
                         </div>
-                        <a href="{{route('mesas_res.index')}}" class="mb-0 card-footer text-center font-weight-bold bg-gradient-light btn-primary"
+                        <a href="{{route('mesas_res.index')}}" class="mb-0 card-footer text-primary text-center h4 font-weight-bold bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
@@ -433,7 +459,7 @@
                             </div>
                             <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Kioskos</h4>
                         </div>
-                        <a href="{{ route('kiosko.index') }}" class="mb-0 card-footer text-center font-weight-bold bg-gradient-light btn-primary"
+                        <a href="{{ route('kiosko.index') }}" class="mb-0 card-footer text-center text-primary font-weight-bold h4 bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
