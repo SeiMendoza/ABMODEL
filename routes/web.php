@@ -11,6 +11,7 @@ use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
 use App\Http\Controllers\EditarPlatilloController;
 use App\Http\Controllers\EditarBebidaController;
+use App\Http\Controllers\PiscinaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -194,4 +195,12 @@ Route::get('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detal
   Route::post('/kiosko', [KioskoController::class, 'store'])->
   name('kiosko.store');
 
+  /****************************************
+  Rutas Para Piscina
+*****************************************/
+  Route::get('/piscina/create', [PiscinaController::class, 'create'])->
+  name('piscina.create');
+
+  Route::post('/piscina/create', [PiscinaController::class, 'store'])->
+  name('piscina.store');
     
