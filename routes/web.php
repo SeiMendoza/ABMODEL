@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BebidaController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KioskoController;
 use App\Http\Controllers\PedidoUsuarioController;
 use App\Http\Controllers\MenuUsuarioController;
 use App\Http\Controllers\PlatilloController;
@@ -180,3 +181,17 @@ Route::get('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detal
  Route::get('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
     ->name('bebida.borrar');
 
+    
+/****************************************
+  Rutas Para Kioskos
+*****************************************/
+  Route::get('/kioskos', [KioskoController::class, 'index'])->
+  name('kiosko.index');
+
+  Route::get('/kioskos/create', [KioskoController::class, 'create'])->
+  name('kiosko.create');
+
+  Route::post('/kiosko', [KioskoController::class, 'store'])->
+  name('kiosko.store');
+
+    

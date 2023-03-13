@@ -71,7 +71,7 @@
                     <a class="nav-link" href={{ route('menuAdmon.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-bell-55 text-danger text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Menú Admón</span>
                     </a>
@@ -80,7 +80,7 @@
                     <a class="nav-link " href={{ route('cliente_prueba') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-badge text-danger text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Cliente</span>
                     </a>
@@ -107,12 +107,12 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href={{ route('b') }}>
+                    <a class="nav-link " href={{ route('kiosko.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                            <i class="ni ni-shop text-success text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Billing</span>
+                        <span class="nav-link-text ms-1">Kioskos</span>
                     </a>
                 </li>
                 <li cFlass="nav-item">
@@ -318,15 +318,15 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
-                                        class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
+                                        class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                        <i class="ni ni-bell-55 text-lg opacity-10" aria-hidden="true">
                                         </i>
                                     </div>
                                 </div>
                             </div>
                             <h4 class="text mb-0 text-uppercase text-center font-weight-bold">MENÚ</h4>
                         </div>
-                        <a href={{ route('menuAdmon.index') }} class="mb-0 card-footer text-success text-center h4 font-weight-bold bg-gradient-light btn-primary"
+                        <a href={{ route('menuAdmon.index') }} class="mb-0 card-footer text-danger text-center h4 font-weight-bold bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
@@ -352,7 +352,7 @@
                             </div>
                             <h4 class="text mb-0 text-uppercase text-center font-weight-bold">MENÚ</h4>
                         </div>
-                        <a href={{ route('cliente_prueba') }} class="mb-0 card-footer text-center text-success h4 font-weight-bold bg-gradient-light btn-primary"
+                        <a href={{ route('cliente_prueba') }} class="mb-0 card-footer text-center text-danger h4 font-weight-bold bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
@@ -378,7 +378,7 @@
                             </div>
                             <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Card</h4>
                         </div>
-                        <a href="#" class="mb-0 card-footer text-center text-success font-weight-bold h4 bg-gradient-light btn-primary"
+                        <a href="#" class="mb-0 card-footer text-center text-danger font-weight-bold h4 bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
@@ -419,21 +419,21 @@
                                 <div class="col-8">
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Cliente
+                                            Administrador
                                         </p>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
                                         class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
+                                        <i class="ni ni-shop text-lg opacity-10" aria-hidden="true">
                                         </i>
                                     </div>
                                 </div>
                             </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">CARD</h4>
+                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Kioskos</h4>
                         </div>
-                        <a href="#" class="mb-0 card-footer text-center font-weight-bold bg-gradient-light btn-primary"
+                        <a href="{{ route('kiosko.index') }}" class="mb-0 card-footer text-center font-weight-bold bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>

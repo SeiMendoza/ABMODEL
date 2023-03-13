@@ -16,7 +16,11 @@ class BebidaController extends Controller
         $create = $platillo->save();
 
         if ($create) {
-            return redirect()->route('menuAdmon.index')->with('mensaje', 'Accion realizada correctamente');
+            if ($platillo->estado == 1) {
+                return redirect()->route('menuAdmon.index')->with('mensaje', 'Bebida Activada correctamente');
+            }else{
+                return redirect()->route('menuAdmon.index')->with('mensaje', 'Bebida Desactivada correctamente');
+            }
         }
 
     }

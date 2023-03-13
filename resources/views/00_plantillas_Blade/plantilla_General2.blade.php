@@ -42,7 +42,7 @@
                     <a class="nav-link" href={{ route('menuAdmon.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-bell-55 text-danger text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Menú Admón</span>
                     </a>
@@ -51,7 +51,7 @@
                     <a class="nav-link " href={{ route('cliente_prueba') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-badge text-danger text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Cliente</span>
                     </a>
@@ -78,12 +78,12 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href={{ route('b') }}>
+                    <a class="nav-link " href={{ route('kiosko.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                            <i class="ni ni-shop text-success text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Billing</span>
+                        <span class="nav-link-text ms-1">Kioskos</span>
                     </a>
                 </li>
                 <li cFlass="nav-item">

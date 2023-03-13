@@ -1,6 +1,12 @@
 @extends('00_plantillas_Blade.plantilla_General')
-@section('title', 'MenuPrueba')
+@section('title', 'Administración de Menu')
 @section('info')
+
+
+@endsection
+
+@section('activatedMenu')
+
     <script>
         var msg = '{{ Session::get('mensaje') }}';
         var exist = '{{ Session::has('mensaje') }}';
@@ -12,14 +18,11 @@
                 showConfirmButton: false,
                 toast: true,
                 background: '#fff',
-                timer: 5500
+                timer: 2000
             })
         }
+
     </script>
-
-@endsection
-
-@section('activatedMenu')
 
     <div class="row">
         <div class="container-fluid">
@@ -96,15 +99,15 @@
 
                                     @php $exits = false; @endphp
 
-                                    @forelse ($bebidas as $p)                                       
-
+                                    @forelse ($bebidas as $p)
                                         @if ($p->estado == 1)
                                             @php $exits = true; @endphp
 
-                                            <div class="container" style="display:block;  height: 300px; width: 300px; padding: 5px ">
+                                            <div class="container"
+                                                style="display:block;  height: 300px; width: 300px; padding: 5px ">
 
                                                 <div class="card h-100" data-id="platillo_{{ $p->id }}"
-                                                    style="padding: 0px; width:100%; border-radius:0%; background: url('/images/1676990534.horchata-1-FP.jpg') top center/cover no-repeat;">
+                                                    style="padding: 0px; width:100%; border-radius:0%; background: url({{ $p->imagen }}) top center/cover no-repeat;">
                                                     <div class="text-center" style="text-align:center; ">
 
                                                         <!-- Check activar-->
@@ -246,11 +249,11 @@
                                                 </div>
 
                                             </div>
-                                        @endif                                       
+                                        @endif
 
                                     @empty
                                         <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4 text-center">No hay Bebidas</div>
-                                    @endforelse                                  
+                                    @endforelse
 
                                 </div>
                             </div>
@@ -258,7 +261,7 @@
                             <!--Comprobacion que no hay ninguna bebida disponible-->
                             @if (!$exits)
                                 <div class="col-12 text-center p-4">
-                                    <h2>No hay Bebidas Disponibles</h2> 
+                                    <h2>No hay Bebidas Disponibles</h2>
                                 </div>
                             @endif
 
@@ -313,8 +316,9 @@
                                     @forelse ($platillos as $p)
                                         @if ($p->estado == 1)
                                             @php $exits = true; @endphp
-                                            
-                                            <div class="container"  style="display:block;  height: 300px; width: 300px; padding: 5px ">
+
+                                            <div class="container"
+                                                style="display:block;  height: 300px; width: 300px; padding: 5px ">
 
                                                 <div class="card h-100" data-id="platillo_{{ $p->id }}"
                                                     style="padding: 0px; width:100%; border-radius:0%; background: url('/images/1676990334.Pollo-chuco-principal.png') top center/cover no-repeat;">
@@ -340,8 +344,9 @@
                                                             style="position:absolute; bottom: 27.5%; left:150px">Borrar</a>
 
                                                         <!--Modal Eliminar-->
-                                                        <div class="modal fade" id="modalBorrarProducto{{ $p->id }}"
-                                                            tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"
+                                                        <div class="modal fade"
+                                                            id="modalBorrarProducto{{ $p->id }}" tabindex="-1"
+                                                            aria-labelledby="ModalLabel" aria-hidden="true"
                                                             data-bs-backdrop="static" data-bs-keyboard="false">
 
                                                             <div class="modal-dialog" data-backdrop="static">
@@ -383,10 +388,10 @@
 
 
                                                         <!--Modal activar-->
-                                                        <div class="modal fade" id="modalactivarPlatillo{{ $p->id }}"
-                                                            tabindex="" aria-labelledby="ModalLabel"
-                                                            data-bs-backdrop="static" data-bs-keyboard="false"
-                                                            data-bs-keyboard="false">
+                                                        <div class="modal fade"
+                                                            id="modalactivarPlatillo{{ $p->id }}" tabindex=""
+                                                            aria-labelledby="ModalLabel" data-bs-backdrop="static"
+                                                            data-bs-keyboard="false" data-bs-keyboard="false">
 
                                                             <div class="modal-dialog" data-backdrop="static">
                                                                 <div class="modal-content">
@@ -459,7 +464,6 @@
                                                 </div>
 
                                             </div>
-                                        
                                         @endif
 
                                     @empty
@@ -472,7 +476,7 @@
                             <!--Comprobacion que no hay ninguna platillo disponible-->
                             @if (!$exits)
                                 <div class="col-12 text-center p-4">
-                                    <h2>No hay Platillos Disponibles</h2> 
+                                    <h2>No hay Platillos Disponibles</h2>
                                 </div>
                             @endif
 
@@ -525,9 +529,8 @@
                                     @php $exits = false; @endphp
 
                                     @forelse ($combos as $p)
-
                                         @if ($p->estado == 1)
-                                        @php $exits = true; @endphp
+                                            @php $exits = true; @endphp
                                             <div class="container"
                                                 style="display:block;  height: 300px; width: 300px; padding: 5px ">
 
@@ -539,7 +542,8 @@
                                                             <input data-bs-toggle="modal"
                                                                 data-bs-target="#modalactivarCombo{{ $p->id }}"
                                                                 class="form-check-input" checked='true' type="checkbox"
-                                                                name="chckBox_disponible" id="checkBebida{{ $p->id }}"
+                                                                name="chckBox_disponible"
+                                                                id="checkBebida{{ $p->id }}"
                                                                 style="position:absolute; bottom: 90.5%; left: 290px">
                                                         </div>
 
@@ -554,8 +558,9 @@
                                                             style="position:absolute; bottom: 27.5%; left:150px">Borrar</a>
 
                                                         <!--Modal Eliminar-->
-                                                        <div class="modal fade" id="modalBorrarProducto{{ $p->id }}"
-                                                            tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"
+                                                        <div class="modal fade"
+                                                            id="modalBorrarProducto{{ $p->id }}" tabindex="-1"
+                                                            aria-labelledby="ModalLabel" aria-hidden="true"
                                                             data-bs-backdrop="static" data-bs-keyboard="false">
 
                                                             <div class="modal-dialog" data-backdrop="static">
@@ -683,7 +688,7 @@
                             <!--Comprobacion que no hay ningun combo disponible-->
                             @if (!$exits)
                                 <div class="col-12 text-center p-4">
-                                    <h2>No hay combos disponibles</h2> 
+                                    <h2>No hay combos disponibles</h2>
                                 </div>
                             @endif
 
@@ -748,7 +753,8 @@
                 <div class="tab-content" id="pills-tabContent">
 
                     <!-- ========== Bebidas ========== -->
-                    <div class="tab-pane fade " id="pills-bebidas-desactivados" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="tab-pane fade " id="pills-bebidas-desactivados" role="tabpanel"
+                        aria-labelledby="pills-home-tab">
                         <div class="container-fluid" style="padding: 0px">
 
                             <div class="row">
@@ -789,7 +795,8 @@
                                     @forelse ($bebidas as $p)
                                         @if ($p->estado == 0)
                                             @php $exits = true; @endphp
-                                            <div class="container"style="display:block;  height: 300px; width: 300px; padding: 5px ">
+                                            <div
+                                                class="container"style="display:block;  height: 300px; width: 300px; padding: 5px ">
 
                                                 <div class="card h-100" data-id="platillo_{{ $p->id }}"
                                                     style="padding: 0px; width:100%; border-radius:0%; background: url({{ $p->imagen }}) top center/cover no-repeat;">
@@ -944,7 +951,7 @@
                             <!--Comprobacion que no hay todas las bebidas est[an] disponibles-->
                             @if (!$exits)
                                 <div class="col-12 text-center p-4">
-                                    <h2>Todas las Bebidas están Disponibles</h2> 
+                                    <h2>Todas las Bebidas están Disponibles</h2>
                                 </div>
                             @endif
 
@@ -952,10 +959,11 @@
                     </div>
 
                     <!-- ========== Platillos ========== -->
-                    <div class="tab-pane fade show active container" id="pills-platillos-desactivados" role="tabpanel" aria-labelledby="pills-profile-tab" style="padding: 0px; margin:0px; border:0px">
+                    <div class="tab-pane fade show active container" id="pills-platillos-desactivados" role="tabpanel"
+                        aria-labelledby="pills-profile-tab" style="padding: 0px; margin:0px; border:0px">
                         <div class="container-fluid" style="padding: 0px">
 
-                            <div class="row">                            
+                            <div class="row">
 
                                 <!--Barra de busqueda-->
                                 <div class="col-4 p-2" style="display:; magin:2px">
@@ -984,163 +992,166 @@
                             <div class="productos" id="productos"
                                 style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
 
-                                <div class="productosadmon" id="productosadmon" style="display: grid; grid-template-columns: 300px 300px 300px 300px">
+                                <div class="productosadmon" id="productosadmon"
+                                    style="display: grid; grid-template-columns: 300px 300px 300px 300px">
 
-                                @php $exits = false; @endphp
+                                    @php $exits = false; @endphp
 
-                                @forelse ($platillos as $p)
-                                    @if ($p->estado == 0)
-                                        @php $exits = true; @endphp                                        
-                                        <div class="container"  style="display:block;  height: 300px; width: 300px; padding: 5px ">
+                                    @forelse ($platillos as $p)
+                                        @if ($p->estado == 0)
+                                            @php $exits = true; @endphp
+                                            <div class="container"
+                                                style="display:block;  height: 300px; width: 300px; padding: 5px ">
 
-                                            <div class="card h-100" data-id="platillo_{{ $p->id }}"
-                                                style="padding: 0px; width:100%; border-radius:0%; background: url('/images/1676990334.Pollo-chuco-principal.png') top center/cover no-repeat;">
-                                                <div class="text-center" style="text-align:center; ">
+                                                <div class="card h-100" data-id="platillo_{{ $p->id }}"
+                                                    style="padding: 0px; width:100%; border-radius:0%; background: url('/images/1676990334.Pollo-chuco-principal.png') top center/cover no-repeat;">
+                                                    <div class="text-center" style="text-align:center; ">
 
-                                                    <!-- Check activar-->
-                                                    <div id="activarPlatillo" class="form-check form-switch text-end">
-                                                        <input data-bs-toggle="modal"
-                                                            data-bs-target="#modalactivarPlatillo{{ $p->id }}"
-                                                            class="form-check-input" checked='true' type="checkbox"
-                                                            name="chckBox_disponible" id="disponible"
-                                                            style="position:absolute; bottom: 90.5%; left: 290px">
-                                                    </div>
-
-                                                    <!--Boton editar-->
-                                                    <a class="btn btn-menu form btn-xs"
-                                                        href="{{ route('plato.editar', ['id' => $p->id]) }}"
-                                                        style="position:absolute; bottom: 27.5%; left:220px">Editar</a>
-
-                                                    <!--Boton borrar-->
-                                                    <a class="btn btn-danger form btn-xs" data-bs-toggle="modal"
-                                                        data-bs-target="#modalBorrarProducto{{ $p->id }}"
-                                                        style="position:absolute; bottom: 27.5%; left:150px">Borrar</a>
-
-                                                     <!--Modal Eliminar-->
-                                                     <div class="modal fade" id="modalBorrarProducto{{ $p->id }}"
-                                                        tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"
-                                                        data-bs-backdrop="static" data-bs-keyboard="false">
-
-                                                        <div class="modal-dialog" data-backdrop="static">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="ModalLabel">
-                                                                        Eliminar Platillo
-                                                                    </h5>
-                                                                    <button type="button" class="btn-close fs-5"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-
-                                                                <div class="modal-body">
-                                                                    ¿Está seguro de eliminar
-                                                                    <strong>{{ $p->nombre }}</strong>
-                                                                    del menú?
-                                                                </div>
-                                                                <div class="modal-footer">
-
-                                                                    <form
-                                                                        action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
-                                                                        method="GET">
-                                                                        @method('put')
-                                                                        @csrf
-                                                                        <div style="display: none">
-                                                                            <input type="number" id="activar"
-                                                                                name="activar" value="0">
-                                                                        </div>
-                                                                        <button type="button" class="btn btn-menu"
-                                                                            data-bs-dismiss="modal">No</button>
-                                                                        <input type="submit" class="btn btn-danger"
-                                                                            value="Si">
-                                                                    </form>
-                                                                </div>
-                                                            </div>
+                                                        <!-- Check activar-->
+                                                        <div id="activarPlatillo" class="form-check form-switch text-end">
+                                                            <input data-bs-toggle="modal"
+                                                                data-bs-target="#modalactivarPlatillo{{ $p->id }}"
+                                                                class="form-check-input" checked='true' type="checkbox"
+                                                                name="chckBox_disponible" id="disponible"
+                                                                style="position:absolute; bottom: 90.5%; left: 290px">
                                                         </div>
-                                                    </div>
 
+                                                        <!--Boton editar-->
+                                                        <a class="btn btn-menu form btn-xs"
+                                                            href="{{ route('plato.editar', ['id' => $p->id]) }}"
+                                                            style="position:absolute; bottom: 27.5%; left:220px">Editar</a>
 
-                                                    <!--Modal activar-->
-                                                    <div class="modal fade" id="modalactivarPlatillo{{ $p->id }}"
-                                                        tabindex="" aria-labelledby="ModalLabel"
-                                                        data-bs-backdrop="static" data-bs-keyboard="false"
-                                                        data-bs-keyboard="false">
+                                                        <!--Boton borrar-->
+                                                        <a class="btn btn-danger form btn-xs" data-bs-toggle="modal"
+                                                            data-bs-target="#modalBorrarProducto{{ $p->id }}"
+                                                            style="position:absolute; bottom: 27.5%; left:150px">Borrar</a>
 
-                                                        <div class="modal-dialog" data-backdrop="static">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="ModalLabel">
-                                                                        Disponibilidad
-                                                                    </h5>
+                                                        <!--Modal Eliminar-->
+                                                        <div class="modal fade"
+                                                            id="modalBorrarProducto{{ $p->id }}" tabindex="-1"
+                                                            aria-labelledby="ModalLabel" aria-hidden="true"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false">
 
-                                                                    <button type="button" class="btn-close close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-
-                                                                <div class="modal-body">
-                                                                    ¿Deseea desactivar
-                                                                    <strong>{{ $p->nombre }}</strong>
-                                                                    del menú?
-                                                                </div>
-
-                                                                <div class="modal-footer">
-
-                                                                    <form
-                                                                        action="{{ route('menuAdmon.activarPlatillo', ['id' => $p->id]) }}"
-                                                                        method="POST">
-                                                                        @method('put')
-                                                                        @csrf
-                                                                        <div style="display: none">
-                                                                            <input type="number" id="activar"
-                                                                                name="activar" value="1">
-                                                                        </div>
-                                                                        <button type="button" class="btn btn-menu"
+                                                            <div class="modal-dialog" data-backdrop="static">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="ModalLabel">
+                                                                            Eliminar Platillo
+                                                                        </h5>
+                                                                        <button type="button" class="btn-close fs-5"
                                                                             data-bs-dismiss="modal"
-                                                                            onclick="cambiarCheck()">No</button>
-                                                                        <input type="submit" class="btn btn-danger"
-                                                                            value="Si">
-                                                                    </form>
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        ¿Está seguro de eliminar
+                                                                        <strong>{{ $p->nombre }}</strong>
+                                                                        del menú?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+
+                                                                        <form
+                                                                            action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
+                                                                            method="GET">
+                                                                            @method('put')
+                                                                            @csrf
+                                                                            <div style="display: none">
+                                                                                <input type="number" id="activar"
+                                                                                    name="activar" value="0">
+                                                                            </div>
+                                                                            <button type="button" class="btn btn-menu"
+                                                                                data-bs-dismiss="modal">No</button>
+                                                                            <input type="submit" class="btn btn-danger"
+                                                                                value="Si">
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
 
-                                                    <p class="nombre card-title pt-2 text-center text-uppercase text-white"
-                                                        id="disponiblesPlatillo_{{ $p->disponible }}">
-                                                        <strong
-                                                            style="font-size: 15px; width:290px;
+                                                        <!--Modal activar-->
+                                                        <div class="modal fade"
+                                                            id="modalactivarPlatillo{{ $p->id }}" tabindex=""
+                                                            aria-labelledby="ModalLabel" data-bs-backdrop="static"
+                                                            data-bs-keyboard="false" data-bs-keyboard="false">
+
+                                                            <div class="modal-dialog" data-backdrop="static">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="ModalLabel">
+                                                                            Disponibilidad
+                                                                        </h5>
+
+                                                                        <button type="button" class="btn-close close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        ¿Deseea desactivar
+                                                                        <strong>{{ $p->nombre }}</strong>
+                                                                        del menú?
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+
+                                                                        <form
+                                                                            action="{{ route('menuAdmon.activarPlatillo', ['id' => $p->id]) }}"
+                                                                            method="POST">
+                                                                            @method('put')
+                                                                            @csrf
+                                                                            <div style="display: none">
+                                                                                <input type="number" id="activar"
+                                                                                    name="activar" value="1">
+                                                                            </div>
+                                                                            <button type="button" class="btn btn-menu"
+                                                                                data-bs-dismiss="modal"
+                                                                                onclick="cambiarCheck()">No</button>
+                                                                            <input type="submit" class="btn btn-danger"
+                                                                                value="Si">
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <p class="nombre card-title pt-2 text-center text-uppercase text-white"
+                                                            id="disponiblesPlatillo_{{ $p->disponible }}">
+                                                            <strong
+                                                                style="font-size: 15px; width:290px;
                                                             background-color:rgba(95, 95, 95, 0.651);
                                                             position: absolute; bottom: 22.5%; left:0;">Disponibles:
-                                                            {{ $p->disponible }}
-                                                        </strong>
-                                                    </p>
+                                                                {{ $p->disponible }}
+                                                            </strong>
+                                                        </p>
 
-                                                    <p class="nombre card-title pt-2 text-center text-dark"
-                                                        id="nombrePlatillo_{{ $p->nombre }}">
-                                                        <strong
-                                                            style="font-size: 20px; width:290px; background-color:rgba(255, 255, 255, 0.677); position: absolute; bottom: 11%; left:0;">
-                                                            {{ $p->nombre }}
-                                                        </strong>
-                                                    </p>
+                                                        <p class="nombre card-title pt-2 text-center text-dark"
+                                                            id="nombrePlatillo_{{ $p->nombre }}">
+                                                            <strong
+                                                                style="font-size: 20px; width:290px; background-color:rgba(255, 255, 255, 0.677); position: absolute; bottom: 11%; left:0;">
+                                                                {{ $p->nombre }}
+                                                            </strong>
+                                                        </p>
 
-                                                    <p class="nombre card-title pt-2 text-center text-dark"
-                                                        id="precioplatillo_{{ $p->precio }}">
-                                                        <strong
-                                                            style="font-size: 20px; width: 290px;  background-color:rgba(255, 255, 255, 0.677);position: absolute; bottom: 0%; left:0;">
-                                                            L {{ $p->precio }}.00
-                                                        </strong>
-                                                    </p>
+                                                        <p class="nombre card-title pt-2 text-center text-dark"
+                                                            id="precioplatillo_{{ $p->precio }}">
+                                                            <strong
+                                                                style="font-size: 20px; width: 290px;  background-color:rgba(255, 255, 255, 0.677);position: absolute; bottom: 0%; left:0;">
+                                                                L {{ $p->precio }}.00
+                                                            </strong>
+                                                        </p>
 
+                                                    </div>
                                                 </div>
+
                                             </div>
+                                        @endif
 
-                                        </div>                                      
-                                    @endif
-
-                                @empty
-                                    <div class="col-12 text-center p-4">No hay registros</div>
-                                @endforelse
+                                    @empty
+                                        <div class="col-12 text-center p-4">No hay registros</div>
+                                    @endforelse
 
                                 </div>
                             </div>
@@ -1148,7 +1159,7 @@
                             <!--Comprobacion que no hay ninguna bebida disponible-->
                             @if (!$exits)
                                 <div class="col-12 text-center p-4">
-                                    <h2>Todos los Platillos están Disponibles</h2> 
+                                    <h2>Todos los Platillos están Disponibles</h2>
                                 </div>
                             @endif
 
@@ -1156,7 +1167,8 @@
                     </div>
 
                     <!-- ========== Combos ========== -->
-                    <div class="tab-pane fade" id="pills-combos-desactivados" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div class="tab-pane fade" id="pills-combos-desactivados" role="tabpanel"
+                        aria-labelledby="pills-contact-tab">
                         <div class="container-fluid" style="padding: 0px">
 
                             <div class="row">
@@ -1195,9 +1207,8 @@
                                     @php $exits = false; @endphp
 
                                     @forelse ($combos as $p)
-
                                         @if ($p->estado == 0)
-                                        @php $exits = true; @endphp
+                                            @php $exits = true; @endphp
                                             <div class="container"
                                                 style="display:block;  height: 300px; width: 300px; padding: 5px ">
 
@@ -1208,8 +1219,9 @@
                                                         <div id="activarCombo" class="form-check form-switch text-end">
                                                             <input data-bs-toggle="modal"
                                                                 data-bs-target="#modalactivarCombo{{ $p->id }}"
-                                                                class="form-check-input" checked='true' type="checkbox"
-                                                                name="chckBox_disponible" id="checkBebida{{ $p->id }}"
+                                                                class="form-check-input" checked='false' type="checkbox"
+                                                                name="chckBox_disponible"
+                                                                id="checkBebida{{ $p->id }}"
                                                                 style="position:absolute; bottom: 90.5%; left: 290px">
                                                         </div>
 
@@ -1224,8 +1236,9 @@
                                                             style="position:absolute; bottom: 27.5%; left:150px">Borrar</a>
 
                                                         <!--Modal Eliminar-->
-                                                        <div class="modal fade" id="modalBorrarProducto{{ $p->id }}"
-                                                            tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true"
+                                                        <div class="modal fade"
+                                                            id="modalBorrarProducto{{ $p->id }}" tabindex="-1"
+                                                            aria-labelledby="ModalLabel" aria-hidden="true"
                                                             data-bs-backdrop="static" data-bs-keyboard="false">
 
                                                             <div class="modal-dialog" data-backdrop="static">
@@ -1267,10 +1280,10 @@
 
 
                                                         <!--Modal activar-->
-                                                        <div class="modal fade" id="modalactivarCombo{{ $p->id }}"
-                                                            tabindex="" aria-labelledby="ModalLabel"
-                                                            data-bs-backdrop="static" data-bs-keyboard="false"
-                                                            data-bs-keyboard="false">
+                                                        <div class="modal fade"
+                                                            id="modalactivarCombo{{ $p->id }}" tabindex=""
+                                                            aria-labelledby="ModalLabel" data-bs-backdrop="static"
+                                                            data-bs-keyboard="false" data-bs-keyboard="false">
 
                                                             <div class="modal-dialog" data-backdrop="static">
                                                                 <div class="modal-content">
@@ -1353,7 +1366,7 @@
                             <!--Comprobacion que no hay ninguna combo disponible-->
                             @if (!$exits)
                                 <div class="col-12 text-center p-4">
-                                    <h2>Todos los Combos están Disponibles</h2> 
+                                    <h2>Todos los Combos están Disponibles</h2>
                                 </div>
                             @endif
 

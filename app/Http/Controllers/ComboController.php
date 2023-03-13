@@ -213,7 +213,11 @@ class ComboController extends Controller
         $create = $platillo->save();
 
         if ($create) {
-            return redirect()->route('menuAdmon.index')->with('mensaje', 'Accion realizada correctamente');
+            if ($platillo->estado == 1) {
+                return redirect()->route('menuAdmon.index')->with('mensaje', 'Combo Activado correctamente');
+            }else{
+                return redirect()->route('menuAdmon.index')->with('mensaje', 'Combo Desactivado correctamente');
+            }
         }
 
     }
