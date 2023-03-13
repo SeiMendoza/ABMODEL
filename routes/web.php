@@ -174,13 +174,34 @@ Route::post('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])
 Route::get('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])
 ->name('pedidoAnterior.detalle'); 
 
-
-
 /****************************************
   Rutas Para eliminar Platillos y Bebidas
 *****************************************/
  Route::get('platillo/{id}/borrar', [PlatilloController::class, 'destroy'])
     ->name('platillo.borrar');
+ Route::get('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
+    ->name('bebida.borrar');
+
+/****************************************
+  Rutas Para Kioskos
+*****************************************/
+Route::get('/kioskos', [KioskoController::class, 'index'])->
+name('kiosko.index');
+
+Route::get('/kioskos/create', [KioskoController::class, 'create'])->
+name('kiosko.create');
+
+Route::post('/kiosko', [KioskoController::class, 'store'])->
+name('kiosko.store');
+
+  /****************************************
+  Rutas Para Piscina
+*****************************************/
+Route::get('/piscina/create', [PiscinaController::class, 'create'])->
+name('piscina.create');
+
+Route::post('/piscina/create', [PiscinaController::class, 'store'])->
+name('piscina.store');
 
 /****************************************
   Rutas Para Mesas
