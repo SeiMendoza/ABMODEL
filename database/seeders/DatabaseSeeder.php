@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call([BebidaSeeder::class,PedidoSeeder::class,
                         PlatilloSeeder::class,
                         ComboSeeder::class,
-                        DetallesUsuarioSeeder::class]);
+                        DetallesUsuarioSeeder::class,
+                        PiscinaTipoSeeder::class,
+                        PiscinaUsoSeeder::class,]);
     }
 }
