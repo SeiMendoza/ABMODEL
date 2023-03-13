@@ -105,12 +105,12 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Piscina</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href={{ route('p') }}>
+                    <a class="nav-link " href={{ route('prodpiscina.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1">Productos</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -135,7 +135,7 @@
         </div>
         
     </aside>
-    <main class="main-content" style="padding: 0px 0px 0px 0px; margin: 0px 0px 0px 250px">
+    <main class="main-content" style="padding: 0px 0px 0px 0px; margin: 10px 0px 40px 250px">
             @yield('activatedMenu')
             @yield('disabledMenu')
     </main>

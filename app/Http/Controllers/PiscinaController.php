@@ -19,9 +19,17 @@ class PiscinaController extends Controller
      */
     public function index()
     {
-        //
+        $prod = Piscina::all();
+        $tip = PiscinaTipo::all();
+        return view('Piscina/inventario/listaproductos',compact('prod','tip'));
     }
-
+public function search(Request $request){
+    $prod = Piscina::all();
+    $tip = PiscinaTipo::all();
+    $text = trim($request->get('busqueda'));
+    $prod = Piscina::where('nombre', 'like', '%' . $text . '%')->paginate(10);
+        return view('Piscina/inventario/listaproductos',compact('prod','tip','text'));
+}
     /**
      * Show the form for creating a new resource.
      *
@@ -97,9 +105,12 @@ class PiscinaController extends Controller
      * @param  \App\Models\Piscina  $piscina
      * @return \Illuminate\Http\Response
      */
-    public function edit(Piscina $piscina)
+    public function edit($id)
     {
-        //
+        $piscina = Piscina::findOrFail($id);
+        $tipo = PiscinaTipo::findOrFail($id);
+        $uso = PiscinaUso::findOrFail($id);
+        return view('Piscina/inventario/editarproductop',compact('piscina','tipo','uso'));
     }
 
     /**
@@ -109,9 +120,44 @@ class PiscinaController extends Controller
      * @param  \App\Models\Piscina  $piscina
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePiscinaRequest $request, Piscina $piscina)
+    public function update(UpdatePiscinaRequest $request, Piscina $id)
     {
-        //
+        $fecha_actual = date("d-m-Y");
+        $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
+
+        $rules=[
+            'nombre' => 'required',
+           // 'tipo' => 'required|exists:piscina_tipos,id',
+           // 'uso' => 'required|exists:piscina_usos,id',
+            'expiracion' => 'required|date|after:'.$minima,
+        ];
+
+        $mensaje=[
+            'nombre.required' => 'El nombre no puede estar vacío',
+            'tipo.required' => 'El tipo de producto no puede estar vacío',
+            'tipo.exists' => 'El tipo de producto no es valido',
+            'uso.required' => 'El uso de producto no puede estar vacío',
+            'uso.exists' => 'El uso de producto no es valido',
+            'expiracion.required' => 'La fecha de expiracion no puede estar vacío',
+            'expiracion.date' => 'La fecha de expiracion debe de ser una fecha',
+            'expiracion.after' => 'La fecha de expiracion debe de ser posterior a '.$minima,
+        ];
+
+        $this->validate($request,$rules,$mensaje);
+
+        $piscina = Piscina::FindOrFail($id);
+
+            $piscina->nombre = $request->input('nombre');
+           // $piscina->tipo = $request->input('tipo');
+           // $piscina->uso = $request->input('uso');
+            $piscina->fecha_expiracion = $request->input('expiracion');
+
+            $creado = $piscina->save();
+
+            if ($creado) {
+                return redirect()->route('producto.update')
+                    ->with('mensaje', 'El producto fue actualizado exitosamente');
+            }
     }
 
     /**

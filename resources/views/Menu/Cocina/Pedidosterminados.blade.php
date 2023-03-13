@@ -18,7 +18,7 @@
         }
     </script>
 
-<div class="mb-0 col-12 text-start">
+<div class="mb-0 col-11 text-start">
 
     <div class="row text-center container pt-2">
         <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos
@@ -61,8 +61,8 @@
             <thead class="card-header border " style="background-color: #fff; color:teal; text-align:center;">
                 <tr>
                     <th scope="col">Número de mesa</th>
-                    <th scope="col">Nombre del cliente</th>
                     <th scope="col">Quiosco</th> 
+                    <th scope="col">Nombre del cliente</th>
                     <th scope="col">Terminado</th>
                     <th scope="col">Detalles</th>
                 </tr>

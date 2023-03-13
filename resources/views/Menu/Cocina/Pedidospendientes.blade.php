@@ -18,7 +18,7 @@
          }
      </script>
     
-<div class="mb-0 col-12 text-start">
+<div class="mb-0 col-11 text-start">
 
     <div class="row text-center container pt-2">
             <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos
@@ -71,7 +71,7 @@
                          <td scope="col">{{$p->quiosco}}</td> 
                          <td scope="col">{{$p->nombreCliente}}</td> 
                                
-                              <td><input type="checkbox" id="term" name="term" value="{{!old('term') ?: 'checked'}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}" style="background:teal; width:20px; height:20px;"></td>
+                              <td><input type="checkbox" id="term" name="term" {{!old('term') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}" style="background:teal; width:20px; height:20px;"></td>
                         <td>
                             <a type="buttom" class="btn btn-light" href="{{route('pedidosp.detalle',['id'=>$p->id])}}">
                                 <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>

@@ -197,11 +197,21 @@ name('kiosko.store');
   /****************************************
   Rutas Para Piscina
 *****************************************/
+//Route::get('/piscina/productos', [PiscinaController::class, 'index'])->
+Route::get('/productos', [PiscinaController::class, 'index'])->
+name('prodpiscina.index');
+Route::get('/piscina/producto/buscar', [PiscinaController::class, 'search'])
+->name('producto.search');
 Route::get('/piscina/create', [PiscinaController::class, 'create'])->
 name('piscina.create');
 
 Route::post('/piscina/create', [PiscinaController::class, 'store'])->
 name('piscina.store');
+Route::get('piscina/{id}/editar', [PiscinaController::class, 'edit'])
+    ->name('producto.edit');
+  
+Route::put('piscina/{id}/edicion', [PiscinaController::class, 'update'])
+    ->name('producto.update');
 
 /****************************************
   Rutas Para Mesas
