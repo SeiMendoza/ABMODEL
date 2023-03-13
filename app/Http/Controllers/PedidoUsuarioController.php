@@ -7,6 +7,7 @@ use App\Models\Pedido;
 use Database\Seeders\PlatillosyBebidasSeeder;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PedidoUsuarioController extends Controller
 {
@@ -77,7 +78,7 @@ class PedidoUsuarioController extends Controller
         if ($create) {
             return redirect()->route('pedidost.pedido')->with('mensaje', 'El pedido fue terminado exitosamente!');
         }
-    }
+    } 
     public function pedidosPendientes_Cocina(Request $request,  $id)
     {
         $activar = Pedido::findOrfail($id);
@@ -104,4 +105,25 @@ class PedidoUsuarioController extends Controller
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detalleterminado', compact('pedido'));
     }
+
+    public function pedidos_anteriores(Request $request)
+    {
+        //recuperar datos
+        $texto=trim($request->get('busqueda'));
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->get();
+        return view('Menu/Cocina/PedidosAnteriores', compact('pedido','texto'));
+    }
+
+    //borrar datos de los pedidos anteriores
+    public function borrarDatos(){
+        $cliente= DB::table('Pedidos')->delete();
+        return back()->with('mensaje', 'Datos Borrados Satisfactoriamente.'); 
+      }
+
+    public function detalles_anteriores($id){
+        $pedido = Pedido::findOrfail($id);
+        return view('Menu/Cocina/detallesPedAnteriores', compact('pedido'));
+    }
 }
+
+

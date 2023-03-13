@@ -160,8 +160,17 @@ Route::get('bebida/{id}/editar', [EditarBebidaController::class, 'edit'])
 Route::put('bebida/{id}/edicion', [EditarBebidaController::class, 'update'])
     ->name('bebida.update');
 
+/*lista de pedidos anteriores*/
+Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])
+    ->name('pedidoant.pedidos_anteriores'); 
+/*Borrar pedidos anteriores*/
+Route::post('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])
+    ->name('borrar.borrarDatos');
+/* Detalles pedidos anteriores */
+Route::get('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])
+->name('pedidoAnterior.detalle'); 
 
-  
+
 
 /****************************************
   Rutas Para eliminar Platillos y Bebidas
@@ -170,3 +179,4 @@ Route::put('bebida/{id}/edicion', [EditarBebidaController::class, 'update'])
     ->name('platillo.borrar');
  Route::get('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
     ->name('bebida.borrar');
+
