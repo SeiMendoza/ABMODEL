@@ -14,6 +14,7 @@ use App\Http\Controllers\EditarBebidaController;
 use App\Http\Controllers\PiscinaController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ReservacionController;
+use App\Http\Controllers\ReservacionTotalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -266,3 +267,23 @@ Route::delete('/mesas/reservaciones/{id}/borrar', [ReservacionController::class,
 
 Route::get('/mesas/reservaciones/buscar', [ReservacionController::class, 'search2'])
 ->name('mesas_res.search');
+
+
+/* Rutas para reservar local*/
+Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])
+       ->name('cliente.reservaLocal');
+
+Route::get('/Local/create', [ReservacionTotalController::class, 'create'])
+       -> name('ReserLocal.create');
+
+Route::post('/Reservacion/Local', [ReservacionTotalController::class, 'store'])
+->name('ReserLocal.store');
+
+Route::get('Cliente/{id}/Editando', [ReservacionTotalController::class, 'edit'])
+  ->name('ResCliente.editar');
+
+Route::put('Cliente/{id}/edicion', [ReservacionTotalController::class, 'update'])
+  ->name('resCliente.update');
+
+Route::get('cliente/{id}/borrar', [ReservacionTotalController::class, 'destroy'])
+  ->name('cliente.borrar');

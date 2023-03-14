@@ -485,7 +485,7 @@
                             </div>
                             <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Local</h4>
                         </div>
-                        <a href="#" class="mb-0 card-footer text-center font-weight-bold bg-gradient-light btn-primary"
+                        <a href="{{route('cliente.reservaLocal')}}" class="mb-0 card-footer text-center text-primary font-weight-bold h4 bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
