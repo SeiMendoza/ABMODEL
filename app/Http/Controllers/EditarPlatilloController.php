@@ -65,8 +65,8 @@ class EditarPlatilloController extends Controller
         $creado = $actualizacion -> save();
 
         if ($creado) {
-               return redirect()->route('menuAdmon.index')
-                ->with('mensaje', "".$actualizacion->nombre." se actualizo correctamente");
+            return redirect()->route('menuAdmon.index')
+            ->with('mensaje', "".$actualizacion->nombre." se actualizo correctamente");
         } 
         
     }

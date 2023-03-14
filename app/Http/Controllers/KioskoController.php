@@ -28,16 +28,16 @@ class KioskoController extends Controller
         $kiosko->cantidad_de_Mesas = $request->input('cantidad_de_Mesas');
        
         //Imagen
+        $file = $request->file('imagen');
         $destinationPath = 'images/kioskos/';
-        $filename = time().'.'.$request->imagen->extension();
-        $request->imagen->move($destinationPath, $filename);
-        $kiosko->imagen = 'images/kioskos' . $filename;
+        $filename = time().'.'.$file->getClientOriginalName();
+        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+        $kiosko->imagen = 'images/kioskos/'.$filename;
 
         $create = $kiosko->save();
 
 
         if ($create) {
-
             return to_route('kiosko.index')->with('mensaje', 'Kiosko registrado correctamente');
         }
 
@@ -52,6 +52,49 @@ class KioskoController extends Controller
     }
 
     public function create(){
-        return view('/Reservaciones/ReserAdmon/registroKioskos');
+        return view('/Reservaciones/ReserAdmon/Kioskos/registroKioskos');
+    }
+
+    public function edit($id){
+
+        $kiosko = Kiosko::findOrFail($id);
+
+        return \view('Reservaciones.ReserAdmon.Kioskos.edicionKioskos')->with('k', $kiosko);
+    }
+
+    public function update(Request $request, $id){
+
+        $kioskoUpdate = Kiosko::findOrFail($id);
+        $kioskoUpdate->descripcion = $request->input('descripcion');
+        $kioskoUpdate->ubicacion = $request->input('ubicacion');
+        $kioskoUpdate->disponible = 1;
+        $kioskoUpdate->cantidad_de_Mesas = $request->input('cantidad_de_Mesas');
+
+        if(isset($k->imagen)){
+            //Imagen
+        $file = $request->file('imagen');
+        $destinationPath = 'images/kioskos/';
+        $filename = time().'.'.$file->getClientOriginalName();
+        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+        $kioskoUpdate->imagen = 'images/kioskos/'.$filename;
+        
+        }
+
+        $kioskoUpdate->save();
+
+        $rules=[ 
+            'descripcion' => 'required|max:100|min:3',      
+            'cantidad_de_Mesas' => 'required|integer ', 
+            'ubicacion' => 'required|max:100|min:3',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg'
+        ];
+
+        return to_route('kiosko.index')->with('mensaje', 'Kiosko actualizado correctamente!');
+    }
+
+    public function destroy($id){
+        Kiosko::findOrFail($id)->delete();
+        return to_route('kiosko.index')->with('mensaje', 'Kiosko Borrado correctamente!');
+
     }
 }

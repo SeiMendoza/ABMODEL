@@ -885,7 +885,7 @@
                                                                     </div>
 
                                                                     <div class="modal-body">
-                                                                        ¿Deseea desactivar
+                                                                        ¿Deseea activar
                                                                         <strong>{{ $p->nombre }}</strong>
                                                                         del menú?
                                                                     </div>
@@ -1089,7 +1089,7 @@
                                                                     </div>
 
                                                                     <div class="modal-body">
-                                                                        ¿Deseea desactivar
+                                                                        ¿Deseea activar
                                                                         <strong>{{ $p->nombre }}</strong>
                                                                         del menú?
                                                                     </div>
@@ -1298,7 +1298,7 @@
                                                                     </div>
 
                                                                     <div class="modal-body">
-                                                                        ¿Deseea desactivar
+                                                                        ¿Deseea activar
                                                                         <strong>{{ $p->nombre }}</strong>
                                                                         del menú?
                                                                     </div>

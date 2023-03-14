@@ -171,7 +171,7 @@ Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos
 Route::post('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])
     ->name('borrar.borrarDatos');
 /* Detalles pedidos anteriores */
-Route::get('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])
+Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])
 ->name('pedidoAnterior.detalle'); 
 
 /****************************************
@@ -193,6 +193,18 @@ name('kiosko.create');
 
 Route::post('/kiosko', [KioskoController::class, 'store'])->
 name('kiosko.store');
+
+Route::get('/kiosko/{id}/edit', [KioskoController::class, 'edit'])->
+name('kiosko.edit');
+
+Route::put('/kiosko/{id}/update', [KioskoController::class, 'update'])->
+name('kiosko.update');
+
+Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
+name('kiosko.destroy');
+
+Route::get('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
+name('kiosko.destroy');
 
   /****************************************
   Rutas Para Piscina
