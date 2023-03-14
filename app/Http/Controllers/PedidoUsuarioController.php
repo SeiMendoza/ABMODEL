@@ -63,7 +63,7 @@ class PedidoUsuarioController extends Controller
     }
     public function pedido_pendientes(Request $request)
     {
-        $pedido = Pedido::where('estado','=','0')->paginate(10);
+         
         //recuperar datos del filtro
         $texto=trim($request->get('busqueda'));
         $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
