@@ -8,6 +8,7 @@
         <title>Villa Crisol - @yield('title') </title>
 
         <!-- Icons -->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link href={{ asset('css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
         <link href={{ asset('css/nucleo-svg.css') }} rel="stylesheet" />
 
@@ -108,7 +109,7 @@
                     <a class="nav-link " href={{ route('prodpiscina.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Productos</span>
                     </a>
@@ -135,11 +136,12 @@
         </div>
         
     </aside>
-    <main class="main-content" style="padding: 0px 0px 0px 0px; margin: 10px 0px 40px 250px">
+    <div style="margin-left: 15px;margin-right:15px;"> 
+    <main class="main-content" style="padding: 0px 0px 0px 0px; margin: 5px 0px 40px 250px;">
             @yield('activatedMenu')
             @yield('disabledMenu')
     </main>
-
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
 

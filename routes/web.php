@@ -201,8 +201,8 @@ name('kiosko.edit');
 Route::put('/kiosko/{id}/update', [KioskoController::class, 'update'])->
 name('kiosko.update');
 
-Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
-name('kiosko.destroy');
+/*Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
+name('kiosko.destroy');*/
 
 Route::get('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');
@@ -222,7 +222,8 @@ Route::post('/piscina/create', [PiscinaController::class, 'store'])->
 name('piscina.store');
 Route::get('piscina/{id}/editar', [PiscinaController::class, 'edit'])
     ->name('producto.edit');
-  
+    Route::delete('/piscina/{id}/borrar', [PiscinaController::class, 'destroy'])
+    ->name('prodpiscina.destroy')->where('id','[0-9]+');
 Route::put('piscina/{id}/edicion', [PiscinaController::class, 'update'])
     ->name('producto.update');
 

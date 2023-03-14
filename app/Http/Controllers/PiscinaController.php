@@ -19,7 +19,7 @@ class PiscinaController extends Controller
      */
     public function index()
     {
-        $prod = Piscina::all();
+        $prod = Piscina::paginate(6);
         $tip = PiscinaTipo::all();
         return view('Piscina/inventario/listaproductos',compact('prod','tip'));
     }
@@ -27,7 +27,8 @@ public function search(Request $request){
     $prod = Piscina::all();
     $tip = PiscinaTipo::all();
     $text = trim($request->get('busqueda'));
-    $prod = Piscina::where('nombre', 'like', '%' . $text . '%')->paginate(10);
+    $prod = Piscina::where('nombre', 'like', '%' . $text . '%')->paginate(6); 
+    $tip = PiscinaTipo::where('descripcion', 'like', '%' . $text . '%')->paginate(6);
         return view('Piscina/inventario/listaproductos',compact('prod','tip','text'));
 }
     /**
@@ -108,9 +109,8 @@ public function search(Request $request){
     public function edit($id)
     {
         $piscina = Piscina::findOrFail($id);
-        $tipo = PiscinaTipo::findOrFail($id);
-        $uso = PiscinaUso::findOrFail($id);
-        return view('Piscina/inventario/editarproductop',compact('piscina','tipo','uso'));
+         
+        return view('Piscina/inventario/editarproductop',compact('piscina'));
     }
 
     /**
@@ -120,15 +120,15 @@ public function search(Request $request){
      * @param  \App\Models\Piscina  $piscina
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePiscinaRequest $request, Piscina $id)
+    public function update(Request $request, $id)
     {
         $fecha_actual = date("d-m-Y");
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
 
         $rules=[
             'nombre' => 'required',
-           // 'tipo' => 'required|exists:piscina_tipos,id',
-           // 'uso' => 'required|exists:piscina_usos,id',
+            'tipo' => 'required|exists:piscina_tipos,id',
+            'uso' => 'required|exists:piscina_usos,id',
             'expiracion' => 'required|date|after:'.$minima,
         ];
 
@@ -148,14 +148,14 @@ public function search(Request $request){
         $piscina = Piscina::FindOrFail($id);
 
             $piscina->nombre = $request->input('nombre');
-           // $piscina->tipo = $request->input('tipo');
-           // $piscina->uso = $request->input('uso');
+            $piscina->tipo = $request->input('tipo');
+            $piscina->uso = $request->input('uso');
             $piscina->fecha_expiracion = $request->input('expiracion');
 
             $creado = $piscina->save();
 
             if ($creado) {
-                return redirect()->route('producto.update')
+                return redirect()->route('prodpiscina.index')
                     ->with('mensaje', 'El producto fue actualizado exitosamente');
             }
     }
@@ -166,8 +166,9 @@ public function search(Request $request){
      * @param  \App\Models\Piscina  $piscina
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Piscina $piscina)
+    public function destroy($id)
     {
-        //
+        Piscina::destroy($id);
+        return redirect()->route('prodpiscina.index')->with('mensaje', 'Producto borrado correctamente');
     }
 }

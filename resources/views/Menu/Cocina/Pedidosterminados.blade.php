@@ -18,7 +18,7 @@
         }
     </script>
 
-<div class="mb-0 col-11 text-start">
+<div class="mb-0 col-12 text-start">
 
     <div class="row text-center container pt-2">
         <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos
@@ -43,9 +43,8 @@
                 @endif
             </div>   
         </form>
-        <a style="position: absolute; right:180px;" href="{{route('terminados.terminados')}}" 
-    class="btn btn-menu"> <i class="ni ni-single-copy-04 text-success text-sm opacity-10">
-    </i> Pedidos terminados</a> 
+        <a style="position: absolute; right:120px;" href="{{route('terminados.terminados')}}" 
+    class="btn btn-menu"><i class="fa-regular fa-newspaper" style="font-size:20px;"></i> Pedidos terminados</a> 
     </div>
     
 <h5 class="card class-2 text-lg text-center" 
