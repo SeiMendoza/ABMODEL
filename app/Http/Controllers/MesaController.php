@@ -23,7 +23,7 @@ class MesaController extends Controller
     public function store(Request $request){
 
         $request -> validate ([
-            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:100|min:3',  
+            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.\0-9\_]+$/|max:100|min:3',  
             'cantidad' => 'required|min:1|max:20|numeric',   
         ],[
             'nombre.required' => 'El nombre no puede estar vacío',
@@ -53,7 +53,7 @@ class MesaController extends Controller
     public function update(Request $request, $id){
 
         $request -> validate ([
-            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:100|min:3',  
+            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.\0-9\_]+$/|max:100|min:3',  
             'cantidad' => 'required|min:1|max:20|numeric',   
         ],[
             'nombre.required' => 'El nombre no puede estar vacío',
