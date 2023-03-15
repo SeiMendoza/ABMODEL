@@ -62,8 +62,7 @@ class PedidoUsuarioController extends Controller
         return view('Menu/Cocina/Terminados', compact('pedido','texto'));
     }
     public function pedido_pendientes(Request $request)
-    {
-         
+    { 
         //recuperar datos del filtro
         $texto=trim($request->get('busqueda'));
         $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);

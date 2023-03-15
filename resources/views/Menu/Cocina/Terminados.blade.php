@@ -1,23 +1,31 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Pedidos-terminados')
-@section('activatedMenu')
-<div class="mb-0 col-12 text-start">
-
-<div class="row text-center container pt-2">
-        <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos terminados
-        </h3>
-</div>
-
+@section('miga')
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">
+    <a class="text-dark" href="{{route('pedidosp.pedido')}}">Cocina</a></li>
+    <li class="breadcrumb-item text-sm text-dark" aria-current="page">
+    <a class="text-dark" href="{{route('pedidost.pedido')}}">Caja</a></li>
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+<a class="text-dark" href="{{route('terminados.terminados')}}">Pedidos terminados</a></li>
+@endsection
+@section('content')
+ 
+        <div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">                            
+            <h4>Pedidos terminados</h4>
+        </div>
  <!--Filtro de busqueda-->
-
- <div class="nav-item" style="margin: 10px 25px 10px 25px;">
-    <form action="{{ route("terminados.terminados") }}" method="get" role="search" 
-        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+ 
+ <div class="nav d-flex justify-content-end">
+            <div class="" style="margin: 10px 25px 10px 25px;">
+    <form action="{{ route('terminados.terminados')}}" method="get" role="search" 
+        class="navbar-search">
         <div class="input-group">
             <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
             placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
             aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>" />
-            <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>    
+            <button class="border-radius-md" type="submit" style="border: 0; color:aliceblue; background:rgb(255,179,71);">
+            <strong>Buscar</strong></button>    
             @if(isset($texto))
                 @if($texto != null)
                     <a href="{{route('terminados.terminados')}}" style="display:block; float:right"  
@@ -27,7 +35,8 @@
         </div>   
     </form>
 </div>
-
+ </div>
+ 
  
         <div class="card-body">
     <div class="table-responsive container-fluid">
@@ -66,6 +75,7 @@
         </table>
     </div>
 </div>
-<a style="position: absolute; right:700px;" class="btn btn-danger" href="{{route('pedidost.pedido')}}">Volver</a>
-     
+<div style="text-align: center;">
+<a class="btn btn-danger" href="{{route('pedidost.pedido')}}">Volver</a>
+</div>    
  @endsection

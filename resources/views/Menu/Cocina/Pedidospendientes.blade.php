@@ -1,32 +1,23 @@
 @extends('00_plantillas_Blade.plantilla_General2')
-@section('title', 'Pedidos-cocina')
-@section('activatedMenu')
+@section('title', 'Cocina')
+@section('miga')
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">
+    <a class="text-dark" href="{{route('pedidosp.pedido')}}">Cocina</a></li>
+    <li class="breadcrumb-item text-sm text-dark" aria-current="page">
+    <a class="text-dark" href="{{route('pedidost.pedido')}}">Caja</a></li>
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+<a class="text-dark" href="{{route('terminados.terminados')}}">Pedidos terminados</a></li>
+@endsection
+@section('content')
  
-     <script>
-         var msg = "{{Session::get('mensaje ')}}";
-         var exist = "{{Session::has('mensaje ')}}";
-         if (exist) {
-             Swal.fire({
-                 position: 'top-end',
-                 icon: 'success',
-                 title: msg,
-                 showConfirmButton: false,
-                 toast: true,
-                 background: '#fff',
-                 timer: 5500
-             })
-         }
-     </script>
-    
-<div class="mb-0 col-12 text-start">
+<div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">
+    <h3>Pedidos en cocina</h3>
+</div>
 
-    <div class="row text-center container pt-2">
-            <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos
-            </h3>
-    </div>
-
-    <!--Filtro de busqueda-->
-
+<!--Filtro de busqueda-->
+<div> 
+<div class="nav d-flex justify-content-end " style="">
     <div class="nav-item" style="margin: 10px 25px 10px 25px;">
         <form action="{{ route('pedidosp.pedido')}}" method="get" role="search" 
             class="navbar-search">
@@ -34,7 +25,7 @@
                 <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
                 placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>" />
-                <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>    
+                <button class="border-radius-md" type="submit" style="border: 0; color:aliceblue; background:rgb(255,179,71);"><strong>Buscar</strong></button>    
                 @if(isset($texto))
                     @if($texto != null)
                         <a href="{{route('pedidosp.pedido')}}" style="display:block; float:right"  
@@ -42,13 +33,9 @@
                     @endif
                 @endif
             </div>   
-        </form>
+            </form>
     </div>
-
-
-     <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
-      position: relative;">Lista de pedidos pendientes en cocina</h5>
-
+</div>
      <!--------Lista de pedidos---------------->
 
      <div class="card-body">
@@ -110,13 +97,15 @@
                      @endforelse
                  </tbody>
                 </table>
-                <div style="display:block; float:right;"> 
-                    {{$pedido->appends(['busqueda' => $texto])->links()}}
-                </div>
             </div>
-
- <script>
+     </div>
+</div>
     
- </script>
-
+@endsection
+@section('pie')
+    <div class="pagination justify-content-end"> 
+        <div style="display:block; float:right;"> 
+        {{$pedido->appends(['busqueda' => $texto])->links()}}
+        </div>
+    </div>
 @endsection

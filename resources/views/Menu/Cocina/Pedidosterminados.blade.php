@@ -1,40 +1,31 @@
 @extends('00_plantillas_Blade.plantilla_General2')
-@section('title', 'Pedidos-caja')
-@section('activatedMenu')
+@section('title', 'Caja')
+@section('miga')
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">
+    <a class="text-dark" href="{{route('pedidosp.pedido')}}">Cocina</a></li>
+    <li class="breadcrumb-item text-sm text-dark" aria-current="page">
+    <a class="text-dark" href="{{route('pedidost.pedido')}}">Caja</a></li>
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+<a class="text-dark" href="{{route('terminados.terminados')}}">Pedidos terminados</a></li>
+@endsection
+@section('content')
    
- <script>
-        var msg = "{{Session::get('mensaje')}}";
-        var exist = "{{Session::has('mensaje')}}";
-        if(exist){
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: msg,
-                showConfirmButton: false,
-                toast: true,
-                background: '#fff',
-                timer: 5500
-            })
-        }
-    </script>
+<div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">
+    <h3>Pedidos en caja</h3>
+</div>
 
-<div class="mb-0 col-12 text-start">
-
-    <div class="row text-center container pt-2">
-        <h3 style="background:rgb(255,179,71);" class=" card text-white text-uppercase p-2">pedidos
-        </h3>
-    </div>
-
-     <!--Filtro de busqueda-->
-             
-     <div class="nav-item" style="margin: 10px 25px 10px 25px;">
+<!--Filtro de busqueda-->
+<div> 
+<div class="nav d-flex justify-content-end " style="">
+    <div class="nav-item" style="margin: 10px 0px 10px 25px;">
         <form action="{{ route('pedidost.pedido')}}" method="get" role="search" 
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            class="navbar-search">
             <div class="input-group">
                 <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
                 placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>" />
-                <button class="btn btn-menu my-2 my-sm-0" type="submit"><strong>Buscar</strong></button>    
+                <button class="border-radius-md" type="submit" style="border: 0; color:aliceblue; background:rgb(255,179,71);"><strong>Buscar</strong></button>    
                 @if(isset($texto))
                     @if($texto != null)
                         <a href="{{route('pedidost.pedido')}}" style="display:block; float:right"  
@@ -42,16 +33,12 @@
                     @endif
                 @endif
             </div>   
-        </form>
-        <a style="position: absolute; right:120px;" href="{{route('terminados.terminados')}}" 
-    class="btn btn-menu"><i class="fa-regular fa-newspaper" style="font-size:20px;"></i> Pedidos terminados</a> 
+            </form>
     </div>
+    <button style="margin: 10px 23px 10px 25px;border: 0; color:aliceblue; background:rgb(255,179,71);" href="{{route('terminados.terminados')}}" 
+    class="border-radius-md"><i class="fa-regular fa-newspaper" style="font-size:15px;"></i> Pedidos terminados</button> 
+</div>
     
-<h5 class="card class-2 text-lg text-center" 
- style="background-color: #fff; color:#fff; background:rgb(255,179,71); position: relative;"
- >Lista de pedidos pendientes en caja</h5>
-
-
 <!--------Lista de pedidos---------------->
  
 <div class="card-body">
