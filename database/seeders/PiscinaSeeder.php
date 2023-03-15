@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Piscina;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,6 @@ class PiscinaSeeder extends Seeder
      */
     public function run()
     {
-        
+        Piscina::factory(40)->create();
     }
 }

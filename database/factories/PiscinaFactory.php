@@ -17,7 +17,10 @@ class PiscinaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre'=>$this->faker->word(),
+            'tipo'=>$this->faker->randomElement([1,2]),
+            'fecha_expiracion'=>$this->faker->date(),
+            'uso'=>$this->faker->randomElement([1,2,3])
         ];
     }
 }

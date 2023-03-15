@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
                         ComboSeeder::class,
                         DetallesUsuarioSeeder::class,
                         PiscinaTipoSeeder::class,
-                        PiscinaUsoSeeder::class,]);
+                        PiscinaUsoSeeder::class,
+                        PiscinaSeeder::class]);
     }
 }
