@@ -10,7 +10,7 @@ class MesaController extends Controller
 {
      public function index()
     {
-        $registros = Mesa::paginate(12);
+        $registros = Mesa::paginate(10);
         return view('Reservaciones.ReserAdmon.Mesas.mesasRegistro',  compact('registros'));
     } 
     public function search(Request $request)
@@ -48,6 +48,12 @@ class MesaController extends Controller
             ->with('mensaje', "".$nuevo->nombre." creada correctamente");
         }
         
+    }
+
+    public function edit($id)
+    {
+        $registro = Mesa::findOrFail($id);
+        return view('Reservaciones.ReserAdmon.Mesas.editarRegistro',  compact('registro'));
     }
 
     public function update(Request $request, $id){

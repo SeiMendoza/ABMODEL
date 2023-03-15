@@ -18,6 +18,14 @@
 
         <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     </head>
+    <style media="screen">
+        #r{
+            background-color: rgba(2, 102, 0, 0.727);
+        }
+        li:active a, li:focus-visible, li:hover{
+            background-color: rgba(2, 102, 0, 0.168);
+        }
+      </style>
 <body class=" g-sidenav-show bg-gray-100" style="">
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
@@ -138,13 +146,92 @@
     </aside>
     <div style="margin-left: 15px;margin-right:15px;"> 
     <main class="main-content" style="padding: 0px 0px 0px 0px; margin: 5px 0px 40px 250px;">
-            @yield('activatedMenu')
-            @yield('disabledMenu')
+        <script>
+            var msg = '{{ Session::get('mensaje') }}';
+            var exist = '{{ Session::has('mensaje') }}';
+            if (exist) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: msg,
+                    showConfirmButton: false,
+                    toast: true,
+                    background: '#fff',
+                    timer: 5500
+                })
+            }
+            var ms = '¡Existe un error, revise los datos!';
+            var exis = '{{ Session::has('errors') }}';
+            if (exis) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: ms,
+                    showConfirmButton: false,
+                    toast: true,
+                    background: '#fff',
+                    timer: 5500
+                })
+            }
+        </script>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                    href="{{route('index')}}">Inicio</a></li>
+                @yield('miga')
+            </ol>
+            
+        </nav>
+        <div class="" style="padding: 0; margin:0;">
+            @yield('content')
+        </div>
+        <div class="row container-fluid footer" style="padding: 0; margin:0;">
+            @yield('pie')
+        </div>
     </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
-
+    <script>
+        (function () { 'use strict'
+    
+        var forms = document.querySelectorAll('.needs-validation')
+    
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+    
+                form.classList.add('was-validated')
+            }, false)
+            })
+        })()
+    
+        function cancelar(ruta){
+    
+            Swal
+            .fire({
+                title: "Cancelar",
+                text: "¿Desea cancelar lo que esta haciendo?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: "Si",
+                cancelButtonText: "No",
+            })
+            .then(resultado => {
+                if (resultado.value) {
+                    // Hicieron click en "Sí"
+                    window.location.href = '/'+ruta;
+                } else {
+                    // Dijeron que no
+                }
+            });
+    
+        }
+    </script>
 </body>
 
 </html>

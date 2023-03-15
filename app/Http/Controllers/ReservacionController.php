@@ -10,7 +10,7 @@ class ReservacionController extends Controller
 {
     public function index2()
     {
-        $reservaciones = Reservacion::paginate(5);
+        $reservaciones = Reservacion::paginate(10);
         return view('Reservaciones.ReserAdmon.Mesas.mesasReservaciones',  compact('reservaciones'));
     }
     public function search2(Request $request)
@@ -41,6 +41,11 @@ class ReservacionController extends Controller
             ->with('mensaje', "".$nuevo->nombre." creada correctamente");
         }
         
+    }
+    public function edit($id)
+    {
+        $reservacion = Reservacion::findOrFail($id);
+        return view('Reservaciones.ReserAdmon.Mesas.editarReservaciones',  compact('reservacion'));
     }
     public function update(Request $request, $id){
 

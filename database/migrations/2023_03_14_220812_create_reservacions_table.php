@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mesas', function (Blueprint $table) {
+        Schema::create('reservacions', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->integer('cantidad');
-            $table->boolean('estado')->default(1);
+            $table->string('celular');
+            $table->string('cantidad');
+            $table->string('fecha');
+            $table->string('pago');
+            $table->unsignedBigInteger('mesa_id');
+            $table->foreign("mesa_id")->references("id")->on("mesas")->onDelate('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mesas');
+        Schema::dropIfExists('reservacions');
     }
 };

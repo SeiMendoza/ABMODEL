@@ -241,6 +241,9 @@ Route::get('/mesas/registro', [MesaController::class, 'index'])
 Route::post('/mesas/registro/nuevo',[MesaController::class, 'store'])
 ->name('mesas_reg.store');
 
+Route::get('/mesas/registro/{id}/edicion', [MesaController::class, 'edit'])
+->name('mesas_reg.edit')->where('id','[0-9]+');
+
 Route::put('/mesas/registro/{id}/edicion', [MesaController::class, 'update'])
 ->name('mesas_reg.update')->where('id','[0-9]+');
 
@@ -259,6 +262,9 @@ Route::get('/mesas/reservaciones', [ReservacionController::class, 'index2'])
 
 Route::post('/mesas/reservaciones/nuevo',[ReservacionController::class, 'store'])
 ->name('mesas_res.store');
+
+Route::get('/mesas/reservaciones/{id}/edicion', [ReservacionController::class, 'edit'])
+->name('mesas_res.edit')->where('id','[0-9]+');
 
 Route::put('/mesas/reservaciones/{id}/edicion', [ReservacionController::class, 'update'])
 ->name('mesas_res.update')->where('id','[0-9]+');

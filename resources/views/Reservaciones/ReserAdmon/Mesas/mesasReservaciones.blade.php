@@ -1,7 +1,17 @@
-@extends('Reservaciones.ReserAdmon.Mesas.mesasIndex')
+@extends('00_plantillas_Blade.plantilla_General2')
+@section('title', 'Mesas')
+@section('miga')
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">Mesas</li>
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Reservaciones de mesas</li>
+@endsection
 @section('content')
     <!-- ========== Reservaciones ========== -->
-    <div class=""  id="reserva" style="">  
+    <div class=""  id="reserva" style="">
+        <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
+            <a href="{{ route('mesas_reg.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
+                <i class="ni ni-bold-left text-sm text-center opacity-10"></i>
+                Ir a registro de mesas</a>
+        </div>
         <div class="nav d-flex justify-content-end " style="">
             <div class="" style="margin: 10px 0 0 10px">
                 <form action="{{ route('mesas_res.search') }}" method="get" role="search" 
@@ -58,21 +68,19 @@
                     </div>
                 </form>
             </div>
-            <div style="margin: 11px 0 0 10px;" class="nav-link-icon">                            
-                <a href="{{ route('index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:80px; padding:6px;">
-                    <i class="ni ni-bold-left text-sm text-center opacity-10"></i>
-                    Inicio</a>
-            </div>
         </div>
-         <!-- ========== Cards ========== -->
-         <div class="">
+        <!-- ========== Cards ========== -->
+        <div class="">
             <div class="table-responsive container-fluid">
                 <table class="table" id="table" style="background-color: #fff;">
                     <thead class="card-header border border-radius" style="color:teal; text-align:center">
                         <tr>
                             <th scope="col">N</th>
                             <th scope="col">Cliente</th>
-                            <th scope="col">Estado</th>
+                            <th scope="col">Celular</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">fecha</th>
+                            <th scope="col">Pago</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Eliminar</th>
                         </tr>
@@ -83,56 +91,17 @@
                                 <tr class="border border-light" style="color:teal; text-align:center">
                                     <th scope="col">{{$r->id}}</th>
                                     <td scope="col">{{$r->nombre}}</td> 
-                                    <td scope="col">Activo</td>
-                                    <td scope="col">
-                                        <!-- Button trigger modal editar-->
-                                        <button style="" 
-                                        class="btn btn-warning button" type="button" data-bs-toggle="modal" 
-                                        data-bs-target="#staticBackdrop{{$r->id}}">Editar
-                                        </button>
-                                        <!-- Modal Editar-->
-                                        <form action="{{route('mesas_res.update', ['id' => $r->id])}}" method="post" id="actualizar" novalidate class="needs-validation" enctype="multipart/form-data">
-                                            @method('put')
-                                            @csrf
-                                            <div class="modal" id="staticBackdrop{{$r->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
-                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class=" modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                    <h5 class="modal-title" id="staticBackdropLabel">Editar a: {{$r->nombre}}</h5>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="form-floating mb-3">
-                                                            <input class="input--style-2 form-control" type="text" placeholder="Mesa" name="nombre" id="nombre"
-                                                            value="{{old('nombre', $r->nombre)}}" required
-                                                            maxlength="25">
-                                                            <label for="nombre" class="form-label">Cliente</label>
-                                                            <div class="invalid-feedback">
-                                                                No puede estar vacio el nombre del cliente
-                                                            </div>
-                                                            @error('nombre')
-                                                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="form-floating">
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" onclick="cancelar('mesas/reservaciones')" class="btn btn-secondary" >Cerrar</button>
-                                                        <button onclick="" type="submit" class="btn btn-success">Comprendido</button>
-                                                    </div>  
-                                                    
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </td>
+                                    <td scope="col">{{$r->celular}}</td> 
+                                    <td scope="col">{{$r->cantidad}}</td> 
+                                    <td scope="col">{{$r->fecha}}</td> 
+                                    <td scope="col">{{$r->pago}}</td> 
+                                    <td scope="col" ><a href="{{route('mesas_res.edit', ['id' => $r->id])}}"><i class="fa fa-edit"></i></a></td>
                                     <td scope="col">
                                         <!-- Button trigger modal eliminar-->
-                                        <button style="" 
-                                        class="btn btn-danger button" type="button" data-bs-toggle="modal" 
-                                        data-bs-target="#staticBackdropE{{$r->id}}">Eliminar
-                                        </button>
+                                        <a style="" 
+                                        class="" type="button" data-bs-toggle="modal" 
+                                        data-bs-target="#staticBackdropE{{$r->id}}"><i class="fa fa-delete-left"></i>
+                                        </a>
                                         <!-- Modal Eliminar-->
                                         <form action="{{route('mesas_res.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
                                             @method('delete')

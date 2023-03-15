@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservacions', function (Blueprint $table) {
+        Schema::create('mesas', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo');
             $table->string('nombre');
+            $table->string('cantidad');
+            $table->unsignedBigInteger('kiosko_id');
+            $table->foreign("kiosko_id")->references("id")->on("kioskos")->onDelate('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservacions');
+        Schema::dropIfExists('mesas');
     }
 };

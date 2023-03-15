@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder
                         DetallesUsuarioSeeder::class,
                         PiscinaTipoSeeder::class,
                         PiscinaUsoSeeder::class,
-                        PiscinaSeeder::class]);
+                        PiscinaSeeder::class,
+                        KioskoSeeder::class,
+                        MesaSeeder::class,
+                        ReservacionSeeder::class]);
     }
 }
