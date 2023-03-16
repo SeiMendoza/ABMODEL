@@ -232,6 +232,16 @@
     
         }
     </script>
+     <!-- Jquery JS-->
+     <script src="/assets/jquery/jquery.min.js"></script>
+     <!-- Vendor JS-->
+     <script src="/assets/select2/select2.min.js"></script>
+     <script src="/assets/datepicker/moment.min.js"></script>
+     <script src="/assets/datepicker/daterangepicker.js"></script>
+ 
+     <!-- Main JS-->
+     <script src="/js/global.js"></script>
 </body>
+
 
 </html>

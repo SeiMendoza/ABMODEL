@@ -1,6 +1,6 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalle de caja')
-@section('activatedMenu')
+@section('content')
 
 
 <style>

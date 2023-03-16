@@ -11,6 +11,6 @@ class Reservacion extends Model
 
     public function mesas()
     {
-        return $this->hasMany(Mesa::class, 'mesa_id', 'id');
+        return $this->belongsTo(Mesa::class, 'mesa_id', 'id');
     }
 }

@@ -49,7 +49,7 @@
                                     maxlength="25">
                                     <label for="nombre" class="form-label">Cliente</label>
                                     <div class="invalid-feedback">
-                                        No puede estar vacio el nombre de la cliente
+                                        No puede estar vacio el nombre del cliente
                                     </div>
                                     @error('nombre')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -95,35 +95,14 @@
                                     <td scope="col">{{$r->cantidad}}</td> 
                                     <td scope="col">{{$r->fecha}}</td> 
                                     <td scope="col">{{$r->pago}}</td> 
-                                    <td scope="col" ><a href="{{route('mesas_res.edit', ['id' => $r->id])}}"><i class="fa fa-edit"></i></a></td>
+                                    <td scope="col" ><a href="{{route('mesas_res.edit', ['id' => $r->id])}}"><i class="fa fa-edit text-success"></i></a></td>
                                     <td scope="col">
-                                        <!-- Button trigger modal eliminar-->
-                                        <a style="" 
-                                        class="" type="button" data-bs-toggle="modal" 
-                                        data-bs-target="#staticBackdropE{{$r->id}}"><i class="fa fa-delete-left"></i>
-                                        </a>
-                                        <!-- Modal Eliminar-->
                                         <form action="{{route('mesas_res.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
                                             @method('delete')
                                             @csrf
-                                            <div class="modal fade" id="staticBackdropE{{$r->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
-                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar a: {{$r->nombre}}</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                        
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                        <button type="submit" class="btn btn-danger">Comprendido</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <button role="button" type="submit" style="border: 0; padding:0; margin:0;"><i class="fa fa-delete-left text-danger" style="border: 0; padding:0; margin:0;"></i></button>
                                         </form>
+                                        <!-- Modal Eliminar-->
                                     </td>
                                 </tr>
                            

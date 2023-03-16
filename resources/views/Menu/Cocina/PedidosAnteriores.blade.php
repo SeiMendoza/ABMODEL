@@ -1,6 +1,6 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Pedidos-Anteriores')
-@section('activatedMenu')
+@section('content')
 
 
 

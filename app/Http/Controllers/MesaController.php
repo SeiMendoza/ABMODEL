@@ -20,12 +20,21 @@ class MesaController extends Controller
             ->orWhere('cantidad', 'like', '%' . $text . '%')->paginate(12);
         return view("Reservaciones.ReserAdmon.Mesas.mesasRegistro", compact('registros', 'text'));
     }
+    public function create()
+    {
+        return view('Reservaciones.ReserAdmon.Mesas.formularioRegistro');
+    }
     public function store(Request $request){
 
         $request -> validate ([
+            'codigo' => 'required|max:13|numeric',
             'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.\0-9\_]+$/|max:100|min:3',  
-            'cantidad' => 'required|min:1|max:20|numeric',   
+            'cantidad' => 'required|min:1|max:20|numeric',  
+            //'kiosko' => 'required' 
         ],[
+            'codigo.required' => 'El código no puede estar vacío',
+            'codigo.max' => 'El código debe tener 13 números',
+            'codigo.numeric' => 'El código debe ser de tipo numérico',
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.regex'=> 'El nombre tiene caracteres no permitidos',
             'nombre.max' => 'El nombre es muy extenso',
@@ -34,13 +43,16 @@ class MesaController extends Controller
             'cantidad.max' => 'la cantidad es muy alta',
             'cantidad.min' => 'La cantidad es muy baja',
             'cantidad.numeric' => 'La cantidad debe se dde tipo numérico',
+           // 'kiosko.required' => 'Kiosko no puede estar vacío',
         ]);
 
       
         $nuevo = new Mesa;
 
+        $nuevo->codigo = $request->input('codigo');
         $nuevo->nombre = $request->input('nombre');
-        $nuevo->cantidad = $request->input('cantidad');               
+        $nuevo->cantidad = $request->input('cantidad'); 
+        //$nuevo->kiosko_id = $request->input('kiosko');              
         $creado = $nuevo -> save();
 
         if ($creado) {
@@ -59,9 +71,15 @@ class MesaController extends Controller
     public function update(Request $request, $id){
 
         $request -> validate ([
+            'codigo' => 'required|min:13|numeric',
             'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.\0-9\_]+$/|max:100|min:3',  
             'cantidad' => 'required|min:1|max:20|numeric',   
+            //'kiosko' => 'required'
         ],[
+            'codigo.required' => 'El código no puede estar vacío',
+            //'codigo.max' => 'El código debe tener 13 números',
+            'codigo.min' => 'El código debe tener 13 números',
+            'codigo.numeric' => 'El código debe ser de tipo numérico',
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.regex'=> 'El nombre tiene caracteres no permitidos',
             'nombre.max' => 'El nombre es muy extenso',
@@ -69,13 +87,16 @@ class MesaController extends Controller
             'cantidad.required' => 'La cantidad no puede estar vacío',
             'cantidad.max' => 'la cantidad es muy alta',
             'cantidad.min' => 'La cantidad es muy baja',
-            'cantidad.numeric' => 'La cantidad debe se dde tipo numérico',
+            'cantidad.numeric' => 'La cantidad debe ser de tipo numérico',
+            //'kiosko.required' => 'Kiosko no puede estar vacío',
         ]);
 
         $actualizacion = Mesa::findOrFail($id);
 
+        $actualizacion->codigo = $request->input('codigo');
         $actualizacion->nombre = $request->input('nombre');
-        $actualizacion->cantidad = $request->input('cantidad');               
+        $actualizacion->cantidad = $request->input('cantidad'); 
+        $actualizacion->kiosko_id = 1;              
         $creado = $actualizacion -> save();
 
         if ($creado) {

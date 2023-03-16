@@ -31,53 +31,8 @@
                     </form>
                 </div>
                 <div style="margin: 10px 0 0 10px;" class=" nav-link-icon">
-                    <button type="button" data-bs-toggle="modal" 
-                    data-bs-target="#staticBackdrop" class="btn btn-success">
-                    <i class="ni ni-palette"></i> Agregar mesas</button>
-                    <!-- Modal Nuevo-->
-                    <form action="{{route('mesas_reg.store')}}" method="post" id="nuevo" novalidate class="needs-validation" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
-                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class=" modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Agregar una nueva mesa</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-floating mb-3">
-                                        <input class="input--style-2 form-control" type="text" placeholder="Mesa" name="nombre" id="nombre"
-                                        value="{{old('nombre')}}" required
-                                        maxlength="25">
-                                        <label for="nombre" class="form-label">Mesa</label>
-                                        <div class="invalid-feedback">
-                                            No puede estar vacio el nombre de la mesa
-                                        </div>
-                                        @error('nombre')
-                                            <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                        @enderror
-                                    </div>
-                                    <div class="form-floating">
-                                        <input class="input--style-2 form-control" type="number" placeholder="Cantidad de personas" name="cantidad" id="cantidad" 
-                                        value="{{old('cantidad')}}" required>
-                                        <label for="cantidad" class="form-label">Cantidad de personas</label>
-                                        <div class="invalid-feedback">
-                                            No puede estar vacia la cantidad
-                                        </div>
-                                        @error('cantidad')
-                                            <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" onclick="cancelar('mesas/registro')" class="btn btn-secondary" >Cerrar</button>
-                                    <button onclick="" type="submit" class="btn btn-success">Comprendido</button>
-                                </div>  
-                                
-                            </div>
-                            </div>
-                        </div>
-                    </form>
+                    <a href="#" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
+                    <i class="fa fa-newspaper"></i> Agregar mesas</a>
                 </div>
             </div>
             <!-- ========== Cards ========== -->
@@ -104,14 +59,37 @@
                                         <td scope="col">{{$r->nombre}}</td> 
                                         <td scope="col">{{$r->cantidad}}</td>
                                         <td scope="col">{{$r->kiosko_id}}</td>
-                                        <td scope="col" ><a href="{{route('mesas_reg.edit', ['id' => $r->id])}}"><i class="fa fa-edit"></i></a></td>
-                                        <td>
-                                            <form action="{{route('mesas_reg.destroy', ['id' => $r->id])}}" method="POST" 
-                                            enctype="multipart/form-data" style="display: inline-black;" id="eliminar">
-                                              @method('delete')
-                                              @csrf
-                                              <a type="button" onclick="eliminar()"> <i class="fa fa-delete-left"></i></a>
-                                          </form> 
+                                        <td  scope="col" ><a class="bg-light border-radius-md h-6 text-center text-success" 
+                                            href="{{route('mesas_reg.edit', ['id' => $r->id])}}"><i class="fa fa-edit"></i></a>
+                                        </td>
+                                        <td scope="col">
+                                            <!-- Button trigger modal eliminar-->
+                                            <a
+                                            class="" type="button" data-bs-toggle="modal" 
+                                            data-bs-target="#staticBackdropE{{$r->id}}"><i class="fa fa-delete-left text-danger"></i>
+                                            </a>
+                                            <!-- Modal Eliminar-->
+                                            <form action="{{route('mesas_reg.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
+                                                @method('delete')
+                                                @csrf
+                                                <div class="modal fade" id="staticBackdropE{{$r->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+                                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar a: {{$r->nombre}}</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                            <button type="submit" class="btn btn-danger">Comprendido</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </td>
                                     </tr>
                                

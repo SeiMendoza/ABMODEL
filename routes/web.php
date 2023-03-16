@@ -238,6 +238,9 @@ Route::put('piscina/{id}/edicion', [PiscinaController::class, 'update'])
 Route::get('/mesas/registro', [MesaController::class, 'index'])
 ->name('mesas_reg.index');
 
+Route::get('/mesas/registro/nuevo',[MesaController::class, 'create'])
+->name('mesas_reg.create');
+
 Route::post('/mesas/registro/nuevo',[MesaController::class, 'store'])
 ->name('mesas_reg.store');
 
@@ -259,6 +262,9 @@ Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])
 
 Route::get('/mesas/reservaciones', [ReservacionController::class, 'index2'])
 ->name('mesas_res.index');
+
+Route::get('/mesas/reservaciones/nuevo',[ReservacionController::class, 'create'])
+->name('mesas_res.create');
 
 Route::post('/mesas/reservaciones/nuevo',[ReservacionController::class, 'store'])
 ->name('mesas_res.store');

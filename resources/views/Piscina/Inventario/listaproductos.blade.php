@@ -1,6 +1,6 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Piscina-productos')
-@section('activatedMenu')
+@section('content')
 
 <script>
         var msg = "{{Session::get('mensaje')}}";
