@@ -100,7 +100,7 @@
                                         <form action="{{route('mesas_res.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
                                             @method('delete')
                                             @csrf
-                                            <button role="button" type="submit" style="border: 0; padding:0; margin:0;"><i class="fa fa-delete-left text-danger" style="border: 0; padding:0; margin:0;"></i></button>
+                                            <a role="button" type="submit" style="border: 0; padding:0; margin:0;"><i class="fa fa-delete-left text-danger" style="border: 0; padding:0; margin:0;"></i></a>
                                         </form>
                                         <!-- Modal Eliminar-->
                                     </td>
