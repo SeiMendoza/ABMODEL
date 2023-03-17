@@ -8,6 +8,7 @@ use Database\Seeders\PlatillosyBebidasSeeder;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class PedidoUsuarioController extends Controller
 {
@@ -46,26 +47,44 @@ class PedidoUsuarioController extends Controller
 
         return redirect()->route("cliente_prueba")->with('mensaje', 'El pedido fue enviado exitosamente');
     }
-    public function pedido_terminados(Request $request)
+    public function pedido_terminados()
     {
-        //recuperar datos del filtro
-        $texto=trim($request->get('busqueda'));
-
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
+        $pedido = Pedido::where('estado',1)->paginate(6);
+        $texto="";
         return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
     }
-    public function terminados(Request $request)
-    {
-        //recuperar datos del filtro
-        $texto=trim($request->get('busqueda'));
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->get();
-        return view('Menu/Cocina/Terminados', compact('pedido','texto'));
-    }
-    public function pedido_pendientes(Request $request)
+    public function psearch(Request $request)
     { 
         //recuperar datos del filtro
-        $texto=trim($request->get('busqueda'));
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
+       $texto=trim($request->get('busqueda'));
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(6);
+        return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
+    }
+    public function terminados()
+    {
+        $pedido = Pedido::where('estado',2)->paginate(6);
+        $texto="";
+        return view('Menu/Cocina/Terminados', compact('pedido','texto'));
+    }
+    public function search(Request $request)
+    { 
+        //recuperar datos del filtro
+       $texto=trim($request->get('busqueda'));
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(6);
+        return view('Menu/Cocina/Terminados', compact('pedido','texto'));
+    }
+    public function pedido_pendientes()
+    { 
+        $pedido = Pedido::where('estado',0)->paginate(6);
+        $texto="";
+        //$pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(5);
+        return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
+    }
+    public function pcsearch(Request $request)
+    { 
+        //recuperar datos del filtro
+       $texto=trim($request->get('busqueda'));
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(6);
         return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
     }
     public function terminarp(Request $request,  $id)

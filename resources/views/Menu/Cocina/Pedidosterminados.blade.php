@@ -1,12 +1,10 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Caja')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">
-    <a class="text-dark" href="{{route('pedidosp.pedido')}}">Cocina</a></li>
     <li class="breadcrumb-item text-sm text-dark" aria-current="page">
     <a class="text-dark" href="{{route('pedidost.pedido')}}">Caja</a></li>
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-<a class="text-dark" href="{{route('terminados.terminados')}}">Pedidos terminados</a></li>
+<a class="text-dark" href="{{route('terminados.terminados')}}" onclick="cambia">Pedidos terminados</a></li>
 @endsection
 @section('content')
    
@@ -19,7 +17,7 @@
 <div> 
 <div class="nav d-flex justify-content-end " style="">
     <div class="nav-item" style="margin: 10px 0px 10px 25px;">
-        <form action="{{ route('pedidost.pedido')}}" method="get" role="search" 
+        <form action="{{ route('pedidost.psearch')}}" method="get" role="search" 
             class="navbar-search">
             <div class="input-group">
                 <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
@@ -35,8 +33,8 @@
             </div>   
             </form>
     </div>
-    <button style="margin: 10px 23px 10px 25px;border: 0; color:aliceblue; background:rgb(255,179,71);" href="{{route('terminados.terminados')}}" 
-    class="border-radius-md"><i class="fa-regular fa-newspaper" style="font-size:15px;"></i> Pedidos terminados</button> 
+    <a style="margin: 10px 23px 10px 25px;border: 0; color:aliceblue; background:rgb(255,179,71);" href="{{route('terminados.terminados')}}" 
+    class="btn badge-light"><i class="fa-regular fa-newspaper" style="font-size:15px;"></i> Pedidos terminados</a> 
 </div>
     
 <!--------Lista de pedidos---------------->
@@ -107,6 +105,5 @@
         </div>
     </div>
 </div>
-
  
 @endsection

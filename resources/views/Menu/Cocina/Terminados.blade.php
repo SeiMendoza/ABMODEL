@@ -1,12 +1,8 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Pedidos-terminados')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">
-    <a class="text-dark" href="{{route('pedidosp.pedido')}}">Cocina</a></li>
     <li class="breadcrumb-item text-sm text-dark" aria-current="page">
     <a class="text-dark" href="{{route('pedidost.pedido')}}">Caja</a></li>
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-<a class="text-dark" href="{{route('terminados.terminados')}}">Pedidos terminados</a></li>
 @endsection
 @section('content')
  
@@ -18,7 +14,7 @@
  
  <div class="nav d-flex justify-content-end">
             <div class="" style="margin: 10px 25px 10px 25px;">
-    <form action="{{ route('terminados.terminados')}}" method="get" role="search" 
+    <form action="{{ route('pedidost.search')}}" method="get" role="search" 
         class="navbar-search">
         <div class="input-group">
             <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
