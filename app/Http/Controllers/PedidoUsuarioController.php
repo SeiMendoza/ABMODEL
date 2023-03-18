@@ -89,6 +89,9 @@ class PedidoUsuarioController extends Controller
     }
     public function terminarp(Request $request,  $id)
     {
+        $request->validate([
+            'estado' => 'required|in:2', // El campo estado es obligatorio y solo puede ser 1
+        ]);
         $activar = Pedido::findOrfail($id);
         $activar->estado = $request->input('estado');
 
@@ -100,9 +103,11 @@ class PedidoUsuarioController extends Controller
     } 
     public function pedidosPendientes_Cocina(Request $request,  $id)
     {
+        $request->validate([
+            'estado' => 'required|in:1', // El campo estado es obligatorio y solo puede ser 1
+        ]);
         $activar = Pedido::findOrfail($id);
         $activar->estado = $request->input('estado');
-
         $create = $activar->save();
 
         if ($create) {

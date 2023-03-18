@@ -38,7 +38,7 @@
     <div class="table-responsive container-fluid">
         <table class="table" id="table" style="background-color: #ff9999;">
             <thead class="card-header border border-light" style="background-color: #fff; color:teal;text-align:center;">
-                <tr>
+                <tr style="font-family: Georgia, Serif;font-size:19px">
                     <th scope="col">Número de mesa</th>
                     <th scope="col">Quiosco</th> 
                     <th scope="col">Nombre del cliente</th>

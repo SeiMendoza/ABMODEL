@@ -19,7 +19,7 @@ class PiscinaController extends Controller
      */
     public function index()
     {
-        $prod = Piscina::paginate(6);
+        $prod = Piscina::paginate(8);
         $tip = PiscinaTipo::all();
         return view('Piscina/inventario/listaproductos',compact('prod','tip'));
     }

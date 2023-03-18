@@ -1,8 +1,7 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Caja')
 @section('miga')
-    <li class="breadcrumb-item text-sm text-dark" aria-current="page">
-    <a class="text-dark" href="{{route('pedidost.pedido')}}">Caja</a></li>
+     
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
 <a class="text-dark" href="{{route('terminados.terminados')}}" onclick="cambia">Pedidos terminados</a></li>
 @endsection
@@ -43,7 +42,7 @@
     <div class="table-responsive container-fluid">
         <table class="table" id="table" style="background-color: #fff;">
             <thead class="card-header border " style="background-color: #fff; color:teal; text-align:center;">
-                <tr>
+                <tr style="font-family: Georgia, Serif;font-size:19px">
                     <th scope="col">Número de mesa</th>
                     <th scope="col">Quiosco</th> 
                     <th scope="col">Nombre del cliente</th>
@@ -86,7 +85,7 @@
                                                         <input type="text" id="estado" name="estado" value="2">
                                                     </div>
                                                     <input type="submit" class="btn btn-danger w-15" value="Si">
-                                                <button onclick="setTimeout(function(){location.reload();}, 00);" type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
                                             </div>
                                             </form>
                                         </div>
