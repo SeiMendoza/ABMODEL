@@ -17,10 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string("Nombre_Cliente");
             $table->string("Apellido_Cliente");
+            $table->string("Contacto");
+            $table->string("Cantidad");  
+            $table->string("Tipo_Reservacion");
+            $table->string("Tipo_Evento");
             $table->date("Fecha");
             $table->time("Hora");
-            $table->string("Contacto");
-            $table->string("Tipo_Evento");
+            $table->string("Precio");
+            $table->string("FormaPago");
             $table->timestamps();
         });
     }

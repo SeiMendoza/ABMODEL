@@ -306,3 +306,25 @@ Route::put('Cliente/{id}/edicion', [ReservacionTotalController::class, 'update']
 
 Route::get('cliente/{id}/borrar', [ReservacionTotalController::class, 'destroy'])
   ->name('cliente.borrar');
+
+/* Rutas para reservar local*/
+Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])
+       ->name('cliente.reservaLocal');
+
+Route::get('/Local/create', [ReservacionTotalController::class, 'create'])
+       -> name('ReserLocal.create');
+
+Route::post('/Reservacion/Local', [ReservacionTotalController::class, 'store'])
+->name('ReserLocal.store');
+
+Route::get('/menu/reservacion/{id}', [ReservacionTotalController::class, 'detalle_reservacion'])
+->name('detalle.reservacion');
+
+Route::get('Cliente/{id}/Editando', [ReservacionTotalController::class, 'edit'])
+  ->name('ResCliente.editar');
+
+Route::put('Cliente/{id}/edicion', [ReservacionTotalController::class, 'update'])
+  ->name('resCliente.update');
+
+Route::delete('cliente/{id}/borrar', [ReservacionTotalController::class, 'destroy'])
+  ->name('cliente.destroy');
