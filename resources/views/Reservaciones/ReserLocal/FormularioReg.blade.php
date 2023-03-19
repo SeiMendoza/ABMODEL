@@ -7,12 +7,10 @@
     href="{{route('ReserLocal.create')}}">Registro de Reservaciones</a></li>
 @endsection
 @section('content')
-<BR>
-    
-<div class="card shadow-lgs border-0 rounded-lg mt-0" style="width: 1000px;  background: #56d39d6f">
-         <div></div>
-         <br>
+
    <div class="container ">
+    <div class="row d-flex justify-content-center" >
+        <div class="card col-lg-10" style="background: #56d39d6f" >
     <BR>
     <form method="post" action="{{ route('ReserLocal.store') }}" enctype="multipart/form-data">
             @csrf

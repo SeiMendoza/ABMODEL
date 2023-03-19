@@ -20,7 +20,7 @@ class ReservacionTotalFactory extends Factory
             'Nombre_Cliente'=>$this->faker->name,
             'Apellido_Cliente'=>$this->faker->name,
             'Contacto'=>$this->faker->randomElement(['3','8','9']).$this->faker->numerify('####-####'),
-            'cantidad' => 'nullable|min:1|max:1000|numeric',
+            'cantidad' => $this->faker->numberBetween(50,1500),
             'Tipo_Reservacion'=>$this->faker->randomElement(['De Día (Menor Costo)','De Noche (Mayor Costo)']),
             'Tipo_Evento'=>$this->faker->randomElement(['Cumpleaños','Boda']),
             'Fecha'=>$this->faker->date(),

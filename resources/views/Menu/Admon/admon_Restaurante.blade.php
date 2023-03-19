@@ -178,28 +178,27 @@
                             </div>
 
                                 <!--Barra de busqueda-->
-                                <div class="col-4 p-2" style="display:; magin:2px">
-                                    <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                                        style="">
-                                        <div class="input-group">
-                                            <input class="btn btn-rounded btn-menu" id="busqueda" name="busqueda"
-                                                style="width: 200px" placeholder="Buscar bebida" aria-label="Search"
-                                                aria-describedby="basic-addon2" maxlength="50" required
-                                                value="<?php if (isset($busqueda)) {
-                                                    echo $busqueda;
-                                                } ?>" />
-                                            <button class="btn btn-rounded btn-menu" type="submit">Buscar</button>
-                                            @if (isset($busqueda) != '')
-                                                <a href="{{ route('busqueda.index') }}"
-                                                    class="btn btn-rounded btn-success">Borrar Busqueda</a>
-                                            @endif
-
-                                        </div>
+                                
+                                <div class="col-8 p-2" style="display:; magin:2px">
+                                    <form action="{{ route('busqueda.index') }}" method="get" role="search" 
+                                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="">
+                                       <div class="input-group">
+                                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 200px" 
+                                                placeholder="Buscar bebida" aria-label="Search" 
+                                                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($busqueda)) {echo $busqueda;} ?>" />
+                                                <button class="bg-success border-radius-md" type="submit" style="border: 0; color:aliceblue"><strong>Buscar</strong></button>    
+                                                @if(isset($busqueda))
+                                                     @if($busqueda != null)
+                                                         <a href="{{ route('busqueda.index') }}" 
+                                                         style="color:aliceblue; width:150px; padding:6px;"  
+                                                         class="bg-secondary border-radius-md h-6 text-center"><strong>Borrar Busqueda</strong></a>
+                                                    @endif
+                                                 @endif
+                                       </div>   
                                     </form>
-                                </div>
-
+                                 </div>
                             </div>
+                            
 
                             <div class="productos" id="productos"
                                 style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
@@ -491,27 +490,24 @@
                             </div>
 
                                 <!--Barra de busqueda-->
-                                <div class="col-4 p-2" style="display:; magin:2px">
-                                    <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                                        style="">
-                                        <div class="input-group">
-                                            <input class="btn btn-rounded btn-menu" id="busqueda" name="busqueda"
-                                                style="width: 200px" placeholder="Buscar platillo" aria-label="Search"
-                                                aria-describedby="basic-addon2" maxlength="50" required
-                                                value="<?php if (isset($busqueda)) {
-                                                    echo $busqueda;
-                                                } ?>" />
-                                            <button class="btn btn-rounded btn-menu" type="submit">Buscar</button>
-                                            @if (isset($busqueda) != '')
-                                                <a href="{{ route('busqueda.index') }}"
-                                                    class="btn btn-rounded btn-success">Borrar Busqueda</a>
-                                            @endif
-
-                                        </div>
+                                <div class="col-8 p-2" style="display:; magin:2px">
+                                    <form action="{{ route('busqueda.index') }}" method="get" role="search" 
+                                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="">
+                                       <div class="input-group">
+                                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 200px" 
+                                                placeholder="Buscar platillo" aria-label="Search" 
+                                                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($busqueda)) {echo $busqueda;} ?>" />
+                                                <button class="bg-success border-radius-md" type="submit" style="border: 0; color:aliceblue"><strong>Buscar</strong></button>    
+                                                @if(isset($busqueda))
+                                                     @if($busqueda != null)
+                                                         <a href="{{ route('busqueda.index') }}" 
+                                                         style="color:aliceblue; width:150px; padding:6px;"  
+                                                         class="bg-secondary border-radius-md h-6 text-center"><strong>Borrar Busqueda</strong></a>
+                                                    @endif
+                                                 @endif
+                                       </div>   
                                     </form>
-                                </div>
-
+                                 </div>
                             </div>
 
                             <div class="productos" id="productos"
@@ -705,27 +701,24 @@
                                 </div>
 
                                 <!--Barra de busqueda-->
-                                <div class="col-4 p-2" style="display:; magin:2px">
-                                    <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                                        style="">
-                                        <div class="input-group">
-                                            <input class="btn btn-rounded btn-menu" id="busqueda" name="busqueda"
-                                                style="width: 200px" placeholder="Buscar combo" aria-label="Search"
-                                                aria-describedby="basic-addon2" maxlength="50" required
-                                                value="<?php if (isset($busqueda)) {
-                                                    echo $busqueda;
-                                                } ?>" />
-                                            <button class="btn btn-rounded btn-menu" type="submit">Buscar</button>
-                                            @if (isset($busqueda) != '')
-                                                <a href="{{ route('busqueda.index') }}"
-                                                    class="btn btn-rounded btn-success">Borrar Busqueda</a>
-                                            @endif
-
-                                        </div>
+                                <div class="col-8 p-2" style="display:; magin:2px">
+                                    <form action="{{ route('busqueda.index') }}" method="get" role="search" 
+                                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="">
+                                       <div class="input-group">
+                                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 200px" 
+                                                placeholder="Buscar combo" aria-label="Search" 
+                                                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($busqueda)) {echo $busqueda;} ?>" />
+                                                <button class="bg-success border-radius-md" type="submit" style="border: 0; color:aliceblue"><strong>Buscar</strong></button>    
+                                                @if(isset($busqueda))
+                                                     @if($busqueda != null)
+                                                         <a href="{{ route('busqueda.index') }}" 
+                                                         style="color:aliceblue; width:150px; padding:6px;"  
+                                                         class="bg-secondary border-radius-md h-6 text-center"><strong>Borrar Busqueda</strong></a>
+                                                    @endif
+                                                 @endif
+                                       </div>   
                                     </form>
-                                </div>
-
+                                 </div>
                             </div>
 
 
@@ -969,28 +962,24 @@
                             <div class="row">
 
                                 <!--Barra de busqueda-->
-                                <div class="col-4 p-2" style="display:; magin:2px">
-                                    <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                                        style="">
-                                        <div class="input-group">
-                                            <input class="btn btn-rounded btn-menu" id="busqueda" name="busqueda"
-                                                style="width: 200px" placeholder="Buscar bebida" aria-label="Search"
-                                                aria-describedby="basic-addon2" maxlength="50" required
-                                                value="<?php if (isset($busqueda)) {
-                                                    echo $busqueda;
-                                                } ?>" />
-                                            <button class="btn btn-rounded btn-menu" type="submit">Buscar</button>
-                                            @if (isset($busqueda) != '')
-                                                <a href="{{ route('busqueda.index') }}"
-                                                    class="btn btn-rounded btn-success">Borrar
-                                                    Busqueda</a>
-                                            @endif
-
-                                        </div>
+                                <div class="col-8 p-2" style="display:; magin:2px">
+                                    <form action="{{ route('busqueda.index') }}" method="get" role="search" 
+                                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="">
+                                       <div class="input-group">
+                                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 200px" 
+                                                placeholder="Buscar bebida" aria-label="Search" 
+                                                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($busqueda)) {echo $busqueda;} ?>" />
+                                                <button class="bg-success border-radius-md" type="submit" style="border: 0; color:aliceblue"><strong>Buscar</strong></button>    
+                                                @if(isset($busqueda))
+                                                     @if($busqueda != null)
+                                                         <a href="{{ route('busqueda.index') }}" 
+                                                         style="color:aliceblue; width:150px; padding:6px;"  
+                                                         class="bg-secondary border-radius-md h-6 text-center"><strong>Borrar Busqueda</strong></a>
+                                                    @endif
+                                                 @endif
+                                       </div>   
                                     </form>
-                                </div>
-
+                                 </div>
                             </div>
 
                             <div class="productos" id="productos"
@@ -1175,27 +1164,24 @@
                             <div class="row">
 
                                 <!--Barra de busqueda-->
-                                <div class="col-4 p-2" style="display:; magin:2px">
-                                    <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                                        style="">
-                                        <div class="input-group">
-                                            <input class="btn btn-rounded btn-menu" id="busqueda" name="busqueda"
-                                                style="width: 200px" placeholder="Buscar platillo" aria-label="Search"
-                                                aria-describedby="basic-addon2" maxlength="50" required
-                                                value="<?php if (isset($busqueda)) {
-                                                    echo $busqueda;
-                                                } ?>" />
-                                            <button class="btn btn-rounded btn-menu" type="submit">Buscar</button>
-                                            @if (isset($busqueda) != '')
-                                                <a href="{{ route('busqueda.index') }}"
-                                                    class="btn btn-rounded btn-success">Borrar Busqueda</a>
-                                            @endif
-
-                                        </div>
+                                <div class="col-8 p-2" style="display:; magin:2px">
+                                    <form action="{{ route('busqueda.index') }}" method="get" role="search" 
+                                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="">
+                                       <div class="input-group">
+                                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 200px" 
+                                                placeholder="Buscar platillo" aria-label="Search" 
+                                                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($busqueda)) {echo $busqueda;} ?>" />
+                                                <button class="bg-success border-radius-md" type="submit" style="border: 0; color:aliceblue"><strong>Buscar</strong></button>    
+                                                @if(isset($busqueda))
+                                                     @if($busqueda != null)
+                                                         <a href="{{ route('busqueda.index') }}" 
+                                                         style="color:aliceblue; width:150px; padding:6px;"  
+                                                         class="bg-secondary border-radius-md h-6 text-center"><strong>Borrar Busqueda</strong></a>
+                                                    @endif
+                                                 @endif
+                                       </div>   
                                     </form>
-                                </div>
-
+                                 </div>
                             </div>
 
                             <div class="productos" id="productos"
@@ -1383,27 +1369,24 @@
                             <div class="row">
 
                                 <!--Barra de busqueda-->
-                                <div class="col-4 p-2" style="display:; magin:2px">
-                                    <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                                        style="">
-                                        <div class="input-group">
-                                            <input class="btn btn-rounded btn-menu" id="busqueda" name="busqueda"
-                                                style="width: 200px" placeholder="Buscar combo" aria-label="Search"
-                                                aria-describedby="basic-addon2" maxlength="50" required
-                                                value="<?php if (isset($busqueda)) {
-                                                    echo $busqueda;
-                                                } ?>" />
-                                            <button class="btn btn-rounded btn-menu" type="submit">Buscar</button>
-                                            @if (isset($busqueda) != '')
-                                                <a href="{{ route('busqueda.index') }}"
-                                                    class="btn btn-rounded btn-success">Borrar Busqueda</a>
-                                            @endif
-
-                                        </div>
+                                <div class="col-8 p-2" style="display:; magin:2px">
+                                    <form action="{{ route('busqueda.index') }}" method="get" role="search" 
+                                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="">
+                                       <div class="input-group">
+                                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 200px" 
+                                                placeholder="Buscar combo" aria-label="Search" 
+                                                 aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($busqueda)) {echo $busqueda;} ?>" />
+                                                <button class="bg-success border-radius-md" type="submit" style="border: 0; color:aliceblue"><strong>Buscar</strong></button>    
+                                                @if(isset($busqueda))
+                                                     @if($busqueda != null)
+                                                         <a href="{{ route('busqueda.index') }}" 
+                                                         style="color:aliceblue; width:150px; padding:6px;"  
+                                                         class="bg-secondary border-radius-md h-6 text-center"><strong>Borrar Busqueda</strong></a>
+                                                    @endif
+                                                 @endif
+                                       </div>   
                                     </form>
-                                </div>
-
+                                 </div>
                             </div>
 
 

@@ -111,7 +111,7 @@ class ReservacionTotalController extends Controller
     public function update(Request $request, $id){
 
         $fecha_act = date("d-m-Y");
-        $min = date('d-m-Y',$min = strtotime($fecha_act."+ 0 day"));
+        $min = date('d-m-Y',$min = strtotime($fecha_act."+ 1 day"));
 
         $request -> validate([
             'Nombre_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:4',

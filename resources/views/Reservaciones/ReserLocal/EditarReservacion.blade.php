@@ -7,19 +7,20 @@
 @endsection
 @section('content')
 <BR>
-<div class="card shadow-lgs border-0 rounded-lg mt-0" style="width: 1000px;  background: #56d39d6f">
-
-    <div class="card card-header " style="width: 1000px; height:70px; background:  #96bbab6f">
-            <div style="text-align:center">
-                <h4 class="m-0 font-weight-bold" style="color: white"> Editando Reservación de:  {{$r->Nombre_Cliente}}</h4>
+   <div class="container ">
+    <div class="row d-flex justify-content-center" >
+        <div class="card col-lg-9" style="background: #56d39d6f" >
+    <div class="row d-flex justify-content-center" >
+    <div class="card header" style=" height:70px; border-radius:13px 13px 0 0; background:  #96bbab6f" >
+            <div style="text-align:center"><br>
+                <h3 class="m-0 font-weight-bold" style="color: white"> Editando Reservación de:  {{$r->Nombre_Cliente}}</h3>
             </div>
         </div>
-        
-   <div class="container ">
     <form method="post" action="{{ route('resCliente.update', ['id' => $r->id]) }}" enctype="multipart/form-data">
             @method('put')
             @csrf
                 <div class="container ">
+
                     <br>
                     <div class="row">
                         <div class="form-group col-md-6 ">
