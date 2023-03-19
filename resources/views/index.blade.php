@@ -301,7 +301,6 @@
             </div>
         </nav>
         <!-- End Navbar -->
-
         <div class="row mt-3">
             <div class="row container-fluid pt-3 d-flex justify-content-center">
                 <H4 style="text-align: center;" class=" bg-white text-primary">RESTAURANTE</H4>

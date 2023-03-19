@@ -17,7 +17,7 @@
         <!-- CSS Files -->
         <link id="pagestyle" href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" />
         <link rel="stylesheet" href={{ asset('css/menuStyles/menuStyles.css') }} type="text/css">
-
+        <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     </head>
 

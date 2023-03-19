@@ -22,6 +22,17 @@
             })
         }
 
+        @if ($errors->any())
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Existe un error, revise los datos',
+                showConfirmButton: false,
+                toast: true,
+                background: '#fff',
+                timer: 2000
+            })
+        @endif
     </script>
 
     <div class="row">
@@ -63,9 +74,108 @@
                             <div class="row">
                                 <!--Boton Registrar-->
                                 <div class="col-2 text-start" style="margin: 4px">
-                                    <a href={{ route('bebidasyplatillos.create') }} class="btn btn-menu"
-                                        style="margin: 4px">Registrar Bebida</a>
+                                    <a class="btn btn-menu" style="margin: 4px" data-bs-toggle="modal" 
+                                    data-bs-target="#bebidaregistro">Registrar Bebida</a>
                                 </div>
+                                
+                            <div class="modal" id="bebidaregistro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+                                aria-labelledby="bebidaregistroLabel" aria-hidden="true">
+                                <div class=" modal-dialog">
+                                <div class="modal-content" style="width: 800px">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="bebidaregistroLabel">Agregar una nueva bebida</h5>
+                                    </div>
+                                    <form method="post" action="{{route('bebidas.store')}}" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div style="float: left;">
+                                                <label for=""><strong>Seleccione una imagen:</strong></label>
+                                                <br>
+                                                <img src="" alt="" width="200px" height="200px" id="imagenmostrada1">
+                                                <br>
+                                                <input type="file" id="imagen1" name="imagen1" accept="image/*" required onchange="precargar(1)"
+                                                    value="{{ old('imagenPrevisualizacion') }}" style="color: white;width: 200px;">
+                                                @error('imagen1')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+                                            </div>
+
+                                            <div style="float: left; margin-left: 10px; width: 270px">
+                                                <label for=""><strong>Nombre bebida:</strong></label>
+                                                <input class="form-control" type="text" placeholder="Nombre de la bebida" name="nombre1"
+                                                    value="{{ old('nombre1') }}" maxlength="25" required onkeypress="quitarerror()">
+                                                @error('nombre1')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+                                                <br>
+                                                <label for=""><strong>Ingrese la descripcion del producto:</strong></label>
+                                                <textarea class="form-control" type="text" placeholder="Descripción" name="descripcion1" 
+                                                maxlength="100" required rows="5"
+                                                onkeypress="quitarerror()">{{ old('descripcion1') }}</textarea>
+                                                @error('descripcion1')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+                                                <br><br>
+                                            </div>
+
+                                            <div style="float: left; margin-left: 10px; width: 270px">
+                                                <label for=""><strong>Seleccione el tamaño:</strong></label>
+                                                <select name="tamanio1" required onchange="quitarerror()" class="form-control">
+                                                    @if (old('tamanio1'))
+                                                        @if (old('tamanio1') === 'Grande')
+                                                            <option style="display: none" selected="selected" value="Grande">Grande</option>
+                                                        @else
+                                                            @if (old('tamanio1') === 'Mediano')
+                                                                <option style="display: none" selected="selected" value="Mediano">Mediano
+                                                                </option>
+                                                            @else
+                                                                @if (old('tamanio1') === 'Pequeño')
+                                                                    <option style="display: none" selected="selected" value="Pequeño">Pequeño
+                                                                    </option>
+                                                                @endif
+                                                            @endif
+                                                        @endif
+                                                    @else
+                                                        <option disabled="disabled" selected="selected" value="">Seleccione una opcion</option>
+                                                    @endif
+                                                    <option value="Grande">Grande</option>
+                                                    <option value="Mediano">Mediano</option>
+                                                    <option value="Pequeño">Pequeño</option>
+                                                </select>
+                                                @error('tamanio1')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+
+                                                <br>
+                                                <label for=""><strong>Ingrese el precio:</strong></label>
+                                                <input class="form-control" type="number" placeholder="Precio" name="precio1" id="precio"
+                                                onkeypress="quitarerror()" step="any"
+                                                onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000"
+                                                value="{{ old('precio1') }}"  required>
+                                                @error('precio1')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+
+                                                <br>
+                                                <label for=""><strong>Ingrese la cantidad de bebidas:</strong></label>
+                                                <input class="form-control" type="number" placeholder="Bebidas disponibles"
+                                                    name="cantidad1" id="cantidad" value="{{ old('cantidad1') }}"
+                                                    onkeypress="quitarerror()"
+                                                    onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
+                                                    max="1000">
+                                                @error('cantidad1')
+                                                    <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+                                            </div>
+                                            <div style="float: right;margin-top: 20px">
+                                                <button type="button" onclick="cancelar('admonRestaurante')" class="btn btn-secondary" >Cerrar</button>
+                                                <button onclick="" type="submit" class="btn btn-info">Guardar</button>
+                                            </div> 
+                                        </div> 
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
 
                                 <!--Barra de busqueda-->
                                 <div class="col-4 p-2" style="display:; magin:2px">
@@ -277,9 +387,108 @@
 
                                 <!--Boton Registrar-->
                                 <div class="col-2 text-start" style="margin: 4px">
-                                    <a href={{ route('bebidasyplatillos.create') }} class="btn btn-menu"
+                                    <a class="btn btn-menu" data-bs-toggle="modal" data-bs-target="#platilloregistro"
                                         style="margin: 4px">Registrar Platillo</a>
                                 </div>
+
+                                <div class="modal" id="platilloregistro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+                                aria-labelledby="platilloregistroLabel" aria-hidden="true">
+                                <div class=" modal-dialog">
+                                <div class="modal-content" style="width: 800px">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="platilloregistroLabel">Agregar un nuevo platillo</h5>
+                                    </div>
+                                    <form method="post" action="{{route('platillos.store')}}" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div style="float: left;">
+                                                <label for=""><strong>Seleccione una imagen:</strong></label>
+                                                <br>
+                                                <img src="" alt="" width="200px" height="200px" id="imagenmostrada2">
+                                                <br>
+                                                <input type="file" id="imagen2" name="imagen2" accept="image/*" required onchange="precargar(2)"
+                                                    value="{{ old('imagenPrevisualizacion') }}" style="color: white;width: 200px;">
+                                                @error('imagen')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+                                            </div>
+
+                                            <div style="float: left; margin-left: 10px; width: 270px">
+                                                <label for=""><strong>Nombre platillo:</strong></label>
+                                                <input class="form-control" type="text" placeholder="Nombre del platillo" name="nombre2"
+                                                    value="{{ old('nombre2') }}" maxlength="25" required onkeypress="quitarerror()">
+                                                @error('nombre2')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+                                                <br>
+                                                <label for=""><strong>Ingrese la descripcion del producto:</strong></label>
+                                                <textarea class="form-control" type="text" placeholder="Descripción" name="descripcion2" 
+                                                maxlength="100" required rows="5"
+                                                onkeypress="quitarerror()">{{ old('descripcion2') }}</textarea>
+                                                @error('descripcion2')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+                                                <br><br>
+                                            </div>
+
+                                            <div style="float: left; margin-left: 10px; width: 270px">
+                                                <label for=""><strong>Seleccione el tamaño:</strong></label>
+                                                <select name="tamanio2" required onchange="quitarerror()" class="form-control">
+                                                    @if (old('tamanio2'))
+                                                        @if (old('tamanio2') === 'Grande')
+                                                            <option style="display: none" selected="selected" value="Grande">Grande</option>
+                                                        @else
+                                                            @if (old('tamanio2') === 'Mediano')
+                                                                <option style="display: none" selected="selected" value="Mediano">Mediano
+                                                                </option>
+                                                            @else
+                                                                @if (old('tamanio2') === 'Pequeño')
+                                                                    <option style="display: none" selected="selected" value="Pequeño">Pequeño
+                                                                    </option>
+                                                                @endif
+                                                            @endif
+                                                        @endif
+                                                    @else
+                                                        <option disabled="disabled" selected="selected" value="">Seleccione una opcion</option>
+                                                    @endif
+                                                    <option value="Grande">Grande</option>
+                                                    <option value="Mediano">Mediano</option>
+                                                    <option value="Pequeño">Pequeño</option>
+                                                </select>
+                                                @error('tamanio2')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+
+                                                <br>
+                                                <label for=""><strong>Ingrese el precio:</strong></label>
+                                                <input class="form-control" type="number" placeholder="Precio" name="precio2" id="precio"
+                                                onkeypress="quitarerror()" step="any"
+                                                onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000"
+                                                value="{{ old('precio2') }}"  required>
+                                                @error('precio2')
+                                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+
+                                                <br>
+                                                <label for=""><strong>Ingrese la cantidad de platillo:</strong></label>
+                                                <input class="form-control" type="number" placeholder="Platillos disponibles"
+                                                name="disponible2" id="disponible" value="{{ old('disponible2') }}"
+                                                    onkeypress="quitarerror()"
+                                                    onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
+                                                    max="1000">
+                                                @error('disponible2')
+                                                    <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
+                                                @enderror
+                                            </div>
+                                            <div style="float: right;margin-top: 20px">
+                                                <button type="button" onclick="cancelar('admonRestaurante')" class="btn btn-secondary" >Cerrar</button>
+                                                <button onclick="" type="submit" class="btn btn-info">Guardar</button>
+                                            </div> 
+                                        </div> 
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
 
                                 <!--Barra de busqueda-->
                                 <div class="col-4 p-2" style="display:; magin:2px">

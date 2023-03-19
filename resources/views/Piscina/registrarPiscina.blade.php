@@ -79,7 +79,7 @@
 
                         <div style="float: right;margin-top: 50px">
                             <button type="submit" class="btn btn-success">Guardar</button>
-                            <button type="button" onclick="cancelar('piscina')"
+                            <button type="button" onclick="cancelar('productos')"
                                 class="btn btn-warning">Cancelar</button>
                         </div>
                     </form>
