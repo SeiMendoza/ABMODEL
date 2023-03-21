@@ -137,7 +137,7 @@
                     <tr style="font-family: Georgia, Serif;font-size:19px">
                         <th scope="col">N</th>
                         <th scope="col">Producto</th>
-                        <th scope="col">Tipo de producto</th> 
+                        <th scope="col">Tipo de producto</th>  
                         <th scope="col">Editar</th>
                         <th scope="col">Eliminar</th>
                     </tr>
@@ -148,12 +148,14 @@
                 <td scope="col">{{$p->id}}</td>
                 <td scope="col">{{$p->nombre}}</td>
                 <td scope="col">{{$p->tipo_producto->descripcion}}</td>
-                 
+                 <td>
+                   
+                 </td>
                 <td>
                 <a  href="{{ route('producto.edit', ['id' => $p->id]) }}">
                 <i class="fa-regular fa-pen-to-square" style="font-size:25px;color:rgb(33, 195, 247)"></i>
                 </td>
-                <td> 
+                <td>
                 <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$p->id}}"  class="fa fa-trash" style="font-size:25px; color:crimson"></i>
                 <form action="{{route('prodpiscina.destroy', ['id' => $p->id])}}" method="post" enctype="multipart/form-data">
                     @method('delete')
@@ -170,15 +172,14 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                         <input type="submit" class="btn btn-danger w-15" value="Si">
-                                                <button onclick="setTimeout(function(){location.reload();}, 00);" type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
+                                                <button   type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
                                             
                                                     </div>
                                                 </div>
                                                 </div>
                                             </div>
                                         </form>
-                                    </td>
-                        
+                </td>
                                 </tr>
             @empty
             <tr>

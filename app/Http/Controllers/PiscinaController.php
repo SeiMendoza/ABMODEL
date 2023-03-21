@@ -122,7 +122,7 @@ public function search(Request $request){
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
 
         $rules=[
-            'nombre' => 'required',
+            'nombre' => 'required|regex:/^[\\pL\\s]+$/u',
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
             'expiracion' => 'required|date|after:'.$minima,
@@ -130,13 +130,14 @@ public function search(Request $request){
 
         $mensaje=[
             'nombre.required' => 'El nombre no puede estar vacío',
+            'nombre.regex' => 'Solo se aceptan letras',
             'tipo.required' => 'El tipo de producto no puede estar vacío',
             'tipo.exists' => 'El tipo de producto no es valido',
             'uso.required' => 'El uso de producto no puede estar vacío',
             'uso.exists' => 'El uso de producto no es valido',
-            'expiracion.required' => 'La fecha de expiracion no puede estar vacío',
-            'expiracion.date' => 'La fecha de expiracion debe de ser una fecha',
-            'expiracion.after' => 'La fecha de expiracion debe de ser posterior a '.$minima,
+            'expiracion.required' => 'La fecha de expiración no puede estar vacío',
+            'expiracion.date' => 'La fecha de expiración debe de ser una fecha',
+            'expiracion.after' => 'La fecha de expiración debe de ser posterior a '.$minima,
         ];
 
         $this->validate($request,$rules,$mensaje);
