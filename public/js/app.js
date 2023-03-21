@@ -10,8 +10,8 @@ function rellenar2(){
     document.getElementById("precio3").value = document.getElementById("precio").value;
 }
 
-const $seleccionArchivos = document.querySelector("#imagen"),
-$imagenPrevisualizacion = document.querySelector("#imagenmostrada");
+const $seleccionArchivos = document.querySelector("#imagen");
+const $imagenPrevisualizacion = document.querySelector("#imagenmostrada");
 
 // Escuchar cuando cambie
 $seleccionArchivos.addEventListener("change", () => {
