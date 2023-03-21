@@ -113,12 +113,11 @@ Route::get('/menu/prueba', [MenuUsuarioController::class, 'prueba'])
 ******************************/
 Route::get('/menu/cliente', [PlatillosyBebidasController::class, 'index'])
 ->name('cliente_menu.index');
+Route::get('/bebidasyplatillos/nuevo', [PlatillosyBebidasController::class, 'create'])
+->name('bebidasyplatillos.create');
 
-Route::post('/bebidas/nuevo',[PlatillosyBebidasController::class, 'bebidasnuevo'])
-    ->name('bebidas.store');
-
-  Route::post('/platillos/nuevo',[PlatillosyBebidasController::class, 'platillosnuevo'])
-    ->name('platillos.store');
+Route::post('/bebidasyplatillos/nuevo',[PlatillosyBebidasController::class, 'store'])
+    ->name('bebidasyplatillos.store');
 
 /*****************************
   Rutas Para Combos
@@ -222,6 +221,8 @@ Route::get('/productos', [PiscinaController::class, 'index'])->
 name('prodpiscina.index');
 Route::get('/piscina/producto/buscar', [PiscinaController::class, 'search'])
 ->name('producto.search');
+Route::get('/piscina/create', [PiscinaController::class, 'create'])->
+name('piscina.create');
 
 Route::post('/piscina/create', [PiscinaController::class, 'store'])->
 name('piscina.store');
