@@ -66,19 +66,19 @@
                             <label for="Tipo_Reservacion">Tipo de Reservación</label>
                             <select name="Tipo_Reservacion" id="Tipo_Reservacion" class="form-control">
                                     @if (old('Tipo_Reservacion'))
-                                        @if (old('Tipo_Reservacion') === 'De Día')
-                                            <option disabled="disabled" selected="selected" value="De Día">De Día (Menor Costo)</option>
+                                        @if (old('Tipo_Reservacion') === 'De Día (Menor Costo)')
+                                            <option disabled="disabled" selected="selected" value="De Día (Menor Costo) ">De Día (Menor Costo)</option>
                                         @else
-                                            @if (old('Tipo_Reservacion') === 'De Noche')
-                                                <option disabled="disabled" selected="selected" value="De Noche">De Noche (Mayor Costo)</option>
+                                            @if (old('Tipo_Reservacion') === 'De Noche (Mayor Costo)')
+                                                <option disabled="disabled" selected="selected" value="De Noche (Mayor Costo)<">De Noche (Mayor Costo)</option>
                                             @else
                                             @endif
                                         @endif
                                     @else
                                         <option disabled="disabled" selected="selected" value="{{$r->Tipo_Reservacion}}">-- Seleccione Uno --</option>
                                     @endif
-                                    <option value="De Día"{{$r->Tipo_Reservacion === 'De Día' ? 'selected' : ''}}>De Día (Menor Costo)</option>
-                                    <option value="De Noche"{{$r->Tipo_Reservacion === 'De Noche' ? 'selected' : ''}}>De Noche (Mayor Costo)</option>
+                                    <option value="De Día (Menor Costo) "{{$r->Tipo_Reservacion === 'De Día (Menor Costo)' ? 'selected' : ''}}>De Día (Menor Costo)</option>
+                                    <option value="De Noche (Mayor Costo)"{{$r->Tipo_Reservacion === 'De Noche (Mayor Costo)' ? 'selected' : ''}}>De Noche (Mayor Costo)</option>
                                 </select>
                             @error('Tipo_Reservacion')
                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
