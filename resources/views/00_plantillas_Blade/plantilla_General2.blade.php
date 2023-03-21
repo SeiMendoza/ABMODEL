@@ -231,6 +231,8 @@
             });
     
         }
+
+
     </script>
      <!-- Jquery JS-->
      <script src="/assets/jquery/jquery.min.js"></script>

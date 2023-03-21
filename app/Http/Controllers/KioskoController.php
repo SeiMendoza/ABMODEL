@@ -48,7 +48,7 @@ class KioskoController extends Controller
 
         $kioskos = Kiosko::all();
 
-        return view('/Reservaciones/ReserAdmon/index')->with(['kioskos' => $kioskos]);
+        return view('/Reservaciones/ReserAdmon/Kioskos/indexKioskos')->with(['kioskos' => $kioskos]);
     }
 
     public function create(){

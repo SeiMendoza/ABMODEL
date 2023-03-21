@@ -37,14 +37,14 @@ Route::get('/billing', [HomeController::class, 'b'])
 ->name('b');
 
 /* Rutas Administracion de Restaurante */
-Route::get('/admonRestaurante', [HomeController::class, 'indexAdmon'])
+Route::get('/admonRestaurante', [HomeController::class, 'pruebaAdmon'])
 ->name('menuAdmon.index');
-Route::put('admonRestaurante/{id}/activarBebida', [BebidaController::class, 'activar'])
-->name('menuAdmon.activarBebida');
-Route::put('admonRestaurante/{id}/activarPlatillo', [PlatilloController::class, 'activar'])
-->name('menuAdmon.activarPlatillo');
-Route::put('admonRestaurante/{id}/activarCombo', [ComboController::class, 'activar'])
-->name('menuAdmon.activarCombo');
+Route::put('bebida/{id}/activar', [BebidaController::class, 'activar'])
+->name('bebida.activar');
+Route::put('platillo/{id}/activar', [PlatilloController::class, 'activar'])
+->name('platillo.activar');
+Route::put('combo/{id}/activar', [ComboController::class, 'activar'])
+->name('combo.activar');
 
 /** Rutas de Prueba AmonMenu */
 Route::get('/pruebaAdmon', [HomeController::class, 'pruebaAdmon'])
