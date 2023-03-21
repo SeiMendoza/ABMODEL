@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Bebida;
 use App\Models\Combo;
 use App\Models\Platillo;
+use App\Models\Piscina;
+use App\Models\PiscinaTipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view("index");
+        $datosalerta = Piscina::select('piscina_tipos.descripcion',DB::raw('COUNT(*) AS total'),DB::raw('SUM(piscinas.peso) AS peso'))
+        ->join('piscina_tipos','piscinas.tipo','=','piscina_tipos.id')->groupby('piscina_tipos.descripcion')->get();
+
+        return view("index",compact('datosalerta'));
     }
 
     public function b()

@@ -303,6 +303,27 @@
         <!-- End Navbar -->
         <div class="row mt-3">
             <div class="row container-fluid pt-3 d-flex justify-content-center">
+
+                <script>
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'info',
+                        html: '@foreach($datosalerta as $d) Productos de piscina en {{$d->descripcion}} tiene {{$d->total}}'+
+                        ' unidades con {{$d->peso}} kg  <br>@endforeach',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Agregar',
+                        showCancelButton: true,
+                        cancelButtonText:'X',
+                        cancelButtonColor: '#d33',
+                        toast: true,
+                        timer: 4000000
+                    }).then(resultado => {
+                        if (resultado.value) {
+                            window.location.href = '{{Route('piscina.create')}}';
+                        }
+                    });
+                </script>
+
                 <H4 style="text-align: center;" class=" bg-white text-primary">RESTAURANTE</H4>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
                     <div class="card height-200 card-2" style="">
