@@ -231,4 +231,101 @@ class ComboController extends Controller
 
     }
 
+
+    /* Editar Combos*/
+    public function edit($id){
+        $actualcomplementos = PlatillosyBebidas::all();
+        $componentes = Componentestemporalcombo::all();
+        $Combos = Combo::findOrFail($id);
+        return view('Menu/Admon/edicion/editarCombo')->with('componentes', $componentes)->with('actualcomplementos', $actualcomplementos) 
+              -> with('Combos', $Combos);
+    }
+
+    public function update(Request $request, $id){
+        $request -> validate ([
+            'nombre' => 'required|max:100|min:3',
+            'descripcion' => 'required|max:100|min:3',
+            'precio' => 'required|min:1|max:1000|numeric',
+            'imagen' => '',
+        ], [
+            'nombre.required' => 'El nombre no puede estar vacío',
+            'nombre.max' => 'El nombre es muy extenso',
+            'nombre.min' => 'El nombre es muy corto',
+            'descripcion.required' => 'La descripcion no puede estar vacío',
+            'descripcion.max' => 'La descripcion es muy extenso',
+            'descripcion.min' => 'La descripcion es muy corto',
+            'precio.required' => 'El precio no puede estar vacío',
+            'precio.max' => 'El precio es muy grande',
+            'precio.min' => 'El precio es muy pequeño',
+            'precio.numeric' => 'El precio debe de ser numerico',
+        ]);
+
+        $actualCombo= Combo::findOrFail($id);
+
+        $actualCombo->nombre = $request->input('nombre');
+        $actualCombo->descripcion = $request->input('descripcion');
+        $actualCombo->precio = $request->input('precio');
+
+        $creado = $actualCombo->save();
+
+        if ($creado) {
+
+            $anteriorcomplemnto = Componentestemporalcombo::all();
+
+            foreach ($anteriorcomplemnto as $ac) {
+                $complemento = Componentescombo::findOrFail($id);
+
+                $complemento->id_complemento = $ac->id_complemento;
+                $complemento->cantidad = $ac->cantidad;
+                $complemento->id_combo = $actualCombo->id;
+
+                $creado2 = $complemento->save();
+
+                if ($creado2) {
+                    Componentestemporalcombo::destroy($ac->id);
+                }
+            }
+
+            return redirect()->route('menuAdmon.index')
+                ->with('mensaje', 'El combo fue actualizado exitosamente');
+        }
+    } 
+
+    public function ediciontemporal(Request $request, $id)
+    {
+        $request -> validate ([
+            'complemento' => 'required|exists:platillosbebidas,id',
+            'cantidad' => 'required|min:1|max:1000|numeric',
+        ],[
+            'complemento.required' => 'La comida o bebida es obligatoria',
+            'complemento.exists' => 'La comida o bebida no existe',
+            'cantidad.required' => 'La cantidad es obligatoria',
+            'cantidad.max' => 'La cantidad es muy grande',
+            'cantidad.min' => 'La cantidad es muy pequeño',
+            'cantidad.numeric' => 'La cantidad debe de ser numerico',
+        ]);
+
+        $actualcomplementos = Componentestemporalcombo::findOrFail($id);
+
+        $actualcomplementos->id_complemento = $request->input('complemento');
+        $actualcomplementos->cantidad = $request->input('cantidad');
+
+        $creado = $actualcomplementos->save();
+
+        $nombre= $request->input('nombre2');
+        $descripcion= $request->input('descripcion2');
+        $precio= $request->input('precio2');
+        $imagens= $request->input('imagen2');
+
+        if ($creado) {
+            return redirect()->route('combo.editar')
+                ->with('mensaje', 'El complemento fue creada exitosamente')
+                ->with('nombre', $nombre)
+                ->with('descripcion', $descripcion)
+                ->with('imagens', $imagens)
+                ->with('precio', $precio);
+        } else {
+        }
+    }
+
 }

@@ -31,8 +31,40 @@
         </div>   
     </form>
 </div>
+<div style="margin-right: 25px; margin-top:10px" class=" nav-link-icon">
+    <button type="button" data-bs-toggle="modal" 
+    data-bs-target="#exampleModalCenter" class="btn btn-danger">
+    <i class="fa fa-times  "></i>       Eliminar Pedidos</button> </div>
+
+<!-- Modal Eliminar-->
+<form action="{{route('borrar.borrarDatos')}}" method="post" enctype="multipart/form-data">
+    @method('delete')
+   @csrf
+    <div class="modal fade" id="exampleModalCenter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 style="text-color:red" class="modal-title" id="exampleModalLongTitle">Eliminar Pedidos</h4>
+            </div>
+            <div class="modal-body">
+                Tenga en cuenta que una vez en dar click en "SÍ",
+                se eliminan los pedidos de la base de datos, así como los pedidos que tenga pendientes en concina y caja. 
+                <br>
+                Se recomienda realizar esta acción una vez al mes y preferible al no tener pedidos que entregar.
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de eliminar los pedidos?
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+            <button type="submit" class="btn btn-danger">SÍ</button>
+            </div>
+        </div>
+    </div>
+</form>
  </div>
- 
+</div>
  
         <div class="card-body">
     <div class="table-responsive container-fluid">

@@ -1,141 +1,145 @@
-@extends('00_plantillas_blade.plantilla_General1')
-@section('contend')
-
-    <script>
-        var msg = '{{ Session::get('mensaje') }}';
-        var exist = '{{ Session::has('mensaje') }}';
-        if (exist) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: msg,
-                showConfirmButton: false,
-                toast: true,
-                background: '#0be004ab',
-                timer: 3500
-            })
-        }
-    </script>
+@extends('00_plantillas_Blade.plantilla_General2')
+@section('title', 'Edicion de Bebidas')
+@section('miga')
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">  
+    <a class="text-dark" href="{{route('menuAdmon.index')}}">Menú</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" >Editando Bebida</a></li>
+@endsection
 
 
-    <div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
-        <br><br>
-        <div class="wrapper wrapper--w960">
-            <div class="card card-2">
-                <div class="card-heading"></div>
-                <div class="card-body">
-                    <h2 class="text-center">Editando a: {{$Bebidas->nombre}}</h2>
-                    <form method="post" action="{{route('bebida.update', ['id'=> $Bebidas->id])}}" enctype="multipart/form-data">
-                        @method('put')
-                        @csrf
-                        <br>
+@section('content')
+<div class="row">
+    <h4 class="col">Administración de Menú</h4>
+    <a class="col-2 text-center text-danger" href="{{ route('cliente_prueba') }}"><i class="fa fa-users"></i> Ver menu cliente</a>
+</div>
 
-                        <div style="width:200px;float:left">
-                            <img src="{{asset($Bebidas->imagen)}}" alt="" width="200px" height="200px" id="imagenmostrada">
-                            <br>
-                            <input type="file" id="imagen" name="imagen" accept="image/*" 
-                                value="{{ old('imagenPrevisualizacion', $Bebidas->imagen) }}" style="color: white;width: 200px;">
-                            @error('imagen')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-                        </div>
+<div class="row">
+    <div class="container-fluid">
+        <ul class="nav d-flex justify-content-center h5 text-center" role="tablist"
+            style="background-color: #ef3f3f; rounde">
 
-                        <div style="margin-left:2%;float:left;width:35%">
-                            <div class="">
-                                <select name="tipo" id="tipo" onchange="producto();quitarerror()">
-                                    @if (old('tipo'))
-                                        @if (old('tipo') === 2)
-                                            <option disabled="disabled" selected="selected" value="2">Comida</option>
-                                        @else
-                                            @if (old('tipo') === 1)
-                                                <option disabled="disabled" selected="selected" value="1">Bebida</option>
-                                            @endif
-                                        @endif
-                                    @else
-                                    @endif
-                                    <option value="1"{{$Bebidas->tipo === "1" ? 'selected' : ''}}>Bebida</option>
-                                    <option value="2"{{$Bebidas->tipo === "2" ? 'selected' : ''}}>Comida</option>
-                                </select>
-                            </div>
-                            @error('tipo')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-                            <br>
-                            <input class="input--style-2" type="text" placeholder="Nombre" name="nombre"
-                                value="{{ old('nombre', $Bebidas->nombre) }}" maxlength="25" onkeypress="quitarerror()">
-                            @error('nombre')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-                            <br><br>
-                            <textarea class="textarea--style-2" type="text" placeholder="Descripción" name="descripcion" maxlength="100" 
-                                onkeypress="quitarerror()">{{ old('descripcion',$Bebidas->descripcion) }}</textarea>
-                            @error('descripcion')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-                            <br><br>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-white" id="pills-bebidas-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-bebidas" type="button" role="tab" aria-controls="pills-bebidas"
+                    aria-selected="true">Bebidas</a>
+            </li>
 
-                        </div>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active text-white" id="pills-platillos-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-platillos" type="button" role="tab" aria-controls="pills-platillos"
+                    aria-selected="false">Platillos</a>
+            </li>
 
-                        <div style="margin-left:2%;float:left;width:35%">
-                            <div class="">
-                                <select name="tamanio" onchange="quitarerror()">
-                                    @if (old('tamanio'))
-                                        @if (old('tamanio') === 'Grande')
-                                            <option disabled="disabled" selected="selected" value="Grande">Grande</option>
-                                        @else
-                                            @if (old('tamanio') === 'Mediano')
-                                                <option disabled="disabled" selected="selected" value="Mediano">Mediano
-                                                </option>
-                                            @else
-                                                @if (old('tamanio') === 'Pequeño')
-                                                    <option disabled="disabled" selected="selected" value="Pequeño">Pequeño
-                                                    </option>
-                                                @endif
-                                            @endif
-                                        @endif
-                                    @else
-                                        <option disabled="disabled" selected="selected" value="{{$Bebidas->tamanio}}">Tamaño</option>
-                                    @endif
-                                    <option value="Grande"{{$Bebidas->tamanio === 'Grande' ? 'selected' : ''}}>Grande</option>
-                                    <option value="Mediano"{{$Bebidas->tamanio === 'Mediano' ? 'selected' : ''}}>Mediano</option>
-                                    <option value="Pequeño"{{$Bebidas->tamanio === 'Pequeño' ? 'selected' : ''}}>Pequeño</option>
-                                </select>
-                            </div>
-                            @error('tamanio')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-                            <br>
-                            <input class="input--style-2" type="number" placeholder="Precio" name="precio"
-                                value="{{ old('precio', $Bebidas->precio) }}" onkeypress="quitarerror()" 
-                                onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
-                                max="1000">
-                            @error('precio')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-                                <br><br>
-
-                            <input class="input--style-2" type="number" placeholder="Bebidas disponibles" name="cantidad"
-                                value="{{ old('disponible', $Bebidas->disponible) }}" onkeypress="quitarerror()"
-                                 onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"  max="1000">
-                            @error('disponible')
-                                  <strong class="menerr" style="color:red">{{ $message }}</strong>
-                             @enderror
-                            <br><br>   
-                            </div>
-
-                            <div id="espacio"><br><br><br><br></div>
-                            <div style="float:right">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <button type="button" onclick="cancelar('admonRestaurante')"
-                                    class="btn btn-warning">Cancelar</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-white" id="pills-combos-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-combos" type="button" role="tab" aria-controls="pills-combos"
+                    aria-selected="false">Combos</a>
+            </li>
+        </ul>
     </div>
-@stop
+</div>
+<BR><BR><BR>
+
+    <div class="container ">
+        <div class="row d-flex justify-content-center" >
+            <div class="card col-lg-9" >
+        <div>
+            <br>
+            <h2 class="text-center">Editando a: {{$Bebidas->nombre}}</h2>  
+        <form method="post" action="{{route('bebida.update', ['id'=> $Bebidas->id])}}" enctype="multipart/form-data">
+            @method('put')
+            @csrf
+             <br>
+            <div class="">
+                <div style="float: left;">
+                    <label for=""><strong>Seleccione una imagen:</strong></label>
+                    <br>
+                    <img src="{{asset($Bebidas->imagen)}}"  alt="" width="200px" height="200px" id="imagenmostrada1">
+                    <br>
+                    <input type="file" id="imagen1" name="imagen1" accept="image/*"  onchange="precargar(1)"
+                        value="{{ old('imagenPrevisualizacion', $Bebidas->imagen) }}" style="color: white;width: 200px;">
+                    @error('imagen1')
+                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                    @enderror
+                </div>
+
+                <div style="float: left; margin-left: 10px; width: 270px">
+                    <label for=""><strong>Nombre bebida:</strong></label>
+                    <input class="form-control" type="text" placeholder="Nombre de la bebida" name="nombre1"
+                        value="{{ old('nombre1', $Bebidas->nombre) }}" maxlength="25"  onkeypress="quitarerror()">
+                    @error('nombre1')
+                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                    @enderror
+                    <br>
+                    <label for=""><strong>Ingrese la descripcion del producto:</strong></label>
+                    <textarea class="form-control" type="text" placeholder="Descripción" name="descripcion1" 
+                    maxlength="100"  rows="5"
+                    onkeypress="quitarerror()">{{ old('descripcion1', $Bebidas->descripcion) }}</textarea>
+                    @error('descripcion1')
+                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                    @enderror
+                    <br><br>
+                </div>
+
+                <div style="float: left; margin-left: 10px; width: 270px">
+                    <label for=""><strong>Seleccione el tamaño:</strong></label>
+                    <select name="tamanio1" required onchange="quitarerror()" class="form-control">
+                        @if (old('tamanio1'))
+                            @if (old('tamanio1') === 'Grande')
+                                <option style="display: none" selected="selected" value="Grande">Grande</option>
+                            @else
+                                @if (old('tamanio1') === 'Mediano')
+                                    <option style="display: none" selected="selected" value="Mediano">Mediano
+                                    </option>
+                                @else
+                                    @if (old('tamanio1') === 'Pequeño')
+                                        <option style="display: none" selected="selected" value="Pequeño">Pequeño
+                                        </option>
+                                    @endif
+                                @endif
+                            @endif
+                        @else
+                            <option disabled="disabled" selected="selected" value="{{$Bebidas->tamanio}}">Seleccione una opcion</option>
+                        @endif
+                        <option value="Grande"{{$Bebidas->tamanio === 'Grande' ? 'selected' : ''}}>Grande</option>
+                        <option value="Mediano"{{$Bebidas->tamanio === 'Mediano' ? 'selected' : ''}}>Mediano</option>
+                        <option value="Pequeño"{{$Bebidas->tamanio === 'Pequeño' ? 'selected' : ''}}>Pequeño</option>
+                    </select>
+                    @error('tamanio1')
+                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                    @enderror
+
+                    <br>
+                    <label for=""><strong>Ingrese el precio:</strong></label>
+                    <input class="form-control" type="number" placeholder="Precio" name="precio1" id="precio"
+                    onkeypress="quitarerror()" step="any"
+                    onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1" max="1000"
+                    value="{{ old('precio1', $Bebidas->precio) }}"  required>
+                    @error('precio1')
+                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                    @enderror
+
+                    <br>
+                    <label for=""><strong>Ingrese la cantidad de bebidas:</strong></label>
+                    <input class="form-control" type="number" placeholder="Bebidas disponibles"
+                        name="cantidad1" id="cantidad" value="{{ old('cantidad1', $Bebidas->disponible) }}"
+                        onkeypress="quitarerror()"
+                        onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
+                        max="1000">
+                    @error('cantidad1')
+                        <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
+                    @enderror
+                </div>
+                <div style="float: right;margin-top: 20px; margin-right: 100px">
+                    <button type="button" onclick="cancelar('admonRestaurante')" class="btn btn-warning" >Cerrar</button>
+                    <button onclick="" type="submit" class="btn btn-success">Actualizar</button>
+                </div> 
+            </div> 
+        </form>
+    </div>
+    </div>
+</div>
+@endsection 
+
 
                
