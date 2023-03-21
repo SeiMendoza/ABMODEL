@@ -136,6 +136,7 @@ public function search(Request $request){
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
             'expiracion' => 'required|date|after:'.$minima,
+            'kilos' => 'required|numeric|min:0|max:1000'
         ];
 
         $mensaje=[
@@ -148,6 +149,10 @@ public function search(Request $request){
             'expiracion.required' => 'La fecha de expiración no puede estar vacío',
             'expiracion.date' => 'La fecha de expiración debe de ser una fecha',
             'expiracion.after' => 'La fecha de expiración debe de ser posterior a '.$minima,
+            'kilos.required' => 'El peso no puede estar vacío',
+            'kilos.max' => 'El peso es muy grande',
+            'kilos.min' => 'El peso es muy pequeño',
+            'kilos.numeric' => 'El peso debe de ser numerico',
         ];
 
         $this->validate($request,$rules,$mensaje);
@@ -158,7 +163,7 @@ public function search(Request $request){
             $piscina->tipo = $request->input('tipo');
             $piscina->uso = $request->input('uso');
             $piscina->fecha_expiracion = $request->input('expiracion');
-
+            $piscina->peso = $request->input('kilos');
             $creado = $piscina->save();
 
             if ($creado) {

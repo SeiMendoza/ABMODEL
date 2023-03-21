@@ -1,5 +1,11 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Piscina-productos')
+
+@section('miga')
+    <li class="breadcrumb-item text-sm active text-dark active">
+    <a class="opacity-5 text-dark" href="{{route('piscina.store')}}">Nuevo producto</a>
+    </li>
+@endsection
 @section('content')
 
 <div style="margin-left:20px; margin-top:10px; display:block; float:left;
@@ -40,7 +46,8 @@
                     <tr style="font-family: Georgia, Serif;font-size:19px">
                         <th scope="col">N</th>
                         <th scope="col">Producto</th>
-                        <th scope="col">Tipo de producto</th>  
+                        <th scope="col">Tipo de producto</th>
+                        <th scope="col">Cantidad</th>  
                         <th scope="col">Editar</th>
                         <th scope="col">Eliminar</th>
                     </tr>
@@ -51,9 +58,7 @@
                 <td scope="col">{{$p->id}}</td>
                 <td scope="col">{{$p->nombre}}</td>
                 <td scope="col">{{$p->tipo_producto->descripcion}}</td>
-                 <td>
-                   
-                 </td>
+                <td scope="col">{{$p->peso}} Kg</td>
                 <td>
                 <a  href="{{ route('producto.edit', ['id' => $p->id]) }}">
                 <i class="fa-regular fa-pen-to-square" style="font-size:25px;color:rgb(33, 195, 247)"></i>
