@@ -19,6 +19,6 @@ class BusquedaAdmonController extends Controller
                   ->where('nombre', 'like', '%'.$busqueda.'%')->paginate(10);
             $combos = DB::table('combos')
                   ->where('nombre', 'like', '%'.$busqueda.'%')->paginate(10);
-            return view('Menu/Admon/admon_Restaurante', compact('platillos','bebidas', 'combos',  'busqueda'));
+            return view('Menu/Admon/pruebaAdmon', compact('platillos','bebidas', 'combos',  'busqueda'));
               }
 }

@@ -1,20 +1,29 @@
-@extends('00_plantillas_Blade.plantilla_General1')
+@extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Edición')
+@section('miga')
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+<a class="text-dark" href="{{route('prodpiscina.index')}}" onclick="cambia">lista de productos</a></li>
+@endsection
+@section('content')
 
-@section('contend')
+<div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">
+    <h3>Productos de piscina</h3>
+</div>
 
-    <div class="page-wrapper bg-primary p-t-170 p-b-100 font-robo">
-        <br><br>
-        <div class="wrapper wrapper--w960">
-            <div class="card">
-                <div class="card-body">
-                    <h2 style="text-align:center">Editar {{$piscina->nombre}}</h2>
-<br>
-                    <form method="post" action="{{ route('producto.update',['id' => $piscina -> id]) }}" enctype="multipart/form-data">
+<div class="container" style="position: relative;">
+    <div class="row d-flex justify-content-center" >
+        <div class="card col-lg-10" style="background: rgb(179, 221, 226);position: absolute;
+  left: 8%;margin-top:10%">
+    <BR>
+<form method="post" action="{{ route('producto.update',['id' => $piscina -> id]) }}" enctype="multipart/form-data">
                     @method('put')
-                        @csrf
-                        <div style="margin-left:2%;float:left;width:47%">
-                            <input class="input--style-2" type="text" placeholder="Nombre del producto" name="nombre" id="nombre"
+                        @csrf   
+                        <div class="container ">
+                        <div class="row">
+                        <div class="form-group col-md-6 ">
+                        <label for="" style="color:teal;font-size: 20px;"><strong>Ingrese el nombre del producto:</strong></label>
+                            <input class="form-control" type="text" placeholder="Nombre del producto" name="nombre" id="nombre"
                             value="@if(Session::has('nombre')){{Session::get('nombre')}}@else{{old('nombre',$piscina->nombre)}}@endif"
                             maxlength="25"  onkeypress="quitarerror()">
                             @error('nombre')
@@ -22,8 +31,9 @@
                             @enderror
                         </div>
 
-                        <div style="margin-left:2%;float:left;width:47%;margin-top: 15px">
-                            <select name="tipo" onchange="quitarerror()" id="tipo">
+                        <div class="form-group col-md-6">
+                        <label for="" style="color:teal;font-size: 20px;"><strong>Seleccione el tipo de producto:</strong></label>
+                            <select class="form-control" name="tipo" onchange="quitarerror()" id="tipo">
                             <option value="1"{{$piscina->tipo =="1" ? 'selected' :''}}>Polvo</option>
                             <option value="2"{{$piscina->tipo =="2" ? 'selected' :''}}>Liquido</option>  
                             </select>
@@ -31,18 +41,21 @@
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
-
-                        <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
-                            <input class="input--style-2" type="text" name="expiracion" id="expiracion"
+                        </div>
+                        
+                    <div class="row ">
+                        <div class="form-group col-md-6">
+                        <label for="" style="color:teal;font-size: 20px;"><strong>Ingrese la fecha de expiracion:</strong></label>
+                            <input class="form-control" type="text" name="expiracion" id="expiracion"
                             value="@if(Session::has('expiracion')){{Session::get('expiracion')}}@else{{old('expiracion',$piscina->fecha_expiracion)}}@endif"
                             onkeypress="quitarerror()" placeholder="Tiempo de expiracion">
                             @error('expiracion')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
-
-                        <div style="margin-left:2%;float:left;width:47%;margin-top: 45px">
-                            <select name="uso" onchange="quitarerror()" id="uso">
+                        <div class="form-group col-md-6">
+                        <label for="" style="color:teal;font-size: 20px;"><strong>Seleccione el tiempo de uso:</strong></label>
+                            <select class="form-control" name="uso" onchange="quitarerror()" id="uso">
                                     <option value="1"{{$piscina->uso =="1" ? 'selected' :''}}>diario</option>
                                     <option value="2"{{$piscina->uso =="2" ? 'selected' :''}}>semanal</option>
                                     <option value="3"{{$piscina->uso =="3" ? 'selected' :''}}>mensual</option>
@@ -51,7 +64,7 @@
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
-
+                    </div>
                         <div style="float: right;margin-top: 50px">
                             <button type="submit" class="btn btn-success">Guardar</button>
                             <button type="button" onclick="cancelarp('productos')"
@@ -62,6 +75,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         window.addEventListener('load',function(){
             document.getElementById('expiracion').type= 'text';

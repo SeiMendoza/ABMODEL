@@ -171,6 +171,20 @@ Route::get('bebida/{id}/editar', [EditarBebidaController::class, 'edit'])
 Route::put('bebida/{id}/edicion', [EditarBebidaController::class, 'update'])
     ->name('bebida.update');
 
+/****************************************
+  Rutas Para Editar Combos
+*****************************************/
+Route::get('combo/{id}/editar', [ComboController::class, 'edit'])
+    ->name('combo.editar');
+  
+Route::put('combo/{id}/edicion', [ComboController::class, 'update'])
+    ->name('combo.update');
+
+Route::post('/combo/id/temporal',[ComboController::class, 'ediciontemporal'])
+    ->name('combo.ediciontemporal');
+
+
+
 /*lista de pedidos anteriores*/
 Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])
     ->name('pedidoant.pedidos_anteriores'); 
@@ -286,26 +300,6 @@ Route::delete('/mesas/reservaciones/{id}/borrar', [ReservacionController::class,
 
 Route::get('/mesas/reservaciones/buscar', [ReservacionController::class, 'search2'])
 ->name('mesas_res.search');
-
-
-/* Rutas para reservar local*/
-Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])
-       ->name('cliente.reservaLocal');
-
-Route::get('/Local/create', [ReservacionTotalController::class, 'create'])
-       -> name('ReserLocal.create');
-
-Route::post('/Reservacion/Local', [ReservacionTotalController::class, 'store'])
-->name('ReserLocal.store');
-
-Route::get('Cliente/{id}/Editando', [ReservacionTotalController::class, 'edit'])
-  ->name('ResCliente.editar');
-
-Route::put('Cliente/{id}/edicion', [ReservacionTotalController::class, 'update'])
-  ->name('resCliente.update');
-
-Route::get('cliente/{id}/borrar', [ReservacionTotalController::class, 'destroy'])
-  ->name('cliente.borrar');
 
 /* Rutas para reservar local*/
 Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])

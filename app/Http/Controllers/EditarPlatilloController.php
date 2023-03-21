@@ -22,45 +22,40 @@ class EditarPlatilloController extends Controller
     public function update(Request $request, $id){
 
         $request -> validate ([
-            'tipo' => 'required|in:2,1',
-            'nombre' => 'required|max:100|min:3',
-            'descripcion' => 'required|max:100|min:3',   
-            'precio' => 'required|min:1|max:1000|numeric',   
-            'tamanio' => 'required|max:100|min:3', 
-            'imagen' => '',
-            'cantidad' => 'nullable|min:1|max:1000|numeric',
-            'disponible' => 'nullable|min:1|max:1000|numeric'
+            'nombre2' => 'required|max:100|min:3',
+            'descripcion2' => 'required|max:100|min:3',   
+            'precio2' => 'required|min:1|max:1000|numeric',   
+            'tamanio2' => 'required', 
+            'imagen2' => '',
+            'disponible2' => 'required|min:1|max:1000|numeric',
         ],[
-            'tipo.required' => 'El tipo no puede estar vacío',
-            'nombre.required' => 'El nombre no puede estar vacío',
-            'nombre.max' => 'El nombre es muy extenso',
-            'nombre.min' => 'El nombre es muy corto',
-            'descripcion.required' => 'La descripcion no puede estar vacío',
-            'descripcion.max' => 'La descripcion es muy extenso',
-            'descripcion.min' => 'La descripcion es muy corto',
-            'precio.required' => 'El precio no puede estar vacío',
-            'precio.max' => 'El precio es muy grande',
-            'precio.min' => 'El precio es muy pequeño',
-            'precio.numeric' => 'El precio debe de ser numerico',
-            'tamanio.required' => 'El tamanio no puede estar vacío',
-            'tamanio.max' => 'El tamanio es muy extenso',
-            'tamanio.min' => 'El tamanio es muy corto',
-            'cantidad.max' => 'El numero de bebidas disponibles es muy grande',
-            'cantidad.min' => 'El numero de bebidas disponibles es muy pequeño',
-            'cantidad.numeric' => 'El numero de bebidas disponibles debe de ser numerico',
-            'disponible.max' => 'El numero de platillos disponibles es muy grande',
-            'disponible.min' => 'El numero de platillos disponibles es muy pequeño',
-            'disponible.numeric' => 'El numero de platillos disponibles debe de ser numerico',
+            'nombre2.required' => 'El nombre no puede estar vacío',
+            'nombre2.max' => 'El nombre es muy extenso',
+            'nombre2.min' => 'El nombre es muy corto',
+            'descripcion2.required' => 'La descripcion no puede estar vacío',
+            'descripcion2.max' => 'La descripcion es muy extenso',
+            'descripcion2.min' => 'La descripcion es muy corto',
+            'precio2.required' => 'El precio no puede estar vacío',
+            'precio2.max' => 'El precio es muy grande',
+            'precio2.min' => 'El precio es muy pequeño',
+            'precio2.numeric' => 'El precio debe de ser numerico',
+            'tamanio2.required' => 'El tamanio no puede estar vacío',
+            'tamanio2.max' => 'El tamanio es muy extenso',
+            'tamanio2.min' => 'El tamanio es muy corto',
+            'disponible2.required' => 'El numero de platillos no puede estar vacío',
+            'disponible2.max' => 'El numero de platillos disponibles es muy grande',
+            'disponible2.min' => 'El numero de platillos disponibles es muy pequeño',
+            'disponible2.numeric' => 'El numero de platillos disponibles debe de ser numerico',
         ]);
 
       
         $actualizacion = Platillo::findOrFail($id);
 
-        $actualizacion->nombre = $request->input('nombre');
-        $actualizacion->descripcion = $request->input('descripcion');
-        $actualizacion->precio = $request->input('precio');
-        $actualizacion->tamanio = $request->input('tamanio');
-        $actualizacion->disponible = $request->input('disponible');
+        $actualizacion->nombre = $request->input('nombre2');
+        $actualizacion->descripcion = $request->input('descripcion2');
+        $actualizacion->precio = $request->input('precio2');
+        $actualizacion->tamanio = $request->input('tamanio2');
+        $actualizacion->disponible = $request->input('disponible2');
                
         $creado = $actualizacion -> save();
 
