@@ -22,7 +22,9 @@ class ReservacionFactory extends Factory
             'celular'=>$this->faker->phoneNumber(),
             'cantidad'=>$this->faker->numberBetween(1,20),
             'fecha'=>$this->faker->date(),
+            'hora'=>$this->faker->time(),
             'pago'=>$this->faker->randomFloat(2,100,10000),
+            'formaPago'=>$this->faker->randomElement(['Efectivo','Transferencia']),
             'mesa_id' => Mesa::get('id')->random()
         ];
     }

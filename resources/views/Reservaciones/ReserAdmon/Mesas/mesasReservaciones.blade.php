@@ -5,8 +5,11 @@
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Reservaciones de mesas</li>
 @endsection
 @section('content')
-    <!-- ========== Reservaciones ========== -->
-    <div class=""  id="reserva" style="">
+    <div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">                            
+            <h4>Reservaciones de Mesas</h4>
+    </div>
+    <div class="nav d-flex justify-content-end " style="margin:0px 0px 5px 5px; display:block; float:rigth">
         <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
             <a href="{{ route('mesas_reg.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
                 <i class="ni ni-bold-left text-sm text-center opacity-10"></i>
@@ -17,7 +20,7 @@
                 <form action="{{ route('mesas_res.search') }}" method="get" role="search" 
                     class="navbar-search" >
                     <div class="input-group">
-                        <input class="form-control" type="search" id="buscar" name="buscar" style="width: 350px" 
+                        <input class="form-control" type="search" id="buscar" name="buscar" style="width: 200px" 
                         placeholder="Buscar por nombre"aria-label="Search"
                         aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>" />
                         <button class="bg-success border-radius-md" type="submit" style="border: 0; color:aliceblue"><strong>Buscar</strong></button>    
@@ -29,46 +32,13 @@
                 </form>
             </div>
             <div style="margin: 10px 0 0 10px;" class=" nav-link-icon">
-                <button type="button" data-bs-toggle="modal" 
-                data-bs-target="#staticBackdrop" class="btn btn-success">
-                <i class="ni ni-palette"></i> Agregar reservaciones</button>
-                <!-- Modal Nuevo-->
-                <form action="{{route('mesas_res.store')}}" method="post" id="nuevo" novalidate class="needs-validation" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
-                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class=" modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Agregar una nueva reservación</h5>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-floating mb-3">
-                                    <input class="input--style-2 form-control" type="text" placeholder="Reservaciones" name="nombre" id="nombre"
-                                    value="{{old('nombre')}}" required
-                                    maxlength="25">
-                                    <label for="nombre" class="form-label">Cliente</label>
-                                    <div class="invalid-feedback">
-                                        No puede estar vacio el nombre del cliente
-                                    </div>
-                                    @error('nombre')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                                <div class="form-floating">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" onclick="cancelar('mesas/reservaciones')" class="btn btn-secondary" >Cerrar</button>
-                                <button onclick="" type="submit" class="btn btn-success">Comprendido</button>
-                            </div>  
-                            
-                        </div>
-                        </div>
-                    </div>
-                </form>
+                <a href="{{route('mesas_res.create')}}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:200px; padding:6px;">
+                <i class="ni ni-palette"></i> Agregar reservaciones</a>
             </div>
         </div>
+    </div>
+    <!-- ========== Reservaciones ========== -->
+    <div class=""  id="reserva" style="">
         <!-- ========== Cards ========== -->
         <div class="">
             <div class="table-responsive container-fluid">

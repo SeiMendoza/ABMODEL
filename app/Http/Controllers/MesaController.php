@@ -27,13 +27,14 @@ class MesaController extends Controller
     public function store(Request $request){
 
         $request -> validate ([
-            'codigo' => 'required|max:13|numeric',
-            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.\0-9\_]+$/|max:100|min:3',  
+            'codigo' => 'required|numeric|min_digits:13|max_digits:13',
+            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.\0-9\_]+$/|max:50|min:3',  
             'cantidad' => 'required|min:1|max:20|numeric',  
             //'kiosko' => 'required' 
         ],[
             'codigo.required' => 'El código no puede estar vacío',
-            'codigo.max' => 'El código debe tener 13 números',
+            'codigo.min_digits' => 'El código debe tener 13 números',
+            'codigo.max_digits' => 'El código debe tener 13 números',
             'codigo.numeric' => 'El código debe ser de tipo numérico',
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.regex'=> 'El nombre tiene caracteres no permitidos',
@@ -52,7 +53,7 @@ class MesaController extends Controller
         $nuevo->codigo = $request->input('codigo');
         $nuevo->nombre = $request->input('nombre');
         $nuevo->cantidad = $request->input('cantidad'); 
-        //$nuevo->kiosko_id = $request->input('kiosko');              
+        $nuevo->kiosko_id = 1;             
         $creado = $nuevo -> save();
 
         if ($creado) {

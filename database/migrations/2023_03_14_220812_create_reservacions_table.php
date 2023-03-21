@@ -18,10 +18,14 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('celular');
             $table->string('cantidad');
-            $table->string('fecha');
+            $table->date('fecha');
+             $table->time("hora");
             $table->string('pago');
+             $table->string("formaPago");
             $table->unsignedBigInteger('mesa_id');
-            $table->foreign("mesa_id")->references("id")->on("mesas")->onDelate('cascade');
+            $table->foreign("mesa_id")->references("id")->on("mesas")
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

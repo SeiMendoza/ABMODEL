@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('cantidad');
             $table->unsignedBigInteger('kiosko_id');
-            $table->foreign("kiosko_id")->references("id")->on("kioskos")->onDelate('cascade');
+            $table->foreign("kiosko_id")->references("id")->on("kioskos");
             $table->timestamps();
         });
     }

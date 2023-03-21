@@ -4,37 +4,45 @@
 <li class="breadcrumb-item text-sm text-dark" aria-current="page">Mesas</li>
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Registro de mesas</li>
 @endsection
+
 @section('content')
+    <div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">                            
+            <h4>Registro de Mesas</h4>
+    </div>
+    <div class="nav d-flex justify-content-end " style="margin:0px 0px 5px 5px; display:block; float:rigth" >
+        <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
+            <a href="{{ route('mesas_res.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
+            <i class="fa fa-table text-sm text-center opacity-10"></i>
+            Ir a reservaciones de mesas</a>
+        </div>
+        <div class="nav d-flex justify-content-end " style="">
+            <div class="" style="margin: 10px 0 0 10px">
+                <form action="{{ route('mesas_reg.search') }}" method="get" role="search" 
+                    class="navbar-search" >
+                    <div class="input-group">
+                        <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 200px" 
+                        placeholder="Buscar por nombre" aria-label="Search" 
+                        aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>"/>
+                        <button class="bg-success border-radius-md" type="submit" 
+                            style="border: 0; color:aliceblue"><strong>Buscar</strong>
+                        </button>    
+                        @if(isset($text)!="")
+                        <a href="{{route('mesas_reg.index')}}" type="button" style="color:aliceblue; width:150px; padding:6px;"  
+                        class="bg-secondary border-radius-md h-6 text-center"><strong style="">Borrar Busqueda</strong></a>
+                        @endif
+                    </div>   
+                </form>
+            </div>
+            <div style="margin: 10px 0 0 10px;" class=" nav-link-icon">
+                <a href="{{route('mesas_reg.create')}}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:200px; padding:6px;">
+                <i class="fa fa-newspaper"></i> Agregar mesas</a>
+            </div>
+        </div>
+    </div>
+
     <!-- ========== Registro ========== -->
         <div class=""  id="registro" style="">  
-            <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
-                <a href="{{ route('mesas_res.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
-                    <i class="ni ni-bold-left text-sm text-center opacity-10"></i>
-                    Ir a reservaciones de mesas</a>
-            </div>
-            <div class="nav d-flex justify-content-end " style="">
-                <div class="" style="margin: 10px 0 0 10px">
-                    <form action="{{ route('mesas_reg.search') }}" method="get" role="search" 
-                        class="navbar-search" >
-                        <div class="input-group">
-                            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
-                            placeholder="Buscar por nombre" aria-label="Search" 
-                            aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>"/>
-                            <button class="bg-success border-radius-md" type="submit" 
-                                style="border: 0; color:aliceblue"><strong>Buscar</strong>
-                            </button>    
-                            @if(isset($text)!="")
-                            <a href="{{route('mesas_reg.index')}}" type="button" style="color:aliceblue; width:150px; padding:6px;"  
-                            class="bg-secondary border-radius-md h-6 text-center"><strong style="">Borrar Busqueda</strong></a>
-                            @endif
-                        </div>   
-                    </form>
-                </div>
-                <div style="margin: 10px 0 0 10px;" class=" nav-link-icon">
-                    <a href="#" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
-                    <i class="fa fa-newspaper"></i> Agregar mesas</a>
-                </div>
-            </div>
             <!-- ========== Cards ========== -->
             <div class="">
                 <div class="table-responsive container-fluid">
@@ -63,33 +71,7 @@
                                             href="{{route('mesas_reg.edit', ['id' => $r->id])}}"><i class="fa fa-edit"></i></a>
                                         </td>
                                         <td scope="col">
-                                            <!-- Button trigger modal eliminar-->
-                                            <a
-                                            class="" type="button" data-bs-toggle="modal" 
-                                            data-bs-target="#staticBackdropE{{$r->id}}"><i class="fa fa-delete-left text-danger"></i>
-                                            </a>
-                                            <!-- Modal Eliminar-->
-                                            <form action="{{route('mesas_reg.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
-                                                @method('delete')
-                                                @csrf
-                                                <div class="modal fade" id="staticBackdropE{{$r->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
-                                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar a: {{$r->nombre}}</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                            
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                            <button type="submit" class="btn btn-danger">Comprendido</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            
                                         </td>
                                     </tr>
                                
