@@ -20,6 +20,7 @@ class PiscinaFactory extends Factory
             'nombre'=>$this->faker->word(),
             'tipo'=>$this->faker->randomElement([1,2]),
             'fecha_expiracion'=>$this->faker->date(),
+            'peso' =>$this->faker->numerify('##'),
             'uso'=>$this->faker->randomElement([1,2,3])
         ];
     }
