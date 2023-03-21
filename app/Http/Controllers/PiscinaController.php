@@ -19,25 +19,29 @@ class PiscinaController extends Controller
      */
     public function index()
     {
-        $uso = PiscinaUso::all();
         $prod = Piscina::paginate(8);
         $tip = PiscinaTipo::all();
-        return view('Piscina/inventario/listaproductos',compact('prod','tip','uso'));
+        return view('Piscina/inventario/listaproductos',compact('prod','tip'));
     }
 public function search(Request $request){
-    $uso = PiscinaUso::all();
     $prod = Piscina::all();
     $tip = PiscinaTipo::all();
     $text = trim($request->get('busqueda'));
     $prod = Piscina::where('nombre', 'like', '%' . $text . '%')->paginate(6); 
     $tip = PiscinaTipo::where('descripcion', 'like', '%' . $text . '%')->paginate(6);
-        return view('Piscina/inventario/listaproductos',compact('prod','tip','text','uso'));
+        return view('Piscina/inventario/listaproductos',compact('prod','tip','text'));
 }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        $tipo = PiscinaTipo::all();
+        $uso = PiscinaUso::all();
+        return view('Piscina.registrarPiscina',compact('tipo','uso'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -80,7 +84,7 @@ public function search(Request $request){
             $creado = $piscina->save();
 
             if ($creado) {
-                return redirect()->route('prodpiscina.index')
+                return redirect()->route('piscina.create')
                     ->with('mensaje', 'El producto de piscina fue creada exitosamente');
             }
     }
