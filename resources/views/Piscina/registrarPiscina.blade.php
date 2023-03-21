@@ -1,10 +1,15 @@
-@extends('00_plantillas_Blade.plantilla_General1')
-@section('title', 'Registro de producto de piscina')
+@extends('00_plantillas_Blade.plantilla_General2')
+@section('title', 'Piscina-productos')
 
-@section('contend')
+@section('miga')
+    <li class="breadcrumb-item text-sm">
+        <a class="opacity-5 text-dark" href="#">Productos Piscina</a>
+    </li>
+    <li class="breadcrumb-item text-sm active text-dark active">Crear</li>
+@endsection
 
-    <div class="page-wrapper bg-primary p-t-170 p-b-100 font-robo">
-        <br><br>
+@section('content')
+<br><br>
         <div class="wrapper wrapper--w960">
             <div class="card">
                 <div class="card-body">
@@ -12,9 +17,9 @@
 <br>
                     <form method="post" action="{{ route('piscina.store') }}" enctype="multipart/form-data">
                         @csrf
-
                         <div style="margin-left:2%;float:left;width:47%">
-                            <input class="input--style-2" type="text" placeholder="Nombre del producto" name="nombre" id="nombre"
+                            <label for=""><strong>Ingrese el nombre del producto</strong></label>
+                            <input class="form-control" type="text" placeholder="Nombre del producto" name="nombre" id="nombre"
                             value="@if(Session::has('nombre')){{Session::get('nombre')}}@else{{old('nombre')}}@endif"
                             maxlength="25"  onkeypress="quitarerror()">
                             @error('nombre')
@@ -22,8 +27,9 @@
                             @enderror
                         </div>
 
-                        <div style="margin-left:2%;float:left;width:47%;margin-top: 15px">
-                            <select name="tipo" onchange="quitarerror()" id="tipo">
+                        <div style="margin-left:2%;float:left;width:47%;">
+                            <label for=""><strong>Seleccione el tipo de producto</strong></label>
+                            <select name="tipo" onchange="quitarerror()" id="tipo" class="form-control">
                                 @if (old('tipo'))
                                     <option disabled="disabled" value="">Selecciona el tipo de producto</option> 
                                     @foreach ($tipo as $c)
@@ -45,8 +51,16 @@
                             @enderror
                         </div>
 
+                        @php
+                            $fecha_actual = date("Y-m-d");
+                            $minima = date('Y-m-d',strtotime($fecha_actual."+ 1 month"));
+                            $minima = date('Y-m-d',strtotime($minima."+ 1 day"));
+                            $maxima = date('Y-m-d',strtotime($fecha_actual."+ 10 year"));
+                        @endphp     
+
                         <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
-                            <input class="input--style-2" type="text" name="expiracion" id="expiracion"
+                            <label for=""><strong>Ingrese la fecha de expiracion</strong></label>
+                            <input class="form-control" type="date" name="expiracion" id="expiracion"
                             value="@if(Session::has('expiracion')){{Session::get('expiracion')}}@else{{old('expiracion')}}@endif"
                             onkeypress="quitarerror()" placeholder="Tiempo de expiracion">
                             @error('expiracion')
@@ -54,8 +68,9 @@
                             @enderror
                         </div>
 
-                        <div style="margin-left:2%;float:left;width:47%;margin-top: 45px">
-                            <select name="uso" onchange="quitarerror()" id="uso">
+                        <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
+                            <label for=""><strong>Seleccione el periodo de uso</strong></label>
+                            <select name="uso" onchange="quitarerror()" id="uso" class="form-control">
                                 @if (old('uso'))
                                     <option disabled="disabled" value="">Selecciona el periodo de tiempo de uso</option> 
                                     @foreach ($uso as $c)
@@ -73,6 +88,22 @@
                                 @endif
                             </select>
                             @error('uso')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+                        <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
+                            <label for=""><strong>Ingrese el peso en kilogramos</strong></label>
+                            <div class="input-group mb-3">
+                                <input class="form-control" type="number" name="kilos" id="kilos"
+                                step="0.01" min="1" max="100" placeholder="Ingrese los kilogramos"
+                                value="@if(Session::has('kilos')){{Session::get('kilos')}}@else{{old('kilos')}}@endif"
+                                onkeypress="quitarerror()">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">kilogramos</span>
+                                </div>
+                            </div>
+                            @error('kilos')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
@@ -97,6 +128,8 @@
             });
             document.getElementById('expiracion').addEventListener('focus',function(){
                 document.getElementById('expiracion').type= 'date';
+                document.getElementById('expiracion').max= '{{$maxima}}';
+                document.getElementById('expiracion').min= '{{$minima}}';
             });
         });
     </script>
