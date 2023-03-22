@@ -189,7 +189,7 @@ Route::post('/combo/id/temporal',[ComboController::class, 'ediciontemporal'])
 Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])
     ->name('pedidoant.pedidos_anteriores'); 
 /*Borrar pedidos anteriores*/
-Route::post('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])
+Route::delete('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])
     ->name('borrar.borrarDatos');
 /* Detalles pedidos anteriores */
 Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])
