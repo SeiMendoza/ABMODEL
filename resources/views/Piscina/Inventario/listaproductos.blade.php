@@ -64,7 +64,7 @@
                 <i class="fa-regular fa-pen-to-square" style="font-size:25px;color:rgb(33, 195, 247)"></i>
                 </td>
                 <td>
-                <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$p->id}}"  class="fa fa-trash" style="font-size:25px; color:crimson"></i>
+                <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$p->id}}"  class="fa fa-delete-left text-danger" style="font-size:20px; color:crimson"></i>
                 <form action="{{route('prodpiscina.destroy', ['id' => $p->id])}}" method="post" enctype="multipart/form-data">
                     @method('delete')
                                             @csrf
