@@ -85,7 +85,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href={{ route('kiosko.index') }}>
+                    <a class="nav-link " href={{ route('mesas_res.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-shop text-primary text-sm opacity-10"></i>
@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li cFlass="nav-item">
-                    <a class="nav-link " href="{{route('mesas_res.index')}}">
+                    <a class="nav-link " href="{{route('mesas_reg.index')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-app text-sm text-primary opacity-10"></i>

@@ -1,9 +1,9 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Reservacion')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">Mesas</li>
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">Kiosko</li>
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-    href="{{route('mesas_res.index')}}">Reservacion de Mesas</a></li>
+    href="{{route('mesas_res.index')}}">Reservacion de Kiosko</a></li>
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Nueva Reservación</li>
 @endsection
 @section('content')

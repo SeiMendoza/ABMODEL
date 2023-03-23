@@ -2,7 +2,6 @@
 @section('title', 'Mesas')
 @section('miga')
 <li class="breadcrumb-item text-sm text-dark" aria-current="page">Mesas</li>
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Registro de mesas</li>
 @endsection
 
 @section('content')
@@ -11,11 +10,6 @@
             <h4>Registro de Mesas</h4>
     </div>
     <div class="nav d-flex justify-content-end " style="margin:0px 0px 5px 5px; display:block; float:rigth" >
-        <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
-            <a href="{{ route('mesas_res.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
-            <i class="fa fa-table text-sm text-center opacity-10"></i>
-            Ir a reservaciones de mesas</a>
-        </div>
         <div class="nav d-flex justify-content-end " style="">
             <div class="" style="margin: 10px 0 0 10px">
                 <form action="{{ route('mesas_reg.search') }}" method="get" role="search" 

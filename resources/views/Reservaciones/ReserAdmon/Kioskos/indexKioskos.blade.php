@@ -1,11 +1,9 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Kioskos')
 @section('miga')
-<li class="breadcrumb-item text-sm">
-    <a class="opacity-5 text-dark"
-    href="#">Reservaciones</a>
+<li class="breadcrumb-item text-sm">Kioskos
 </li>
-<li class="breadcrumb-item text-sm active text-dark active">Kioskos</li>
+<li class="breadcrumb-item text-sm active text-dark active">Registro</li>
 @endsection
 
 @section('content')
@@ -27,6 +25,11 @@
     </script>
 
     <!--Boton Registrar Kiosko-->
+    <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
+        <a href="{{ route('mesas_res.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-primary" style="width:300px; padding:0px;">
+        <i class="fa fa-table text-sm text-center opacity-10"></i>
+        Ir a reservaciones de Kiosko</a>
+    </div>
     <div class="row" style="margin: 4px">
         <a href={{ route('kiosko.create') }} class=" col-2 btn btn-primary" style="margin: 4px">Registrar Kiosko</a>
         <p class="col-8 text-end">Cantidad de Kioskos totales: <strong> {{ $kioskos->count() }}</strong></p>

@@ -1,19 +1,19 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Mesas')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">Mesas</li>
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Reservaciones de mesas</li>
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">Kioskos</li>
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Reservaciones de Kioskos</li>
 @endsection
 @section('content')
     <div style="margin-left:25px; margin-top:15px; display:block; float:left;
         color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">                            
-            <h4>Reservaciones de Mesas</h4>
+            <h4>Reservaciones de Kioskos</h4>
     </div>
     <div class="nav d-flex justify-content-end " style="margin:0px 0px 5px 5px; display:block; float:rigth">
         <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
-            <a href="{{ route('mesas_reg.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
-                <i class="ni ni-bold-left text-sm text-center opacity-10"></i>
-                Ir a registro de mesas</a>
+            <a href="{{ route('kiosko.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
+                <i class="fa fa-table-columns text-sm text-center opacity-10"></i>
+                Ir a registro de Kiosko</a>
         </div>
         <div class="nav d-flex justify-content-end " style="">
             <div class="" style="margin: 10px 0 0 10px">
@@ -70,7 +70,7 @@
                                         <form action="{{route('mesas_res.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
                                             @method('delete')
                                             @csrf
-                                            <a role="button" type="submit" style="border: 0; padding:0; margin:0;"><i class="fa fa-delete-left text-danger" style="border: 0; padding:0; margin:0;"></i></a>
+                                            <button onclick="" style="border: 0; padding:0; margin:0;"><i class="fa fa-delete-left text-danger" style="border: 0; padding:0; margin:0;"></i></button>
                                         </form>
                                         <!-- Modal Eliminar-->
                                     </td>
@@ -95,4 +95,28 @@
             {{$reservaciones->links()}}
         </div>
     </div>
+
+    <script>
+        function eliminar(){
+    
+    Swal
+    .fire({
+        title: "Eliminar",
+        text: "¿Desea eliminar el registro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: "Si",
+        cancelButtonText: "No",
+    })
+    .then(resultado => {
+        if (resultado.value) {
+            // Hicieron click en "Sí"
+            document.getElementById('eliminar').submit();
+        } else {
+            // Dijeron que no
+        }
+    });
+
+}
+    </script>
 @endsection

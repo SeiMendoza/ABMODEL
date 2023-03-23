@@ -82,7 +82,7 @@
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-danger text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Cliente</span>
+                        <span class="nav-link-text ms-1">Pedido</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -107,7 +107,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href={{ route('kiosko.index') }}>
+                    <a class="nav-link " href={{ route('mesas_res.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-shop text-primary text-sm opacity-10"></i>
@@ -116,7 +116,7 @@
                     </a>
                 </li>
                 <li cFlass="nav-item">
-                    <a class="nav-link " href="{{route('mesas_res.index')}}">
+                    <a class="nav-link " href="{{route('mesas_reg.index')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-app text-sm text-primary opacity-10"></i>
@@ -358,7 +358,7 @@
                                 <div class="col-8">
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Cliente
+                                            Pedido
                                         </p>
                                     </div>
                                 </div>
@@ -453,7 +453,7 @@
                             </div>
                             <h4 class="text mb-0 text-uppercase text-center font-weight-bold">MESAS</h4>
                         </div>
-                        <a href="{{route('mesas_res.index')}}" class="mb-0 card-footer text-primary text-center h4 font-weight-bold bg-gradient-light btn-primary"
+                        <a href="{{route('mesas_reg.index')}}" class="mb-0 card-footer text-primary text-center h4 font-weight-bold bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
@@ -479,7 +479,7 @@
                             </div>
                             <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Kioskos</h4>
                         </div>
-                        <a href="{{ route('kiosko.index') }}" class="mb-0 card-footer text-center text-primary font-weight-bold h4 bg-gradient-light btn-primary"
+                        <a href="{{ route('mesas_res.index') }}" class="mb-0 card-footer text-center text-primary font-weight-bold h4 bg-gradient-light btn-primary"
                            style="height: 60px" >Ver
                         </a>
                     </div>
