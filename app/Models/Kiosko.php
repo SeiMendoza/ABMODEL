@@ -12,4 +12,9 @@ class Kiosko extends Model
     public function mesas(){
         return $this->hasMany(Mesa::class);
     }
+
+    public function reservaciones()
+    {
+        return $this->belongsToMany(Reservacion::class, 'kiosko_reservacion');
+    }
 }

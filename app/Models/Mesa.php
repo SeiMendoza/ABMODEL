@@ -13,9 +13,4 @@ class Mesa extends Model
     {
         return $this->belongsTo(Kiosko::class, 'kiosko_id', 'id');
     }
-    public function reservacion()
-    {
-        return $this->hasMany(Reservacion::class);
-    }
-
 }

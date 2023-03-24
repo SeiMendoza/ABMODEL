@@ -5,11 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reservacion extends Model
+class KioskoReservacion extends Model
 {
     use HasFactory;
-
-    public function kioskos(){
-        return $this->belongsToMany(Kiosko::class,'kiosko_reservacion');
-    }
+    protected $table="kiosko_reservacion";
 }

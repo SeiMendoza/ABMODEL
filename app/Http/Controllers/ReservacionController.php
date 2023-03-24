@@ -11,17 +11,17 @@ class ReservacionController extends Controller
     public function index2()
     {
         $reservaciones = Reservacion::paginate(10);
-        return view('Reservaciones.ReserAdmon.Mesas.mesasReservaciones',  compact('reservaciones'));
+        return view('Reservaciones.ReserAdmon.Kioskos.kioskoReservaciones',  compact('reservaciones'));
     }
     public function search2(Request $request)
     {
         $text = trim($request->get('buscar'));
         $reservaciones = Reservacion::where('nombre', 'like', '%' . $text . '%')->paginate(5);
-        return view("Reservaciones.ReserAdmon.Mesas.mesasReservaciones", compact('reservaciones', 'text'));
+        return view("Reservaciones.ReserAdmon.Kioskos.kioskoReservaciones", compact('reservaciones', 'text'));
     }
     public function create()
     {
-        return view('Reservaciones.ReserAdmon.Mesas.formularioReservaciones');
+        return view('Reservaciones.ReserAdmon.Kioskos.formularioReservaciones');
     }
     public function store(Request $request){
         $fecha_act = date("d-m-Y");
@@ -82,7 +82,7 @@ class ReservacionController extends Controller
         $creado = $nuevo -> save();
 
         if ($creado) {
-            return redirect()->route('mesas_res.index')
+            return redirect()->route('kiosko_res.index')
             ->with('mensaje', "".$nuevo->nombre." creada correctamente");
         }
         
@@ -90,7 +90,7 @@ class ReservacionController extends Controller
     public function edit($id)
     {
         $reservacion = Reservacion::findOrFail($id);
-        return view('Reservaciones.ReserAdmon.Mesas.editarReservaciones',  compact('reservacion'));
+        return view('Reservaciones.ReserAdmon.Kioskos.editarReservaciones',  compact('reservacion'));
     }
     public function update(Request $request, $id){
 
@@ -109,13 +109,13 @@ class ReservacionController extends Controller
         $creado = $actualizacion -> save();
 
         if ($creado) {
-            return redirect()->route('mesas_res.index')
+            return redirect()->route('kiosko_res.index')
             ->with('mensaje', "".$actualizacion->nombre." actualizada correctamente");
         } 
         
     }
     public function destroy($id){
-        Reservacion::destroy($id);
-        return redirect()->route('mesas_res.index')->with('mensaje', 'Reservación borrada correctamente');
+       // Reservacion::destroy($id);
+        //return redirect()->route('mesas_res.index')->with('mensaje', 'Reservación borrada correctamente');
     }
 }

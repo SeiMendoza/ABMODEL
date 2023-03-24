@@ -16,16 +16,18 @@ return new class extends Migration
         Schema::create('reservacions', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('celular');
-            $table->string('cantidad');
+            $table->integer('celular');
             $table->date('fecha');
-             $table->time("hora");
-            $table->string('pago');
-             $table->string("formaPago");
-            $table->unsignedBigInteger('mesa_id');
-            $table->foreign("mesa_id")->references("id")->on("mesas")
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+            $table->time('hora');
+            $table->string('tipo');
+            $table->double('alimentos');
+            $table->integer('cantidad');
+            $table->float('precio');
+            $table->float('total');
+            $table->float('anticipo');
+            $table->float('pendiente');
+            $table->string('formaPago');
+            $table->double('estado');
             $table->timestamps();
         });
     }

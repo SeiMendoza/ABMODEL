@@ -1,9 +1,8 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Reservacion')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">Kioskos</li>
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-    href="{{route('mesas_res.index')}}">Reservacion de Kiosko</a></li>
+    href="{{route('kiosko_res.index')}}">Reservacion de Kiosko</a></li>
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Reservación de {{$reservacion->nombre}}</li>
 @endsection
 @section('content')
@@ -11,7 +10,7 @@
         <div class="row d-flex justify-content-center" >
             <div class="card" style="background: #008d504f" >
                  <BR>
-                <form method="post" action="{{ route('mesas_res.update',  ['id' => $reservacion->id]) }}" novalidate class="needs-validation"
+                <form method="post" action="{{ route('kiosko_res.update',  ['id' => $reservacion->id]) }}" novalidate class="needs-validation"
                 enctype="multipart/form-data">
                     @csrf
                     <div class="container ">
@@ -122,7 +121,7 @@
                         <div id="" ><br></div>
                         <div style="text-align:center">
                             <button onclick="" type="submit" class="btn btn-success">Guardar</button>
-                            <button type="button" onclick="cancelar('mesas/reservaciones')" class="btn btn-danger">Cancelar</button>
+                            <button type="button" onclick="cancelar('kiosko/reservaciones')" class="btn btn-danger">Cancelar</button>
                         </div>
                     </div>
                 </form>

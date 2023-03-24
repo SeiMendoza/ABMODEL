@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Kiosko;
 use App\Models\Mesa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,7 +26,7 @@ class ReservacionFactory extends Factory
             'hora'=>$this->faker->time(),
             'pago'=>$this->faker->randomFloat(2,100,10000),
             'formaPago'=>$this->faker->randomElement(['Efectivo','Transferencia']),
-            'mesa_id' => Mesa::get('id')->random()
+            'kiosko_id' => Kiosko::get('id')->random()
         ];
     }
 }

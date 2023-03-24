@@ -277,29 +277,29 @@ Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])
 ->name('mesas_reg.search');
 
 /**
- * Reservaciones de mesas
+ * Reservaciones de kioskos
 */
 
-Route::get('/mesas/reservaciones', [ReservacionController::class, 'index2'])
-->name('mesas_res.index');
+Route::get('/kiosko/reservaciones', [ReservacionController::class, 'index2'])
+->name('kiosko_res.index');
 
-Route::get('/mesas/reservaciones/nuevo',[ReservacionController::class, 'create'])
-->name('mesas_res.create');
+Route::get('/kiosko/reservaciones/nuevo',[ReservacionController::class, 'create'])
+->name('kiosko_res.create');
 
-Route::post('/mesas/reservaciones/nuevo',[ReservacionController::class, 'store'])
-->name('mesas_res.store');
+Route::post('/kiosko/reservaciones/nuevo',[ReservacionController::class, 'store'])
+->name('kiosko_res.store');
 
-Route::get('/mesas/reservaciones/{id}/edicion', [ReservacionController::class, 'edit'])
-->name('mesas_res.edit')->where('id','[0-9]+');
+Route::get('/kiosko/reservaciones/{id}/edicion', [ReservacionController::class, 'edit'])
+->name('kiosko_res.edit')->where('id','[0-9]+');
 
-Route::put('/mesas/reservaciones/{id}/edicion', [ReservacionController::class, 'update'])
-->name('mesas_res.update')->where('id','[0-9]+');
+Route::put('/kiosko/reservaciones/{id}/edicion', [ReservacionController::class, 'update'])
+->name('kiosko_res.update')->where('id','[0-9]+');
 
-Route::delete('/mesas/reservaciones/{id}/borrar', [ReservacionController::class, 'destroy'])
-->name('mesas_res.destroy')->where('id','[0-9]+');
+Route::delete('/kiosko/reservaciones/{id}/borrar', [ReservacionController::class, 'destroy'])
+->name('kiosko_res.destroy')->where('id','[0-9]+');
 
-Route::get('/mesas/reservaciones/buscar', [ReservacionController::class, 'search2'])
-->name('mesas_res.search');
+Route::get('/kiosko/reservaciones/buscar', [ReservacionController::class, 'search2'])
+->name('kiosko_res.search');
 
 /* Rutas para reservar local*/
 Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])
