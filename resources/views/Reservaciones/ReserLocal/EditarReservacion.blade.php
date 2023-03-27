@@ -1,26 +1,18 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Reservacion del local')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">  
-    <a class="text-dark" href="{{route('cliente.reservaLocal')}}">Reservaciones</a></li>
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">Editar Reservación</a></li>
+<li class="breadcrumb-item text-sm " aria-current="page">  
+    <a class="opacity-5 text-dark" href="{{route('cliente.reservaLocal')}}">Reservación del Local</a></li>
+<li class="breadcrumb-item text-sm text-dark "><a class="text-dark">Editando Reservación</a></li>
 @endsection
 @section('content')
-<BR>
    <div class="container ">
     <div class="row d-flex justify-content-center" >
-        <div class="card col-lg-9" style="background: #56d39d6f" >
-    <div class="row d-flex justify-content-center" >
-    <div class="card header" style=" height:70px; border-radius:13px 13px 0 0; background:  #96bbab6f" >
-            <div style="text-align:center"><br>
-                <h3 class="m-0 font-weight-bold" style="color: white"> Editando Reservación de:  {{$r->Nombre_Cliente}}</h3>
-            </div>
-        </div>
+        <div class="card" style="background: #008d504f" >
     <form method="post" action="{{ route('resCliente.update', ['id' => $r->id]) }}" enctype="multipart/form-data">
             @method('put')
             @csrf
                 <div class="container ">
-
                     <br>
                     <div class="row">
                         <div class="form-group col-md-6 ">
@@ -51,18 +43,7 @@
                                 <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                              @enderror
                          </div>
-                         <div class="form-group col-md-6 ">
-                            <label for="cantidad">Cantidad de Personas</label>
-                           <input name="Cantidad" type="number" class="form-control" id="Cantidad"
-                               required placeholder="Cantidad de personas a asistir" value="{{ old('Cantidad', $r->Cantidad) }}" maxlength="8" minlength="8" >
-                             @error('Cantidad')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
-                             @enderror
-                        </div>
-                    </div>
-
-                    <div class="row ">
-                        <div class="form-group col-md-6">
+                         <div class="form-group col-md-6">
                             <label for="Tipo_Reservacion">Tipo de Reservación</label>
                             <select name="Tipo_Reservacion" id="Tipo_Reservacion" class="form-control">
                                     @if (old('Tipo_Reservacion'))
@@ -84,31 +65,17 @@
                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                              @enderror
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="Tipo_Evento">Tipo de Evento</label>
-                            <select name="Tipo_Evento" id="Tipo_Evento" class="form-control">
-                                @if (old('Tipo_Evento'))
-                                    @if (old('Tipo_Evento') === 'Cumpleaños')
-                                        <option disabled="disabled" selected="selected" value="Cumpleaños">Cumpleaños</option>
-                                    @else
-                                        @if (old('Tipo_Evento') === 'Boda')
-                                            <option disabled="disabled" selected="selected" value="De Noche">Boda</option>
-                                        @else
-                                        @endif
-                                    @endif
-                                @else
-                                    <option disabled="disabled" selected="selected" value="{{$r->Tipo_Evento}}">-- Seleccione Uno --</option>
-                                @endif
-                                <option value="Cumpleaños"{{$r->Tipo_Evento === 'Cumpleaños' ? 'selected' : ''}}>Cumpleaños</option>
-                                <option value="Boda"{{$r->Tipo_Evento === 'Boda' ? 'selected' : ''}}>Boda</option>
-                            </select>
-                            @error('Tipo_Evento')
-                               <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
-                             @enderror
-                        </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row ">
+                        <div class="form-group col-md-6">
+                            <label for="Tipo_Evento">Tipo de Evento</label>
+                            <input name="Tipo_Evento" type="text" class="form-control" id="Tipo_Evento"
+                               required placeholder="Ingrese el nombre del evento " value="{{ old('Tipo_Evento', $r->Tipo_Evento)}}"  >
+                             @error('Tipo_Evento')
+                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                             @enderror
+                        </div>
                         <div class="form-group col-md-6 ">
                             <label for="Fecha">Fecha del Evento</label>
                             <input name="Fecha" type="date"  class="form-control" id="Fecha"
@@ -117,22 +84,14 @@
                                 <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                             @enderror
                         </div>
+                    </div>
+
+                    <div class="row ">
                         <div class="form-group col-md-6 ">
                             <label for="Hora">Hora de Llegada</label>
                             <input name="Hora" type="time"  class="form-control" id="Hora"
                                 placeholder="Ingrese la hora de llegada" value="{{ old('Hora', $r->Hora)}}" required>
                             @error('Hora')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="form-group col-md-6 ">
-                            <label for="Precio">Precio</label>
-                            <input name="Precio" type="number"  class="form-control" id="Precio"
-                                placeholder="Ingrese el precio" value="{{ old('Precio', $r->Precio)}}" required>
-                            @error('Precio')
                                 <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                             @enderror
                         </div>
@@ -143,8 +102,8 @@
                                     @if (old('FormaPago') === 'Efectivo')
                                     <option disabled="disabled" selected="selected" value="Efectivo">Efectivo</option>
                                     @else
-                                        @if (old('FormaPago') === 'Tigo Money')
-                                        <option disabled="disabled" selected="selected" value="Tigo Money">Tigo Money</option>
+                                        @if (old('FormaPago') === 'Transferencia')
+                                        <option disabled="disabled" selected="selected" value="Transferencia">Transferencia</option>
                                         @else
                                         @endif
                                     @endif
@@ -152,19 +111,83 @@
                                     <option disabled="disabled" selected="selected" value="{{$r->FormaPago}}">-- Seleccione Uno --</option>
                                 @endif
                                 <option value="Efectivo"{{$r->FormaPago === 'Efectivo' ? 'selected' : ''}}>Efectivo</option>
-                                <option value="Tigo Money"{{$r->FormaPago === 'Tigo Money' ? 'selected' : ''}}>Tigo Money</option>
+                                <option value="Transferencia"{{$r->FormaPago === 'Transferencia' ? 'selected' : ''}}>Transferencia</option>
                             </select>
                             @error('FormaPago')
                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                              @enderror
                         </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-md-6 ">
+                            <label for="PrecioEntrada">Precios de Entrada</label>
+                            <select name="PrecioEntrada" id="PrecioEntrada" class="form-control">
+                                @if (old('PrecioEntrada'))
+                                    @if (old('PrecioEntrada') === 'L.100 con Alimentos')
+                                        <option disabled="disabled" selected="selected" value="L.100 con Alimentos">L.100 con Alimentos</option>
+                                    @else
+                                        @if (old('PrecioEntrada') === 'L.80 sin Alimentos')
+                                            <option disabled="disabled" selected="selected" value="L.80 sin Alimentos">L.  80 sin Alimentos</option>
+                                        @else
+                                        @endif
+                                    @endif
+                                @else
+                                    <option disabled="disabled" selected="selected" value="{{$r->PrecioEntrada}}">-- Seleccione Uno --</option>
+                                @endif
+                                <option value="L.100 con Alimentos"{{$r->PrecioEntrada === 'L.100 con Alimentos' ? 'selected' : ''}}>L.100 con Alimentos</option>
+                                <option value="L.80 sin Alimentos"{{$r->PrecioEntrada === 'L.  80 sin Alimentos' ? 'selected' : ''}}>L.  80 sin Alimentos</option>
+                            </select>
+                            @error('PrecioEntrada')
+                               <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                             @enderror
+                        </div>
+                        <div class="form-group col-md-6 ">
+                            <label for="cantidad">Cantidad de Personas</label>
+                           <input name="Cantidad" type="number" class="form-control" id="Cantidad"
+                               required placeholder="Cantidad de personas a asistir" value="{{ old('Cantidad', $r->Cantidad) }}" maxlength="8" minlength="8" >
+                             @error('Cantidad')
+                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                             @enderror
+                        </div>
+                    </div>
 
-                    <div id="" ><br></div>
-                          <div style="text-align:center">
-                              <button onclick="" type="submit" class="btn btn-success">Guardar</button>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 ">
+                            <label for="total">Costo de la Reservación</label>
+                           <input name="Total" type="number" class="form-control" id="Total"
+                               placeholder="Ingrese el total a pagar" value="{{ old('Total', $r->Total) }}" required >
+                             @error('Total')
+                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                             @enderror
+                        </div>
+                        <div class="form-group col-md-6 ">
+                            <label for="Anticipo">Anticipo</label>
+                            <input name="Anticipo" type="number"  class="form-control" id="Anticipo"
+                                placeholder="Ingrese el adelanto a cancelar" value="{{ old('Anticipo', $r->Anticipo) }}" required>
+                            @error('Anticipo')
+                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 ">
+                            <label for="Pendiente">Saldo Pendiente</label>
+                            <input name="Pendiente" type="text"  class="form-control" id="Pendiente"
+                                placeholder="Ingrese la cantidad pendiente a cancelar" value="{{ old('Pendiente', $r->Pendiente) }}" required>
+                            @error('Pendiente')
+                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-6 ">
+                            <div id="" ><br></div>
+                          <div style="text-align:right; margin-right:150px">
+                              <button onclick="" type="submit" class="btn btn-success">Actualizar</button>
                               <button type="button" onclick="cancelar('Reser/Local')" class="btn btn-danger">Cancelar</button>
                           </div>
+                       </div>
                     </div>
                 </div>
             </div>

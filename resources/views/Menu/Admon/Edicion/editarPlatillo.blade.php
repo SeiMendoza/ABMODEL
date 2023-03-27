@@ -1,24 +1,19 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Edicion de Platillos')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">  
-    <a class="text-dark" href="{{route('menuAdmon.index')}}">Menú</a></li>
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" >Editando Platillo</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+    href="{{route('menuAdmon.index')}}">Restaurante</a></li>
+    <li class="breadcrumb-item text-sm active text-dark active">
+       Editando Platillo
+    </li>
 @endsection
-
 @section('content')
-<div class="row">
-    <h4 class="col">Administración de Menú</h4>
-    <a class="col-2 text-center text-danger" href="{{ route('cliente_prueba') }}"><i class="fa fa-users"></i> Ver menu cliente</a>
-</div>
-
-    <div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
-        <br><br>
-        <div class="wrapper wrapper--w960">
-            <div class="card card-2">
-                <div class="card-heading"></div>
-                <div class="card-body">
-                    <h2 class="text-center">Editando a: {{$Platillos->nombre}}</h2>
+<div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
+    <div class="wrapper wrapper--w960">
+        <div class="card card-2">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <h2 class="text-center">Editando Platillo: {{$Platillos->nombre}}</h2>
                     <form method="post" action="{{route('plato.update', ['id'=> $Platillos->id])}}" enctype="multipart/form-data">
                         @method('put')
                         @csrf

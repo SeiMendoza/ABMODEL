@@ -234,10 +234,10 @@ class ComboController extends Controller
 
     /* Editar Combos*/
     public function edit($id){
-        $actualcomplementos = PlatillosyBebidas::all();
+        $complementos = PlatillosyBebidas::all();
         $componentes = Componentestemporalcombo::all();
         $Combos = Combo::findOrFail($id);
-        return view('Menu/Admon/edicion/editarCombo')->with('componentes', $componentes)->with('actualcomplementos', $actualcomplementos) 
+        return view('Menu/Admon/edicion/editarCombo')->with('componentes', $componentes)->with('complementos', $complementos) 
               -> with('Combos', $Combos);
     }
 
@@ -270,7 +270,7 @@ class ComboController extends Controller
 
         if ($creado) {
 
-            $anteriorcomplemnto = Componentestemporalcombo::all();
+            $anteriorcomplemnto = Componentestemporalcombo::findOrFail($id);
 
             foreach ($anteriorcomplemnto as $ac) {
                 $complemento = Componentescombo::findOrFail($id);
@@ -291,7 +291,7 @@ class ComboController extends Controller
         }
     } 
 
-    public function ediciontemporal(Request $request, $id)
+    public function ediciontemporal(Request $request, $id )
     {
         $request -> validate ([
             'complemento' => 'required|exists:platillosbebidas,id',
@@ -305,12 +305,12 @@ class ComboController extends Controller
             'cantidad.numeric' => 'La cantidad debe de ser numerico',
         ]);
 
-        $actualcomplementos = Componentestemporalcombo::findOrFail($id);
+        $complementos = Componentestemporalcombo::findOrFail($id);
 
-        $actualcomplementos->id_complemento = $request->input('complemento');
-        $actualcomplementos->cantidad = $request->input('cantidad');
+        $complementos->id_complemento = $request->input('complemento');
+        $complementos->cantidad = $request->input('cantidad');
 
-        $creado = $actualcomplementos->save();
+        $creado = $complementos->save();
 
         $nombre= $request->input('nombre2');
         $descripcion= $request->input('descripcion2');
@@ -328,4 +328,18 @@ class ComboController extends Controller
         }
     }
 
+    public function destruir(Request $request, $id)
+    {
+        $nombre= $request->input('nombre3');
+        $descripcion= $request->input('descripcion3');
+        $precio= $request->input('precio3');
+
+        Componentestemporalcombo::destruir($id);
+
+        return redirect()->route('combo.editar')
+                ->with('mensaje', 'El complemento fue eliminado exitosamente')
+                ->with('nombre', $nombre)
+                ->with('descripcion', $descripcion)
+                ->with('precio', $precio);
+    }
 }

@@ -82,7 +82,7 @@
                     <td class="info">{{$reservar->Pendiente}}</td>
                     <td>
                     <div style=""><br>
-                        <a href="{{route('cliente.reservaLocal')}}" class="btn btn-danger" type="buttom" 
+                        <a href="{{route('realizadas.realizadas')}}" class="btn btn-danger" type="buttom" 
                          style="float: right; width:180px; padding:10px;" >Regresar</a>
                     </div>
                     </td>

@@ -322,3 +322,12 @@ Route::put('Cliente/{id}/edicion', [ReservacionTotalController::class, 'update']
 
 Route::delete('cliente/{id}/borrar', [ReservacionTotalController::class, 'destroy'])
   ->name('cliente.destroy');
+
+Route::put('/cliente/{id}/reservacionRealizada', [ReservacionTotalController::class,'reservacionesRealizadas'])
+  ->name('reservacionRealizada')->where('id','[0-9]+');
+
+Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Realizadas'])
+  ->name('realizadas.realizadas'); /*lista de reservaciones realizadas */
+  
+Route::get('/Reservaciones/Realizadas/{id}', [ReservacionTotalController::class, 'detalleRealizadas'])
+  ->name('detalle.realizadas');

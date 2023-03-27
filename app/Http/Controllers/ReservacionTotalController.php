@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\reservacion_total;
+use Illuminate\Support\Facades\DB;
 
 class ReservacionTotalController extends Controller
 {
@@ -13,9 +14,13 @@ class ReservacionTotalController extends Controller
     public function reservaLocal(Request $request)
     {
         $texto=trim($request->get('busqueda'));
-
         $reservacion = reservacion_total::where('Nombre_Cliente', 'like', '%' . $texto . '%')->paginate(10);
         return view('Reservaciones/ReserLocal/Localindex', compact('reservacion','texto'));
+    }
+
+    public function orden(){
+        $reservacion = reservacion_total::orderBy('Fecha', 'ASC')->get();
+        return view('/Reservaciones/ReserLocal/Localindex', compact('reservacion'));
     }
 
 
@@ -32,13 +37,16 @@ class ReservacionTotalController extends Controller
             'Nombre_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:4',
             'Apellido_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:4',
             'Contacto' => ['required', 'min:8', 'regex:/^[2,3,8,9][0-9]{7}+$/'],
-            'Cantidad' => 'required|min:50|max:1000|numeric',
+            'Cantidad' => 'required|min:20|max:1000|numeric',
             'Tipo_Reservacion' => 'required',
             'Tipo_Evento' => 'required',
             'Fecha' => 'required|date|after:'.$min,   
             'Hora' => 'required',   
-            'Precio' => 'required|min:2000|max:8000|numeric', 
+            'Total' => 'required|min:2000|max:9000|numeric', 
+            'PrecioEntrada'=>'required',
             'FormaPago' => 'required',
+            'Anticipo' => 'required',
+            'Pendiente' => 'required',
         ],[
 
             'Nombre_Cliente.required' => 'El nombre es obligatorio',
@@ -68,13 +76,18 @@ class ReservacionTotalController extends Controller
             
             'Hora.required'=> 'La hora de llegada es obligatoria',
 
-            'Precio.required' => 'El precio no puede estar vacío',
-            'Precio.min' => 'El precio es muy bajo',
-            'Precio.max' => 'El precio es muy alto',
-            'Precio.numeric' => 'El precio debe de ser numerico',
+            'Total.required' => 'El precio no puede estar vacío',
+            'Total.min' => 'El precio es muy bajo',
+            'Total.max' => 'El precio es muy alto',
+            'Total.numeric' => 'El precio debe de ser numerico',
+
+            'PrecioEntrada.required' =>'El precio no puede estar vacío',
 
             'FormaPago.required' => 'La forma de pago no puede estar vacía',
-            
+
+            'Anticipo.required' =>'El anticipo no puede estar vacío',
+
+            'Pendiente.required' =>'El saldo pendiente es obligatorio',
         ]);
 
         /*Variable para reconocer los nuevos registros a la tabla*/
@@ -88,8 +101,11 @@ class ReservacionTotalController extends Controller
         $nuevoCliente->Tipo_Evento=$request->input('Tipo_Evento');
         $nuevoCliente->Fecha=$request->input('Fecha');
         $nuevoCliente->Hora=$request->input('Hora');
-        $nuevoCliente->Precio=$request->input('Precio');
+        $nuevoCliente->Total=$request->input('Total');
+        $nuevoCliente->PrecioEntrada=$request->input('PrecioEntrada');
         $nuevoCliente->FormaPago=$request->input('FormaPago');
+        $nuevoCliente->Anticipo=$request->input('Anticipo');
+        $nuevoCliente->Pendiente=$request->input('Pendiente');
         
         /*Variable para guardar los nuevos registros */
         $creado = $nuevoCliente->save();
@@ -117,13 +133,16 @@ class ReservacionTotalController extends Controller
             'Nombre_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:4',
             'Apellido_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:4',
             'Contacto' => ['required', 'min:8', 'regex:/^[2,3,8,9][0-9]{7}+$/'],
-            'Cantidad' => 'required|min:50|max:1000|numeric',
+            'Cantidad' => 'required|min:20|max:1000|numeric',
             'Tipo_Reservacion' => 'required',
             'Tipo_Evento' => 'required',
             'Fecha' => 'required|date|after:'.$min,   
             'Hora' => 'required',   
-            'Precio' => 'required|min:2000|max:8000|numeric', 
+            'Total' => 'required|min:2000|max:9000|numeric', 
+            'PrecioEntrada'=>'required',
             'FormaPago' => 'required',
+            'Anticipo' => 'required',
+            'Pendiente' => 'required',
         ],[
             'Nombre_Cliente.required' => 'El nombre es obligatorio',
             'Nombre_Cliente.regex'=> 'El nombre debe tener solo letras',
@@ -153,12 +172,18 @@ class ReservacionTotalController extends Controller
             
             'Hora.required'=> 'La hora de llegada es obligatoria',
 
-            'Precio.required' => 'El precio no puede estar vacío',
-            'Precio.min' => 'El precio es muy bajo',
-            'Precio.max' => 'El precio es muy alto',
-            'Precio.numeric' => 'El precio debe de ser numerico',
+            'Total.required' => 'El precio no puede estar vacío',
+            'Total.min' => 'El precio es muy bajo',
+            'Total.max' => 'El precio es muy alto',
+            'Total.numeric' => 'El precio debe de ser numerico',
+
+            'PrecioEntrada.required' =>'El precio no puede estar vacío',
 
             'FormaPago.required' => 'La forma de pago no puede estar vacía',
+
+            'Anticipo.required' =>'El anticipo no puede estar vacío',
+
+            'Pendiente.required' =>'El saldo pendiente es obligatorio',
         ]);
    
             $actualizacion = reservacion_total::findOrFail($id);
@@ -171,7 +196,11 @@ class ReservacionTotalController extends Controller
             $actualizacion->Tipo_Evento=$request->input('Tipo_Evento');
             $actualizacion->Fecha=$request->input('Fecha');
             $actualizacion->Hora=$request->input('Hora');
+            $actualizacion->Total=$request->input('Total');
+            $actualizacion->PrecioEntrada=$request->input('PrecioEntrada');
             $actualizacion->FormaPago=$request->input('FormaPago');
+            $actualizacion->Anticipo=$request->input('Anticipo');
+            $actualizacion->Pendiente=$request->input('Pendiente');
 
             $creado = $actualizacion -> save();
     
@@ -192,5 +221,33 @@ class ReservacionTotalController extends Controller
    public function destroy($id){
     reservacion_total::findOrFail($id)->delete();
     return to_route('cliente.reservaLocal')->with('mensaje', 'Cliente borrado correctamente!');
+   }
+
+   /**Estado de reservaciones */
+   public function reservacionesRealizadas(Request $request,  $id)
+    {
+        $request->validate([
+            'estado' => 'required|in:1', // El campo estado es obligatorio y solo puede ser 1
+        ]);
+        $activar = reservacion_total::findOrfail($id);
+        $activar->estado = $request->input('estado');
+        $create = $activar->save();
+
+        if ($create) {
+            return redirect()->route('cliente.reservaLocal')->with('mensaje', 'Reservación realizada con éxito.');
+        }
+    }
+
+    /**Reservaciones realizadas */
+    public function Realizadas() {
+        $reservacion = reservacion_total::where('estado',1)->paginate(10);
+        $texto="";
+        return view('Reservaciones/ReserLocal/ReservRealizadas', compact('reservacion','texto'));
+    }
+
+     /**Detalles de la reservación realizadas */
+   public function detalleRealizadas($id){
+    $reservar = reservacion_total::findOrfail($id);
+        return view('Reservaciones/ReserLocal/DetalleReserRealizadas', compact('reservar'));
    }
 }

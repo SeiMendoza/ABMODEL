@@ -23,8 +23,12 @@ return new class extends Migration
             $table->string("Tipo_Evento");
             $table->date("Fecha");
             $table->time("Hora");
-            $table->string("Precio");
+            $table->string("Total");
+            $table->string("PrecioEntrada");
             $table->string("FormaPago");
+            $table->string("estado")->default('0');
+            $table->string("Anticipo");
+            $table->string("Pendiente");
             $table->timestamps();
         });
     }
