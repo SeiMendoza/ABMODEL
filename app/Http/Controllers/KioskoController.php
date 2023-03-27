@@ -46,7 +46,7 @@ class KioskoController extends Controller
 
     public function index(){
 
-        $kioskos = Kiosko::all();
+        $kioskos = Kiosko::paginate(10);
 
         return view('/Reservaciones/ReserAdmon/Kioskos/indexKioskos')->with(['kioskos' => $kioskos]);
     }
@@ -89,12 +89,12 @@ class KioskoController extends Controller
             'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ];
 
-        return to_route('kiosko.index')->with('mensaje', 'Kiosko actualizado correctamente!');
+        return to_route('kiosko.index')->with('mensaje', 'Kiosko actualizado correctamente');
     }
 
     public function destroy($id){
         Kiosko::findOrFail($id)->delete();
-        return to_route('kiosko.index')->with('mensaje', 'Kiosko Borrado correctamente!');
+        return to_route('kiosko.index')->with('mensaje', 'Kiosko eliminado correctamente');
 
     }
 }

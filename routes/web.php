@@ -37,7 +37,7 @@ Route::get('/billing', [HomeController::class, 'b'])
 ->name('b');
 
 /* Rutas Administracion de Restaurante */
-Route::get('/admonRestaurante', [HomeController::class, 'pruebaAdmon'])
+Route::get('/admonRestaurante', [HomeController::class, 'indexAdmon'])
 ->name('menuAdmon.index');
 Route::put('bebida/{id}/activar', [BebidaController::class, 'activar'])
 ->name('bebida.activar');
@@ -198,7 +198,7 @@ Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'deta
 /****************************************
   Rutas Para eliminar Platillos y Bebidas
 *****************************************/
- Route::get('platillo/{id}/borrar', [PlatilloController::class, 'destroy'])
+ Route::delete('platillo/{id}/borrar', [PlatilloController::class, 'destroy'])
     ->name('platillo.borrar');
  Route::get('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
     ->name('bebida.borrar');
@@ -224,7 +224,7 @@ name('kiosko.update');
 /*Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');*/
 
-Route::get('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
+Route::delete('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');
 
   /****************************************

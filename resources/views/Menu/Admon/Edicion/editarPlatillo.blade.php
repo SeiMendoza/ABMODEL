@@ -12,32 +12,6 @@
     <a class="col-2 text-center text-danger" href="{{ route('cliente_prueba') }}"><i class="fa fa-users"></i> Ver menu cliente</a>
 </div>
 
-<div class="row">
-    <div class="container-fluid">
-        <ul class="nav d-flex justify-content-center h5 text-center" role="tablist"
-            style="background-color: #ef3f3f; rounde">
-
-            <li class="nav-item" role="presentation">
-                <a class="nav-link text-white" id="pills-bebidas-tab" data-bs-toggle="pill"
-                    data-bs-target="#pills-bebidas" type="button" role="tab" aria-controls="pills-bebidas"
-                    aria-selected="true">Bebidas</a>
-            </li>
-
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active text-white" id="pills-platillos-tab" data-bs-toggle="pill"
-                    data-bs-target="#pills-platillos" type="button" role="tab" aria-controls="pills-platillos"
-                    aria-selected="false">Platillos</a>
-            </li>
-
-            <li class="nav-item" role="presentation">
-                <a class="nav-link text-white" id="pills-combos-tab" data-bs-toggle="pill"
-                    data-bs-target="#pills-combos" type="button" role="tab" aria-controls="pills-combos"
-                    aria-selected="false">Combos</a>
-            </li>
-        </ul>
-    </div>
-</div>
-
     <div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
         <br><br>
         <div class="wrapper wrapper--w960">

@@ -12,7 +12,7 @@
         <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
             <a href="{{ route('kiosko.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
                 <i class="fa fa-table-columns text-sm text-center opacity-10"></i>
-                Ir a registro de Kiosko</a>
+                 Administración de Kioskos</a>
         </div>
         <div class="nav d-flex justify-content-end " style="">
             <div class="" style="margin: 10px 0 0 10px">

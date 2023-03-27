@@ -1,4 +1,4 @@
-@extends('00_plantillas_blade.plantilla_General1')
+@extends('00_plantillas_blade.plantilla_General2')
 @section('contend')
 
 <script>

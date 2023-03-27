@@ -445,7 +445,6 @@
                                     <tr>
                                         <th scope="col">N</th>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">Cantidad Disp.</th>
                                         <th scope="col">Precio</th>
                                         <th scope="col">Acción</th>
                                         <th scope="col">Editar</th>
@@ -467,7 +466,6 @@
                                             <tr class="border border-light" style="color:gray; text-align:center">
                                                 <th scope="col">@php echo $i  @endphp</th>
                                                 <td scope="col">{{ $p->nombre }}</td>
-                                                <td scope="col">{{ $p->disponible }}</td>
                                                 <td scope="col">{{ $p->precio }}</td>
                                                 <td scope="col"><a class="btn"
                                                         onclick="activarProducto( {{ $p->id }} , 'desactivar', '{{ $p->nombre }}', 'combo/{id}/activar')"><i
@@ -527,7 +525,6 @@
                                             <tr class="border border-light" style="color:gray; text-align:center">
                                                 <th scope="col">@php echo $i  @endphp</th>
                                                 <td scope="col">{{ $p->nombre }}</td>
-                                                <td scope="col">{{ $p->disponible }}</td>
                                                 <td scope="col">{{ $p->precio }}</td>
                                                 <td scope="col"><a class="btn"
                                                         onclick="activarProducto( {{ $p->id }}, 'activar', '{{ $p->nombre }}', 'combo/{id}/activar')"><i

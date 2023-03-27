@@ -73,7 +73,7 @@
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-bell-55 text-danger text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Menú Admón</span>
+                        <span class="nav-link-text ms-1">Administración de menú</span>
                     </a>
                 </li>
                 <li class="nav-item">

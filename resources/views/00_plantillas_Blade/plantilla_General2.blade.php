@@ -51,7 +51,7 @@
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-bell-55 text-danger text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Menú Admón</span>
+                        <span class="nav-link-text ms-1">Administración de menú</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -176,7 +176,7 @@
             }
         </script>
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5" style="margin-left:25px">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
                     href="{{route('index')}}">Inicio</a></li>
                 @yield('miga')
