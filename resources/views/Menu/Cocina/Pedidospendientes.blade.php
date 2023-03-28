@@ -37,7 +37,7 @@
                  <thead class="card-header border border-radius" style="text-align:center">
                      <tr>
                          <th scope="col">Número de mesa</th>
-                         <th scope="col">Quiosco</th>
+                         <th scope="col">Kiosko</th>
                          <th scope="col">Nombre del cliente</th>
                          <th scope="col">Terminado</th>
                          <th scope="col">Detalles</th>
