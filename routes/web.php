@@ -73,6 +73,8 @@ Route::post('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'stor
 ->name('usuario_pedido.store');
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
 ->name('terminar.terminarp')->where('id','[0-9]+');/*terminar pedidos en caja*/
+Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class,'env_a_cocina'])
+->name('env.env_a_cocina')->where('id','[0-9]+');/*enviar a cocina*/
 Route::get('/menu/pedidot', [PedidoUsuarioController::class, 'pedido_terminados'])
 ->name('pedidost.pedido');/*lista de pedidos pendientes de terminar en caja*/
 Route::get('/menu/pedidot/caja', [PedidoUsuarioController::class, 'psearch'])
