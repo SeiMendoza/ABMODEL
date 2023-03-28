@@ -3,16 +3,14 @@
 @section('miga')
  
 @endsection
-@section('content')
- 
-<div style="margin-left:25px; margin-top:15px; display:block; float:left;
-        color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">
-    <h3>Pedidos en cocina</h3>
+@section('content') 
+<div style="margin-left:25px; margin-top:15px; display:block; float:left;" class="nav-link-icon">
+    <h4>Pedidos en cocina</h4>
 </div>
 
 <!--Filtro de busqueda-->
 <div> 
-<div class="nav d-flex justify-content-end " style="">
+<div class="nav d-flex justify-content-end">
     <div class="nav-item" style="margin: 10px 25px 10px 25px;">
         <form action="{{ route('pedidosp.pcsearch')}}" method="get" role="search" 
             class="navbar-search">
@@ -36,8 +34,8 @@
      <div class="card-body">
          <div class="table-responsive container-fluid">
              <table class="table" id="table" style="background-color: #fff;">
-                 <thead class="card-header border border-radius" style="color:teal; text-align:center">
-                     <tr style="font-family: Georgia, Serif;font-size:19px">
+                 <thead class="card-header border border-radius" style="text-align:center">
+                     <tr>
                          <th scope="col">Número de mesa</th>
                          <th scope="col">Quiosco</th>
                          <th scope="col">Nombre del cliente</th>
@@ -47,15 +45,22 @@
                  </thead>
                  <tbody>
                      @forelse($pedido as $p)
-                     @if(($p->estado)=="0") 
-                     <tr class="border border-light" style="color:teal; text-align:center">
+                     @if(($p->estado_cocina)=="1") 
+                     <tr class="border border-light" style="text-align:center">
                          <th scope="col">{{$p->mesa}}</th>
                          <td scope="col">{{$p->quiosco}}</td> 
                          <td scope="col">{{$p->nombreCliente}}</td> 
                                
-                              <td><input type="checkbox" id="term" name="term" {{!old('term') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}" style="background:teal; width:20px; height:20px;"></td>
+                              <td>
+                                <!-----icono que envia el pedido de regreso a caja con un estado=2 y estado_cocina=2------>
+                                <a href="#" id="envia_de_cocina" name="envia_de_cocina" 
+                              {{!old('envia_de_cocina') ?: 'checked'}} data-bs-toggle="modal" 
+                              data-bs-target="#staticBackdrop{{$p->id}}">
+                              <i class="fa-solid fa-truck-fast text-danger"></i>
+                                </a>
+                            </td>
                         <td>
-                            <a type="buttom" class="btn btn-light" href="{{route('pedidosp.detalle',['id'=>$p->id])}}">
+                            <a type="buttom" href="{{route('pedidosp.detalle',['id'=>$p->id])}}">
                                 <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
                             </a>
                         </td>
@@ -75,7 +80,8 @@
                                             @method('put')
                                             @csrf
                                             <div style="display: none">
-                                                <input type="text" id="estado" name="estado" value="1">
+                                                <input type="text" id="estado" name="estado" value="2">
+                                                <input type="text" id="estado_cocina" name="estado_cocina" value="2">
                                             </div>
                                             <input type="submit" class="btn btn-danger w-15" value="Si">
                                             <button onclick="setTimeout(function(){location.reload();}, 00);" type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
@@ -87,15 +93,14 @@
                         @endif
                         @empty
                         <tr>
-                            <td colspan="7" style="text-align: center;color: teal;">No hay pedidos</td>
+                            <td colspan="7" style="text-align: center;">No hay pedidos</td>
                         </tr>
                      @endforelse
                  </tbody>
                 </table>
             </div>
      </div>
-</div>
-    
+</div> 
 @endsection
 @section('pie')
     <div class="pagination justify-content-end"> 

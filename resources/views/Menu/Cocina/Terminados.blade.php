@@ -6,8 +6,7 @@
 @endsection
 @section('content')
  
-        <div style="margin-left:25px; margin-top:15px; display:block; float:left;
-        color: #333333;font-family: Georgia, Serif;" class="nav-link-icon">                            
+        <div style="margin-left:25px; margin-top:15px; display:block; float:left;" class="nav-link-icon">                            
             <h4>Pedidos terminados</h4>
         </div>
  <!--Filtro de busqueda-->
@@ -45,7 +44,7 @@
         <div class="modal-dialog modal-lg-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                <h4 style="text-color:red" class="modal-title" id="exampleModalLongTitle">Eliminar Pedidos</h4>
+                <h4 style="text-color:red;" class="modal-title" id="exampleModalLongTitle">Eliminar Pedidos</h4>
             </div>
             <div class="modal-body">
                 Tenga en cuenta que una vez en dar click en "SÍ",
@@ -68,9 +67,9 @@
  
         <div class="card-body">
     <div class="table-responsive container-fluid">
-        <table class="table" id="table" style="background-color: #ff9999;">
-            <thead class="card-header border border-light" style="background-color: #fff; color:teal;text-align:center;">
-                <tr style="font-family: Georgia, Serif;font-size:19px">
+        <table class="table" id="table" style="background-color: #fff;">
+            <thead class="card-header border border-light" style="text-align:center;">
+                <tr>
                     <th scope="col">Número de mesa</th>
                     <th scope="col">Quiosco</th> 
                     <th scope="col">Nombre del cliente</th>
@@ -80,15 +79,15 @@
             </thead>
             <tbody>
                 @forelse($pedido as $p)
-                @if(($p->estado)=="2")
-                <tr class="border border-light" style="background-color: #fff; color:teal;text-align:center;">
+                @if(($p->estado)=="3")
+                <tr class="border border-light" style="text-align:center;">
                     <th scope="col">{{$p->mesa}}</th>
                     <td scope="col">{{$p->quiosco}}</td> 
                     <td scope="col">{{$p->nombreCliente}}</td>
                     <td><input disabled type="checkbox" name="term" {{ old('term') ?: 'checked' }} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}"
                     style="background:#ffffff; width:20px; height:20px;"></input></td>
                     <td>
-                        <a type="buttom" class="btn btn-light" href="{{route('terminados.detalle',['id'=>$p->id])}}">
+                        <a type="button" href="{{route('terminados.detalle',['id'=>$p->id])}}">
                             <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
                         </a>
                     </td>
@@ -96,14 +95,18 @@
                 @endif
                 @empty
                 <tr>
-                    <td colspan="7" style="text-align: center;color:teal;">No hay pedidos terminados</td>
+                    <td colspan="7" style="text-align: center;">No hay pedidos terminados</td>
                 </tr>
                 @endforelse
             </tbody>
-        </table>
+        </table> 
+        <div style="text-align: center;">
+    <a class="btn btn-danger" href="{{route('pedidost.pedido')}}">Volver</a>
+    <div class="pagination justify-content-end" style="display:inline-block; float:right;"> 
+        {{$pedido->appends(['busqueda' => $texto])->links()}}
     </div>
 </div>
-<div style="text-align: center;">
-<a class="btn btn-danger" href="{{route('pedidost.pedido')}}">Volver</a>
-</div>    
- @endsection
+    </div>
+</div>   
+@endsection
+  

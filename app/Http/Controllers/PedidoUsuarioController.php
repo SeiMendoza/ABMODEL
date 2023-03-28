@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetallesUsuario;
 use App\Models\Pedido;
+use App\Models\PiscinaUso;
 use Database\Seeders\PlatillosyBebidasSeeder;
 
 use Illuminate\Http\Request;
@@ -49,7 +50,8 @@ class PedidoUsuarioController extends Controller
     }
     public function pedido_terminados()
     {
-        $pedido = Pedido::where('estado',1)->paginate(6);
+        $pedido = Pedido::where('estado',0)
+        ->orwhere('estado',2)->paginate(10);
         $texto="";
         return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
     }
@@ -57,12 +59,13 @@ class PedidoUsuarioController extends Controller
     { 
         //recuperar datos del filtro
        $texto=trim($request->get('busqueda'));
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(6);
+        $pedido = Pedido::where('mesa', 'like', '%' . $texto . '%')
+        ->orwhere('quiosco', 'like', '%' . $texto . '%')->paginate(10);
         return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
     }
     public function terminados()
     {
-        $pedido = Pedido::where('estado',2)->paginate(6);
+        $pedido = Pedido::where('estado',3)->paginate(10);
         $texto="";
         return view('Menu/Cocina/Terminados', compact('pedido','texto'));
     }
@@ -75,7 +78,7 @@ class PedidoUsuarioController extends Controller
     }
     public function pedido_pendientes()
     { 
-        $pedido = Pedido::where('estado',0)->paginate(6);
+        $pedido = Pedido::where('estado_cocina',1)->paginate(10); 
         $texto="";
         //$pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(5);
         return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
@@ -84,10 +87,25 @@ class PedidoUsuarioController extends Controller
     { 
         //recuperar datos del filtro
        $texto=trim($request->get('busqueda'));
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(6);
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
         return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
     }
-    public function terminarp(Request $request,  $id)
+
+    public function env_a_cocina(Request $request,  $id)
+    {
+        $request->validate([
+            'estado_cocina' => 'required|in:1', // El campo estado es obligatorio y solo puede ser 1
+        ]);
+        $activar = Pedido::findOrfail($id);
+        $activar->estado_cocina = $request->input('estado_cocina');
+
+        $create = $activar->save();
+
+        if ($create) {
+            return redirect()->route('pedidost.pedido')->with('mensaje', 'Pedido enviado a cocina!');
+        }
+    } 
+   /* public function env_a_caja(Request $request,  $id)
     {
         $request->validate([
             'estado' => 'required|in:2', // El campo estado es obligatorio y solo puede ser 1
@@ -98,20 +116,44 @@ class PedidoUsuarioController extends Controller
         $create = $activar->save();
 
         if ($create) {
-            return redirect()->route('pedidost.pedido')->with('mensaje', 'El pedido fue terminado exitosamente!');
+            return redirect()->route('pedidost.pedido')->with('mensaje', 'Pedido enviado a caja!');
         }
-    } 
-    public function pedidosPendientes_Cocina(Request $request,  $id)
+    } */
+    public function terminarp(Request $request,  $id)
     {
         $request->validate([
-            'estado' => 'required|in:1', // El campo estado es obligatorio y solo puede ser 1
+            'estado' => 'required|in:3', // El campo estado es obligatorio y solo puede ser 2
         ]);
         $activar = Pedido::findOrfail($id);
         $activar->estado = $request->input('estado');
+
         $create = $activar->save();
 
         if ($create) {
-            return redirect()->route('pedidosp.pedido')->with('mensaje', 'El pedido fue completado con exito!');
+            return redirect()->route('pedidost.pedido')->with('mensaje', 'El pedido fue terminado exitosamente!');
+        }
+    } 
+   public function pedidosPendientes_Cocina(Request $request,  $id)
+    {
+        $request->validate([
+            'estado' => 'required|in:2', // El campo estado es obligatorio y solo puede ser 1
+            'estado_cocina' => 'required|in:2',
+        ]);
+       // $request->session()->put('envia_de_cocina', $request->input('envia_de_cocina'));
+        $activar = Pedido::findOrfail($id);
+        $activar->estado = $request->input('estado'); 
+        $activar->estado_cocina = $request->input('estado_cocina');
+       /* if ('estado_cocina' == 1) {
+            dd('procesando');
+        } elseif ('estado_cocina' == 2) {
+            dd('entregar');
+        } else {
+            
+        }*/
+       $create = $activar->save();
+
+        if ($create) {
+            return redirect()->route('pedidosp.pedido')->with('mensaje', 'Pedido enviado a caja!');
         }
     }
 

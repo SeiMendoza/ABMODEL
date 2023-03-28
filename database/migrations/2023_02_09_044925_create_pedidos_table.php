@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('nombreCliente');
             $table->double('imp')->default('0');
             $table->double('total')->default('0');
-            $table->string('estado')->default('0');
+            $table->string('estado')->default('0'); 
+            $table->string('estado_cocina')->default(''); 
             $table->timestamps();
         });
     }
