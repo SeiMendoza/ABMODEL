@@ -3,7 +3,7 @@
 @section('miga')
      
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-<a class="text-dark" href="{{route('terminados.terminados')}}" onclick="cambia">Pedidos terminados</a></li>
+<a class="text-dark" href="{{route('terminados.terminados')}}">Pedidos terminados</a></li>
 @endsection
 @section('content')
    

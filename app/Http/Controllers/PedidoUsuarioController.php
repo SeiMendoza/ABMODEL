@@ -101,7 +101,11 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     { 
         //recuperar datos del filtro
        $texto=trim($request->get('busqueda'));
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(10);
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
+        ->orWhere('quiosco', 'like', '%' . $texto . '%')
+        ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
+            $query->where('nombre', 'like', '%' . $texto . '%');
+        })->paginate(10);
         return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
     }
 
