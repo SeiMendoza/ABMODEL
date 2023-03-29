@@ -52,8 +52,9 @@
         }
         label, input{
             font-size: 15px;
-            color: black;
+            color: gray;
         }
+
       </style>
 <body class=" g-sidenav-show bg-gray-100" style="">
     <aside
