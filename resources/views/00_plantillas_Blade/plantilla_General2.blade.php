@@ -4,20 +4,33 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-        <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+        
         <title>Villa Crisol - @yield('title') </title>
 
         <!-- Icons -->
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <link href={{ asset('css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
-        <link href={{ asset('css/nucleo-svg.css') }} rel="stylesheet" />
+        <link href="/assets/css/fontawesome.css" rel="stylesheet">
+        <link href="/assets/css/solid.css" rel="stylesheet">
+        <link href="/assets/css/brands.css" rel="stylesheet">
+        <link href={{ asset('/css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
+        <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet">
 
         <!-- CSS Files -->
-        <link id="pagestyle" href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" />
-        <link rel="stylesheet" href={{ asset('css/menuStyles/menuStyles.css') }} type="text/css">
+        <link id="pagestyle" href="{{ asset('/css/argon-dashboard.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href={{ asset('/css/menuStyles/menuStyles.css') }} type="text/css">
+
+        <!-- Icons font CSS-->
+        <link href="/assets/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+        <link href="/assets/fontawesome/css/font-awesome.min.css" rel="stylesheet" media="all">
+
+        <!-- Vendor CSS-->
+        <link href="/assets/select2/select2.min.css" rel="stylesheet" media="all">
+        <link href="/assets/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+        <!-- Main CSS-->
+        <link href="/css/main.css" rel="stylesheet" media="all">
 
         
-        <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+        <script src="{{ asset('/js/sweetalert2.all.min.js') }}"></script>
     </head>
     <style media="screen">
         #r{
@@ -25,6 +38,21 @@
         }
         li:active a, li:focus-visible, li:hover{
             background-color: rgba(2, 102, 0, 0.168);
+        }
+        div, ul, h4{
+            font-family: Tahoma;
+        }
+        table{
+            font-size: 17px;
+            color: black;
+            text-align: center;
+        }
+        thead{
+            background-color: rgba(0, 99, 48, 0.085);
+        }
+        label, input{
+            font-size: 15px;
+            color: black;
         }
       </style>
 <body class=" g-sidenav-show bg-gray-100" style="">
@@ -42,25 +70,14 @@
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Restaurante</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href={{ route('menuAdmon.index') }}>
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bell-55 text-danger text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Administración de menú</span>
-                    </a>
-                </li>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Restaurante</h6>
                 <li class="nav-item">
                     <a class="nav-link " href={{ route('cliente_prueba') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-danger text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Cliente</span>
+                        <span class="nav-link-text ms-1">Pedido</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -81,44 +98,58 @@
                         <span class="nav-link-text ms-1">Cocina</span>
                     </a>
                 </li>
-                <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link " href={{ route('kiosko_res.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                            <i class="ni ni-shop text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Kioskos</span>
-                    </a>
-                </li>
-                <li cFlass="nav-item">
-                    <a class="nav-link " href="{{route('mesas_reg.index')}}">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-sm text-primary opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Mesas</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{route('cliente.reservaLocal')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+                            <i class="fa-solid fa-shop text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Local</span>
                     </a>
                 </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Piscina</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Configuraciones</h6>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ route('menuAdmon.index') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bell-55 text-info text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Administración de menú</span>
+                    </a>
+                </li>
+                <li cFlass="nav-item">
+                    <a class="nav-link " href="{{route('mesas_reg.index')}}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-table text-sm text-info opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Mesas</span>
+                    </a>
+                </li>
+                <li cFlass="nav-item">
+                    <a class="nav-link " href="{{route('kiosko.index')}}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-store text-sm text-info opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">kioskos</span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href={{ route('prodpiscina.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+                            <i class="fa-solid fa-water-ladder text-info text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Productos</span>
                     </a>
@@ -176,17 +207,17 @@
             }
         </script>
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5" style="margin-left:25px">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 font-robo" style="margin-left:25px">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
                     href="{{route('index')}}">Inicio</a></li>
                 @yield('miga')
             </ol>
             
         </nav>
-        <div class="" style="padding: 0; margin:0;">
+        <div class="font-robo" style="padding: 0; margin:0;">
             @yield('content')
         </div>
-        <div class="row container-fluid footer" style="padding: 0; margin:0;">
+        <div class="row container-fluid footer font-robo" style="padding: 0; margin:0;">
             @yield('pie')
         </div>
     </main>
@@ -244,8 +275,6 @@
  
      <!-- Main JS-->
      <script src="/js/global.js"></script>
-
-     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 

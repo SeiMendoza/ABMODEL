@@ -23,9 +23,12 @@
     <title>
         Villa Crisol
     </title>
-   <!-- Nucleo Icons -->
-  <link href={{ asset("/css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
-  <link href={{ asset("/css/nucleo-svg.css") }} rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="/assets/css/fontawesome.css" rel="stylesheet">
+    <link href="/assets/css/solid.css" rel="stylesheet">
+    <link href="/assets/css/brands.css" rel="stylesheet">
+    <link href={{ asset("/css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
+    <link href={{ asset("/css/nucleo-svg.css") }} rel="stylesheet"/>
  
   <!-- CSS Files -->
   <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
@@ -64,23 +67,12 @@
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Restaurante</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href={{ route('menuAdmon.index') }}>
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bell-55 text-danger text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Administración de menú</span>
-                    </a>
-                </li>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Restaurante</h6>
                 <li class="nav-item">
                     <a class="nav-link " href={{ route('cliente_prueba') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-danger text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Pedido</span>
                     </a>
@@ -103,44 +95,58 @@
                         <span class="nav-link-text ms-1">Cocina</span>
                     </a>
                 </li>
-                <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link " href={{ route('kiosko_res.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                            <i class="ni ni-shop text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Kioskos</span>
-                    </a>
-                </li>
-                <li cFlass="nav-item">
-                    <a class="nav-link " href="{{route('mesas_reg.index')}}">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-sm text-primary opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Mesas</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{route('cliente.reservaLocal')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+                            <i class="fa-solid fa-shop text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Local</span>
                     </a>
                 </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Piscina</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Configuraciones</h6>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ route('menuAdmon.index') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bell-55 text-info text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Administración de menú</span>
+                    </a>
+                </li>
+                <li cFlass="nav-item">
+                    <a class="nav-link " href="{{route('mesas_reg.index')}}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-table text-sm text-info opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Mesas</span>
+                    </a>
+                </li>
+                <li cFlass="nav-item">
+                    <a class="nav-link " href="{{route('kiosko.index')}}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-store text-sm text-info opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">kioskos</span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href={{ route('prodpiscina.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+                            <i class="fa-solid fa-water-ladder text-info text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Productos</span>
                     </a>

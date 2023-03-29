@@ -6,16 +6,11 @@
 @section('content')
     <div style="margin-left:25px; margin-top:15px; display:block; float:left;
         color: #333333" class="nav-link-icon">                            
-            <h4>Reservaciones de Kioskos</h4>
+            <h4 class="h4"><strong>Reservaciones de Kioskos</strong></h4>
     </div>
-    <div class="nav d-flex justify-content-end " style="margin:0px 0px 5px 5px; display:block; float:rigth">
-        <div style="margin: 11px 0 0 10px; display:block; float:left" class="nav-link-icon">                            
-            <a href="{{ route('kiosko.index') }}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:300px; padding:6px;">
-                <i class="fa fa-table-columns text-sm text-center opacity-10"></i>
-                 Administración de Kioskos</a>
-        </div>
-        <div class="nav d-flex justify-content-end " style="">
-            <div class="" style="margin: 10px 0 0 10px">
+    <div class="nav d-flex justify-content-end " style="margin:0px; display:block; float:rigth">
+        <div class="nav d-flex justify-content-end " style="height: 60px">
+            <div class="" style="margin: 10px 0 0 0">
                 <form action="{{ route('kiosko_res.search') }}" method="get" role="search" 
                     class="navbar-search" >
                     <div class="input-group">
@@ -30,8 +25,8 @@
                     </div>   
                 </form>
             </div>
-            <div style="margin: 10px 0 0 10px;" class=" nav-link-icon">
-                <a href="{{route('kiosko_res.create')}}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:200px; padding:6px;">
+            <div style="margin: 10px 25px 0px 25px;" class=" nav-link-icon">
+                <a href="{{route('kiosko_res.create')}}" type="button" class="bg-light border-radius-md text-center text-success" style="width:200px; padding:6px;">
                 <i class="ni ni-palette"></i> Agregar reservaciones</a>
             </div>
         </div>
@@ -41,35 +36,39 @@
         <!-- ========== Cards ========== -->
         <div class="">
             <div class="table-responsive container-fluid">
-                <table class="table" id="table" style="background-color: #fff;">
-                    <thead class="card-header border border-radius" style="color:teal; text-align:center">
+                <table class="table" id="table" style="">
+                    <thead style="">
                         <tr>
-                            <th scope="col">N</th>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Celular</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">fecha</th>
-                            <th scope="col">Pago</th>
-                            <th scope="col">Editar</th>
-                            <th scope="col">Eliminar</th>
+                            <th class="col" style="padding: 8px;" scope="col">N</th>
+                            <th class="col" style="padding: 8px; text-align:left;" scope="col">Cliente</th>
+                            <th class="col" style="padding: 8px; text-align:left;" scope="col">Celular</th>
+                            <th class="col" style="padding: 8px;" scope="col">Cantidad</th>
+                            <th class="col" style="padding: 8px; width:100px" scope="col">fecha</th>
+                            <th class="col" style="padding: 8px;" scope="col">Pago</th>
+                            <th class="col" style="padding: 8px;" scope="col">Anticipo</th>
+                            <th class="col" style="padding: 8px;" scope="col">Editar</th>
+                            <th class="col" style="padding: 8px;" scope="col">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($reservaciones as $r)
+                        @forelse($reservaciones  as $i => $r)
                              
-                                <tr class="border border-light" style="color:teal; text-align:center">
-                                    <th scope="col">{{$r->id}}</th>
-                                    <td scope="col">{{$r->nombre}}</td> 
-                                    <td scope="col">{{$r->celular}}</td> 
-                                    <td scope="col">{{$r->cantidad}}</td> 
-                                    <td scope="col">{{$r->fecha}}</td> 
-                                    <td scope="col">{{$r->pago}}</td> 
-                                    <td scope="col" ><a href="{{route('kiosko_res.edit', ['id' => $r->id])}}"><i class="fa fa-edit text-success"></i></a></td>
+                                <tr style="">
+                                    <th scope="col">{{++$i}}</th>
+                                    <td scope="col" style="text-align:left">{{$r->nombre}}</td> 
+                                    <td scope="col" style="text-align:left">{{$r->celular}}</td> 
+                                    <td scope="col" >{{$r->cantidad}}</td> 
+                                    <td scope="col" style="text-align:left; width:100px" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
+                                        {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('MMMM') }},
+                                        {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('YYYY') }}</td> 
+                                    <td class="" style="text-align:right" scope="col">L {{ number_format($r->total, 2, '.', ',') }}</td>
+                                    <td class="" style="text-align:right" scope="col">L {{ number_format($r->anticipo, 2, '.', ',') }}</td> 
+                                    <td scope="col"><a href="{{route('kiosko_res.edit', ['id' => $r->id])}}"><i class="fa-solid fa-edit text-success"></i></a></td>
                                     <td scope="col">
                                         <form action="{{route('kiosko_res.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
                                             @method('delete')
                                             @csrf
-                                            <button onclick="" style="border: 0; padding:0; margin:0;"><i class="fa fa-delete-left text-danger" style="border: 0; padding:0; margin:0;"></i></button>
+                                            <button onclick="" style="border: 0; padding:0; margin:0;"><i class="fa-solid fa-trash-can text-danger" style="border: 0; padding:0; margin:0;"></i></button>
                                         </form>
                                         <!-- Modal Eliminar-->
                                     </td>
@@ -77,7 +76,7 @@
                            
                         @empty
                            <tr>
-                               <td colspan="7" style="text-align: center;color: teal;">No hay pedidos</td>
+                               <td colspan="7" style=";">No hay resultados</td>
                            </tr>
                         @endforelse
                     </tbody>
@@ -89,7 +88,7 @@
 @endsection
 
 @section('pie')
-    <div class="pagination justify-content-end"> 
+    <div class="pagination justify-content-end" style="padding-right: 21px"> 
         <div style="display:block; float:right;"> 
             {{$reservaciones->links()}}
         </div>

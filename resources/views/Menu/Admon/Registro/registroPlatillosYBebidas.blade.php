@@ -29,11 +29,11 @@
     </script>
 
 
-    <div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
+    <div class="page-wrapper p-t-170 p-b-100 font-robo">
         <br><br>
         <div class="wrapper wrapper--w960">
             <div class="card card-2">
-                <div class="card-heading"></div>
+                
                 <div class="card-body">
                     <h2 class="title">Registro de Platillos y Bebidas</h2>
                     <form method="post" action="" enctype="multipart/form-data">
