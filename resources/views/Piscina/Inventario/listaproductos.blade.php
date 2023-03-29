@@ -6,41 +6,46 @@
     </li>
 @endsection
 @section('content')
-
-<div style="margin-left:20px; margin-top:10px; display:block; float:left;" class="nav-link-icon">
-    <h4>Productos de piscina</h4>
-</div>
-<div class="nav d-flex justify-content-end " style="">
-    <div class="nav-item" style="margin: 10px 10px 10px 25px;">
-        <form action="{{ route('producto.search')}}" method="get" role="search" 
-            class="navbar-search">
-            <div class="input-group">
-                <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
-                placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
-                aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>" />
-                <button class="border-radius-md" type="submit" style="border: 0; color:aliceblue; background:rgb(33, 195, 247 );">Buscar</button>    
-                @if(isset($text))
-                    @if($text != null)
-                        <a href="{{route('prodpiscina.index')}}" style="display:block; float:right"  
-                        class="btn btn-secondary my-2 my-sm-0">Borrar busqueda</a>
-                    @endif
-                @endif
-            </div>   
-            </form>
+<div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;" class="nav-link-icon">                            
+            <h4 class="h4"> <strong>Productos de piscina</strong> </h4>
     </div>
-    <a style="margin: 10px 23px 10px 25px;border: 0; color:aliceblue; background:rgb(33, 195, 247);" 
-    href="{{route('piscina.create')}}" 
-    class="btn badge-light"><i class="fa-regular fa-newspaper" style="font-size:15px;"></i> Nuevo producto</a> 
-</div>
 
-</div>
+<!--Filtro de busqueda-->
+<div class="nav d-flex justify-content-end " style="margin:0px; display:block; float:rigth" >
+        <div class="nav d-flex justify-content-end " style="height: 60px">
+            <div class="" style="margin: 10px 0 0 10px">
+                <form action="{{ route('producto.search') }}" method="get" role="search" 
+                    class="navbar-search" >
+                    <div class="input-group">
+                        <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 250px" 
+                        placeholder="Buscar por nombre" aria-label="Search" 
+                        aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>"/>
+                        <button class="bg-success border-radius-md" type="submit" 
+                            style="border: 0; color:aliceblue;width:80px;"><strong>Buscar</strong>
+                        </button>     
+                        @if(isset($text))
+                    @if($text != null)
+                        <a href="{{route('prodpiscina.index')}}" type="button" style="color:aliceblue; width:150px; padding:6px;"  
+                        class="bg-secondary border-radius-md h-6 text-center"><strong style="">Borrar Busqueda</strong></a>
+                        @endif
+                        @endif
+                    </div>   
+                </form>
+            </div>
+            <div style="margin: 10px 25px 10px 25px;" class=" nav-link-icon">
+                <a href="{{route('piscina.create')}}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:200px; padding:8px;">
+                <i class="fa fa-newspaper"></i> <strong>Nuevo producto</strong></a>
+            </div>
+        </div>
+    </div>
     
     <!--------Lista de pedidos---------------->
 
-    <div class="card-body">
+    <div class="">
         <div class="table-responsive container-fluid">
-            <table class="table" id="table" style="background-color: #fff;">
-                <thead class="card-header border border-radius" style="text-align:center">
+            <table class="table" id="table" style="">
+                <thead class="" style="text-align:center">
                     <tr>
                         <th scope="col">N</th>
                         <th scope="col">Producto</th>
@@ -52,17 +57,17 @@
                 </thead>
                 <tbody>
                 @forelse($prod as $i => $p)
-                <tr class="border border-light" style="text-align:center;">
+                <tr class="" style="text-align:center;">
                 <td scope="col">{{++$i}}</td>
                 <td scope="col">{{$p->nombre}}</td>
                 <td scope="col">{{$p->tipo_producto->descripcion}}</td>
                 <td scope="col">{{$p->peso}} Kg</td>
                 <td>
                 <a  href="{{ route('producto.edit', ['id' => $p->id]) }}">
-                <i class="fa-regular fa-pen-to-square" style="color:rgb(33, 195, 247)"></i>
+                <i class="fa-solid fa-edit text-success" style="color:rgb(33, 195, 247)"></i>
                 </td>
                 <td>
-                <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$p->id}}"  class="fa fa-delete-left text-danger" style="color:crimson"></i>
+                <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$p->id}}"  class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
                 <form action="{{route('prodpiscina.destroy', ['id' => $p->id])}}" method="post" enctype="multipart/form-data">
                     @method('delete')
                                             @csrf

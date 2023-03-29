@@ -22,15 +22,17 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([BebidaSeeder::class,
-        PedidoSeeder::class,
-                        PlatilloSeeder::class,
-                        ComboSeeder::class,
-                        DetallesUsuarioSeeder::class,
-                        PiscinaTipoSeeder::class,
-                        PiscinaUsoSeeder::class,
-                        PiscinaSeeder::class,
-                        KioskoSeeder::class,
-                        MesaSeeder::class,
-                        ReservacionSeeder::class]);
+        PlatilloSeeder::class,
+        ComboSeeder::class,
+        DetallesUsuarioSeeder::class,
+        PiscinaTipoSeeder::class,
+        PiscinaUsoSeeder::class,
+        PiscinaSeeder::class,
+        KioskoSeeder::class,
+        MesaSeeder::class,
+        ReservacionSeeder::class,
+        PedidoSeeder::class
+
+    ]);
     }
 }

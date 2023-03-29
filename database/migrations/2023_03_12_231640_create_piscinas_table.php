@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->unsignedBigInteger('tipo');
             $table->foreign("tipo")->references("id")->on("piscina_tipos");
-            $table->date('fecha_expiracion');
+           // $table->date('fecha_expiracion');
             $table->decimal('peso');
             $table->unsignedBigInteger('uso');
             $table->foreign("uso")->references("id")->on("piscina_usos");

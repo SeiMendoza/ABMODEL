@@ -51,14 +51,14 @@ public function search(Request $request){
      */
     public function store(Request $request)
     {
-        $fecha_actual = date("d-m-Y");
+    /*    $fecha_actual = date("d-m-Y");
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
-
+*/
         $rules=[
             'nombre' => 'required',
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
-            'expiracion' => 'required|date|after:'.$minima,
+           // 'expiracion' => 'required|date|after:'.$minima,
             'kilos' => 'required|numeric|min:0|max:1000'
         ];
 
@@ -69,8 +69,8 @@ public function search(Request $request){
             'uso.required' => 'El uso de producto no puede estar vacío',
             'uso.exists' => 'El uso de producto no es valido',
             'expiracion.required' => 'La fecha de expiracion no puede estar vacío',
-            'expiracion.date' => 'La fecha de expiracion debe de ser una fecha',
-            'expiracion.after' => 'La fecha de expiracion debe de ser posterior a '.$minima,
+           // 'expiracion.date' => 'La fecha de expiracion debe de ser una fecha',
+           // 'expiracion.after' => 'La fecha de expiracion debe de ser posterior a '.$minima,
             'kilos.required' => 'El peso no puede estar vacío',
             'kilos.max' => 'El peso es muy grande',
             'kilos.min' => 'El peso es muy pequeño',
@@ -84,7 +84,7 @@ public function search(Request $request){
             $piscina->nombre = $request->input('nombre');
             $piscina->tipo = $request->input('tipo');
             $piscina->uso = $request->input('uso');
-            $piscina->fecha_expiracion = $request->input('expiracion');
+          //  $piscina->fecha_expiracion = $request->input('expiracion');
             $piscina->peso = $request->input('kilos');
 
             $creado = $piscina->save();
@@ -128,15 +128,15 @@ public function search(Request $request){
      */
     public function update(Request $request, $id)
     {
-        $fecha_actual = date("d-m-Y");
+    /*    $fecha_actual = date("d-m-Y");
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
-
+*/
         $rules=[
             'nombre' => 'required|regex:/^[\\pL\\s]+$/u',
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
-            'expiracion' => 'required|date|after:'.$minima,
-            'kilos' => 'required|numeric|min:0|max:1000'
+           // 'expiracion' => 'required|date|after:'.$minima,
+            'kilos' => 'required|numeric|min:1|max:1000'
         ];
 
         $mensaje=[
@@ -146,9 +146,9 @@ public function search(Request $request){
             'tipo.exists' => 'El tipo de producto no es valido',
             'uso.required' => 'El uso de producto no puede estar vacío',
             'uso.exists' => 'El uso de producto no es valido',
-            'expiracion.required' => 'La fecha de expiración no puede estar vacío',
-            'expiracion.date' => 'La fecha de expiración debe de ser una fecha',
-            'expiracion.after' => 'La fecha de expiración debe de ser posterior a '.$minima,
+           // 'expiracion.required' => 'La fecha de expiración no puede estar vacío',
+           // 'expiracion.date' => 'La fecha de expiración debe de ser una fecha',
+           // 'expiracion.after' => 'La fecha de expiración debe de ser posterior a '.$minima,
             'kilos.required' => 'El peso no puede estar vacío',
             'kilos.max' => 'El peso es muy grande',
             'kilos.min' => 'El peso es muy pequeño',
@@ -162,7 +162,7 @@ public function search(Request $request){
             $piscina->nombre = $request->input('nombre');
             $piscina->tipo = $request->input('tipo');
             $piscina->uso = $request->input('uso');
-            $piscina->fecha_expiracion = $request->input('expiracion');
+           // $piscina->fecha_expiracion = $request->input('expiracion');
             $piscina->peso = $request->input('kilos');
             $creado = $piscina->save();
 
