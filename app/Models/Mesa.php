@@ -13,4 +13,8 @@ class Mesa extends Model
     {
         return $this->belongsTo(Kiosko::class, 'kiosko_id', 'id');
     }
+    public function pedidos()
+{
+    return $this->hasMany(Pedido::class);
+}
 }

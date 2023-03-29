@@ -4,39 +4,44 @@
  
 @endsection
 @section('content') 
-<div style="margin-left:25px; margin-top:15px; display:block; float:left;" class="nav-link-icon">
-    <h4>Pedidos en cocina</h4>
-</div>
+<div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;" class="nav-link-icon">                            
+            <h4 class="h4"> <strong>Pedidos en cocina</strong> </h4>
+    </div>
 
 <!--Filtro de busqueda-->
-<div> 
-<div class="nav d-flex justify-content-end">
-    <div class="nav-item" style="margin: 10px 25px 10px 25px;">
-        <form action="{{ route('pedidosp.pcsearch')}}" method="get" role="search" 
-            class="navbar-search">
-            <div class="input-group">
-                <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
-                placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
-                aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>" />
-                <button class="border-radius-md" type="submit" style="border: 0; color:aliceblue; background:rgb(255,179,71);"><strong>Buscar</strong></button>    
-                @if(isset($texto))
+<div class="nav d-flex justify-content-end " style="margin:0px; display:block; float:rigth" >
+        <div class="nav d-flex justify-content-end " style="height: 60px">
+            <div class="" style="margin: 10px 25px 10px 25px;">
+                <form action="{{ route('pedidosp.pcsearch') }}" method="get" role="search" 
+                    class="navbar-search" >
+                    <div class="input-group">
+                        <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 250px" 
+                        placeholder="Buscar por nombre" aria-label="Search" 
+                        aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>"/>
+                        <button class="bg-success border-radius-md" type="submit" 
+                            style="border: 0; color:aliceblue;width:80px;"><strong>Buscar</strong>
+                        </button>     
+                        @if(isset($texto))
                     @if($texto != null)
-                        <a href="{{route('pedidosp.pedido')}}" style="display:block; float:right"  
-                        class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
-                    @endif
-                @endif
-            </div>   
-            </form>
+                        <a href="{{route('pedidosp.pedido')}}" type="button" style="color:aliceblue; width:150px; padding:6px;"  
+                        class="bg-secondary border-radius-md h-6 text-center"><strong style="">Borrar Busqueda</strong></a>
+                        @endif
+                        @endif
+                    </div>   
+                </form>
+            </div>
+        </div>
     </div>
-</div>
      <!--------Lista de pedidos---------------->
 
-     <div class="card-body">
+     <div class="">
          <div class="table-responsive container-fluid">
-             <table class="table" id="table" style="background-color: #fff;">
-                 <thead class="card-header border border-radius" style="text-align:center">
+             <table class="table" id="table" style="">
+                 <thead class="" style="text-align:center">
                      <tr>
-                         <th scope="col">Número de mesa</th>
+                     <th scope="col">N</th>
+                         <th scope="col">Mesa</th>
                          <th scope="col">Kiosko</th>
                          <th scope="col">Nombre del cliente</th>
                          <th scope="col">Terminado</th>
@@ -44,19 +49,19 @@
                      </tr>
                  </thead>
                  <tbody>
-                     @forelse($pedido as $p)
+                     @forelse($pedido as $i => $p)
                      @if(($p->estado_cocina)=="1") 
-                     <tr class="border border-light" style="text-align:center">
-                         <th scope="col">{{$p->mesa}}</th>
+                     <tr class="" style="text-align:center">
+                     <td scope="col">{{++$i}}</td>
+                         <td scope="col">{{$p->mesa_nombre->nombre}}</td>
                          <td scope="col">{{$p->quiosco}}</td> 
                          <td scope="col">{{$p->nombreCliente}}</td> 
                                
                               <td>
                                 <!-----icono que envia el pedido de regreso a caja con un estado=2 y estado_cocina=2------>
-                                <a href="#" id="envia_de_cocina" name="envia_de_cocina" 
-                              {{!old('envia_de_cocina') ?: 'checked'}} data-bs-toggle="modal" 
+                                <a href="#" id="envia_de_cocina" name="envia_de_cocina" data-bs-toggle="modal" 
                               data-bs-target="#staticBackdrop{{$p->id}}">
-                              <i class="fa-solid fa-truck-fast text-danger"></i>
+                              <i class="fa-solid fa-truck-fast text-success"></i>
                                 </a>
                             </td>
                         <td>
@@ -84,7 +89,7 @@
                                                 <input type="text" id="estado_cocina" name="estado_cocina" value="2">
                                             </div>
                                             <input type="submit" class="btn btn-danger w-15" value="Si">
-                                            <button onclick="setTimeout(function(){location.reload();}, 00);" type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
+                                            <button  type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
                                         </div>
                                     </form>
                                 </div>
@@ -93,7 +98,7 @@
                         @endif
                         @empty
                         <tr>
-                            <td colspan="7" style="text-align: center;">No hay pedidos</td>
+                            <td colspan="7" style="">No hay pedidos</td>
                         </tr>
                      @endforelse
                  </tbody>

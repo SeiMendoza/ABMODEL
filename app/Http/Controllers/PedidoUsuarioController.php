@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetallesUsuario;
+use App\Models\Mesa;
 use App\Models\Pedido;
 use App\Models\PiscinaUso;
 use Database\Seeders\PlatillosyBebidasSeeder;
@@ -27,10 +28,10 @@ class PedidoUsuarioController extends Controller
             'tuplas.required' => 'El pedido esta vacio',
         ]);
 
-        $pedido = new Pedido();
-        $pedido->mesa = $request->input('mesa');
+        $pedido = new Pedido(); 
         $pedido->quiosco = $request->input('quiosco');
         $pedido->nombreCliente = 'Sutano';
+        $pedido->mesa_id =3;
         $pedido->imp = 0.00;
         $pedido->total = 100;
         $pedido->save();
@@ -51,17 +52,26 @@ class PedidoUsuarioController extends Controller
     public function pedido_terminados()
     {
         $pedido = Pedido::where('estado',0)
+        ->orwhere('estado',1)
         ->orwhere('estado',2)->paginate(10);
+        $p = Mesa::all();
         $texto="";
-        return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
+        return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto','p'));
     }
     public function psearch(Request $request)
     { 
+        $texto = trim($request->get('busqueda'));
+$pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
+    ->orWhere('quiosco', 'like', '%' . $texto . '%')
+    ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
+        $query->where('nombre', 'like', '%' . $texto . '%');
+    })->paginate(10);
+    return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
         //recuperar datos del filtro
-       $texto=trim($request->get('busqueda'));
+     /*  $texto=trim($request->get('busqueda'));
         $pedido = Pedido::where('mesa', 'like', '%' . $texto . '%')
         ->orwhere('quiosco', 'like', '%' . $texto . '%')->paginate(10);
-        return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
+        return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));*/
     }
     public function terminados()
     {
@@ -71,9 +81,13 @@ class PedidoUsuarioController extends Controller
     }
     public function search(Request $request)
     { 
-        //recuperar datos del filtro
-       $texto=trim($request->get('busqueda'));
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(6);
+        //recuperar datos del filtro 
+       $texto = trim($request->get('busqueda'));
+       $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
+           ->orWhere('quiosco', 'like', '%' . $texto . '%')
+           ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
+               $query->where('nombre', 'like', '%' . $texto . '%');
+           })->paginate(10);
         return view('Menu/Cocina/Terminados', compact('pedido','texto'));
     }
     public function pedido_pendientes()
@@ -94,11 +108,12 @@ class PedidoUsuarioController extends Controller
     public function env_a_cocina(Request $request,  $id)
     {
         $request->validate([
-            'estado_cocina' => 'required|in:1', // El campo estado es obligatorio y solo puede ser 1
+            'estado_cocina' => 'required|in:1',
+            'estado' => 'required|in:1', // El campo estado es obligatorio y solo puede ser 1
         ]);
         $activar = Pedido::findOrfail($id);
         $activar->estado_cocina = $request->input('estado_cocina');
-
+        $activar->estado = $request->input('estado');
         $create = $activar->save();
 
         if ($create) {

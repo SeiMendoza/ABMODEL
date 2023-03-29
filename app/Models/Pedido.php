@@ -13,5 +13,9 @@ class Pedido extends Model
     {
         return $this->hasMany(DetallesUsuario::class,'cantidad');
     }
+    public function mesa_nombre()
+{
+    return $this->belongsTo(Mesa::class,'mesa_id','id');
+}
 
 }

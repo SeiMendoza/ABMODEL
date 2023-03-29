@@ -5,36 +5,40 @@
     <a class="text-dark" href="{{route('pedidost.pedido')}}">Caja</a></li>
 @endsection
 @section('content')
- 
-        <div style="margin-left:25px; margin-top:15px; display:block; float:left;" class="nav-link-icon">                            
-            <h4>Pedidos terminados</h4>
-        </div>
+<div style="margin-left:25px; margin-top:15px; display:block; float:left;
+        color: #333333;" class="nav-link-icon">                            
+            <h4 class="h4"> <strong>Pedidos terminados</strong> </h4>
+    </div>
  <!--Filtro de busqueda-->
- 
- <div class="nav d-flex justify-content-end">
-            <div class="" style="margin: 10px 25px 10px 25px;">
-    <form action="{{ route('pedidost.search')}}" method="get" role="search" 
-        class="navbar-search">
-        <div class="input-group">
-            <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 350px" 
-            placeholder="Buscar pedido por nombre del cliente" aria-label="Search" 
-            aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>" />
-            <button class="border-radius-md" type="submit" style="border: 0; color:aliceblue; background:rgb(255,179,71);">
-            <strong>Buscar</strong></button>    
-            @if(isset($texto))
-                @if($texto != null)
-                    <a href="{{route('terminados.terminados')}}" style="display:block; float:right"  
-                    class="btn btn-secondary my-2 my-sm-0">Borrar Busqueda</a>
-                @endif
-            @endif
-        </div>   
-    </form>
-</div>
-<div style="margin-right: 25px; margin-top:10px" class=" nav-link-icon">
-    <button type="button" data-bs-toggle="modal" 
-    data-bs-target="#exampleModalCenter" class="btn btn-danger">
-    <i class="fa fa-times  "></i>       Eliminar Pedidos</button> </div>
-
+ <div class="nav d-flex justify-content-end " style="margin:0px; display:block; float:rigth" >
+        <div class="nav d-flex justify-content-end " style="height: 60px">
+            <div class="" style="margin: 10px 0px 0px 10px;">
+                <form action="{{ route('pedidost.search') }}" method="get" role="search" 
+                    class="navbar-search" >
+                    <div class="input-group">
+                        <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 250px" 
+                        placeholder="Buscar por nombre" aria-label="Search" 
+                        aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($texto)) {echo $texto;} ?>"/>
+                        <button class="bg-success border-radius-md" type="submit" 
+                            style="border: 0; color:aliceblue;width:80px;"><strong>Buscar</strong>
+                        </button>     
+                        @if(isset($texto))
+                    @if($texto != null)
+                        <a href="{{route('terminados.terminados')}}" type="button" style="color:aliceblue; width:150px; padding:6px;"  
+                        class="bg-secondary border-radius-md h-6 text-center"><strong style="">Borrar Busqueda</strong></a>
+                        @endif
+                        @endif
+                    </div>   
+                </form>
+            </div>
+            <div style="margin: 10px 25px 10px 25px;" class=" nav-link-icon">
+                <a href="#" type="button" class="bg-light border-radius-md h-6 text-center text-success" 
+                style="width:200px; padding:8px;" data-bs-toggle="modal" 
+    data-bs-target="#exampleModalCenter">
+                <i class="fa-solid fa-trash-can text-danger"></i> <strong>Eliminar pedidos</strong></a>
+            </div>
+        </div>
+    </div>
 <!-- Modal Eliminar-->
 <form action="{{route('borrar.borrarDatos')}}" method="post" enctype="multipart/form-data">
     @method('delete')
@@ -65,11 +69,12 @@
  </div>
 </div>
  
-        <div class="card-body">
+        <div class="">
     <div class="table-responsive container-fluid">
-        <table class="table" id="table" style="background-color: #fff;">
-            <thead class="card-header border border-light" style="text-align:center;">
+        <table class="table" id="table" style="">
+            <thead class="" style="text-align:center;">
                 <tr>
+                <th scope="col">N</th>
                     <th scope="col">Número de mesa</th>
                     <th scope="col">Kiosko</th> 
                     <th scope="col">Nombre del cliente</th>
@@ -78,14 +83,18 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($pedido as $p)
+                @forelse($pedido as $i => $p)
                 @if(($p->estado)=="3")
-                <tr class="border border-light" style="text-align:center;">
-                    <th scope="col">{{$p->mesa}}</th>
+                <tr class="" style="text-align:center;">
+                <td scope="col">{{++$i}}</td>
+                         <td scope="col">{{$p->mesa_nombre->nombre}}</td>
                     <td scope="col">{{$p->quiosco}}</td> 
                     <td scope="col">{{$p->nombreCliente}}</td>
-                    <td><input disabled type="checkbox" name="term" {{ old('term') ?: 'checked' }} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}"
-                    style="background:#ffffff; width:20px; height:20px;"></input></td>
+                    <td>
+                        @if($p->estado == 3)
+                        Entregado al cliente
+                        @endif
+                    </td>
                     <td>
                         <a type="button" href="{{route('terminados.detalle',['id'=>$p->id])}}">
                             <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
