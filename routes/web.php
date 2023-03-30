@@ -239,6 +239,7 @@ Route::get('/piscina/producto/buscar', [PiscinaController::class, 'search'])
 ->name('producto.search');
 Route::get('/piscina/create', [PiscinaController::class, 'create'])->
 name('piscina.create');
+
 Route::post('/piscina/create', [PiscinaController::class, 'store'])->
 name('piscina.store');
 Route::get('piscina/{id}/editar', [PiscinaController::class, 'edit'])
@@ -247,10 +248,6 @@ Route::get('piscina/{id}/editar', [PiscinaController::class, 'edit'])
     ->name('prodpiscina.destroy')->where('id','[0-9]+');
 Route::put('piscina/{id}/edicion', [PiscinaController::class, 'update'])
     ->name('producto.update');
-Route::post('/piscina/agregar/{id}', [PiscinaController::class, 'agregar'])->
-name('piscina.agregar');
-Route::post('/piscina/restar/{id}', [PiscinaController::class, 'restar'])->
-name('piscina.restar');
 
 /****************************************
   Rutas Para Mesas

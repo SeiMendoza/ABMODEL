@@ -183,49 +183,4 @@ public function search(Request $request){
         Piscina::destroy($id);
         return redirect()->route('prodpiscina.index')->with('mensaje', 'Producto borrado correctamente');
     }
-
-    public function agregar(Request $request,$id){
-        $rules=[
-            'cantidad' => 'required|numeric|min:1|max:1000'
-        ];
-
-        $mensaje=[
-            'cantidad.required' => 'La cantidad no puede estar vacío',
-            'cantidad.max' => 'La cantidad es muy grande',
-            'cantidad.min' => 'La cantidad es muy pequeño',
-            'cantidad.numeric' => 'La cantidad debe de ser numerico',
-        ];
-        $this->validate($request,$rules,$mensaje);
-        $piscina = Piscina::FindOrFail($id);
-        $piscina->peso += $request->input('cantidad');
-        $creado = $piscina->save();
-
-        if ($creado) {
-            return redirect()->route('prodpiscina.index')
-                ->with('mensaje', 'La cantidad del producto fue actualizado exitosamente');
-        }
-    }
-
-    public function restar(Request $request,$id){
-        $piscina = Piscina::FindOrFail($id);
-
-        $rules=[
-            'cantidad' => 'required|numeric|min:1|max:'.$piscina->peso
-        ];
-
-        $mensaje=[
-            'cantidad.required' => 'La cantidad no puede estar vacío',
-            'cantidad.max' => 'La cantidad es mayor a la existente',
-            'cantidad.min' => 'La cantidad es muy pequeño',
-            'cantidad.numeric' => 'La cantidad debe de ser numerico',
-        ];
-        $this->validate($request,$rules,$mensaje);
-        $piscina->peso -= $request->input('cantidad');
-        $creado = $piscina->save();
-
-        if ($creado) {
-            return redirect()->route('prodpiscina.index')
-                ->with('mensaje', 'La cantidad del producto fue actualizado exitosamente');
-        }
-    }
 }

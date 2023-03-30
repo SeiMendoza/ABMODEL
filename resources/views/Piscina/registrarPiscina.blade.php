@@ -51,6 +51,23 @@
                             @enderror
                         </div>
 
+                        @php
+                            $fecha_actual = date("Y-m-d");
+                            $minima = date('Y-m-d',strtotime($fecha_actual."+ 1 month"));
+                            $minima = date('Y-m-d',strtotime($minima."+ 1 day"));
+                            $maxima = date('Y-m-d',strtotime($fecha_actual."+ 10 year"));
+                        @endphp     
+
+                        <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
+                            <label for=""><strong>Ingrese la fecha de expiracion</strong></label>
+                            <input class="form-control" type="date" name="expiracion" id="expiracion"
+                            value="@if(Session::has('expiracion')){{Session::get('expiracion')}}@else{{old('expiracion')}}@endif"
+                            onkeypress="quitarerror()" placeholder="Tiempo de expiracion">
+                            @error('expiracion')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+                        </div>
+
                         <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
                             <label for=""><strong>Seleccione el periodo de uso</strong></label>
                             <select name="uso" onchange="quitarerror()" id="uso" class="form-control">
@@ -76,14 +93,14 @@
                         </div>
 
                         <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
-                            <label for=""><strong>Ingrese el peso en onzas</strong></label>
+                            <label for=""><strong>Ingrese el peso en kilogramos</strong></label>
                             <div class="input-group mb-3">
                                 <input class="form-control" type="number" name="kilos" id="kilos"
-                                step="0.01" min="1" max="100" placeholder="Ingrese las onzas"
+                                step="0.01" min="1" max="100" placeholder="Ingrese los kilogramos"
                                 value="@if(Session::has('kilos')){{Session::get('kilos')}}@else{{old('kilos')}}@endif"
                                 onkeypress="quitarerror()">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">onzas</span>
+                                    <span class="input-group-text">kilogramos</span>
                                 </div>
                             </div>
                             @error('kilos')
@@ -101,5 +118,20 @@
             </div>
         </div>
     </div>
+    <script>
+        window.addEventListener('load',function(){
+            document.getElementById('expiracion').type= 'text';
+            document.getElementById('expiracion').addEventListener('blur',function(){
+                if (document.getElementById('expiracion').value == '') {
+                    document.getElementById('expiracion').type= 'text';
+                }
+            });
+            document.getElementById('expiracion').addEventListener('focus',function(){
+                document.getElementById('expiracion').type= 'date';
+                document.getElementById('expiracion').max= '{{$maxima}}';
+                document.getElementById('expiracion').min= '{{$minima}}';
+            });
+        });
+    </script>
 
 @endsection
