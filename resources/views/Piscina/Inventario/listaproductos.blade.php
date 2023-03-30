@@ -1,5 +1,11 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Piscina-productos')
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 @section('miga')
     <li class="breadcrumb-item text-sm active text-dark active">
     <a class="opacity-5 text-dark" href="{{route('piscina.store')}}">Nuevo producto</a>
@@ -10,6 +16,30 @@
         color: #333333;" class="nav-link-icon">                            
             <h4 class="h4"> <strong>Productos de piscina</strong> </h4>
     </div>
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: '{{$error}}',
+                showConfirmButton: false,
+                toast: true,
+                background: '#fff',
+                timer: 5500
+            })
+        </script>
+        @endforeach
+    @endif
+
+<style>
+    .productpiscina{
+        height: 40px;
+        line-height: 15px;
+        margin-bottom: 0px;
+    }
+</style>
+
 
 <!--Filtro de busqueda-->
 <div class="nav d-flex justify-content-end " style="margin:0px; display:block; float:rigth" >
@@ -61,7 +91,76 @@
                 <td scope="col">{{++$i}}</td>
                 <td scope="col">{{$p->nombre}}</td>
                 <td scope="col">{{$p->tipo_producto->descripcion}}</td>
-                <td scope="col">{{$p->peso}} Kg</td>
+                <td scope="col">
+                    <!--Boton para agregar cantidad-->
+                    <button class="btn btn-success productpiscina" data-toggle="modal" data-target="#agregar{{$p->id}}">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                        <!--Texto de cantidad-->
+                        {{$p->peso}} Onzas
+                    <!--Boton para restar cantidad-->
+                    <button class="btn btn-danger productpiscina" data-toggle="modal" data-target="#restar{{$p->id}}">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button>
+
+                    <!--Modal de agregar cantidad-->
+                    <div class="modal fade" id="agregar{{$p->id}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success d-flex align-items-center">
+                                <strong>
+                                    <h3 class="mx-auto">
+                                        Agregar onzas a {{$p->nombre}}
+                                    </h3>
+                                </strong>
+                            </div>
+                            <form method="post" action="{{ route('piscina.agregar',['id'=>$p->id]) }}">
+                                @csrf
+                                <div class="modal-body">
+                                    <label for="">Ingrese la cantidad que se sumara:</label>
+                                    <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad"
+                                    class="form-control" step="0.01">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+
+
+                    <!--Modal de quitar cantidad-->
+                    <div class="modal fade" id="restar{{$p->id}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger d-flex align-items-center">
+                                <strong>
+                                    <h3 class="mx-auto">
+                                        Restar onzas a {{$p->nombre}}
+                                    </h3>
+                                </strong>
+                            </div>
+                            <form method="post" action="{{ route('piscina.restar',['id'=>$p->id]) }}">
+                                @csrf
+                                <div class="modal-body">
+                                    <label for="">Ingrese la cantidad que se restara:</label>
+                                    <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad"
+                                    class="form-control" step="0.01">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+
+
+
+                </td>
                 <td>
                 <a  href="{{ route('producto.edit', ['id' => $p->id]) }}">
                 <i class="fa-solid fa-edit text-success" style="color:rgb(33, 195, 247)"></i>
