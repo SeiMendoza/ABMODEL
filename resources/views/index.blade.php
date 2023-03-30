@@ -380,6 +380,7 @@
             <!-- Cards Reservaciones -->
             <div class="row container-fluid pt-3 d-flex justify-content-center">
                 <H4 style="text-align: ;" class="bg-white text-success">RESERVACIONES</H4>
+                <div class="row d-flex justify-content-center" style="">
                     <a href="{{ route('kiosko_res.index') }}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
                     data-id="" style="border-radius:0%; margin:10px;">
                     <div class="text-center" style="text-align:center; padding: 0px;">   
@@ -412,7 +413,7 @@
             </div>
             <!-- Cards Configuraciones -->
             <div class="row container-fluid pt-3 d-flex justify-content-center">
-                <H5 style="text-align:;" class="bg-white text-info">CONFIGURACIONES</H5>
+                <H4 style="text-align: ;" class="bg-white text-info">CONFIGURACIONES</H4>
                 <div class="row d-flex justify-content-center" style="">
                     <a href="{{ route('menuAdmon.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
                         data-id="" style="margin:10px; border-radius:0%;">
