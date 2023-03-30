@@ -10,7 +10,7 @@ class ReservacionController extends Controller
 {
     public function index2()
     {
-        $reservaciones = Reservacion::paginate(10);
+        $reservaciones = Reservacion::all();
         return view('Reservaciones.ReserAdmon.Kioskos.kioskoReservaciones',  compact('reservaciones'));
     }
     public function search2(Request $request)

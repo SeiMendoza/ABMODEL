@@ -1,29 +1,24 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Mesas')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">Mesas</li>
+<li class="breadcrumb-item text-sm text-dark active m-0" aria-current="page">Mesas</li>
 @endsection
-
+@section('b')
+    <h3 class="font-weight-bolder opacity-8 text-gray mb-0" style="position: absolute; top:100%;">Registro de Mesas</h3> 
+    <div class="" style="position:absolute; right:0%; top:16%">    
+        <a href="{{route('mesas_reg.create')}}" style="margin:0; padding:0" type="button" class="font-weight-bolder text-gray opacity-6">
+        <i class="fa fa-plus-circle"></i> Agregar
+       </a> 
+    </div>
+@endsection
 @section('content')
-    <div style="margin-left:25px; margin-top:15px; display:block; float:left;
-    color: #333333" class="nav-link-icon">                            
-        <h4 class="h4"><strong>Registro de Mesas</strong></h4>
-    </div>
-    <div class="nav d-flex justify-content-end " style="margin:0px; display:block; float:rigth">
-    <div class="nav d-flex justify-content-end " style="height: 60px">
-        <div style="margin: 10px 25px 0px 25px;" class=" nav-link-icon">
-            <a href="{{route('mesas_reg.create')}}" type="button" class="bg-light border-radius-md text-center text-success" style="width:200px; padding:6px;">
-            <i class="ni ni-palette"></i> Agregar Mesa</a>
-        </div>
-    </div>
-    </div>
     <!-- ========== Tabla========== -->
-    <div class="table-responsive container-fluid">
+    <div class="table-responsive">
         <table class="table" id="example" style="">
             <thead class="">
                 <tr>
                     <th scope="col" style="text-align:center">N</th>
-                    <th scope="col" style="text-align:center">Codigo</th>
+                    <th scope="col" style="text-align:center">Código</th>
                     <th scope="col" style="text-align:center">Mesa</th>
                     <th scope="col" style="text-align:center">Cantidad de personas</th>
                     <th scope="col" style="text-align:center">Kiosko</th>

@@ -1,23 +1,19 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Mesas')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Reservaciones de Kioskos</li>
+<li class="breadcrumb-item text-sm text-dark active m-0" aria-current="page">Kioskos</li>
+@endsection
+@section('b')
+    <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Reservaciones de Kioskos</h3> 
+    <div class="" style="position:absolute; right:0%; top:16%">    
+        <a href="{{route('kiosko_res.create')}}" style="margin:0; padding:0" type="button" class="font-weight-bolder text-gray opacity-6">
+        <i class="fa fa-plus-circle"></i> Agregar
+       </a> 
+    </div>
 @endsection
 @section('content')
-    <div style="margin-left:25px; margin-top:15px; display:block; float:left;
-        color: #333333" class="nav-link-icon">                            
-            <h4 class="h4"><strong>Reservaciones de Kioskos</strong></h4>
-    </div>
-    <div class="nav d-flex justify-content-end " style="margin:0px; display:block; float:rigth">
-        <div class="nav d-flex justify-content-end " style="height: 60px">
-            <div style="margin: 10px 25px 0px 25px;" class=" nav-link-icon">
-                <a href="{{route('kiosko_res.create')}}" type="button" class="bg-light border-radius-md text-center text-success" style="width:200px; padding:6px;">
-                <i class="ni ni-palette"></i> Agregar reservaciones</a>
-            </div>
-        </div>
-    </div>
     <!-- ========== Reservaciones ========== -->
-    <div class="table-responsive container-fluid">
+    <div class="table-responsive">
         <table class="table" id="example" style="">
             <thead style="">
                 <tr>
@@ -40,7 +36,7 @@
                             <td scope="col" >{{$r->nombre}}</td> 
                             <td scope="col">{{$r->celular}}</td> 
                             <td style="text-align: center;">{{$r->cantidad}}</td> 
-                            <td scope="col" style="text-align:left; width:100px" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
+                            <td scope="col" style="text-align:left;" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('MMMM') }},
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('YYYY') }}</td> 
                             <td class="" style="text-align:right" scope="col">L {{ number_format($r->total, 2, '.', ',') }}</td>

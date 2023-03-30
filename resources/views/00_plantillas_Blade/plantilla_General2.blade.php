@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
     <link href="/assets/css/fontawesome.css" rel="stylesheet">
     <link href="/assets/css/solid.css" rel="stylesheet">
     <link href="/assets/css/brands.css" rel="stylesheet">
@@ -13,13 +15,13 @@
     <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet">
     
     <!-- CSS Files -->
-    <link id="pagestyle" href="/css/argon-dashboard.css" rel="stylesheet">
+    <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
     <link href="/assets/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="/assets/datepicker/daterangepicker.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="/DataTables/DataTables-1.13.4/css/jquery.dataTables.css">
     <link rel="" href="/DataTables/DataTables-1.13.4/css/jquery.dataTables.min.css">
-    <link href="/assets/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="/assets/fontawesome/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/assets/mdi-font/css/material-design-iconic-font.min.css" rel="" media="all">
+    <link href="/assets/fontawesome/css/font-awesome.min.css" rel="" media="all">
     
     <!-- Main CSS-->
     <link href="/css/main.css" rel="stylesheet" media="all">
@@ -36,25 +38,24 @@
             background-color: rgba(2, 102, 0, 0.168);
         }
         div, ul, h4{
-            font-family: Tahoma;
+            font-family: verdana;
         }
         table{
             font-size: 17px;
-            color: black;
+            color: gray;
             
         }
-        tr{
+        thead{
             background-color: rgba(0, 99, 48, 0.085);
         }
         label, input{
             font-size: 15px;
             color: gray;
         }
-
     </style>
 </head>
 <body class="">
-    <aside
+     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
         id="sidenav-main">
         <div class="sidenav-header">
@@ -172,7 +173,7 @@
                 </li>
             </ul>
         </div>
-    
+        
     </aside>
 <div style="margin-left: 15px;margin-right:15px;"> 
 <main class="main-content" style="padding: 0px 0px 0px 0px; margin: 5px 0px 40px 250px;">
@@ -204,14 +205,23 @@
             })
         }
     </script>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 font-robo" style="margin-left:25px">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                href="{{route('index')}}">Inicio</a></li>
-            @yield('miga')
-        </ol>
-        
+    <nav class="navbar navbar-main navbar-expand-lg px-0  shadow-none border-radius-xl " id="navbarBlur" style="padding-bottom:15px"
+        data-scroll="false">
+        <div class="" style="margin: 0; padding:0;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 font-robo" style="margin-left:0px">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                        href="{{route('index')}}">Inicio</a></li>
+                    @yield('miga')
+                </ol>
+                @yield('m')
+            </nav>
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                @yield('b')
+            </div>
+        </div>
     </nav>
+    
     <div class="font-robo" style="padding: 0; margin:0;">
         @yield('content')
     </div>
@@ -273,5 +283,10 @@
         }
     </script>
     <script src="/js/global.js"></script>
+    <script src={{ asset('/js/core/popper.min.js') }}></script>
+    <script src={{ asset('/js/core/bootstrap.min.js') }}></script>
+    <script src={{ asset('/js/plugins/perfect-scrollbar.min.js') }}></script>
+    <script src={{ asset('/js/plugins/smooth-scrollbar.min.js') }}></script>
+    <script src={{ asset('/js/plugins/chartjs.min.js') }}></script>
 </body>
 </html>

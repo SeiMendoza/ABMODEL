@@ -182,10 +182,9 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
-                                href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+                                href="javascript:;">Inicio</a></li>
                     </ol>
-                    <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+                    <h6 class="font-weight-bolder text-white mb-0">Villa Crisol</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -308,6 +307,7 @@
         </nav>
         <!-- End Navbar -->
         <div class="row mt-3">
+            <!-- Cards Restaurante -->
             <div class="row container-fluid pt-3 d-flex justify-content-center">
 
                 <script>
@@ -330,272 +330,147 @@
                     });
                 </script>
 
-                <H4 style="text-align: center;" class=" bg-white text-primary">RESTAURANTE</H4>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Administrador
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                        <i class="ni ni-bell-55 text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">MENÚ</h4>
+                <H4 style="text-align: ;" class=" bg-white text-warning">RESTAURANTE</H4>
+                <div class="row d-flex justify-content-center" style="">
+                    <a href="{{ route('cliente_prueba') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:10px; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 5%">
+                                <i class="fa-solid fa-utensils fa-8x text-warning"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(255, 0, 0, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Pedido</strong>
+                                </p>         
                         </div>
-                        <a href={{ route('menuAdmon.index') }} class="mb-0 card-footer text-danger text-center h4 font-weight-bold bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
+                    </a>
+                    <a href="{{route('pedidost.pedido')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                    data-id="" style="border-radius:0%; margin:10px;">
+                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="" style="margin-top: 5%">
+                            <i class="fa-solid fa-cash-register fa-8x text-warning" ></i>
+                        </div>             
+                        <!-- Nombre -->
+                            <p id="precio" class="text-white font-robo text-decoration-line">
+                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                background-color:rgba(255, 0, 0, 0.504);
+                                position: absolute; bottom: 0; left:0;">Caja</strong>
+                            </p>         
                     </div>
+                    </a>
+                    <a href="{{route('pedidosp.pedido')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:10px; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 5%">
+                                <i class="fa-solid fa-kitchen-set fa-8x text-warning"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(255, 0, 0, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Cocina</strong>
+                                </p>         
+                        </div>
+                    </a>
                 </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Pedido
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-danger shadow-success text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">MENÚ</h4>
-                        </div>
-                        <a href={{ route('cliente_prueba') }} class="mb-0 card-footer text-center text-danger h4 font-weight-bold bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
+                
+            </div>
+            <!-- Cards Reservaciones -->
+            <div class="row container-fluid pt-3 d-flex justify-content-center">
+                <H4 style="text-align: ;" class="bg-white text-success">RESERVACIONES</H4>
+                    <a href="{{ route('kiosko_res.index') }}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                    data-id="" style="border-radius:0%; margin:10px;">
+                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="" style="margin-top: 5%">
+                            <i class="fa-solid fa-store fa-8x text-success" style=""></i>
+                        </div>             
+                        <!-- Nombre -->
+                            <p id="precio" class="text-white font-robo text-decoration-line">
+                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                background-color:rgba(0, 173, 12, 0.504);
+                                position: absolute; bottom: 0; left:0;">Kioskos</strong>
+                            </p>         
                     </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Administrador
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-warning shadow-success text-center rounded-circle">
-                                        <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">CAJA</h4>
+                    </a>
+                    <a href="{{route('cliente.reservaLocal')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:10px; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 5%">
+                                <i class="fa-solid fa-shop fa-8x text-success"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(0, 173, 12, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Local</strong>
+                                </p>         
                         </div>
-                        <a href="{{route('pedidost.pedido')}}" class="mb-0 card-footer text-center text-warning font-weight-bold h4 bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Administrador
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-warning shadow-success text-center rounded-circle">
-                                        <i class="ni ni-tablet-button text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">COCINA</h4>
-                        </div>
-                        <a href="{{route('pedidosp.pedido')}}" class="mb-0 card-footer text-center text-warning font-weight-bold h4 bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
-                    </div>
+                    </a>
                 </div>
             </div>
+            <!-- Cards Configuraciones -->
             <div class="row container-fluid pt-3 d-flex justify-content-center">
-                <H4 style="text-align: center;" class="bg-white text-primary">RESERVACIONES</H4>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Administrador
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                        <i class="ni ni-app text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">MESAS</h4>
+                <H5 style="text-align:;" class="bg-white text-info">CONFIGURACIONES</H5>
+                <div class="row d-flex justify-content-center" style="">
+                    <a href="{{ route('menuAdmon.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:10px; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 10%">
+                                <i class="fa-solid fa-glass-water fa-6x text-info"></i>
+                                <i class="fa-solid fa-burger fa-7x text-info"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(0, 195, 255, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Menú</strong>
+                                </p>         
                         </div>
-                        <a href="{{route('mesas_reg.index')}}" class="mb-0 card-footer text-primary text-center h4 font-weight-bold bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Administrador
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                        <i class="ni ni-shop text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Kioskos</h4>
+                    </a>
+                    <a href="{{route('kiosko.index')}}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:10px; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 5%">
+                                <i class="fa-solid fa-store fa-8x text-info"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(0, 195, 255, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Kioskos</strong>
+                                </p>         
                         </div>
-                        <a href="{{ route('kiosko_res.index') }}" class="mb-0 card-footer text-center text-primary font-weight-bold h4 bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Administrador
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Local</h4>
+                    </a>
+                    <a href="{{route('mesas_reg.index')}}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:10px; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 4%">
+                                <i class="fa-regular fa-chair fa-9x text-info"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(0, 195, 255, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Mesas</strong>
+                                </p>         
                         </div>
-                        <a href="{{route('cliente.reservaLocal')}}" class="mb-0 card-footer text-center text-primary font-weight-bold h4 bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
+                    </a>
+                    <a href="{{ route('prodpiscina.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                    data-id="" style="margin:10px; border-radius:0%;">
+                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="" style="margin-top: 0%">
+                            <i class="fa-solid fa-person-swimming fa-10x text-info"></i>
+                        </div>             
+                        <!-- Nombre -->
+                            <p id="precio" class="text-white font-robo text-decoration-line">
+                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                background-color:rgba(11, 198, 255, 0.504);
+                                position: absolute; bottom: 0; left:0;">Piscina</strong>
+                            </p>         
                     </div>
-                </div>
-            </div>
-            <div class="row container-fluid pt-3 d-flex justify-content-center">
-                <H5 style="text-align: center;" class="bg-white text-primary">PISCINA</H5>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Administrador
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">PRODUCTOS</h4>
-                        </div>
-                        <a href="{{route('prodpiscina.index')}}"class="mb-0 card-footer text-center font-weight-bold bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Cliente
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">CARD</h4>
-                        </div>
-                        <a href="#" class="mb-0 card-footer text-center font-weight-bold bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
-                    <div class="card height-200 card-2" style="">
-                        <div class="card-header mb-0 bg-gradient-faded-light" style="height:140px;">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                            Administrador
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                        <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true">
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="text mb-0 text-uppercase text-center font-weight-bold">Card</h4>
-                        </div>
-                        <a href="#" class="mb-0 card-footer text-center font-weight-bold bg-gradient-light btn-primary"
-                           style="height: 60px" >Ver
-                        </a>
-                    </div>
+                </a>
                 </div>
             </div>
            
