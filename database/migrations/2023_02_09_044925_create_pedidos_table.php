@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->integer('mesa');
-            $table->integer('quiosco');
+            $table->string('mesa');
+            $table->string('quiosco');
             $table->string('nombreCliente');
             $table->double('imp')->default('0');
             $table->double('total')->default('0');
             $table->string('estado')->default('0'); 
-            $table->string('estado_cocina')->default(''); 
+            $table->string('estado_cocina')->default('0'); 
             $table->timestamps();
         });
     }

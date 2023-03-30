@@ -53,7 +53,7 @@
                      @if(($p->estado_cocina)=="1") 
                      <tr class="" style="text-align:center">
                      <td scope="col">{{++$i}}</td>
-                         <td scope="col">{{$p->mesa_nombre->nombre}}</td>
+                         <td scope="col">{{$p->mesa}}</td>
                          <td scope="col">{{$p->quiosco}}</td> 
                          <td scope="col">{{$p->nombreCliente}}</td> 
                                

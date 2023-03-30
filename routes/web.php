@@ -257,6 +257,16 @@ name('piscina.restar');
 *****************************************/
 
 /**
+ * Reservaciones de mesas
+*/
+
+Route::get('/mesas/reservaciones', [MesaController::class, 'indexR'])
+->name('mesas_res.index');
+
+Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])
+->name('mesas_res.show');
+
+/**
  * Registro de mesas
 */
 

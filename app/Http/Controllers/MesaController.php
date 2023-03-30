@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class MesaController extends Controller
 {
+    //Registro
      public function index()
     {
         $registros = Mesa::paginate(10);
@@ -111,5 +112,19 @@ class MesaController extends Controller
         Mesa::destroy($id);
         return redirect()->route('mesas_reg.index')->with('mensaje', 'Mesa borrada correctamente');
     }
+
+    //Reservaciones
+
+    public function indexR()
+    {
+        $reservaciones = Mesa::all();
+        return view('Reservaciones.ReserAdmon.Mesas.mesasReservaciones',  compact('reservaciones'));
+    } 
+
+    public function show()
+    {
+        
+        return view('Reservaciones.ReserAdmon.Mesas.mesasDetalles');
+    } 
 
 }

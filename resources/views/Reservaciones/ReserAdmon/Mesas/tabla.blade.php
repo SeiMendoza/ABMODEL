@@ -10,16 +10,12 @@
     <link href="/assets/css/solid.css" rel="stylesheet">
     <link href="/assets/css/brands.css" rel="stylesheet">
     <link href={{ asset('/css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
-    <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet">
-    
+
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/argon-dashboard.css" rel="stylesheet">
-    <link href="/assets/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/assets/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
     <link rel="stylesheet" href="/DataTables/DataTables-1.13.4/css/jquery.dataTables.css">
     <link rel="" href="/DataTables/DataTables-1.13.4/css/jquery.dataTables.min.css">
-    <link href="/assets/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="/assets/fontawesome/css/font-awesome.min.css" rel="stylesheet" media="all">
     
     <!-- Main CSS-->
     <link href="/css/main.css" rel="stylesheet" media="all">
@@ -224,9 +220,6 @@
     <script src="/assets/jquery/jquery.min.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script> 
-    <script src="/assets/select2/select2.min.js"></script>
-    <script src="/assets/datepicker/moment.min.js"></script>
-    <script src="/assets/datepicker/daterangepicker.js"></script>
     <script>
         $(document).ready(function () {
         $('#example').DataTable();
