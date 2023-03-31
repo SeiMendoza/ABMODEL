@@ -8,10 +8,9 @@
     </li>
 @endsection
 @section('content')
-<div class="page-wrapper bg-red p-t-170 p-b-100 font-robo">
+<div class="page-wrapper p-t-170 p-b-100 font-robo">
     <div class="wrapper wrapper--w960">
         <div class="card card-2">
-            <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="text-center">Editando Platillo: {{$Platillos->nombre}}</h2>
                     <form method="post" action="{{route('plato.update', ['id'=> $Platillos->id])}}" enctype="multipart/form-data">

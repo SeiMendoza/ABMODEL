@@ -34,7 +34,7 @@
             <div style="margin: 10px 25px 10px 25px;" class=" nav-link-icon">
                 <a href="#" type="button" class="bg-light border-radius-md h-6 text-center text-success" 
                 style="width:200px; padding:8px;" data-bs-toggle="modal" 
-    data-bs-target="#exampleModalCenter">
+                data-bs-target="#exampleModalCenter">
                 <i class="fa-solid fa-trash-can text-danger"></i> <strong>Eliminar pedidos</strong></a>
             </div>
         </div>
@@ -51,13 +51,7 @@
                 <h4 style="text-color:red;" class="modal-title" id="exampleModalLongTitle">Eliminar Pedidos</h4>
             </div>
             <div class="modal-body">
-                Tenga en cuenta que una vez en dar click en "SÍ",
-                se eliminan los pedidos de la base de datos, así como los pedidos que tenga pendientes en cocina y caja. 
-                <br>
-                Se recomienda realizar esta acción una vez al mes y preferible al no tener pedidos que entregar.
-            </div>
-            <div class="modal-body">
-                ¿Está seguro de eliminar los pedidos?
+                ¿Está seguro de eliminar los pedidos entregados?
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
@@ -87,7 +81,7 @@
                 @if(($p->estado)=="3")
                 <tr class="" style="text-align:center;">
                 <td scope="col">{{++$i}}</td>
-                         <td scope="col">{{$p->mesa_nombre->nombre}}</td>
+                         <td scope="col">{{$p->mesa_nombre}}</td>
                     <td scope="col">{{$p->quiosco}}</td> 
                     <td scope="col">{{$p->nombreCliente}}</td>
                     <td>

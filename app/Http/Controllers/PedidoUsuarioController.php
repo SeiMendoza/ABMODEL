@@ -201,8 +201,8 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
 
     //borrar datos de los pedidos anteriores
     public function borrarDatos(){
-        $cliente= DB::table('Pedidos')->delete();
-        return back()->with('mensaje', 'Datos Borrados Satisfactoriamente.'); 
+        $cliente= DB::table('Pedidos')->where('estado', 3)->delete();
+        return back()->with('mensaje', 'Pedidos Borrados Satisfactoriamente.');
       }
 
     public function detalles_anteriores($id){
