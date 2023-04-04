@@ -28,10 +28,10 @@ class PedidoUsuarioController extends Controller
             'tuplas.required' => 'El pedido esta vacio',
         ]);
 
-        $pedido = new Pedido(); 
+        $pedido = new Pedido();
         $pedido->quiosco = $request->input('quiosco');
         $pedido->nombreCliente = 'Sutano';
-        $pedido->mesa_id =3;
+        $pedido->mesa_id = 3;
         $pedido->imp = 0.00;
         $pedido->total = 100;
         $pedido->save();
@@ -51,16 +51,16 @@ class PedidoUsuarioController extends Controller
     }
     public function pedido_terminados()
     {
-        $pedido = Pedido::where('estado',0)
-        ->orwhere('estado',1)
-        ->orwhere('estado',2)->paginate(10);
+        $pedido = Pedido::where('estado', 0)
+            ->orwhere('estado', 1)
+            ->orwhere('estado', 2)->orderby('id')->get();
         $p = Mesa::all();
-        $texto="";
-        return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto','p'));
+        $texto = "";
+        return view('Menu/Cocina/Pedidoscaja', compact('pedido', 'texto', 'p'));
     }
     public function psearch(Request $request)
-    { 
-        $texto = trim($request->get('busqueda'));
+    {
+        /*  $texto = trim($request->get('busqueda'));
 $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     ->orWhere('quiosco', 'like', '%' . $texto . '%')
     ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
@@ -75,38 +75,40 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     }
     public function terminados()
     {
-        $pedido = Pedido::where('estado',3)->paginate(10);
-        $texto="";
-        return view('Menu/Cocina/Terminados', compact('pedido','texto'));
+        $pedido = Pedido::where('estado', 3)->orderby('id')->get();
+        $p = Mesa::all(); 
+        $texto = "";
+        return view('Menu/Cocina/Terminados', compact('pedido', 'texto', 'p',));
     }
     public function search(Request $request)
-    { 
+    {
         //recuperar datos del filtro 
-       $texto = trim($request->get('busqueda'));
-       $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
-           ->orWhere('quiosco', 'like', '%' . $texto . '%')
-           ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
-               $query->where('nombre', 'like', '%' . $texto . '%');
-           })->paginate(10);
-        return view('Menu/Cocina/Terminados', compact('pedido','texto'));
+        $texto = trim($request->get('busqueda'));
+        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
+            ->orWhere('quiosco', 'like', '%' . $texto . '%')
+            ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
+                $query->where('nombre', 'like', '%' . $texto . '%');
+            })->paginate(10);
+        return view('Menu/Cocina/Terminados', compact('pedido', 'texto'));
     }
     public function pedido_pendientes()
-    { 
-        $pedido = Pedido::where('estado_cocina',1)->paginate(10); 
-        $texto="";
+    {
+        $pedido = Pedido::where('estado_cocina', 1)->orderby('id')->get();
+        //$pedido = Pedido::where('estado_cocina',1)->paginate(10); 
+        $texto = "";
         //$pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(5);
-        return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
+        return view('Menu/Cocina/Pedidoscocina', compact('pedido', 'texto'));
     }
     public function pcsearch(Request $request)
-    { 
+    {
         //recuperar datos del filtro
-       $texto=trim($request->get('busqueda'));
+        $texto = trim($request->get('busqueda'));
         $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
-        ->orWhere('quiosco', 'like', '%' . $texto . '%')
-        ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
-            $query->where('nombre', 'like', '%' . $texto . '%');
-        })->paginate(10);
-        return view('Menu/Cocina/Pedidospendientes', compact('pedido','texto'));
+            ->orWhere('quiosco', 'like', '%' . $texto . '%')
+            ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
+                $query->where('nombre', 'like', '%' . $texto . '%');
+            })->paginate(10);
+        return view('Menu/Cocina/Pedidoscocina', compact('pedido', 'texto'));
     }
 
     public function env_a_cocina(Request $request,  $id)
@@ -121,10 +123,10 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $create = $activar->save();
 
         if ($create) {
-            return redirect()->route('pedidost.pedido')->with('mensaje', 'Pedido enviado a cocina!');
+            return redirect()->route('pedidos.caja')->with('mensaje', 'Pedido enviado a cocina!');
         }
-    } 
-   /* public function env_a_caja(Request $request,  $id)
+    }
+    /* public function env_a_caja(Request $request,  $id)
     {
         $request->validate([
             'estado' => 'required|in:2', // El campo estado es obligatorio y solo puede ser 1
@@ -149,44 +151,47 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $create = $activar->save();
 
         if ($create) {
-            return redirect()->route('pedidost.pedido')->with('mensaje', 'El pedido fue terminado exitosamente!');
+            return redirect()->route('pedidos.caja')->with('mensaje', 'El pedido fue terminado exitosamente!');
         }
-    } 
-   public function pedidosPendientes_Cocina(Request $request,  $id)
+    }
+    public function pedidosPendientes_Cocina(Request $request,  $id)
     {
         $request->validate([
             'estado' => 'required|in:2', // El campo estado es obligatorio y solo puede ser 1
             'estado_cocina' => 'required|in:2',
         ]);
-       // $request->session()->put('envia_de_cocina', $request->input('envia_de_cocina'));
+        // $request->session()->put('envia_de_cocina', $request->input('envia_de_cocina'));
         $activar = Pedido::findOrfail($id);
-        $activar->estado = $request->input('estado'); 
+        $activar->estado = $request->input('estado');
         $activar->estado_cocina = $request->input('estado_cocina');
-       /* if ('estado_cocina' == 1) {
+        /* if ('estado_cocina' == 1) {
             dd('procesando');
         } elseif ('estado_cocina' == 2) {
             dd('entregar');
         } else {
             
         }*/
-       $create = $activar->save();
+        $create = $activar->save();
 
         if ($create) {
             return redirect()->route('pedidosp.pedido')->with('mensaje', 'Pedido enviado a caja!');
         }
     }
 
-    public function detalle_pedido_terminados($id){
+    public function detalle_pedido_terminados($id)
+    {
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detallecaja', compact('pedido'));
     }
 
-    public function detalle_pedido_pendientes($id){
+    public function detalle_pedido_pendientes($id)
+    {
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detallecocina', compact('pedido'));
     }
 
-    public function detalle_terminados($id){
+    public function detalle_terminados($id)
+    {
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detalleterminado', compact('pedido'));
     }
@@ -194,21 +199,32 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     public function pedidos_anteriores(Request $request)
     {
         //recuperar datos
-        $texto=trim($request->get('busqueda'));
+        $texto = trim($request->get('busqueda'));
         $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->get();
-        return view('Menu/Cocina/PedidosAnteriores', compact('pedido','texto'));
+        return view('Menu/Cocina/PedidosAnteriores', compact('pedido', 'texto'));
     }
 
     //borrar datos de los pedidos anteriores
-    public function borrarDatos(){
-        $cliente= DB::table('Pedidos')->where('estado', 3)->delete();
-        return back()->with('mensaje', 'Pedidos Borrados Satisfactoriamente.');
-      }
+    public function borrarDatos()
+    {
+        $cliente = DB::table('Pedidos')->where('estado', 3)->count();
+        if ($cliente > 0) {
+            DB::table('Pedidos')->where('estado', 3)->delete();
+            return back()->with('mensaje', 'Pedidos Borrados Satisfactoriamente.');
+        } else {
+            return back()->with('mensaje', 'No hay pedidos para borrar.');
+        }
+    }
 
-    public function detalles_anteriores($id){
+  /*  public function borrarDatos()
+    {
+        $cliente = DB::table('Pedidos')->where('estado', 3)->delete();
+        return back()->with('mensaje', 'Pedidos Borrados Satisfactoriamente.');
+    }*/
+
+    public function detalles_anteriores($id)
+    {
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detallesPedAnteriores', compact('pedido'));
     }
 }
-
-

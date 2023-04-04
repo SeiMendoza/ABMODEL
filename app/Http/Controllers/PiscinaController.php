@@ -19,18 +19,18 @@ class PiscinaController extends Controller
      */
     public function index()
     {
-        $prod = Piscina::paginate(10);
+        $prod = Piscina::all();
         $tip = PiscinaTipo::all();
         return view('Piscina/inventario/listaproductos',compact('prod','tip'));
     }
-public function search(Request $request){
+/*public function search(Request $request){
     $prod = Piscina::all();
     $tip = PiscinaTipo::all();
     $text = trim($request->get('busqueda'));
     $prod = Piscina::where('nombre', 'like', '%' . $text . '%')->paginate(10); 
     $tip = PiscinaTipo::where('descripcion', 'like', '%' . $text . '%')->paginate(10);
         return view('Piscina/inventario/listaproductos',compact('prod','tip','text'));
-}
+}*/
     /**
      * Show the form for creating a new resource.
      *

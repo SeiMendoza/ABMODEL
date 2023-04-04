@@ -7,203 +7,168 @@
 
 
 @section('miga')
-    <li class="breadcrumb-item text-sm active text-dark active">
-    <a class="opacity-5 text-dark" href="{{route('piscina.store')}}">Nuevo producto</a>
-    </li>
+<li class="breadcrumb-item text-sm active text-dark active">
+    <a class="font-weight-bolder opacity-8 text-gray" href="{{route('piscina.store')}}">Nuevo producto</a>
+</li>
+@endsection
+@section('b')
+<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Productos de piscina</h3>
+<div class="" style="position:absolute; right:0%; top:16%">
+    <a href="{{route('piscina.store')}}" style="margin:0;width:200px; padding:6px;" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
+        <i class="fa fa-plus-circle"></i> Nuevo producto
+    </a>
+</div>
 @endsection
 @section('content')
-<div style="margin-left:25px; margin-top:15px; display:block; float:left;
-        color: #333333;" class="nav-link-icon">                            
-            <h4 class="h4"> <strong>Productos de piscina</strong> </h4>
-    </div>
-    @if($errors->any())
-        @foreach($errors->all() as $error)
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'warning',
-                title: '{{$error}}',
-                showConfirmButton: false,
-                toast: true,
-                background: '#fff',
-                timer: 5500
-            })
-        </script>
-        @endforeach
-    @endif
+@if($errors->any())
+@foreach($errors->all() as $error)
+<script>
+    Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: '{{$error}}',
+        showConfirmButton: false,
+        toast: true,
+        background: '#fff',
+        timer: 5500
+    })
+</script>
+@endforeach
+@endif
 
 <style>
-    .productpiscina{
+    .productpiscina {
         height: 40px;
         line-height: 15px;
         margin-bottom: 0px;
     }
 </style>
 
+<!--------Lista de productos---------------->
 
-<!--Filtro de busqueda-->
-<div class="nav d-flex justify-content-end " style="margin:0px; display:block; float:rigth" >
-        <div class="nav d-flex justify-content-end " style="height: 60px">
-            <div class="" style="margin: 10px 0 0 10px">
-                <form action="{{ route('producto.search') }}" method="get" role="search" 
-                    class="navbar-search" >
-                    <div class="input-group">
-                        <input class="form-control" type="search" id="busqueda" name="busqueda" style="width: 250px" 
-                        placeholder="Buscar por nombre" aria-label="Search" 
-                        aria-describedby="basic-addon2" maxlength="50" required value="<?php if (isset($text)) {echo $text;} ?>"/>
-                        <button class="bg-success border-radius-md" type="submit" 
-                            style="border: 0; color:aliceblue;width:80px;"><strong>Buscar</strong>
-                        </button>     
-                        @if(isset($text))
-                    @if($text != null)
-                        <a href="{{route('prodpiscina.index')}}" type="button" style="color:aliceblue; width:150px; padding:6px;"  
-                        class="bg-secondary border-radius-md h-6 text-center"><strong style="">Borrar Busqueda</strong></a>
-                        @endif
-                        @endif
-                    </div>   
-                </form>
-            </div>
-            <div style="margin: 10px 25px 10px 25px;" class=" nav-link-icon">
-                <a href="{{route('piscina.create')}}" type="button" class="bg-light border-radius-md h-6 text-center text-success" style="width:200px; padding:8px;">
-                <i class="fa fa-newspaper"></i> <strong>Nuevo producto</strong></a>
-            </div>
-        </div>
-    </div>
-    
-    <!--------Lista de pedidos---------------->
-
-    <div class="">
-        <div class="table-responsive container-fluid">
-            <table class="table" id="table" style="">
-                <thead class="" style="text-align:center">
-                    <tr>
-                        <th scope="col">N</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Tipo de producto</th>
-                        <th scope="col">Cantidad</th>  
-                        <th scope="col">Editar</th>
-                        <th scope="col">Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @forelse($prod as $i => $p)
-                <tr class="" style="text-align:center;">
+<div class="table-responsive">
+    <table class="table" id="example">
+        <thead>
+            <tr>
+                <th scope="col" style="text-align:center">N</th>
+                <th scope="col" style="text-align:center">Producto</th>
+                <th scope="col" style="text-align:center">Tipo de producto</th>
+                <th scope="col" style="text-align:center">Cantidad</th>
+                <th scope="col" style="text-align:center">Editar</th>
+                <th scope="col" style="text-align:center">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($prod as $i => $p)
+            <tr style="text-align:center;">
                 <td scope="col">{{++$i}}</td>
                 <td scope="col">{{$p->nombre}}</td>
                 <td scope="col">{{$p->tipo_producto->descripcion}}</td>
                 <td scope="col">
-                    <!--Boton para agregar cantidad-->
-                    <button class="btn btn-success productpiscina" data-toggle="modal" data-target="#agregar{{$p->id}}">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                    </button>
-                        <!--Texto de cantidad-->
-                        {{$p->peso}} Onzas
                     <!--Boton para restar cantidad-->
-                    <button class="btn btn-danger productpiscina" data-toggle="modal" data-target="#restar{{$p->id}}">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
-                    </button>
+                    <a style="color: red;" class="productpiscina" data-toggle="modal" data-target="#restar{{$p->id}}">
+                        <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </a>
+                    <!--Texto de cantidad-->
+                    {{$p->peso}} Onzas
+                    <!--Boton para agregar cantidad-->
+                    <a style="color: blue;" class="productpiscina" data-toggle="modal" data-target="#agregar{{$p->id}}">
+                        <i style="text-size-adjust: 2px;" class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </a>
 
                     <!--Modal de agregar cantidad-->
                     <div class="modal fade" id="agregar{{$p->id}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
                         <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-success d-flex align-items-center">
-                                <strong>
-                                    <h3 class="mx-auto">
-                                        Agregar onzas a {{$p->nombre}}
-                                    </h3>
-                                </strong>
+                            <div class="modal-content">
+                                <div class="modal-header bg-success d-flex align-items-center">
+                                    <strong>
+                                        <h3 class="mx-auto">
+                                            Agregar onzas a {{$p->nombre}}
+                                        </h3>
+                                    </strong>
+                                </div>
+                                <form method="post" action="{{ route('piscina.agregar',['id'=>$p->id]) }}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <label for="">Ingrese la cantidad que se sumara:</label>
+                                        <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad" class="form-control" step="0.01" style="width:250px;height:30px;">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
-                            <form method="post" action="{{ route('piscina.agregar',['id'=>$p->id]) }}">
-                                @csrf
-                                <div class="modal-body">
-                                    <label for="">Ingrese la cantidad que se sumara:</label>
-                                    <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad"
-                                    class="form-control" step="0.01">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                </div>
-                            </form>
-                        </div>
                         </div>
                     </div>
-
 
                     <!--Modal de quitar cantidad-->
                     <div class="modal fade" id="restar{{$p->id}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
                         <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-danger d-flex align-items-center">
-                                <strong>
-                                    <h3 class="mx-auto">
-                                        Restar onzas a {{$p->nombre}}
-                                    </h3>
-                                </strong>
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger d-flex align-items-center">
+                                    <strong>
+                                        <h3 class="mx-auto">
+                                            Restar onzas a {{$p->nombre}}
+                                        </h3>
+                                    </strong>
+                                </div>
+                                <form method="post" action="{{ route('piscina.restar',['id'=>$p->id]) }}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <label for="">Ingrese la cantidad que se restara:</label>
+                                        <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad" class="form-control" step="0.01" style="width:250px;height:30px;">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
-                            <form method="post" action="{{ route('piscina.restar',['id'=>$p->id]) }}">
-                                @csrf
-                                <div class="modal-body">
-                                    <label for="">Ingrese la cantidad que se restara:</label>
-                                    <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad"
-                                    class="form-control" step="0.01">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                </div>
-                            </form>
-                        </div>
                         </div>
                     </div>
-
-
-
+                    <!----icono para editar el producto------>
                 </td>
                 <td>
-                <a  href="{{ route('producto.edit', ['id' => $p->id]) }}">
-                <i class="fa-solid fa-edit text-success" style="color:rgb(33, 195, 247)"></i>
+                    <a href="{{ route('producto.edit', ['id' => $p->id]) }}">
+                        <i class="fa-solid fa-edit text-success" style="color:rgb(33, 195, 247)"></i>
                 </td>
+                <!----icono para borrar el producto------>
                 <td>
-                <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$p->id}}"  class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
-                <form action="{{route('prodpiscina.destroy', ['id' => $p->id])}}" method="post" enctype="multipart/form-data">
-                    @method('delete')
-                                            @csrf
-                                            <div class="modal fade" id="staticBackdropE{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
-                                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar producto</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            ¿Esta seguro de borrar el producto: {{$p->nombre}}?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                        <input type="submit" class="btn btn-danger w-15" value="Si">
-                                                <button   type="button" class="btn btn-menu" data-bs-dismiss="modal">No</button>
-                                            
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </form>
+                    <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$p->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
+                    <form action="{{route('prodpiscina.destroy', ['id' => $p->id])}}" method="post" enctype="multipart/form-data">
+                        @method('delete')
+                        @csrf
+                        <div class="modal fade" id="staticBackdropE{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar producto</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Esta seguro de borrar el producto: {{$p->nombre}}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Si</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </td>
-                                </tr>
+            </tr>
             @empty
             <tr>
                 <td colspan="7" style="text-align: center;color: teal;">No hay productos</td>
             </tr>
             @endforelse
-                </tbody>
-            </table>
-            <div style="display:block; float:right;"> 
-            {{$prod->links()}}
-            </div>
-        </div>
-    </div>
-    
+        </tbody>
+    </table>
 
-     
-    @endsection
+</div>
+
+
+
+
+@endsection

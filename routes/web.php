@@ -75,10 +75,10 @@ Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
 ->name('terminar.terminarp')->where('id','[0-9]+');/*terminar pedidos en caja*/
 Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class,'env_a_cocina'])
 ->name('env.env_a_cocina')->where('id','[0-9]+');/*enviar a cocina*/
-Route::get('/menu/pedidot', [PedidoUsuarioController::class, 'pedido_terminados'])
-->name('pedidost.pedido');/*lista de pedidos pendientes de terminar en caja*/
-Route::get('/menu/pedidot/caja', [PedidoUsuarioController::class, 'psearch'])
-->name('pedidost.psearch');/*buscar pedidos en caja*/
+Route::get('/pedidos/caja', [PedidoUsuarioController::class, 'pedido_terminados'])
+->name('pedidos.caja');/*lista de pedidos pendientes de terminar en caja*/
+Route::get('/pedidos/caja/search', [PedidoUsuarioController::class, 'psearch'])
+->name('pedidos.psearch');/*buscar pedidos en caja*/
 Route::put('/menu/{id}/pendiente_cocina', [PedidoUsuarioController::class,'pedidosPendientes_Cocina'])
 ->name('pedidosPendientes_Cocina.pedidosPendientes_Cocina')->where('id','[0-9]+');/*terminar pedido en cocina*/
 Route::get('/menu/pedidop', [PedidoUsuarioController::class, 'pedido_pendientes'])

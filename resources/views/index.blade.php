@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href={{ route('pedidost.pedido') }}>
+                    <a class="nav-link " href={{ route('pedidos.caja') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-archive-2 text-warning text-sm opacity-10"></i>
@@ -346,7 +346,7 @@
                                 </p>         
                         </div>
                     </a>
-                    <a href="{{route('pedidost.pedido')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                    <a href="{{route('pedidos.caja')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
                     data-id="" style="border-radius:0%; margin:10px;">
                     <div class="text-center" style="text-align:center; padding: 0px;">   
                         <div class="" style="margin-top: 5%">
