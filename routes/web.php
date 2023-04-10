@@ -318,17 +318,20 @@ Route::get('/kiosko/reservaciones/buscar', [ReservacionController::class, 'searc
 
 /* Rutas para reservar local*/
 Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])
-       ->name('cliente.reservaLocal');
+  ->name('cliente.reservaLocal');
+      
+ Route::get('Evento/Realizado', [ReservacionTotalController::class, 'reali'])
+  ->name('evento.realizado');      
 
 Route::get('/Local/create', [ReservacionTotalController::class, 'create'])
-       -> name('ReserLocal.create');
+   -> name('ReserLocal.create');
 
 Route::post('/Reservacion/Local', [ReservacionTotalController::class, 'store'])
 ->name('ReserLocal.store');
 
-Route::get('/menu/reservacion/{id}', [ReservacionTotalController::class, 'detalle_reservacion'])
-->name('detalle.reservacion');
-
+Route::get('/cliente/reservacion/{id}', [ReservacionTotalController::class, 'detalle_reservacion'])
+  ->name('detalle.reservacion');
+ 
 Route::get('Cliente/{id}/Editando', [ReservacionTotalController::class, 'edit'])
   ->name('ResCliente.editar');
 

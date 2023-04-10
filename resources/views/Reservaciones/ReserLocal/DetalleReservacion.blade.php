@@ -3,91 +3,149 @@
 @section('miga')
 <li class="breadcrumb-item text-sm text-dark" aria-current="page">  
     <a class="opacity-5 text-dark" href="{{route('cliente.reservaLocal')}}">Reservación del Local</a></li>
-<li class="breadcrumb-item text-sm"><a class=" text-dark">Detalles Reservación</a></li>
+<li class="breadcrumb-item text-sm"><a class=" text-dark">Detalles </a></li>
 @endsection
-
 
 @section('content')
 <style>
-    .title{
+    .titulo{
         width: 25%;
-        font-weight: bold;
-        height: 50px;
-        line-height: 60px;
+        font-size: 17px;
+        height: 30px;
+        line-height: 30px;
     }
-    .info{
-        width: 30%;
-        height: 50px;
-        line-height: 60px;
-        color:rgb(98, 177, 154);
+
+    
+    .informacion{
+        width: 20%;
+        height: 30px;
+        font-size: 17px;
+        line-height: 30px;
     }
 </style>
 
+<div class="wrapper wrapper--w960">
+    <div class="row d-flex justify-content-center">
+         <div class="card shadow items-center"> <BR><BR>
+            <h3 class=" font-weight-bold" style="color: teal; text-align:center"> 
+                Detalles de la reservación de: {{$reservar->Nombre_Cliente}} </h3>
+            <div class="card-body">
+                <table class="table" >
+                    <thead style="background-color: rgba(81, 255, 0, 0.182)">
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo"><strong>Datos</strong></td>
+                            <td class="informacion"></td>
+                            <td class="titulo"><strong>Información</strong></td>
+                            <td class="informacion"></td>
+                        </tr>
+                    </thead>
 
+                    <tbody>
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Cliente</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->Nombre_Cliente}} {{$reservar->Apellido_Cliente}}</td>
+                            <td class="informacion"></td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Celular</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->Contacto}} </td>
+                            <td class="informacion"></td>
+                        </tr>
 
-<div class="card shadow mb-4 " style="margin-right:20px; margin-left:25px">
-    <div class="card-header" style="background: #3c9a716f; border-radius:6px 6px 0 0;">
-        <div style="text-align:center">
-            <h4 class="m-0 font-weight-bold" style="color: white"> Información detallada de la reservación de:      {{$reservar->Nombre_Cliente}}</h4>
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Tipo de reservación</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->Tipo_Reservacion}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Evento</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->Tipo_Evento}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Cantidad de personas</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->Cantidad}} </td>
+                            <td class="informacion"></td>
+                        </tr> 
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Fecha</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{\Carbon\Carbon::parse($reservar->Fecha)->locale("es")->isoFormat("DD MMMM YYYY")}}</td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Hora de llegada</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->HoraEntrada}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Hora de salida</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->HoraSalida}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Forma de pago</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->FormaPago}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Costo de la reservación</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->Total}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Anticipo</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->Anticipo}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Saldo pendiente</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservar->Pendiente}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background-color: rgba(81, 255, 0, 0.182);text-align:center; font-size:16px">
+                    <a href="{{route('cliente.reservaLocal')}}" class=" " 
+                     style=" width:915px; " ><strong>Regresar</strong></a>
+                </div>
+
+            </div>  
         </div>
     </div>
-    
-         <div class="container">
-            <div class="m-0 font-weight-bold">
-            <table class="table">
-                <tr>
-                    <td class="title">NOMBRE: </td>
-                    <td class="info">{{$reservar->Nombre_Cliente}}</td>
-                    <td class="title">APELLIDO: </td>
-                    <td class="info">{{$reservar->Apellido_Cliente}}</td>
-                </tr>
-
-                <tr>
-                    <td class="title">CELULAR:</td>
-                    <td class="info">{{$reservar->Contacto}}</td>
-                    <td class="title">TIPO DE RESERVACIÓN:</td>
-                    <td class="info">{{$reservar->Tipo_Reservacion}}</td>
-                </tr>
-
-                <tr>
-                    <td class="title">TIPO DE EVENTO: </td>
-                    <td class="info">{{$reservar->Tipo_Evento}}</td>
-                    <td class="title">FECHA DEL EVENTO:</td>
-                    <td class="info">{{$reservar->Fecha}}</td>
-                </tr>
-
-                <tr>
-                    <td class="title">HORA DE LLEGADA: </td>
-                    <td class="info">{{$reservar->Hora}}</td>
-                    <td class="title">FORMA DE PAGO:</td>
-                    <td class="info">{{$reservar->FormaPago}}</td>
-                </tr>
-
-                <tr>
-                    <td class="title">PRECIOS DE ENTRADA: </td>
-                    <td class="info">{{$reservar->PrecioEntrada}}</td>
-                    <td class="title">CANTIDAD DE PERSONAS: </td>
-                    <td class="info">{{$reservar->Cantidad}} </td>
-                </tr>
-
-                <tr>
-                    <td class="title">COSTO DE LA RESERVACIÓN:</td>
-                    <td class="info">{{$reservar->Total}}</td>
-                    <td class="title">CANTIDAD ANTICIPADA: </td>
-                    <td class="info">{{$reservar->Anticipo}} </td>
-                </tr>
-
-                <tr>
-                    <td class="title">SALDO PENDIENTE:</td>
-                    <td class="info">{{$reservar->Pendiente}}</td>
-                    <td>
-                    <div style=""><br>
-                        <a href="{{route('cliente.reservaLocal')}}" class="btn btn-danger" type="buttom" 
-                         style="float: right; width:180px; padding:10px;" >Regresar</a>
-                    </div>
-                    </td>
-                </tr>
-            </table>
-        </div> 
-    </div>
-@endsection
+@stop

@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string("Tipo_Reservacion");
             $table->string("Tipo_Evento");
             $table->date("Fecha");
-            $table->time("Hora");
+            $table->time("HoraEntrada");
+            $table->time("HoraSalida");
             $table->string("Total");
-            $table->string("PrecioEntrada");
             $table->string("FormaPago");
             $table->string("estado")->default('0');
             $table->string("Anticipo");

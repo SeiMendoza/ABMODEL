@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class ReservacionTotalFactory extends Factory
+class Reservacion_TotalFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -24,12 +24,12 @@ class ReservacionTotalFactory extends Factory
             'Tipo_Reservacion'=>$this->faker->randomElement(['De Día (Menor Costo)','De Noche (Mayor Costo)']),
             'Tipo_Evento'=>$this->faker->name,
             'Fecha'=>$this->faker->date(),
-            'Hora'=>$this->faker->time($format = 'h:i'),
-            'Total'=>$this->faker->numberBetween(1600, 10000),
-            'PrecioEntrada'=>$this->faker->randomElement(['L.100 con Alimentos','L.80 sin Alimentos']),
+            'HoraEntrada'=>$this->faker->time(),
+            'HoraSalida'=>$this->faker->time(),
+            'Total'=>$this->faker->numberBetween(1500, 15000),
             'FormaPago'=>$this->faker->randomElement(['Efectivo','Transferencia']),
             'estado'=>$this->faker->numberBetween(0,1),
-            'Anticipo'=>$this->faker->numberBetween(100, 10000),
+            'Anticipo'=>$this->faker->numberBetween(500, 15000),
             'Pendiente'=>$this->faker->name,
         ];
     }

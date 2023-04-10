@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\reservacion_total;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ReservacionTotalSeeder extends Seeder
+class Reservacion_TotalSeeder extends Seeder
 {
     /**
      * Run the database seeds.
