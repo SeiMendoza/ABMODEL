@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('estado')->default('0'); 
             $table->string('estado_cocina')->default('0'); 
             $table->unsignedBigInteger('mesa_id');
-    $table->foreign('mesa_id')->references('id')->on('mesas');
+            $table->foreign('mesa_id')->references('id')->on('mesas');
             $table->timestamps();
         });
     }

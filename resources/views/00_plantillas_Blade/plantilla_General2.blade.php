@@ -38,12 +38,12 @@
             background-color: rgba(2, 102, 0, 0.168);
         }
         div, ul, h4{
-            font-family: verdana;
+            font-family: Arial;
+            text-transform:initial;
         }
         table{
             font-size: 17px;
-            color: gray;
-            
+            color: gray; 
         }
         thead{
             background-color: rgba(0, 99, 48, 0.085);
@@ -55,7 +55,7 @@
     </style>
 </head>
 <body class="">
-     <aside
+    <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
         id="sidenav-main">
         <div class="sidenav-header">
@@ -175,61 +175,61 @@
         </div>
         
     </aside>
-<div style="margin-left: 15px;margin-right:15px;"> 
-<main class="main-content" style="padding: 0px 0px 0px 0px; margin: 5px 0px 40px 250px;">
-    <script>
-        var msg = '{{ Session::get('mensaje') }}';
-        var exist = '{{ Session::has('mensaje') }}';
-        if (exist) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: msg,
-                showConfirmButton: false,
-                toast: true,
-                background: '#fff',
-                timer: 5500
-            })
-        }
-        var ms = '¡Existe un error, revise los datos!';
-        var exis = '{{ Session::has('errors') }}';
-        if (exis) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'warning',
-                title: ms,
-                showConfirmButton: false,
-                toast: true,
-                background: '#fff',
-                timer: 5500
-            })
-        }
-    </script>
-    <nav class="navbar navbar-main navbar-expand-lg px-0  shadow-none border-radius-xl " id="navbarBlur" style="padding-bottom:15px"
-        data-scroll="false">
-        <div class="" style="margin: 0; padding:0;">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 font-robo" style="margin-left:0px">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        href="{{route('index')}}">Inicio</a></li>
-                    @yield('miga')
-                </ol>
-                @yield('m')
+    <div style="margin-left: 15px;margin-right:15px;"> 
+        <main class="main-content" style="padding: 0px; margin: 5px 0px 40px 250px;">
+            <script>
+                var msg = '{{ Session::get('mensaje') }}';
+                var exist = '{{ Session::has('mensaje') }}';
+                if (exist) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: msg,
+                        showConfirmButton: false,
+                        toast: true,
+                        background: '#fff',
+                        timer: 5500
+                    })
+                }
+                var ms = '¡Existe un error, revise los datos!';
+                var exis = '{{ Session::has('errors') }}';
+                if (exis) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: ms,
+                        showConfirmButton: false,
+                        toast: true,
+                        background: '#fff',
+                        timer: 5500
+                    })
+                }
+            </script>
+            <nav class="navbar navbar-main navbar-expand-lg px-0  shadow-none border-radius-xl " id="navbarBlur" style="padding-bottom:15px"
+                data-scroll="false">
+                <div class="" style="margin: 0; padding:0;">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 font-robo" style="margin-left:0px">
+                            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                                href="{{route('index')}}">Inicio</a></li>
+                            @yield('miga')
+                        </ol>
+                        @yield('m')
+                    </nav>
+                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                        @yield('b')
+                    </div>
+                </div>
             </nav>
-            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                @yield('b')
+            
+            <div class="font-robo ali" style="padding: 0; margin:0;">
+                @yield('content')
             </div>
-        </div>
-    </nav>
-    
-    <div class="font-robo" style="padding: 0; margin:0;">
-        @yield('content')
+            <div class="row container-fluid footer font-robo" style="padding: 0; margin:0;">
+                @yield('pie')
+            </div>
+        </main>
     </div>
-    <div class="row container-fluid footer font-robo" style="padding: 0; margin:0;">
-        @yield('pie')
-    </div>
-</main>
-</div>
     <script src="/assets/jquery/jquery.js"></script>
     <script src="/assets/jquery/jquery.min.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>

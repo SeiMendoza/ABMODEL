@@ -6,7 +6,8 @@
 @section('b')
     <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Reservaciones de Kioskos</h3> 
     <div class="" style="position:absolute; right:0%; top:16%">    
-        <a href="{{route('kiosko_res.create')}}" style="margin:0; padding:0" type="button" class="font-weight-bolder text-gray opacity-6">
+        <a href="{{route('kiosko_res.create')}}" style="margin:0; padding:5px; width:150px;" type="button" 
+        class="bg-light border-radius-md font-robo h-6 text-center text-success">
         <i class="fa fa-plus-circle"></i> Agregar
        </a> 
     </div>
@@ -14,7 +15,7 @@
 @section('content')
     <!-- ========== Reservaciones ========== -->
     <div class="table-responsive">
-        <table class="table" id="example" style="">
+        <table class="table font-robo" id="example" style="">
             <thead style="">
                 <tr>
                     <th scope="col">N</th>

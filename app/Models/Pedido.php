@@ -9,7 +9,7 @@ class Pedido extends Model
 {
     use HasFactory;
     protected $table = 'pedidos';
-    public function detalle()
+    public function detalles()
     {
         return $this->hasMany(DetallesUsuario::class,'cantidad');
     }

@@ -5,58 +5,58 @@
 @endsection
 @section('content')
     <div class="page-wrapper font-robo">
-        <div class="wrapper wrapper--w960">
-            <div class="card-2 border-radius-sm">
-                <div class="card-heading"></div>
-                <div class="card-body">
+        <div class="wrapper wrapper--w960 ">
+            <div class="card border-radius-sm border-0">
+                <div class="card-body border-radius-sm border-0">
                     <h2 class="title">Registrar Información</h2>
                     <form method="POST">
-                        <div class="font-robo input-group">
-                            <label for="name">Nombre:</label>
-                            <input class="input--style-2" type="text" placeholder="Nombre" name="name">
-                        </div>
                         <div class="row row-space">
-                            <div class="col-2">
-                                <div class="font-robo input-group">
+                            <div class="col-6">
+                                <div class="font-robo">
+                                    <label for="name">Nombre:</label>
+                                    <input class="form-control border-radius-sm" type="text" placeholder="Nombre" name="name">
+                                </div>   
+                            </div>
+                            <div class="col-6">
+                                <div class="font-robo form-group">
                                     <label for="birthday">Cumpleaños:</label>
-                                    <input class="input--style-2 js-datepicker" type="text" placeholder="Fecha" name="birthday">
+                                    <input class="form-control js-datepicker border-radius-sm" type="text" placeholder="Fecha: 00/00/0000" name="birthday">
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <div class="font-robo input-group">
-                                    <label for="gender">Opciones: </label>
-                                    <div class="rs-select2 js-select-simple select--no-search" style="width: 200px">
-                                        <select name="gender">
+                            <div class="col">
+                                <div class="font-robo form-group">
+                                    <label for="gender">Opciones: </label> <br>
+                                   
+                                        <select name="gender" class="form-control border-radius-sm ">
                                             <option disabled="disabled" selected="selected">Seleccione</option>
                                             <option>Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Otro</option>
                                         </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
+                                     
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
-                            <div class="col-2">
-                                <div class="font-robo input-group">
+                            <div class="col-6">
+                                <div class="font-robo form-group">
                                     <label for="class">Clases: </label>
-                                    <div class="rs-select2 js-select-simple select--no-search" style="width: 500px">
-                                        <select name="class">
+                                    
+                                        <select name="class" class="form-control border-radius-sm">
                                             <option disabled="disabled" selected="selected">Clase</option>
                                             <option>Clase 1</option>
                                             <option>Clase 2</option>
                                             <option>Clase 3</option>
                                         </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
+                                        
+
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <div class="font-robo input-group">
+                            <div class="col-6">
+                                <div class="font-robo form-group">
                                     <label for="res_code">Número: </label>
-                                    <input class="input--style-2" type="number" placeholder="Ingrese un número" name="res_code">
+                                    <input class=" form-control input--style-2 border-radius-sm ps-2" type="number" placeholder="Ingrese un número" name="res_code">
                                 </div>
                             </div>
                         </div>

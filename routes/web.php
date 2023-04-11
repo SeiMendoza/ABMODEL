@@ -67,9 +67,9 @@ Route::get('/registro', [HomeController::class, 'registro'])
 /*****************************
   Rutas Para Menú de usuario
 ******************************/
-Route::get('/menu/usuario/pedido', [PedidoUsuarioController::class, 'create'])
+Route::get('/menu/usuario/pedido', [MenuUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
-Route::post('/menu/usuario/pedido/crear', [PedidoUsuarioController::class, 'store'])
+Route::post('/menu/usuario/pedido/crear', [MenuUsuarioController::class, 'store'])
 ->name('usuario_pedido.store');
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
 ->name('terminar.terminarp')->where('id','[0-9]+');/*terminar pedidos en caja*/

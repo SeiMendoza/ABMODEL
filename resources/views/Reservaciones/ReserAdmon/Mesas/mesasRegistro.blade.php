@@ -6,7 +6,8 @@
 @section('b')
     <h3 class="font-weight-bolder opacity-8 text-gray mb-0" style="position: absolute; top:100%;">Registro de Mesas</h3> 
     <div class="" style="position:absolute; right:0%; top:16%">    
-        <a href="{{route('mesas_reg.create')}}" style="margin:0; padding:0" type="button" class="font-weight-bolder text-gray opacity-6">
+        <a href="{{route('mesas_reg.create')}}" style="margin:0; padding:5px; width:150px;" 
+        type="button" class="bg-light border-radius-md h-6 text-center text-success">
         <i class="fa fa-plus-circle"></i> Agregar
        </a> 
     </div>
@@ -20,7 +21,7 @@
                     <th scope="col" style="text-align:center">N</th>
                     <th scope="col" style="text-align:center">Código</th>
                     <th scope="col" style="text-align:center">Mesa</th>
-                    <th scope="col" style="text-align:center">Cantidad de personas</th>
+                    <th scope="col" style="text-align:center;  text-transform:initial;">Cantidad de personas</th>
                     <th scope="col" style="text-align:center">Kiosko</th>
                     <th scope="col" style="text-align: center;">QR</th>
                     <th scope="col" style="text-align:center">Editar</th>
