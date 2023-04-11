@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('cantidad');
             $table->unsignedBigInteger('kiosko_id');
             $table->foreign("kiosko_id")->references("id")->on("kioskos");
+            $table->binary('mesa_qr');
             $table->timestamps();
         });
     }

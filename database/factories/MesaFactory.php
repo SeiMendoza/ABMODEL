@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Kiosko;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,11 +18,13 @@ class MesaFactory extends Factory
      */
     public function definition()
     {
+        $qr = QrCode::size(500)->generate('https://registro.unah.edu.hn/');
         return [
             'codigo'=>$this->faker->numerify('######-######-#'),
             'nombre'=>$this->faker->numerify('Mesa-').$this->faker->numberBetween(1,25),
             'cantidad'=>$this->faker->numberBetween(1,20),
-            'kiosko_id'=> Kiosko::get('id')->random()
+            'kiosko_id'=> Kiosko::get('id')->random(),
+            'mesa_qr'=>$qr,
         ];
     }
 }
