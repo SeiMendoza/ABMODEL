@@ -85,7 +85,7 @@ class PlatillosyBebidasController extends Controller
             $platillos->descripcion = $request->input('descripcion');
             $platillos->precio = $request->input('precio');
             $platillos->tamanio = $request->input('tamanio');
-            $platillos->disponible = $request->input('disponible');
+            $platillos->disponible = $request->input('cantidad');
 
             $file = $request->file('imagen');
             $destinationPath = 'images/';

@@ -129,14 +129,14 @@
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
 
-                            <div id="bebida" style="display:none">
+                            <div id="bebida" style="display:">
                                 <br>
-                                <label for=""><strong>Ingrese las bebidas disponibles</strong></label>
-                                <input class="form-control" type="number" placeholder="Bebidas disponibles"
+                                <label for=""><strong>Ingrese la cantidad disponible</strong></label>
+                                <input class="form-control" type="number" placeholder="Cantidad disponible"
                                     name="cantidad" id="cantidad" value="{{ old('cantidad') }}"
                                     onkeypress="quitarerror()"
                                     onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
-                                    max="1000" disabled>
+                                    max="1000">
                                 @error('cantidad')
                                     <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror

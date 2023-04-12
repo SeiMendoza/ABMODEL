@@ -209,7 +209,7 @@
                 data-scroll="false">
                 <div class="" style="margin: 0; padding:0;">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 font-robo" style="margin-left:0px">
+                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 font-robo" style="margin-left:15px;">
                             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
                                 href="{{route('index')}}">Inicio</a></li>
                             @yield('miga')
@@ -222,7 +222,7 @@
                 </div>
             </nav>
             
-            <div class="font-robo ali" style="padding: 0; margin:0;">
+            <div class="font-robo ali" style="padding: 0; margin:15px;">
                 @yield('content')
             </div>
             <div class="row container-fluid footer font-robo" style="padding: 0; margin:0;">
@@ -240,7 +240,35 @@
     <script>
         $(document).ready(function () {
         $('#example').DataTable();
-    });
+        });
+
+        //DATATABLES para Menú
+        $(document).ready(function () {
+        $('#PlatillosNoDisponibles').DataTable();
+        });
+
+        $(document).ready(function () {
+        $('#PlatillosDisponibles').DataTable();
+        });
+
+        $(document).ready(function () {
+        $('#BebidasNoDisponibles').DataTable();
+        });
+
+        $(document).ready(function () {
+        $('#BebidasDisponibles').DataTable();
+        });
+
+        $(document).ready(function () {
+        $('#ComplementosNoDisponibles').DataTable();
+        });
+
+        $(document).ready(function () {
+        $('#ComplementosDisponibles').DataTable();
+        });
+
+
+
     </script>
     <script>
         (function () { 'use strict'

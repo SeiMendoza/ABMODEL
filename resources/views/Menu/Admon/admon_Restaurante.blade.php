@@ -6,6 +6,15 @@
     </li>
 @endsection
 
+@section('b')
+    <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; left:15px; top:100%;">Administración de Menú</h3>
+    <div class="" style="position:absolute; right:2%; top:16%">
+        <a href="{{route('cliente_prueba')}}" style="margin:0;width:200px; padding:6px;" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
+            <i class="fa fa-users"></i>   Ver menu cliente
+        </a>
+    </div>
+@endsection
+
 @section('content')
     <script>
         var msg = '{{ Session::get('mensaje') }}';
@@ -22,63 +31,12 @@
             })
         }
 
-        function activarProducto(id, e, nombre, ruta) {
-
-            let form = document.getElementById('formcheckDesactivar');
-
-            if (e == 'activar') {
-                form = document.getElementById('formcheckActivar');
-            }
-
-            Swal
-                .fire({
-                    title: 'Estado',
-                    text: "¿Desea " + e + " " + nombre + "?",
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: "Si",
-                    cancelButtonText: "No",
-                })
-                .then(resultado => {
-                    if (resultado.value) {
-                        form.submit();
-                    } else {
-                        // Dijeron que no
-                    }
-                });
-        }
-
-        function eliminarProducto(id, nombre, ruta) {
-
-            Swal
-                .fire({
-                    title: 'Eliminar',
-                    text: "¿Está seguro de eliminar a " + nombre + "?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: "Si",
-                    cancelButtonText: "No",
-                })
-                .then(resultado => {
-                    if (resultado.value) {
-                        //form.submit();
-                    } else {
-                        // Dijeron que no
-                    }
-                });
-        }
+        
     </script>
 
-    <div class="row">
-        <h4 class="col" style="margin-left:25px; margin-top:15px ">Administración de Menú</h4>
-        <a class="col-2 text-center text-danger " style="margin-top:15px" href="{{ route('cliente_prueba') }}"><i
-                class="fa fa-users"></i> Ver menu cliente</a>
-    </div>
-
-    <div class="row ms-2 me-2">
-        <div class="container">
-            <ul class="nav d-flex justify-content-center h5 text-center" role="tablist"
-                style="background-color: #ef3f3f; rounde">
+    <div class="">
+        <div class="row bg bg-warning" style="position: absolute; top:12%; margin:0;width:1225px;">
+            <ul class="nav d-flex justify-content-center h5 text-center" role="tablist" >
 
                 <li class="nav-item" role="presentation">
                     <a class="nav-link text-white" id="pills-bebidas-tab" data-bs-toggle="pill"
@@ -101,8 +59,10 @@
         </div>
     </div>
 
+    <br><br><br><br>
+
     <!--Menu de Productos-->
-    <div class="table-responsive" id="pills-tabContent" style="height: 595px; overflow-y: scroll; overflow-x: hidden; scroll-behavior: smooth;">
+    <div class="table-responsive" id="pills-tabContent">
         <section class="NovidadesSection" style="">
             <main class="main-content position-relative border-radius-lg">
                 <div class="tab-content" id="pills-tabContent">
@@ -150,7 +110,7 @@
                                 </div>
 
                                 <div class="table-responsive container-fluid">
-                                    <table class="table" id="table" style="background-color: #fff;">
+                                    <table>
                                         <thead class="card-header border border-radius"
                                             style="color:rgba(244, 48, 48, 0.765); text-align:center">
                                             <tr>
@@ -317,41 +277,13 @@
                         aria-labelledby="pills-Pdisponible-tab">
                         <div class="container-fluid" style="padding: 0px">
 
-                            <!--Barra de búsqueda y botón registrar-->
-                            <div class="row ">
-                                <!--Boton Registrar-->
-                                <div class="col-2 text-center" style="margin: 4px">
-                                    <a class="btn btn-menu" href="{{ route('bebidasyplatillos.create') }}"
-                                        style="margin: 4px">Registrar Platillo</a>
-                                </div>
-                                <!--Barra de busqueda-->
-                                <div class="col-8 p-2" style="display:; magin:2px">
-                                    <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                                        style="">
-                                        <div class="input-group">
-                                            <input class="form-control" type="search" id="busqueda" name="busqueda"
-                                                style="width: 200px" placeholder="Buscar platillo" aria-label="Search"
-                                                aria-describedby="basic-addon2" maxlength="50" required
-                                                value="<?php if (isset($busqueda)) {
-                                                    echo $busqueda;
-                                                } ?>" />
-                                            <button class="bg-success border-radius-md" type="submit"
-                                                style="border: 0; color:aliceblue"><strong>Buscar</strong></button>
-                                            @if (isset($busqueda))
-                                                @if ($busqueda != null)
-                                                    <a href="{{ route('busqueda.index') }}"
-                                                        style="color:aliceblue; width:150px; padding:6px;"
-                                                        class="bg-secondary border-radius-md h-6 text-center"><strong>Borrar
-                                                            Busqueda</strong></a>
-                                                @endif
-                                            @endif
-                                        </div>
-                                    </form>
-                                </div>
+                            <!-- Botón registrar-->
+                             <div >
+                                <a href="{{route('bebidasyplatillos.create')}}" style="position: absolute; left:0%; top:100% margin:0; width:150px; padding:4px;" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
+                                    <i class=""></i class="fa fa-plus-circle">Registrar Platillo</a>
                             </div>
 
-                            <!--Navegacion entre disponibles y no disponibles-->
+                            <!--Navegacion entre disponibles y no disponibles--> 
                             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link active" id="PDisponibles-tab" data-bs-toggle="tab"
@@ -363,48 +295,49 @@
                                         data-bs-target="#PNoDisponibles" role="tab" aria-controls="PNoDisponibles"
                                         aria-selected="false">No Disponibles</a>
                                 </li>
-
                             </ul>
 
-                            <div class="tab-content" id="myTabContent">
-
+                            <div class="tab-content" id="myTabContent" style="height: 500px; overflow-x: hidden;">
                                 <!--Platillos Disponibles-->
-                                <div class="tab-pane fade show active" id="PDisponibles" role="tabpanel"
-                                    aria-labelledby="PDisponibles-tab">
+                                <div class="tab-pane fade show active" id="PDisponibles" role="tabpanel" aria-labelledby="PDisponibles-tab">
+                                    
                                     <div class="table-responsive container-fluid">
                                         <br>
-                                        <table class="table" id="table" style="background-color: #fff;">
-                                            <thead class="card-header border border-radius"
-                                                style="color:rgba(244, 48, 48, 0.765); text-align:center">
+
+                                        <table class="table" class="table" id="PlatillosDisponibles" style="">
+                                            <thead>
                                                 <tr>
                                                     <th scope="col">N</th>
                                                     <th scope="col">Nombre</th>
-                                                    <th scope="col">Cantidad Disp.</th>
+                                                    <th scope="col">Disponibles</th>
                                                     <th scope="col">Precio</th>
                                                     <th scope="col">Acción</th>
                                                     <th scope="col">Editar</th>
                                                     <th scope="col">Eliminar</th>
                                                 </tr>
                                             </thead>
+
                                             <tbody>
                                                 @php
                                                     $exits = false;
                                                     $i = 0;
                                                 @endphp
+
                                                 @forelse($platillos as $p)
+
                                                     @if ($p->estado == 1)
                                                         @php
                                                             $exits = true;
                                                             $i++;
                                                         @endphp
 
-                                                        <tr class="border border-light"
-                                                            style="color:gray; text-align:center">
+                                                        <tr>
+
                                                             <th scope="col">@php echo $i  @endphp</th>
                                                             <td scope="col">{{ $p->nombre }}</td>
                                                             <td scope="col">{{ $p->disponible }}</td>
                                                             <td scope="col">{{ $p->precio }}</td>
-                                                            <td>
+                                                            <td scope="col">
                                                                 <i data-bs-toggle="modal"
                                                                     data-bs-target="#activarPlatillo{{ $p->id }}">
                                                                     <a class="fa fa-times-circle text-warning"></a>
@@ -432,31 +365,17 @@
                                                                                     <strong>{{ $p->nombre }}</strong>?
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <input id="activar" name="activar"
-                                                                                        style="display:none"
-                                                                                        value="0">
-                                                                                    <input type="submit"
-                                                                                        class="btn btn-danger w-15"
-                                                                                        value="Sí">
-                                                                                    <button type="button"
-                                                                                        class="btn btn-menu"
-                                                                                        data-bs-dismiss="modal">No</button>
-
+                                                                                    <input id="activar" name="activar" style="display:none"  value="0">
+                                                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </form>
                                                             </td>
-
-                                                            <td scope="col"><a
-                                                                    href="{{ route('plato.editar', ['id' => $p->id]) }}"><i
-                                                                        class="fa fa-edit text-success"></i></a></td>
-                                                            <td>
-                                                                <i data-bs-toggle="modal"
-                                                                    data-bs-target="#staticBackdropE{{ $p->id }}"
-                                                                    class="fa fa-delete-left text-danger"
-                                                                    style="color:crimson"></i>
+                                                            <td scope="col"><a href="{{ route('plato.editar', ['id' => $p->id]) }}"><i class="fa fa-edit text-success"></i></a></td>
+                                                            <td><i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{ $p->id }}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
                                                                 <form
                                                                     action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
                                                                     method="post" enctype="multipart/form-data">
@@ -471,28 +390,20 @@
                                                                         <div class="modal-dialog">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h5 class="modal-title"
-                                                                                        id="staticBackdropLabel">Eliminar
-                                                                                        Platillo</h5>
+                                                                                    <h5 class="modal-title"id="staticBackdropLabel">Eliminar Platillo</h5>
                                                                                 </div>
-                                                                                <div class="modal-body">
-                                                                                    ¿Está seguro de borrar el platillo:
-                                                                                    <strong>{{ $p->nombre }}</strong>?
+                                                                                <div class="modal-body"> ¿Está seguro de borrar el platillo: <strong>{{ $p->nombre }}</strong>?
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <input type="submit"
-                                                                                        class="btn btn-danger w-15"
-                                                                                        value="Si">
-                                                                                    <button type="button"
-                                                                                        class="btn btn-menu"
-                                                                                        data-bs-dismiss="modal">No</button>
-
+                                                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </form>
                                                             </td>
+
                                                         </tr>
                                                     @endif
                                                 @empty
@@ -500,8 +411,7 @@
 
                                                 @if (!$exits)
                                                     <tr>
-                                                        <td colspan="7" style="text-align: center;color: gray;">No hay
-                                                            Platillos disponibles <br> </td>
+                                                        <td colspan="7" style="text-align: center;color: gray;">No hay Platillos disponibles <br> </td>
                                                     </tr>
                                                 @endif
 
@@ -511,13 +421,13 @@
                                 </div>
 
                                 <!--Platillos No Disponibles-->
-                                <div class="tab-pane fade" id="PNoDisponibles" role="tabpanel"
-                                    aria-labelledby="PNoDisponibles-tab">
+                                <div class="tab-pane fade" id="PNoDisponibles" role="tabpanel" aria-labelledby="PNoDisponibles-tab">
+
                                     <div class="table-responsive container-fluid">
                                         <br>
-                                        <table class="table" id="table" style="background-color: #fff;">
-                                            <thead class="card-header border border-radius"
-                                                style="color:rgba(244, 48, 48, 0.765); text-align:center">
+
+                                        <table class="table" class="table" id="PlatillosNoDisponibles" style="">
+                                            <thead >
                                                 <tr>
                                                     <th scope="col">N</th>
                                                     <th scope="col">Nombre</th>
@@ -528,6 +438,7 @@
                                                     <th scope="col">Eliminar</th>
                                                 </tr>
                                             </thead>
+
                                             <tbody>
                                                 @php
                                                     $exits = false;
@@ -539,13 +450,12 @@
                                                             $exits = true;
                                                             $i++;
                                                         @endphp
-                                                        <tr class="border border-light"
-                                                            style="color:gray; text-align:center">
+                                                        <tr>
                                                             <th scope="col">@php echo $i  @endphp</th>
                                                             <td scope="col">{{ $p->nombre }}</td>
                                                             <td scope="col">{{ $p->disponible }}</td>
                                                             <td scope="col">{{ $p->precio }}</td>
-                                                            <td>
+                                                            <td scope="col">
                                                                 <i data-bs-toggle="modal"
                                                                     data-bs-target="#activarPlatillo{{ $p->id }}">
                                                                     <a class="fa fa-check-circle text-success"></a>
@@ -575,14 +485,10 @@
                                                                                 <div class="modal-footer">
                                                                                     <input id="activar" name="activar"
                                                                                         style="display:none"
-                                                                                        value="1">
-                                                                                    <input type="submit"
-                                                                                        class="btn btn-danger w-15"
-                                                                                        value="Sí">
-                                                                                    <button type="button"
-                                                                                        class="btn btn-menu"
-                                                                                        data-bs-dismiss="modal">No</button>
-
+                                                                                        value="1">                                                                                        
+                                                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                                                
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -592,10 +498,10 @@
                                                             <td scope="col"><a
                                                                     href="{{ route('plato.editar', ['id' => $p->id]) }}"><i
                                                                         class="fa fa-edit text-success"></i></a></td>
-                                                            <td>
+                                                            <td scope="col">
                                                                 <i data-bs-toggle="modal"
                                                                     data-bs-target="#staticBackdropE{{ $p->id }}"
-                                                                    class="fa fa-delete-left text-danger"
+                                                                    class="fa-solid fa-trash-can text-danger"
                                                                     style="color:crimson"></i>
                                                                 <form
                                                                     action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
@@ -620,13 +526,8 @@
                                                                                     <strong>{{ $p->nombre }}</strong>?
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <input type="submit"
-                                                                                        class="btn btn-danger w-15"
-                                                                                        value="Si">
-                                                                                    <button type="button"
-                                                                                        class="btn btn-menu"
-                                                                                        data-bs-dismiss="modal">No</button>
-
+                                                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -635,11 +536,7 @@
                                                             </td>
                                                         </tr>
                                                     @endif
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="7" style="text-align: center;color: gray;">No hay
-                                                            Platillos<br> </td>
-                                                    </tr>
+                                                @empty  
                                                 @endforelse
 
                                                 @if (!$exits)
@@ -650,6 +547,7 @@
                                                 @endif
                                             </tbody>
                                         </table>
+
                                     </div>
                                 </div>
 
@@ -703,7 +601,7 @@
 
                 </div>
             </main>
-        </section>    
+        </section>
     </div>
 
 @endsection
