@@ -52,7 +52,7 @@
             <tr>
                 <th scope="col" style="text-align:center">N</th>
                 <th scope="col" style="text-align:center">Producto</th>
-                <th scope="col" style="text-align:center">Tipo de producto</th>
+                <th scope="col" style="text-align:center;text-transform:initial;">Tipo de producto</th>
                 <th scope="col" style="text-align:center">Cantidad</th>
                 <th scope="col" style="text-align:center">Editar</th>
                 <th scope="col" style="text-align:center">Eliminar</th>
@@ -159,9 +159,7 @@
                 </td>
             </tr>
             @empty
-            <tr>
-                <td colspan="7" style="text-align: center;color: teal;">No hay productos</td>
-            </tr>
+             
             @endforelse
         </tbody>
     </table>
