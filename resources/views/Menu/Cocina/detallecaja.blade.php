@@ -28,7 +28,7 @@
 <table class="table">
     <tr>
         <td class="titulo">Numero de mesa: </td>
-        <td class="informacion">{{$pedido->mesa}}</td>
+        <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
         <td class="titulo">Quisco:</td>
         <td class="informacion">{{$pedido->quiosco}}</td>
     </tr>
@@ -37,7 +37,15 @@
         <td class="informacion">{{$pedido->nombreCliente}}</td>
         <td class="titulo">Estado:</td>
         <td class="informacion">
-            @if ($pedido->estado == 0)
+        @if ($pedido->estado_cocina == 1)
+                    Procesando
+                    @elseif($pedido->estado_cocina == 2 || $pedido->estado==2)
+                     Entregar 
+                    @else
+                    Enviar
+                      
+                        @endif
+           <!--- @if ($pedido->estado == 0)
                 Pendiente en cocina
             @else
                 @if ($pedido->estado == 1)
@@ -45,7 +53,7 @@
                 @else
                     Terminado
                 @endif  
-            @endif
+            @endif ---->
         </td>
     </tr>
     <script>
@@ -108,6 +116,6 @@
     </tr>
 </table>
 
-<a href="{{route('pedidost.pedido')}}" class="btn btn-danger" type="buttom" style="float: right;">Regresar</a>
+<a href="{{route('pedidos.caja')}}" class="btn btn-danger" type="buttom" style="float: right;">Regresar</a>
 
 @stop
