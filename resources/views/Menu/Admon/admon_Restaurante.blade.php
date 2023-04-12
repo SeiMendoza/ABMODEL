@@ -2,13 +2,13 @@
 @section('title', 'Administración de menú')
 @section('miga')
     <li class="breadcrumb-item text-sm active text-dark active">
-        <a class="opacity-5 text-dark" href="">Restaurante</a>
+        <a class="opacity-5 text-dark" href="">Administración Restaurante</a>
     </li>
 @endsection
 
 @section('b')
     <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; left:15px; top:100%;">Administración de Menú</h3>
-    <div class="" style="position:absolute; right:2%; top:16%">
+    <div class="" style="position:absolute; right:2%; top:100%">
         <a href="{{route('cliente_prueba')}}" style="margin:0;width:200px; padding:6px;" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
             <i class="fa fa-users"></i>   Ver menu cliente
         </a>
@@ -71,204 +71,293 @@
                     <div class="tab-pane fade " id="pills-bebidas" role="tabpanel" aria-labelledby="pills-Pdisponible-tab">
                         <div class="container-fluid" style="padding: 0px">
 
-                            <div class="">
-                                <div class="row">
-                                    <!--Boton Registrar-->
-                                    <div class="col-2 text-center" style="margin: 4px">
-                                        <a class="btn btn-menu" style="margin: 4px"
-                                            href="{{ route('bebidasyplatillos.create') }}">
-                                            Registrar Bebida</a>
-                                    </div>
-
-                                    <!--Barra de busqueda-->
-
-                                    <div class="col-8 p-2" style="display:; magin:2px">
-                                        <form action="{{ route('busqueda.index') }}" method="get" role="search"
-                                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                                            style="">
-                                            <div class="input-group">
-                                                <input class="form-control" type="search" id="busqueda" name="busqueda"
-                                                    style="width: 200px" placeholder="Buscar bebida" aria-label="Search"
-                                                    aria-describedby="basic-addon2" maxlength="50" required
-                                                    value="<?php if (isset($busqueda)) {
-                                                        echo $busqueda;
-                                                    } ?>" />
-                                                <button class="bg-success border-radius-md" type="submit"
-                                                    style="border: 0; color:aliceblue"><strong>Buscar</strong></button>
-                                                @if (isset($busqueda))
-                                                    @if ($busqueda != null)
-                                                        <a href="{{ route('busqueda.index') }}"
-                                                            style="color:aliceblue; width:150px; padding:6px;"
-                                                            class="bg-secondary border-radius-md h-6 text-center"><strong>Borrar
-                                                                Busqueda</strong></a>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                </div>
-
-                                <div class="table-responsive container-fluid">
-                                    <table>
-                                        <thead class="card-header border border-radius"
-                                            style="color:rgba(244, 48, 48, 0.765); text-align:center">
-                                            <tr>
-                                                <td colspan="7">
-                                                    <h5 style="text-align: center;color: rgba(244, 48, 48, 0.928);">
-                                                        DISPONIBLES</h5>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="col">N</th>
-                                                <th scope="col">Nombre</th>
-                                                <th scope="col">Cantidad Disp.</th>
-                                                <th scope="col">Precio</th>
-                                                <th scope="col">Acción</th>
-                                                <th scope="col">Editar</th>
-                                                <th scope="col">Eliminar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                                $exits = false;
-                                                $i = 0;
-                                            @endphp
-                                            @forelse($bebidas as $p)
-                                                @if ($p->estado == 1)
-                                                    @php
-                                                        $exits = true;
-                                                        $i++;
-                                                    @endphp
-
-                                                    <tr class="border border-light" style="color:gray; text-align:center">
-                                                        <th scope="col">@php echo $i  @endphp</th>
-                                                        <td scope="col">{{ $p->nombre }}</td>
-                                                        <td scope="col">{{ $p->disponible }}</td>
-                                                        <td scope="col">{{ $p->precio }}</td>
-                                                        <td scope="col"><a class="btn"
-                                                                onclick="activarProducto( {{ $p->id }} , 'desactivar', '{{ $p->nombre }}', 'bebida/{id}/activar')"><i
-                                                                    class="fa fa-times-circle text-warning"></i>
-                                                                Desactivar</a></td>
-
-                                                        <form id="formcheckActivar{{ $p->id }}"
-                                                            action="{{ route('bebida.activar', ['id' => $p->id]) }}"
-                                                            method="POST">
-                                                            @method('put')
-                                                            @csrf
-                                                            <div style="display:none">
-                                                                <input type="number hidden" id="activar" name="activar"
-                                                                    value="0">
-                                                            </div>
-                                                            <input style="display:none" type="submit"
-                                                                class="btn btn-danger" value="Si">
-                                                        </form>
-
-                                                        <td scope="col"><a
-                                                                href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
-                                                                    class="fa fa-edit text-success"></i></a></td>
-                                                        <td scope="col">
-                                                            <form name="formBorrar{{ $p->id }}"
-                                                                action="{{ route('bebida.borrar', ['id' => $p->id]) }}"
-                                                                method="post" enctype="multipart/form-data">
-                                                                @method('delete')
-                                                                @csrf
-                                                                <a role="button"
-                                                                    onclick="eliminarProducto({{ $p->id }}, '{{ $p->nombre }}', 'bebida/{id}/borrar')"
-                                                                    type="submit"
-                                                                    style="border: 0; padding:0; margin:0;"><i
-                                                                        class="fa fa-delete-left text-danger"
-                                                                        style="border: 0; padding:0; margin:0;"></i></a>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @empty
-                                            @endforelse
-
-                                            @if (!$exits)
-                                                <tr>
-                                                    <td colspan="7" style="text-align: center;color: gray;">No hay
-                                                        bebidas disponibles <br> </td>
-                                                </tr>
-                                            @endif
-
-                                            <tr>
-                                                <td colspan="7">
-                                                    <h5 style="text-align: center;color: rgb(120, 117, 117);">NO
-                                                        DISPONIBLES</h5>
-                                                </td>
-                                            </tr>
-
-                                            @php
-                                                $exits = false;
-                                                $i = 0;
-                                            @endphp
-                                            @forelse($bebidas as $p)
-                                                @if ($p->estado == 0)
-                                                    @php
-                                                        $exits = true;
-                                                        $i++;
-                                                    @endphp
-                                                    <tr class="border border-light" style="color:gray; text-align:center">
-                                                        <th scope="col">@php echo $i  @endphp</th>
-                                                        <td scope="col">{{ $p->nombre }}</td>
-                                                        <td scope="col">{{ $p->disponible }}</td>
-                                                        <td scope="col">{{ $p->precio }}</td>
-                                                        <td scope="col"><a class="btn"
-                                                                onclick="activarProducto( {{ $p->id }} , 'activar', '{{ $p->nombre }}', 'bebida/{id}/activar')"><i
-                                                                    class="fa fa-check-circle text-success"></i>
-                                                                Activar</a></td>
-
-                                                        <form id="formcheckDesactivar"
-                                                            action="{{ route('bebida.activar', ['id' => $p->id]) }}"
-                                                            method="POST">
-                                                            @method('put')
-                                                            @csrf
-                                                            <div style="display:none">
-                                                                <input type="number" id="activar" name="activar"
-                                                                    value="1">
-                                                            </div>
-                                                            <input style="display:none" type="submit"
-                                                                class="btn btn-danger" value="Si">
-                                                        </form>
-                                                        <td scope="col"><a
-                                                                href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
-                                                                    class="fa fa-edit text-success"></i></a></td>
-                                                        <td scope="col">
-                                                            <form name="formEliminarDes{{ $p->id }}"
-                                                                action="{{ route('bebida.borrar', ['id' => $p->id]) }}"
-                                                                method="post" enctype="multipart/form-data">
-                                                                @method('delete')
-                                                                @csrf
-                                                                <a role="button"
-                                                                    onclick="eliminarProducto({{ $p->id }}, '{{ $p->nombre }}', 'bebida/{id}/borrar')"
-                                                                    type="submit"
-                                                                    style="border: 0; padding:0; margin:0;"><i
-                                                                        class="fa fa-delete-left text-danger"
-                                                                        style="border: 0; padding:0; margin:0;"></i></a>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @empty
-                                                <tr>
-                                                    <td colspan="7" style="text-align: center;color: gray;">No hay
-                                                        bebidas<br> </td>
-                                                </tr>
-                                            @endforelse
-
-                                            @if (!$exits)
-                                                <tr>
-                                                    <td colspan="7" style="text-align: center;color: gray;">Todas las
-                                                        bebidas disponibles <br> </td>
-                                                </tr>
-                                            @endif
-
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <!-- Botón registrar-->
+                            <div >
+                                <a href="{{route('bebidasyplatillos.create')}}" style="position: absolute; left:0%; top:100% margin:0; width:150px; padding:4px;" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
+                                    <i class=""></i class="fa fa-plus-circle">Registrar Bebida</a>
                             </div>
+
+                            <!--Navegacion entre disponibles y no disponibles--> 
+                            <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="BDisponibles-tab" data-bs-toggle="tab"
+                                        data-bs-target="#BDisponibles" role="tab" aria-controls="BDisponibles"
+                                        aria-selected="true">Disponibles</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="BNoDisponibles-tab" data-bs-toggle="tab"
+                                        data-bs-target="#BNoDisponibles" role="tab" aria-controls="BNoDisponibles"
+                                        aria-selected="false">No Disponibles</a>
+                                </li>
+                            </ul>
+
+
+                            <div class="tab-content" id="myTabContent" style="height: 500px; overflow-x: hidden;">
+                                
+                                <!-- Bedidas Disponibles -->
+                                <div class="tab-pane fade show active" id="BDisponibles" role="tabpanel" aria-labelledby="BDisponibles-tab">
+                                    <div class="table-responsive container-fluid">
+                                        <br>
+                                        <table class="table menu" class="table" id="BDisponibles" style="">
+                                            <thead>                                            
+                                                <tr>
+                                                    <th scope="col">N</th>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Disponibles</th>
+                                                    <th scope="col">Precio</th>
+                                                    <th scope="col">Acción</th>
+                                                    <th scope="col">Editar</th>
+                                                    <th scope="col">Eliminar</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @php
+                                                    $exits = false;
+                                                    $i = 0;
+                                                @endphp
+                                                @forelse($bebidas as $p)
+                                                    @if ($p->estado == 1)
+                                                        @php
+                                                            $exits = true;
+                                                            $i++;
+                                                        @endphp
+
+                                                        <tr>
+                                                            <th scope="col">@php echo $i  @endphp</th>
+                                                            <td scope="col">{{ $p->nombre }}</td>
+                                                            <td scope="col">{{ $p->disponible }}</td>
+                                                            <td scope="col">{{ $p->precio }}</td>
+                                                            <td scope="col">
+                                                                <i data-bs-toggle="modal"
+                                                                    data-bs-target="#desactivarBebida{{ $p->id }}">
+                                                                    <a class="fa fa-times-circle text-warning"></a>
+                                                                    Desactivar</i>
+                                                                <form
+                                                                    action="{{ route('bebida.activar', ['id' => $p->id]) }}"
+                                                                    method="post" enctype="m    ultipart/form-data">
+                                                                    @method('put')
+                                                                    @csrf
+                                                                    <div class="modal fade"
+                                                                        id="desactivarBebida{{ $p->id }}"
+                                                                        data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                        tabindex="-1"
+                                                                        aria-labelledby="staticBackdropLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="staticBackdropLabel">Desactivar
+                                                                                        Bebida</h5>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    ¿Está seguro de desactivar la bebida:
+                                                                                    <strong>{{ $p->nombre }}</strong>?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <input id="activar" name="activar" style="display:none"  value="0">
+                                                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </td>
+                                                            <td scope="col"><a
+                                                                    href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
+                                                                        class="fa fa-edit text-success"></i></a></td>
+                                                            <td scope="col">
+                                                                <i data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdropEb{{ $p->id }}"
+                                                                    class="fa-solid fa-trash-can text-danger"
+                                                                    style="color:crimson"></i>
+                                                                <form
+                                                                    action="{{ route('bebida.borrar', ['id' => $p->id]) }}"
+                                                                    method="post" enctype="multipart/form-data">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <div class="modal fade"
+                                                                        id="staticBackdropEb{{ $p->id }}"
+                                                                        data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                        tabindex="-1"
+                                                                        aria-labelledby="staticBackdropLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="staticBackdropLabel">Eliminar
+                                                                                        producto</h5>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    ¿Está seguro de eliminar la bebida:
+                                                                                    <strong>{{ $p->nombre }}</strong>?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @empty
+                                                @endforelse
+
+                                                @if (!$exits)
+                                                    <tr>
+                                                        <td colspan="7" style="text-align: center;color: gray;">No hay
+                                                            bebidas disponibles <br> </td>
+                                                    </tr>
+                                                @endif                                                    
+
+                                            </tbody>
+                                        </table>
+                                    </div> 
+                                </div>
+
+                                <!-- Bedidas no Disponibles -->
+                                <div class="tab-pane fade" id="BNoDisponibles" role="tabpanel" aria-labelledby="BNoDisponibles-tab">
+                                    <div class="table-responsive container-fluid">
+                                        <br>
+                                        <table class="table menu" class="table" id="BNoDisponibles" style="">
+                                            <thead>                                            
+                                                <tr>
+                                                    <th scope="col">N</th>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Disponibles</th>
+                                                    <th scope="col">Precio</th>
+                                                    <th scope="col">Acción</th>
+                                                    <th scope="col">Editar</th>
+                                                    <th scope="col">Eliminar</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                
+
+                                                @php
+                                                    $exits = false;
+                                                    $i = 0;
+                                                @endphp
+                                                @forelse($bebidas as $p)
+                                                    @if ($p->estado == 0)
+                                                        @php
+                                                            $exits = true;
+                                                            $i++;
+                                                        @endphp
+                                                        <tr>
+                                                            <th scope="col">@php echo $i  @endphp</th>
+                                                            <td scope="col">{{ $p->nombre }}</td>
+                                                            <td scope="col">{{ $p->disponible }}</td>
+                                                            <td scope="col">{{ $p->precio }}</td>
+                                                            <td scope="col">
+                                                                <i data-bs-toggle="modal"
+                                                                    data-bs-target="#activarBebida{{ $p->id }}">
+                                                                    <a class="fa fa-check-circle text-success"></a>
+                                                                    Activar</i>
+                                                                <form
+                                                                    action="{{ route('bebida.activar', ['id' => $p->id]) }}"
+                                                                    method="post" enctype="multipart/form-data">
+                                                                    @method('put')
+                                                                    @csrf
+                                                                    <div class="modal fade"
+                                                                        id="activarBebida{{ $p->id }}"
+                                                                        data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                        tabindex="-1"
+                                                                        aria-labelledby="staticBackdropLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="staticBackdropLabel">Activar
+                                                                                        Bebida</h5>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    ¿Está seguro de activar la bebida:
+                                                                                    <strong>{{ $p->nombre }}</strong>?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <input id="activar" name="activar"
+                                                                                        style="display:none"
+                                                                                        value="1">                                                                                        
+                                                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                                                
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </td>
+                                                            <td scope="col"><a
+                                                                    href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
+                                                                        class="fa fa-edit text-success"></i></a></td>
+                                                            <td scope="col">
+                                                                <i data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdropE{{ $p->id }}"
+                                                                    class="fa-solid fa-trash-can text-danger"
+                                                                    style="color:crimson"></i>
+                                                                <form
+                                                                    action="{{ route('bebida.borrar', ['id' => $p->id]) }}"
+                                                                    method="post" enctype="multipart/form-data">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <div class="modal fade"
+                                                                        id="staticBackdropE{{ $p->id }}"
+                                                                        data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                        tabindex="-1"
+                                                                        aria-labelledby="staticBackdropLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="staticBackdropLabel">Eliminar
+                                                                                        producto</h5>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    ¿Está seguro de eliminar la bebida:
+                                                                                    <strong>{{ $p->nombre }}</strong>?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="7" style="text-align: center;color: gray;">No hay
+                                                            bebidas<br> </td>
+                                                    </tr>
+                                                @endforelse
+
+                                                @if (!$exits)
+                                                    <tr>
+                                                        <td colspan="7" style="text-align: center;color: gray;">Todas las
+                                                            bebidas disponibles <br> </td>
+                                                    </tr>
+                                                @endif
+
+                                            </tbody>
+                                        </table>
+                                    </div> 
+                                </div>
+                                                               
+                            </div>
+                            
                         </div>
                     </div>
 
@@ -298,13 +387,14 @@
                             </ul>
 
                             <div class="tab-content" id="myTabContent" style="height: 500px; overflow-x: hidden;">
+
                                 <!--Platillos Disponibles-->
                                 <div class="tab-pane fade show active" id="PDisponibles" role="tabpanel" aria-labelledby="PDisponibles-tab">
                                     
                                     <div class="table-responsive container-fluid">
                                         <br>
 
-                                        <table class="table" class="table" id="PlatillosDisponibles" style="">
+                                        <table class="table menu" class="table" id="PlatillosDisponibles" style="">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">N</th>
@@ -375,14 +465,14 @@
                                                                 </form>
                                                             </td>
                                                             <td scope="col"><a href="{{ route('plato.editar', ['id' => $p->id]) }}"><i class="fa fa-edit text-success"></i></a></td>
-                                                            <td><i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{ $p->id }}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
+                                                            <td><i data-bs-toggle="modal" data-bs-target="#staticBackdropEe{{ $p->id }}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
                                                                 <form
                                                                     action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
                                                                     method="post" enctype="multipart/form-data">
                                                                     @method('delete')
                                                                     @csrf
                                                                     <div class="modal fade"
-                                                                        id="staticBackdropE{{ $p->id }}"
+                                                                        id="staticBackdropEe{{ $p->id }}"
                                                                         data-bs-backdrop="static" data-bs-keyboard="false"
                                                                         tabindex="-1"
                                                                         aria-labelledby="staticBackdropLabel"
@@ -392,7 +482,7 @@
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title"id="staticBackdropLabel">Eliminar Platillo</h5>
                                                                                 </div>
-                                                                                <div class="modal-body"> ¿Está seguro de borrar el platillo: <strong>{{ $p->nombre }}</strong>?
+                                                                                <div class="modal-body"> ¿Está seguro de eliminar el platillo: <strong>{{ $p->nombre }}</strong>?
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="submit" class="btn btn-danger">Si</button>
@@ -426,12 +516,12 @@
                                     <div class="table-responsive container-fluid">
                                         <br>
 
-                                        <table class="table" class="table" id="PlatillosNoDisponibles" style="">
+                                        <table class="table menu" class="table" id="PlatillosNoDisponibles" style="">
                                             <thead >
                                                 <tr>
                                                     <th scope="col">N</th>
                                                     <th scope="col">Nombre</th>
-                                                    <th scope="col">Cantidad Disp.</th>
+                                                    <th scope="col">Disponibles</th>
                                                     <th scope="col">Precio</th>
                                                     <th scope="col">Acción</th>
                                                     <th scope="col">Editar</th>
@@ -513,7 +603,7 @@
                                                                         data-bs-backdrop="static" data-bs-keyboard="false"
                                                                         tabindex="-1"
                                                                         aria-labelledby="staticBackdropLabel"
-                                                                        aria-hidden="true">
+                                                                        aria-hidden="true">     
                                                                         <div class="modal-dialog">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
@@ -522,7 +612,7 @@
                                                                                         producto</h5>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    ¿Está seguro de borrar el platillo:
+                                                                                    ¿Está seguro de eliminar el platillo:
                                                                                     <strong>{{ $p->nombre }}</strong>?
                                                                                 </div>
                                                                                 <div class="modal-footer">

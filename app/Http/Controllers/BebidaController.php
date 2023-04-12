@@ -17,9 +17,9 @@ class BebidaController extends Controller
 
         if ($create) {
             if ($platillo->estado == 1) {
-                return redirect()->route('menuAdmon.prueba')->with('mensaje', 'Bebida Activada correctamente');
+                return redirect()->route('menuAdmon.index')->with('mensaje', 'Bebida Activada correctamente');
             }else{
-                return redirect()->route('menuAdmon.prueba')->with('mensaje', 'Bebida Desactivada correctamente');
+                return redirect()->route('menuAdmon.index')->with('mensaje', 'Bebida Desactivada correctamente');
             }
         }
 
@@ -30,7 +30,7 @@ class BebidaController extends Controller
         $platillo = Bebida::findOrFail($id);
         $platillo->delete();
 
-        return redirect()->route('menuAdmon.index')->with('mensaje', 'Platillo borrado correctamente');
+        return redirect()->route('menuAdmon.index')->with('mensaje', 'Bebida borrada correctamente');
 
     }
 }

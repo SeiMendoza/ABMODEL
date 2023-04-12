@@ -202,7 +202,7 @@ Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'deta
 *****************************************/
  Route::delete('platillo/{id}/borrar', [PlatilloController::class, 'destroy'])
     ->name('platillo.borrar');
- Route::get('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
+ Route::delete('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
     ->name('bebida.borrar');
 
 /****************************************

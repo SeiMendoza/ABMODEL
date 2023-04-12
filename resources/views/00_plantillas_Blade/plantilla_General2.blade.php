@@ -244,29 +244,8 @@
 
         //DATATABLES para Menú
         $(document).ready(function () {
-        $('#PlatillosNoDisponibles').DataTable();
+        $('.menu').DataTable();
         });
-
-        $(document).ready(function () {
-        $('#PlatillosDisponibles').DataTable();
-        });
-
-        $(document).ready(function () {
-        $('#BebidasNoDisponibles').DataTable();
-        });
-
-        $(document).ready(function () {
-        $('#BebidasDisponibles').DataTable();
-        });
-
-        $(document).ready(function () {
-        $('#ComplementosNoDisponibles').DataTable();
-        });
-
-        $(document).ready(function () {
-        $('#ComplementosDisponibles').DataTable();
-        });
-
 
 
     </script>

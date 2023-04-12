@@ -2,10 +2,7 @@
 @section('title', 'Platillo o bebida')
 @section('miga')
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="#">Restaurante</a>
-    </li>
-    <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="#">Menu Admon</a>
+        <a class="opacity-5 text-dark" href="{{ route('menuAdmon.index') }}">Administración Restaurante</a>
     </li>
     <li class="breadcrumb-item text-sm active text-dark active">Registrar platillo o bebida</li>
 @endsection

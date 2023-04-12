@@ -2,7 +2,7 @@
 @section('title', 'Edicion de Bebidas')
 @section('miga')
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-    href="{{route('menuAdmon.index')}}">Restaurante</a></li>
+    href="{{route('menuAdmon.index')}}">Administración Restaurante</a></li>
     <li class="breadcrumb-item text-sm active text-dark active">
         Editando Bebida
      </li>
