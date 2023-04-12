@@ -27,7 +27,7 @@
 <table class="table">
     <tr>
         <td class="titulo">Numero de mesa: </td>
-        <td class="informacion">{{$pedido->mesa}}</td>
+        <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
         <td class="titulo">Quisco:</td>
         <td class="informacion">{{$pedido->quiosco}}</td>
     </tr>
