@@ -52,18 +52,18 @@ class EditarBebidaController extends Controller
         ]);
 
             $actualizacion= Bebida::FindOrFail($id);
-            
+
             $actualizacion->nombre = $request->input('nombre');
             $actualizacion->descripcion = $request->input('descripcion');
             $actualizacion->precio = $request->input('precio');
             $actualizacion->tamanio = $request->input('tamanio');
             $actualizacion->disponible = $request->input('cantidad');
 
-            $creado = $actualizacion -> save();
+            $creado = $actualizacion->save();
 
             if ($creado) {
                 return redirect()->route('menuAdmon.index')
-                    ->with('mensaje', 'La bebida fue modificada exitosamente');
+                    ->with('mensaje', "Bebida ".$actualizacion->nombre." se actualizó correctamente");
             }
     }
  }

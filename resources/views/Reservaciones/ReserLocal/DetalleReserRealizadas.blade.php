@@ -134,7 +134,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Saldo pendiente</td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Pendiente}} </td>
+                            <td class="titulo">Cancelado</td>
                             <td class="informacion"></td>
                         </tr>
                     </tbody>

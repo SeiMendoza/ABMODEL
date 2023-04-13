@@ -60,13 +60,13 @@ class EditarPlatilloController extends Controller
         $actualizacion->descripcion = $request->input('descripcion');
         $actualizacion->precio = $request->input('precio');
         $actualizacion->tamanio = $request->input('tamanio');
-        $actualizacion->disponible = $request->input('disponible');
+        $actualizacion->disponible = $request->input('cantidad');
                
-        $creado = $actualizacion -> save();
+        $creado = $actualizacion->save();
 
         if ($creado) {
             return redirect()->route('menuAdmon.index')
-            ->with('mensaje', "".$actualizacion->nombre." se actualizo correctamente");
+            ->with('mensaje', "Platillo ".$actualizacion->nombre." se actualizó correctamente");
         } 
         
     }

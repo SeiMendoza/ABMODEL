@@ -116,7 +116,7 @@
                     <div class="row d-flex justify-content-center">
                         <div class="form-group col-md-3 ">
                             <label for="HoraEntrada">Hora de Llegada</label>
-                            <input name="HoraEntrada" type="time"  class="form-control" id="HoraEntrada" min="10:00" max="18:00"
+                            <input name="HoraEntrada" type="time"  class="form-control" id="HoraEntrada" min="08:00" max="18:00"
                                 placeholder="Ingrese la hora de llegada" value="{{ old('HoraEntrada')}}" required>
                             @error('HoraEntrada')
                                    <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>

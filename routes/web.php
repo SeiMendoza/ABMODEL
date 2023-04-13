@@ -182,9 +182,6 @@ Route::get('combo/{id}/editar', [ComboController::class, 'edit'])
 Route::put('combo/{id}/edicion', [ComboController::class, 'update'])
     ->name('combo.update');
 
-Route::post('/combo/id/temporal',[ComboController::class, 'ediciontemporal'])
-    ->name('combo.ediciontemporal');
-
 
 
 /*lista de pedidos anteriores*/

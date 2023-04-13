@@ -8,20 +8,37 @@
      </li>
 @endsection
 @section('content')
+<script>
+    var msg = '{{ Session::get('mensaje') }}';
+    var exist = '{{ Session::has('mensaje') }}';
+    if (exist) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: msg,
+            showConfirmButton: false,
+            toast: true,
+            background: '#0be004ab',
+            timer: 3500
+        })
+    }
+</script>
+
+
 <div class="page-wrapper p-t-170 p-b-100 font-robo">
     <div class="wrapper wrapper--w960">
         <div class="card card-2">
+
          <div class="card-body">
-            <h2 class="text-center">Editando Bebida: {{$Bebidas->nombre}}</h2>  
+            <h2 class="title">Editando Bebida: {{$Bebidas->nombre}}</h2> 
             <form method="post" action="{{route('bebida.update', ['id'=> $Bebidas->id])}}" enctype="multipart/form-data">
             @method('put')
             @csrf
-            <br>
             <div style="width:200px;float:left">
                 <label for=""><strong>Seleccione una imagen</strong></label>
-                <img src="{{asset($Bebidas->imagen)}}" alt="" width="200px" height="200px" id="imagenmostrada">
+                <img src="{{asset($Bebidas->imagen)}}" alt="" width="200px" height="220px" id="imagenmostrada">
                 <br>
-                <input type="file" id="imagen" name="imagen" accept="image/*"
+                <input type="file" id="imagen" name="imagen" accept="image/*" 
                     value="{{ old('imagenPrevisualizacion', $Bebidas->imagen) }}" style="color: white;width: 200px;">
                 @error('imagen')
                     <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -31,7 +48,7 @@
             <div style="margin-left:2%;float:left;width:35%">
                 <div class="">
                     <label for=""><strong>Seleccione el tipo de producto</strong></label>
-                    <select name="tipo" id="tipo" onchange="producto();quitarerror()" class="form-control">
+                    <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control">
                         @if (old('tipo'))
                             @if (old('tipo') === 2)
                                 <option disabled="disabled" selected="selected" value="2">Comida</option>
@@ -59,7 +76,7 @@
                 <br>
                 <label for=""><strong>Ingrese la descripción</strong></label>
                 <textarea class="form-control" type="text" placeholder="Descripción" name="descripcion" maxlength="100" required
-                    onkeypress="quitarerror()">{{ old('descripcion', $Bebidas->descripcion ) }}</textarea>
+                    onkeypress="quitarerror()">{{ old('descripcion', $Bebidas->descripcion) }}</textarea>
                 @error('descripcion')
                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                 @enderror
@@ -106,14 +123,14 @@
                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                 @enderror
 
-                <div id="bebida" style="display:none">
+                <div id="bebida" style="display:">
                     <br>
-                    <label for=""><strong>Ingrese las bebidas disponibles</strong></label>
-                    <input class="form-control" type="number" placeholder="Bebidas disponibles"
+                    <label for=""><strong>Ingrese la cantidad disponible</strong></label>
+                    <input class="form-control" type="number" placeholder="Cantidad disponible"
                         name="cantidad" id="cantidad" value="{{ old('cantidad', $Bebidas->disponible) }}"
                         onkeypress="quitarerror()"
                         onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
-                        max="1000" disabled>
+                        max="1000">
                     @error('cantidad')
                         <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
                     @enderror
@@ -134,7 +151,7 @@
                     <br><br>
                 </div>
 
-                <div id="espacio"><br><br><br><br><br><br></div>
+                <div id="espacio"><br><br></div>
                 <div style="float:right">
                     <button type="submit" class="btn btn-success">Actualizar</button>
                     <button type="button" onclick="cancelar('admonRestaurante')"
@@ -147,4 +164,5 @@
 </div>
 </div>
 </div>
+
 @stop

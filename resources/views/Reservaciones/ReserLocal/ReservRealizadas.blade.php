@@ -38,7 +38,7 @@
                             {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('MMMM') }},
                             {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('YYYY') }}</td> 
                         <td scope="col" style="text-align: left;">{{$r->Total}}</td>
-                        <td scope="col" style="text-align: left;">{{$r->Pendiente}}</td>
+                        <td scope="col" style="text-align: left;">Cancelado</td>
                         <td scope="col" style="text-align: center;"><input disabled type="checkbox" id="list" name="list" {{ old('list') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$r->id}}" 
                             style="background:teal; width:15px; height:15px;"> </td>
                          
