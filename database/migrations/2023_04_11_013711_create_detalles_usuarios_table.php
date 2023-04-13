@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('detalles_usuarios', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pedido_id');
-            $table->foreign('pedido_id')->references('id')->on('pedidos');
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');
             $table->string('producto');
+            $table->string('nombre');
             $table->string('cantidad');
             $table->string('precio');
+            $table->integer('estado')->default(0);
             $table->timestamps();
         });
     }

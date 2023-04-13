@@ -24,6 +24,7 @@ class MesaFactory extends Factory
             'nombre'=>$this->faker->numerify('Mesa-').$this->faker->numberBetween(1,25),
             'cantidad'=>$this->faker->numberBetween(1,20),
             'kiosko_id'=> Kiosko::get('id')->random(),
+            'estadoM'=>$this->faker->numberBetween(0,1),
             'mesa_qr'=>$qr,
         ];
     }

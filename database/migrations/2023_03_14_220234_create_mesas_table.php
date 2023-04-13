@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('cantidad');
             $table->unsignedBigInteger('kiosko_id');
-            $table->foreign("kiosko_id")->references("id")->on("kioskos");
+            $table->foreign("kiosko_id")->references("id")->on("kioskos")->onDelete('cascade');
+            $table->integer('estadoM')->default(0);
             $table->binary('mesa_qr');
             $table->timestamps();
         });

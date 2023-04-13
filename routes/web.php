@@ -67,10 +67,7 @@ Route::get('/registro', [HomeController::class, 'registro'])
 /*****************************
   Rutas Para Menú de usuario
 ******************************/
-Route::get('/menu/usuario/pedido', [MenuUsuarioController::class, 'create'])
-->name('usuario_pedido.create');
-Route::post('/menu/usuario/pedido/crear', [MenuUsuarioController::class, 'store'])
-->name('usuario_pedido.store');
+
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
 ->name('terminar.terminarp')->where('id','[0-9]+');/*terminar pedidos en caja*/
 Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class,'env_a_cocina'])
@@ -100,12 +97,18 @@ Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 
   Rutas Para Menu de cliente
 ******************************/
 
-Route::get('/menu/cliente/buscar', [MenuUsuarioController::class, 'search'])
-->name('cliente_menu.search');
+Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])
+->name('cliente_menu.details');
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])
 ->name('cliente_menu.qr');
 Route::get('/menu/prueba', [MenuUsuarioController::class, 'prueba'])
 ->name('cliente_prueba');
+Route::get('/menu/usuario/pedido', [MenuUsuarioController::class, 'create'])
+->name('usuario_pedido.create');
+Route::post('/menu/usuario/pedido', [MenuUsuarioController::class, 'store'])
+->name('cliente_pedido.store');
+Route::delete('/menu/detalles/{id}/borrar', [MenuUsuarioController::class, 'destroy'])
+->name('cliente_detalles.destroy')->where('id','[0-9]+');
  
 //Route::get('/menu', [MenuUsuarioController::class,'search'])
 //->name('menu.search');

@@ -115,7 +115,7 @@ class ReservacionController extends Controller
         
     }
     public function destroy($id){
-       // Reservacion::destroy($id);
-        //return redirect()->route('mesas_res.index')->with('mensaje', 'Reservación borrada correctamente');
+        Reservacion::destroy($id);
+        return redirect()->route('kiosko_res.index')->with('mensaje', 'Reservación borrada correctamente');
     }
 }

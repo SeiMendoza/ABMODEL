@@ -1,4 +1,4 @@
-@extends('00_plantillas_Blade.plantilla_General2')
+@extends('Reservaciones.ReserAdmon.Mesas.formularioRegistro')
 @section('title', 'Reservacion')
 @section('miga')
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"

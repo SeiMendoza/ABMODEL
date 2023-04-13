@@ -45,12 +45,27 @@
                             <td class="" style="text-align:right" scope="col">L {{ number_format($r->anticipo, 2, '.', ',') }}</td> 
                             <td scope="col" style="text-align: center;" ><a href="{{route('kiosko_res.edit', ['id' => $r->id])}}"><i class="fa-solid fa-edit text-success"></i></a></td>
                             <td scope="col" style="text-align: center;">
+                                <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$r->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
                                 <form action="{{route('kiosko_res.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
                                     @method('delete')
                                     @csrf
-                                    <button onclick="" style="border: 0; padding:0; margin:0;"><i class="fa-solid fa-trash-can text-danger" style="border: 0; padding:0; margin:0;"></i></button>
+                                    <div class="modal fade" id="staticBackdropE{{$r->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar producto</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Esta seguro de borrar el producto: {{$r->nombre}}?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger">Si</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
-                                <!-- Modal Eliminar-->
                             </td>
                         </tr>
                     

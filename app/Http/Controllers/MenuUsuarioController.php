@@ -16,25 +16,38 @@ class MenuUsuarioController extends Controller
 {
     /*Visualizar el menu por usuario*/
          
-     public function prueba(Request $request){
-        $platillos = Platillo::all();
-        $bebidas = Bebida::all();
-        $combos = Combo::all();
-        $mesas = Mesa::all();
-        return view("Menu.Cliente.Prueba", compact('platillos', 'combos','bebidas','mesas'));
+     public function prueba(){
+        $platillos = Platillo::where('estado', '=', '1')->get();
+        $bebidas = Bebida::where('estado', '=', '1')->get();
+        $combos = Combo::where('estado', '=', '1')->get();
+        $mesas = Mesa::where('estadoM', '=', 0)->get();
+        $pedido = Pedido::where('estado', '=', '0')->get();
+        $detalles = DetallesUsuario::where('estado', '=', '0')->get();
+        if ($pedido->count() == 0) {
+            $pedido_new = new Pedido();
+            $pedido_new->estado_compra = '0';
+            $pedido_new->save();
+
+            return view('Menu.Cliente.Prueba')->with('pedido', $pedido_new)
+                ->with('platillos', $platillos)->with('combos', $combos)->with('detalles', $detalles)
+                ->with('bebidas', $bebidas)->with('mesas', $mesas); 
+        } 
+
+        return view('Menu.Cliente.Prueba')->with('pedido', $pedido[0])
+        ->with('platillos', $platillos)->with('combos', $combos)->with('detalles', $detalles)
+        ->with('bebidas', $bebidas)->with('mesas', $mesas);
      }
-      public function search(Request $request)
+    public function details(Request $request)
     {
-        $text = trim($request->get('busqueda'));
-        $platillos = Platillo::where('nombre', 'like', '%' . $text . '%')
-            ->orWhere('tamanio', 'like', '%' . $text . '%')
-            ->orWhere('precio', 'like', '%' . $text . '%')->paginate(10);
-        $bebidas = Bebida::where('nombre', 'like', '%' . $text . '%')
-            ->orWhere('tamanio', 'like', '%' . $text . '%')
-            ->orWhere('precio', 'like', '%' . $text . '%')->paginate(10);
-        $combos = Combo::where('nombre', 'like', '%' . $text . '%')
-            ->orWhere('precio', 'like', '%' . $text . '%')->paginate(10);
-        return view("Menu.Cliente.Prueba", compact('platillos', 'text', 'combos','bebidas'));
+        $detalles = new DetallesUsuario();
+        $detalles->pedido_id = $request->input('pedido');
+        $detalles->producto = $request->input('producto');
+        $detalles->nombre = $request->input('nombre');
+        $detalles->cantidad = $request->input('cantidad');
+        $detalles->precio = $request->input('precio');
+        $detalles->save();
+
+        return redirect()->route('cliente_prueba');
     }
      public function qr(){
         return view('Menu/Admon/QR_Menu');
@@ -43,7 +56,7 @@ class MenuUsuarioController extends Controller
      public function store(Request $request)
     {
         $request->validate([
-            'tuplas' => ['required'],
+            '' => ['required'],
         ], [
             'name.required' => 'No tiene un nombre ingresado',
             'tuplas.required' => 'El pedido esta vacio',
@@ -69,5 +82,11 @@ class MenuUsuarioController extends Controller
         }
 
         return redirect()->route("cliente_prueba")->with('mensaje', 'El pedido fue enviado exitosamente');
+    }
+
+    public function destroy($id)
+    {
+        DetallesUsuario::destroy($id);
+        return redirect()->route('cliente_prueba')->with('mensaje', 'Detalle borrado correctamente');
     }
 }

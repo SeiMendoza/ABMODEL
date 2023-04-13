@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Pedido;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,11 +17,14 @@ class DetallesUsuarioFactory extends Factory
      */
     public function definition()
     {
+        $e = 1;
         return [
-            'pedido_id'=>$this->faker->numberBetween(0, 100),
-            'platillo_id'=>$this->faker->numberBetween(0, 100),
+            'pedido_id'=>Pedido::get('id')->random(),
+            'producto'=>$this->faker->numberBetween(0, 100),
+            'nombre'=>$this->faker->word,
             'cantidad'=>$this->faker->numberBetween(1, 100),
-            'precio'=>$this->faker->numberBetween(1,100)
+            'precio'=>$this->faker->numberBetween(1,100),
+            'estado'=>$e,
         ];
     }
 }
