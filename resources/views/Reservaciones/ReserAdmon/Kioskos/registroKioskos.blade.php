@@ -1,8 +1,7 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Registro de Kiosko')
 @section('miga')
-    <li class="breadcrumb-item text-sm"> <a class="opacity-5 text-dark" href="{{ route('kiosko_res.index') }}">Kioskos</a></li>
-    <li class="breadcrumb-item text-sm"> <a class="opacity-5 text-dark" href="{{ route('kiosko.index') }}">Administración</a>
+    <li class="breadcrumb-item text-sm"> <a class="opacity-5 text-dark" href="{{ route('kiosko.index') }}">Administración de Kiosko</a>
     </li>
     <li class="breadcrumb-item text-sm active text-dark active">Registro</li>
 @endsection

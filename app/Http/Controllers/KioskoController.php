@@ -46,7 +46,7 @@ class KioskoController extends Controller
 
     public function index(){
 
-        $kioskos = Kiosko::paginate(10);
+        $kioskos = Kiosko::all();
 
         return view('/Reservaciones/ReserAdmon/Kioskos/indexKioskos')->with(['kioskos' => $kioskos]);
     }
@@ -93,7 +93,9 @@ class KioskoController extends Controller
     }
 
     public function destroy($id){
+
         Kiosko::findOrFail($id)->delete();
+
         return to_route('kiosko.index')->with('mensaje', 'Kiosko eliminado correctamente');
 
     }

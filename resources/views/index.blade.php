@@ -118,9 +118,10 @@
                         <a class="nav-link" href={{ route('menuAdmon.index') }}>
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-bell-55 text-info text-sm opacity-10"></i>
+                                <i class="fa-solid fa-glass-water text-info text-sm opacity-10 m-1"></i>
+                                <i class="fa-solid fa-burger text-info text-sm opacity-10"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Administración de menú</span>
+                            <span class="nav-link-text ms-1">Menú</span>
                         </a>
                     </li>
                     <li cFlass="nav-item">

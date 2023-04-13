@@ -1,7 +1,8 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Mesas')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark active m-0" aria-current="page">Kioskos</li>
+<li class="breadcrumb-item text-sm text-dark active m-0" aria-current="page">Administración Kioskos</li>
+<li class="breadcrumb-item text-sm text-dark active m-0" aria-current="page">Reservaciones</li>
 @endsection
 @section('b')
     <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Reservaciones de Kioskos</h3> 

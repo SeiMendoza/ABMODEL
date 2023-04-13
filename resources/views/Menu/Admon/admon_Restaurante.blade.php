@@ -724,12 +724,12 @@
                             </ul>
 
                             <div class="tab-content" id="myTabContent" style="height: 500px; overflow-x: hidden;">
-
+                                <br>
                                 <!--Combos Disponibles-->
 
                                 <div class="tab-pane fade show active" id="CDisponibles" role="tabpanel"
                                     aria-labelledby="CDisponibles-tab">
-
+                                    
                                     <div class="table-responsive container-fluid">
 
                                         <table class="table menu" class="table" id="CombosDisponibles"

@@ -1,8 +1,25 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Kioskos')
 @section('miga')
-    <li class="breadcrumb-item text-sm"> <a class="opacity-5 text-dark" href="{{ route('kiosko_res.index') }}" >Kioskos</a></li>
-    <li class="breadcrumb-item text-sm active text-dark active">Administración</li>
+    <li class="breadcrumb-item text-sm active text-dark active">Administración de Kioskos</li>
+@endsection
+
+@section('b')
+    <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; left:15px; top:100%;">Administración
+        de Kioskos</h3>
+    <div class="" style="position:absolute; right:2%; top:50%">
+        <a href="{{ route('kiosko_res.index') }}" style="margin:0;width:200px; padding:6px;"
+            class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
+            <i class="fa fa-users"></i> Reservaciones de Kioskos
+        </a>
+    </div>
+    <div class="" style="position:absolute; right:19%; top:50%">
+        <a href="#" style="margin:0;width:200px; padding:6px;"
+            class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
+            <i class="fa fa-users"></i> Agregar Kiosko
+        </a>
+    </div>
+
 @endsection
 
 @section('content')
@@ -23,28 +40,10 @@
         }
     </script>
 
-
-    <div style="margin-left:25px; display:block; float:left;
-        color: #333333" class="nav-link-icon">                            
-            <h4>Listado de Kioskos</h4>
-    </div>
-
-    <div class="row justify-content-end text-center" style="margin-top:15px">
-        <a href="{{ route('kiosko_res.index') }}" type="button" class="h-6 text-center text-primary"
-            style="width:300px; padding:0px;">
-            <i class="fa fa-table text-sm text-center opacity-10"></i>
-            Ir a reservaciones de Kiosko
-        </a>
-
-        <a href={{ route('kiosko.create') }} class="me-4 text-center col-2 btn btn-xs btn-primary">Registrar Kiosko</a>
-
-    </div>
-
     <div class="container">
         <div class="table-responsive ">
-            <table class="table" id="table" style="background-color: #fff;">
-                <thead class="card-header border border-radius text-primary"
-                    style=" text-align:center">
+            <table class="table kiosko" id="table" style="background-color: #fff;">
+                <thead >
                     <tr>
                         <th scope="col">N</th>
                         <th scope="col">Código</th>
@@ -80,7 +79,7 @@
                                 <td>
                                     <i data-bs-toggle="modal"
                                         data-bs-target="#kiosko{{ $k->id }}"
-                                        class="fa fa-delete-left text-danger"
+                                        class="fa fa-trash-can text-danger"
                                         style="color:crimson"></i>
                                     <form
                                         action="{{ route('kiosko.destroy', ['id' => $k->id]) }}"
@@ -102,17 +101,16 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         ¿Está seguro de eliminar el kiosko:
-                                                        <strong>{{ $k->nombre }}</strong>?
+                                                        <strong>{{ $k->codigo }}</strong>?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input id="activar" name="activar"
                                                             style="display:none"
                                                             value="0">
-                                                        <input type="submit"
-                                                            class="btn btn-danger w-15"
-                                                            value="Si">
+                                                            <button type="submit"
+                                                            class="btn btn-danger">Si</button>
                                                         <button type="button"
-                                                            class="btn btn-menu"
+                                                            class="btn btn-secondary"
                                                             data-bs-dismiss="modal">No</button>
 
                                                     </div>
@@ -127,12 +125,6 @@
 
                 </tbody>
             </table>
-
-            <div class="pagination pagination-sm justify-content-end"> 
-                <div style="display:block; float:right;"> 
-                {{$kioskos->links()}}
-                </div>
-            </div>
         </div>
 
 
