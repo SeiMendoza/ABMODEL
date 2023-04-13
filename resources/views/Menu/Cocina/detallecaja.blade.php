@@ -1,5 +1,10 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalle de caja')
+@section('miga')
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">
+    <a class="text-dark" href="{{route('pedidos.caja')}}">Caja</a>
+</li>
+@endsection
 @section('content')
 
 
@@ -16,16 +21,12 @@
         line-height: 50px;
     }
 </style>
-<div class="mb-0 col-11 text-start">
+<div class="mb-0 col-12 text-start">
+    
+    <table class="table">
 
-    <div class="row text-center container pt-6">
-<h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
-      position: relative;">Detalle de pedidos pendientes en caja de: {{$pedido->nombreCliente}}</h5>
-            
-    </div>
-
-
-<table class="table">
+    <h5 class="card text-lg" style="text-align:center; background:rgb(255,179,71); color:#fff;position: relative;">
+        Detalle de pedidos en caja de: {{$pedido->nombreCliente}}</h5>
     <tr>
         <td class="titulo">Numero de mesa: </td>
         <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>

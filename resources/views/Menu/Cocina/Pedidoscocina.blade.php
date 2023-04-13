@@ -4,7 +4,7 @@
 
 @endsection
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Pedidos en cocina</h3>
+<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;left:1%;">Pedidos en cocina</h3>
 @endsection
 @section('content')
 

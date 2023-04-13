@@ -12,9 +12,9 @@
 </li>
 @endsection
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Productos de piscina</h3>
-<div class="" style="position:absolute; right:0%; top:16%">
-    <a href="{{route('piscina.store')}}" style="margin:0;width:200px; padding:6px;" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
+<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;left:1%">Productos de piscina</h3>
+<div class="" style="position:absolute; right:1%; top:40%;">
+    <a href="{{route('piscina.store')}}" style="margin:0;width:200px; padding:8px;" class="bg-light border-0 border-radius-sm h-6 text-center text-gray font-weight-bolder">
         <i class="fa fa-plus-circle"></i> Nuevo producto
     </a>
 </div>
