@@ -133,10 +133,10 @@ Route::post('/combos/nuevo',[ComboController::class, 'store'])
 Route::post('/combos/temporal',[ComboController::class, 'temporal'])
     ->name('combo.temporal');
 
-Route::post('/combos/{id}',[ComboController::class, 'destroy'])
+Route::delete('/combos/{id}',[ComboController::class, 'destroy'])
   ->name('combo.destroy');
 
-  Route::get('combo/{id}/borrar', [ComboController::class, 'destroyC'])
+  Route::delete('combo/{id}/borrar', [ComboController::class, 'destroyC'])
   ->name('combo.borrar');
 
 /*****************************

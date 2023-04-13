@@ -214,9 +214,9 @@ class ComboController extends Controller
 
         if ($create) {
             if ($platillo->estado == 1) {
-                return redirect()->route('menuAdmon.index')->with('mensaje', 'Combo Activado correctamente');
+                return redirect()->route('menuAdmon.index')->with('mensaje', 'Complemento activado correctamente');
             }else{
-                return redirect()->route('menuAdmon.index')->with('mensaje', 'Combo Desactivado correctamente');
+                return redirect()->route('menuAdmon.index')->with('mensaje', 'Complemento desactivado correctamente');
             }
         }
 
@@ -227,7 +227,7 @@ class ComboController extends Controller
         $platillo = Combo::findOrFail($id);
         $platillo->delete();
 
-        return redirect()->route('menuAdmon.index')->with('mensaje', 'Platillo borrado correctamente');
+        return redirect()->route('menuAdmon.index')->with('mensaje', 'Complemento eliminado correctamente');
 
     }
 

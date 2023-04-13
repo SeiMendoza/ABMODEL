@@ -2,12 +2,9 @@
 @section('title', 'Combo Nuevo')
 @section('miga')
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="#">Restaurante</a>
+        <a class="opacity-5 text-dark" href="{{ route('menuAdmon.index') }}">Administración Restaurante</a>
     </li>
-    <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="#">Menu Admon</a>
-    </li>
-    <li class="breadcrumb-item text-sm active text-dark active">Registrar de combos</li>
+    <li class="breadcrumb-item text-sm active text-dark active">Registro de combos</li>
 @endsection
 
 @section('content')
