@@ -1,8 +1,12 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalle de caja')
+@section('miga')
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+    <a class="text-dark" href="{{route('terminados.terminados')}}">Pedidos terminados</a>
+</li>
+@endsection
 @section('content')
-
-
+ 
 <style>
     .titulo{
         width: 20%;
@@ -16,20 +20,15 @@
         line-height: 60px;
     }
 </style>
-<div class="mb-0 col-11 text-start">
-
-    <div class="row text-center container pt-6">
-<h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
-      position: relative;">Detalle de pedidos terminado de: {{$pedido->nombreCliente}}</h5>
-             
-    </div>
-
-
+<div class="mb-0 col-12 text-start">
+ 
 <table class="table">
+<h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;
+      position: relative;">Detalle del pedido terminado: {{$pedido->nombreCliente}}</h5>
     <tr>
-        <td class="titulo">Numero de mesa: </td>
-        <td class="informacion">{{$pedido->mesa}}</td>
-        <td class="titulo">Quisco:</td>
+        <td class="titulo">Número de mesa: </td>
+        <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
+        <td class="titulo">Kiosko:</td>
         <td class="informacion">{{$pedido->quiosco}}</td>
     </tr>
     <tr>
@@ -37,7 +36,10 @@
         <td class="informacion">{{$pedido->nombreCliente}}</td>
         <td class="titulo">Estado:</td>
         <td class="informacion">
-            @if ($pedido->estado == 0)
+        @if($pedido->estado == 3)
+                    Entregado al cliente
+                    @endif
+           <!--- @if ($pedido->estado == 0)
                 Pendiente en cocina
             @else
                 @if ($pedido->estado == 1)
@@ -45,7 +47,7 @@
                 @else
                     Terminado
                 @endif  
-            @endif
+            @endif--->
         </td>
     </tr>
     <tr>

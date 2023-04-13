@@ -210,9 +210,9 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $cliente = DB::table('Pedidos')->where('estado', 3)->count();
         if ($cliente > 0) {
             DB::table('Pedidos')->where('estado', 3)->delete();
-            return back()->with('mensaje', 'Pedidos Borrados Satisfactoriamente.');
+            return back()->with('mensaje', 'Pedidos borrados correctamente.');
         } else {
-            return back()->with('mensaje', 'No hay pedidos para borrar.');
+            return back()->with('errors', 'No hay pedidos para borrar.');
         }
     }
 

@@ -13,13 +13,13 @@
 <div class="">
     <div class="table-responsive">
         <table class="" id="example" style="">
-            <thead class="">
+            <thead>
                 <tr>
                     <th scope="col" style="text-align:center">N</th>
                     <th scope="col" style="text-align:center">Mesa</th>
                     <th scope="col" style="text-align:center">Kiosko</th>
                     <th scope="col" style="text-align:center">Nombre del cliente</th>
-                    <th scope="col" style="text-align:center">Terminado</th>
+                    <th scope="col" style="text-align:center">Enviar a caja</th>
                     <th scope="col" style="text-align:center">Detalles</th>
                 </tr>
             </thead>

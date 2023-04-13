@@ -1,15 +1,18 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Pedidos-terminados')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">
+<li class="breadcrumb-item opacity-5 text-sm text-dark" aria-current="page">
     <a class="text-dark" href="{{route('pedidos.caja')}}">Caja</a>
 </li>
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">
+    <a class="text-dark">Pedidos terminados </a>
+</li>
 @endsection
- 
+
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Pedidos terminados</h3>
-<div class="" style="position:absolute; right:0%; top:16%"> 
-    <a href="#" style="margin:0;width:200px; padding:6px;" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
+<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;left:1%;">Pedidos terminados</h3>
+<div class="" style="position:absolute;right:1%; top:40%"> 
+    <a href="#" style="margin:0;width:200px; padding:8px;" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="bg-light border-0 border-radius-sm h-6 text-center text-gray font-weight-bolder">
         <i class="fa-solid fa-trash-can text-danger"></i> Eliminar pedidos
     </a> 
 </div>
@@ -23,15 +26,15 @@
 @endsection
 @section('content')
 <div class="table-responsive">
-    <table class="pedidos" id="example" style="">
-        <thead class="" style="text-align:center;">
+    <table  id="example" style="">
+        <thead>
             <tr>
-                <th scope="col">N</th>
-                <th scope="col">Número de mesa</th>
-                <th scope="col">Kiosko</th>
-                <th scope="col">Nombre del cliente</th>
-                <th scope="col">Terminado</th>
-                <th scope="col">Detalles</th>
+                <th scope="col" style="text-align:center">N</th>
+                <th scope="col" style="text-align:center">Número de mesa</th>
+                <th scope="col" style="text-align:center">Kiosko</th>
+                <th scope="col" style="text-align:center">Nombre del cliente</th>
+                <th scope="col" style="text-align:center">Terminado</th>
+                <th scope="col" style="text-align:center">Detalles</th>
             </tr>
         </thead>
         <tbody>

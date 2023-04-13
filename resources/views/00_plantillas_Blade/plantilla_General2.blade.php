@@ -205,6 +205,19 @@
                         timer: 5500
                     })
                 }
+                var ms = '{{ Session::get('errors') }}';
+                var exis = '{{ Session::has('errors') }}';
+                if (exis) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: ms,
+                        showConfirmButton: false,
+                        toast: true,
+                        background: '#fff',
+                        timer: 5500
+                    })
+                }
             </script>
             <nav class="navbar navbar-main navbar-expand-lg px-0  shadow-none border-radius-xl " id="navbarBlur" style="padding-bottom:15px"
                 data-scroll="false">

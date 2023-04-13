@@ -24,9 +24,9 @@
                 <th scope="col" style="text-align:center">N</th>
                 <th scope="col" style="text-align:center">Mesa</th>
                 <th scope="col" style="text-align:center">kiosko</th>
-                <th scope="col" style="text-align:center">Enviar a cocina</th>
-                <th scope="col" style="text-align:center">enviado de cocina</th>
-                <th scope="col" style="text-align:center">Terminar pedido</th>
+                <th scope="col" style="text-align:center;text-transform:initial;">Enviar a cocina</th>
+                <th scope="col" style="text-align:center;text-transform:initial;">Enviado de cocina</th>
+                <th scope="col" style="text-align:center;text-transform:initial;">Terminar pedido</th>
                 <th scope="col" style="text-align:center">Detalles</th>
             </tr>
         </thead>

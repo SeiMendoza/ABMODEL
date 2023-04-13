@@ -89,11 +89,11 @@ Route::get('/pedidos/terminados', [PedidoUsuarioController::class, 'terminados']
 ->name('terminados.terminados'); /*lista de pedidos terminados*/
 Route::get('/menu/pedidost', [PedidoUsuarioController::class, 'search'])
 ->name('pedidost.search');/*buscar pedidos terminados*/
-Route::get('/menu/pedidot/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])
+Route::get('/pedidos/caja/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])
 ->name('pedidost.detalle');/*detalle de pedidos pendientes de terminar en caja*/
-Route::get('/menu/pedidop/{id}', [PedidoUsuarioController::class, 'detalle_pedido_pendientes'])
+Route::get('/pedidos/cocina/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_pendientes'])
 ->name('pedidosp.detalle');/*detalle de pedidos pendientes en cocina*/
-Route::get('/menu/pedidos/terminados/{id}', [PedidoUsuarioController::class, 'detalle_terminados'])
+Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 'detalle_terminados'])
 ->name('terminados.detalle'); /*lista de pedidos terminados*/
 
  /*****************************
