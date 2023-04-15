@@ -26,6 +26,7 @@
                     <th scope="col">fecha</th>
                     <th scope="col" style="text-align:right;">Pago</th>
                     <th scope="col" style="text-align:right;">Anticipo</th>
+                    <th scope="col" style="text-align:right;"> Detalle</th>
                     <th scope="col" style="text-align: center;">Editar</th>
                     <th scope="col" style="text-align: center;">Eliminar</th>
                 </tr>
@@ -43,6 +44,11 @@
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('YYYY') }}</td> 
                             <td class="" style="text-align:right" scope="col">L {{ number_format($r->total, 2, '.', ',') }}</td>
                             <td class="" style="text-align:right" scope="col">L {{ number_format($r->anticipo, 2, '.', ',') }}</td> 
+                            <td scope="col"  style="text-align: center;">
+                                <a type="buttom" href="{{route('kiosko.detail',['id'=>$r->id])}}">
+                                    <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
+                                </a>
+                            </td>
                             <td scope="col" style="text-align: center;" ><a href="{{route('kiosko_res.edit', ['id' => $r->id])}}"><i class="fa-solid fa-edit text-success"></i></a></td>
                             <td scope="col" style="text-align: center;">
                                 <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$r->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>

@@ -29,7 +29,7 @@
 
                         <div style="margin-left:2%;float:left;width:47%;">
                             <label for=""><strong>Seleccione el tipo de producto</strong></label>
-                            <select name="tipo" onchange="quitarerror()" id="tipo" class="form-control">
+                            <select name="tipo" onchange="cambioPeso()" id="tipo" class="form-control">
                                 @if (old('tipo'))
                                     <option disabled="disabled" value="">Selecciona el tipo de producto</option> 
                                     @foreach ($tipo as $c)
@@ -53,7 +53,7 @@
 
                         <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
                             <label for=""><strong>Seleccione el periodo de uso</strong></label>
-                            <select name="uso" onchange="quitarerror()" id="uso" class="form-control">
+                            <select name="uso" onchange="quitarerror();cambioPeso();" id="uso" class="form-control">
                                 @if (old('uso'))
                                     <option disabled="disabled" value="">Selecciona el periodo de tiempo de uso</option> 
                                     @foreach ($uso as $c)
@@ -75,15 +75,33 @@
                             @enderror
                         </div>
 
+                        <script>
+                            window.onload = cambioPeso;
+                            function cambioPeso() {
+                                var select = document.getElementById("tipo");
+                                var identificador = document.getElementById("identificador");
+                                var valorSeleccionado = select.value;
+
+                                if (valorSeleccionado == 1) {
+                                    identificador.innerHTML = "libras";
+                                } else if (valorSeleccionado == 2) {
+                                    identificador.innerHTML = "onzas";
+                                } else {
+                                    identificador.innerHTML = ""; // Si no se selecciona ninguna opción, se limpia el contenido del span
+                                }
+                            }
+                        </script>
+                        
+
                         <div style="margin-left:2%;float:left;width:47%;margin-top: 30px">
-                            <label for=""><strong>Ingrese el peso en onzas</strong></label>
+                            <label for=""><strong>Ingrese el peso</strong></label>
                             <div class="input-group mb-3">
                                 <input class="form-control" type="number" name="kilos" id="kilos"
-                                step="0.01" min="1" max="100" placeholder="Ingrese las onzas"
+                                step="0.01" min="1" max="100" placeholder="Ingrese el peso"
                                 value="@if(Session::has('kilos')){{Session::get('kilos')}}@else{{old('kilos')}}@endif"
                                 onkeypress="quitarerror()">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">onzas</span>
+                                    <span class="input-group-text" id="identificador"></span>
                                 </div>
                             </div>
                             @error('kilos')

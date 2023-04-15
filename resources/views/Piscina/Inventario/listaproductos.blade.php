@@ -70,7 +70,7 @@
                         <i class="fa fa-minus-circle" aria-hidden="true"></i>
                     </a>
                     <!--Texto de cantidad-->
-                    {{$p->peso}} Onzas
+                    {{$p->peso}} @if ($p->tipo_producto->id == 1) Libras @else Onzas @endif
                     <!--Boton para agregar cantidad-->
                     <a style="color: blue;" class="productpiscina" data-toggle="modal" data-target="#agregar{{$p->id}}">
                         <i style="text-size-adjust: 2px;" class="fa fa-plus-circle" aria-hidden="true"></i>

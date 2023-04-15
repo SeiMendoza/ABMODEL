@@ -300,6 +300,35 @@
                                             </div>
                                         </a>
                                     </li>
+
+
+                                    <li>
+                                        <a class="dropdown-item border-radius-md" href="{{Route('piscina.create')}}">
+                                            <div class="d-flex py-1">
+                                                <div class="avatar avatar-sm bg-black  me-3  my-auto">
+                                                    <i class="fa-solid fa-person-swimming text-info fa-3x"></i>
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        Existencia de productos de piscina
+                                                    </h6>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        @foreach($datosalerta as $d) 
+                                                            Productos de piscina en {{$d->descripcion}} tiene {{$d->total}}
+                                                            unidades con {{$d->peso}}  
+                                                            @if ($d->descripcion == "Polvo") 
+                                                                Libras 
+                                                            @else 
+                                                                Onzas 
+                                                            @endif
+                                                            <br>
+                                                        @endforeach
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+
                                 </ul>
                             </li>
                         </ul>
@@ -310,26 +339,6 @@
             <div class="row mt-3 container-fluid" style="margin: 0; padding:0;">
                 <!-- Cards Restaurante -->
                 <div class="row pt-3" style="margin: 0; padding:0;">
-
-                    <script>
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'info',
-                            html: '@foreach($datosalerta as $d) Productos de piscina en {{$d->descripcion}} tiene {{$d->total}}'+
-                            ' unidades con {{$d->peso}} kg  <br>@endforeach',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Agregar',
-                            showCancelButton: true,
-                            cancelButtonText:'X',
-                            cancelButtonColor: '#d33',
-                            toast: true,
-                            timer: 4000000
-                        }).then(resultado => {
-                            if (resultado.value) {
-                                window.location.href = '{{Route('piscina.create')}}';
-                            }
-                        });
-                    </script>
 
                     <H4 style="text-align: ;" class=" bg-white text-warning">RESTAURANTE</H4>
                     <div class="row" style="margin: 0px; padding:0;">

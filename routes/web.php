@@ -319,6 +319,9 @@ Route::delete('/kiosko/reservaciones/{id}/borrar', [ReservacionController::class
 Route::get('/kiosko/reservaciones/buscar', [ReservacionController::class, 'search2'])
 ->name('kiosko_res.search');
 
+Route::get('/kiosko/reservaciones/{id}/detail', [ReservacionController::class, 'detail'])->
+name('kiosko.detail');
+
 /* Rutas para reservar local*/
 Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])
   ->name('cliente.reservaLocal');

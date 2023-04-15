@@ -118,4 +118,8 @@ class ReservacionController extends Controller
         Reservacion::destroy($id);
         return redirect()->route('kiosko_res.index')->with('mensaje', 'Reservación borrada correctamente');
     }
+    public function detail($id){
+        $reservacion = Reservacion::findOrFail($id);
+        return \view('Reservaciones.ReserAdmon.Kioskos.detailReservaciones',  compact('reservacion'));
+    }
 }

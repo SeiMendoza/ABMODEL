@@ -19,6 +19,7 @@
                     <th scope="col" style="text-align:center">Mesa</th>
                     <th scope="col" style="text-align:center">Kiosko</th>
                     <th scope="col" style="text-align:center">Nombre del cliente</th>
+                    <th scope="col" style="text-align:center">Tiempo transcurrido</th>
                     <th scope="col" style="text-align:center">Enviar a caja</th>
                     <th scope="col" style="text-align:center">Detalles</th>
                 </tr>
@@ -31,6 +32,40 @@
                     <td scope="col">{{$p->mesa_nombre->nombre}}</td>
                     <td scope="col">{{$p->quiosco}}</td>
                     <td scope="col">{{$p->nombreCliente}}</td>
+                    <td scope="col" id="tiempo{{$p->id}}"></td>
+                    <!--Funcion para el tiempo transcurrido en cocina-->
+                    <script>
+                        setInterval(() => {
+                            var creacion = new Date('{{$p->created_at}}')
+                            var actual = new Date();
+                            var msr = actual - creacion;
+                            
+                            var hora =  Math.floor((msr)/1000/60/60);
+                
+                            msr = msr-(hora*60*60*1000);
+                
+                            var minuto = Math.floor((msr)/1000/60);
+                            msr = msr-(minuto*60*1000);
+                
+                            var segundos =  Math.floor((msr)/1000);
+                
+                            var texto = '';
+                
+                            if (hora != 0) {
+                                if (hora == 1) {
+                                    texto = hora+' hora '
+                                } else {
+                                    texto = hora+' horas '
+                                }
+                                texto = texto+minuto+' minutos ';
+                            }else{
+                                texto = texto+minuto+' minutos '+segundos+' segundos';
+                            }
+                            
+                            
+                            document.getElementById("tiempo{{$p->id}}").innerHTML = texto;
+                        }, 100);
+                    </script>
 
                     <td>
                         <!-----icono que envia el pedido de regreso a caja con un estado=2 y estado_cocina=2------>
