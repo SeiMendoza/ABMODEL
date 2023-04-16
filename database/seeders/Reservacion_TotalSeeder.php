@@ -16,5 +16,6 @@ class Reservacion_TotalSeeder extends Seeder
     public function run()
     {
         //
+       reservacion_total::factory(40)->create();
     }
 }

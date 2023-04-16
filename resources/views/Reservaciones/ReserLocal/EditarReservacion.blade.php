@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
 <script type="text/javascript">
     function calcular(){
       try{
@@ -18,39 +19,40 @@
     }
 </script>
 
-   <div class="container ">
-    <div class="row d-flex justify-content-center" >
-        <div class="card" style="background: #dee8e487;">
+<div class="wrapper wrapper--w960">
+    <div class="card">
+        <div class="card-body">
+            <h2 style="text-align: center; text-transform: uppercase"><strong>Editar reservación de: {{ $r->Nombre_Cliente}} </strong></h2>
+
             <form method="post" action="{{ route('resCliente.update', ['id' => $r->id]) }}" enctype="multipart/form-data">
                 @method('put')
                 @csrf
-                <div class="container ">
-                    <BR>
-                    <div class="row d-flex justify-content-center">
-                        <div class="form-group col-md-3 ">
+                  <BR>
+                    <div class="row d-flex justify-content-center ">
+                        <div class="form-group col-md-4 ">
                             <label for="NombreCliente">Nombre</label>
                                 <input name="Nombre_Cliente" type="text" class=" form-control" id="Nombre_Cliente" maxlength="20"
                                         required placeholder="Ingrese el nombre" value="{{ old('Nombre_Cliente', $r->Nombre_Cliente) }}">
                                  @error('Nombre_Cliente')
-                                     <span class="menerr" style="color:red">{{ $message }}</span>
+                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                  @enderror
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="Apellido_Cliente">Apellido</label>
                             <input name="Apellido_Cliente" type="text" class="form-control" id="ApellidoCliente" 
                               required placeholder="Ingrese el apellido" value="{{ old('Apellido_Cliente', $r->Apellido_Cliente) }}">
                             @error('Apellido_Cliente')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong  class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="contacto">Contacto / Celular</label>
                            <input name="Contacto" type="number" class="form-control" id="Contacto"
                                required placeholder="Ingrese número de celular" value="{{ old('Contacto', $r->Contacto) }}"  maxlength="8" minlength="8">
                              @error('Contacto')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong  class="menerr" style="color:red">{{ $message }}</strong>
                              @enderror
                          </div>
                     </div>
@@ -58,7 +60,7 @@
                     <BR>
 
                     <div class="row d-flex justify-content-center">
-                         <div class="form-group col-md-3 ">
+                         <div class="form-group col-md-4 ">
                             <label for="Tipo_Reservacion">Tipo de Reservación</label>
                             <select name="Tipo_Reservacion" required onchange="quitarerror()" class="form-control">
                                     @if (old('Tipo_Reservacion'))
@@ -77,25 +79,25 @@
                                     <option value="De Noche (Mayor Costo)"{{$r->Tipo_Reservacion === 'De Noche (Mayor Costo)' ? 'selected' : ''}}>De Noche (Mayor Costo)</option>
                                 </select>
                             @error('Tipo_Reservacion')
-                               <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                               <strong class="menerr" style="color:red">{{ $message }}</strong>
                              @enderror
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="Tipo_Evento">Evento</label>
                             <input name="Tipo_Evento" type="text" class="form-control" id="Tipo_Evento"
                                required placeholder="Ingrese el nombre del evento " value="{{ old('Tipo_Evento', $r->Tipo_Evento) }}"  >
                              @error('Tipo_Evento')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
                              @enderror
                         </div>
 
-                        <div class="form-group col-md-3 ">
+                        <div class="form-group col-md-4">
                             <label for="cantidad">Cantidad de Personas</label>
                             <input name="Cantidad" type="number" class="form-control" id="Cantidad" 
                                 required placeholder="Cantidad de personas a asistir" value="{{ old('Cantidad', $r->Cantidad) }}" maxlength="8" minlength="8" >
                               @error('Cantidad')
-                                 <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                               @enderror
                         </div>
                     </div>
@@ -103,12 +105,12 @@
                     <BR>
 
                     <div class="row d-flex justify-content-center">
-                        <div class="form-group col-md-9">
+                        <div class="form-group col-md-12">
                             <label for="Fecha" >Fecha del Evento</label>
                             <input name="Fecha" type="date"  class="form-control" id="Fecha"
                                 required placeholder="" value="{{ old('Fecha',$r->Fecha ) }}">
                             @error('Fecha')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
@@ -116,25 +118,25 @@
                     <BR>
 
                     <div class="row d-flex justify-content-center">
-                        <div class="form-group col-md-3 ">
+                        <div class="form-group col-md-4 ">
                             <label for="HoraEntrada">Hora de Llegada</label>
                             <input name="HoraEntrada" type="time"  class="form-control" id="HoraEntrada" min="08:00" max="18:00"
                                 placeholder="Ingrese la hora de llegada" value="{{ old('HoraEntrada', $r->HoraEntrada) }}" required>
                             @error('HoraEntrada')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-3 ">
+                        <div class="form-group col-md-4 ">
                             <label for="HoraSalida">Hora de Salida</label>
                             <input name="HoraSalida" type="time"  class="form-control" id="HoraSalida" max="22:00"
                                 placeholder="Ingrese la hora de salida" value="{{ old('HoraSalida', $r->HoraSalida) }}" required>
                             @error('HoraSalida')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-3 ">
+                        <div class="form-group col-md-4 ">
                             <label for="FormaPago">Forma de Pago</label>
                             <select name="FormaPago" required onchange="quitarerror()"  class="form-control">
                                 @if (old('FormaPago'))
@@ -153,7 +155,7 @@
                                 <option value="Transferencia"{{$r->FormaPago === 'Transferencia' ? 'selected' : ''}}>Transferencia</option>
                             </select>
                             @error('FormaPago')
-                               <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                               <strong class="menerr" style="color:red">{{ $message }}</strong>
                              @enderror
                         </div>
                     </div>
@@ -161,39 +163,39 @@
                     <BR>
                         
                     <div class="row d-flex justify-content-center">
-                        <div class="form-group col-md-3 ">
+                        <div class="form-group col-md-4 ">
                             <label for="total">Costo de la Reservación</label>
                            <input name="Total" type="number" class="form-control" id="Total" step="0.001" oninput="calcular()"
                                 placeholder="Ingrese el total a pagar" value="{{ old('Total', $r->Total) }}" required>
                              @error('Total')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
                              @enderror
                         </div>
 
-                        <div class="form-group col-md-3 ">
+                        <div class="form-group col-md-4 ">
                             <label for="Anticipo">Anticipo</label>
                             <input name="Anticipo" type="number"  class="form-control" id="Anticipo" step="0.001" oninput="calcular()"
                                 placeholder="Ingrese el saldo a cancelar" value="{{ old('Anticipo', $r->Anticipo) }}" required>
                             @error('Anticipo')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-3 ">
+                        <div class="form-group col-md-4 ">
                             <label for="Pendiente">Saldo Pendiente</label>
                             <input name="Pendiente" type="text"  class="form-control" step="0.001" id="Pendiente" 
                                 placeholder="Saldo pendiente" value="{{ old('Pendiente', $r->Pendiente) }}" required>
                             @error('Pendiente')
-                                <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
 
                         <div class="">
-                            <div id="" ><br></div>
+                            <BR>
                           <div style="text-align:center; ">
-                              <button onclick="" type="submit" class="btn btn-success">Actualizar</button>
-                              <button type="button" onclick="cancelar('Reser/Local')" class="btn btn-danger">Cancelar</button>
+                              <button style="width:142px;" onclick="" type="submit" class="btn btn-success">Actualizar</button>
+                              <button style="width:142px;" type="button" onclick="cancelar('Reser/Local')" class="btn btn-danger">Cancelar</button>
                           </div>
                        </div>
                        
@@ -201,8 +203,8 @@
 
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
    </div>
 </div>
 @endsection

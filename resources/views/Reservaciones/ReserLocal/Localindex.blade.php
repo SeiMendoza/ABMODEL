@@ -1,30 +1,30 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Reservacion-Local')
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Reservaciones del Local</h3> 
+<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:130%; margin-left:15px ">Reservaciones del Local</h3> 
     <div class="" style="position:absolute; right:0%; top:16%"> 
-        <a href="{{route('ReserLocal.create')}}"  class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder" style="margin:0;width:200px; padding:6px;">
+        <a href="{{route('ReserLocal.create')}}"  class="bg-light border-0 border-radius-sm h-6 text-center text-gray font-weight-bolder" style="margin:0;width:200px; padding:6px;">
             <i class="fa fa-plus-circle"></i> Agregar</a>
 
-        <a href="{{route('realizadas.realizadas')}}" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder" style="margin:0;width:300px; padding:6px;">
+        <a href="{{route('realizadas.realizadas')}}" class="bg-light border-0 border-radius-sm h-6 text-center text-gray font-weight-bolder" style="margin:0;width:300px; padding:6px;">
         <i class="ni ni-laptop"></i> Eventos Realizados</a>
 
     </div>
 @endsection
 
 @section('content')
-<div class="">
-    <table class="table" id="example" style="">
+<div class="table-responsive">
+    <table class="table" id="example">
         <thead style="">
             <tr>
-                <th scope="col" style=" ">N°</th>
-                <th scope="col" style="text-align: center">Cliente</th>
-                <th scope="col" style="text-align: left">Fecha</th>
-                <th scope="col" style="text-align: left; ">Total</th>
-                <th scope="col" style="text-align: left; ">Pendiente</th>
+                <th scope="col" style="">N°</th>
+                <th scope="col" style="text-align: left;  ">Cliente</th>
+                <th scope="col" style="text-align: right;width:15% ">Fecha</th>
+                <th scope="col" style="text-align: right; width:12%  ">Total</th>
+                <th scope="col" style="text-align: right; ">Pendiente</th>
                 <th scope="col" style="text-align: center; ">Realizado</th>
-                <th scope="col" style="text-align: center; ">Detalles</th>
-                <th scope="col" style="text-align: center; ">Editar</th>
+                <th scope="col" style="text-align: center;">Detalles</th>
+                <th scope="col" style="text-align: center; width:12% ">Editar</th>
             </tr>
         </thead>
 
@@ -32,13 +32,13 @@
             @forelse($reservacion as $m => $r)
             @if(($r->estado)=="0") 
             <tr>
-                <th scope="col">{{++$m}}</th>
-                <td scope="col" style="text-align: center">{{$r->Nombre_Cliente}} </td>
-                <td scope="col" style="text-align: left;">{{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('DD') }} de
+                <th scope="col" style="  ">{{++$m}}</th>
+                <td scope="col" style="text-align: left;">{{$r->Nombre_Cliente}} </td>
+                <td scope="col" style="text-align: right;">{{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('DD') }} de
                     {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('MMMM') }},
                     {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('YYYY') }}</td> 
-                <td scope="col" style="text-align: left;">{{$r->Total}}</td>
-                <td scope="col" style="text-align: left;">{{$r->Pendiente}}</td>
+                <td scope="col" style="text-align: right;">{{$r->Total}}</td>
+                <td scope="col" style="text-align: right;">{{$r->Pendiente}}</td>
                 <td scope="col" style="text-align: center;"><input type="checkbox" id="list" name="list" {{!old('list') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$r->id}}" style="background:teal; width:15px; height:15px;">
                    <div class="modal fade" id="staticBackdrop{{$r->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                        <div class="modal-dialog">
@@ -73,8 +73,11 @@
                 <td style="text-align: center;"><a href="{{ route('ResCliente.editar', ['id'=>$r->id]) }}"><i class="fa fa-edit text-success"></i></a> </td>
             </tr>
             @endif
+
             @empty
-         @endforelse
+            @endforelse
         </tbody>
     </table>
+
+</div>
 @endsection

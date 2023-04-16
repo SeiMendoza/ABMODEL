@@ -7,22 +7,23 @@
 @endsection
 
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Eventos Realizados</h3> 
+<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%; margin-left:15px">Eventos Realizados</h3> 
 <div class="" style="position:absolute; right:0%; top:16%">
-    <a href="{{route('cliente.reservaLocal')}}" class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder" style="margin:0;width:300px; padding:6px;">
+    <a href="{{route('cliente.reservaLocal')}}" class="bg-light border-0 border-radius-sm h-6 text-center text-gray font-weight-bolder" style="margin:0;width:400px;padding:6px;">
         <i class="ni ni-palette"></i> Regresar</a>
 </div>
+
 @endsection
 @section('content')
      <div class="">
          <table class="table" id="example" style="">
              <thead style="">
                  <tr>
-                     <th scope="col" style="text-align: left">N°</th>
-                     <th scope="col" style="text-align: center;">Cliente</th>
-                     <th scope="col" style="text-align: left;">Fecha</th>
-                     <th scope="col" style="text-align: left;">Total</th>
-                     <th scope="col" style="text-align: left;">Pendiente</th>
+                     <th scope="col" style="">N°</th>
+                     <th scope="col" style="text-align:  left; ">Cliente</th>
+                     <th scope="col" style="text-align: right;width:15% ">Fecha</th>
+                     <th scope="col" style="text-align: right;width:11% ">Total</th>
+                     <th scope="col" style="text-align: center;">Pendiente</th>
                      <th scope="col" style="text-align: center;">Realizado</th>
                      <th scope="col" style="text-align: center;">Detalles</th>
                      <th scope="col"  style="text-align: center;">Eliminar</th>
@@ -32,13 +33,13 @@
                      @forelse($reservacion as $m => $r)
                      @if(($r->estado)=="1") 
                      <tr>
-                        <th scope="col"  style="text-align: left;">{{++$m}}</th>
-                        <td scope="col" style="text-align: center;">{{$r->Nombre_Cliente}}</td>
-                        <td scope="col" style="text-align: left;">{{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('DD') }} de
+                        <th scope="col"  style="">{{++$m}}</th>
+                        <td scope="col" style="text-align: left">{{$r->Nombre_Cliente}}</td>
+                        <td scope="col" style="text-align: right">{{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('DD') }} de
                             {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('MMMM') }},
                             {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('YYYY') }}</td> 
-                        <td scope="col" style="text-align: left;">{{$r->Total}}</td>
-                        <td scope="col" style="text-align: left;">Cancelado</td>
+                        <td scope="col" style="text-align: right">{{$r->Total}}</td>
+                        <td scope="col" style="text-align: center;">Cancelado</td>
                         <td scope="col" style="text-align: center;"><input disabled type="checkbox" id="list" name="list" {{ old('list') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$r->id}}" 
                             style="background:teal; width:15px; height:15px;"> </td>
                          
