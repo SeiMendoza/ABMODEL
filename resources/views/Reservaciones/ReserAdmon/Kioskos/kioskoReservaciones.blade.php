@@ -1,27 +1,26 @@
 @extends('00_plantillas_Blade.plantilla_General2')
-@section('title', 'Mesas')
+@section('title', 'Kioskos')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark active m-0" aria-current="page">Administración Kioskos</li>
-<li class="breadcrumb-item text-sm text-dark active m-0" aria-current="page">Reservaciones</li>
+<li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Reservaciones</li>
 @endsection
+@section('tit','Reserservaciones de kioskos')
 @section('b')
-    <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;">Reservaciones de Kioskos</h3> 
-    <div class="" style="position:absolute; right:0%; top:16%">    
-        <a href="{{route('kiosko_res.create')}}" style="margin:0; padding:5px; width:150px;" type="button" 
-        class="bg-light border-radius-md font-robo h-6 text-center text-success">
+    <div class="" style="">    
+        <a href="{{route('kiosko_res.create')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" 
+        class="bg-light border-radius-sm text-center">
         <i class="fa fa-plus-circle"></i> Agregar
        </a> 
     </div>
 @endsection
 @section('content')
     <!-- ========== Reservaciones ========== -->
-    <div class="table-responsive">
-        <table class="table font-robo" id="example" style="">
+    <div class="table-responsive" style="">
+        <table class="table" id="example" style="">
             <thead style="">
                 <tr>
-                    <th scope="col">N</th>
+                    <th scope="col" style="text-align:center">N</th>
                     <th scope="col">Cliente</th>
-                    <th scope="col">Celular</th>
+                    <th scope="col" style="text-align: center;" >Celular</th>
                     <th scope="col" style="text-align: center;">Cantidad</th>
                     <th scope="col">fecha</th>
                     <th scope="col" style="text-align:right;">Pago</th>
@@ -34,10 +33,10 @@
             <tbody>
                 @forelse($reservaciones  as $i => $r)
                         
-                        <tr style="">
-                            <th scope="col">{{++$i}}</th>
+                        <tr style=" height:46px">
+                            <td scope="col" style="text-align: center">{{++$i}}</td>
                             <td scope="col" >{{$r->nombre}}</td> 
-                            <td scope="col">{{$r->celular}}</td> 
+                            <td scope="col"  style="text-align:right">{{$r->celular}}</td> 
                             <td style="text-align: center;">{{$r->cantidad}}</td> 
                             <td scope="col" style="text-align:left;" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('MMMM') }},

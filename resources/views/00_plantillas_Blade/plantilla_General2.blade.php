@@ -15,7 +15,8 @@
     <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet">
     
     <!-- CSS Files -->
-    <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
+    <link id="pagestyle" href="../css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
+    <link id="pagestyle" href="../css/argon-dashboard.min.css?v=2.0.4" rel="stylesheet">
     <link href="/assets/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="/assets/datepicker/daterangepicker.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="/DataTables/DataTables-1.13.4/css/jquery.dataTables.css">
@@ -54,22 +55,54 @@
         }
     </style>
 </head>
-<body class="">
-    <aside
-        class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2 "
-        id="sidenav-main">
-        <div class="sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-                aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href={{ route('index') }}>
-                <img src="/img/Villacrisol.png" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold">INICIO</span>
+<body class="g-sidenav-show   bg-gray-100">
+    <header id="main-header" class="he-ma" style="background-color: rgb(111, 143, 175);">
+        <div class="" style="margin:0 0 0 0%; width:16.4%; padding:0%; display:block; float:left">
+            <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
+                <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 100%; height:90px;">
             </a>
         </div>
-        <hr class="horizontal dark mt-0">
+        <div class="" style="margin:1% 0% 0 1%; width:81.6%; padding:0%; display:block; float:left">    
+            <nav class="navbar navbar-main navbar-expand-lg shadow-none border-radius-xl " id="navbarBlur"
+                data-scroll="false" style="padding: 0;">
+                <div class="container-fluid" style="padding: 0; height:70px;">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent" style="margin: 0% 0 3.5% 0; padding:0">
+                            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
+                                    href="{{route('index')}}">Inicio</a></li>
+                                    @yield('miga')
+                        </ol>
+                        <h2 class="font-weight-bolder text-white " style="margin:0">@yield('tit')</h2>
+                    </nav> 
+                    <div class="collapse navbar-collapse " id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">   
+                    </div>
+                    <ul class="navbar-nav  justify-content-end" style="margin-top: 2.5%">
+                        <li class="nav-item d-flex align-items-center">
+                        @yield('b')
+                        </li>  
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line bg-white"></i>
+                                    <i class="sidenav-toggler-line bg-white"></i>
+                                    <i class="sidenav-toggler-line bg-white"></i>
+                                </div>
+                            </a>
+                        </li>                      
+                    </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <aside
+        class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 fixed-start"
+        id="sidenav-main"
+        style="margin-top:90px">
         <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Restaurante</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="margin: 4% 0 0 0">Restaurante</h6>
                 <li class="nav-item">
                     <a class="nav-link " href={{ route('cliente_prueba') }}>
                         <div
@@ -154,96 +187,61 @@
                         <span class="nav-link-text ms-1">Productos</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " href={{ route('s') }}>
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign In</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="{{route('u')}}">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign Up</span>
-                    </a>
-                </li>
             </ul>
         </div>
         
     </aside>
-    <div style="margin-left: 15px;margin-right:15px;"> 
-        <main class="main-content" style="padding: 0px; margin: 5px 0px 40px 250px;">
-            <script>
-                var msg = '{{ Session::get('mensaje') }}';
-                var exist = '{{ Session::has('mensaje') }}';
-                if (exist) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: msg,
-                        showConfirmButton: false,
-                        toast: true,
-                        background: '#fff',
-                        timer: 5500
-                    })
-                }
-                var ms = '¡Existe un error, revise los datos!';
-                var exis = '{{ Session::has('errors') }}';
-                if (exis) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'warning',
-                        title: ms,
-                        showConfirmButton: false,
-                        toast: true,
-                        background: '#fff',
-                        timer: 5500
-                    })
-                }
-                var ms = '{{ Session::get('errors') }}';
-                var exis = '{{ Session::has('errors') }}';
-                if (exis) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'warning',
-                        title: ms,
-                        showConfirmButton: false,
-                        toast: true,
-                        background: '#fff',
-                        timer: 5500
-                    })
-                }
-            </script>
-            <nav class="navbar navbar-main navbar-expand-lg px-0  shadow-none border-radius-xl " id="navbarBlur" style="padding-bottom:15px"
-                data-scroll="false">
-                <div class="" style="margin: 0; padding:0;">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 font-robo" style="margin-left:15px;">
-                            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                                href="{{route('index')}}">Inicio</a></li>
-                            @yield('miga')
-                        </ol>
-                        @yield('m')
-                    </nav>
-                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                        @yield('b')
-                    </div>
-                </div>
-            </nav>
-            
-            <div class="font-robo ali" style="padding: 0; margin:15px;">
-                @yield('content')
-            </div>
-            <div class="row container-fluid footer font-robo" style="padding: 0; margin:0;">
-                @yield('pie')
-            </div>
-        </main>
-    </div>
+   
+    <main class="main-content" style="padding: 0px; margin: 93px 1% 0% 17.3%;">
+        <script>
+            var msg = '{{ Session::get('mensaje') }}';
+            var exist = '{{ Session::has('mensaje') }}';
+            if (exist) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: msg,
+                    showConfirmButton: false,
+                    toast: true,
+                    background: '#fff',
+                    timer: 5500
+                })
+            }
+            var ms = '¡Existe un error, revise los datos!';
+            var exis = '{{ Session::has('errors') }}';
+            if (exis) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: ms,
+                    showConfirmButton: false,
+                    toast: true,
+                    background: '#fff',
+                    timer: 5500
+                })
+            }
+            var ms = '{{ Session::get('errors') }}';
+            var exis = '{{ Session::has('errors') }}';
+            if (exis) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: ms,
+                    showConfirmButton: false,
+                    toast: true,
+                    background: '#fff',
+                    timer: 5500
+                })
+            }
+        </script>
+        <div class="font-robo content-cell" style="">
+            @yield('content')
+        </div>
+        <div class="row container-fluid footer font-robo" style="padding: 0; margin:0;">
+            @yield('pie')
+        </div>
+    </main>
+  
     <script src="/assets/jquery/jquery.js"></script>
     <script src="/assets/jquery/jquery.min.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
@@ -319,6 +317,16 @@
     <script src={{ asset('/js/core/bootstrap.min.js') }}></script>
     <script src={{ asset('/js/plugins/perfect-scrollbar.min.js') }}></script>
     <script src={{ asset('/js/plugins/smooth-scrollbar.min.js') }}></script>
-    <script src={{ asset('/js/plugins/chartjs.min.js') }}></script>
+    <script src="../js/argon-dashboard.min.js?v=2.0.4"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+          var options = {
+            damping: '0.5'
+          }
+          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    
 </body>
 </html>

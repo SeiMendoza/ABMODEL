@@ -23,7 +23,7 @@
                 @forelse($reservaciones as $i => $r)
                     
                         <tr class="" style="text-align:center">
-                            <th scope="col">{{++$i}}</th>
+                            <td scope="col">{{++$i}}</td>
                             <td scope="col">{{$r->codigo}}</td>
                             <td scope="col">{{$r->nombre}}</td> 
                             <td scope="col">{{$r->cantidad}}</td>

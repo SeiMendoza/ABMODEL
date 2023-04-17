@@ -8,55 +8,64 @@
         <div class="wrapper wrapper--w960 ">
             <div class="card border-radius-sm border-0">
                 <div class="card-body border-radius-sm border-0">
-                    <h2 class="title">Registrar Información</h2>
-                    <form method="POST">
+                    <h2 class="title">Registro de mesas</h2>
+                    <form method="POST" action="{{route('mesas_reg.store')}}"  enctype="multipart/form-data">
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="font-robo">
-                                    <label for="name">Nombre:</label>
-                                    <input class="form-control border-radius-sm" type="text" placeholder="Nombre" name="name">
+                                    <label for="name">Código: </label>
+                                    <input class="form-control border-radius-sm" type="text" placeholder="K0-M0" name="codigo" id="codigo" 
+                                    minlength="5" maxlength="5" required>
+                                    @error('codigo')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
                                 </div>   
                             </div>
                             <div class="col-6">
                                 <div class="font-robo form-group">
-                                    <label for="birthday">Cumpleaños:</label>
-                                    <input class="form-control js-datepicker border-radius-sm" type="text" placeholder="Fecha: 00/00/0000" name="birthday">
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="font-robo form-group">
-                                    <label for="gender">Opciones: </label> <br>
-                                   
-                                        <select name="gender" class="form-control border-radius-sm ">
-                                            <option disabled="disabled" selected="selected">Seleccione</option>
-                                            <option>Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Otro</option>
-                                        </select>
-                                     
+                                    <label for="birthday">Nombre:</label>
+                                    <input class="form-control border-radius-sm" type="text" placeholder="Nombre" name="name" id="name" minlength="4" 
+                                    maxlength="15" required>
+                                    @error('name')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="font-robo form-group">
-                                    <label for="class">Clases: </label>
-                                    
-                                        <select name="class" class="form-control border-radius-sm">
-                                            <option disabled="disabled" selected="selected">Clase</option>
-                                            <option>Clase 1</option>
-                                            <option>Clase 2</option>
-                                            <option>Clase 3</option>
-                                        </select>
-                                        
-
+                                    <label for="class">Cantidad: </label>
+                                    <input class="form-control border-radius-sm" type="number" placeholder="Ingrese una cantidad"
+                                    name="cantidad" id="cantidad" minlength="1" maxlength="1" min="6" max="8" required>
+                                    @error('cantidad')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="font-robo form-group">
-                                    <label for="res_code">Número: </label>
-                                    <input class=" form-control input--style-2 border-radius-sm ps-2" type="number" placeholder="Ingrese un número" name="res_code">
+                                    <label for="res_code">Kiosko: </label>
+                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" class="form-control">
+                                        @if (old('kiosko'))
+                                            <option disabled="disabled" value="">Seleccione un kiosko</option> 
+                                            @foreach ($kiosko as $c)
+                                                @if (old('kiosko') == $c->id)
+                                                    <option selected="selected" value="{{$c->id}}">{{$c->id}}</option>
+                                                @else
+                                                    <option value="{{$c->id}}">{{$c->id}}</option>
+                                                @endif
+                                            @endforeach 
+                                        @else
+                                            <option disabled="disabled" selected="selected" value="">Seleccione un kiosko</option> 
+                                            @foreach ($kiosko as $c)
+                                                <option value="{{$c->id}}">{{$c->id}}</option>
+                                            @endforeach 
+                                        @endif
+                                    </select>
+                                    @error('kiosko')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

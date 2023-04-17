@@ -38,8 +38,8 @@
 
 <style>
     .productpiscina {
-        height: 40px;
-        line-height: 15px;
+        height: 50px;
+        line-height: 30px;
         margin-bottom: 0px;
     }
 </style>

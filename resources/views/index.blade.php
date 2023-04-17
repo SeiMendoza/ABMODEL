@@ -32,11 +32,35 @@
  
   <!-- CSS Files -->
   <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
+  <link href="/css/main.css" rel="stylesheet" media="all">
 
   <script src="{{ asset("/js/sweetalert2.all.min.js") }}"></script> 
+  <style media="screen">
+    #r{
+        background-color: rgba(0, 240, 248, 0.668);
+    }
+    li:active a, li:focus-visible, li:hover{
+        background-color: rgba(0, 94, 102, 0.168);
+    }
+    div, ul, h4{
+        font-family: Arial;
+        text-transform:initial;
+    }
+    table{
+        font-size: 17px;
+        color: gray; 
+    }
+    thead{
+        background-color: rgba(0, 99, 48, 0.085);
+    }
+    label, input{
+        font-size: 15px;
+        color: gray;
+    }
+</style>
 </head>
 
-<body class="g-sidenav-show bg-gray-100" style="overflow-x: hidden;">
+<body class="g-sidenav-show bg-gray-100" style="">
     <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
@@ -52,147 +76,29 @@
             })
         }
     </script>
-    
-        <aside
-            class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 fixed-start"
-            id="sidenav-main"
-            style="margin: 5px 0px 5px 5px; padding:0px">
-            <div class="sidenav-header">
-                <a class="navbar m-0 d-flex bg-dark height-100 justify-content-center" href={{ route('index') }} style="margin: 0; padding:5px;">
-                    <img src="/img/Villacrisol.png" class="img" alt="main_logo" style="width:100px; height:50px;">
-                    <h5 class="ms-2 font-weight-bold text-white">INICIO</h5>
-                </a>
-            </div>
-            <hr class="horizontal dark mt-4">
-            <div class="collapse navbar-collapse h-auto" id="sidenav-collapse-main">
-                <ul class="navbar-nav">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Restaurante</h6>
-                    <li class="nav-item">
-                        <a class="nav-link " href={{ route('cliente_prueba') }}>
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Pedido</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href={{ route('pedidos.caja') }}>
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-archive-2 text-warning text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Caja</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href={{ route('pedidosp.pedido') }}>
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-tablet-button text-warning text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Cocina</span>
-                        </a>
-                    </li>
-                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
-                    <li class="nav-item">
-                        <a class="nav-link " href={{ route('kiosko_res.index') }}>
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-shop text-success text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Kioskos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{route('cliente.reservaLocal')}}">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-shop text-success text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Local</span>
-                        </a>
-                    </li>
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Configuraciones</h6>
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ route('menuAdmon.index') }}>
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-glass-water text-info text-sm opacity-10 m-1"></i>
-                                <i class="fa-solid fa-burger text-info text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Menú</span>
-                        </a>
-                    </li>
-                    <li cFlass="nav-item">
-                        <a class="nav-link " href="{{route('mesas_reg.index')}}">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-table text-sm text-info opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Mesas</span>
-                        </a>
-                    </li>
-                    <li cFlass="nav-item">
-                        <a class="nav-link " href="{{route('kiosko.index')}}">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-store text-sm text-info opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">kioskos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href={{ route('prodpiscina.index') }}>
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-water-ladder text-info text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Productos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href={{ route('s') }}>
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Sign In</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{route('u')}}">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Sign Up</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            
-        </aside>
-
-        <main class="main-content position-relative overflow-hidden scroll-x" style="padding:0; margin: 5px 0px 5px 260px; overflow-x: hidden;">
-            <div class="min-height-100 position-absolute w-100 bg-dark"></div>
-            <!-- Navbar -->
-            <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
-                data-scroll="false">
-                <div class="container-fluid py-1 px-3">
+    <header id="main-header" class="" style="background-color: rgb(111, 143, 175);">
+        <div class="" style="margin:0 0 0 0%; width:16.4%; padding:0%; display:block; float:left">
+            <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
+                <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 100%; height:90px;">
+            </a>
+        </div>
+        <div class="" style="margin:1% 0% 0 1%; width:81.6%; padding:0%; display:block; float:left">    
+            <nav class="navbar navbar-main navbar-expand-lg shadow-none border-radius-xl " id="navbarBlur"
+                data-scroll="false" style="padding: 0;">
+                <div class="container-fluid" style="padding: 0; height:70px;">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <ol class="breadcrumb bg-transparent" style="margin: 0% 0 4% 0; padding:0">
                             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
-                                    href="javascript:;">Inicio</a></li>
+                                    href="{{route('index')}}">Inicio</a></li>
                         </ol>
-                        <h6 class="font-weight-bolder text-white mb-0">Villa Crisol</h6>
-                    </nav>
-                    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <h2 class="font-weight-bolder text-white " style="margin:0">Villa Crisol</h2>
+                    </nav> 
+                    <div class="collapse navbar-collapse " id="navbar">
+                        <div class="ms-md-auto pe-md-3 d-flex align-items-center"style="margin-top: 2.5%">   
                             <div class="input-group">
                                 <span class="input-group-text text-body"><i class="fas fa-search"
                                         aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" placeholder="Type here...">
+                                <input type="text" class="form-control" placeholder="Busqueda..." name="buscar" id="buscar">
                             </div>
                         </div>
                         <ul class="navbar-nav  justify-content-end">
@@ -335,255 +241,381 @@
                     </div>
                 </div>
             </nav>
-            <!-- End Navbar -->
-            <div class="row mt-3 container-fluid" style="margin: 0; padding:0;">
-                <!-- Cards Restaurante -->
-                <div class="row pt-3" style="margin: 0; padding:0;">
+        </div>
+    </header>
+    <aside
+        class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 fixed-start"
+        id="sidenav-main"
+        style="margin:6% 0 0 0">
+        <hr class="horizontal dark mt-0">
+        <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="margin: 4% 0 0 0">Restaurante</h6>
+                <li class="nav-item">
+                    <a class="nav-link " href={{ route('cliente_prueba') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Pedido</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href={{ route('pedidos.caja') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-archive-2 text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Caja</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href={{ route('pedidosp.pedido') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-tablet-button text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Cocina</span>
+                    </a>
+                </li>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
+                <li class="nav-item">
+                    <a class="nav-link " href={{ route('kiosko_res.index') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Kioskos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{route('cliente.reservaLocal')}}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-shop text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Local</span>
+                    </a>
+                </li>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Configuraciones</h6>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ route('menuAdmon.index') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-glass-water text-info text-sm opacity-10 m-1"></i>
+                            <i class="fa-solid fa-burger text-info text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Menú</span>
+                    </a>
+                </li>
+                <li cFlass="nav-item">
+                    <a class="nav-link " href="{{route('mesas_reg.index')}}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-table text-sm text-info opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Mesas</span>
+                    </a>
+                </li>
+                <li cFlass="nav-item">
+                    <a class="nav-link " href="{{route('kiosko.index')}}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-store text-sm text-info opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">kioskos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href={{ route('prodpiscina.index') }}>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-water-ladder text-info text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Productos</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
-                    <H4 style="text-align: ;" class=" bg-white text-warning">RESTAURANTE</H4>
-                    <div class="row" style="margin: 0px; padding:0;">
-                        <a href="{{ route('cliente_prueba') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
-                            data-id="" style="margin:0px; border-radius:0%;">
-                            <div class="text-center" style="text-align:center; padding: 0px;">   
-                                <div class="" style="margin-top: 5%">
-                                    <i class="fa-solid fa-utensils fa-8x text-warning"></i>
-                                </div>             
-                                <!-- Nombre -->
-                                    <p id="precio" class="text-white font-robo text-decoration-line">
-                                        <strong class="h-25" style="font-size: 30px; width:100%; 
-                                        background-color:rgba(255, 0, 0, 0.504);
-                                        position: absolute; bottom: 0; left:0;">Pedido</strong>
-                                    </p>         
-                            </div>
-                        </a>
-                        <a href="{{route('pedidos.caja')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
-                        data-id="" style="border-radius:0%; margin:0px 10px 0px 10px;">
+    <main class="main-content" id="indice" style="padding:0; margin: 90px 1% 0% 17.3%;">
+        <div class="content-cell" style="padding:0; margin:0">
+            <!-- Cards Restaurante -->
+            <div class="row pt-3" style="margin: 0; padding:0;">
+
+                <script>
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'info',
+                        html: '@foreach($datosalerta as $d) Productos de piscina en {{$d->descripcion}} tiene {{$d->total}}'+
+                        ' unidades con {{$d->peso}} kg  <br>@endforeach',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Agregar',
+                        showCancelButton: true,
+                        cancelButtonText:'X',
+                        cancelButtonColor: '#d33',
+                        toast: true,
+                        timer: 4000000
+                    }).then(resultado => {
+                        if (resultado.value) {
+                            window.location.href = '{{Route('piscina.create')}}';
+                        }
+                    });
+                </script>
+
+                <h4 style="margin-bottom: 15px" class="bg-white text-warning font-robo font-weight-bolder">RESTAURANTE</h4>
+                <div class="row" style="margin: 0px; padding:0;">
+                    <a href="{{ route('cliente_prueba') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:0px; border-radius:0%;">
                         <div class="text-center" style="text-align:center; padding: 0px;">   
                             <div class="" style="margin-top: 5%">
-                                <i class="fa-solid fa-cash-register fa-8x text-warning" ></i>
+                                <i class="fa-solid fa-utensils fa-8x text-warning"></i>
                             </div>             
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
                                     <strong class="h-25" style="font-size: 30px; width:100%; 
                                     background-color:rgba(255, 0, 0, 0.504);
-                                    position: absolute; bottom: 0; left:0;">Caja</strong>
+                                    position: absolute; bottom: 0; left:0;">Pedido</strong>
                                 </p>         
                         </div>
-                        </a>
-                        <a href="{{route('pedidosp.pedido')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
-                            data-id="" style="margin:0px 10px 0px 0px; border-radius:0%;">
-                            <div class="text-center" style="text-align:center; padding: 0px;">   
-                                <div class="" style="margin-top: 5%">
-                                    <i class="fa-solid fa-kitchen-set fa-8x text-warning"></i>
-                                </div>             
-                                <!-- Nombre -->
-                                    <p id="precio" class="text-white font-robo text-decoration-line">
-                                        <strong class="h-25" style="font-size: 30px; width:100%; 
-                                        background-color:rgba(255, 0, 0, 0.504);
-                                        position: absolute; bottom: 0; left:0;">Cocina</strong>
-                                    </p>         
-                            </div>
-                        </a>
+                    </a>
+                    <a href="{{route('pedidos.caja')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                    data-id="" style="border-radius:0%; margin:0px 10px 0px 10px;">
+                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="" style="margin-top: 5%">
+                            <i class="fa-solid fa-cash-register fa-8x text-warning" ></i>
+                        </div>             
+                        <!-- Nombre -->
+                            <p id="precio" class="text-white font-robo text-decoration-line">
+                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                background-color:rgba(255, 0, 0, 0.504);
+                                position: absolute; bottom: 0; left:0;">Caja</strong>
+                            </p>         
                     </div>
-                    
-                </div>
-                <!-- Cards Reservaciones -->
-                <div class="row pt-3" style="margin:0px; padding:0px;">
-                    <H4 style="text-align: ;" class="bg-white text-success">RESERVACIONES</H4>
-                    <div class="row" style="margin:0px; padding:0px">
-                        <a href="{{ route('kiosko_res.index') }}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
-                        data-id="" style="border-radius:0%; margin:0px;">
+                    </a>
+                    <a href="{{route('pedidosp.pedido')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:0px 10px 0px 0px; border-radius:0%;">
                         <div class="text-center" style="text-align:center; padding: 0px;">   
                             <div class="" style="margin-top: 5%">
-                                <i class="fa-solid fa-store fa-8x text-success" style=""></i>
+                                <i class="fa-solid fa-kitchen-set fa-8x text-warning"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(255, 0, 0, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Cocina</strong>
+                                </p>         
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+            <!-- Cards Reservaciones -->
+            <div class="row pt-3" style="margin:0px; padding:0px;">
+                <H4 style="margin-bottom: 15px" class="bg-white text-success font-robo font-weight-bolder">RESERVACIONES</H4>
+                <div class="row" style="margin:0px; padding:0px">
+                    <a href="{{ route('kiosko_res.index') }}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                    data-id="" style="border-radius:0%; margin:0px;">
+                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="" style="margin-top: 5%">
+                            <i class="fa-solid fa-store fa-8x text-success" style=""></i>
+                        </div>             
+                        <!-- Nombre -->
+                            <p id="precio" class="text-white font-robo text-decoration-line">
+                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                background-color:rgba(0, 173, 12, 0.504);
+                                position: absolute; bottom: 0; left:0;">Kioskos</strong>
+                            </p>         
+                    </div>
+                    </a>
+                    <a href="{{route('cliente.reservaLocal')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:0px 10px 0px 10px;; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 5%">
+                                <i class="fa-solid fa-shop fa-8x text-success"></i>
                             </div>             
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
                                     <strong class="h-25" style="font-size: 30px; width:100%; 
                                     background-color:rgba(0, 173, 12, 0.504);
-                                    position: absolute; bottom: 0; left:0;">Kioskos</strong>
+                                    position: absolute; bottom: 0; left:0;">Local</strong>
                                 </p>         
                         </div>
-                        </a>
-                        <a href="{{route('cliente.reservaLocal')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
-                            data-id="" style="margin:0px 10px 0px 10px;; border-radius:0%;">
-                            <div class="text-center" style="text-align:center; padding: 0px;">   
-                                <div class="" style="margin-top: 5%">
-                                    <i class="fa-solid fa-shop fa-8x text-success"></i>
-                                </div>             
-                                <!-- Nombre -->
-                                    <p id="precio" class="text-white font-robo text-decoration-line">
-                                        <strong class="h-25" style="font-size: 30px; width:100%; 
-                                        background-color:rgba(0, 173, 12, 0.504);
-                                        position: absolute; bottom: 0; left:0;">Local</strong>
-                                    </p>         
-                            </div>
-                        </a>
-                    </div>
+                    </a>
                 </div>
-                <!-- Cards Configuraciones -->
-                <div class="row pt-3" style="margin:0px; padding:0px;" >
-                    <H4 style="text-align: ;" class="bg-white text-info">CONFIGURACIONES</H4>
-                    <div class="row" style="margin:0px; padding:0px;">
-                        <a href="{{ route('menuAdmon.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
-                            data-id="" style="margin:0px; border-radius:0%;">
-                            <div class="text-center" style="text-align:center; padding: 0px;">   
-                                <div class="" style="margin-top: 10%">
-                                    <i class="fa-solid fa-glass-water fa-6x text-info"></i>
-                                    <i class="fa-solid fa-burger fa-7x text-info"></i>
-                                </div>             
-                                <!-- Nombre -->
-                                    <p id="precio" class="text-white font-robo text-decoration-line">
-                                        <strong class="h-25" style="font-size: 30px; width:100%; 
-                                        background-color:rgba(0, 195, 255, 0.504);
-                                        position: absolute; bottom: 0; left:0;">Menú</strong>
-                                    </p>         
-                            </div>
-                        </a>
-                        <a href="{{route('kiosko.index')}}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
-                            data-id="" style="margin:0px 10px 0px 10px; border-radius:0%;">
-                            <div class="text-center" style="text-align:center; padding: 0px;">   
-                                <div class="" style="margin-top: 5%">
-                                    <i class="fa-solid fa-store fa-8x text-info"></i>
-                                </div>             
-                                <!-- Nombre -->
-                                    <p id="precio" class="text-white font-robo text-decoration-line">
-                                        <strong class="h-25" style="font-size: 30px; width:100%; 
-                                        background-color:rgba(0, 195, 255, 0.504);
-                                        position: absolute; bottom: 0; left:0;">Kioskos</strong>
-                                    </p>         
-                            </div>
-                        </a>
-                        <a href="{{route('mesas_reg.index')}}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
-                            data-id="" style="margin:0px 10px 0px 0px; border-radius:0%;">
-                            <div class="text-center" style="text-align:center; padding: 0px;">   
-                                <div class="" style="margin-top: 4%">
-                                    <i class="fa-regular fa-chair fa-9x text-info"></i>
-                                </div>             
-                                <!-- Nombre -->
-                                    <p id="precio" class="text-white font-robo text-decoration-line">
-                                        <strong class="h-25" style="font-size: 30px; width:100%; 
-                                        background-color:rgba(0, 195, 255, 0.504);
-                                        position: absolute; bottom: 0; left:0;">Mesas</strong>
-                                    </p>         
-                            </div>
-                        </a>
-                        <a href="{{ route('prodpiscina.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
-                        data-id="" style="margin:10px 10px 0px 0px; border-radius:0%;">
+            </div>
+            <!-- Cards Configuraciones -->
+            <div class="row pt-3" style="margin:0px; padding:0px;" >
+                <H4 style="margin-bottom: 15px" class="bg-white text-info font-robo font-weight-bolder">CONFIGURACIONES</H4>
+                <div class="row" style="margin:0px; padding:0px;">
+                    <a href="{{ route('menuAdmon.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:0px; border-radius:0%;">
                         <div class="text-center" style="text-align:center; padding: 0px;">   
-                            <div class="" style="margin-top: 0%">
-                                <i class="fa-solid fa-person-swimming fa-10x text-info"></i>
+                            <div class="" style="margin-top: 10%">
+                                <i class="fa-solid fa-glass-water fa-6x text-info"></i>
+                                <i class="fa-solid fa-burger fa-7x text-info"></i>
                             </div>             
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
                                     <strong class="h-25" style="font-size: 30px; width:100%; 
-                                    background-color:rgba(11, 198, 255, 0.504);
-                                    position: absolute; bottom: 0; left:0;">Piscina</strong>
+                                    background-color:rgba(0, 195, 255, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Menú</strong>
                                 </p>         
                         </div>
                     </a>
-                    </div>
-                </div>
-            
-                <footer class="footer pt-3">
-                    <div class="container-fluid">
-                        <div class="row align-items-center justify-content-lg-between">
-                            <div class="col-lg-6 mb-lg-0 mb-4">
-                                
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                    <li class="nav-item">
-                                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                                            ©
-                                            <script>
-                                                document.write(new Date().getFullYear())
-                                            </script>,
-                                            <i class="fa fa-sun"></i> by Abmodel
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </footer> 
-            </div>   
-        </main>
-
-        <div class="fixed-plugin">
-            <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-                <i class="ni ni-diamond py-2"> </i>
-            </a>
-            <div class="card" style="height: 660px; bottom:10%;">
-                <div class="card-header pb-0 pt-3 ">
-                    <div class="float-start">
-                        <h5 class="mt-3 mb-0">Argon Configurator</h5>
-                        <p>See our dashboard options.</p>
-                    </div>
-                    <div class="float-end mt-4">
-                        <button class="btn btn-danger text-dark fixed-plugin-close-button">
-                            X
-                        </button>
-                    </div>
-                    <!-- End Toggle Button -->
-                </div>
-                <hr class="horizontal dark my-1">
-                <div class="card-body pt-sm-3 pt-0 overflow-auto">
-                    <!-- Sidebar Backgrounds -->
-                    <div>
-                        <h6 class="mb-0">Sidebar Colors</h6>
-                    </div>
-                    <a href="javascript:void(0)" class="switch-trigger background-color">
-                        <div class="badge-colors my-2 text-start">
-                            <span class="badge filter bg-gradient-primary active" data-color="primary"
-                                onclick="sidebarColor(this)"></span>
-                            <span class="badge filter bg-gradient-dark" data-color="dark"
-                                onclick="sidebarColor(this)"></span>
-                            <span class="badge filter bg-gradient-info" data-color="info"
-                                onclick="sidebarColor(this)"></span>
-                            <span class="badge filter bg-gradient-success" data-color="success"
-                                onclick="sidebarColor(this)"></span>
-                            <span class="badge filter bg-gradient-warning" data-color="warning"
-                                onclick="sidebarColor(this)"></span>
-                            <span class="badge filter bg-gradient-danger" data-color="danger"
-                                onclick="sidebarColor(this)"></span>
+                    <a href="{{route('kiosko.index')}}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:0px 10px 0px 10px; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 5%">
+                                <i class="fa-solid fa-store fa-8x text-info"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(0, 195, 255, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Kioskos</strong>
+                                </p>         
                         </div>
                     </a>
-                    <!-- Sidenav Type -->
-                    <div class="mt-3">
-                        <h6 class="mb-0">Sidenav Type</h6>
-                        <p class="text-sm">Choose between 2 different sidenav types.</p>
+                    <a href="{{route('mesas_reg.index')}}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                        data-id="" style="margin:0px 10px 0px 0px; border-radius:0%;">
+                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                            <div class="" style="margin-top: 4%">
+                                <i class="fa-regular fa-chair fa-9x text-info"></i>
+                            </div>             
+                            <!-- Nombre -->
+                                <p id="precio" class="text-white font-robo text-decoration-line">
+                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    background-color:rgba(0, 195, 255, 0.504);
+                                    position: absolute; bottom: 0; left:0;">Mesas</strong>
+                                </p>         
+                        </div>
+                    </a>
+                    <a href="{{ route('prodpiscina.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                    data-id="" style="margin:10px 10px 0px 0px; border-radius:0%;">
+                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="" style="margin-top: 0%">
+                            <i class="fa-solid fa-person-swimming fa-10x text-info"></i>
+                        </div>             
+                        <!-- Nombre -->
+                            <p id="precio" class="text-white font-robo text-decoration-line">
+                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                background-color:rgba(11, 198, 255, 0.504);
+                                position: absolute; bottom: 0; left:0;">Piscina</strong>
+                            </p>         
                     </div>
-                    <div class="d-flex">
-                        <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white"
-                            onclick="sidebarType(this)">White</button>
-                        <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default"
-                            onclick="sidebarType(this)">Dark</button>
-                    </div>
-                    <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-                    <!-- Navbar Fixed -->
-                    <div class="d-flex my-3">
-                        <h6 class="mb-0">Navbar Fixed</h6>
-                        <div class="form-check form-switch ps-0 ms-auto my-auto">
-                            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed"
-                                onclick="navbarFixed(this)">
+                </a>
+                </div>
+            </div>
+        
+            <footer class="footer pt-3">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                <li class="nav-item">
+                                    <div class="copyright text-center text-sm text-muted text-lg-start">
+                                        ©
+                                        <script>
+                                            document.write(new Date().getFullYear())
+                                        </script>,
+                                        <i class="fa fa-sun"></i> by Abmodel
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <hr class="horizontal dark my-sm-4">
-                    <div class="mt-2 mb-5 d-flex">
-                        <h6 class="mb-0">Light / Dark</h6>
-                        <div class="form-check form-switch ps-0 ms-auto my-auto">
-                            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version"
-                                onclick="darkMode(this)">
-                        </div>
+                </div>
+            </footer> 
+        </div>   
+    </main>
+
+    <div class="fixed-plugin">
+        
+        <div class="card" style="height: 660px; bottom:10%;">
+            <div class="card-header pb-0 pt-3 ">
+                <div class="float-start">
+                    <h5 class="mt-3 mb-0">Argon Configurator</h5>
+                    <p>See our dashboard options.</p>
+                </div>
+                <div class="float-end mt-4">
+                    <button class="btn btn-danger text-dark fixed-plugin-close-button">
+                        X
+                    </button>
+                </div>
+                <!-- End Toggle Button -->
+            </div>
+            <hr class="horizontal dark my-1">
+            <div class="card-body pt-sm-3 pt-0 overflow-auto">
+                <!-- Sidebar Backgrounds -->
+                <div>
+                    <h6 class="mb-0">Sidebar Colors</h6>
+                </div>
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors my-2 text-start">
+                        <span class="badge filter bg-gradient-primary active" data-color="primary"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-dark" data-color="dark"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-info" data-color="info"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-success" data-color="success"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-warning" data-color="warning"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-danger" data-color="danger"
+                            onclick="sidebarColor(this)"></span>
+                    </div>
+                </a>
+                <!-- Sidenav Type -->
+                <div class="mt-3">
+                    <h6 class="mb-0">Sidenav Type</h6>
+                    <p class="text-sm">Choose between 2 different sidenav types.</p>
+                </div>
+                <div class="d-flex">
+                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white"
+                        onclick="sidebarType(this)">White</button>
+                    <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default"
+                        onclick="sidebarType(this)">Dark</button>
+                </div>
+                <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+                <!-- Navbar Fixed -->
+                <div class="d-flex my-3">
+                    <h6 class="mb-0">Navbar Fixed</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed"
+                            onclick="navbarFixed(this)">
+                    </div>
+                </div>
+                <hr class="horizontal dark my-sm-4">
+                <div class="mt-2 mb-5 d-flex">
+                    <h6 class="mb-0">Light / Dark</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version"
+                            onclick="darkMode(this)">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     
-    <!--   Core JS Files   -->
+    <!--    jquery Files   -->
     <script src="/assets/jquery/jquery.js"></script>
     <script src="/assets/jquery/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          $("#buscar").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#indice a").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
     <!-- Core -->
     <script src={{ asset('/js/core/popper.min.js') }}></script>
     <script src={{ asset('/js/core/bootstrap.min.js') }}></script>

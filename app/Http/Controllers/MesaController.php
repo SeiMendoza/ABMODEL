@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kiosko;
 use App\Models\Mesa;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
@@ -37,7 +38,8 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
     }
     public function create()
     {
-        return view('Reservaciones.ReserAdmon.Mesas.formularioRegistro');
+        $kiosko = Kiosko::all();
+        return view('Reservaciones.ReserAdmon.Mesas.formularioRegistro', compact('kiosko'));
     }
     public function store(Request $request)
     {
