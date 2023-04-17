@@ -246,7 +246,7 @@
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 fixed-start"
         id="sidenav-main"
-        style="margin:6% 0 0 0">
+        style="margin:90px 0 0 0">
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">

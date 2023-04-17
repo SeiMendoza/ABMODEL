@@ -15,8 +15,7 @@
     <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet">
     
     <!-- CSS Files -->
-    <link id="pagestyle" href="../css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
-    <link id="pagestyle" href="../css/argon-dashboard.min.css?v=2.0.4" rel="stylesheet">
+    
     <link href="/assets/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="/assets/datepicker/daterangepicker.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="/DataTables/DataTables-1.13.4/css/jquery.dataTables.css">
@@ -25,8 +24,9 @@
     <link href="/assets/fontawesome/css/font-awesome.min.css" rel="" media="all">
     
     <!-- Main CSS-->
+    <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet" media="all">
-
+    
     <script src="{{ asset('/js/sweetalert2.all.min.js') }}"></script>
 
     <title>Villa Crisol - @yield('title') </title>
@@ -67,7 +67,7 @@
                 data-scroll="false" style="padding: 0;">
                 <div class="container-fluid" style="padding: 0; height:70px;">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb bg-transparent" style="margin: 0% 0 3.5% 0; padding:0">
+                        <ol class="breadcrumb bg-transparent" style="margin: 0% 0 4% 0; padding:0">
                             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
                                     href="{{route('index')}}">Inicio</a></li>
                                     @yield('miga')
@@ -75,22 +75,22 @@
                         <h2 class="font-weight-bolder text-white " style="margin:0">@yield('tit')</h2>
                     </nav> 
                     <div class="collapse navbar-collapse " id="navbar">
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">   
-                    </div>
-                    <ul class="navbar-nav  justify-content-end" style="margin-top: 2.5%">
-                        <li class="nav-item d-flex align-items-center">
-                        @yield('b')
-                        </li>  
-                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                                <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                </div>
-                            </a>
-                        </li>                      
-                    </ul>
+                        <div class="ms-md-auto pe-md-3 d-flex align-items-center"style="margin-top: 2.5%">   
+                        </div>
+                        <ul class="navbar-nav  justify-content-end">
+                            <li class="nav-item d-flex align-items-center" style="margin-top: 23px">
+                                @yield('b')
+                            </li>
+                            <li class="nav-item d-xl-none ps-3 d-flex align-items-center" style="margin-top: 23px">
+                                <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                                    <div class="sidenav-toggler-inner">
+                                        <i class="sidenav-toggler-line bg-white"></i>
+                                        <i class="sidenav-toggler-line bg-white"></i>
+                                        <i class="sidenav-toggler-line bg-white"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -99,7 +99,8 @@
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 fixed-start"
         id="sidenav-main"
-        style="margin-top:90px">
+        style="margin:90px 0 0 0">
+        <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="margin: 4% 0 0 0">Restaurante</h6>
@@ -189,7 +190,6 @@
                 </li>
             </ul>
         </div>
-        
     </aside>
    
     <main class="main-content" style="padding: 0px; margin: 93px 1% 0% 17.3%;">
@@ -317,7 +317,7 @@
     <script src={{ asset('/js/core/bootstrap.min.js') }}></script>
     <script src={{ asset('/js/plugins/perfect-scrollbar.min.js') }}></script>
     <script src={{ asset('/js/plugins/smooth-scrollbar.min.js') }}></script>
-    <script src="../js/argon-dashboard.min.js?v=2.0.4"></script>
+    
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -328,5 +328,6 @@
         }
     </script>
     
+    <script src="/js/argon-dashboard.min.js"></script>
 </body>
 </html>

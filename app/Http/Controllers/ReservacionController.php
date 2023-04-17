@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kiosko;
 use App\Models\Reservacion;
 use Illuminate\Http\Request;
 
@@ -11,17 +12,17 @@ class ReservacionController extends Controller
     public function index2()
     {
         $reservaciones = Reservacion::all();
-        return view('Reservaciones.ReserAdmon.Kioskos.kioskoReservaciones',  compact('reservaciones'));
+        return view('Reservaciones.ReserAdmon.Quiosco.kioskoReservaciones',  compact('reservaciones'));
     }
-    public function search2(Request $request)
+    /*public function search2(Request $request)
     {
         $text = trim($request->get('buscar'));
         $reservaciones = Reservacion::where('nombre', 'like', '%' . $text . '%')->paginate(5);
-        return view("Reservaciones.ReserAdmon.Kioskos.kioskoReservaciones", compact('reservaciones', 'text'));
-    }
+        return view("Reservaciones.ReserAdmon.Quiosco.kioskoReservaciones", compact('reservaciones', 'text'));
+    }*/
     public function create()
     {
-        return view('Reservaciones.ReserAdmon.Kioskos.formularioReservaciones');
+        return view('Reservaciones.ReserAdmon.Quiosco.formularioReservaciones');
     }
     public function store(Request $request){
         $fecha_act = date("d-m-Y");
@@ -90,7 +91,7 @@ class ReservacionController extends Controller
     public function edit($id)
     {
         $reservacion = Reservacion::findOrFail($id);
-        return view('Reservaciones.ReserAdmon.Kioskos.editarReservaciones',  compact('reservacion'));
+        return view('Reservaciones.ReserAdmon.Quiosco.editarReservaciones',  compact('reservacion'));
     }
     public function update(Request $request, $id){
 
@@ -120,6 +121,6 @@ class ReservacionController extends Controller
     }
     public function detail($id){
         $reservacion = Reservacion::findOrFail($id);
-        return \view('Reservaciones.ReserAdmon.Kioskos.detailReservaciones',  compact('reservacion'));
+        return \view('Reservaciones.ReserAdmon.Quiosco.detailReservaciones',  compact('reservacion'));
     }
 }

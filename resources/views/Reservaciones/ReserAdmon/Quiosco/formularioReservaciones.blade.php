@@ -1,9 +1,9 @@
-@extends('Reservaciones.ReserAdmon.Mesas.formularioRegistro')
-@section('title', 'Reservacion')
+@extends('00_plantillas_Blade.plantilla_General2')
+@section('title', 'Reservacion del local')
 @section('miga')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-    href="{{route('kiosko_res.index')}}">Reservacion de Kiosko</a></li>
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Nueva Reservación</li>
+<li class="breadcrumb-item text-sm text-dark" aria-current="page">  
+    <a class="opacity-5 text-dark" href="{{route('kiosko_res.index')}}">Kiosko</a></li>
+<li class="breadcrumb-item text-sm"><a class="text-dark">Nueva Reservación</li>
 @endsection
 @section('content')
 

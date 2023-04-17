@@ -1,7 +1,9 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Registro')    
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Registro de Mesas</li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
+    href="{{route('mesas_reg.index')}}">Mesas</a></li>
+<li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de Mesas</li>
 @endsection
 @section('content')
     <div class="page-wrapper font-robo">
@@ -10,6 +12,7 @@
                 <div class="card-body border-radius-sm border-0">
                     <h2 class="title">Registro de mesas</h2>
                     <form method="POST" action="{{route('mesas_reg.store')}}"  enctype="multipart/form-data">
+                        @csrf
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="font-robo">
