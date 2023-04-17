@@ -180,20 +180,53 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
 
     public function detalle_pedido_terminados($id)
     {
+        $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
-        return view('Menu/Cocina/detallecaja', compact('pedido'));
+        $suma = 0;
+        $total_con_impuesto = 0;
+        $impuesto = 0 ;
+        foreach ($detapedido as $detalle) {
+            $tasa_impuesto = 0.15;
+            $suma += $detalle->precio * $detalle->cantidad;
+            $impuesto = $suma * $tasa_impuesto;
+
+            $total_con_impuesto = $suma + $impuesto;
+        }
+        return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido','total_con_impuesto', 'impuesto'));
     }
 
     public function detalle_pedido_pendientes($id)
-    {
+    { 
+        $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
-        return view('Menu/Cocina/detallecocina', compact('pedido'));
+        $suma = 0;
+        $total_con_impuesto = 0;
+        $impuesto = 0 ;
+        foreach ($detapedido as $detalle) {
+            $tasa_impuesto = 0.15;
+            $suma += $detalle->precio * $detalle->cantidad;
+            $impuesto = $suma * $tasa_impuesto;
+
+            $total_con_impuesto = $suma + $impuesto;
+        }
+        return view('Menu/Cocina/detallecocina', compact('pedido', 'detapedido','total_con_impuesto', 'impuesto'));
     }
 
     public function detalle_terminados($id)
-    {
+    { 
+        $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
-        return view('Menu/Cocina/detalleterminado', compact('pedido'));
+        $suma = 0;
+        $total_con_impuesto = 0;
+        $impuesto = 0 ;
+        foreach ($detapedido as $detalle) {
+            $tasa_impuesto = 0.15;
+            $suma += $detalle->precio * $detalle->cantidad;
+            $impuesto = $suma * $tasa_impuesto;
+
+            $total_con_impuesto = $suma + $impuesto;
+        }
+        return view('Menu/Cocina/detalleterminado', compact('pedido', 'detapedido','total_con_impuesto', 'impuesto'));
     }
 
     public function pedidos_anteriores(Request $request)

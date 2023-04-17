@@ -1,13 +1,21 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalle de caja')
 @section('miga')
-<li class="breadcrumb-item opacity-5 text-sm text-dark" aria-current="page">
+<li class="breadcrumb-item opacity-5 text-sm text-white" aria-current="page">
     <a class="text-dark" href="{{route('pedidos.caja')}}">Caja</a>
 </li>
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">
-    <a class="text-dark">Detalles</a>
+<li class="breadcrumb-item text-sm text-white" aria-current="page">
+    <a class="text-white">Detalles</a>
 </li>
 @endsection
+
+@section('b')
+<div style="position:absolute; right:1%; top:30%">
+    <a href="{{route('pedidos.caja')}}" class="btn btn-danger" type="buttom" style="float: right;">Regresar</a>
+     
+</div>
+@endsection
+
 @section('content')
 
 
@@ -114,12 +122,52 @@
     </tr>
     <tr>
         <td class="titulo">Impuesto: </td>
-        <td class="informacion">L. {{number_format($pedido->imp, 2, '.', ',')}}</td>
+        <td class="informacion">L. <?=number_format($impuesto, 2, ".", ",") ?></td>
         <td class="titulo">Total:</td>
-        <td class="informacion">L. {{number_format($pedido->total, 2, '.', ',')}}</td>
+        <td class="informacion">L. <?=number_format($total_con_impuesto, 2, ".", ",") ?> </td>
     </tr>
 </table>
+</div>
 
-<a href="{{route('pedidos.caja')}}" class="btn btn-danger" type="buttom" style="float: right;">Regresar</a>
-
+<table class="table" id="example">
+                    <thead style="padding-top: 2px;">
+                        <tr class="text-dark">
+                            <th scope="col" style="width:20%;text-align:center;">Nombre</th>
+                            <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
+                            <th scope="col" style="width:20%; text-align:center;">Precio</th>
+                            <th scope="col" style="width:20%; text-align:center;">Sub-total</th> 
+                        </tr>
+                    </thead>
+                    <tbody class="col" style="overflow:auto;" id="">
+                        @php
+                        $sum = 0;
+                        @endphp
+                        @forelse($detapedido as $i => $detalle)
+                        
+                        <tr>
+                            <td scope="" class="" style="width:20%; text-align:center; height:32px;">{{$detalle->nombre}}</td>
+                            <td scope=""  style=" width:20%; text-align:center; height:42px;">{{ $detalle->cantidad }}</td>
+                            <td scope="col" style="text-align:right; width:20%; height:30px;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
+                            <td scope="col" style="text-align:right; width:20%; height:30px;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
+                            <!---  <td scope="col" style="text-align: center; height:42px;">
+                                {{$detalle->pedido->mesa_nombre->nombre}}
+                                     <form action="{{route('cliente_detalles.destroy', ['id' => $detalle->id])}}" id="borrar" method="post" enctype="multipart/form-data">
+                                        @method('delete')
+                                        @csrf
+                                        <button onclick="borrar()"  style="border: 0; padding:0; margin:0;" >
+                                            <i class="fa-solid fa-trash-can text-danger" style="border: 0; padding:0; margin:0;"></i></button>
+                                        </form> 
+                                    </td>--->
+                                </tr>
+                                @php
+                                $sum += $detalle->precio*$detalle->cantidad;
+                                @endphp
+                                
+                                @empty
+                                
+                                @endforelse
+                            </tbody>
+                        </table>
+                        
+                        
 @stop

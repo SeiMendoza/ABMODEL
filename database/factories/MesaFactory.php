@@ -18,7 +18,7 @@ class MesaFactory extends Factory
      */
     public function definition()
     {
-        $qr = QrCode::size(500)->generate('https://registro.unah.edu.hn/');
+        $qr = QrCode::size(500)->generate('https://www.facebook.com/villacrisol/');
         return [
             'codigo'=>$this->faker->numerify('######-######-#'),
             'nombre'=>$this->faker->numerify('Mesa-').$this->faker->numberBetween(1,25),

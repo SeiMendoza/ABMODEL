@@ -7,14 +7,17 @@
 
 
 @section('miga')
-<li class="breadcrumb-item text-sm active text-dark active">
-    <a class="font-weight-bolder opacity-8 text-gray" href="{{route('piscina.store')}}">Nuevo producto</a>
+<li class="breadcrumb-item text-sm text-dark active m-0 text-white">
+    <a class="font-weight-bolder opacity-8 text-white" href="{{route('piscina.store')}}">Nuevo producto</a>
 </li>
 @endsection
+@section('tit','Productos de piscina')
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;left:1%">Productos de piscina</h3>
-<div class="" style="position:absolute; right:1%; top:40%;">
-    <a href="{{route('piscina.store')}}" style="margin:0;width:200px; padding:8px;" class="bg-light border-0 border-radius-sm h-6 text-center text-gray font-weight-bolder">
+<!---<h3 class="font-weight-bolder opacity-8  text-gray mb-0" 
+style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
+<div class="" style=""> 
+    <a href="{{route('piscina.store')}}" style="margin:0; padding:5px; width:150px;" 
+    type="button" class="bg-light border-radius-sm text-center">
         <i class="fa fa-plus-circle"></i> Nuevo producto
     </a>
 </div>

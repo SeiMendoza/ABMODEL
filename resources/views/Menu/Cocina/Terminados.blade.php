@@ -1,18 +1,19 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Pedidos-terminados')
 @section('miga')
-<li class="breadcrumb-item opacity-5 text-sm text-dark" aria-current="page">
-    <a class="text-dark" href="{{route('pedidos.caja')}}">Caja</a>
+<li class="breadcrumb-item opacity-5 text-sm text-white" aria-current="page">
+    <a class="text-white" href="{{route('pedidos.caja')}}">Caja</a>
 </li>
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">
-    <a class="text-dark">Pedidos terminados </a>
+<li class="breadcrumb-item text-sm text-white" aria-current="page">
+    <a class="text-white">Pedidos terminados </a>
 </li>
 @endsection
-
+@section('tit','Pedidos terminados')
 @section('b')
 <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;left:1%;">Pedidos terminados</h3>
-<div class="" style="position:absolute;right:1%; top:40%"> 
-    <a href="#" style="margin:0;width:200px; padding:8px;" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="bg-light border-0 border-radius-sm h-6 text-center text-gray font-weight-bolder">
+<div class="" style=""> 
+    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="margin:0; padding:5px; width:150px;" 
+    type="button" class="bg-light border-radius-sm text-center">
         <i class="fa-solid fa-trash-can text-danger"></i> Eliminar pedidos
     </a> 
 </div>
@@ -26,7 +27,7 @@
 @endsection
 @section('content')
 <div class="table-responsive">
-    <table  id="example" style="">
+    <table class="table" id="example" style="">
         <thead>
             <tr>
                 <th scope="col" style="text-align:center">N</th>

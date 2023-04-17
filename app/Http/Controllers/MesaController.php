@@ -71,7 +71,7 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
         $nuevo->nombre = $request->input('nombre');
         $nuevo->cantidad = $request->input('cantidad');
         $nuevo->kiosko_id = 1;
-        $qr = QrCode::size(250)->generate('https://registro.unah.edu.hn/');
+        $qr = QrCode::size(250)->generate('https://www.facebook.com/villacrisol/');
 
  // Guardar el QR en la carpeta 'public'
 //Storage::putFileAs('public', new \Illuminate\Http\File(storage_path('app/mesa_qr.png')), 'mesa_qr.png');

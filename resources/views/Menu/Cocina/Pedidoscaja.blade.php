@@ -1,14 +1,16 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Caja')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-    <a class="text-dark" href="{{route('terminados.terminados')}}">Pedidos terminados</a>
+<li class="breadcrumb-item text-sm text-white active" aria-current="page">
+    <a class="text-white" href="{{route('terminados.terminados')}}">Pedidos terminados</a>
 </li>
 @endsection
+@section('tit','Pedidos en caja')
 @section('b')
 <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%; left:1%;">Pedidos en caja</h3>
-<div style="position:absolute; right:1%; top:40%">
-    <a href="{{route('terminados.terminados')}}" style="margin:0;width:200px; padding:8px;" class="bg-light border-0 border-radius-sm h-6 text-center text-gray font-weight-bolder">
+<div style="">
+    <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" 
+    type="button" class="bg-light border-radius-sm text-center">
         <i class="fa fa-plus-circle"></i> Pedidos terminados
     </a>
 </div>
@@ -32,7 +34,7 @@
         </thead>
         <tbody>
             @forelse($pedido as $i => $p)
-            @if(($p->estado)=="0" || $p->estado==1 || $p->estado==2 )
+            @if(($p->estado)==0 || $p->estado==1 || $p->estado==2)
             <tr style="text-align:center">
                 <td scope="col">{{++$i}}</td>
                 <td scope="col">{{$p->mesa_nombre->nombre}}</td>
