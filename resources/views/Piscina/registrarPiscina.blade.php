@@ -9,12 +9,10 @@
 @endsection
 
 @section('content')
-<br><br>
         <div class="wrapper wrapper--w960">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="">Registro de producto de piscina</h2>
-<br>
+                    <h2 class="title">Registro de producto de piscina</h2>
                     <form method="post" action="{{ route('piscina.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div style="margin-left:2%;float:left;width:47%">
@@ -110,9 +108,9 @@
                         </div>
 
                         <div style="float: right;margin-top: 50px">
-                            <button type="submit" class="btn btn-success">Guardar</button>
                             <button type="button" onclick="cancelar('productos')"
                                 class="btn btn-warning">Cancelar</button>
+                                <button type="submit" class="btn btn-success">Guardar</button>
                         </div>
                     </form>
                 </div>

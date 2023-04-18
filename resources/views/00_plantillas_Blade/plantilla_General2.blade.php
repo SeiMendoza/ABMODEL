@@ -32,26 +32,32 @@
     <title>Villa Crisol - @yield('title') </title>
 
     <style media="screen">
-        #r{
-            background-color: rgba(2, 102, 0, 0.727);
-        }
+    
         li:active a, li:focus-visible, li:hover{
-            background-color: rgba(2, 102, 0, 0.168);
+            background-color:rgba(111, 143, 175, 0.200);
         }
-        div, ul, h4{
+        div, ul, h2, h4, label, input, select, textarea{
             font-family: Arial;
             text-transform:initial;
+        }
+
+        .title, .t{
+            color: rgb(111, 143, 175);
         }
         table{
             font-size: 17px;
             color: gray; 
         }
-        thead{
-            background-color: rgba(0, 99, 48, 0.085);
+        thead, .t{
+            background-color: rgba(111, 143, 175, 0.147);
+            color: rgb(111, 143, 175);
         }
-        label, input{
+        label, select, input, .form-control{
             font-size: 15px;
-            color: gray;
+            color: rgb(111, 143, 175);
+        }
+        div .card {
+            margin-top: 100px; 
         }
     </style>
 </head>
@@ -208,19 +214,6 @@
                 })
             }
             var ms = '¡Existe un error, revise los datos!';
-            var exis = '{{ Session::has('errors') }}';
-            if (exis) {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    title: ms,
-                    showConfirmButton: false,
-                    toast: true,
-                    background: '#fff',
-                    timer: 5500
-                })
-            }
-            var ms = '{{ Session::get('errors') }}';
             var exis = '{{ Session::has('errors') }}';
             if (exis) {
                 Swal.fire({

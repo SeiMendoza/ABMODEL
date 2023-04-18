@@ -43,7 +43,7 @@
                             </div>
                             <div class="form-group col-md-6 ">
                                 <label for="cantidad">Cantidad de Personas</label>
-                            <input name="cantidad" type="text" class="form-control" id="cantidad"  max="20" min="1" maxlength="3" minlength="1"
+                                <input name="cantidad" type="text" class="form-control" id="cantidad"  max="20" min="1" maxlength="3" minlength="1"
                                 required placeholder="Cantidad de personas a asistir" value="{{ old('cantidad', $reservacion->cantidad) }}">
                                 <div class="invalid-feedback">
                                 

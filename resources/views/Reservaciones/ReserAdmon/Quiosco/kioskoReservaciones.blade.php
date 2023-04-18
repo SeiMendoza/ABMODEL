@@ -1,7 +1,7 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Kioskos')
 @section('miga')
-<li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Reservaciones</li>
+<li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Reservaciones de kioskos</li>
 @endsection
 @section('tit','Reserservaciones de kioskos')
 @section('b')

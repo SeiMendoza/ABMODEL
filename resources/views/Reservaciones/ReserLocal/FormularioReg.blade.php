@@ -18,7 +18,7 @@
     }
 </script>
 
-<div class="wrapper wrapper--w960">
+<div class="wrapper wrapper--w960" >
     <div class="card">
         <div class="card-body">
             <h2 style="text-align: center; text-transform: uppercase"><strong>Registro de Reservación</strong></h2>

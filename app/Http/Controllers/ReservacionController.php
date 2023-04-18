@@ -21,8 +21,8 @@ class ReservacionController extends Controller
         return view("Reservaciones.ReserAdmon.Quiosco.kioskoReservaciones", compact('reservaciones', 'text'));
     }*/
     public function create()
-    {
-        return view('Reservaciones.ReserAdmon.Quiosco.formularioReservaciones');
+    {   $kiosko = Kiosko::all();
+        return view('Reservaciones.ReserAdmon.Quiosco.formularioReservaciones', compact('kiosko'));
     }
     public function store(Request $request){
         $fecha_act = date("d-m-Y");

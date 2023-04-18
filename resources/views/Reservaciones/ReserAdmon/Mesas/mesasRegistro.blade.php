@@ -1,9 +1,9 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Mesas')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark active m-0 text-white" aria-current="page">Mesas</li>
+<li class="breadcrumb-item text-sm text-dark active m-0 text-white" aria-current="page">Lista de mesas</li>
 @endsection
-@section('tit','Registro de mesas')
+@section('tit','Lista de Mesas')
 @section('b')
     <div class="" style="">    
         <a href="{{route('mesas_reg.create')}}" style="margin:0; padding:5px; width:150px;" 
@@ -19,10 +19,11 @@
             <thead class="">
                 <tr style="">
                     <th scope="col" style="text-align:center">N</th>
-                    <th scope="col" style="text-align:center">Código</th>
+                    <th scope="col" style="">Código</th>
                     <th scope="col" style="">Mesa</th>
                     <th scope="col" style="text-align:center;  text-transform:initial;">Cantidad de personas</th>
                     <th scope="col" style="text-align:center">Kiosko</th>
+                    <th scope="col" style="text-align:;">Estado</th>
                     <th scope="col" style="text-align: center;">QR</th>
                     <th scope="col" style="text-align:center">Editar</th>
                     <th scope="col" style="text-align:center">Eliminar</th>
@@ -33,11 +34,18 @@
                         
                         <tr class="" style="text-align:center; height:46px">
                             <td scope="col" style="">{{++$i}}</td>
-                            <td scope="col" >{{$r->codigo}}</td>
+                            <td scope="col" style="text-align: left"> {{$r->codigo}}</td>
                             <td scope="col" style="text-align: left">{{$r->nombre}}</td> 
-                            <td scope="col" >{{$r->cantidad}}</td>
-                            <td scope="col" >{{$r->kiosko_id}}</td>
-                            <td  scope="col" ><a class="" 
+                            <td scope="col">{{$r->cantidad}}</td>
+                            <td scope="col">{{$r->kiosko_id}}</td>
+                            <td scope="col" style="text-align: left">
+                                @if ($r->estadoM == 0)
+                                    Disponible
+                                @else
+                                    Ocupado
+                                @endif
+                            </td>
+                            <td  scope="col"><a class="" 
                                 href="{{route('mesa.Codigo_Qr', ['id' => $r->id])}}"><i class="fas fa-qrcode text-success"></i></a>
                             </td>
                             <td  scope="col"><a class="" 
@@ -83,28 +91,4 @@
 @endsection
 
 @section('pie')
-
-    <script>
-        function eliminar(){
-    
-    Swal
-    .fire({
-        title: "Eliminar",
-        text: "¿Desea eliminar el registro?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: "Si",
-        cancelButtonText: "No",
-    })
-    .then(resultado => {
-        if (resultado.value) {
-            // Hicieron click en "Sí"
-            document.getElementById('eliminar').submit();
-        } else {
-            // Dijeron que no
-        }
-    });
-
-}
-    </script>
 @endsection

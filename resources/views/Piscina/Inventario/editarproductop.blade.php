@@ -15,7 +15,6 @@
 @endsection
 
 @section('content')
-<br> 
     <div class="wrapper wrapper--w960 font-robo">
         <div class="card border-radius-sm border-0">
             <div class="card-body border-radius-sm border-0">
@@ -33,10 +32,10 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <div class="font-robo form-group">
-                                <label for="">tipo de producto: </label>
-                                <div style="width: 400px">
+                                <label for="">Tipo de producto: </label>
+                                <div style="">
                                     <select class="form-control border-radius-sm" style="text-indent: 8px !important;" name="tipo" id="tipo">
                                         <option value="1" {{$piscina->tipo =="1" ? 'selected' :''}}>Polvo</option>
                                         <option value="2" {{$piscina->tipo =="2" ? 'selected' :''}}>Liquido</option>
@@ -62,7 +61,7 @@
                         <div class="col">
                             <div class="font-robo form-group">
                                 <label for="">Tipo de uso: </label>
-                                <div style="width: 400px">
+                                <div style="">
                                     <select class="form-control border-radius-sm" name="uso" id="uso">
                                         <option value="1" {{$piscina->uso =="1" ? 'selected' :''}}>Diario</option>
                                         <option value="2" {{$piscina->uso =="2" ? 'selected' :''}}>Semanal</option>
@@ -76,18 +75,14 @@
                             </div>
                         </div>
                     </div>
-                    <div id=""><br></div>
-                    <div style="text-align:center">
-                        <button onclick="" type="submit" class="btn btn-success">Guardar</button>
+                    <div style="float: right;margin-top: 50px">
                         <button type="button" onclick="cancelarp('productos')" class="btn btn-danger">Cancelar</button>
+                        <button onclick="" type="submit" class="btn btn-success">Guardar</button>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-</div>
-</div>
-
 <script>
     function cancelarp(ruta) {
 

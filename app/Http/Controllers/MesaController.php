@@ -45,12 +45,13 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
     {
 
         $request->validate([
-            'codigo' => 'required|min:5|max:5',
-            'name' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.\0-9\_]+$/|max:50|min:3',
+            'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7',
+            'name' => 'required|regex:/^[a-zA-Z]{4}+[-][0-9][0-9]$/|max:7|min:7',
             'cantidad' => 'required|min:1|max:20|numeric',
             'kiosko' => 'required' 
         ], [
             'codigo.required' => 'El código no puede estar vacío',
+            'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01-M01',
             'codigo.max' => 'El código es muy extenso',
             'codigo.min' => 'El código es muy corto',
             'name.required' => 'El nombre no puede estar vacío',
@@ -98,16 +99,17 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
     {
 
         $request->validate([
-            'codigo' => 'required|min:5|max:5',
-            'name' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.\0-9\_]+$/|max:100|min:3',
+            'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7',
+            'name' => 'required|regex:/^[M][e][s][a][-][0-9][0-9]$/|max:7|min:7',
             'cantidad' => 'required|min:1|max:20|numeric',
             'kiosko' => 'required'
         ], [
             'codigo.required' => 'El código no puede estar vacío',
+            'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01-M01',
             'codigo.max' => 'El código es muy extenso',
             'codigo.min' => 'El código es muy corto',
             'name.required' => 'El nombre no puede estar vacío',
-            'name.regex' => 'El nombre tiene caracteres no permitidos',
+            'name.regex' => 'El nombre no es válido, uno válido es: Mesa-00',
             'name.max' => 'El nombre es muy extenso',
             'name.min' => 'El nombre es muy corto',
             'cantidad.required' => 'La cantidad no puede estar vacío',
