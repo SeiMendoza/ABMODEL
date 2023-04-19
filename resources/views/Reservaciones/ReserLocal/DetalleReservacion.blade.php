@@ -1,9 +1,9 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalles de la reservación')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">  
-    <a class="opacity-5 text-dark" href="{{route('cliente.reservaLocal')}}">Reservación del Local</a></li>
-<li class="breadcrumb-item text-sm"><a class=" text-dark">Detalles </a></li>
+<li class="breadcrumb-item text-sm">
+    <a class="opacity-5 text-white" href="{{route('cliente.reservaLocal')}}">Reservaciones del Local</a></li>
+    <li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Detalles</li>
 @endsection
 
 @section('content')
@@ -25,9 +25,9 @@
 </style>
 
 <div class="wrapper wrapper--w960">
-    <div class="row d-flex justify-content-center">
-         <div class="card shadow items-center"> <BR><BR>
-            <h3 class=" font-weight-bold" style="color: teal; text-align:center"> 
+    <div>
+         <div class="card shadow items-center"> <BR>
+            <h3 class=" font-weight-bold" style="color: teal; text-align:center; text-transform: uppercase"> 
                 Detalles de la reservación de: {{$reservar->Nombre_Cliente}} </h3>
             <div class="card-body">
                 <table class="table" >
@@ -118,7 +118,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Costo de la reservación</td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Total}} </td>
+                            <td class="titulo">L {{ number_format($reservar->Total, 2, '.', ',') }}</td>
                             <td class="informacion"></td>
                         </tr>
 
@@ -126,7 +126,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Anticipo</td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Anticipo}} </td>
+                            <td class="titulo">L {{ number_format($reservar->Anticipo, 2, '.', ',') }} </td>
                             <td class="informacion"></td>
                         </tr>
 

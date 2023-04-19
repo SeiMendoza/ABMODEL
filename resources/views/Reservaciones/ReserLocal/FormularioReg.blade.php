@@ -1,9 +1,9 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Reservacion del local')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">  
-    <a class="opacity-5 text-dark" href="{{route('cliente.reservaLocal')}}">Reservación del Local</a></li>
-<li class="breadcrumb-item text-sm"><a class="text-dark">Nueva Reservación</li>
+<li class="breadcrumb-item text-sm" aria-current="page">  
+    <a class="opacity-5 text-white" href="{{route('cliente.reservaLocal')}}">Reservaciones del Local</a></li>
+<li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Nueva Reservación</li>
 @endsection
 
 @section('content')
@@ -21,15 +21,15 @@
 <div class="wrapper wrapper--w960" >
     <div class="card">
         <div class="card-body">
-            <h2 style="text-align: center; text-transform: uppercase"><strong>Registro de Reservación</strong></h2>
+            <h2 class="title" style="margin-bottom:0%">Reservación del Local</h2>
             
     <form method="post" action="{{ route('ReserLocal.store') }}" enctype="multipart/form-data">
             @csrf
                 <BR>
                     <div class="row d-flex justify-content-center" >
                         <div class="form-group col-md-4 "  >
-                            <label for="NombreCliente">Nombre</label> 
-                                <input name="Nombre_Cliente" type="text" class=" form-control" id="Nombre_Cliente" maxlength="20"
+                            <label for="NombreCliente">Nombre:</label> 
+                                <input name="Nombre_Cliente" type="text" class=" form-control border-radius-sm " id="Nombre_Cliente" maxlength="20"
                                         required placeholder="Ingrese el nombre" value="{{ old('Nombre_Cliente') }}">
                                  @error('Nombre_Cliente')
                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -37,8 +37,8 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="Apellido_Cliente">Apellido</label>
-                            <input name="Apellido_Cliente" type="text" class="form-control" id="ApellidoCliente" 
+                            <label for="Apellido_Cliente">Apellido:</label>
+                            <input name="Apellido_Cliente" type="text" class="form-control border-radius-sm" id="ApellidoCliente" 
                               required placeholder="Ingrese el apellido" value="{{ old('Apellido_Cliente') }}">
                             @error('Apellido_Cliente')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -46,8 +46,8 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="contacto">Contacto / Celular</label>
-                           <input name="Contacto" type="number" class="form-control" id="Contacto"
+                            <label for="contacto">Celular:</label>
+                           <input name="Contacto" type="number" class="form-control border-radius-sm" id="Contacto"
                                required placeholder="Ingrese número de celular" value="{{ old('Contacto') }}"  maxlength="8" minlength="8">
                              @error('Contacto')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -55,12 +55,10 @@
                          </div>
                     </div>
 
-                    <BR>
-
                     <div class="row d-flex justify-content-center">
                          <div class="form-group col-md-4 ">
-                            <label for="Tipo_Reservacion">Tipo de Reservación</label>
-                            <select name="Tipo_Reservacion" required onchange="quitarerror()" class="form-control">
+                            <label for="Tipo_Reservacion">Tipo de Reservación:</label>
+                            <select name="Tipo_Reservacion" required onchange="quitarerror()" class="form-control border-radius-sm ">
                                     @if (old('Tipo_Reservacion'))
                                         @if (old('Tipo_Reservacion') === 'De Día (Menor Costo)')
                                             <option style="display: none" selected="selected" value="De Día (Menor Costo)">De Día (Menor Costo)</option>
@@ -82,8 +80,8 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="Tipo_Evento">Evento</label>
-                            <input name="Tipo_Evento" type="text" class="form-control" id="Tipo_Evento"
+                            <label for="Tipo_Evento">Evento:</label>
+                            <input name="Tipo_Evento" type="text" class="form-control border-radius-sm" id="Tipo_Evento"
                                required placeholder="Ingrese el nombre del evento " value="{{ old('Tipo_Evento') }}"  >
                              @error('Tipo_Evento')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -91,20 +89,19 @@
                         </div>
 
                         <div class="form-group col-md-4 ">
-                            <label for="cantidad">Cantidad de Personas</label>
-                            <input name="Cantidad" type="number" class="form-control" id="Cantidad"  
+                            <label for="cantidad">Cantidad de Personas:</label>
+                            <input name="Cantidad" type="number" class="form-control border-radius-sm" id="Cantidad"  
                                 required placeholder="Cantidad de personas a asistir" value="{{ old('Cantidad') }}" maxlength="8" minlength="8" >
                               @error('Cantidad')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                               @enderror
                         </div>
                     </div>
-                    <BR>
 
                     <div class="row d-flex justify-content-center">
                         <div class="form-group col-md-12">
-                            <label for="Fecha" >Fecha del Evento</label>
-                            <input name="Fecha" type="date"  class="form-control" id="Fecha"
+                            <label for="Fecha" >Fecha del Evento:</label>
+                            <input name="Fecha" type="date"  class="form-control border-radius-sm " id="Fecha"
                                 required placeholder="" value="{{ old('Fecha') }}">
                             @error('Fecha')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -112,12 +109,10 @@
                         </div>
                     </div>
 
-                    <BR>
-
                     <div class="row d-flex justify-content-center">
                         <div class="form-group col-md-4 ">
-                            <label for="HoraEntrada">Hora de Llegada</label>
-                            <input name="HoraEntrada" type="time"  class="form-control" id="HoraEntrada" min="08:00" max="18:00"
+                            <label for="HoraEntrada">Hora de Llegada:</label>
+                            <input name="HoraEntrada" type="time"  class="form-control border-radius-sm" id="HoraEntrada" min="08:00" max="18:00"
                                 placeholder="Ingrese la hora de llegada" value="{{ old('HoraEntrada')}}" required>
                             @error('HoraEntrada')
                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -125,8 +120,8 @@
                         </div>
 
                         <div class="form-group col-md-4 ">
-                            <label for="HoraSalida">Hora de Salida</label>
-                            <input name="HoraSalida" type="time"  class="form-control" id="HoraSalida"  max="22:00"
+                            <label for="HoraSalida">Hora de Salida:</label>
+                            <input name="HoraSalida" type="time"  class="form-control border-radius-sm" id="HoraSalida"  max="22:00"
                                 placeholder="Ingrese la hora de salida" value="{{ old('HoraSalida')}}" required>
                             @error('HoraSalida')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -134,8 +129,8 @@
                         </div>
 
                         <div class="form-group col-md-4 ">
-                            <label for="FormaPago">Forma de Pago</label>
-                            <select name="FormaPago" required onchange="quitarerror()"  class="form-control">
+                            <label for="FormaPago">Forma de Pago:</label>
+                            <select name="FormaPago" required onchange="quitarerror()"  class="form-control border-radius-sm">
                                 @if (old('FormaPago'))
                                     @if (old('FormaPago') === 'Efectivo')
                                         <option style="display: none" selected="selected" value="Efectivo">Efectivo</option>
@@ -156,13 +151,11 @@
                              @enderror
                         </div>
                     </div>
-
-                    <BR>
                         
                     <div class="row d-flex justify-content-center">
                         <div class="form-group col-md-4 ">
-                            <label for="total">Costo de la Reservación</label>
-                           <input name="Total" type="number" class="form-control" id="Total" step="0.001" oninput="calcular()"
+                            <label for="total">Costo de la Reservación:</label>
+                           <input name="Total" type="number" class="form-control border-radius-sm" id="Total" step="0.001" oninput="calcular()"
                                 placeholder="Ingrese el total a pagar" value="{{ old('Total')}}" required>
                              @error('Total')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -170,8 +163,8 @@
                         </div>
 
                         <div class="form-group col-md-4 ">
-                            <label for="Anticipo">Anticipo</label>
-                            <input name="Anticipo" type="number"  class="form-control" id="Anticipo" step="0.001" oninput="calcular()"
+                            <label for="Anticipo">Anticipo:</label>
+                            <input name="Anticipo" type="number"  class="form-control border-radius-sm" id="Anticipo" step="0.001" oninput="calcular()"
                                 placeholder="Ingrese el saldo a cancelar" value="{{ old('Anticipo')}}" required>
                             @error('Anticipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -179,8 +172,8 @@
                         </div>
 
                         <div class="form-group col-md-4 ">
-                            <label for="Pendiente">Saldo Pendiente</label>
-                            <input name="Pendiente" type="number"  class="form-control" step="0.001" id="Pendiente" 
+                            <label for="Pendiente">Saldo Pendiente:</label>
+                            <input name="Pendiente" type="number"  class="form-control border-radius-sm" step="0.001" id="Pendiente" 
                                 placeholder="Saldo pendiente" value="{{ old('Pendiente')}}" required>
                             @error('Pendiente')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -195,8 +188,6 @@
                               <button  style="width:142px;" type="button" onclick="cancelar('Reser/Local')" class="btn btn-danger">Cancelar</button>
                           </div>
                        </div>
-                       
-                       <BR>
 
                     </div>
             </div>

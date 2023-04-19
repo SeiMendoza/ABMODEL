@@ -30,7 +30,7 @@ class Reservacion_TotalFactory extends Factory
             'FormaPago'=>$this->faker->randomElement(['Efectivo','Transferencia']),
             'estado'=>$this->faker->numberBetween(0,1),
             'Anticipo'=>$this->faker->numberBetween(500, 15000),
-            'Pendiente'=>$this->faker->name,
+            'Pendiente'=>$this->faker->numberBetween(300, 15000),
         ];
     }
 }
