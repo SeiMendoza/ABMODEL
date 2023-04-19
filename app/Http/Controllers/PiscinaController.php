@@ -115,8 +115,8 @@ class PiscinaController extends Controller
     public function edit($id)
     {
         $piscina = Piscina::findOrFail($id);
-         
-        return view('Piscina/inventario/editarproductop',compact('piscina'));
+        $tipo = PiscinaTipo::all();
+        return view('Piscina/inventario/editarproductop',compact('piscina','tipo'));
     }
 
     /**

@@ -2,10 +2,10 @@
 @section('title', 'Piscina-productos')
 
 @section('miga')
-    <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="#">Productos Piscina</a>
+    <li class="breadcrumb-item text-sm text-white opacity-6">
+        <a class="text-white" href="{{route('prodpiscina.index')}}">Productos Piscina</a>
     </li>
-    <li class="breadcrumb-item text-sm active text-dark active">Crear</li>
+    <li class="breadcrumb-item text-sm active text-white active">Crear</li>
 @endsection
 
 @section('content')

@@ -10,8 +10,7 @@
 @endsection
 @section('tit','Pedidos terminados')
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;left:1%;">Pedidos terminados</h3>
-<div class="" style=""> 
+ <div class=""> 
     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="margin:0; padding:5px; width:150px;" 
     type="button" class="bg-light border-radius-sm text-center">
         <i class="fa-solid fa-trash-can text-danger"></i> Eliminar pedidos
@@ -27,7 +26,7 @@
 @endsection
 @section('content')
 <div class="table-responsive">
-    <table class="table" id="example" style="">
+    <table class="table" id="example">
         <thead>
             <tr>
                 <th scope="col" style="text-align:center">N</th>

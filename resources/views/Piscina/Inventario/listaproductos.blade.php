@@ -7,8 +7,8 @@
 
 
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark active m-0 text-white">
-    <a class="font-weight-bolder opacity-8 text-white" href="{{route('piscina.store')}}">Nuevo producto</a>
+<li class="breadcrumb-item text-sm active m-0 text-white">
+    <a class="text-white" href="{{route('piscina.store')}}">Nuevo producto</a>
 </li>
 @endsection
 @section('tit','Productos de piscina')

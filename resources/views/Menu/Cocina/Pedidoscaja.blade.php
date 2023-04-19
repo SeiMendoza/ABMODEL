@@ -7,10 +7,8 @@
 @endsection
 @section('tit','Pedidos en caja')
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%; left:1%;">Pedidos en caja</h3>
-<div style="">
-    <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" 
-    type="button" class="bg-light border-radius-sm text-center">
+<div>
+    <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center">
         <i class="fa fa-plus-circle"></i> Pedidos terminados
     </a>
 </div>
@@ -20,7 +18,7 @@
 <!--------Lista de pedidos---------------->
 
 <div class="table-responsive">
-    <table class="table" id="example" style="">
+    <table class="table" id="example">
         <thead>
             <tr>
                 <th scope="col" style="text-align:center">N</th>
@@ -40,35 +38,40 @@
                 <td scope="col">{{$p->mesa_nombre->nombre}}</td>
                 <td scope="col">{{$p->quiosco}}</td>
                 <td scope="col">
-                    <!-----si existe en la columna estado_cocina 1 o 2 mostrara un texto o mostrar un icono para enviar------>
+                    <!---enviar a cocina--si existe en la columna estado_cocina 1 o 2 mostrara un texto o mostrar un icono para enviar------>
                     @if ($p->estado_cocina == 1)
-                    Enviado
+                    <!--Enviado-->
+                    <i class="fa fa-check text-success"></i>
                     @elseif($p->estado_cocina == 2 || $p->estado==2)
-                    Entregar
+                    <!--Entregar-->
+                    <i class="fa fa-check-double text-success"></i>
                     @else
                     <a href="#" id="envia_a_cocina" name="envia_a_cocina" data-bs-toggle="modal" data-bs-target="#static{{$p->id}}">
                         <i class="fa-solid fa-truck-fast text-success"></i>
                     </a>
                     @endif
                 </td>
-                <!-----si existe en la columna estado_cocina 1 o 2 mostrara un texto------>
+                <!--- enviado de cocina--si existe en la columna estado_cocina 1 o 2 mostrara un texto------>
                 <td scope="col">
                     @if ($p->estado_cocina == 1)
-                    Pendiente
+                    <!--Pendiente-->
+                    <i class="fa fa-check"></i>
                     @elseif ($p->estado_cocina == 2)
-                    Terminado
+                    <!--Terminado-->
+                    <i class="fa fa-check-double text-success"></i>
                     @else
 
                     @endif
                 </td>
                 <td scope="col">
-                    <!-----si existe en la columna estado_cocina 2 mostrara un icono para terminar el pedido------>
+                    <!---terminar en caja--si existe en la columna estado_cocina 2 mostrara un icono para terminar el pedido------>
                     @if($p->estado_cocina == 2)
                     <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}">
                         <i class="fa-solid fa-truck-fast text-success"></i>
                     </a>
                     @elseif($p->estado_cocina == 1)
-                    Esperando
+                    <!--Esperando de cocina-->
+                    <i class="fa fa-check"></i>
                     @else
                     @endif
                 <td scope="col">

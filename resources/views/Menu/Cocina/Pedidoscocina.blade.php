@@ -5,7 +5,7 @@
 @endsection
 @section('tit','Pedidos en cocina')
 @section('b')
-<h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; top:100%;left:1%;">Pedidos en cocina</h3>
+ 
 @endsection
 @section('content')
 
@@ -13,7 +13,7 @@
 
 <div class="">
     <div class="table-responsive">
-        <table class="table" id="example" style="">
+        <table class="table" id="example">
             <thead>
                 <tr>
                     <th scope="col" style="text-align:center">N</th>

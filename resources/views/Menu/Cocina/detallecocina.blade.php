@@ -1,18 +1,18 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalle de cocina')
 @section('miga')
-<li class="breadcrumb-item opacity-5 text-sm text-dark" aria-current="page">
-    <a class="text-dark" href="{{route('pedidosp.pedido')}}">Cocina</a>
+<li class="breadcrumb-item opacity-5 text-sm text-white" aria-current="page">
+    <a class="text-white" href="{{route('pedidosp.pedido')}}">Cocina</a>
 </li>
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">
-    <a class="text-dark">Detalles</a>
+<li class="breadcrumb-item text-sm text-white" aria-current="page">
+    <a class="text-white">Detalles</a>
 </li>
 @endsection
 
 @section('b')
-<div style="position:absolute; right:1%; top:30%">
-    <a href="{{route('pedidosp.pedido')}}" class="btn btn-danger" type="button" style="float: right;">Regresar</a>
-    
+<div>
+    <a href="{{route('pedidosp.pedido')}}" style="margin:0; padding:5px; width:150px;" 
+        type="button" class="bg-light border-radius-sm text-center">Regresar</a> 
 </div>
 @endsection
 @section('content')
@@ -21,22 +21,22 @@
     .titulo {
         width: 20%;
         font-weight: bold;
-        height: 70px;
-        line-height: 60px;
+        height: 40%;
+        line-height: 190%;
     }
 
     .informacion {
         width: 20%;
-        height: 70px;
-        line-height: 60px;
+        height: 40%;
+        line-height: 190%;
     }
 </style>
-<div class="mb-0 col-12 text-start">
+<div class="mb-0 col-12 text-start" style="position:absolute;top:0.2%;width:82%;">
 
-    <table class="table">
+    <table class="table" style="position: absolute;top:100%;width:100%;height:100%;">
 
-        <h5 class="card class-4 text-lg text-center" style="text-align:center;background:rgb(255,179,71); color:#fff;
-      position: relative;">Detalles del pedido en cocina: {{$pedido->nombreCliente}}</h5>
+        <h5 class="card class-4 text-lg text-center" style="text-align:center;background:rgb(255,179,71); color:#fff;">
+        Detalles del pedido en cocina: {{$pedido->nombreCliente}}</h5>
         <tr>
             <td class="titulo">Número de mesa: </td>
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
@@ -98,14 +98,12 @@
             <td class="titulo">Total:</td>
             <td class="informacion">L. <?=number_format($total_con_impuesto, 2, ".", ",") ?></td>
         </tr>
+        </tbody>
     </table>
-</div>
-
-
-    
-    <table class="table" id="example">
-                    <thead style="padding-top: 2px;">
-                        <tr class="text-dark">
+    <div class="mb-0 col-9 text-start" style="position:absolute;top:260%;width:100%;">
+    <table class="table" id="example" style="width:100%;height:100%;">
+                    <thead>
+                        <tr class="text-dark" style="background:rgba(255,179,71,0.6);">
                             <th scope="col" style="width:20%; text-align:center;">Nombre</th>
                             <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
                             <th scope="col" style="width:20%; text-align:center;">Precio</th>
@@ -143,5 +141,7 @@
                         @endforelse
                     </tbody>
                     </table>
+                    </div>
 
+</div>
     @stop

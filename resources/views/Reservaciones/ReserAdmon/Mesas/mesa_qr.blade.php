@@ -1,11 +1,11 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Código-Qr')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">
-    <a class="opacity-5 text-dark" href="{{route('mesas_reg.index')}}">Mesas</a>
+<li class="breadcrumb-item opacity-6 text-sm text-white" aria-current="page">
+    <a class="text-white" href="{{route('mesas_reg.index')}}">Mesas</a>
 </li>
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">
-    <a class="text-dark">Código Qr </a>
+<li class="breadcrumb-item text-sm text-white" aria-current="page">
+    <a class="text-white">Código Qr </a>
 </li>
 @endsection
 
@@ -16,7 +16,7 @@
         <div class="card-body border-radius-sm border-0"> <BR><BR>
             <h3 class="border-radius-md h-6 text-center text-gray font-weight-bolder" style="text-align:right">
                 Código Qr para: {{$reg->nombre}} </h3><br>
-            <div style="position:relative;left:40%">
+            <div style="text-align:center">
                 <svg style="width:250px; height:250px;">
                     <image xlink:href="{{ $qr }}" style="width:80%; height:80%;" />
                 </svg>
