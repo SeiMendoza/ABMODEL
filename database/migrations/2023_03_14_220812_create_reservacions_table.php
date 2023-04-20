@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('celular');
             $table->date('fecha');
-            $table->time('hora');
+            $table->time('horaI');
+            $table->time('horaF');
             $table->string('tipo');
             $table->double('alimentos');
             $table->integer('cantidad');

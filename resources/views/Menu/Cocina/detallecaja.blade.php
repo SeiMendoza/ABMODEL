@@ -128,9 +128,9 @@
             </tr>
             <tr>
                 <td class="titulo">Impuesto: </td>
-                <td class="informacion">L. <?= number_format($impuesto, 2, ".", ",") ?></td>
+                <td class="informacion">L. <?= number_format($pedido->imp, 2, ".", ",") ?></td>
                 <td class="titulo">Total:</td>
-                <td class="informacion">L. <?= number_format($total_con_impuesto, 2, ".", ",") ?> </td>
+                <td class="informacion">L. <?= number_format($pedido->total, 2, ".", ",") ?> </td>
             </tr>
         </tbody>
     </table>

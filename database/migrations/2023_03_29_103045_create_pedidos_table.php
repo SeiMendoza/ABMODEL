@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('quiosco');
             $table->string('nombreCliente');
-            $table->double('imp')->default('0');
-            $table->double('total')->default('0');
+            $table->double('imp');
+            $table->double('total');
             $table->string('estado')->default('0'); 
             $table->string('estado_cocina')->default('0'); 
             $table->unsignedBigInteger('mesa_id');

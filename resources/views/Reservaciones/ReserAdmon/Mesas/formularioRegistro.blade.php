@@ -13,6 +13,8 @@
                     <h2 class="title">Registro de mesas</h2>
                     <form method="POST" action="{{route('mesas_reg.store')}}"  enctype="multipart/form-data">
                         @csrf
+                        <h4 class="font-robo t" style="margin: 0; padding:0">Datos de la mesa: </h4>
+                        <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="font-robo form-group">

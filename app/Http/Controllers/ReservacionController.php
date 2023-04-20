@@ -89,9 +89,10 @@ class ReservacionController extends Controller
         
     }
     public function edit($id)
-    {
-        $reservacion = Reservacion::findOrFail($id);
-        return view('Reservaciones.ReserAdmon.Quiosco.editarReservaciones',  compact('reservacion'));
+    {   
+        $kiosko = Kiosko::all();
+        $registro = Reservacion::findOrFail($id);
+        return view('Reservaciones.ReserAdmon.Quiosco.editarReservaciones',  compact('registro', 'kiosko'));
     }
     public function update(Request $request, $id){
 

@@ -1,9 +1,9 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalles de la reservación')
 @section('miga')
-<li class="breadcrumb-item text-sm text-dark" aria-current="page">  
-    <a class="opacity-5 text-dark" href="{{route('kiosko_res.index')}}">Reservación del Kiosko</a></li>
-<li class="breadcrumb-item text-sm"><a class=" text-dark">Detalles </a></li>
+<li class="breadcrumb-item text-sm " aria-current="page">  
+    <a class="opacity-5 text-white" href="{{route('kiosko_res.index')}}">Reservacines de Kioskos</a></li>
+<li class="breadcrumb-item text-sm"><a class="text-white ">Detalles de la reservación </a></li>
 @endsection
 
 @section('content')
@@ -13,6 +13,7 @@
         font-size: 17px;
         height: 30px;
         line-height: 30px;
+        color:rgba(111, 143, 175);
     }
 
     
@@ -25,18 +26,18 @@
 </style>
 
 <div class="wrapper wrapper--w960">
-    <div class="row d-flex justify-content-center">
-         <div class="card shadow items-center"> <BR><BR>
-            <h3 class=" font-weight-bold" style="color: teal; text-align:center"> 
+    <div class="row d-flex justify-content-center" >
+         <div class="card shadow items-center" style="margin: 0">
+            <h3 class=" font-weight-bold" style="color:rgba(111, 143, 175); text-align:center"> 
                 Detalles de la reservación de: {{$reservacion->nombre}} </h3>
             <div class="card-body">
                 <table class="table" >
-                    <thead style="background-color: rgba(81, 255, 0, 0.182)">
+                    <thead style="background-color: rgba(111, 143, 175, 0.600)">
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo"><strong>Datos</strong></td>
+                            <td class="text-white"><strong>Datos</strong></td>
                             <td class="informacion"></td>
-                            <td class="titulo"><strong>Información</strong></td>
+                            <td class="text-white"><strong>Información</strong></td>
                             <td class="informacion"></td>
                         </tr>
                     </thead>
@@ -133,9 +134,9 @@
                     </tbody>
                 </table>
 
-                <div style="background-color: rgba(81, 255, 0, 0.182);text-align:center; font-size:16px">
-                    <a href="{{route('kiosko_res.index')}}" class=" " 
-                     style=" width:915px; " ><strong>Regresar</strong></a>
+                <div style="text-align:center; font-size:16px">
+                    <a href="{{route('kiosko_res.index')}}" class="btn" 
+                     style="background-color: rgba(111, 143, 175, 0.600);" ><strong>Regresar</strong></a>
                 </div>
 
             </div>  

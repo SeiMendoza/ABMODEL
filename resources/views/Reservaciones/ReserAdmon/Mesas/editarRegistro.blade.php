@@ -14,6 +14,7 @@
                     <form method="POST" action="{{route('mesas_reg.update',['id' => $registro ->id])}}"  enctype="multipart/form-data">
                         @method('put')
                         @csrf
+                        <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="font-robo form-group">

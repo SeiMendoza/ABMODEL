@@ -17,12 +17,12 @@
         <link href="/assets/fontawesome/css/font-awesome.min.css" rel="" media="all">
 
         <!-- CSS Files -->
-        <link id="pagestyle" href="/css/argon-dashboard.css" rel="stylesheet" />
-        <link rel="stylesheet" href="/css/menuStyles/menuStyles.css" type="text/css">
+        <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet" media="all">
 
         <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script>
 </head>
-<body style="background-color:rgba(207, 207, 207, 0.34); padding:0px; overflow:hidden">
+<body class="g-sidenav-show bg-gray-100" style="overflow-x:hidden;" >
     <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
@@ -40,20 +40,38 @@
 
     </script>
     
-    <div class="" style="width: 100%; padding:0; margin:0;">
+    <div class="" style="width: 100%; padding:0; margin:0; ">
         <div class="" style="margin: 0px; padding:0; width: 67%; display:block; float:left">
-            <div class="nav d-flex justify-content-start bg-warning" style="margin: 0px; padding:0;">
-                <h3 style="padding:0; margin:1% 41% 0 1%; " class="text-white title font-robo">Menú del Día</h3>
-                <div class="nav-link-icon navbar-search" style="margin: 10px 0 0 0px;">
-                    <input id="myInput" type="text" placeholder="Buscar en el menú" style="width: 300px; height:42px" class="border-0 border-radius-sm">
+            <div id="" style="width: 100%; height:60px;" class="bg-warning">
+                <div class="" style="margin:0 0 0 0%; width:14%; padding:0%; display:block; float:left">
+                <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
+                    <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 100%; height:60px;">
+                </a>
                 </div>
-                <div style="margin: 10px 0 0 8px;" class=" nav-link-icon d-flex justify-content-end">
-                    <a href="{{route("index")}}" class="btn btn-menu text-warning border-0 border-radius-sm"><i class="ni ni-palette text-warning"></i> Inicio</a>
+                <div class="" style="margin:0% 0% 0 1%; width:83.8%;  height:60px; padding:0%; display:block; float:left">    
+                    <nav class="navbar navbar-main navbar-expand-lg shadow-none border-radius-xl " id="navbarBlur"
+                        data-scroll="false" style="padding: 0;">
+                        <nav aria-label="breadcrumb" style=" display:block; float:left;">
+                            <ol class="breadcrumb bg-transparent" style="margin: 1% 0 0% 0; padding:0;">
+                                <li class="breadcrumb-item text-sm"><h2 class="font-weight-bolder text-white " style="margin:0">Menú del día</h2></li>
+                            </ol> 
+                        </nav>
+                        <div class="collapse navbar-collapse" id="navbar" style="display:block; float:right; height:75px; margin-top:2%">
+                            <div class="ms-md-auto" style="float:inline-end">  
+                                <div class="input-group">
+                                    <span class="input-group-text text-body"><i class="fas fa-search"
+                                            aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" placeholder="Busqueda..." name="myInput" id="myInput">
+                                </div> 
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </div>
+           
             <!-- Catalogo de Productos -->
-            <div class="table-responsive" style="height: 636px; overflow-y: auto; overflow-x: hidden;
-                scroll-behavior: smooth;">
+            <div class="table-responsive" style="height: 628px; overflow-y: auto; overflow-x: auto; 
+                scroll-behavior: smooth; margin-top:5px">
                 <section class="NovidadesSection" style="">     
                     <main class="main-content position border-radius-lg">   
                         <div class="tab-content" id="pills-tabContent">
@@ -247,115 +265,144 @@
                 </footer>
             </div>
         </div>
-        <div class="" style="padding: 0px; width: 33%; margin: 0; display:block; float:left">
-            <div class="container-fluid" style="padding: 0px;">
-                <div class="nav d-flex justify-content-center bg-gradient-warning" style="height: 67px; width: 100%">
-                    <h3 style="padding:0; margin:2% 0% 0 1%; " class="text-white title font-robo">Pedido</h3>  
+        <div class="bg-gradient-faded-white" style="padding: 0px; width: 33%; margin: 0; display:block; float:left">
+            <div class="container-fluid " style="padding: 0px;">
+                <div class="nav d-flex justify-content-center bg-gradient-warning" style="height: 60px; width: 99%">
+                    <h3 style="padding:0; margin:15px 0% 0 5px; " class="text-white title font-robo">Pedido</h3> 
                     <br><br>
                 </div> 
-                <div class="row table-responsive" id="carrito" style="height: 22.4rem; width:100%; margin:0">
-                    <table class="tab" id="lista">
-                    <thead style="padding-top: 2px;">
-                        <tr class="text-dark">
-                            <th scope="col" style="width:20%">Nombre</th>
-                            <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
-                            <th scope="col" style="width:20%; text-align:right;">Precio</th>
-                            <th scope="col" style="width:20%; text-align:right;">Sub-total</th>
-                            <th scope="col" style="width:20%; text-align:center;">Quitar</th>
-                        </tr>
-                    </thead>
-                    <tbody class="col" style="overflow:auto;" id="">
-                        @php
-                            $sum = 0;
-                        @endphp
-                        @forelse($detalles as $i => $detalle)
-                            
-                            <tr>
-                                <td scope="" class="" style="width:20%; text-align:left; height:42px;">{{$detalle->nombre}}</td>
-                                <td scope=""  style=" width:20%; text-align:center; height:42px;"><input type="number" class="border-0 border-radius-sm" 
-                                    style="width: 80px" min="1" max="2000" maxlength="4" minlength="1" value="{{ $detalle->cantidad }}"></td>
-                                <td scope="col" style="text-align:right; width:20%; height:42px;">L {{ number_format($detalle->precio, 2, ".", ",") }}</td>
-                                <td scope="col" style="text-align:right; height:42px;">L {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
-                                <td scope="col" style="text-align: center; height:42px;">
-                                    <form action="{{route('cliente_detalles.destroy', ['id' => $detalle->id])}}" id="borrar" method="post" enctype="multipart/form-data">
-                                        @method('delete')
-                                        @csrf
-                                        <button onclick="borrar()"  style="border: 0; padding:0; margin:0;" >
-                                            <i class="fa-solid fa-trash-can text-danger" style="border: 0; padding:0; margin:0;"></i></button>
-                                    </form>
-                                </td>
+                <div style="height: 377px; margin:0px; margin-top:101px; overflow-y:auto;">
+                    <div class="row" id="carrito" style="margin: 0; padding:0;">
+                        <table class="table overflow-auto" id="lista" style="margin: 0; padding:0;">
+                        <thead style="padding-top: 2px;">
+                            <tr class="text-dark">
+                                <th scope="col" style="padding:3px; text-align:;">Nombre</th>
+                                <th scope="col" style="padding:3px; text-align:center;">Cantidad</th>
+                                <th scope="col" style="padding:3px; text-align:right;">Precio</th>
+                                <th scope="col" style="padding:3px; text-align:right;">Sub-total</th>
+                                <th scope="col" style="padding:3px; text-align:center;">Quitar</th>
                             </tr>
+                        </thead>
+                        <tbody class="col"  id="" >
                             @php
-                                $sum += $detalle->precio*$detalle->cantidad;
+                                $sum = 0;
                             @endphp
+                            @forelse($detalles as $i => $detalle)
+                                <tr style="">  
+                                    <td scope="" class="" style="width:5%; text-align:left;">{{$detalle->nombre}}</td>
+                                    <td scope=""  style="width:4%; text-align:center; "><input type="number" class="border-0 border-radius-sm" 
+                                        style="" min="1" max="2000" maxlength="4" minlength="1" value="{{ $detalle->cantidad }}">
+                                        @error('number')
+                                        <small class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </small>
+                                        @enderror
+                                    </td>
+                                    <td scope="col" style="text-align:right; width:4%; ">L {{ number_format($detalle->precio, 2, ".", ",") }}</td>
+                                    <td scope="col" style="text-align:right; width:4%; ">L {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
+                                    <td scope="col" style="text-align: center; width:4%;">
+                                        <form action="{{route('cliente_detalles.destroy', ['id' => $detalle->id])}}" id="borrar" method="post" enctype="multipart/form-data">
+                                            @method('delete')
+                                            @csrf
+                                            <button onclick="borrar()"  style="border: 0; padding:0; margin:0;" >
+                                                <i class="fa-solid fa-trash-can text-danger" style="border: 0; padding:0; margin:0;"></i></button>
+                                        </form>
+                                    </td>
+                                    
+                                </tr>
+                                @php
+                                    $sum += $detalle->precio*$detalle->cantidad;
+                                @endphp
+                                
+                            @empty
+                                <tr>
+                                    <td colspan="8">Vacio</td>
+                                </tr>
+                                
+                            @endforelse
                             
-                        @empty
-                            <tr>
-                                <td colspan="8">Vacio</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                    </table>
-                </div>
-                <div class="nav d-flex justify-content-center bg-gradient-warning" style="height: 40px; width: 100% ">
-                    <h5 style="padding:0; margin:1% 0% 0 0%; " class="text-white title font-robo">Datos:</h5>  
-                    <br><br>
+                        </tbody>
+                        </table>
+                    </div>
                 </div>
                 <form action="{{ route('cliente_pedido.store') }}" id="formulario" name="formulario" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div style="width: 99%">
-                        <div class="input-group" style="">
-                            <Label class="h6 title col-form-label font-robo" style="margin: 1% 5% 0 0;" for="mesa">Pedido de la Mesa:</Label>
-                            <select name="mesa" required style="height:42px; border-radius:0; margin: 4px 0px 5px 23px;" id="mesa"
-                                class="form-control input--style-2 border-0 ps-2 font-robo">
-                                <option disabled="disabled" selected="selected" >Mesa</option>
-                                @foreach($mesas as $m)
-                                    <option value="{{$m->id}}">{{$m->nombre}}</option>
-                                @endforeach
-                            </select>
-                            @error('mesa')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-                            @foreach($mesas as $m)
-                                <input type="text" value="{{$m->kiosko_id}}" id="kiosko" name="kiosko" hidden>
-                            @endforeach
-                        </div>
-                        <div class="input-group" >
-                            <label class="h6 text-xl-center title col-form-label col-auto" for="nombre" style="margin: 0 5% 0 0;">Nombre del cliente:</label>
-                            <input name="nombre" type="text" class="ps-2 input--style-2 form-control border-0 border-radius-sm" id="nombre" maxlength="50" minlength="3"
-                                required placeholder="Ingrese el nombre" value="{{ old('nombre') }}" style="margin: 0px 0px 5px 20px; height:42px;">
-                            <div class="invalid-feedback">  
+                    <div style="width: 99%" class="">
+                        <div style="position:absolute; top: 60px; width: 33%">
+                            <div class="input-group" style="margin: 0; border: 0; width: 99%">
+                                @php
+                                    $k_id
+                                @endphp
+                                <Label class="h6 col-form-label font-robo" style="margin: 5px 5% 0 0;" for="mesa">Pedido de la Mesa:</Label>
+                                <select name="mesa" required style="height:42px; border-radius:0; margin: 5px 0px 5px 23px;" id="mesa"
+                                    class="form-control input--style-2 border-0 ps-2 font-robo">
+                                    <option disabled="disabled" selected="selected" >Mesa</option>
+                                    @foreach($mesas as $m)
+                                        <option value="{{$m->id}}">{{old('mesa', $m->nombre)}}</option>
+                                            @php
+                                                $k_id = $m->kiosko_id;
+                                            @endphp
+                                    @endforeach
+                                </select>
+                                @error('mesa')
+                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                @enderror
+                                <input type="text" value="{{$k_id}}" id="kiosko" name="kiosko" hidden>     
                             </div>
-                            @error('nombre')
-                                <span class="menerr" style="color:red">{{ $message }}</span>
+                            <div class="input-group" style="margin: 0; border: 0; width: 99%">
+                                <label class="h6 font-robo col-form-label" for="nombre" style="margin: 0 5% 0 0;">Nombre del cliente:</label>
+                                <input name="nombre" type="text" class="ps-2 input--style-2 form-control border-0 border-radius-sm" id="nombre" maxlength="50" minlength="3"
+                                    required placeholder="Ingrese el nombre" value="{{ old('nombre') }}" style="margin: 0px 0px 5px 20px; height:42px;">
+                                <div class="invalid-feedback">  
+                                </div>
+                                @error('nombre')
+                                    <span class="menerr" style="color:red">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        @php
+                            $sub = number_format($sum - $sum*0.15, 2, ".", ",");
+                            $isv = number_format($sum*0.15, 2, ".", ",");
+                            $tot = number_format($sum, 2, ".", ",");
+                        @endphp
+                        @if ($tot > 0.00)
+                            <input type="number" name="t" id="t" value="{{$tot}}" hidden>
+                        @else
+                            <input type="number" name="t" id="t" value="" hidden>
+                            @error('t')
+                            <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
-                        </div>                        
-                        <div class="input-group" >
-                            <label class="h6 text-xl-center title col-form-label col-auto" for="sub" style="margin: 0 17% 0 0;">Sub-Total: L</label>
-                            <input class="ps-2 input--style-2 form-control border-0 border-radius-sm opacity-5" id="sub"
-                                name="sub" type="text" style="height:42px; margin: 0px 0px 5px 16px; padding:0; text-align:right;"  
-                                value="{{number_format($sum - $sum*0.15, 2, ".", ",")}}"></input>
-                        </div>                   
-                        <div class="input-group" >
-                            <label class="h6 text-xl-center title col-form-label col-auto" for="isv" style="margin: 0 19% 0 0;">ISV 15%: L</label>
-                            <input class="ps-2 input--style-2 form-control border-0 border-radius-sm opacity-5" id="isv" name="isv" 
-                            type="text" style="margin: 0px 0px 5px 16px; padding:0; text-align:right; height:42px;" 
-                            value="{{number_format($sum*0.15, 2, ".", ",")}}">
-                        </div>                 
-                        <div class="input-group" >
-                            <label class="h6 text-xl-center title col-form-label col-auto" for="total" style="margin: 0 24% 0 0;">Total: L</label>
-                            <input class="ps-2 input--style-2 form-control border-0 border-radius-sm" type="text" id="total" name="total"  
-                            style=" margin: 0px 0px 4px 16px; padding:0; text-align:right; height:42px;"
-                            value="{{number_format($sum, 2, ".", ",")}}"></input>
-                        </div> 
+                        @endif     
+                        <div class="" style="margin: 0; margin-top:3%; padding:0">
+                            <div class="input-group" style="margin: 0; border: 0;">
+                                <label class="h6 font-robo col-form-label" for="sub" style="margin: 0 15% 0 0;">Sub-Total: L</label>
+                                <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" id="sub"
+                                    name="sub" type="text" style="height:42px; margin: 0px 0px 5px 20px; padding:0; text-align:right;"  
+                                    value="{{$sub}}" required readonly>
+                            </div>                   
+                            <div class="input-group" style="margin: 0;  border: 0;">
+                                <label class="h6 text-xl-center col-form-label col-auto" for="isv" style="margin: 0 15% 0 0;">ISV 15%: L</label>
+                                <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" id="isv" name="isv" 
+                                type="number" style="margin: 0px 0px 5px 30px; padding:0; text-align:right; height:42px;" 
+                                value="{{$isv}}" required readonly>
+                            </div>                 
+                            <div class="input-group" style="margin: 0;  border: 0;">
+                                <label class="h6 text-xl-center col-form-label col-auto" for="total" style="margin: 0 15% 0 0;">Total: L</label>
+                                <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" 
+                                min="1" type="number"  
+                                style=" margin: 0px 0px 4px 55px; padding:0; text-align:right; height:42px;"
+                                value="{{$tot}}" required readonly>
+                                
+                            </div> 
+                        </div>
                     </div>
-                    <div class="bg-gradient-warning d-flex align-content-start" style="text-align: center; width:100%;">
+                    <div class="bg-gradient-warning" style="text-align: center; width:99%; height:49px; margin:0;">
                         <a href="#" onclick="cancelar('menu/prueba')" id="cancelar"
-                        class="btn btn-danger px-6 border-0 border-radius-sm" style="margin: 4px 5px 3.5px 30px;">Cancelar</a>
-                        <button href="{{route('cliente_prueba')}}" onclick="guardar()" id="procesar-compra"
-                            class="btn btn-success px-6 border-0 border-radius-sm" style="margin: 4px 5px 3.5px 30px;">Guardar</button>  
+                        class="btn btn-danger border-0 border-radius-sm" style="margin-top:5px">Cancelar</a>
+                        <button href="#" id="cancelar" type="submit"
+                        class="btn btn-success border-0 border-radius-sm" style="margin-top:5px">Guardar</button>
                     </div>
-                    
+                    </div>
                 </form>
             </div>  
         </div>
@@ -367,7 +414,7 @@
         $(document).ready(function(){
           $("#myInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $("#productos div").filter(function() {
+            $("#productos button").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });

@@ -3,7 +3,7 @@
 @section('miga')
 <li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Reservaciones de kioskos</li>
 @endsection
-@section('tit','Reserservaciones de kioskos')
+@section('tit','Reservaciones de kioskos')
 @section('b')
     <div class="" style="">    
         <a href="{{route('kiosko_res.create')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" 

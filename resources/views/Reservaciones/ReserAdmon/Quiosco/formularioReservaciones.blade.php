@@ -3,7 +3,7 @@
 @section('miga')
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
     href="{{route('kiosko_res.index')}}">Reservaciones de kioskos</a></li>
-<li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de kiosko</li>
+<li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de reservación</li>
 @endsection
 @section('content')
     <div class="page-wrapper font-robo">
@@ -200,7 +200,7 @@
                             </div>
                         </div>
                         <div  class="d-flex justify-content-end" style="margin: 0 23px 0 0"> 
-                            <button type="button" onclick="cancelar('kioskp/reservaciones')" class="btn btn-danger">Cancelar</button>
+                            <button type="button" onclick="cancelar('kiosko/reservaciones')" class="btn btn-danger" style="margin-right: 5px">Cancelar</button>
                             <button onclick="" type="submit" class="btn btn-success">Guardar</button>
                         </div>
                     </form>
