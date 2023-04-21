@@ -11,11 +11,10 @@
 
 @section('b')
 <div>
-<a href="{{route('pedidos.caja')}}" style="margin:0; padding:5px; width:150px;" 
-        type="button" class="bg-light border-radius-sm text-center"> Regresar
-       </a> 
+    <a href="{{route('pedidos.caja')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center"> Regresar
+    </a>
 
-   <!--- <a href="{{route('pedidos.caja')}}" class="btn btn-danger border-radius-sm" 
+    <!--- <a href="{{route('pedidos.caja')}}" class="btn btn-danger border-radius-sm" 
     type="button" style="margin:0; padding:3px; width:150px;">Regresar</a>  --->
 </div>
 @endsection
@@ -63,15 +62,6 @@
                     Enviar
 
                     @endif
-                    <!--- @if ($pedido->estado == 0)
-                Pendiente en cocina
-            @else
-                @if ($pedido->estado == 1)
-                    Pendiente en caja
-                @else
-                    Terminado
-                @endif  
-            @endif ---->
                 </td>
             </tr>
             <script>
@@ -128,9 +118,9 @@
             </tr>
             <tr>
                 <td class="titulo">Impuesto: </td>
-                <td class="informacion">L. <?= number_format($pedido->imp, 2, ".", ",") ?></td>
+                <td class="informacion">L. <?= number_format($impuesto, 2, ".", ",") ?></td>
                 <td class="titulo">Total:</td>
-                <td class="informacion">L. <?= number_format($pedido->total, 2, ".", ",") ?> </td>
+                <td class="informacion">L. <?= number_format($total_con_impuesto, 2, ".", ",") ?> </td>
             </tr>
         </tbody>
     </table>
@@ -142,36 +132,41 @@
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
                     <th scope="col" style="width:20%; text-align:center;">Precio</th>
                     <th scope="col" style="width:20%; text-align:center;">Sub-total</th>
+                    @if($pedido->estado_cocina == 0)
+                    <th scope="col" style="width:20%; text-align:center;">Acciones</th>
+                    @endif
                 </tr>
             </thead>
             <tbody class="col" style="overflow:auto;" id="">
-                @php
-                $sum = 0;
-                @endphp
-                @forelse($detapedido as $i => $detalle)
 
-                <tr>
-                    <td scope="col" style="width:20%; text-align:center; height:20%;">{{$detalle->nombre}}</td>
-                    <td scope="col" style=" width:20%; text-align:center; height:20%;">{{ $detalle->cantidad }}</td>
-                    <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
-                    <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
-                    <!---  <td scope="col" style="text-align: center; height:42px;">
-                                {{$detalle->pedido->mesa_nombre->nombre}}
-                                <form action="{{route('cliente_detalles.destroy', ['id' => $detalle->id])}}" id="borrar" method="post" enctype="multipart/form-data">
-                                    @method('delete')
-                                    @csrf
-                                    <button onclick="borrar()"  style="border: 0; padding:0; margin:0;" >
-                                            <i class="fa-solid fa-trash-can text-danger" style="border: 0; padding:0; margin:0;"></i></button>
-                                        </form> 
-                                    </td>--->
+
+
+                @foreach ($detapedido as $detalle)
+                <td scope="col" style="width:20%; text-align:center; height:20%;">{{$detalle->nombre}}</td>
+                <td scope="col" style=" width:20%; text-align:center; height:20%;">{{ $detalle->cantidad }}</td>
+                <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
+                <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
+                @if($pedido->estado_cocina == 0 )
+                <td scope="col" style="text-align:center; width:20%; height:20%;">
+                    <div style="display: flex; justify-content: center; flex-direction: row;">
+                        <a href="{{ route('detallep.edit', ['pedido_id' => $pedido->id, 'detalle_id' => $detalle->id]) }}" style="margin-right: 10px;">
+                            <i class="fa-solid fa-edit text-success" style="color: rgb(33, 195, 247);"></i>
+                        </a>
+                        <form action="{{ route('detallep.destroy', ['id' => $detalle->id]) }}" id="borrar" method="post" enctype="multipart/form-data">
+                            @method('delete')
+                            @csrf
+                            <button onclick="borrar()" style="border: 0; padding: 0; margin: 0;">
+                                <i class="fa-solid fa-trash-can text-danger" style="border: 0; padding: 0; margin-left: 10px;"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+
+                @endif
                 </tr>
-                @php
-                $sum += $detalle->precio*$detalle->cantidad;
-                @endphp
 
-                @empty
 
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DetallesUsuario;
 use App\Models\Mesa;
 use App\Models\Pedido;
+use Illuminate\Support\Facades\Session;
 use App\Models\PiscinaUso;
 use Database\Seeders\PlatillosyBebidasSeeder;
 
@@ -76,7 +77,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     public function terminados()
     {
         $pedido = Pedido::where('estado', 3)->orderby('id')->get();
-        $p = Mesa::all(); 
+        $p = Mesa::all();
         $texto = "";
         return view('Menu/Cocina/Terminados', compact('pedido', 'texto', 'p',));
     }
@@ -177,14 +178,33 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             return redirect()->route('pedidosp.pedido')->with('mensaje', 'Pedido enviado a caja!');
         }
     }
-
     public function detalle_pedido_terminados($id)
+{
+    $pedido = Pedido::findOrFail($id);  
+    $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
+  
+    $suma = 0;
+    $total_con_impuesto = 0;
+    $impuesto = 0;
+
+    foreach ($detapedido as $detalle) {
+        $tasa_impuesto = 0.15;
+        $suma += $detalle->precio * $detalle->cantidad;
+        $impuesto = $suma * $tasa_impuesto;
+
+        $total_con_impuesto = $suma + $impuesto;
+    }
+
+    return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido', 'total_con_impuesto', 'impuesto'));
+}
+   
+    public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
         $suma = 0;
         $total_con_impuesto = 0;
-        $impuesto = 0 ;
+        $impuesto = 0;
         foreach ($detapedido as $detalle) {
             $tasa_impuesto = 0.15;
             $suma += $detalle->precio * $detalle->cantidad;
@@ -192,33 +212,16 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
 
             $total_con_impuesto = $suma + $impuesto;
         }
-        return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido','total_con_impuesto', 'impuesto'));
-    }
-
-    public function detalle_pedido_pendientes($id)
-    { 
-        $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
-        $pedido = Pedido::findOrfail($id);
-        $suma = 0;
-        $total_con_impuesto = 0;
-        $impuesto = 0 ;
-        foreach ($detapedido as $detalle) {
-            $tasa_impuesto = 0.15;
-            $suma += $detalle->precio * $detalle->cantidad;
-            $impuesto = $suma * $tasa_impuesto;
-
-            $total_con_impuesto = $suma + $impuesto;
-        }
-        return view('Menu/Cocina/detallecocina', compact('pedido', 'detapedido','total_con_impuesto', 'impuesto'));
+        return view('Menu/Cocina/detallecocina', compact('pedido', 'detapedido', 'total_con_impuesto', 'impuesto'));
     }
 
     public function detalle_terminados($id)
-    { 
+    {
         $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
         $suma = 0;
         $total_con_impuesto = 0;
-        $impuesto = 0 ;
+        $impuesto = 0;
         foreach ($detapedido as $detalle) {
             $tasa_impuesto = 0.15;
             $suma += $detalle->precio * $detalle->cantidad;
@@ -226,7 +229,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
 
             $total_con_impuesto = $suma + $impuesto;
         }
-        return view('Menu/Cocina/detalleterminado', compact('pedido', 'detapedido','total_con_impuesto', 'impuesto'));
+        return view('Menu/Cocina/detalleterminado', compact('pedido', 'detapedido', 'total_con_impuesto', 'impuesto'));
     }
 
     public function pedidos_anteriores(Request $request)
@@ -249,7 +252,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         }
     }
 
-  /*  public function borrarDatos()
+    /*  public function borrarDatos()
     {
         $cliente = DB::table('Pedidos')->where('estado', 3)->delete();
         return back()->with('mensaje', 'Pedidos Borrados Satisfactoriamente.');
@@ -259,5 +262,50 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     {
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detallesPedAnteriores', compact('pedido'));
+    }
+    public function destroy($id)
+    {
+        DetallesUsuario::destroy($id);
+        return redirect()->route('pedidos.caja')->with('mensaje', 'Detalle borrado correctamente');
+    }
+    public function edit($pedido_id, $detalle_id)
+    {
+        $edit = DetallesUsuario::findOrFail($detalle_id);
+        $pedido = Pedido::findOrfail($pedido_id);
+        $productos = DetallesUsuario::pluck('nombre')->unique();
+        return view('Menu/Cocina/editardetallecaja', compact('edit', 'pedido', 'productos'));
+    }
+    public function update(Request $request, $pedido_id, $detalle_id)
+    {
+        $request->validate([
+            'cantidad' => ['required', 'numeric', 'digits_between:1,3', 'min:1'],
+            'precio' => ['required', 'numeric', 'min:0'],
+        ], [
+            'cantidad.min' => 'La cantidad minima es 1',
+            'cantidad.digits_between' => 'Solo se permiten 3 digitos'
+        ]);
+
+        $detalle = DetallesUsuario::find($detalle_id);
+        $pedido = $detalle->pedido;
+        $detalle->nombre = $request->nombre;
+        $detalle->cantidad = $request->input('cantidad');
+        $detalle->precio = $request->input('precio');
+        $impuesto = $detalle->precio * $detalle->cantidad * 0.15; // calcular el impuesto
+        $total = $detalle->precio * $detalle->cantidad + $impuesto; // calcular el total
+
+        $pedido->imp = $impuesto;
+        $pedido->total = $total;
+
+        $detalle->save();
+        $pedido->save();
+        return redirect()->route('pedidost.detalle', ['id' => $pedido_id])->with('mensaje', 'El detalle del pedido ha sido actualizado exitosamente.');
+    }
+/**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
+    public function obtenerPrecio(Request $request)
+    {
+        $producto = $request->input('producto');
+        $precio = DB::table('detalles_usuarios')->where('nombre', $producto)->value('precio');
+        Session::put('producto_precio', $precio);
+        return $precio;
     }
 }

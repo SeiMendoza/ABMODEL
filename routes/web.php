@@ -88,10 +88,19 @@ Route::get('/menu/pedidost', [PedidoUsuarioController::class, 'search'])
 ->name('pedidost.search');/*buscar pedidos terminados*/
 Route::get('/pedidos/caja/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])
 ->name('pedidost.detalle');/*detalle de pedidos pendientes de terminar en caja*/
+Route::delete('/pedidos/detalles/{id}/borrar', [PedidoUsuarioController::class, 'destroy'])
+->name('detallep.destroy')->where('id','[0-9]+');/**borrar detalle de caja */
+Route::get('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'edit'])
+    ->name('detallep.edit');
+Route::put('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'update'])
+->name('detallep.update')->where('id','[0-9]+');/**editar detalle de caja */
 Route::get('/pedidos/cocina/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_pendientes'])
 ->name('pedidosp.detalle');/*detalle de pedidos pendientes en cocina*/
 Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 'detalle_terminados'])
 ->name('terminados.detalle'); /*lista de pedidos terminados*/
+
+Route::post('/obtener-precio',[PedidoUsuarioController::class, 'obtenerPrecio'])
+->name('obtener-precio');
 
  /*****************************
   Rutas Para Menu de cliente

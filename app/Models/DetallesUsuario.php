@@ -19,7 +19,7 @@ class DetallesUsuario extends Model
 
     public function pedido()
     {
-       return $this->belongsTo(Pedido::class);
+       return $this->belongsTo(Pedido::class,'pedido_id');
     }
 
     public function combos()
