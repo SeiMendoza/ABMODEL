@@ -6,8 +6,8 @@
 <li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de reservación</li>
 @endsection
 @section('content')
-    <div class="page-wrapper font-robo">
-        <div class="wrapper wrapper--w960">
+    <div class="" style="margin-bottom: 10px">
+        <div class="wrapper wrapper--w960" >
             <div class="card border-radius-sm border-0" style="padding-bottom:0">
                 <div class="card-body border-radius-sm border-0" style="padding-bottom:0">
                     <h2 class="title" style="margin-bottom:0%">Reservación de Kiosko</h2>
@@ -18,7 +18,7 @@
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="font-robo form-group">
-                                    <label for="name">Nombre:</label>
+                                    <label for="name" style="margin-left: 0;">Nombre:</label>
                                     <input class="form-control border-radius-sm" type="text" placeholder="Nombre" name="name" id="name" minlength="7" 
                                     maxlength="7" value="{{old('name')}}" required>
                                     @error('name')
@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="font-robo form-group">
-                                    <label for="celular">Celular: </label>
+                                    <label for="celular" style="margin-left: 0;">Celular: </label>
                                     <input name="celular" type="text" class="form-control border-radius-sm" id="celular" maxlength="8" minlength="8"
                                     required placeholder="Ingrese un número de celular" value="{{ old('celular') }}">  
                                     @error('celular')
@@ -42,7 +42,7 @@
                         <div class="row row-space">
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="cantidad">Cantidad de personas: </label>
+                                    <label for="cantidad" style="margin-left: 0;">Cantidad de personas: </label>
                                     <input name="cantidad" type="number" class="form-control border-radius-sm" id="cantidad"  max="50" min="2" maxlength="3" minlength="1"
                                     required placeholder="Cantidad de personas a asistir" value="{{ old('cantidad') }}">
                                     @error('cantidad')
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="tipoE">Evento: </label>
+                                    <label for="tipoE" style="margin-left: 0;">Evento: </label>
                                     <input name="tipoE" type="text" class="form-control border-radius-sm" id="tipoE"
                                     required placeholder="Ingrese el tipo del evento " value="{{ old('tipoE') }}"  >
                                     @error('tipoE')
@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="kiosko">Kiosko a reservar: </label>
+                                    <label for="kiosko" style="margin-left: 0;">Kiosko a reservar: </label>
                                     <select name="kiosko" onchange="quitarerror()" id="kiosko" class="form-control border-radius-sm" required>
                                         @if (old('kiosko'))
                                             <option disabled="disabled" value="">Seleccione un kiosko</option> 
@@ -89,7 +89,7 @@
                         <div class="row row-space">
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="fecha">Fecha: </label>
+                                    <label for="fecha" style="margin-left: 0;">Fecha: </label>
                                     <input name="fecha" type="date"  class="form-control border-radius-sm" id="fecha" style="height: 40px"
                                     placeholder="Ingrese la fecha del evento" value="{{ old('fecha',)}}" required>  
                                     @error('fecha')
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="inicio">Hora de inicio</label>
+                                    <label for="inicio" style="margin-left: 0;">Hora de inicio</label>
                                     <input name="inicio" type="time"  class="form-control border-radius-sm" id="inicio" min="08:00" max="18:00"
                                         placeholder="Ingrese la hora de llegada" value="{{ old('inicio')}}" required>
                                     @error('inicio')
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="fin">Hora de salida</label>
+                                    <label for="fin" style="margin-left: 0;">Hora de salida</label>
                                     <input name="fin" type="time"  class="form-control border-radius-sm" id="fin" min="08:00" max="00:00"
                                         placeholder="Ingrese la hora de llegada" value="{{ old('fin')}}" required>
                                     @error('fin')
@@ -123,7 +123,7 @@
                         <div class="row row-space">
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="class">Ingreso de alimentos: </label>
+                                    <label for="class" style="margin-left: 0;">Ingreso de alimentos: </label>
                                     <input class="form-control border-radius-sm" type="number" placeholder="Ingrese una alimentos"
                                     name="alimentos" id="alimentos" minlength="1" maxlength="3" min="80" max="100" value="{{old('alimentos')}}" required>
                                     @error('alimentos')
@@ -133,7 +133,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="class">Precio: </label>
+                                    <label for="class" style="margin-left: 0;">Precio: </label>
                                     <input class="form-control border-radius-sm" type="number" placeholder="Ingrese una precio"
                                     name="precio" id="precio" minlength="1" maxlength="3" min="80" max="100" value="{{old('precio')}}" required>
                                     @error('precio')
@@ -143,7 +143,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="class">Total: </label>
+                                    <label for="class" style="margin-left: 0;">Total: </label>
                                     <input name="total" type="number" class="form-control border-radius-sm" id="total" step="0.001" oninput="calcular()"
                                     placeholder="Ingrese el total a pagar" value="{{ old('total')}}" required>
                                     @error('total')
@@ -154,8 +154,8 @@
                         </div>
                         <div class="row row-space">
                             <div class="col-4">
-                                <div class="font-robo form-group">
-                                    <label for="anticipo">Pago anticipado: </label>
+                                <div class="font-robo form-group" style="margin-bottom: 5px">
+                                    <label for="anticipo" style="margin-left: 0;">Pago anticipado: </label>
                                     <input name="anticipo" type="number"  class="form-control border-radius-sm" id="anticipo" step="0.001" oninput="calcular()"
                                     placeholder="Ingrese el saldo a cancelar" value="{{ old('anticipo')}}" required>
                                     @error('anticipo')
@@ -164,8 +164,8 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="font-robo form-group">
-                                    <label for="pendiente">Pago pendiente: </label>
+                                <div class="font-robo form-group" style="margin-bottom: 5px">
+                                    <label for="pendiente" style="margin-left: 0;">Pago pendiente: </label>
                                     <input name="pendiente" type="number"  class="form-control border-radius-sm" step="0.001" id="pendiente" 
                                         placeholder="Saldo pendiente" value="{{ old('pendiente')}}" required>
                                     @error('pendiente')
@@ -174,8 +174,8 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="font-robo form-group">
-                                    <label for="formaPago">Forma de pago: </label>
+                                <div class="font-robo form-group" style="margin-bottom: 5px">
+                                    <label for="formaPago" style="margin-left: 0;">Forma de pago: </label>
                                     <select name="formaPago" required onchange="quitarerror()"  class="form-control border-radius-sm">
                                         @if (old('formaPago'))
                                             @if (old('formaPago') === 'Efectivo')
@@ -198,8 +198,9 @@
                                 </div>
                                 </div>
                             </div>
+                            <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
                         </div>
-                        <div  class="d-flex justify-content-end" style="margin: 0 23px 0 0"> 
+                        <div  class="d-flex justify-content-end" style="margin: 5px 23px 0 0"> 
                             <button type="button" onclick="cancelar('kiosko/reservaciones')" class="btn btn-danger" style="margin-right: 5px">Cancelar</button>
                             <button onclick="" type="submit" class="btn btn-success">Guardar</button>
                         </div>
