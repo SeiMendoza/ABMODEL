@@ -3,7 +3,7 @@
 @section('miga')
 <li class="breadcrumb-item text-sm" aria-current="page">  
     <a class="opacity-5 text-white" href="{{route('cliente.reservaLocal')}}">Reservaciones del Local</a></li>
-<li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Nueva Reservación</li>
+<li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Registro de Reservación</li>
 @endsection
 
 @section('content')
@@ -25,10 +25,12 @@
             
     <form method="post" action="{{ route('ReserLocal.store') }}" enctype="multipart/form-data">
             @csrf
-                <BR>
-                    <div class="row d-flex justify-content-center" >
+            <h4 class="font-robo t" style="margin: 0; padding:0">Datos del cliente: </h4>
+                <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
+               
+                    <div class="row row-spacer" >
                         <div class="form-group col-md-4 "  >
-                            <label for="NombreCliente">Nombre:</label> 
+                            <label for="NombreCliente" style="margin-left: 0;" >Nombre:</label> 
                                 <input name="Nombre_Cliente" type="text" class=" form-control border-radius-sm " id="Nombre_Cliente" maxlength="20"
                                         required placeholder="Ingrese el nombre" value="{{ old('Nombre_Cliente') }}">
                                  @error('Nombre_Cliente')
@@ -37,7 +39,7 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="Apellido_Cliente">Apellido:</label>
+                            <label for="Apellido_Cliente" style="margin-left: 0;">Apellido:</label>
                             <input name="Apellido_Cliente" type="text" class="form-control border-radius-sm" id="ApellidoCliente" 
                               required placeholder="Ingrese el apellido" value="{{ old('Apellido_Cliente') }}">
                             @error('Apellido_Cliente')
@@ -46,7 +48,7 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="contacto">Celular:</label>
+                            <label for="contacto" style="margin-left: 0;">Celular:</label>
                            <input name="Contacto" type="number" class="form-control border-radius-sm" id="Contacto"
                                required placeholder="Ingrese número de celular" value="{{ old('Contacto') }}"  maxlength="8" minlength="8">
                              @error('Contacto')
@@ -55,9 +57,12 @@
                          </div>
                     </div>
 
-                    <div class="row d-flex justify-content-center">
+                    <h4 class="font-robo t" style="margin: 0; padding:0">Datos de la reservación: </h4>
+                    <hr class="m-1" style="border: 0.1px solid rgba(111, 143, 175, 0.600)">
+
+                    <div class="row row-spacer">
                          <div class="form-group col-md-4 ">
-                            <label for="Tipo_Reservacion">Tipo de Reservación:</label>
+                            <label for="Tipo_Reservacion" style="margin-left: 0;" >Tipo de Reservación:</label>
                             <select name="Tipo_Reservacion" required onchange="quitarerror()" class="form-control border-radius-sm ">
                                     @if (old('Tipo_Reservacion'))
                                         @if (old('Tipo_Reservacion') === 'De Día (Menor Costo)')
@@ -80,16 +85,16 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="Tipo_Evento">Evento:</label>
+                            <label for="Tipo_Evento" style="margin-left: 0;">Evento:</label>
                             <input name="Tipo_Evento" type="text" class="form-control border-radius-sm" id="Tipo_Evento"
-                               required placeholder="Ingrese el nombre del evento " value="{{ old('Tipo_Evento') }}"  >
+                               required placeholder="Ingrese el tipo de evento " value="{{ old('Tipo_Evento') }}"  >
                              @error('Tipo_Evento')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                              @enderror
                         </div>
 
                         <div class="form-group col-md-4 ">
-                            <label for="cantidad">Cantidad de Personas:</label>
+                            <label for="cantidad"style="margin-left: 0;" >Cantidad de Personas:</label>
                             <input name="Cantidad" type="number" class="form-control border-radius-sm" id="Cantidad"  
                                 required placeholder="Cantidad de personas a asistir" value="{{ old('Cantidad') }}" maxlength="8" minlength="8" >
                               @error('Cantidad')
@@ -98,20 +103,18 @@
                         </div>
                     </div>
 
-                    <div class="row d-flex justify-content-center">
-                        <div class="form-group col-md-12">
-                            <label for="Fecha" >Fecha del Evento:</label>
-                            <input name="Fecha" type="date"  class="form-control border-radius-sm " id="Fecha"
+                    <div class="row row-spacer">
+                        <div class="form-group col-md-4">
+                            <label for="Fecha" style="margin-left: 0;">Fecha del Evento:</label>
+                            <input name="Fecha" type="date"  class="form-control border-radius-sm " id="Fecha" style="height: 40px"
                                 required placeholder="" value="{{ old('Fecha') }}">
                             @error('Fecha')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
-                    </div>
 
-                    <div class="row d-flex justify-content-center">
                         <div class="form-group col-md-4 ">
-                            <label for="HoraEntrada">Hora de Llegada:</label>
+                            <label for="HoraEntrada" style="margin-left: 0;" >Hora de Llegada:</label>
                             <input name="HoraEntrada" type="time"  class="form-control border-radius-sm" id="HoraEntrada" min="08:00" max="18:00"
                                 placeholder="Ingrese la hora de llegada" value="{{ old('HoraEntrada')}}" required>
                             @error('HoraEntrada')
@@ -120,16 +123,21 @@
                         </div>
 
                         <div class="form-group col-md-4 ">
-                            <label for="HoraSalida">Hora de Salida:</label>
+                            <label for="HoraSalida" style="margin-left: 0;">Hora de Salida:</label>
                             <input name="HoraSalida" type="time"  class="form-control border-radius-sm" id="HoraSalida"  max="22:00"
                                 placeholder="Ingrese la hora de salida" value="{{ old('HoraSalida')}}" required>
                             @error('HoraSalida')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
+                    </div>
 
-                        <div class="form-group col-md-4 ">
-                            <label for="FormaPago">Forma de Pago:</label>
+                    <h4 class="font-robo t" style="margin: 0; padding:0">Costo de la reservación: </h4>
+                    <hr class="m-1" style="border: 0.1px solid rgba(111, 143, 175, 0.600)">
+
+                    <div class="row row-spacer">
+                        <div class="form-group col-md-6 ">
+                            <label for="FormaPago" style="margin-left: 0;">Forma de Pago:</label>
                             <select name="FormaPago" required onchange="quitarerror()"  class="form-control border-radius-sm">
                                 @if (old('FormaPago'))
                                     @if (old('FormaPago') === 'Efectivo')
@@ -150,20 +158,20 @@
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                              @enderror
                         </div>
-                    </div>
-                        
-                    <div class="row d-flex justify-content-center">
-                        <div class="form-group col-md-4 ">
-                            <label for="total">Costo de la Reservación:</label>
+
+                          <div class="form-group col-md-6 ">
+                            <label for="total" style="margin-left: 0;">Costo de la Reservación:</label>
                            <input name="Total" type="number" class="form-control border-radius-sm" id="Total" step="0.001" oninput="calcular()"
                                 placeholder="Ingrese el total a pagar" value="{{ old('Total')}}" required>
                              @error('Total')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                              @enderror
                         </div>
+                    </div>
 
-                        <div class="form-group col-md-4 ">
-                            <label for="Anticipo">Anticipo:</label>
+                    <div class="row row-spacer">
+                        <div class="form-group col-md-6 " style="margin-bottom: 5px">
+                            <label for="Anticipo" style="margin-left: 0;">Pago Anticipado:</label>
                             <input name="Anticipo" type="number"  class="form-control border-radius-sm" id="Anticipo" step="0.001" oninput="calcular()"
                                 placeholder="Ingrese el saldo a cancelar" value="{{ old('Anticipo')}}" required>
                             @error('Anticipo')
@@ -171,25 +179,22 @@
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-4 ">
-                            <label for="Pendiente">Saldo Pendiente:</label>
+                        <div class="form-group col-md-6 " style="margin-bottom: 5px">
+                            <label for="Pendiente" style="margin-left: 0;" >Saldo Pendiente:</label>
                             <input name="Pendiente" type="number"  class="form-control border-radius-sm" step="0.001" id="Pendiente" 
                                 placeholder="Saldo pendiente" value="{{ old('Pendiente')}}" required>
                             @error('Pendiente')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
-                    </div>
+                    <div>
+                    <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600); margin-top: px"> </div>
 
-                        <div class="">
-                            <BR>
-                          <div style="text-align:center;">
-                              <button style="width:142px;" onclick="" type="submit" class="btn btn-success">Guardar</button>
-                              <button  style="width:142px;" type="button" onclick="cancelar('Reser/Local')" class="btn btn-danger">Cancelar</button>
-                          </div>
-                       </div>
-
+                    <div class="d-flex justify-content-end" style="margin: 5px 23px 0 0">
+                          <button style=" margin-right:5px" type="button" onclick="cancelar('Reser/Local')" class="btn btn-danger">Cancelar</button>
+                          <button onclick="" type="submit" class="btn btn-success">Guardar</button>    
                     </div>
+                </div>
             </div>
         </form>
    </div>

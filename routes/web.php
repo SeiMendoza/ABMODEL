@@ -196,6 +196,7 @@ Route::put('combo/{id}/edicion', [ComboController::class, 'update'])
 
 
 
+
 /*lista de pedidos anteriores*/
 Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])
     ->name('pedidoant.pedidos_anteriores'); 
@@ -344,7 +345,7 @@ Route::get('/Local/create', [ReservacionTotalController::class, 'create'])
 Route::post('/Reservacion/Local', [ReservacionTotalController::class, 'store'])
 ->name('ReserLocal.store');
 
-Route::get('/cliente/reservacion/{id}', [ReservacionTotalController::class, 'detalle_reservacion'])
+Route::get('/cliente/reservacion/{id}/detalles', [ReservacionTotalController::class, 'detalle_reservacion'])
   ->name('detalle.reservacion');
  
 Route::get('Cliente/{id}/Editando', [ReservacionTotalController::class, 'edit'])
@@ -362,5 +363,5 @@ Route::put('/cliente/{id}/reservacionRealizada', [ReservacionTotalController::cl
 Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Realizadas'])
   ->name('realizadas.realizadas'); /*lista de reservaciones realizadas */
   
-Route::get('/Reservaciones/Realizadas/{id}', [ReservacionTotalController::class, 'detalleRealizadas'])
+Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])
   ->name('detalle.realizadas');

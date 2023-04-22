@@ -13,6 +13,7 @@
         font-size: 17px;
         height: 30px;
         line-height: 30px;
+        color:rgba(111, 143, 175);
     }
 
     
@@ -25,18 +26,18 @@
 </style>
 
 <div class="wrapper wrapper--w960">
-    <div>
-         <div class="card shadow items-center"> <BR>
-            <h3 class=" font-weight-bold" style="color: teal; text-align:center; text-transform: uppercase"> 
+    <div class="row d-flex justify-content-center" >
+         <div class="card shadow items-center" style="margin: 0"> <BR>
+            <h3 class=" font-weight-bold" style="color: rgba(111, 143, 175); text-align:center; "> 
                 Detalles de la reservación de: {{$reservar->Nombre_Cliente}} </h3>
             <div class="card-body">
                 <table class="table" >
-                    <thead style="background-color: rgba(81, 255, 0, 0.182)">
+                    <thead style="background-color: rgba(111, 143, 175, 0.600)" >
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo"><strong>Datos</strong></td>
+                            <td class="text-white"><strong>Datos</strong></td>
                             <td class="informacion"></td>
-                            <td class="titulo"><strong>Información</strong></td>
+                            <td class="text-white"><strong>Información</strong></td>
                             <td class="informacion"></td>
                         </tr>
                     </thead>
@@ -140,8 +141,8 @@
                     </tbody>
                 </table>
 
-                <div style="background-color: rgba(81, 255, 0, 0.182);text-align:center; font-size:16px">
-                    <a href="{{route('cliente.reservaLocal')}}" class=" " 
+                <div style="background-color: rgba(111, 143, 175, 0.600); text-align:center; font-size:17px">
+                    <a href="{{route('cliente.reservaLocal')}}" class="text-white " 
                      style=" width:915px; " ><strong>Regresar</strong></a>
                 </div>
 
