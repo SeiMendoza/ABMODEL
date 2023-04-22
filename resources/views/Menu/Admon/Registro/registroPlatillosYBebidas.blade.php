@@ -4,14 +4,14 @@
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('menuAdmon.index')}}">Administración de menú</a></li>
 <li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de platillo y bebida</li>
 @endsection
-@section('tit','Registro de platillos y bebidas')
-@section('b')
+@section('tit','')
+<!-- 
 <div>
-    <a href="{{route('menuAdmon.index')}}" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+    <a href="{{route('menuAdmon.index')}}" style="margin:0; padding:5px; width:160px; margin-top:25px" type="button" class="bg-light border-radius-sm text-center ">
         <i class="fa fa-arrow-left"></i>  Regresar
     </a>
-</div>
-@endsection
+</div>  -->
+
 @section('content')
     <script>
         var msg = '{{ Session::get('mensaje') }}';
@@ -29,17 +29,18 @@
         }
     </script>
 
-    <div class=""> <!--aquí iria el wrapper-->
+    <div class="wrapper wrapper--w960"> <!--aquí iria el wrapper-->
         <div class="card border-radius-sm border-0" style="">
             
             <div class="card-body border-radius-sm border-0">
+                <h2 class="title" style="margin-bottom:0%">Registro de platillo o bebida</h2>
                 <form method="post" action="" enctype="multipart/form-data">
                     @csrf
                     <h4 class="font-robo t" style="margin: 0; padding:0">Datos del producto</h4>
                     <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
 
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <div>  
                                 <label for=""><strong>Seleccione una imagen</strong></label>
                                 <img src="/img/Villacrisol.png" alt="" width="240px" height="240px" id="imagenmostrada">
@@ -51,9 +52,9 @@
                             </div>
                         </div>
                         
-                        <div class="col-8">
+                        <div class="col">
                             
-                            <div class="row">
+                            <div class="row" style="margin-left:20px">
                                 <div class="col">
                                     <label for=""><strong>Tipo de producto:</strong></label>
                                     <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control border-radius-sm">
@@ -103,7 +104,7 @@
                             </div>
 
                             <br>
-                            <div class="row">
+                            <div class="row" style="margin-left:20px">
                                 <div class="col">
                                     <label for=""><strong>Nombre del producto:</strong></label>
                                     <input class="form-control border-radius-sm" type="text" placeholder="Ingrese el nombre del producto" name="nombre"
@@ -125,10 +126,11 @@
                             </div>
 
                             <br>
-                            <div class="row">
+                            <div class="row" style="margin-left:20px">
                                 <div class="col">
                                     <label for=""><strong>Descripción:</strong></label>
-                                    <textarea class="form-control border-radius-sm" type="text" placeholder="Ingrese la descripción" name="descripcion" maxlength="100" required
+                                    <textarea class="form-control border-radius-sm" type="text" placeholder="Ingrese la descripción" name="descripcion" 
+                                    maxlength="100" required style="resize:none; height: 50px; "
                                     onkeypress="quitarerror()">{{ old('descripcion') }}</textarea>
                                     @error('descripcion')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -136,11 +138,10 @@
                                 </div>
                                 <div class="col">
                                     <div id="bebida" style="display:">
-                                        <br>
                                         <label for=""><strong>Cantidad disponible</strong></label>
                                         <input class="form-control border-radius-sm" type="number" placeholder="Ingrese la cantidad disponible"
                                             name="cantidad" id="cantidad" value="{{ old('cantidad') }}"
-                                            onkeypress="quitarerror()"
+                                            onkeypress="quitarerror()" style="height: 50px;"
                                             onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
                                             max="1000">
                                         @error('cantidad')
