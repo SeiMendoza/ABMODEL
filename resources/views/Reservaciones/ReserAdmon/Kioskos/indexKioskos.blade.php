@@ -1,25 +1,15 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Kioskos')
 @section('miga')
-    <li class="breadcrumb-item text-sm active text-dark active">Administración de Kioskos</li>
+    <li class="breadcrumb-item text-sm active text-white active">Administración de Kioskos</li>
 @endsection
-
+@section('tit','Listado de Kioskos')
 @section('b')
-    <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; left:15px; top:100%;">Administración
-        de Kioskos</h3>
-    <div class="" style="position:absolute; right:2%; top:50%">
-        <a href="{{ route('kiosko_res.index') }}" style="margin:0;width:200px; padding:6px;"
-            class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
-            <i class="fa fa-users"></i> Reservaciones de Kioskos
-        </a>
-    </div>
-    <div class="" style="position:absolute; right:19%; top:50%">
-        <a href="#" style="margin:0;width:200px; padding:6px;"
-            class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
-            <i class="fa fa-users"></i> Agregar Kiosko
-        </a>
-    </div>
-
+<div>
+    <a href="{{route('kiosko.create')}}" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+        <i class="fa fa-plus-circle"></i>  Agregar Kiosko
+    </a>
+</div>
 @endsection
 
 @section('content')
@@ -41,6 +31,7 @@
     </script>
 
     <div class="container">
+        <br>
         <div class="table-responsive ">
             <table class="table kiosko" id="table" style="background-color: #fff;">
                 <thead >
@@ -61,7 +52,7 @@
                     @forelse($kioskos as $k)
                             <tr class="border border-light"
                                 style="color:gray; text-align:center">
-                                <th scope="col">@php echo $i++  @endphp</th>
+                                <td scope="col">@php echo $i++  @endphp</td>
                                 <td scope="col">{{ $k->codigo }}</td>
                                 <td scope="col">{{ $k->cantidad_de_Mesas }}</td>
                                 <td scope="col">{{ $k->ubicacion }}</td>                           
