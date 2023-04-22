@@ -16,9 +16,9 @@ class PlatilloController extends Controller
 
         if ($create) {
             if ($platillo->estado == 1) {
-                return redirect()->route('menuAdmon.index')->with('mensaje', 'Platillo Activado correctamente');
+                return back()->with('mensaje', 'Platillo Activado correctamente');
             }else{
-                return redirect()->route('menuAdmon.index')->with('mensaje', 'Platillo Desactivado correctamente');
+                return back()->with('mensaje', 'Platillo Desactivado correctamente');
             }
         }
 

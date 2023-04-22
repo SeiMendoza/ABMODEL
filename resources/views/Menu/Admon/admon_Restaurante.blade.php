@@ -1,20 +1,30 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Administración de menú')
 @section('miga')
-    <li class="breadcrumb-item text-sm active text-dark active">
-        <a class="opacity-5 text-dark" href="">Administración Restaurante</a>
-    </li>
+<li class="breadcrumb-item text-sm text-white active" aria-current="page">Administración de menú</li>
 @endsection
-
+@section('tit','Administración de menú')
 @section('b')
-    <h3 class="font-weight-bolder opacity-8  text-gray mb-0" style="position: absolute; left:15px; top:100%;">Administración
-        de Menú</h3>
-    <div class="" style="position:absolute; right:2%; top:100%">
-        <a href="{{ route('cliente_prueba') }}" style="margin:0;width:200px; padding:6px;"
-            class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
-            <i class="fa fa-users"></i> Ver menu cliente
+
+    <!-- Botón registrar-->
+    <div>
+        <a href="{{route('bebidasyplatillos.create')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center">
+            <i class="fa fa-plus-circle"></i> Agregar platillo o bebida
         </a>
     </div>
+
+    <div>
+        <a href="{{route('combo.create')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center m-2">
+            <i class="fa fa-plus-circle"></i> Agregar complemento
+        </a>
+    </div>
+
+    <div>
+        <a href="{{route('cliente_prueba')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center ">
+            <i class="fa fa-users"></i> Menú cliente
+        </a>
+    </div>
+    
 @endsection
 
 @section('content')
@@ -34,24 +44,25 @@
         }
     </script>
 
-    <div class="">
-        <div class="row bg bg-warning" style="position: absolute; top:12%; margin:0;width:1225px;">
-            <ul class="nav d-flex justify-content-center h5 text-center" role="tablist">
+ <br>
+    <div>
+        <div>
+            <ul class="nav nav-pills nav-justified h5 " role="tablist" style="background-color:rgba(111, 143, 175, 0.200);">
 
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-white" id="pills-bebidas-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-bebidas" type="button" role="tab" aria-controls="pills-bebidas"
+                    <a class="nav-link text-dark active" id="pills-bebidas-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-bebidas" type="button" aria-controls="pills-bebidas"
                         aria-selected="true">Bebidas</a>
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active text-white" id="pills-platillos-tab" data-bs-toggle="pill"
+                    <a class="nav-link text-dark" id="pills-platillos-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-platillos" type="button" role="tab" aria-controls="pills-platillos"
                         aria-selected="false">Platillos</a>
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-white" id="pills-combos-tab" data-bs-toggle="pill"
+                    <a class="nav-link text-dark" id="pills-combos-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-combos" type="button" role="tab" aria-controls="pills-combos"
                         aria-selected="false">Complementos</a>
                 </li>
@@ -59,36 +70,27 @@
         </div>
     </div>
 
-    <br><br><br><br>
-
+    <br>
+    
     <!--Menu de Productos-->
     <div class="table-responsive" id="pills-tabContent">
-        <section class="NovidadesSection" style="">
-            <main class="main-content position-relative border-radius-lg">
+        <section>
+            <main class="">
                 <div class="tab-content" id="pills-tabContent">
-
                     <!--Bebidas-->
-                    <div class="tab-pane fade " id="pills-bebidas" role="tabpanel" aria-labelledby="pills-Pdisponible-tab">
+                    <div class="tab-pane fade show active" id="pills-bebidas" role="tabpanel" aria-labelledby="pills-Pdisponible-tab">
                         <div class="container-fluid" style="padding: 0px">
-
-                            <!-- Botón registrar-->
-                            <div>
-                                <a href="{{ route('bebidasyplatillos.create') }}"
-                                    style="position: absolute; left:0%; top:100% margin:0; width:150px; padding:4px;"
-                                    class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
-                                    <i class=""></i class="fa fa-plus-circle">Registrar Bebida</a>
-                            </div>
 
                             <!--Navegacion entre disponibles y no disponibles-->
                             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="BDisponibles-tab" data-bs-toggle="tab"
-                                        data-bs-target="#BDisponibles" role="tab" aria-controls="BDisponibles"
+                                    <a class="nav-link text-dark h6 active" id="BDisponibles-tab" data-bs-toggle="tab"
+                                        data-bs-target="#BDisponibles" role="tab" type="button" aria-controls="BDisponibles"
                                         aria-selected="true">Disponibles</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="BNoDisponibles-tab" data-bs-toggle="tab"
-                                        data-bs-target="#BNoDisponibles" role="tab" aria-controls="BNoDisponibles"
+                                    <a class="nav-link text-dark h6" id="BNoDisponibles-tab" data-bs-toggle="tab"
+                                        data-bs-target="#BNoDisponibles" role="tab" type="button" aria-controls="BNoDisponibles"
                                         aria-selected="false">No Disponibles</a>
                                 </li>
                             </ul>
@@ -104,13 +106,13 @@
                                         <table class="table menu" class="table" id="BDisponibles" style="">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">N</th>
-                                                    <th scope="col">Nombre</th>
-                                                    <th scope="col">Disponibles</th>
-                                                    <th scope="col">Precio</th>
-                                                    <th scope="col">Acción</th>
-                                                    <th scope="col">Editar</th>
-                                                    <th scope="col">Eliminar</th>
+                                                    <th scope="col" style="text-align: center;">N</th>
+                                                    <th scope="col" style="text-align: center;">Nombre</th>
+                                                    <th scope="col" style="text-align: center;">D</th>
+                                                    <th scope="col" style="text-align: center;">Precio</th>
+                                                    <th scope="col" style="text-align: center;">Acción</th>
+                                                    <th scope="col" style="text-align: center;">Editar</th>
+                                                    <th scope="col" style="text-align: center;">Eliminar</th>
                                                 </tr>
                                             </thead>
 
@@ -127,11 +129,11 @@
                                                         @endphp
 
                                                         <tr>
-                                                            <th scope="col">@php echo $i  @endphp</th>
-                                                            <td scope="col">{{ $p->nombre }}</td>
-                                                            <td scope="col">{{ $p->disponible }}</td>
-                                                            <td scope="col">{{ $p->precio }}</td>
-                                                            <td scope="col">
+                                                            <th scope="col" style="text-align: center;">@php echo $i  @endphp</th>
+                                                            <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
+                                                            <td scope="col" style="text-align: end;">{{ $p->disponible }}</td>
+                                                            <td scope="col" style="text-align: end;">{{ $p->precio }}</td>
+                                                            <td scope="col" style="text-align: center;">
                                                                 <i data-bs-toggle="modal"
                                                                     data-bs-target="#desactivarBebida{{ $p->id }}">
                                                                     <a class="fa fa-times-circle text-warning"></a>
@@ -173,10 +175,10 @@
                                                                     </div>
                                                                 </form>
                                                             </td>
-                                                            <td scope="col"><a
+                                                            <td scope="col" style="text-align: center;"><a
                                                                     href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
                                                                         class="fa fa-edit text-success"></i></a></td>
-                                                            <td scope="col">
+                                                            <td scope="col" style="text-align: center;">
                                                                 <i data-bs-toggle="modal"
                                                                     data-bs-target="#staticBackdropEb{{ $p->id }}"
                                                                     class="fa-solid fa-trash-can text-danger"
@@ -381,28 +383,20 @@
                     </div>
 
                     <!--Platillos-->
-                    <div class="tab-pane fade show active" id="pills-platillos" role="tabpanel"
+                    <div class="tab-pane fade" id="pills-platillos" role="tabpanel"
                         aria-labelledby="pills-Pdisponible-tab">
                         <div class="container-fluid" style="padding: 0px">
-
-                            <!-- Botón registrar-->
-                            <div>
-                                <a href="{{ route('bebidasyplatillos.create') }}"
-                                    style="position: absolute; left:0%; top:100% margin:0; width:150px; padding:4px;"
-                                    class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
-                                    <i class=""></i class="fa fa-plus-circle">Registrar Platillo</a>
-                            </div>
 
                             <!--Navegacion entre disponibles y no disponibles-->
                             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="PDisponibles-tab" data-bs-toggle="tab"
-                                        data-bs-target="#PDisponibles" role="tab" aria-controls="PDisponibles"
+                                    <a class="nav-link active text-dark h6" id="PDisponibles-tab" data-bs-toggle="tab"
+                                        data-bs-target="#PDisponibles" role="tab" type="button" aria-controls="PDisponibles"
                                         aria-selected="true">Disponibles</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="PNoDisponibles-tab" data-bs-toggle="tab"
-                                        data-bs-target="#PNoDisponibles" role="tab" aria-controls="PNoDisponibles"
+                                    <a class="nav-link text-dark h6" id="PNoDisponibles-tab" data-bs-toggle="tab"
+                                        data-bs-target="#PNoDisponibles" role="tab" type="button" aria-controls="PNoDisponibles"
                                         aria-selected="false">No Disponibles</a>
                                 </li>
                             </ul>
@@ -699,25 +693,17 @@
                         aria-labelledby="pills-Cdisponible-tab">
 
 
-                        <div class="container-fluid" style="padding: 0px">
-
-                            <!-- Botón registrar-->
-                            <div>
-                                <a href="{{ route('combo.create') }}"
-                                    style="position: absolute; left:0%; top:100% margin:0; width:190px; padding:4px;"
-                                    class="bg-light border-radius-md h-6 text-center text-gray font-weight-bolder">
-                                    <i class=""></i class="fa fa-plus-circle">Registrar Complementos</a>
-                            </div>
+                        <div class="container-fluid" style="padding: 0px">  
 
                             <!--Navegacion entre disponibles y no disponibles-->
                             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="CPDisponibles-tab" data-bs-toggle="tab"
+                                    <a class="nav-link text-dark h6 active" id="CPDisponibles-tab" data-bs-toggle="tab"
                                         data-bs-target="#CDisponibles" role="tab" aria-controls="CDisponibles"
                                         aria-selected="true">Disponibles</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="CNoDisponibles-tab" data-bs-toggle="tab"
+                                    <a class="nav-link text-dark h6" id="CNoDisponibles-tab" data-bs-toggle="tab"
                                         data-bs-target="#CNoDisponibles" role="tab" aria-controls="CNoDisponibles"
                                         aria-selected="false">No Disponibles</a>
                                 </li>
