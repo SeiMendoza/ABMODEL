@@ -96,17 +96,6 @@ class PiscinaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Piscina  $piscina
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Piscina $piscina)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Piscina  $piscina
@@ -227,5 +216,10 @@ class PiscinaController extends Controller
             return redirect()->route('prodpiscina.index')
                 ->with('mensaje', 'La cantidad del producto fue actualizado exitosamente');
         }
+    }
+
+    public function show($id){
+        $piscina = Piscina::FindOrFail($id);
+        return view('Piscina.detalleproducto',compact('piscina'));
     }
 }

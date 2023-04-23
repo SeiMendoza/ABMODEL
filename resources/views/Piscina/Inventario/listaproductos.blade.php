@@ -57,6 +57,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                 <th scope="col" style="text-align:center">Producto</th>
                 <th scope="col" style="text-align:center;text-transform:initial;">Tipo de producto</th>
                 <th scope="col" style="text-align:center">Cantidad</th>
+                <th scope="col" style="text-align:center">Detalle</th>
                 <th scope="col" style="text-align:center">Editar</th>
                 <th scope="col" style="text-align:center">Eliminar</th>
             </tr>
@@ -86,7 +87,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                                 <div class="modal-header bg-success d-flex align-items-center">
                                     <strong>
                                         <h3 class="mx-auto">
-                                            Agregar onzas a {{$p->nombre}}
+                                            Agregar @if ($piscina->tipo_producto->id == 1) Libras @else Onzas @endif a {{$p->nombre}}
                                         </h3>
                                     </strong>
                                 </div>
@@ -112,7 +113,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                                 <div class="modal-header bg-danger d-flex align-items-center">
                                     <strong>
                                         <h3 class="mx-auto">
-                                            Restar onzas a {{$p->nombre}}
+                                            Restar @if ($p->tipo_producto->id == 1) Libras @else Onzas @endif a {{$p->nombre}}
                                         </h3>
                                     </strong>
                                 </div>
@@ -131,6 +132,11 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                         </div>
                     </div>
                     <!----icono para editar el producto------>
+                </td>
+                <td>
+                    <a type="buttom" href="{{route('piscina.show',['id'=>$p->id])}}">
+                        <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
+                    </a>
                 </td>
                 <td>
                     <a href="{{ route('producto.edit', ['id' => $p->id]) }}">

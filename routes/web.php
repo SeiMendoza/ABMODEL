@@ -261,6 +261,8 @@ Route::post('/piscina/agregar/{id}', [PiscinaController::class, 'agregar'])->
 name('piscina.agregar');
 Route::post('/piscina/restar/{id}', [PiscinaController::class, 'restar'])->
 name('piscina.restar');
+Route::get('piscina/{id}', [PiscinaController::class, 'show'])
+    ->name('piscina.show');
 
 /****************************************
   Rutas Para Mesas
