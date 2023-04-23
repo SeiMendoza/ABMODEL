@@ -255,10 +255,7 @@
 
         //DATATABLES para Kiosko
         $(document).ready(function () {
-        $('.kiosko').DataTable({
-            "columnDefs": [
-            {"className": "dt-center", "targets": "_all"}
-            ]});
+        $('.kiosko').DataTable();
         });
 
 
