@@ -28,6 +28,7 @@
     <link href="/css/main.css" rel="stylesheet" media="all">
     
     <script src="{{ asset('/js/sweetalert2.all.min.js') }}"></script>
+    
 
     <title>Villa Crisol - @yield('title') </title>
 
@@ -319,5 +320,6 @@
     </script>
     
     <script src="/js/argon-dashboard.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

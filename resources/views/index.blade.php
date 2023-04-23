@@ -252,25 +252,7 @@
     </aside>
 
     <main class="main-content" id="indice" style="padding:0; margin: 90px 1% 0% 17.3%;">
-        <div class="content-cell" style="padding:0; margin:0"><script>
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'info',
-                        html: '@foreach($datosalerta as $d) Productos de piscina en {{$d->descripcion}} tiene {{$d->total}}'+
-                        ' unidades con {{$d->peso}} kg  <br>@endforeach',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Agregar',
-                        showCancelButton: true,
-                        cancelButtonText:'X',
-                        cancelButtonColor: '#d33',
-                        toast: true,
-                        timer: 4000000
-                    }).then(resultado => {
-                        if (resultado.value) {
-                            window.location.href = '{{Route('piscina.create')}}';
-                        }
-                    });
-                </script>
+        <div class="content-cell" style="padding:0; margin:0">
             <!-- Cards Restaurante -->
             <div class="row pt-3" style="margin: 0; padding:0;">
                 <h4 style="margin-bottom: 15px; padding:0%;" class="bg-white text-warning font-robo font-weight-bolder">RESTAURANTE</h4>
