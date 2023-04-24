@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pedido_id');
             $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');
-            $table->string('producto');
-            $table->string('nombre');
-            $table->string('cantidad');
-            $table->string('precio');
-            $table->integer('estado')->default(0);
+            $table->string('producto', 10);
+            $table->string('nombre', 50);
+            $table->integer('cantidad')->default(1);
+            $table->float('precio');
+            $table->boolean('estado')->default(0);
             $table->timestamps();
         });
     }

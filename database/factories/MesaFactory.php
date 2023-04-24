@@ -20,9 +20,9 @@ class MesaFactory extends Factory
     {
         $qr = QrCode::size(500)->generate('https://www.facebook.com/villacrisol/');
         return [
-            'codigo'=>$this->faker->numerify('######-######-#'),
-            'nombre'=>$this->faker->numerify('Mesa-').$this->faker->numberBetween(1,25),
-            'cantidad'=>$this->faker->numberBetween(1,20),
+            'codigo'=>$this->faker->numerify('K##-M##'),
+            'nombre'=>$this->faker->numerify('Mesa-##'),
+            'cantidad'=>$this->faker->numberBetween(6,8),
             'kiosko_id'=> Kiosko::get('id')->random(),
             'estadoM'=>$this->faker->numberBetween(0,1),
             'mesa_qr'=>$qr,

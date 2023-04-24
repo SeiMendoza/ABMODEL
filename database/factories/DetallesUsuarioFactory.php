@@ -21,9 +21,9 @@ class DetallesUsuarioFactory extends Factory
         return [
             'pedido_id'=>Pedido::get('id')->random(),
             'producto'=>$this->faker->numberBetween(0, 100),
-            'nombre'=>$this->faker->word,
+            'nombre'=>$this->faker->randomElement(['Pescado Frito','Refresco','Pollo con Tajadas', 'Juguito de Naranja']),
             'cantidad'=>$this->faker->numberBetween(1, 100),
-            'precio'=>$this->faker->numberBetween(1,100),
+            'precio'=>$this->faker->randomFloat($nbMaxDecimals = 2, $min = 50, $max = 550),
             'estado'=>$e,
         ];
     }

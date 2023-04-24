@@ -15,6 +15,6 @@ class DetallesUsuarioSeeder extends Seeder
      */
     public function run()
     {
-        DetallesUsuario::factory(40)->create();
+        DetallesUsuario::factory(80)->create();
     }
 }

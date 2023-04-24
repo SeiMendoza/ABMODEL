@@ -116,6 +116,8 @@ Route::get('/menu/usuario/pedido', [MenuUsuarioController::class, 'create'])
 ->name('usuario_pedido.create');
 Route::post('/menu/usuario/pedido', [MenuUsuarioController::class, 'store'])
 ->name('cliente_pedido.store');
+Route::put('/menu/detalles/{id}/editar', [MenuUsuarioController::class, 'edit'])
+->name('cliente_detalles.edit')->where('id','[0-9]+');
 Route::delete('/menu/detalles/{id}/borrar', [MenuUsuarioController::class, 'destroy'])
 ->name('cliente_detalles.destroy')->where('id','[0-9]+');
  

@@ -11,6 +11,7 @@ use App\Models\Mesa;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 use App\Models\Platillo;
+use Illuminate\Validation\Rules\Exists;
 
 class MenuUsuarioController extends Controller
 {
@@ -46,8 +47,8 @@ class MenuUsuarioController extends Controller
         $detalles->cantidad = $request->input('cantidad');
         $detalles->precio = $request->input('precio');
         $detalles->save();
-
-        return redirect()->route('cliente_prueba');
+        return redirect()->route("cliente_prueba")->with('mensaje', 'Producto añadido');
+       
     }
      public function qr(){
         return view('Menu/Admon/QR_Menu');
@@ -67,7 +68,7 @@ class MenuUsuarioController extends Controller
             't.min' => 'El pedido esta vacio',
         ]);
 
-        
+        if ($request->input('t') > 0) {
         $pedido = new Pedido();
         $pedido->quiosco = $request->input('kiosko');
         $pedido->nombreCliente = $request->input('nombre');
@@ -75,6 +76,7 @@ class MenuUsuarioController extends Controller
         $pedido->total = $request->input('t');
         $pedido->mesa_id = $request->input('mesa');
         $pedido->save();
+        }
 
         $pedido->detalles_usuarios;
         
@@ -85,6 +87,28 @@ class MenuUsuarioController extends Controller
         }*/
 
         return redirect()->route("cliente_prueba")->with('mensaje', 'El pedido fue enviado exitosamente');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $request->validate([
+            'numb' => ['required','numeric','min:1'],
+
+        ], [
+            'numb.required' => 'La cantidad no puede estar vacia',
+            'numb.numeric' => 'La cantidad debe ser numérica',
+            'numb.min' => 'La cantidad no puede ser menor a 1',
+        ]);
+
+        $detal = DetallesUsuario::findOrFail($id);
+        $detal->cantidad = $request->input('numb');
+        $detal->save();
+        $creado = $detal -> save();
+
+        if ($creado) {
+            return redirect()->route('cliente_prueba')
+            ->with('mensaje', "".$detal->nombre." actualizada correctamente");
+        } 
     }
 
     public function destroy($id)

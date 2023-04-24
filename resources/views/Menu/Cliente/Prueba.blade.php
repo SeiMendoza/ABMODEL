@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -109,7 +109,7 @@
                                                 <p id="precio" class="text-dark text-decoration-line">
                                                     <strong class="precio" style="font-size: 15px; width:194px;
                                                     background-color:rgba(255, 255, 255, 0.677);
-                                                    position: absolute; bottom: 0; left:0;">L {{$pro->precio}}.00</strong>
+                                                    position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
                                                 </p>                        
                                                 </div>
                                             </button>
@@ -134,6 +134,7 @@
                                         <form action="{{route('cliente_menu.details')}}" method="post">
                                             @csrf
                                         <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden> 
+
                                         <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
                                         <input type="number" id="cantidad" name="cantidad" value="1" hidden>
                                         <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
@@ -143,21 +144,18 @@
                                             <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                 data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
                                                 background: url('/images/{{ $pro->imagen }}') top center/cover no-repeat;">
-                                                <div class="text-center" 
-                                                style="text-align:center; ">
-                                                <!-- Nombre -->
-                                                <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
-                                                    <strong style="font-size: 20px; width:194px;
-                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                    position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
-                                                </p>                        
-                                                <!-- Precio -->
-                                                <p id="precio" class="text-dark text-decoration-line">
-                                                    <strong class="precio" style="font-size: 15px; width:194px;
-                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                    position: absolute; bottom: 0; left:0;">L {{$pro->precio}}.00</strong>
-                                                </p>                        
-                                                </div>
+                                                <section class="text-center" style="text-align:center; ">
+                                                    <!-- Nombre -->
+                                                    <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
+                                                        <strong style="font-size: 20px; width:194px;
+                                                        background-color:rgba(255, 255, 255, 0.677);
+                                                        position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
+                                                    
+                                                        <strong class="precio" style="font-size: 15px; width:194px;
+                                                        background-color:rgba(255, 255, 255, 0.677);
+                                                        position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                                    </p>                        
+                                                </section>
                                             </button>
                                         </div>
                                         </form>
@@ -200,7 +198,7 @@
                                                 <p id="precio" class="text-dark text-decoration-line">
                                                     <strong class="precio" style="font-size: 15px; width:194px;
                                                     background-color:rgba(255, 255, 255, 0.677);
-                                                    position: absolute; bottom: 0; left:0;">L {{$pro->precio}}.00</strong>
+                                                    position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
                                                 </p>                        
                                                 </div>
                                             </button>
@@ -280,7 +278,7 @@
                                 <th scope="col" style="padding:3px; text-align:center;">Cantidad</th>
                                 <th scope="col" style="padding:3px; text-align:right;">Precio</th>
                                 <th scope="col" style="padding:3px; text-align:right;">Sub-total</th>
-                                <th scope="col" style="padding:3px; text-align:center;">Quitar</th>
+                                <th scope="col" colspan="2" style="padding:3px; text-align:center;">Elementos</th>
                             </tr>
                         </thead>
                         <tbody class="col"  id="" >
@@ -290,17 +288,26 @@
                             @forelse($detalles as $i => $detalle)
                                 <tr style="">  
                                     <td scope="" class="" style="width:5%; text-align:left;">{{$detalle->nombre}}</td>
-                                    <td scope=""  style="width:4%; text-align:center; "><input type="number" class="border-0 border-radius-sm" 
-                                        style="" min="1" max="2000" maxlength="4" minlength="1" value="{{ $detalle->cantidad }}">
-                                        @error('number')
-                                        <small class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </small>
-                                        @enderror
-                                    </td>
-                                    <td scope="col" style="text-align:right; width:4%; ">L {{ number_format($detalle->precio, 2, ".", ",") }}</td>
-                                    <td scope="col" style="text-align:right; width:4%; ">L {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
-                                    <td scope="col" style="text-align: center; width:4%;">
+                                    <form action="{{route('cliente_detalles.edit', ['id' => $detalle->id])}}" method="post">
+                                        @method('put')
+                                        @csrf
+                                        <td scope=""  style="width:4%; text-align:center; "><input type="number" 
+                                            id="numb" name="numb" class="border-0 border-radius-sm" 
+                                            style="" min="1" max="2000" maxlength="4" minlength="1" value="{{old('numb', $detalle->cantidad) }}">
+                                            @error('numb')
+                                            <small class="invalid-feedback">
+                                                <strong>{{ $message }}</strong>
+                                            </small>
+                                            @enderror
+                                        </td>
+                                        <td scope="col" style="text-align:right; width:4%; ">L {{ number_format($detalle->precio, 2, ".", ",") }}</td>
+                                        <td scope="col" style="text-align:right; width:4%; ">L {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
+                                        <td scope="col" style="text-align: right; width:4%;">
+                                            <button style="border: 0; padding:0; margin:0;" >
+                                            <i class="fas fa-edit text-success" style="border: 0; padding:0; margin:0;"></i></button> 
+                                        </td>     
+                                    </form>
+                                    <td scope="col" style=" width:4%;">
                                         <form action="{{route('cliente_detalles.destroy', ['id' => $detalle->id])}}" id="borrar" method="post" enctype="multipart/form-data">
                                             @method('delete')
                                             @csrf

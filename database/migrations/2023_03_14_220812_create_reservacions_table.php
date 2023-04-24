@@ -15,20 +15,20 @@ return new class extends Migration
     {
         Schema::create('reservacions', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('celular');
+            $table->string('nombre', 50);
+            $table->string('celular', 9);
             $table->date('fecha');
             $table->time('horaI');
             $table->time('horaF');
-            $table->string('tipo');
-            $table->double('alimentos');
+            $table->string('tipo', 50);
+            $table->boolean('alimentos')->default(0);
             $table->integer('cantidad');
             $table->float('precio');
             $table->float('total');
             $table->float('anticipo');
             $table->float('pendiente');
-            $table->string('formaPago');
-            $table->double('estado');
+            $table->boolean('formaPago')->default(0);
+            $table->boolean('estado')->default(0);
             $table->timestamps();
         });
     }

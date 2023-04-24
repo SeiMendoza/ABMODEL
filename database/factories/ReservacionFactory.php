@@ -20,18 +20,18 @@ class ReservacionFactory extends Factory
     {
         return [
             'nombre'=>$this->faker->name,
-            'celular'=>$this->faker->phoneNumber(),
+            'celular'=>$this->faker->randomElement(['8','2','9']).$this->faker->numerify('###-####'),
             'fecha'=>$this->faker->date(),
             'horaI'=>$this->faker->time(),
             'horaF'=>$this->faker->time(),
-            'tipo'=>$this->faker->word,
+            'tipo'=>$this->faker->randomElement(['Reunión','Cumpleaños','Otro']),
             'alimentos'=>$this->faker->randomElement([0,1]),
             'cantidad'=>$this->faker->numberBetween(1,20),
             'precio'=>$this->faker->randomElement([80,100]),
             'total'=>$this->faker->randomFloat(2,100,1000),
             'anticipo'=>$this->faker->randomFloat(2,100,500),
             'pendiente'=>$this->faker->randomFloat(2,100,500),
-            'formaPago'=>$this->faker->randomElement(['Efectivo','Transferencia']),
+            'formaPago'=>$this->faker->randomElement([0,1]),
             'estado'=>$this->faker->randomElement([0,1]),
         ];
     }

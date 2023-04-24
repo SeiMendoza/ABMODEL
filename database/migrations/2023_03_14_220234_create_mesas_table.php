@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');
-            $table->string('nombre');
-            $table->string('cantidad');
+            $table->string('codigo', 7);
+            $table->string('nombre', 50);
+            $table->integer('cantidad');
             $table->unsignedBigInteger('kiosko_id');
             $table->foreign("kiosko_id")->references("id")->on("kioskos")->onDelete('cascade');
-            $table->integer('estadoM')->default(0);
+            $table->boolean('estadoM')->default(0);
             $table->binary('mesa_qr');
             $table->timestamps();
         });

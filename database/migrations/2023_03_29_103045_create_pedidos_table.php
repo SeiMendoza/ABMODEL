@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->integer('quiosco');
-            $table->string('nombreCliente');
-            $table->double('imp');
-            $table->double('total');
-            $table->string('estado')->default('0'); 
-            $table->string('estado_cocina')->default('0'); 
+            $table->string('nombreCliente', 50);
+            $table->float('imp');
+            $table->float('total');
+            $table->boolean('estado')->default('0'); 
+            $table->boolean('estado_cocina')->default('0'); 
             $table->unsignedBigInteger('mesa_id');
             $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete('cascade');
             $table->timestamps();
