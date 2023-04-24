@@ -78,13 +78,11 @@ class MenuUsuarioController extends Controller
         $pedido->save();
         }
 
-        $pedido->detalles_usuarios;
-        
-        /*foreach ($pedido as $key => $value) {
-            $d = DetallesUsuario::findOrFail($value->detalles_usuario->pedido_id);
-            $d->estado = 1;
-            $d->save();
-        }*/
+        $d = DetallesUsuario::where('estado', '=', '0')->get();
+        foreach ($d as $key => $value) {
+            $value->estado = 1;
+            $value->save();
+        }
 
         return redirect()->route("cliente_prueba")->with('mensaje', 'El pedido fue enviado exitosamente');
     }
