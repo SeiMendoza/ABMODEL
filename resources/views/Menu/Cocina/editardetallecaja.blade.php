@@ -20,7 +20,9 @@
 <div class="wrapper wrapper--w960 font-robo">
     <div class="card border-radius-sm border-0">
         <div class="card-body border-radius-sm border-0">
-            <h2 class="title">Información de: {{$pedido->nombreCliente}}</h2>
+            <h2 class="title" style="margin-bottom:0">Información de: {{$pedido->nombreCliente}}</h2>
+            <h4 class="font-robo t" style="margin: 0; padding:0">Datos del producto: </h4>
+            <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
             @if($pedido)
             <form method="post" action="{{ route('detallep.update',['pedido_id' => $pedido->id, 'detalle_id' => $edit->id]) }}" enctype="multipart/form-data">
                 @method('put')
@@ -31,7 +33,7 @@
                             <label for="">Nombre del producto:</label>
                             <select class="form-control border-radius-sm producto" name="nombre" id="nombre">
                                 @foreach ($productos as $producto)
-                                <option value="{{ $producto }}" @if ($edit->nombre == $producto) selected @endif>{{ $producto }}</option>
+                                <option value="{{ $producto }}" {{ old('nombre', $edit->nombre) == $producto ? 'selected' : '' }}>{{ $producto }}</option>
                                 @endforeach
                             </select>
                             @error('nombre')
@@ -42,7 +44,9 @@
                     <div class="col">
                         <div class="font-robo form-group">
                             <label for="">Cantidad de producto:</label>
-                            <input style="padding-left: 8px;width:360px;" class="form-control border-radius-sm" type="number" name="cantidad" id="cantidad" step="1" placeholder="Ingrese de producto" value="@if(Session::has('cantidad')){{Session::get('cantidad')}}@else{{old('cantidad',$edit->cantidad)}}@endif" onkeypress="quitarerror()">
+                            <input style="padding-left: 8px;" class="form-control border-radius-sm" type="number" name="cantidad" id="cantidad" step="1" placeholder="Ingrese de producto" 
+                            value="@if(Session::has('cantidad')){{Session::get('cantidad')}}
+                            @else{{old('cantidad',$edit->cantidad)}}@endif" onkeypress="quitarerror()">
                             @error('cantidad')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -53,7 +57,7 @@
                     <div class="col-6">
                         <div class="font-robo form-group">
                             <label for="">Precio del producto:</label>
-                            <input style="padding-left: 8px; width:442px;" class="form-control border-radius-sm precio" placeholder="Precio del producto" name="precio" id="precio" readonly value="@if(Session::has('producto_precio')){{Session::get('producto_precio')}}@else{{old('precio',$edit->precio)}}@endif">
+                            <input style="padding-left: 8px;" class="form-control border-radius-sm precio" placeholder="Precio del producto" name="precio" id="precio" readonly value="@if(Session::has('producto_precio')){{Session::get('producto_precio')}}@else{{old('precio',$edit->precio)}}@endif">
                             @error('precio')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -62,7 +66,7 @@
                     <div class="col">
                         <div class="font-robo form-group">
                             <label for="">Impuesto:</label>
-                            <input style="padding-left: 8px;width:360px;" class="form-control border-radius-sm" type="number" name="impuesto" id="impuesto" step="0.01" placeholder="" value="@if(Session::has('impuesto')){{Session::get('impuesto')}}@else{{old('',$edit->precio*$edit->cantidad)}}@endif" readonly onkeypress="quitarerror()">
+                            <input style="padding-left: 8px;" class="form-control border-radius-sm" type="number" name="impuesto" id="impuesto" step="0.01" placeholder="" value="@if(Session::has('impuesto')){{Session::get('impuesto')}}@else{{old('',$edit->precio*$edit->cantidad)}}@endif" readonly onkeypress="quitarerror()">
                             @error('impuesto')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -82,18 +86,17 @@
                     <div class="col">
                         <div class="font-robo form-group">
                             <label for="">Total Compra:</label>
-                            <input style="padding-left: 8px;width:360px;" class="form-control border-radius-sm" type="number" name="total" id="total" step="0.01" placeholder="" value="@if(Session::has('total')){{Session::get('total')}}@else{{old('',$edit->precio*$edit->cantidad)}}@endif" readonly onkeypress="quitarerror()">
+                            <input style="padding-left: 8px;" class="form-control border-radius-sm" type="number" name="total" id="total" step="" placeholder="" value="@if(Session::has('total')){{Session::get('total')}}@else{{old('',$edit->precio*$edit->cantidad)}}@endif" readonly onkeypress="quitarerror()">
                             @error('total')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
                 </div>
-
-
-
-                <div style="float: right;margin-top: 50px">
-                    <button type="button" onclick="cancelarp('')" class="btn btn-danger">Cancelar</button>
+ 
+                <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
+                <div style="float: right;margin-top: 5px">
+                    <button type="button" onclick="cancelarp('pedidos/caja/detalle/{{$pedido->id}}')" class="btn btn-danger">Cancelar</button>
                     <button onclick="" type="submit" class="btn btn-success">Guardar</button>
                 </div>
             </form>
@@ -116,7 +119,7 @@
             .then(resultado => {
                 if (resultado.value) {
                     // Hicieron click en "Sí"
-                    window.location.href = ruta;
+                    window.location.href = '/' + ruta;
                 } else {
                     // Dijeron que no
                 }
@@ -143,8 +146,8 @@
                         var sub_total = precio * cantidad;
                         $('#precio').val(response);
                         $('#impuesto').val(impuesto.toFixed(2)); // Muestra el impuesto con 2 decimales
-                        $('#sub_total').val(sub_total.toFixed(2));
-                        $('#total').val(total.toFixed(2));
+                        $('#sub_total').val(sub_total.toFixed(2)); // Muestra el sub_total con 2 decimales
+                        $('#total').val(total.toFixed(2)); // Muestra el total con 2 decimales
                     }
                 },
                 error: function(xhr) {

@@ -87,7 +87,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                                 <div class="modal-header bg-success d-flex align-items-center">
                                     <strong>
                                         <h3 class="mx-auto">
-                                            Agregar @if ($piscina->tipo_producto->id == 1) Libras @else Onzas @endif a {{$p->nombre}}
+                                            Agregar @if ($p->tipo_producto->id == 1) Libras @else Onzas @endif a {{$p->nombre}}
                                         </h3>
                                     </strong>
                                 </div>

@@ -10,7 +10,7 @@
 @section('b')
 <div>
     <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" 
-        type="button" class="bg-light border-radius-sm text-center">Regresar</a>
+        type="button" class="bg-light border-radius-sm text-center">  <i class="fa fa-arrow-left"></i> Regresar</a>
 </div>
 @endsection
 
