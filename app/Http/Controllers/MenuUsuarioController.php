@@ -26,7 +26,7 @@ class MenuUsuarioController extends Controller
         $detalles = DetallesUsuario::where('estado', '=', '0')->get();
         if ($pedido->count() == 0) {
             $pedido_new = new Pedido();
-            $pedido_new->estado_compra = '0';
+            $pedido_new->estado = '0';
             $pedido_new->save();
 
             return view('Menu.Cliente.Prueba')->with('pedido', $pedido_new)
@@ -74,8 +74,10 @@ class MenuUsuarioController extends Controller
         $pedido->nombreCliente = $request->input('nombre');
         $pedido->imp = $request->input('isv');
         $pedido->total = $request->input('t');
+        $pedido->estado = 1;
         $pedido->mesa_id = $request->input('mesa');
         $pedido->save();
+        dd($pedido);
         }
 
         $d = DetallesUsuario::where('estado', '=', '0')->get();

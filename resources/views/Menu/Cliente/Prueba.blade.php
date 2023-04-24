@@ -347,7 +347,7 @@
                                     @foreach($mesas as $m)
                                         <option value="{{$m->id}}">{{old('mesa', $m->nombre)}}</option>
                                             @php
-                                                $k_id = $m->kiosko_id;
+                                                $k_id = $m->kiosko->id;
                                             @endphp
                                     @endforeach
                                 </select>
@@ -373,7 +373,7 @@
                             $tot = number_format($sum, 2, ".", ",");
                         @endphp
                         @if ($tot > 0.00)
-                            <input type="number" name="t" id="t" value="{{$tot}}" hidden>
+                            <input type="number" name="t" id="t" value="{{$sum}}" hidden>
                         @else
                             <input type="number" name="t" id="t" value="" hidden>
                             @error('t')
@@ -391,14 +391,14 @@
                                 <label class="h6 text-xl-center col-form-label col-auto" for="isv" style="margin: 0 15% 0 0;">ISV 15%: L</label>
                                 <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" id="isv" name="isv" 
                                 type="number" style="margin: 0px 0px 5px 30px; padding:0; text-align:right; height:42px;" 
-                                value="{{$isv}}" required readonly>
+                                value="{{$sum - $sum * 0.15}}" required readonly>
                             </div>                 
                             <div class="input-group" style="margin: 0;  border: 0;">
                                 <label class="h6 text-xl-center col-form-label col-auto" for="total" style="margin: 0 15% 0 0;">Total: L</label>
                                 <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" 
                                 min="1" type="number"  
                                 style=" margin: 0px 0px 4px 55px; padding:0; text-align:right; height:42px;"
-                                value="{{$tot}}" required readonly>
+                                value="{{$sum}}" required readonly>
                                 
                             </div> 
                         </div>
