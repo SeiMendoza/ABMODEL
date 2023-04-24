@@ -279,10 +279,16 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     {
         $request->validate([
             'cantidad' => ['required', 'numeric', 'digits_between:1,3', 'min:1'],
-            'precio' => ['required', 'numeric', 'min:0'],
+            'precio' => ['required', 'numeric', 'min:1'],
         ], [
+            'cantidad.required' => 'La cantidad es obligatoria',
+            'cantidad.numeric' => 'Solo se aceptan  números',
             'cantidad.min' => 'La cantidad minima es 1',
-            'cantidad.digits_between' => 'Solo se permiten 3 digitos'
+            'cantidad.digits_between' => 'Solo se permiten 3 dígitos',
+
+            'precio.required' => 'La cantidad es obligatoria',
+            'precio.numeric' => 'Solo se aceptan  números',
+            'precio.min' => 'La cantidad minima es 1',
         ]);
 
         $detalle = DetallesUsuario::find($detalle_id);
