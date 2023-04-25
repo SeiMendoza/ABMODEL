@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
                         KioskoSeeder::class,
                         MesaSeeder::class,
                         ReservacionSeeder::class,
-                        PedidoSeeder::class,
-                        DetallesUsuarioSeeder::class,]);
+                        //PedidoSeeder::class,
+                        //DetallesUsuarioSeeder::class,
+                    ]);
     }
 }

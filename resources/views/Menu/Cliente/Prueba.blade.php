@@ -93,7 +93,7 @@
                                         <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
                                         <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
                                         <div class="container-fluid agregarCarrito" id="carritoA" 
-                                                style="display:block;  height: 200px; width: 200px; padding: 3px ">
+                                                style="display:block; height: 200px; width: 200px; padding: 3px ">
                                             <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                 data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
                                                 background: url('/images/{{ $pro->imagen }}') top center/cover no-repeat;">
@@ -143,7 +143,7 @@
                                                 style="display:block;  height: 200px; width: 200px; padding: 3px ">
                                             <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                 data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                background: url('/images/{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                background: url('/images/{{$pro->imagen}}') top center/cover no-repeat;">
                                                 <section class="text-center" style="text-align:center; ">
                                                     <!-- Nombre -->
                                                     <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
@@ -185,7 +185,7 @@
                                                 style="display:block;  height: 200px; width: 200px; padding: 3px ">
                                             <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                 data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                background: url('/images/{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                background: url('/img/{{ $pro->imagen }}') top center/cover no-repeat;">
                                                 <div class="text-center" 
                                                 style="text-align:center; ">
                                                 <!-- Nombre -->
@@ -337,33 +337,38 @@
                     <div style="width: 99%" class="">
                         <div style="position:absolute; top: 60px; width: 33%">
                             <div class="input-group" style="margin: 0; border: 0; width: 99%">
-                                @php
-                                    $k_id
-                                @endphp
                                 <Label class="h6 col-form-label font-robo" style="margin: 5px 5% 0 0;" for="mesa">Pedido de la Mesa:</Label>
-                                <select name="mesa" required style="height:42px; border-radius:0; margin: 5px 0px 5px 23px;" id="mesa"
+                                <select name="mesa" style="height:42px; border-radius:0; margin: 5px 0px 5px 23px;" id="mesa"
                                     class="form-control input--style-2 border-0 ps-2 font-robo">
-                                    <option disabled="disabled" selected="selected" >Mesa</option>
-                                    @foreach($mesas as $m)
-                                        <option value="{{$m->id}}">{{old('mesa', $m->nombre)}}</option>
-                                            @php
-                                                $k_id = $m->kiosko->id;
-                                            @endphp
-                                    @endforeach
+                                    @if (old('mesa'))
+                                    <option disabled="disabled" value="">Seleccione una mesa</option> 
+                                    @foreach ($mesas as $c)
+                                        @if (old('mesa') == $c->id)
+                                            <option selected="selected" value="{{$c->id}}">{{$c->nombre}}</option>
+                                        @else
+                                            <option value="{{$c->id}}">{{$c->nombre}}</option>
+                                        @endif
+                                    @endforeach 
+                                @else
+                                    <option disabled="disabled" selected="selected" value="">Seleccione una mesa</option> 
+                                    @foreach ($mesas as $c)
+                                        <option value="{{$c->id}}">{{$c->nombre}}</option>
+                                    @endforeach 
+                                @endif
                                 </select>
                                 @error('mesa')
                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror
-                                <input type="text" value="{{$k_id}}" id="kiosko" name="kiosko" hidden>     
+                                <input type="number" value="{{$pedido->id}}" id="pedido" name="pedido" hidden>          
                             </div>
                             <div class="input-group" style="margin: 0; border: 0; width: 99%">
                                 <label class="h6 font-robo col-form-label" for="nombre" style="margin: 0 5% 0 0;">Nombre del cliente:</label>
                                 <input name="nombre" type="text" class="ps-2 input--style-2 form-control border-0 border-radius-sm" id="nombre" maxlength="50" minlength="3"
-                                    required placeholder="Ingrese el nombre" value="{{ old('nombre') }}" style="margin: 0px 0px 5px 20px; height:42px;">
+                                    placeholder="Ingrese el nombre" value="{{ old('nombre',) }}" style="margin: 0px 0px 5px 20px; height:42px;">
                                 <div class="invalid-feedback">  
                                 </div>
                                 @error('nombre')
-                                    <span class="menerr" style="color:red">{{ $message }}</span>
+                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror
                             </div>
                         </div>
@@ -372,7 +377,7 @@
                             $isv = number_format($sum*0.15, 2, ".", ",");
                             $tot = number_format($sum, 2, ".", ",");
                         @endphp
-                        @if ($tot > 0.00)
+                        @if ($sum > 0.00)
                             <input type="number" name="t" id="t" value="{{$sum}}" hidden>
                         @else
                             <input type="number" name="t" id="t" value="" hidden>
@@ -380,26 +385,25 @@
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         @endif     
-                        <div class="" style="margin: 0; margin-top:3%; padding:0">
+                        <div class="" style="margin: 0; margin-top:15px; padding:0">
                             <div class="input-group" style="margin: 0; border: 0;">
                                 <label class="h6 font-robo col-form-label" for="sub" style="margin: 0 15% 0 0;">Sub-Total: L</label>
                                 <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" id="sub"
                                     name="sub" type="text" style="height:42px; margin: 0px 0px 5px 20px; padding:0; text-align:right;"  
-                                    value="{{$sub}}" required readonly>
+                                    value="{{number_format($sum - $sum * 0.15, 2, ".", ",")}}" required readonly>
                             </div>                   
                             <div class="input-group" style="margin: 0;  border: 0;">
                                 <label class="h6 text-xl-center col-form-label col-auto" for="isv" style="margin: 0 15% 0 0;">ISV 15%: L</label>
                                 <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" id="isv" name="isv" 
                                 type="number" style="margin: 0px 0px 5px 30px; padding:0; text-align:right; height:42px;" 
-                                value="{{$sum - $sum * 0.15}}" required readonly>
+                                value="{{number_format($sum * 0.15, 2, ".", ",")}}" required readonly>
                             </div>                 
                             <div class="input-group" style="margin: 0;  border: 0;">
                                 <label class="h6 text-xl-center col-form-label col-auto" for="total" style="margin: 0 15% 0 0;">Total: L</label>
                                 <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" 
                                 min="1" type="number"  
                                 style=" margin: 0px 0px 4px 55px; padding:0; text-align:right; height:42px;"
-                                value="{{$sum}}" required readonly>
-                                
+                                value="{{number_format($sum, 2, ".", ",")}}" required readonly>
                             </div> 
                         </div>
                     </div>

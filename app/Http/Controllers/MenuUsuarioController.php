@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bebida;
 use App\Models\Combo;
 use App\Models\DetallesUsuario;
+use App\Models\Kiosko;
 use App\Models\Mesa;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
@@ -22,24 +23,30 @@ class MenuUsuarioController extends Controller
         $bebidas = Bebida::where('estado', '=', '1')->get();
         $combos = Combo::where('estado', '=', '1')->get();
         $mesas = Mesa::where('estadoM', '=', 0)->get();
+        $kiosko = Kiosko::all();
         $pedido = Pedido::where('estado', '=', '0')->get();
         $detalles = DetallesUsuario::where('estado', '=', '0')->get();
         if ($pedido->count() == 0) {
             $pedido_new = new Pedido();
-            $pedido_new->estado = '0';
+            $pedido_new->estado = 1;
+            $pedido_new->quiosco = 0;
+            $pedido_new->nombreCliente = "Cliente";
+            $pedido_new->imp = 0;
+            $pedido_new->total = 0;
+            $pedido_new->mesa_id = 1;
             $pedido_new->save();
 
-            return view('Menu.Cliente.Prueba')->with('pedido', $pedido_new)
+            return view('Menu.Cliente.Prueba')->with('pedido', $pedido_new)->with('kiosko', $kiosko)
                 ->with('platillos', $platillos)->with('combos', $combos)->with('detalles', $detalles)
                 ->with('bebidas', $bebidas)->with('mesas', $mesas); 
         } 
 
-        return view('Menu.Cliente.Prueba')->with('pedido', $pedido[0])
+        return view('Menu.Cliente.Prueba')->with('pedido', $pedido[0])->with('kiosko', $kiosko)
         ->with('platillos', $platillos)->with('combos', $combos)->with('detalles', $detalles)
         ->with('bebidas', $bebidas)->with('mesas', $mesas);
      }
     public function details(Request $request)
-    {
+    {   
         $detalles = new DetallesUsuario();
         $detalles->pedido_id = $request->input('pedido');
         $detalles->producto = $request->input('producto');
@@ -68,25 +75,29 @@ class MenuUsuarioController extends Controller
             't.min' => 'El pedido esta vacio',
         ]);
 
+        $kiosko = Mesa::findOrFail($request->input('mesa')); 
+
         if ($request->input('t') > 0) {
-        $pedido = new Pedido();
-        $pedido->quiosco = $request->input('kiosko');
+        $pedido = Pedido::findOrFail($request->input('pedido'));
+        $pedido->quiosco = $kiosko->kiosko->id;
         $pedido->nombreCliente = $request->input('nombre');
         $pedido->imp = $request->input('isv');
         $pedido->total = $request->input('t');
-        $pedido->estado = 1;
+        //$pedido->estado = 1;
         $pedido->mesa_id = $request->input('mesa');
-        $pedido->save();
-        dd($pedido);
+        //$pedido->save();
+        //dd($pedido); 
+        $creado = $pedido -> save();
+        if ($creado) {
+            $d = DetallesUsuario::where('estado', '=', '0')->get();
+            foreach ($d as $key => $value) {
+                $value->estado = 1;
+                $value->save();
+            }
+            return redirect()->route("cliente_prueba")->with('mensaje', 'El pedido fue enviado exitosamente');
         }
-
-        $d = DetallesUsuario::where('estado', '=', '0')->get();
-        foreach ($d as $key => $value) {
-            $value->estado = 1;
-            $value->save();
         }
-
-        return redirect()->route("cliente_prueba")->with('mensaje', 'El pedido fue enviado exitosamente');
+  
     }
 
     public function edit(Request $request, $id)
@@ -102,7 +113,7 @@ class MenuUsuarioController extends Controller
 
         $detal = DetallesUsuario::findOrFail($id);
         $detal->cantidad = $request->input('numb');
-        $detal->save();
+        //$detal->save();
         $creado = $detal -> save();
 
         if ($creado) {
