@@ -23,7 +23,7 @@
     <table class="table" id="example" style="">
         <thead style="">
             <tr>
-                <th scope="col" style="text-align:center" >N</th>
+                <th scope="col" style="text-align:center;" >N</th>
                 <th scope="col" style="text-align: left;  ">Cliente</th>
                 <th scope="col" style="text-align: right; ">Celular</th>
                 <th scope="col" style="text-align: right;width:15% ">Fecha</th>
@@ -39,7 +39,7 @@
             @forelse($reservacion as $m => $r)
             @if(($r->estado)=="0") 
             <tr style=" height:46px">
-                <td scope="col" style="  ">{{++$m}}</td>
+                <td scope="col" style="  text-align: center">{{++$m}}</td>
                 <td scope="col" style="text-align: left;">{{$r->Nombre_Cliente}} </td>
                 <td scope="col" style="text-align: right;">{{$r->Contacto}}</td>
                 <td scope="col" style="text-align: right;">{{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('DD') }} de
