@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\DetallesUsuario;
 use App\Models\Mesa;
 use App\Models\Pedido;
+use App\Models\Bebida;
+use App\Models\Combo;
+use App\Models\Platillo;
 use Illuminate\Support\Facades\Session;
 use App\Models\PiscinaUso;
 use Database\Seeders\PlatillosyBebidasSeeder;
@@ -272,7 +275,13 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     {
         $edit = DetallesUsuario::findOrFail($detalle_id);
         $pedido = Pedido::findOrfail($pedido_id);
-        $productos = DetallesUsuario::pluck('nombre')->unique();
+        $productos = Platillo::select('nombre')
+    ->where('estado', '=', '1')
+    ->union(Combo::select('nombre')->where('estado', '=', '1'))
+    ->union(Bebida::select('nombre')->where('estado', '=', '1'))
+    ->get()
+    ->pluck('nombre');
+      //  $productos = DetallesUsuario::pluck('nombre')->unique();
         return view('Menu/Cocina/editardetallecaja', compact('edit', 'pedido', 'productos'));
     }
     public function update(Request $request, $pedido_id, $detalle_id)
@@ -310,7 +319,25 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     public function obtenerPrecio(Request $request)
     {
         $producto = $request->input('producto');
-        $precio = DB::table('detalles_usuarios')->where('nombre', $producto)->value('precio');
+        $precio = DB::table('platillos')
+        ->select('platillos.precio')
+        ->where('platillos.nombre', $producto)
+        ->where('platillos.estado', '=', '1')
+        ->union(
+            DB::table('combos')
+                ->select('combos.precio')
+                ->where('combos.nombre', $producto)
+                ->where('combos.estado', '=', '1')
+        )
+        ->union(
+            DB::table('bebidas')
+                ->select('bebidas.precio')
+                ->where('bebidas.nombre', $producto)
+                ->where('bebidas.estado', '=', '1')
+        )
+        ->get()
+        ->pluck('precio')
+        ->first();
         Session::put('producto_precio', $precio);
         return $precio;
     }

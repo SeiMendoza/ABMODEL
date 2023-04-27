@@ -142,8 +142,7 @@
 
 
 
-                @foreach ($detapedido as $detalle)
-                @if ($pedido->id == $detalle->pedido_id)
+                @foreach ($detapedido as $detalle) 
                   <td scope="col" style="width:20%; text-align:center; height:20%;">{{$detalle->nombre}}</td>
                 <td scope="col" style=" width:20%; text-align:center; height:20%;">{{ $detalle->cantidad }}</td>
                 <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
@@ -163,15 +162,8 @@
                         </form>
                     </div>
                 </td>
-
                 @endif  
-                @else
-                    <td colspan="5"> ni madres, no da</td>
-                @endif
-                
                 </tr>
-
-
                 @endforeach
             </tbody>
         </table>

@@ -32,7 +32,7 @@
         </thead>
         <tbody>
             @forelse($pedido as $i => $p)
-            @if(($p->estado)==0 || $p->estado==1 || $p->estado==2)
+            @if($p->estado==1 || $p->estado==2)
             <tr style="text-align:center">
                 <td scope="col">{{++$i}}</td>
                 <td scope="col">{{$p->mesa_nombre->nombre}}</td>
