@@ -18,7 +18,7 @@
 @section('content')
 
 <style>
-    .titulo {
+     .titulo {
         width: 20%;
         font-weight: bold;
         height: 40%;
@@ -42,6 +42,8 @@
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
             <td class="titulo">Kiosko:</td>
             <td class="informacion">{{$pedido->quiosco}}</td>
+            <td class="titulo">Sub_Total:</td>
+                <td class="informacion">L. <?= number_format($sub, 2, ".", ",") ?> </td>
         </tr>
         <tr>
             <td class="titulo">Nombre del cliente: </td>
@@ -54,6 +56,8 @@
                 Terminado
                 @endif
             </td>
+            <td class="titulo">Impuesto: </td>
+            <td class="informacion">L. <?= number_format($isv, 2, ".", ",") ?></td>
         </tr>
         <script>
             setInterval(() => {
@@ -89,16 +93,10 @@
             <td class="informacion">{{date('h:i:s a',strtotime($pedido->created_at))}}</td>
             <td class="titulo">Tiempo transcurrido en cocina:</td>
 
-            <td class="informacion" id="tiempo">
-            </td>
-        </tr>
-        <tr>
-            <td class="titulo">Impuesto: </td>
-            <td class="informacion">L. <?= number_format($impuesto, 2, ".", ",") ?></td>
+            <td class="informacion" id="tiempo"></td>
             <td class="titulo">Total:</td>
-            <td class="informacion">L. <?= number_format($total_con_impuesto, 2, ".", ",") ?></td>
-        </tr>
-        </tbody>
+            <td class="informacion">L. <?= number_format($tot, 2, ".", ",") ?> </td> 
+        </tr>  
     </table>
     <div class="mb-0 col-9 text-start" style="position:absolute;top:260%;width:100%;">
         <table class="table" id="example" style="width:100%;height:100%;">

@@ -40,7 +40,6 @@ class PedidoUsuarioController extends Controller
         $pedido->total = 100;
         $pedido->save();
 
-
         for ($i = 0; $i < intval($request->input("tuplas")); $i++) {
             $array = explode(' ', $request->input("det-" . $i));
             $detalle = new DetallesUsuario();
@@ -164,17 +163,11 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             'estado' => 'required|in:2', // El campo estado es obligatorio y solo puede ser 1
             'estado_cocina' => 'required|in:2',
         ]);
-        // $request->session()->put('envia_de_cocina', $request->input('envia_de_cocina'));
+
         $activar = Pedido::findOrfail($id);
         $activar->estado = $request->input('estado');
         $activar->estado_cocina = $request->input('estado_cocina');
-        /* if ('estado_cocina' == 1) {
-            dd('procesando');
-        } elseif ('estado_cocina' == 2) {
-            dd('entregar');
-        } else {
-            
-        }*/
+
         $create = $activar->save();
 
         if ($create) {
@@ -182,40 +175,52 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         }
     }
     public function detalle_pedido_terminados($id)
-{
-    $pedido = Pedido::findOrFail($id);  
-    $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
-  
-    $suma = 0;
-    $total_con_impuesto = 0;
+    {
+        $pedido = Pedido::findOrFail($id);
+        $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
+
+        /* $suma = 0;
+    $Sub_total = 0;
     $impuesto = 0;
 
     foreach ($detapedido as $detalle) {
         $tasa_impuesto = 0.15;
         $suma += $detalle->precio * $detalle->cantidad;
         $impuesto = $suma * $tasa_impuesto;
+        $Sub_total = $suma - $suma * $impuesto;
+        $total = $Sub_total + $impuesto;
+    }*/
 
-        $total_con_impuesto = $suma + $impuesto;
+        $suma = 0;
+        $tasa_impuesto = 0.15;
+
+        foreach ($detapedido as $detalle) {
+            $suma += $detalle->precio * $detalle->cantidad;
+        }
+
+        $sub = number_format($suma - $suma * $tasa_impuesto, 2, ".", ",");
+        $isv = number_format($suma * $tasa_impuesto, 2, ".", ",");
+        $tot = number_format($suma, 2, ".", ",");
+        return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido', 'tot', 'sub', 'isv'));
     }
+    /*   return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido', 'total','Sub_total', 'impuesto'));
+}*/
 
-    return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido', 'total_con_impuesto', 'impuesto'));
-}
-   
     public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
         $suma = 0;
-        $total_con_impuesto = 0;
-        $impuesto = 0;
-        foreach ($detapedido as $detalle) {
-            $tasa_impuesto = 0.15;
-            $suma += $detalle->precio * $detalle->cantidad;
-            $impuesto = $suma * $tasa_impuesto;
+        $tasa_impuesto = 0.15;
 
-            $total_con_impuesto = $suma + $impuesto;
+        foreach ($detapedido as $detalle) {
+            $suma += $detalle->precio * $detalle->cantidad;
         }
-        return view('Menu/Cocina/detallecocina', compact('pedido', 'detapedido', 'total_con_impuesto', 'impuesto'));
+
+        $sub = number_format($suma - $suma * $tasa_impuesto, 2, ".", ",");
+        $isv = number_format($suma * $tasa_impuesto, 2, ".", ",");
+        $tot = number_format($suma, 2, ".", ",");
+        return view('Menu/Cocina/detallecocina', compact('pedido', 'detapedido', 'tot', 'sub', 'isv'));
     }
 
     public function detalle_terminados($id)
@@ -223,16 +228,16 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
         $suma = 0;
-        $total_con_impuesto = 0;
-        $impuesto = 0;
-        foreach ($detapedido as $detalle) {
-            $tasa_impuesto = 0.15;
-            $suma += $detalle->precio * $detalle->cantidad;
-            $impuesto = $suma * $tasa_impuesto;
+        $tasa_impuesto = 0.15;
 
-            $total_con_impuesto = $suma + $impuesto;
+        foreach ($detapedido as $detalle) {
+            $suma += $detalle->precio * $detalle->cantidad;
         }
-        return view('Menu/Cocina/detalleterminado', compact('pedido', 'detapedido', 'total_con_impuesto', 'impuesto'));
+
+        $sub = number_format($suma - $suma * $tasa_impuesto, 2, ".", ",");
+        $isv = number_format($suma * $tasa_impuesto, 2, ".", ",");
+        $tot = number_format($suma, 2, ".", ",");
+        return view('Menu/Cocina/detalleterminado', compact('pedido', 'detapedido', 'tot', 'sub', 'isv'));
     }
 
     public function pedidos_anteriores(Request $request)
@@ -276,12 +281,12 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $edit = DetallesUsuario::findOrFail($detalle_id);
         $pedido = Pedido::findOrfail($pedido_id);
         $productos = Platillo::select('nombre')
-    ->where('estado', '=', '1')
-    ->union(Combo::select('nombre')->where('estado', '=', '1'))
-    ->union(Bebida::select('nombre')->where('estado', '=', '1'))
-    ->get()
-    ->pluck('nombre');
-      //  $productos = DetallesUsuario::pluck('nombre')->unique();
+            ->where('estado', '=', '1')
+            ->union(Combo::select('nombre')->where('estado', '=', '1'))
+            ->union(Bebida::select('nombre')->where('estado', '=', '1'))
+            ->get()
+            ->pluck('nombre');
+        //  $productos = DetallesUsuario::pluck('nombre')->unique();
         return view('Menu/Cocina/editardetallecaja', compact('edit', 'pedido', 'productos'));
     }
     public function update(Request $request, $pedido_id, $detalle_id)
@@ -306,38 +311,38 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $detalle->cantidad = $request->input('cantidad');
         $detalle->precio = $request->input('precio');
         $impuesto = $detalle->precio * $detalle->cantidad * 0.15; // calcular el impuesto
-        $total = $detalle->precio * $detalle->cantidad + $impuesto; // calcular el total
+        $total = $detalle->precio * $detalle->cantidad; // calcular el total
 
         $pedido->imp = $impuesto;
         $pedido->total = $total;
 
-        $detalle->save();
         $pedido->save();
+        $detalle->save();
         return redirect()->route('pedidost.detalle', ['id' => $pedido_id])->with('mensaje', 'El detalle del pedido ha sido actualizado exitosamente.');
     }
-/**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
+    /**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
     public function obtenerPrecio(Request $request)
     {
         $producto = $request->input('producto');
         $precio = DB::table('platillos')
-        ->select('platillos.precio')
-        ->where('platillos.nombre', $producto)
-        ->where('platillos.estado', '=', '1')
-        ->union(
-            DB::table('combos')
-                ->select('combos.precio')
-                ->where('combos.nombre', $producto)
-                ->where('combos.estado', '=', '1')
-        )
-        ->union(
-            DB::table('bebidas')
-                ->select('bebidas.precio')
-                ->where('bebidas.nombre', $producto)
-                ->where('bebidas.estado', '=', '1')
-        )
-        ->get()
-        ->pluck('precio')
-        ->first();
+            ->select('platillos.precio')
+            ->where('platillos.nombre', $producto)
+            ->where('platillos.estado', '=', '1')
+            ->union(
+                DB::table('combos')
+                    ->select('combos.precio')
+                    ->where('combos.nombre', $producto)
+                    ->where('combos.estado', '=', '1')
+            )
+            ->union(
+                DB::table('bebidas')
+                    ->select('bebidas.precio')
+                    ->where('bebidas.nombre', $producto)
+                    ->where('bebidas.estado', '=', '1')
+            )
+            ->get()
+            ->pluck('precio')
+            ->first();
         Session::put('producto_precio', $precio);
         return $precio;
     }

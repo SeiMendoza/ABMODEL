@@ -1,8 +1,11 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalle de caja')
 @section('miga')
-<li class="breadcrumb-item text-sm text-white active" aria-current="page">
+<li class="breadcrumb-item text-sm opacity-5 text-white active" aria-current="page">
     <a class="text-white" href="{{route('terminados.terminados')}}">Pedidos terminados</a>
+</li>
+<li class="breadcrumb-item text-sm text-white" aria-current="page">
+    <a class="text-white">Detalles</a>
 </li>
 @endsection
 
@@ -43,6 +46,8 @@
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
             <td class="titulo">Kiosko:</td>
             <td class="informacion">{{$pedido->quiosco}}</td>
+            <td class="titulo">Sub_Total:</td>
+            <td class="informacion">L. <?= number_format($sub, 2, ".", ",") ?> </td>
         </tr>
         <tr>
             <td class="titulo">Nombre del cliente: </td>
@@ -62,18 +67,16 @@
                 @endif  
             @endif--->
             </td>
+            <td class="titulo">Impuesto: </td>
+            <td class="informacion">L. <?= number_format($isv, 2, ".", ",") ?></td>
         </tr>
         <tr>
             <td class="titulo">Hora del pedido: </td>
             <td class="informacion">{{date('h:i:s a',strtotime($pedido->created_at))}}</td>
             <td class="titulo">Hora de entrega:</td>
             <td class="informacion" id="tiempo"> {{date('h:i:s a',strtotime($pedido->updated_at))}} </td>
-        </tr>
-        <tr>
-            <td class="titulo">Impuesto: </td>
-            <td class="informacion">L. <?= number_format($impuesto, 2, ".", ",") ?></td>
             <td class="titulo">Total:</td>
-            <td class="informacion">L. <?= number_format($total_con_impuesto, 2, ".", ",") ?> </td>
+            <td class="informacion">L. <?= number_format($tot, 2, ".", ",") ?> </td>
         </tr>
         </tbody>
     </table>

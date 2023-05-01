@@ -57,7 +57,10 @@
                     <div class="col-6">
                         <div class="font-robo form-group">
                             <label for="">Precio del producto:</label>
-                            <input style="padding-left: 8px;" class="form-control border-radius-sm precio" placeholder="Precio del producto" name="precio" id="precio" readonly value="@if(Session::has('producto_precio')){{Session::get('producto_precio')}}@else{{old('precio',$edit->precio)}}@endif">
+                            <input style="padding-left: 8px;" class="form-control border-radius-sm precio" 
+                            placeholder="Precio del producto" name="precio" id="precio" readonly 
+                            value="@if(Session::has('producto_precio')){{Session::get('producto_precio')}}
+                            @else{{old('precio',$edit->precio)}}@endif">
                             @error('precio')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -66,18 +69,24 @@
                     <div class="col">
                         <div class="font-robo form-group">
                             <label for="">Impuesto:</label>
-                            <input style="padding-left: 8px;" class="form-control border-radius-sm" type="number" name="impuesto" id="impuesto" step="0.01" placeholder="" value="@if(Session::has('impuesto')){{Session::get('impuesto')}}@else{{old('',$edit->precio*$edit->cantidad)}}@endif" readonly onkeypress="quitarerror()">
+                            <input style="padding-left: 8px;" class="form-control border-radius-sm" type="number" name="impuesto" id="impuesto" step="0.01" placeholder="" value="@if(Session::has('impuesto')){{Session::get('impuesto')}}@else{{old('',$edit->precio*$edit->cantidad * 0.15)}}@endif" readonly onkeypress="quitarerror()">
                             @error('impuesto')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
                 </div>
+                @php
+                $imp=$edit->precio * $edit->cantidad * 0.15;
+                $sub=$edit->precio * $edit->cantidad -$imp;
+                @endphp
+            
                 <div class="row row-space">
                     <div class="col-6">
                         <div class="font-robo form-group">
                             <label for="">Sub_total:</label>
-                            <input class="form-control border-radius-sm" type="number" name="sub_total" id="sub_total" step="" placeholder="" value="@if(Session::has('sub_total')){{Session::get('sub_total')}}@else{{old('',$edit->precio*$edit->cantidad)}}@endif" readonly onkeypress="quitarerror()">
+                            <input class="form-control border-radius-sm" type="number" name="sub_total" id="sub_total" step="" placeholder="" value="@if(Session::has('sub_total'))
+                            {{Session::get('sub_total')}}@else{{old('',$sub )}}@endif" readonly onkeypress="quitarerror()">
                             @error('sub_total')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -141,9 +150,9 @@
                 success: function(response) {
                     var precio = parseFloat(response);
                     if (!isNaN(precio)) { // Verifica si el valor de precio es válido
-                        var impuesto = precio * cantidad * 0.15; // Calcula el impuesto como el 15% del precio total
-                        var total = precio * cantidad * 1.15;
-                        var sub_total = precio * cantidad;
+                        var impuesto = cantidad * precio * 0.15; // Calcula el impuesto como el 15% del precio total
+                        var sub_total = precio * cantidad - impuesto;
+                        var total = precio * cantidad;
                         $('#precio').val(response);
                         $('#impuesto').val(impuesto.toFixed(2)); // Muestra el impuesto con 2 decimales
                         $('#sub_total').val(sub_total.toFixed(2)); // Muestra el sub_total con 2 decimales
