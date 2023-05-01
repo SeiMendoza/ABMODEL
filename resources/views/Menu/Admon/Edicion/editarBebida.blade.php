@@ -168,7 +168,7 @@
                    </div>
                     <div style="float: right;margin-top: 5px">
                         <button type="submit" class="btn btn-success">Actualizar</button>
-                        <button type="button" onclick="cancelar('admonRestaurante')"
+                        <button type="button" onclick="cancelarAct('admonRestaurante')"
                             class="btn btn-warning">Cancelar</button>
                     </div>
 

@@ -39,7 +39,7 @@
             <thead>
                 <tr>
                     <th scope="col" style="text-align: center">N</th>
-                    <th scope="col" style="text-align: end">Código</th>
+                    <th scope="col" style="text-align: center">Código</th>
                     <th scope="col" style="text-align: center">Cantidad de Mesas</th>
                     <th scope="col" style="text-align: start">Ubicación</th>
                     <th scope="col" style="text-align: center">Disponible</th>
@@ -52,7 +52,7 @@
                     @forelse($kioskos as $k)
                         <tr>
                             <td scope="col" style="text-align: center">{{ $k->id }}</td>
-                            <td scope="col" style="text-align: end">{{ $k->codigo }}</td>
+                            <td scope="col" style="text-align: center">{{ $k->codigo }}</td>
                             <td scope="col" style="text-align: center">{{ $k->cantidad_de_Mesas }}</td>
                             <td scope="col" style="text-align: start">{{ $k->ubicacion }}</td>
                             <td scope="col" style="text-align: center">

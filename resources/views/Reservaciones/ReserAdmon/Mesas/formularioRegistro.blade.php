@@ -24,15 +24,15 @@
                                             <option disabled="disabled" value="">Seleccione un kiosko</option> 
                                             @foreach ($kiosko as $c)
                                                 @if (old('kiosko') == $c->id)
-                                                    <option selected="selected" value="{{$c->id}}">{{$c->id}}</option>
+                                                    <option selected="selected" value="{{$c->id}}">{{$c->codigo}}</option>
                                                 @else
-                                                    <option value="{{$c->id}}">{{$c->id}}</option>
+                                                    <option value="{{$c->id}}">{{$c->codigo}}</option>
                                                 @endif
                                             @endforeach 
                                         @else
                                             <option disabled="disabled" selected="selected" value="">Seleccione un kiosko</option> 
                                             @foreach ($kiosko as $c)
-                                                <option value="{{$c->id}}">{{$c->id}}</option>
+                                                <option value="{{$c->id}}">{{$c->codigo}}</option>
                                             @endforeach 
                                         @endif
                                     </select>
@@ -76,7 +76,7 @@
                         </div>
                         <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
                         <div style="float: right;margin-top: 5px"> 
-                            <button type="button" onclick="cancelar('mesas/registro')" class="btn btn-danger">Cancelar</button>
+                            <button type="button" onclick="cancelarAct('mesas/registro')" class="btn btn-danger">Cancelar</button>
                             <button onclick="" type="submit" class="btn btn-success">Guardar</button>
                         </div>
                     </form>

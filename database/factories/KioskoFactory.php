@@ -18,7 +18,7 @@ class KioskoFactory extends Factory
     public function definition()
     {
         return [
-            'codigo'=>$this->faker->numerify('######'),
+            'codigo'=>$this->faker->numerify('K##'),
             'descripcion'=>$this->faker->words(10, true),
             'cantidad_de_Mesas'=>$this->faker->numberBetween(0, 10),
             'ubicacion'=>$this->faker->randomElement(['Cerca','Media Distancia','Lejano']),

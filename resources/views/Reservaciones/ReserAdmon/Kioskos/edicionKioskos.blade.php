@@ -1,91 +1,76 @@
-@extends('00_plantillas_Blade.plantilla_General1')
-@section('title', 'Edición de Kiosko')
+@extends('00_plantillas_Blade.plantilla_General2')
+@section('title', 'Registro de Kiosko')
+@section('miga')
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('kiosko.index')}}">Administración de Kioskos</a></li>
+<li class="breadcrumb-item text-sm active text-white active">Edición</li>
+@endsection
+@section('b')
+<div>
+    <a onclick="cancelarAct('kioskos')" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+        <i class="fa fa-arrow-left"></i>  Regresar
+    </a>
+</div>
+@endsection
+@section('content')
 
-@section('contend')
-
-
-    <div class="page-wrapper bg-primary p-t-170 p-b-100 font-robo">
-        <br><br>
+    <div class="">
         <div class="wrapper wrapper--w960">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="">Edición de Kiosko {{ $k->codigo }}</h2>
-
+            <div class="card border-radius-sm border-0" style="">            
+                <div class="card-body border-radius-sm border-0">
+                    <h2 class="title" style="margin-bottom:0" >Edición de kiosko</h2>
                     <form method="post" action="{{ route('kiosko.update', ['id' => $k->id]) }}" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
-                        <div class="row">
-                            <div class="col-4">
-                                <div style="width:200px;float:left">
-                                    <img src="{{asset($k->imagen)}}" alt="" width="250px" height="250px" id="imagenmostrada">
-                                    <br>
-                                    <input type="file" id="imagen" name="imagen" accept="image/*"  value="{{ old('imagenPrevisualizacion', $k->imagen) }}" style="color: white;width: 200px;">
+                        <h4 class="font-robo t m-1" style="margin: 0; padding:0">Datos del kiosko</h4>
+                        <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
+                        <div class="row row-space">
+
+                            <div class="col-3">      
+                                <div class="font-robo form-group">                     
+                                    <label for="" style="margin-left: 0;">Seleccione una imagen</label>
+                                    <img style="margin-left: 0;" src="{{asset($k->imagen)}}" alt="" width="220px" height="220px" id="imagenmostrada">
+                                    <br><br>
+                                    <input type="file" id="imagen" name="imagen" accept="image/*"  value="{{ old('imagenPrevisualizacion') }}" style="color: white;width: 200px;">
                                     @error('imagen')
                                             <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                    @enderror  
+                                </div>                                       
+                            </div>                    
+                            <div class="col-9">
+                                <div class="form-group col" style="margin-left: 0;">
+                                    <label for="codigo">Código</label>
+                                    <input name="codigo" disabled type="text" class="form-control border-radius-sm" id="codigo" maxlength="3"
+                                        required placeholder="K00" value="{{ $k->codigo }}">
+                                    @error('codigo')
+                                        <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                    @enderror
+                                </div>                                
+                                <div class="form-group col">
+                                    <label for="description">Descripcion</label>
+                                    <textarea name="descripcion" style="resize:none" type="tex-area" class="form-control text-area" id="descripcion" required
+                                        placeholder="Descripcion del Kiosko">{{ $k->descripcion }}</textarea>
+                                    @error('descripcion')
+                                        <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="col-8">
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="codigo">Código</label>
-                                        <input name="codigo" disabled type="num" class="form-control" id="codigo" maxlength="5"
-                                        required placeholder="Código de Kiosko" value="{{ $k->codigo }}">
-                                        @error('codigo')
-                                            <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="description">Descripcion</label>
-                                        <textarea name="descripcion" type="tex-area" class="form-control text-area" id="descripcion" required placeholder="Descripcion del Kiosko">{{ $k->descripcion }}</textarea>
-                                        @error('descripcion')
-                                            <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+
+                                <div class="form-group col">
+                                    <label for="ubicacion">Ubicación</label>
+                                    <input name="ubicacion" type="text" class="form-control border-radius-sm" id="ubicacion" required
+                                        placeholder="Ubicacion del Kiosko" value="{{ $k->ubicacion }}">
+                                    @error('ubicacion')
+                                        <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                    @enderror
                                 </div>
-
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="cantidadDeMesas">Cantidad de Mesas</label>
-                                        <input name="cantidad_de_Mesas" type="number"  class="form-control" id="cantidadDeMesas"
-                                            placeholder="Cantidad de Mesas en el kiosko" value="{{ $k->cantidad_de_Mesas }}" required>
-                                        @error('cantidad_de_Mesas')
-                                            <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="ubicacion">Ubicación</label>
-                                        <input name="ubicacion" type="text" class="form-control" id="ubicacion" required placeholder="Ubicacion del Kiosko" value="{{ $k->ubicacion }}">
-                                        @error('ubicacion')
-                                            <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="mesasContenidas">Mesas</label>
-                                            <select name="mesasContenidas" id="mesasContenidas" class="form-control">
-                                                <option selected>Mesas que contiene</option>
-                                                <option>...</option>
-                                            </select>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
+                            </div> 
                         </div>
 
-                        <div id="espacio"><br></div>
-                        <div style="float:right">
-                            <button type="submit" class="btn btn-success">Guardar</button>
-                            <button type="button" onclick="cancelar('kioskos')" class="btn btn-danger">Cancelar</button>
+                        <div class="row" style="float:center">
+                            <div class="col text-end">
+                                <button type="submit" class="btn btn-success">Actualizar</button>
+                                <button type="button" onclick="cancelarAct('kioskos')" class="btn btn-danger">Cancelar</button>
+                            </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>

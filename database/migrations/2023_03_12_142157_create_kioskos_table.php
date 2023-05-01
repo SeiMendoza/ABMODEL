@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kioskos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('codigo')->unique()->required();
+            $table->string('codigo')->unique()->required();
             $table->string('descripcion');
             $table->integer('cantidad_de_Mesas')->required();
             $table->string('ubicacion')->nullable();

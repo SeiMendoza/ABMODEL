@@ -66,7 +66,9 @@
     <header id="main-header" class="he-ma" style="background-color: rgb(111, 143, 175);">
         <div class="" style="margin:0 0 0 0%; width:16.4%; padding:0%; display:block; float:left">
             <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
-                <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 100%; height:90px;">
+                <div style="width: 100%; height:90px; text-align:center; background-color: white;">
+                    <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 160px; height:100px;">
+                </div>
             </a>
         </div>
         <div class="" style="margin:1% 0% 0 1%; width:81.6%; padding:0%; display:block; float:left">    

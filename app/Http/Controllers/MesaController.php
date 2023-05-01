@@ -73,6 +73,11 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
         $nuevo->kiosko_id = $request->input('kiosko');;
         $qr = QrCode::size(250)->generate('https://www.facebook.com/villacrisol/');
 
+        //Sumar mesa al kiosko 
+        $kiosko = Kiosko::findOrFail($request->input('kiosko'));
+        $kiosko->cantidad_de_Mesas = $kiosko->cantidad_de_Mesas + 1;
+        $kiosko->save();
+
  // Guardar el QR en la carpeta 'public'
 //Storage::putFileAs('public', new \Illuminate\Http\File(storage_path('app/mesa_qr.png')), 'mesa_qr.png');
 

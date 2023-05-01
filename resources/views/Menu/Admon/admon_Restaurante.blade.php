@@ -13,7 +13,7 @@
     </div>
 
     <div>
-        <a href="{{route('combo.create')}}" style="margin:0; padding:5px; width:200px;" type="button" class="bg-light border-radius-sm text-center m-2">
+        <a href="#" style="margin:0; padding:5px; width:200px;" type="button" class="bg-light border-radius-sm text-center m-2">
             <i class="fa fa-plus-circle"></i> Agregar complemento
         </a>
     </div>

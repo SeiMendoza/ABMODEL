@@ -15,6 +15,6 @@ class KioskoSeeder extends Seeder
      */
     public function run()
     {
-        Kiosko::factory(20)->create();
+        Kiosko::factory(2)->create();
     }
 }

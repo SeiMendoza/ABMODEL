@@ -86,7 +86,7 @@
                                     <div id="espacio"><br><br></div>
                                     <div style="float:right">
                                     <button type="submit" class="btn btn-success">Actualizar</button>
-                                    <button type="button" onclick="cancelar('admonRestaurante')"
+                                    <button type="button" onclick="cancelarAct('admonRestaurante')"
                                         class="btn btn-warning">Cancelar</button>
                                      </div>
                                 </div>

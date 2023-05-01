@@ -11,21 +11,24 @@ class KioskoController extends Controller
     public function store(Request $request){
 
         $rules=[
-            'codigo' => 'required|numeric|unique:kioskos', 
-            'descripcion' => 'required|max:100|min:3',      
-            'cantidad_de_Mesas' => 'required|integer ', 
-            'ubicacion' => 'required|max:100|min:3',
+            'codigo' => 'required|unique:kioskos|regex:/^[K][0-9][0-9]$/|min:3|max:3',
+            'descripcion' => 'required|max:100|min:5',      
+            'ubicacion' => 'required|max:100|min:5',
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ];
 
-        $this->validate($request, $rules);
+        $messages=[
+            'codigo.regex' => 'El código no es válido, un ejemplo válido es: K001',
+        ];
+
+        $this->validate($request, $rules, $messages);
 
         $kiosko = new Kiosko();
         $kiosko->codigo = $request->input('codigo');
         $kiosko->descripcion = $request->input('descripcion');
         $kiosko->ubicacion = $request->input('ubicacion');
         $kiosko->disponible = 1;
-        $kiosko->cantidad_de_Mesas = $request->input('cantidad_de_Mesas');
+        $kiosko->cantidad_de_Mesas = 0;
        
         //Imagen
         $file = $request->file('imagen');
@@ -67,28 +70,18 @@ class KioskoController extends Controller
         $kioskoUpdate = Kiosko::findOrFail($id);
         $kioskoUpdate->descripcion = $request->input('descripcion');
         $kioskoUpdate->ubicacion = $request->input('ubicacion');
-        $kioskoUpdate->disponible = 1;
-        $kioskoUpdate->cantidad_de_Mesas = $request->input('cantidad_de_Mesas');
 
         if(isset($k->imagen)){
-            //Imagen
+        //Imagen
+        //Aún no actualiza bien!
         $file = $request->file('imagen');
         $destinationPath = 'images/kioskos/';
         $filename = time().'.'.$file->getClientOriginalName();
         $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
         $kioskoUpdate->imagen = 'images/kioskos/'.$filename;
-        
         }
 
         $kioskoUpdate->save();
-
-        $rules=[ 
-            'descripcion' => 'required|max:100|min:3',      
-            'cantidad_de_Mesas' => 'required|integer ', 
-            'ubicacion' => 'required|max:100|min:3',
-            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg'
-        ];
-
         return to_route('kiosko.index')->with('mensaje', 'Kiosko actualizado correctamente');
     }
 
