@@ -96,7 +96,7 @@
                                                 style="display:block; height: 200px; width: 200px; padding: 3px ">
                                             <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                 data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                background: url('/images/{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
                                                 <div class="text-center" 
                                                 style="text-align:center; ">
                                                 <!-- Nombre -->
@@ -143,7 +143,7 @@
                                                 style="display:block;  height: 200px; width: 200px; padding: 3px ">
                                             <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                 data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                background: url('/images/{{$pro->imagen}}') top center/cover no-repeat;">
+                                                background: url('../{{$pro->imagen}}') top center/cover no-repeat;">
                                                 <section class="text-center" style="text-align:center; ">
                                                     <!-- Nombre -->
                                                     <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
@@ -185,7 +185,7 @@
                                                 style="display:block;  height: 200px; width: 200px; padding: 3px ">
                                             <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                 data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                background: url('/img/{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
                                                 <div class="text-center" 
                                                 style="text-align:center; ">
                                                 <!-- Nombre -->

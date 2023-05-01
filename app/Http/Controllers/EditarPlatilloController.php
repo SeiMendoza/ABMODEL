@@ -23,7 +23,7 @@ class EditarPlatilloController extends Controller
 
         $request -> validate ([
             'tipo' => 'required|in:2,1',
-            'nombre' => 'required|max:100|min:3',
+            'nombre' => 'required|max:100|min:3|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/',
             'descripcion' => 'required|max:100|min:3',   
             'precio' => 'required|min:1|max:1000|numeric',   
             'tamanio' => 'required|max:100|min:3', 
@@ -35,6 +35,7 @@ class EditarPlatilloController extends Controller
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.max' => 'El nombre es muy extenso',
             'nombre.min' => 'El nombre es muy corto',
+            'nombre.regex'=> 'El nombre debe tener solo letras',
             'descripcion.required' => 'La descripcion no puede estar vacío',
             'descripcion.max' => 'La descripcion es muy extenso',
             'descripcion.min' => 'La descripcion es muy corto',
@@ -62,6 +63,17 @@ class EditarPlatilloController extends Controller
         $actualizacion->tamanio = $request->input('tamanio');
         $actualizacion->disponible = $request->input('cantidad');
                
+        if($request->hasFile('imagen')){
+            $file = $request->file('imagen');
+            $destinationPath = 'images/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+            $actualizacion->imagen = 'images/'.$filename;
+
+            }else{
+                unset($actualizacion['imagen']);
+        }
+
         $creado = $actualizacion->save();
 
         if ($creado) {

@@ -234,15 +234,14 @@ class ComboController extends Controller
 
     /* Editar Combos*/
     public function edit($id){
-        $complementos = PlatillosyBebidas::all();
         $Combos = Combo::findOrFail($id);
-        return view('Menu/Admon/Edicion/editarCombo')->with('complementos',  $complementos)
+        return view('Menu/Admon/Edicion/editarCombo')
               -> with('Combos', $Combos);
     }
 
     public function update(Request $request, $id){
         $request -> validate ([
-            'nombre' => 'required|max:100|min:3',
+            'nombre' => 'required|max:100|min:3|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/',
             'descripcion' => 'required|max:100|min:3',
             'precio' => 'required|min:1|max:1000|numeric',
             'imagen' => '',
@@ -250,6 +249,7 @@ class ComboController extends Controller
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.max' => 'El nombre es muy extenso',
             'nombre.min' => 'El nombre es muy corto',
+            'nombre.regex'=> 'El nombre debe tener solo letras',
             'descripcion.required' => 'La descripcion no puede estar vacío',
             'descripcion.max' => 'La descripcion es muy extenso',
             'descripcion.min' => 'La descripcion es muy corto',
@@ -264,6 +264,17 @@ class ComboController extends Controller
         $actualCombo->nombre = $request->input('nombre');
         $actualCombo->descripcion = $request->input('descripcion');
         $actualCombo->precio = $request->input('precio');
+
+        if($request->hasFile('imagen')){
+            $file = $request->file('imagen');
+            $destinationPath = 'images/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+            $actualCombo->imagen = 'images/'.$filename;
+
+            }else{
+                unset($actualCombo['imagen']);
+        }
 
         $creado = $actualCombo->save();
 

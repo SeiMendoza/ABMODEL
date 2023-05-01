@@ -40,7 +40,7 @@
                             <label for=""><strong>Seleccione una imagen</strong></label>
                             <img src="{{asset($Bebidas->imagen)}}" alt="" width="240px" height="240px" id="imagenmostrada">
                             <br>
-                            <input type="file" id="imagen" name="imagen" accept="image/*" value="{{ old('imagenPrevisualizacion', $Bebidas->imagen) }}" style="color: white;width: 200px;">
+                            <input type="file" id="imagen" name="imagen" accept="images/*" value="{{ old('imagenPrevisualizacion', $Bebidas->imagen) }}" style="color: white;width: 200px; ">
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
