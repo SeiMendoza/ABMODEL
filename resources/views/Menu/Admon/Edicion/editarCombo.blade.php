@@ -83,12 +83,16 @@
                                     </div>
                                 </div>
 
-                                    <div id="espacio"><br><br></div>
-                                    <div style="float:right">
+                                <BR>
+
+                                <div>
+                                    <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
+                                </div>
+
+                                <div style="float: right;margin-top: 5px">
                                     <button type="submit" class="btn btn-success">Actualizar</button>
-                                    <button type="button" onclick="cancelarAct('admonRestaurante')"
+                                    <button type="button" onclick="cancelar('admonRestaurante')"
                                         class="btn btn-warning">Cancelar</button>
-                                     </div>
                                 </div>
                             </form>
             </div>
