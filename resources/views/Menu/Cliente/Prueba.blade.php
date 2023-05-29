@@ -389,7 +389,8 @@
                             <div class="input-group" style="margin: 0; border: 0;">
                                 <label class="h6 font-robo col-form-label" for="sub" style="margin: 0 15% 0 0;">Sub-Total: L</label>
                                 <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" id="sub"
-                                    name="sub" type="text" style="height:42px; margin: 0px 0px 5px 20px; padding:0; text-align:right;"  
+                                    name="sub" type="text" style="height:42px; margin: 0px 0px 5px 20px; padding:0; 
+                                    padding-right: 10px; text-align:right;"  
                                     value="{{number_format($sum - $sum * 0.15, 2, ".", ",")}}" required readonly>
                             </div>                   
                             <div class="input-group" style="margin: 0;  border: 0;">

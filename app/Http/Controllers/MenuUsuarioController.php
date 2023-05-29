@@ -47,7 +47,11 @@ class MenuUsuarioController extends Controller
     }
 
     public function details(Request $request)
+
     {
+        $pedido = DetallesUsuario::where('estado', '=', '0')->get();
+
+        if ($pedido){
         $detalle = new DetallesUsuario();
         $detalle->pedido_id = $request->input('pedido');
         $detalle->producto = $request->input('producto');
@@ -55,8 +59,13 @@ class MenuUsuarioController extends Controller
         $detalle->cantidad = $request->input('cantidad');
         $detalle->precio = $request->input('precio');
         $detalle->save();
-
         return redirect()->route("cliente_prueba")->with('mensaje', 'Producto añadido');
+        } else{
+            return redirect()->route("cliente_prueba")->with('mensaje', 'Producto existente');
+        }
+       
+
+        
     }
     public function qr(){
         return view('Menu/Admon/QR_Menu');
@@ -85,6 +94,10 @@ class MenuUsuarioController extends Controller
             $pedido->estado = 1;
             $pedido->mesa_id = $request->input('mesa');
             $pedido->save();
+
+            $mesa = Mesa::findOrFail($request->input('mesa'));
+            $mesa->estadoM = 1;
+            $mesa->save();
 
             $detalles = DetallesUsuario::where('pedido_id', '=', $pedido->id)->where('estado', '=', '0')->get();
             foreach ($detalles as $detalle) {
