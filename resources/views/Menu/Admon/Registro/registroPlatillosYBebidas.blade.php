@@ -4,7 +4,7 @@
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('menuAdmon.index')}}">Administración de menú</a></li>
 <li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de platillo y bebida</li>
 @endsection
-@section('tit','')
+@section('tit','Registro de platillo o bebida')
 <!-- 
 <div>
     <a href="{{route('menuAdmon.index')}}" style="margin:0; padding:5px; width:160px; margin-top:25px" type="button" class="bg-light border-radius-sm text-center ">
@@ -40,7 +40,7 @@
     <div class="wrapper wrapper--w960"> <!--aquí iria el wrapper-->
         <div class="card border-radius-sm border-0" style="">            
             <div class="card-body border-radius-sm border-0">
-                <h2 class="title" style="margin-bottom:0%">Registro de platillo o bebida</h2>
+                <h2 class="title" style="margin-bottom:0%"></h2>
                 <form method="post" action="" enctype="multipart/form-data">
                     @csrf
                     <h4 class="font-robo t" style="margin: 0; padding:0">Datos del producto</h4>

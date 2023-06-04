@@ -71,14 +71,15 @@ class KioskoController extends Controller
         $kioskoUpdate->descripcion = $request->input('descripcion');
         $kioskoUpdate->ubicacion = $request->input('ubicacion');
 
-        if(isset($k->imagen)){
-        //Imagen
-        //Aún no actualiza bien!
-        $file = $request->file('imagen');
-        $destinationPath = 'images/kioskos/';
-        $filename = time().'.'.$file->getClientOriginalName();
-        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
-        $kioskoUpdate->imagen = 'images/kioskos/'.$filename;
+
+        if($request->hasFile('imagen')){
+            $file = $request->file('imagen');
+            $destinationPath = 'images/kioskos/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $file->move($destinationPath,$filename);
+            $kioskoUpdate->imagen = 'images/kioskos/'.$filename;
+
+        }else{
         }
 
         $kioskoUpdate->save();

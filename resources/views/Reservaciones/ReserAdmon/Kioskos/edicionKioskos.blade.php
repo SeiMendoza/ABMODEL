@@ -4,9 +4,10 @@
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('kiosko.index')}}">Administración de Kioskos</a></li>
 <li class="breadcrumb-item text-sm active text-white active">Edición</li>
 @endsection
+@section('tit', 'Edición de kiosko')
 @section('b')
 <div>
-    <a onclick="cancelarAct('kioskos')" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+    <a onclick="cancelarAct('¿Desea regresar? Esto cancelará la actualización del kiosko', 'kioskos')" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
         <i class="fa fa-arrow-left"></i>  Regresar
     </a>
 </div>
@@ -17,7 +18,6 @@
         <div class="wrapper wrapper--w960">
             <div class="card border-radius-sm border-0" style="">            
                 <div class="card-body border-radius-sm border-0">
-                    <h2 class="title" style="margin-bottom:0" >Edición de kiosko</h2>
                     <form method="post" action="{{ route('kiosko.update', ['id' => $k->id]) }}" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
@@ -68,7 +68,7 @@
                         <div class="row" style="float:center">
                             <div class="col text-end">
                                 <button type="submit" class="btn btn-success">Actualizar</button>
-                                <button type="button" onclick="cancelarAct('kioskos')" class="btn btn-danger">Cancelar</button>
+                                <button type="button" onclick="cancelarAct('¿Desea cancelar la actualización del kiosko?', 'kioskos')" class="btn btn-danger">Cancelar</button>
                             </div>
                         </div>
                     </form>

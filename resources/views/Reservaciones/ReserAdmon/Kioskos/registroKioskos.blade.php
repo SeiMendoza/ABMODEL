@@ -4,6 +4,7 @@
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('kiosko.index')}}">Administración de Kioskos</a></li>
 <li class="breadcrumb-item text-sm active text-white active">Registro</li>
 @endsection
+@section('tit', 'Registro de kiosko')
 @section('b')
 <div>
     <a onclick="cancelar('kioskos')" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
@@ -18,7 +19,6 @@
         <div class="wrapper wrapper--w960">
             <div class="card border-radius-sm border-0" style="">            
                 <div class="card-body border-radius-sm border-0">
-                    <h2 class="title" style="margin-bottom:0" >Registro de kiosko</h2>
                     <form method="post" action="{{ route('kiosko.store') }}" enctype="multipart/form-data">
                         @csrf
                         <h4 class="font-robo t m-1" style="margin: 0; padding:0">Datos del kiosko</h4>
