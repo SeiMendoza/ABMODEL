@@ -13,9 +13,6 @@
 <div>
     <a href="{{route('pedidos.caja')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center"> <i class="fa fa-arrow-left"></i> Regresar
     </a>
-
-    <!--- <a href="{{route('pedidos.caja')}}" class="btn btn-danger border-radius-sm" 
-    type="button" style="margin:0; padding:3px; width:150px;">Regresar</a>  --->
 </div>
 @endsection
 
@@ -133,7 +130,8 @@
                         <form action="{{ route('detallep.destroy', ['id' => $detalle->id]) }}" id="borrar" method="post" enctype="multipart/form-data">
                             @method('delete')
                             @csrf
-                            <button onclick="borrar()" style="border: 0; padding: 0; margin: 0;">
+                            <button style="border: 0; padding: 0; margin: 0;">
+                            <input type="hidden" name="mesa" value="{{ $detalle->mesa_id }}">
                                 <i class="fa-solid fa-trash-can text-danger" style="border: 0; padding: 0; margin-left: 10px;"></i>
                             </button>
                         </form>

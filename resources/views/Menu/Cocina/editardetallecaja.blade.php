@@ -1,7 +1,6 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalles-pedido')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+ 
 <style>
     .cont {
         overflow-x: hidden;
@@ -60,7 +59,7 @@
                             <input style="padding-left: 8px;" class="form-control border-radius-sm precio" 
                             placeholder="Precio del producto" name="precio" id="precio" readonly 
                             value="@if(Session::has('producto_precio')){{Session::get('producto_precio')}}
-                            @else{{old('precio',$edit->precio)}}@endif">
+                            @else{{old('',$edit->precio_producto)}}@endif">
                             @error('precio')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -105,7 +104,7 @@
  
                 <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
                 <div style="float: right;margin-top: 5px">
-                    <button type="button" onclick="cancelarp('pedidos/caja/detalle/{{$pedido->id}}')" class="btn btn-danger">Cancelar</button>
+                    <button type="button" onclick="cancelar('pedidos/caja/detalle/{{$pedido->id}}')" class="btn btn-danger">Cancelar</button>
                     <button onclick="" type="submit" class="btn btn-success">Guardar</button>
                 </div>
             </form>
@@ -114,7 +113,7 @@
     </div>
 </div>
 <script>
-    function cancelarp(ruta) {
+   /* function cancelarp(ruta) {
 
         Swal
             .fire({
@@ -135,36 +134,8 @@
             });
 
     }
-
-    $(document).ready(function() {
-        $('.producto, #cantidad').change(function() {
-            var producto = $('.producto').val();
-            var cantidad = parseFloat($('#cantidad').val());
-            $.ajax({
-                url: '/obtener-precio',
-                type: 'POST',
-                data: {
-                    producto: producto,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    var precio = parseFloat(response);
-                    if (!isNaN(precio)) { // Verifica si el valor de precio es válido
-                        var impuesto = cantidad * precio * 0.15; // Calcula el impuesto como el 15% del precio total
-                        var sub_total = precio * cantidad - impuesto;
-                        var total = precio * cantidad;
-                        $('#precio').val(response);
-                        $('#impuesto').val(impuesto.toFixed(2)); // Muestra el impuesto con 2 decimales
-                        $('#sub_total').val(sub_total.toFixed(2)); // Muestra el sub_total con 2 decimales
-                        $('#total').val(total.toFixed(2)); // Muestra el total con 2 decimales
-                    }
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-    });
+*/
+    
 </script>
 
 @endsection

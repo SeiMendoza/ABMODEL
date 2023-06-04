@@ -9,7 +9,7 @@
 @section('b')
 <div>
     <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center">
-        <i class="fa fa-plus-circle"></i> Pedidos terminados
+    <i class="fa-regular fa-check-double"></i> Pedidos terminados
     </a>
 </div>
 @endsection
@@ -32,6 +32,7 @@
         </thead>
         <tbody>
             @forelse($pedido as $i => $p)
+            @if ($p->detalles->count() > 0)
             @if($p->estado==1 || $p->estado==2)
             <tr style="text-align:center">
                 <td scope="col">{{++$i}}</td>
@@ -96,7 +97,8 @@
                                 @method('put')
                                 @csrf
                                 <div style="display: none">
-                                    <input type="text" id="estado" name="estado" value="3">
+                                    <input type="text" id="estado" name="estado" value="3"> 
+                                    <input type="hidden" name="mesa" value="{{ $p->mesa_id }}"> 
                                 </div>
                                 <button type="submit" class="btn btn-danger">Si</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
@@ -131,6 +133,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @endif
             @empty
 

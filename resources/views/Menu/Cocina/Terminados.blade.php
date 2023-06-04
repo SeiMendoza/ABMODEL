@@ -11,10 +11,15 @@
 @section('tit','Pedidos terminados')
 @section('b')
  <div class=""> 
-    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="margin:0; padding:5px; width:150px;" 
+    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="margin-right:10px; padding:5px; width:150px;" 
     type="button" class="bg-light border-radius-sm text-center">
         <i class="fa-solid fa-trash-can text-danger"></i> Eliminar pedidos
     </a> 
+     
+ <!--boton para volver a caja-->
+    <a href="{{route('pedidos.caja')}}" style="margin:0; padding:5px; width:150px;" type="button" 
+    class="bg-light border-radius-sm text-center"> <i class="fa fa-arrow-left"></i> Regresar
+    </a>
 </div>
 <!----<div class="" style="position:absolute; right:0%; top:16%">    
 <a href="#" type="button" class="bg-light border-radius-md h-6 text-center text-success" 

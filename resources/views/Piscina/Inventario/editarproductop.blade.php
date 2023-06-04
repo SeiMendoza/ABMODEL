@@ -85,7 +85,7 @@
  
                     <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
                 <div style="float: right;margin-top: 5px">
-                    <button type="button" onclick="cancelarp('productos')" class="btn btn-danger">Cancelar</button>
+                    <button type="button" onclick="cancelar('productos')" class="btn btn-danger">Cancelar</button>
                     <button onclick="" type="submit" class="btn btn-success">Guardar</button>
                 </div>
             </form>
@@ -93,27 +93,7 @@
     </div>
 </div>
 <script>
-    function cancelarp(ruta) {
-
-        Swal
-            .fire({
-                title: "¿Cancelar actualización?",
-                text: "¿Desea cancelar los cambios?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: "Si",
-                cancelButtonText: "No",
-            })
-            .then(resultado => {
-                if (resultado.value) {
-                    // Hicieron click en "Sí"
-                    window.location.href = '/' + ruta;
-                } else {
-                    // Dijeron que no
-                }
-            });
-
-    }
+     
 </script>
 <script>
     window.onload = cambioPeso;

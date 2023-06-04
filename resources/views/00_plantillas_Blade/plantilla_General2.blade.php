@@ -321,7 +321,38 @@
                 }
         });
     }
-
+/**CAMBIA EL PRECIO DE LOS PRODUCTOS EN EDICION EN CAJA ANTES DE SER ENVIADOS A COCINA */
+$(document).ready(function() {
+    $('.producto, #cantidad').change(function() {
+        var producto = $('.producto').val();
+        var cantidad = parseFloat($('#cantidad').val());
+        $.ajax({
+            url: '/obtener-precio',
+            type: 'POST',
+            data: {
+                producto: producto,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                var precio = parseFloat(response);
+                if (!isNaN(precio)) { // Verifica si el valor de precio es válido
+                    var impuesto = cantidad * precio * 0.15; // Calcula el impuesto como el 15% del precio total
+                    var sub_total = precio * cantidad - impuesto;
+                    var total = precio * cantidad;
+                    $('#precio').val(response);
+                    $('#impuesto').val(impuesto.toFixed(2)); // Muestra el impuesto con 2 decimales
+                    $('#sub_total').val(sub_total.toFixed(2)); // Muestra el sub_total con 2 decimales
+                    $('#total').val(total.toFixed(2)); // Muestra el total con 2 decimales
+                }
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+    // actualiza el precio del producto que esta seleccionado
+$('.producto').trigger('change');
+});
     </script>
     <script src="/js/global.js"></script>
     <script src="/js/kiosko.js"></script>

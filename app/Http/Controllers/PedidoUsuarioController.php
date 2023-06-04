@@ -56,7 +56,9 @@ class PedidoUsuarioController extends Controller
     {
         $pedido = Pedido::where('estado', 0)
             ->orwhere('estado', 1)
-            ->orwhere('estado', 2)->orderby('id')->get();
+            ->orwhere('estado', 2) 
+            ->orderby('id')
+            ->get();
         $p = Mesa::all();
         $texto = "";
         return view('Menu/Cocina/Pedidoscaja', compact('pedido', 'texto', 'p'));
@@ -147,10 +149,17 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     {
         $request->validate([
             'estado' => 'required|in:3', // El campo estado es obligatorio y solo puede ser 2
-        ]);
+             ]);
         $activar = Pedido::findOrfail($id);
-        $activar->estado = $request->input('estado');
+        $kiosko = Mesa::findOrFail($request->input('mesa')); 
 
+        $activar->estado = $request->input('estado');
+        $activar->quiosco = $kiosko->kiosko->id;
+        $activar->mesa_id = $request->input('mesa');
+        /**cambia el estado de la mesa */
+        $mesa = Mesa::findOrFail($request->input('mesa'));
+        $mesa->estadoM = 0;
+        $mesa->save();
         $create = $activar->save();
 
         if ($create) {
@@ -273,8 +282,20 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     }
     public function destroy($id)
     {
-        DetallesUsuario::destroy($id);
-        return redirect()->route('pedidos.caja')->with('mensaje', 'Detalle borrado correctamente');
+       $detalle = DetallesUsuario::findOrfail($id);
+        $pedido = $detalle->pedido;
+        $detalle->delete();
+    // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
+        if ($pedido->detalles->count() == 0) {
+            $mesa = $pedido->mesa_nombre;
+            $mesa->estadoM = 0;
+            $mesa->save();
+            $pedido->delete();
+        return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
+        }
+        else{
+            return redirect()->route('pedidost.detalle',$pedido->id)->with('mensaje', 'Detalle borrado correctamente');
+    }
     }
     public function edit($pedido_id, $detalle_id)
     {
