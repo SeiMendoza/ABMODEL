@@ -49,10 +49,10 @@
                     <div class="row row-space">
                         <div class="col-3">
                             <div>  
-                                <label style="margin-left: 0;" for=""><strong>Seleccione una imagen</strong></label>
-                                <img  style="margin-left: 0;" src="/img/Loremplatillo.png" alt="" width="240px" height="240px" id="imagenmostrada">
-                                <br>
-                                <input  style="margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" required value="{{ old('imagenPrevisualizacion') }}" style="color: white;width: 150px;">
+                                <img onclick="elegirImagen()" style="margin-left: 0;" src="/img/Loremplatillo.png" alt="" width="240px" height="240px" id="imagenmostrada">
+                                <br><br>
+                                <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px;" class="bg-light border-radius-sm text-center "> <i class="fa fa-file-image"></i> Seleccionar imagen</label>
+                                <input  style="display:none; margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" required value="{{ old('imagenPrevisualizacion') }}" onchange="colocarNombre();" style="color: white;width: 150px;">
                                 @error('imagen')
                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror

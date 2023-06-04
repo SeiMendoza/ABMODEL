@@ -4,7 +4,7 @@
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('menuAdmon.index')}}">Administración de menú</a></li>
 <li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Edición de Bebida</li>
 @endsection
-@section('tit','')
+@section('tit','Editando bebida')
 
 @section('content')
 <script>
@@ -27,7 +27,6 @@
     <div class="card border-radius-sm border-0" style="">
         
         <div class="card-body border-radius-sm border-0">
-            <h2 class="title" style="margin-bottom:0%">Editando bebida: {{$Bebidas->nombre}} </h2>
             <form method="post" action="{{route('bebida.update', ['id'=> $Bebidas->id])}}" enctype="multipart/form-data">
                 @method('put')
                 @csrf
@@ -37,14 +36,14 @@
                 <div class="row">
                     <div class="col-3">
                         <div>  
-                            <label for=""><strong>Seleccione una imagen</strong></label>
-                            <img src="{{asset($Bebidas->imagen)}}" alt="" width="240px" height="240px" id="imagenmostrada">
-                            <br>
-                            <input type="file" id="imagen" name="imagen" accept="images/*" value="{{ old('imagenPrevisualizacion', $Bebidas->imagen) }}" style="color: white;width: 200px; ">
+                            <img onclick="elegirImagen()" src="{{asset($Bebidas->imagen)}}" alt="" width="240px" height="240px" id="imagenmostrada">
+                            <br><br>
+                            <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px;" class="bg-light border-radius-sm text-center "> <i class="fa fa-file-image"></i> Cambiar imagen</label>
+                            <input type="file" id="imagen" name="imagen" accept="images/*" value="{{ old('imagenPrevisualizacion', $Bebidas->imagen) }}" onchange="colocarNombre();" style="display:none; margin-left: 0; color: white;width: 200px; ">
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
-                        </div>
+                        </div>                        
                     </div>
 
                     <div class="col">
@@ -168,7 +167,7 @@
                    </div>
                     <div style="float: right;margin-top: 5px">
                         <button type="submit" class="btn btn-success">Actualizar</button>
-                        <button type="button" onclick="cancelar('admonRestaurante')"
+                        <button type="button" onclick="cancelarAct('¿Desea cancelar la actualización de la bebida?','admonRestaurante')"
                             class="btn btn-warning">Cancelar</button>
                     </div>
 

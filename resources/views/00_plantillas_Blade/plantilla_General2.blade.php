@@ -303,7 +303,6 @@
         }
 
     function cancelarAct(mensaje , ruta){
-    
         Swal
         .fire({
             title: "Cancelar Actualización",
@@ -321,11 +320,12 @@
                     // Dijeron que no
                 }
         });
-
     }
 
     </script>
     <script src="/js/global.js"></script>
+    <script src="/js/kiosko.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src={{ asset('/js/core/popper.min.js') }}></script>
     <script src={{ asset('/js/core/bootstrap.min.js') }}></script>
     <script src={{ asset('/js/plugins/perfect-scrollbar.min.js') }}></script>

@@ -38,7 +38,7 @@
                 showConfirmButton: false,
                 toast: true,
                 background: '#fff',
-                timer: 5500
+                timer: 3000
             })
         }
     </script>
