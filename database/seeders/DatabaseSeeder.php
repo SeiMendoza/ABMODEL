@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
                         KioskoSeeder::class,
                         MesaSeeder::class,
                         ReservacionSeeder::class,
+                        UserSeeder::class,
                         //PedidoSeeder::class,
                         //DetallesUsuarioSeeder::class,
                     ]);

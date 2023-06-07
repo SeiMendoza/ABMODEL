@@ -47,10 +47,19 @@
         font-size: 15px;
         color:rgba(111, 143, 175, 0.319);
     }
+
+    .img-perfil, .topbar .nav-item .nav-link .img-perfil {
+        height: 2rem;
+        width: 2rem;
+    }
+    .rounded-circ {
+      border-radius: 50%!important;
+    }
 </style>
 </head>
 
 <body class="g-sidenav-show bg-gray-100" style="">
+    @auth
     <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
@@ -86,22 +95,14 @@
                         <h2 class="font-weight-bolder text-white " style="margin:0">Villa Crisol</h2>
                     </nav> 
                     <div class="collapse navbar-collapse " id="navbar">
-                        <div class="ms-md-auto pe-md-3 d-flex align-items-center"style="margin-top: 2.5%">   
+                        <div class="ms-md-auto pe-md-0 d-flex align-items-center"style="margin-top: 2.5%">   
                             <div class="input-group">
                                 <span class="input-group-text text-body"><i class="fas fa-search"
                                         aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" placeholder="Busqueda..." name="buscar" id="buscar">
                             </div>
                         </div>
-                        <ul class="navbar-nav  justify-content-end">
-                            <li class="nav-item d-flex align-items-center">
-                                <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                                    <i class="ni ni-badge me-sm-1"></i>
-                                    <span class="d-sm-inline d-none">
-                                        usuario
-                                    </span>
-                                </a>
-                            </li>
+                       <ul class="navbar-nav  justify-content-end">
                             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                                 <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                                     <div class="sidenav-toggler-inner">
@@ -121,7 +122,7 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="ni ni-bell-55 cursor-pointer"></i>
                                 </a>
-                                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"
                                     aria-labelledby="dropdownMenuButton">
                                     <li>
                                         <a class="dropdown-item border-radius-md" href="{{Route('piscina.create')}}">
@@ -149,15 +150,44 @@
                                             </div>
                                         </a>
                                     </li>
-
                                 </ul>
                             </li>
+
+                            <div>
+                            <!-- Informacion perfil-->
+                                <li class="">
+                                    <a href="javascript:;" class="nav-link text-white font-weight-bold px-0" 
+                                        id="dropdownMenuButton"  data-bs-toggle="dropdown" aria-expanded="false">
+                                           {{auth()->user()->name ?? auth()->user()->username}}
+                                        <img class="img-perfil rounded-circ" src="img/{{ Auth::user()->imagen}}" >
+                                    </a>
+                                 <!-- Usar Informacion -->
+                                    <div class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"
+                                        aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">
+                                          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                           Perfil
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                           <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                             Información
+                                        </a>
+                                    
+                                        <hr>
+                                            <a class="dropdown-item" href="{{ route('cerrarSes.cerrar') }}" data-toggle="modal" data-target="logoutModal">
+                                               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Cerrar sesión
+                                            </a>
+                                    </div>
+                                </li>
+                            </div>
                         </ul>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
+
     <aside
         class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 fixed-start"
         id="sidenav-main"
@@ -422,8 +452,13 @@
                         </div>
                     </div>
                 </div>
+
+                
             </footer> 
-        </div>   
+        </div>  
+        
+    
+
     </main>
 
     <div class="fixed-plugin">
@@ -495,6 +530,7 @@
         </div>
     </div>
     
+    
     <!--    jquery Files   -->
     <script src="/assets/jquery/jquery.js"></script>
     <script src="/assets/jquery/jquery.min.js"></script>
@@ -528,5 +564,6 @@
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{asset('/js/argon-dashboard.min.js')}}"></script>
 </body>
+@endauth
 
 </html>

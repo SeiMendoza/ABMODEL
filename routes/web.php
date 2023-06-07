@@ -15,6 +15,9 @@ use App\Http\Controllers\PiscinaController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ReservacionController;
 use App\Http\Controllers\ReservacionTotalController;
+use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CerrarSesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +32,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**Home */
-Route::get('/', [HomeController::class, 'index'])
+Route::get('/', [LoginController::class, 'show'])
+->name('login'); 
+Route::get('/ab', [HomeController::class, 'index'])
 ->name('index');
 Route::get('/tabla', [HomeController::class, 't'])
 ->name('t');
@@ -369,3 +374,16 @@ Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Rea
   
 Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])
   ->name('detalle.realizadas');
+
+/** LOGIN */
+Route::get('/registro', [RegistroController::class, 'show']);
+
+Route::post('/registro', [RegistroController::class, 'registro']);
+
+Route::get('/login', [LoginController::class, 'show']);
+
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/CerrarSesión', [CerrarSesController::class, 'cerrar'])
+   ->name('cerrarSes.cerrar');
+

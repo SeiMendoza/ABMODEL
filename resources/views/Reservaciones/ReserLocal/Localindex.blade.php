@@ -5,16 +5,16 @@
 @endsection
 @section('tit','Reservaciones del Local')
 @section('b')
-    <div class="" style="">    
-        <a href="{{route('ReserLocal.create')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" 
-           class="bg-light border-radius-sm text-center">
+    <div>
+        <a href="{{route('ReserLocal.create')}}" style="margin:0; padding:5px; width:80px;" type="button" class="bg-light border-radius-sm text-center m-2">
              <i class="fa fa-plus-circle"></i> Agregar
-         </a> 
+        </a>
+    </div>
 
-         <a href="{{route('realizadas.realizadas')}}" style="margin:0; padding:5px; width:200px; font-size:15px" type="button" 
-           class="bg-light border-radius-sm text-center">
-             <i class="ni ni-laptop"></i> Eventos Realizados
-         </a> 
+    <div>
+        <a href="{{route('realizadas.realizadas')}}" style="margin:0; padding:5px; width:200px;" type="button" class="bg-light border-radius-sm text-center ">
+           <i class="ni ni-laptop"></i> Eventos Realizados
+        </a>
     </div>
 @endsection
 

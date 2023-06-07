@@ -26,9 +26,9 @@ class Reservacion_TotalFactory extends Factory
             'Fecha'=>$this->faker->date(),
             'HoraEntrada'=>$this->faker->time(),
             'HoraSalida'=>$this->faker->time(),
-            'Total'=>$this->faker->numberBetween(1500, 15000),
             'FormaPago'=>$this->faker->randomElement(['Efectivo','Transferencia']),
             'estado'=>$this->faker->numberBetween(0,1),
+            'Total'=>$this->faker->numberBetween(1500, 15000),
             'Anticipo'=>$this->faker->numberBetween(500, 15000),
             'Pendiente'=>$this->faker->numberBetween(300, 15000),
         ];

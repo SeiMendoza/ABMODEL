@@ -46,7 +46,7 @@ class ReservacionTotalController extends Controller
             'Contacto' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
             'Cantidad' => 'required|min:20|max:1000|numeric',
             'Tipo_Reservacion' => 'required',
-            'Tipo_Evento' => 'required',
+            'Tipo_Evento' => 'required|max:50',
             'Fecha' => 'required|date|after:'.$min,   
             'HoraEntrada' => 'required',
             'HoraSalida' => 'required', 
@@ -73,12 +73,13 @@ class ReservacionTotalController extends Controller
 
             'Cantidad.required' => 'La cantidad no puede estar vacía',
             'Cantidad.min' => 'La cantidad es muy baja',
-            'Cantidad.max' => 'la cantidad es muy alta',
+            'Cantidad.max' => 'La cantidad es muy alta',
             'Cantidad.numeric' => 'La cantidad debe ser de tipo numérico',
 
             'Tipo_Reservacion.required' => 'El tipo no puede estar vacío',
 
             'Tipo_Evento.required' => 'El tipo no puede estar vacío',
+            'Tipo_Evento.max' => 'El nombre es muy largo',
 
             'Fecha.required'=> 'La fecha de asistencia es obligatoria',
             'Fecha.date' => 'La fecha de expiracion debe de ser una fecha mayor a la de hoy',
@@ -146,7 +147,7 @@ class ReservacionTotalController extends Controller
             'Contacto' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
             'Cantidad' => 'required|min:20|max:1000|numeric',
             'Tipo_Reservacion' => 'required',
-            'Tipo_Evento' => 'required',
+            'Tipo_Evento' => 'required|max:50',
             'Fecha' => 'required|date|after:'.$min,   
             'HoraEntrada' => 'required',
             'HoraSalida' => 'required|after:Hora',
@@ -173,12 +174,13 @@ class ReservacionTotalController extends Controller
 
             'Cantidad.required' => 'La cantidad no puede estar vacía',
             'Cantidad.min' => 'La cantidad es muy baja',
-            'Cantidad.max' => 'la cantidad es muy alta',
+            'Cantidad.max' => 'La cantidad es muy alta',
             'Cantidad.numeric' => 'La cantidad debe ser de tipo numérico',
 
             'Tipo_Reservacion.required' => 'El tipo no puede estar vacío',
 
             'Tipo_Evento.required' => 'El tipo no puede estar vacío',
+            'Tipo_Evento.max' => 'El nombre es muy largo',
 
             'Fecha.required'=> 'La fecha de asistencia es obligatoria',
             'Fecha.date' => 'La fecha de expiracion debe de ser una fecha',

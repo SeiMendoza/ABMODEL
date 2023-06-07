@@ -15,20 +15,20 @@ return new class extends Migration
     {
         Schema::create('reservacion_totals', function (Blueprint $table) {
             $table->id();
-            $table->string("Nombre_Cliente");
-            $table->string("Apellido_Cliente");
-            $table->string("Contacto");
-            $table->string("Cantidad");  
-            $table->string("Tipo_Reservacion");
-            $table->string("Tipo_Evento");
-            $table->date("Fecha");
-            $table->time("HoraEntrada");
-            $table->time("HoraSalida");
-            $table->string("Total");
-            $table->string("FormaPago");
-            $table->string("estado")->default('0');
-            $table->string("Anticipo");
-            $table->string("Pendiente");
+            $table->string('Nombre_Cliente', 25);
+            $table->string('Apellido_Cliente', 25);
+            $table->string('Contacto', 9);
+            $table->integer('Cantidad');  
+            $table->string('Tipo_Reservacion');
+            $table->string('Tipo_Evento', 50);
+            $table->date('Fecha');
+            $table->time('HoraEntrada');
+            $table->time('HoraSalida');
+            $table->string('FormaPago')->default(0);
+            $table->boolean('estado')->default(0);
+            $table->float('Total');
+            $table->float('Anticipo');
+            $table->float('Pendiente');
             $table->timestamps();
         });
     }

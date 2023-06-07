@@ -10,7 +10,7 @@
     <div class="" style="">    
         <a href="{{route('cliente.reservaLocal')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" 
            class="bg-light border-radius-sm text-center">
-             <i class="ni ni-palette"></i> Regresar
+             <i class="fa fa-arrow-left"></i> Regresar
          </a> 
     </div>
 @endsection

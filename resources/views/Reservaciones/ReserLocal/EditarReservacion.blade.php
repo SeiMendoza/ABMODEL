@@ -5,6 +5,14 @@
         <a class="opacity-5 text-white" href="{{route('cliente.reservaLocal')}}">Reservaciones del Local</a></li>
     <li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Edición de Reservación</li>
 @endsection
+@section('tit', 'Editando Reservación del Local')
+@section('b')
+<div>
+    <a  href="{{route('cliente.reservaLocal')}}"style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+        <i class="fa fa-arrow-left"></i>  Regresar
+    </a>
+</div>
+@endsection
 
 @section('content')
 
@@ -22,7 +30,6 @@
 <div class="wrapper wrapper--w960">
     <div class="card">
         <div class="card-body">
-            <h2 class="title" style="margin-bottom:0%">Editando reservación de: {{ $r->Nombre_Cliente}}</h2>
 
             <form method="post" action="{{ route('resCliente.update', ['id' => $r->id]) }}" enctype="multipart/form-data">
                 @method('put')

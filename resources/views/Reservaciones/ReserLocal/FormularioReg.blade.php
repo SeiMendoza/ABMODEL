@@ -1,9 +1,17 @@
 @extends('00_plantillas_Blade.plantilla_General2')
-@section('title', 'Reservacion del local')
+@section('title', 'Registro del local')
 @section('miga')
 <li class="breadcrumb-item text-sm" aria-current="page">  
     <a class="opacity-5 text-white" href="{{route('cliente.reservaLocal')}}">Reservaciones del Local</a></li>
-<li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Registro de Reservación</li>
+<li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Registro</li>
+@endsection
+@section('tit', 'Nueva Reservación del Local')
+@section('b')
+<div>
+    <a  href="{{route('cliente.reservaLocal')}}"style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+        <i class="fa fa-arrow-left"></i>  Regresar
+    </a>
+</div>
 @endsection
 
 @section('content')
@@ -21,7 +29,6 @@
 <div class="wrapper wrapper--w960" >
     <div class="card">
         <div class="card-body">
-            <h2 class="title" style="margin-bottom:0%">Reservación del Local</h2>
             
     <form method="post" action="{{ route('ReserLocal.store') }}" enctype="multipart/form-data">
             @csrf

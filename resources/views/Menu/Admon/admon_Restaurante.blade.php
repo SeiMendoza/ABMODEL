@@ -778,7 +778,7 @@
                                                         </form>
                                                     </td>
                                                     <td scope="col" style="text-align: center;"><a
-                                                            href="{{ route('combo.editar', ['id' => $p->id]) }}"><i
+                                                            href="#"><i
                                                                 class="fa fa-edit text-success"></i></a></td>
                                                     <td scope="col" style="text-align: center;">
                                                         <i data-bs-toggle="modal"
