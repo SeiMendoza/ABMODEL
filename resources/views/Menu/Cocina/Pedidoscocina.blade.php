@@ -84,11 +84,11 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Completar pedido</h1>
+                                <h5 class="modal-title font-weight-bolder" id="staticBackdropLabel">Completar pedido</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" style="color:teal">
-                                ! pedido completado ¡ para: <strong>{{$p->nombreCliente}}</strong>?
+                            <div class="modal-body" style="text-align: center;">
+                                ! Pedido completado ¡ para: <strong>{{$p->nombreCliente}}</strong>?
                             </div>
                             <div class="modal-footer">
                                 <form action="{{route('pedidosPendientes_Cocina.pedidosPendientes_Cocina', ['id'=>$p->id])}}" method="POST">

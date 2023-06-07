@@ -86,10 +86,10 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Terminar pedido</h1>
+                            <h5 class="modal-title font-weight-bolder" id="staticBackdropLabel">Terminar pedido</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body" style="color: teal;">
+                        <div class="modal-body" style="text-align: center;">
                             ¿Está seguro de terminar el pedido de: <strong>{{$p->nombreCliente}}</strong>?
                         </div>
                         <div class="modal-footer">
@@ -110,13 +110,13 @@
             <!-------Envia los pedidos por id a la cocina--------->
             <div class="modal fade" id="static{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Enviar pedido a cocina</h1>
+                <div class="modal-content">
+                <div class="modal-header">
+                            <h5 class="modal-title font-weight-bolder" id="staticBackdropLabel">Enviar pedido a cocina</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body" style="color: teal;">
-                            !El pedido para¡ <strong>{{$p->nombreCliente}}</strong> se enviara a cocina
+                        <div class="modal-body" style="text-align: center;">
+                            !El pedido para¡ <strong>{{$p->nombreCliente}}</strong> se enviará a cocina
                         </div>
                         <div class="modal-footer">
                             <form action="{{route('env.env_a_cocina', ['id'=>$p->id])}}" method="POST">

@@ -123,18 +123,32 @@
                 <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
                 @if($pedido->estado_cocina == 0 )
                 <td scope="col" style="text-align:center; width:20%; height:20%;">
-                    <div style="display: flex; justify-content: center; flex-direction: row;">
+                    <div style="display: flex; justify-content: center; flex-direction: row;position: relative;">
                         <a href="{{ route('detallep.edit', ['pedido_id' => $pedido->id, 'detalle_id' => $detalle->id]) }}" style="margin-right: 10px;">
                             <i class="fa-solid fa-edit text-success" style="color: rgb(33, 195, 247);"></i>
                         </a>
-                        <form action="{{ route('detallep.destroy', ['id' => $detalle->id]) }}" id="borrar" method="post" enctype="multipart/form-data">
-                            @method('delete')
-                            @csrf
-                            <button style="border: 0; padding: 0; margin: 0;">
-                            <input type="hidden" name="mesa" value="{{ $detalle->mesa_id }}">
-                                <i class="fa-solid fa-trash-can text-danger" style="border: 0; padding: 0; margin-left: 10px;"></i>
-                            </button>
-                        </form>
+                        <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$detalle->id}}" class="fa-solid fa-trash-can text-danger" 
+                        style="color:crimson;text-align:center;position: absolute; margin-left:20%; top: 50%;transform: translateY(-50%);"></i>
+                    <form action="{{route('detallep.destroy', ['id' => $detalle->id])}}" method="post" enctype="multipart/form-data">
+                        @method('delete')
+                        @csrf
+                        <div class="modal fade" id="staticBackdropE{{$detalle->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar producto</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro de borrar el <strong>{{$detalle->nombre}}</strong>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Si</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     </div>
                 </td>
                 @endif

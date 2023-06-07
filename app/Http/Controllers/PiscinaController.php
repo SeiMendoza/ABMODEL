@@ -79,8 +79,19 @@ class PiscinaController extends Controller
 
         $this->validate($request,$rules,$mensaje);
 
-            $piscina = new Piscina();
+        // Busca si ya existe un registro con el mismo nombre, tipo y uso
+    $piscina = Piscina::where('nombre', $request->input('nombre'))
+    ->where('tipo', $request->input('tipo'))
+    ->where('uso', $request->input('uso'))
+    ->first();
 
+        if ($piscina) {
+            // Si ya existe el producto solo se suma la cantidad
+            $piscina->peso += $request->input('kilos');
+            $piscina->save();
+        } else {
+            // Si no existe el producto se crea uno nuevo
+            $piscina = new Piscina();
             $piscina->nombre = $request->input('nombre');
             $piscina->tipo = $request->input('tipo');
             $piscina->uso = $request->input('uso');
@@ -88,11 +99,11 @@ class PiscinaController extends Controller
             $piscina->peso = $request->input('kilos');
 
             $creado = $piscina->save();
-
-            if ($creado) {
+        }
+          //  if ($creado) {
                 return redirect()->route('prodpiscina.index')
                     ->with('mensaje', 'El producto de piscina fue creada exitosamente');
-            }
+          //  }
     }
 
     /**
