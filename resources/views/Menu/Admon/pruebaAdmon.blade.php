@@ -105,6 +105,7 @@
                                     <th scope="col" style="text-align: center;">Nombre</th>
                                     <th scope="col" style="text-align: center;">Disponibles</th>
                                     <th scope="col" style="text-align: end;">Precio</th>
+                                    <th scope="col" style="text-align: start;">Tipo</th>
                                     <th scope="col" style="text-align: center;">Acción</th>
                                     <th scope="col" style="text-align: center;">Editar</th>
                                     <th scope="col" style="text-align: center;">Eliminar</th>
@@ -117,71 +118,75 @@
                                     $i = 0;
                                 @endphp
 
-                                @forelse($platillos as $p)
-                                    @if ($p->estado == 1)
-                                        @php
-                                            $exits = true;
-                                            $i++;
-                                        @endphp
+                                @forelse($productos as $p)
 
-                                        <tr>
+                                    @if ($p->tipo == 2)
+                                        @if ($p->estado == 1)
+                                            @php
+                                                $exits = true;
+                                                $i++;
+                                            @endphp
 
-                                            <td scope="col" style="text-align: center;">@php echo $i  @endphp</td>
-                                            <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
-                                            <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
-                                            <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
-                                            <td scope="col" style="text-align: center;">
-                                                <i onclick="activar('{{ $p->nombre }}', {{ $p->id }}, 'menu.admon');">
-                                                    <a class="fa fa-times-circle text-warning"></a>
-                                                    Desactivar</i>
-                                                
-                                            </td>
-                                            <td scope="col" style="text-align: center;">
-                                                <a href="{{ route('plato.editar', ['id' => $p->id]) }}">
-                                                    <i class="fa fa-edit text-success"></i>
-                                                </a>
-                                            </td>
-                                            <td scope="col" style="text-align: center;">
-                                                <i data-bs-toggle="modal"
-                                                    data-bs-target="#staticBackdropEe{{ $p->id }}"
-                                                    class="fa-solid fa-trash-can text-danger"
-                                                    style="color:crimson"></i>
-                                                <form
-                                                    action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
-                                                    method="post" enctype="multipart/form-data">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <div class="modal fade"
-                                                        id="staticBackdropEe{{ $p->id }}"
-                                                        data-bs-backdrop="static" data-bs-keyboard="false"
-                                                        tabindex="-1"
-                                                        aria-labelledby="staticBackdropLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5
-                                                                        class="modal-title"id="staticBackdropLabel">
-                                                                        Eliminar Platillo</h5>
-                                                                </div>
-                                                                <div class="modal-body"> ¿Está seguro de
-                                                                    eliminar el platillo:
-                                                                    <strong>{{ $p->nombre }}</strong>?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger">Si</button>
-                                                                    <button type="button"
-                                                                        class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">No</button>
+                                            <tr>
+
+                                                <td scope="col" style="text-align: center;">@php echo $i  @endphp</td>
+                                                <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
+                                                <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
+                                                <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
+                                                <td scope="col" style="text-align: start;"> {{ $p->tipo === 0 ? 'Complemento' : ($p->tipo === 1 ? 'Platillo' : 'Bebida')}}</td>
+                                                <td scope="col" style="text-align: center;">
+                                                    <i onclick="activar('{{ $p->nombre }}', {{ $p->id }}, 'menu.admon');">
+                                                        <a class="fa fa-times-circle text-warning"></a>
+                                                        Desactivar</i>
+                                                    
+                                                </td>
+                                                <td scope="col" style="text-align: center;">
+                                                    <a href="{{ route('plato.editar', ['id' => $p->id]) }}">
+                                                        <i class="fa fa-edit text-success"></i>
+                                                    </a>
+                                                </td>
+                                                <td scope="col" style="text-align: center;">
+                                                    <i data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdropEe{{ $p->id }}"
+                                                        class="fa-solid fa-trash-can text-danger"
+                                                        style="color:crimson"></i>
+                                                    <form
+                                                        action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
+                                                        method="post" enctype="multipart/form-data">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <div class="modal fade"
+                                                            id="staticBackdropEe{{ $p->id }}"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1"
+                                                            aria-labelledby="staticBackdropLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5
+                                                                            class="modal-title"id="staticBackdropLabel">
+                                                                            Eliminar Platillo</h5>
+                                                                    </div>
+                                                                    <div class="modal-body"> ¿Está seguro de
+                                                                        eliminar el platillo:
+                                                                        <strong>{{ $p->nombre }}</strong>?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Si</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">No</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            </td>
+                                                    </form>
+                                                </td>
 
-                                        </tr>
+                                            </tr>
+                                        @endif                                    
                                     @endif
                                 @empty
                                 @endforelse
@@ -224,112 +229,111 @@
                                     $exits = false;
                                     $i = 0;
                                 @endphp
-                                @forelse($platillos as $p)
-                                    @if ($p->estado == 0)
-                                        @php
-                                            $exits = true;
-                                            $i++;
-                                        @endphp
-                                        <tr>
-                                            <td scope="col" style="text-align: center;">@php echo $i  @endphp</td>
-                                            <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
-                                            <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
-                                            <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
-                                            <td scope="col" style="text-align: center;">
-                                                <i data-bs-toggle="modal"
-                                                    data-bs-target="#activarPlatillo{{ $p->id }}">
-                                                    <a class="fa fa-check-circle text-success"></a>
-                                                    Activar</i>
-                                                <form
-                                                    action="{{ route('platillo.activar', ['id' => $p->id]) }}"
-                                                    method="post" enctype="multipart/form-data">
-                                                    @method('put')
-                                                    @csrf
-                                                    <div class="modal fade"
-                                                        id="activarPlatillo{{ $p->id }}"
-                                                        data-bs-backdrop="static" data-bs-keyboard="false"
-                                                        tabindex="-1"
-                                                        aria-labelledby="staticBackdropLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"
-                                                                        id="staticBackdropLabel">Activar
-                                                                        Platillo</h5>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    ¿Está seguro de activar el platillo:
-                                                                    <strong>{{ $p->nombre }}</strong>?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input id="activar" name="activar"
-                                                                        style="display:none"
-                                                                        value="1">
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger">Si</button>
-                                                                    <button type="button"
-                                                                        class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">No</button>
+                                @forelse($productos as $p)
+                                    @if ($p->tipo == 2)
+                                        @if ($p->estado == 0)
+                                            @php
+                                                $exits = true;
+                                                $i++;
+                                            @endphp
+                                            <tr>
+                                                <td scope="col" style="text-align: center;">@php echo $i  @endphp</td>
+                                                <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
+                                                <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
+                                                <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
+                                                <td scope="col" style="text-align: center;">
+                                                    <i data-bs-toggle="modal"
+                                                        data-bs-target="#activarPlatillo{{ $p->id }}">
+                                                        <a class="fa fa-check-circle text-success"></a>
+                                                        Activar</i>
+                                                    <form
+                                                        action="{{ route('platillo.activar', ['id' => $p->id]) }}"
+                                                        method="post" enctype="multipart/form-data">
+                                                        @method('put')
+                                                        @csrf
+                                                        <div class="modal fade"
+                                                            id="activarPlatillo{{ $p->id }}"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1"
+                                                            aria-labelledby="staticBackdropLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="staticBackdropLabel">Activar
+                                                                            Platillo</h5>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        ¿Está seguro de activar el platillo:
+                                                                        <strong>{{ $p->nombre }}</strong>?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input id="activar" name="activar"
+                                                                            style="display:none"
+                                                                            value="1">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Si</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">No</button>
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            </td>
-                                            <td scope="col" style="text-align: center;"><a
-                                                    href="{{ route('plato.editar', ['id' => $p->id]) }}"><i
-                                                        class="fa fa-edit text-success"></i></a></td>
-                                            <td scope="col" style="text-align: center;">
-                                                <i data-bs-toggle="modal"
-                                                    data-bs-target="#staticBackdropE{{ $p->id }}"
-                                                    class="fa-solid fa-trash-can text-danger"
-                                                    style="color:crimson"></i>
-                                                <form
-                                                    action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
-                                                    method="post" enctype="multipart/form-data">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <div class="modal fade"
-                                                        id="staticBackdropE{{ $p->id }}"
-                                                        data-bs-backdrop="static" data-bs-keyboard="false"
-                                                        tabindex="-1"
-                                                        aria-labelledby="staticBackdropLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"
-                                                                        id="staticBackdropLabel">Eliminar
-                                                                        producto</h5>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    ¿Está seguro de eliminar el platillo:
-                                                                    <strong>{{ $p->nombre }}</strong>?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger">Si</button>
-                                                                    <button type="button"
-                                                                        class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">No</button>
+                                                    </form>
+                                                </td>
+                                                <td scope="col" style="text-align: center;"><a
+                                                        href="{{ route('plato.editar', ['id' => $p->id]) }}"><i
+                                                            class="fa fa-edit text-success"></i></a></td>
+                                                <td scope="col" style="text-align: center;">
+                                                    <i data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdropE{{ $p->id }}"
+                                                        class="fa-solid fa-trash-can text-danger"
+                                                        style="color:crimson"></i>
+                                                    <form
+                                                        action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
+                                                        method="post" enctype="multipart/form-data">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <div class="modal fade"
+                                                            id="staticBackdropE{{ $p->id }}"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1"
+                                                            aria-labelledby="staticBackdropLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="staticBackdropLabel">Eliminar
+                                                                            producto</h5>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        ¿Está seguro de eliminar el platillo:
+                                                                        <strong>{{ $p->nombre }}</strong>?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Si</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">No</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endif                                        
                                     @endif
                                 @empty
                                 @endforelse
 
                                 @if (!$exits)
-                                    <tr>
-                                        <td colspan="7" style="text-align: center;color: gray;">Todos
-                                            los Platillos están disponibles <br> </td>
-                                    </tr>
+                                    
                                 @endif
                             </tbody>
                         </table>
@@ -346,7 +350,7 @@
         function activar(nombre, id, ruta) {
             Swal.fire({
                 title: "Desactivar "+ nombre,
-                text:  'Hola',
+                text:  '...',
                 icon: 'question',
                 showDenyButton: true,
                 confirmButtonText: "Si",

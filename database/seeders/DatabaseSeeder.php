@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
                         MesaSeeder::class,
                         ReservacionSeeder::class,
                         UserSeeder::class,
+                        ProductoSeeder::class,
                         //PedidoSeeder::class,
                         //DetallesUsuarioSeeder::class,
                     ]);

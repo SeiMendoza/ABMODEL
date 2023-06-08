@@ -29,7 +29,7 @@ class PlatilloController extends Controller
         $platillo = Platillo::findOrFail($id);
         $platillo->delete();
 
-        return redirect()->route('menuAdmon.index')->with('mensaje', 'Platillo borrado correctamente');
+        return back()->with('mensaje', 'Platillo borrado correctamente');
 
     }
 }

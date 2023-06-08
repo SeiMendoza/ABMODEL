@@ -7,6 +7,7 @@ use App\Models\Combo;
 use App\Models\Platillo;
 use App\Models\Piscina;
 use App\Models\PiscinaTipo;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,18 +35,21 @@ class HomeController extends Controller
     public function indexAdmon()
     {
 
+        $productos = Producto::all();
         $platillos = Platillo::all();
         $bebidas = Bebida::all();
         $combos = Combo::all();
-        return view("/Menu/Admon/admon_Restaurante")->with(['platillos' => $platillos, 'bebidas' => $bebidas, 'combos' => $combos]);
+        return view("/Menu/Admon/admon_Restaurante")->with(['productos' => $productos, 'platillos' => $platillos, 'bebidas' => $bebidas, 'combos' => $combos]);
     }
 
 
     public function pruebaAdmon(){
+
+        $productos = Producto::all();
         $platillos = Platillo::all();
         $bebidas = Bebida::all();
         $combos = Combo::all();
-        return view("/Menu/Admon/pruebaAdmon")->with(['platillos' => $platillos, 'bebidas' => $bebidas, 'combos' => $combos]);
+        return view("/Menu/Admon/pruebaAdmon")->with(['productos' => $productos, 'platillos' => $platillos, 'bebidas' => $bebidas, 'combos' => $combos]);
     }
 
 

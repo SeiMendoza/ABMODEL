@@ -43,14 +43,14 @@
         }
     </script>
 
- <br>
+    <br>
     <div>
         <div>
             <ul class="nav nav-pills nav-justified h5 " role="tablist" style="background-color:rgba(111, 143, 175, 0.200);">
 
                 <li class="nav-item" role="presentation">
                     <a class="nav-link text-dark active" id="pills-bebidas-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-bebidas" type="button" aria-controls="pills-bebidas"
+                        data-bs-target="#pills-bebidas" type="button" role="tab" aria-controls="pills-bebidas"
                         aria-selected="true">Bebidas</a>
                 </li>
 
@@ -61,8 +61,8 @@
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-dark" id="pills-combos-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-combos" type="button" role="tab" aria-controls="pills-combos"
+                    <a class="nav-link text-dark" id="pills-complementos-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-complementos" type="button" role="tab" aria-controls="pills-complementos"
                         aria-selected="false">Complementos</a>
                 </li>
             </ul>
@@ -677,8 +677,8 @@
                 </div>
             </div>
 
-            <!--Combos-->
-            <div class="tab-pane fade" id="pills-combos" role="tabpanel"
+            <!--complementos-->
+            <div class="tab-pane fade" id="pills-complementos" role="tabpanel"
                 aria-labelledby="pills-Cdisponible-tab">
 
                 <div class="container-fluid" style="padding: 0px">  
@@ -699,7 +699,7 @@
 
                     <div class="tab-content" id="myTabContent" style="height: 500px; overflow-x: hidden;">
                         <br>
-                        <!--Combos Disponibles-->
+                        <!--complementos Disponibles-->
 
                         <div class="tab-pane fade show active" id="CDisponibles" role="tabpanel"
                             aria-labelledby="CDisponibles-tab">
@@ -720,116 +720,108 @@
                                     </thead>
 
                                     <tbody>
-                                        @php
-                                            $exits = false;
-                                            $i = 0;
-                                        @endphp
-                                        @forelse($combos as $p)
-                                            @if ($p->estado == 1)
-                                                @php
-                                                    $exits = true;
-                                                    $i++;
-                                                @endphp
-                                                <tr>
-                                                    <td scope="col" style="text-align: center;">@php echo $i  @endphp</td>
-                                                    <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
-                                                    <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
-                                                    <td scope="col" style="text-align: center;">
-                                                        <i data-bs-toggle="modal"
-                                                            data-bs-target="#activarComplemento{{ $p->id }}">
-                                                            <a class="fa fa-times-circle text-warning"></a>
-                                                            Desactivar</i>
-                                                        <form
-                                                            action="{{ route('combo.activar', ['id' => $p->id]) }}"
-                                                            method="post" enctype="multipart/form-data">
-                                                            @method('put')
-                                                            @csrf
-                                                            <div class="modal fade"
-                                                                id="activarComplemento{{ $p->id }}"
-                                                                data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                tabindex="-1"
-                                                                aria-labelledby="staticBackdropLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="staticBackdropLabel">Desactivar
-                                                                                complemento</h5>
-                                                                        </div>
-                                                                        <div class="modal-body"> ¿Está seguro de
-                                                                            desactivar el complemento:
-                                                                            <strong>{{ $p->nombre }}</strong>?
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <input id="activar" name="activar"
-                                                                                style="display:none"
-                                                                                value="0">
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Si</button>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">No</button>
+                                        @php $i = 0;  @endphp
+                                        @forelse($productos as $p)
+                                            @if ($p->tipo == 0)
+                                                @if ($p->estado == 1)
+                                                    @php
+                                                        $exits = true;
+                                                        $i++;
+                                                    @endphp
+                                                    <tr>
+                                                        <td scope="col" style="text-align: center;">@php echo $i  @endphp</td>
+                                                        <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
+                                                        <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
+                                                        <td scope="col" style="text-align: center;">
+                                                            <i data-bs-toggle="modal"
+                                                                data-bs-target="#activarComplemento{{ $p->id }}">
+                                                                <a class="fa fa-times-circle text-warning"></a>
+                                                                Desactivar</i>
+                                                            <form
+                                                                action="{{ route('combo.activar', ['id' => $p->id]) }}"
+                                                                method="post" enctype="multipart/form-data">
+                                                                @method('put')
+                                                                @csrf
+                                                                <div class="modal fade"
+                                                                    id="activarComplemento{{ $p->id }}"
+                                                                    data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                    tabindex="-1"
+                                                                    aria-labelledby="staticBackdropLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="staticBackdropLabel">Desactivar
+                                                                                    complemento</h5>
+                                                                            </div>
+                                                                            <div class="modal-body"> ¿Está seguro de
+                                                                                desactivar el complemento:
+                                                                                <strong>{{ $p->nombre }}</strong>?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <input id="activar" name="activar"
+                                                                                    style="display:none"
+                                                                                    value="0">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-danger">Si</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">No</button>
 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </form>
-                                                    </td>
-                                                    <td scope="col" style="text-align: center;"><a
-                                                            href="#"><i
-                                                                class="fa fa-edit text-success"></i></a></td>
-                                                    <td scope="col" style="text-align: center;">
-                                                        <i data-bs-toggle="modal"
-                                                            data-bs-target="#eliminarComplemento{{ $p->id }}"
-                                                            class="fa-solid fa-trash-can text-danger"
-                                                            style="color:crimson"></i>
-                                                        <form
-                                                            action="{{ route('combo.borrar', ['id' => $p->id]) }}"
-                                                            method="post" enctype="multipart/form-data">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <div class="modal fade"
-                                                                id="eliminarComplemento{{ $p->id }}"
-                                                                data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                tabindex="-1"
-                                                                aria-labelledby="staticBackdropLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="staticBackdropLabel">Eliminar
-                                                                                producto</h5>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            ¿Está seguro de eliminar el complemento:
-                                                                            <strong>{{ $p->nombre }}</strong>?
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Si</button>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">No</button>
+                                                            </form>
+                                                        </td>
+                                                        <td scope="col" style="text-align: center;"><a
+                                                                href="#"><i
+                                                                    class="fa fa-edit text-success"></i></a></td>
+                                                        <td scope="col" style="text-align: center;">
+                                                            <i data-bs-toggle="modal"
+                                                                data-bs-target="#eliminarComplemento{{ $p->id }}"
+                                                                class="fa-solid fa-trash-can text-danger"
+                                                                style="color:crimson"></i>
+                                                            <form
+                                                                action="{{ route('combo.borrar', ['id' => $p->id]) }}"
+                                                                method="post" enctype="multipart/form-data">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <div class="modal fade"
+                                                                    id="eliminarComplemento{{ $p->id }}"
+                                                                    data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                    tabindex="-1"
+                                                                    aria-labelledby="staticBackdropLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="staticBackdropLabel">Eliminar
+                                                                                    producto</h5>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                ¿Está seguro de eliminar el complemento:
+                                                                                <strong>{{ $p->nombre }}</strong>?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-danger">Si</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">No</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </form>
-                                                    </td>
-                                                </tr>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endif                                                
                                             @endif
                                         @empty
                                         @endforelse
-
-                                        @if (!$exits)
-                                            <tr>
-                                                <td colspan="7" style="text-align: center;color: gray;">Todos
-                                                    los complementos están disponibles <br> </td>
-                                            </tr>
-                                        @endif
                                     </tbody>
                                 </table>
 
@@ -837,7 +829,7 @@
 
                         </div>
 
-                        <!--Combos no Disponibles-->
+                        <!--complementos no Disponibles-->
 
                         <div class="tab-pane fade " id="CNoDisponibles" role="tabpanel"
                             aria-labelledby="CNoDisponibles-tab">
@@ -862,102 +854,104 @@
                                             $exits = false;
                                             $i = 0;
                                         @endphp
-                                        @forelse($combos as $p)
-                                            @if ($p->estado == 0)
-                                                @php
-                                                    $exits = true;
-                                                    $i++;
-                                                @endphp
-                                                <tr>
-                                                    <th scope="col" style="text-align: center;">@php echo $i  @endphp</th>
-                                                    <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
-                                                    <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
-                                                    <td scope="col" style="text-align: center;">
-                                                        <i data-bs-toggle="modal"
-                                                            data-bs-target="#activarComplemento{{ $p->id }}">
-                                                            <a class="fa fa-check-circle text-success"></a>
-                                                            Activar</i>
-                                                        <form
-                                                            action="{{ route('combo.activar', ['id' => $p->id]) }}"
-                                                            method="post" enctype="multipart/form-data">
-                                                            @method('put')
-                                                            @csrf
-                                                            <div class="modal fade"
-                                                                id="activarComplemento{{ $p->id }}"
-                                                                data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                tabindex="-1"
-                                                                aria-labelledby="staticBackdropLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="staticBackdropLabel">Activar
-                                                                                Complemento</h5>
-                                                                        </div>
-                                                                        <div class="modal-body"> ¿Está seguro de
-                                                                            activar el complemento:
-                                                                            <strong>{{ $p->nombre }}</strong>?
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <input id="activar" name="activar"
-                                                                                style="display:none"
-                                                                                value="1">
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Si</button>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">No</button>
+                                        @forelse($productos as $p)
+                                            @if ($p->tipo == 0)
+                                                @if ($p->estado == 0)
+                                                    @php
+                                                        $exits = true;
+                                                        $i++;
+                                                    @endphp
+                                                    <tr>
+                                                        <th scope="col" style="text-align: center;">@php echo $i  @endphp</th>
+                                                        <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
+                                                        <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
+                                                        <td scope="col" style="text-align: center;">
+                                                            <i data-bs-toggle="modal"
+                                                                data-bs-target="#activarComplemento{{ $p->id }}">
+                                                                <a class="fa fa-check-circle text-success"></a>
+                                                                Activar</i>
+                                                            <form
+                                                                action="{{ route('combo.activar', ['id' => $p->id]) }}"
+                                                                method="post" enctype="multipart/form-data">
+                                                                @method('put')
+                                                                @csrf
+                                                                <div class="modal fade"
+                                                                    id="activarComplemento{{ $p->id }}"
+                                                                    data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                    tabindex="-1"
+                                                                    aria-labelledby="staticBackdropLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="staticBackdropLabel">Activar
+                                                                                    Complemento</h5>
+                                                                            </div>
+                                                                            <div class="modal-body"> ¿Está seguro de
+                                                                                activar el complemento:
+                                                                                <strong>{{ $p->nombre }}</strong>?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <input id="activar" name="activar"
+                                                                                    style="display:none"
+                                                                                    value="1">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-danger">Si</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">No</button>
 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </form>
-                                                    </td>
-                                                    <td scope="col" style="text-align: center;"><a
-                                                            href="{{ route('combo.editar', ['id' => $p->id]) }}"><i
-                                                                class="fa fa-edit text-success"></i></a></td>
-                                                    <td scope="col" style="text-align: center;">
-                                                        <i data-bs-toggle="modal"
-                                                            data-bs-target="#eliminarCombo{{ $p->id }}"
-                                                            class="fa-solid fa-trash-can text-danger"
-                                                            style="color:crimson"></i>
-                                                        <form
-                                                            action="{{ route('combo.borrar', ['id' => $p->id]) }}"
-                                                            method="post" enctype="multipart/form-data">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <div class="modal fade"
-                                                                id="eliminarCombo{{ $p->id }}"
-                                                                data-bs-backdrop="static" data-bs-keyboard="false"
-                                                                tabindex="-1"
-                                                                aria-labelledby="staticBackdropLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="staticBackdropLabel">Eliminar
-                                                                                producto</h5>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            ¿Está seguro de eliminar el complemento:
-                                                                            <strong>{{ $p->nombre }}</strong>?
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Si</button>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">No</button>
+                                                            </form>
+                                                        </td>
+                                                        <td scope="col" style="text-align: center;"><a
+                                                                href="{{ route('combo.editar', ['id' => $p->id]) }}"><i
+                                                                    class="fa fa-edit text-success"></i></a></td>
+                                                        <td scope="col" style="text-align: center;">
+                                                            <i data-bs-toggle="modal"
+                                                                data-bs-target="#eliminarCombo{{ $p->id }}"
+                                                                class="fa-solid fa-trash-can text-danger"
+                                                                style="color:crimson"></i>
+                                                            <form
+                                                                action="{{ route('combo.borrar', ['id' => $p->id]) }}"
+                                                                method="post" enctype="multipart/form-data">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <div class="modal fade"
+                                                                    id="eliminarCombo{{ $p->id }}"
+                                                                    data-bs-backdrop="static" data-bs-keyboard="false"
+                                                                    tabindex="-1"
+                                                                    aria-labelledby="staticBackdropLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="staticBackdropLabel">Eliminar
+                                                                                    producto</h5>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                ¿Está seguro de eliminar el complemento:
+                                                                                <strong>{{ $p->nombre }}</strong>?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-danger">Si</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">No</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </form>
-                                                    </td>
-                                                </tr>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endif                                                
                                             @endif
                                         @empty
                                         @endforelse
