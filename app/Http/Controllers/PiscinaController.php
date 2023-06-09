@@ -55,7 +55,7 @@ class PiscinaController extends Controller
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
 */
         $rules=[
-            'nombre' => 'required',
+            'nombre' => 'required|regex:/^[\\pL\\s]+$/u',
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
            // 'expiracion' => 'required|date|after:'.$minima,
@@ -64,6 +64,7 @@ class PiscinaController extends Controller
 
         $mensaje=[
             'nombre.required' => 'El nombre no puede estar vacío',
+            'nombre.regex' => 'Solo se aceptan letras',
             'tipo.required' => 'El tipo de producto no puede estar vacío',
             'tipo.exists' => 'El tipo de producto no es valido',
             'uso.required' => 'El uso de producto no puede estar vacío',

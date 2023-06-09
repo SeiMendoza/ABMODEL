@@ -9,6 +9,37 @@
 @endsection
 
 @section('content')
+<style>
+    .row-space {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: stretch;
+        min-height: 60px;
+    }
+
+    .row-space .form-group {
+        margin-bottom: 0;
+    }
+
+    .row-space .form-group label {
+        margin-bottom: 0;
+    }
+
+    .align-items-center>* {
+        align-self: center;
+    }
+
+    .align-items-center .form-group {
+        margin-bottom: 0;
+    }
+
+    .align-items-center input[type=number],
+    .align-items-center select {
+        height: 45px;
+    }
+</style>
 <div class="wrapper wrapper--w960 font-robo">
     <div class="card border-radius-sm border-0">
         <div class="card-body border-radius-sm border-0">
@@ -32,7 +63,7 @@
                         <div class="font-robo form-group">
                             <label for="">Tipo de producto: </label>
                             <div style="">
-                                <select onchange="cambioPeso();mostrarOcultarDiv();" class="form-control border-radius-sm" style="text-indent: 8px !important;" name="tipo" id="tipo">
+                                <select onchange="cambioPeso();mostrarOcultarDiv();cambiarPlaceholder()" class="form-control border-radius-sm" style="text-indent: 8px !important;" name="tipo" id="tipo">
                                     @if (old('tipo'))
                                     <option disabled="disabled" value="">Selecciona el tipo de producto</option>
                                     @foreach ($tipo as $c)
@@ -89,16 +120,16 @@
                     <div class="col">
                         <div class="font-robo form-group">
                             <label for="">Ingrese el peso:</label>
-                            <input style="padding-left: 8px;width:360px;" class="form-control border-radius-sm" type="number" name="kilos" id="kilos" step="0.01" placeholder="Ingrese los kilogramos" value="@if(Session::has('kilos')){{Session::get('kilos')}}@else{{old('kilos')}}@endif" onkeypress="quitarerror()">
+                            <input style="padding-left: 8px;width:340px;" class="form-control border-radius-sm" type="number" name="kilos" id="kilos" step="0.01" placeholder="Ingresa la cantidad" value="@if(Session::has('kilos')){{Session::get('kilos')}}@else{{old('kilos')}}@endif" onkeypress="quitarerror()">
                             @error('kilos')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
                     </div>
-                </div>
-                <div class="col-4" id="contenedor" style="display:none;">
-                    <div class="font-robo form-group">
-                        <span style="width:80px;position:absolute;top:57%;right:22px;" class="form-control border-radius-sm" id="identificador"></span>
+                    <div class="col-4" id="contenedor">
+                        <div class="font-robo form-group">
+                            <span style="width:90px;position:absolute;top:57%;right:25px;text-align:center;" class="form-control border-radius-sm" id="identificador"></span>
+                        </div>
                     </div>
                 </div>
 
@@ -116,6 +147,16 @@
 <script>
     window.onload = cambioPeso;
 
+    function cambiarPlaceholder() {
+        var tipo = document.getElementById('tipo').value;
+        var input = document.getElementById('kilos');
+        if (tipo == 1) {
+            input.placeholder = "Ingrese la cantidad de libras";
+        } else if (tipo == 2) {
+            input.placeholder = "Ingrese la cantidad de onzas";
+        }
+    }
+
     function cambioPeso() {
         var select = document.getElementById("tipo");
         var identificador = document.getElementById("identificador");
@@ -126,7 +167,7 @@
         } else if (valorSeleccionado == 2) {
             identificador.innerHTML = "onzas";
         } else {
-            identificador.innerHTML = ""; // Si no se selecciona ninguna opción, se limpia el contenido del span
+            identificador.innerHTML = "unidades"; // Si no se selecciona ninguna opción, se limpia el contenido del span
         }
     }
     /* oculta el campo de identificador es decir
