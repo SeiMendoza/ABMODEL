@@ -27,10 +27,10 @@
 
                             <div class="col-3">      
                                 <div class="font-robo form-group">                     
-                                    <label for="" style="margin-left: 0;">Seleccione una imagen</label>
-                                    <img style="margin-left: 0;" src="{{asset($k->imagen)}}" alt="" width="220px" height="220px" id="imagenmostrada">
+                                    <img onclick="elegirImagen()" style="margin-left: 0;" src="{{ asset($k->imagen) }}" alt="" width="220px" height="220px" id="imagenmostrada">
                                     <br><br>
-                                    <input type="file" id="imagen" name="imagen" accept="image/*"  value="{{ old('imagenPrevisualizacion') }}" style="color: white;width: 200px;">
+                                    <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:200px;" class="bg-light border-radius-sm text-center "> <i class="fa fa-file-image"></i> Cambiar imagen</label>
+                                    <input type="file" class="files" id="imagen" name="imagen" accept="image/*"  value="{{ old('imagenPrevisualizacion') }}" onchange="colocarNombre();" style="display:none; color: rgb(0, 0, 0);">
                                     @error('imagen')
                                             <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                     @enderror  

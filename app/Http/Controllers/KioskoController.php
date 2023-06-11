@@ -18,7 +18,7 @@ class KioskoController extends Controller
         ];
 
         $messages=[
-            'codigo.regex' => 'El código no es válido, un ejemplo válido es: K001',
+            'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01',
         ];
 
         $this->validate($request, $rules, $messages);
@@ -43,7 +43,7 @@ class KioskoController extends Controller
         if ($create) {
             return to_route('kiosko.index')->with('mensaje', 'Kiosko registrado correctamente');
         }
-
+        
 
     }
 
