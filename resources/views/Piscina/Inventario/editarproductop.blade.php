@@ -14,11 +14,20 @@
 </li>
 @endsection
 
+@section('tit','Edición de producto de piscina')
+@section('b')
+    <div class="" style="">    
+        <a href="{{route('prodpiscina.index')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" 
+        class="bg-light border-radius-sm text-center">
+        <i class="fa fa-arrow-left"></i> Regresar
+       </a> 
+    </div>
+@endsection
+
 @section('content')
 <div class="wrapper wrapper--w960 font-robo">
     <div class="card border-radius-sm border-0">
         <div class="card-body border-radius-sm border-0">
-            <h2 class="title" style="margin-bottom:0">Información de: {{$piscina->nombre}}</h2>
             <h4 class="font-robo t" style="margin: 0; padding:0">Datos del producto: </h4>
             <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
             <form method="post" action="{{ route('producto.update',['id' => $piscina -> id]) }}" enctype="multipart/form-data">

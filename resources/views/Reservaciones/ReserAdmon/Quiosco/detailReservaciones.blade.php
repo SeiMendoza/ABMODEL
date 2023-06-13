@@ -6,6 +6,16 @@
 <li class="breadcrumb-item text-sm"><a class="text-white ">Detalles de la reservación </a></li>
 @endsection
 
+@section('tit', "Detalles de la reservación") 
+@section('b')
+    <div class="" style="">    
+        <a href="{{route('kiosko_res.index')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" 
+        class="bg-light border-radius-sm text-center">
+        <i class="fa fa-arrow-left"></i> Regresar
+       </a> 
+    </div>
+@endsection
+
 @section('content')
 <style>
     .titulo{
@@ -28,8 +38,6 @@
 <div class="wrapper wrapper--w960">
     <div class="row d-flex justify-content-center" >
          <div class="card shadow items-center" style="margin: 0">
-            <h3 class=" font-weight-bold" style="color:rgba(111, 143, 175); text-align:center"> 
-                Detalles de la reservación de: {{$reservacion->nombre}} </h3>
             <div class="card-body">
                 <table class="table" >
                     <thead style="background-color: rgba(111, 143, 175, 0.600)">

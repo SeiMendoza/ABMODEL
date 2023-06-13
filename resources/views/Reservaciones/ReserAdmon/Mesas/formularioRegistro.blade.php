@@ -5,12 +5,20 @@
     href="{{route('mesas_reg.index')}}">Lista de mesas</a></li>
 <li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de mesa</li>
 @endsection
+@section('tit','Registro de mesa')
+@section('b')
+    <div class="" style="">    
+        <a href="{{route('mesas_reg.index')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" 
+        class="bg-light border-radius-sm text-center">
+        <i class="fa fa-arrow-left"></i> Regresar
+       </a> 
+    </div>
+@endsection
 @section('content')
     <div class="">
         <div class="wrapper wrapper--w960">
             <div class="card border-radius-sm border-0" style="">
                 <div class="card-body border-radius-sm border-0">
-                    <h2 class="title" style="margin-bottom:0" >Registro de mesas</h2>
                     <form method="POST" action="{{route('mesas_reg.store')}}"  enctype="multipart/form-data">
                         @csrf
                         <h4 class="font-robo t" style="margin: 0; padding:0">Datos de la mesa: </h4>

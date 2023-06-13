@@ -237,8 +237,8 @@
         </div>
     </main>
   
-    <script src="/assets/jquery/jquery.js"></script>
-    <script src="/assets/jquery/jquery.min.js"></script>
+    <script src="/JQuery/jquery-3.7.0.js"></script>
+    <script src="/JQuery/jquery-3.7.0.min.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script> 
     <script src="/assets/select2/select2.min.js"></script>
@@ -246,8 +246,7 @@
     <script src="/assets/datepicker/daterangepicker.js"></script>
     <script>
 
-        $(document).ready(function () {
-        $('#example').DataTable();
+        let table = new DataTable('#example', {
         });
 
         //DATATABLES para Menú
