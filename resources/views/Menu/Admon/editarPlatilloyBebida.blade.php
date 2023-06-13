@@ -42,19 +42,10 @@
                         <div style="margin-left:2%;float:left;width:35%">
                             <div class="rs-select2 js-select-simple select--no-search">
                                 <select name="tipo" id="tipo" required onchange="producto();quitarerror()">
-                                @if(old('tipo'))
-                                    @if(old('tipo') === 2 )
-                                        <option disabled="disabled" selected="selected" value="2">Comida</option>
-                                    @else
-                                        @if(old('tipo') === 1 )
-                                            <option disabled="disabled" selected="selected" value="1">Bebida</option>
-                                        @endif
-                                    @endif
-                                @else
-                                    <option disabled="disabled" selected="selected" value="{{$PlatillosyBebidas->tipo}}">Tipo de producto</option>
-                                @endif
-                                    <option value="1"{{$PlatillosyBebidas->tipo =="1" ? 'selected' :''}} >Bebida</option>
-                                    <option value="2"{{$PlatillosyBebidas->tipo =="2" ? 'selected' :''}} >Comida</option>
+                                    <option value="">Seleccione el tipo de producto</option>
+                                    <option @if ($PlatillosyBebidas->tipo == 1) selected @endif value="1">Bebida</option>
+                                    <option @if ($PlatillosyBebidas->tipo == 2) selected @endif value="2">Comida</option>
+                                    <option @if ($PlatillosyBebidas->tipo == 3) selected @endif value="3">Complemento</option>
                                 </select>
                                 <div class="select-dropdown"></div>
                             </div>

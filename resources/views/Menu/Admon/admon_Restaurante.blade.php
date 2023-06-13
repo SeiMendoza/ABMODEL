@@ -5,25 +5,25 @@
 @endsection
 @section('tit','Administración de menú')
 @section('b')
-    <!-- Botón registrar-->
+    <!-- Botón registrar -->
     <div>
         <a href="{{route('bebidasyplatillos.create')}}" style="margin:0; padding:5px; width:200px;" type="button" class="bg-light border-radius-sm text-center">
-            <i class="fa fa-plus-circle"></i> Agregar platillo o bebida
+            <i class="fa fa-plus-circle"></i> Agregar Productos
         </a>
     </div>
-
+<!--
     <div>
         <a href="#" style="margin:0; padding:5px; width:200px;" type="button" class="bg-light border-radius-sm text-center m-2">
             <i class="fa fa-plus-circle"></i> Agregar complemento
         </a>
     </div>
-
+-->
     <div>
         <a href="{{route('cliente_prueba')}}" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
             <i class="fa fa-users"></i> Menú cliente
         </a>
     </div>
-    
+
 @endsection
 
 @section('content')
@@ -70,7 +70,7 @@
     </div>
 
     <br>
-    
+
     <!--Menu de Productos-->
     <div class="table-responsive" id="pills-tabContent">
         <div class="tab-content" id="pills-tabContent">
@@ -681,7 +681,7 @@
             <div class="tab-pane fade" id="pills-complementos" role="tabpanel"
                 aria-labelledby="pills-Cdisponible-tab">
 
-                <div class="container-fluid" style="padding: 0px">  
+                <div class="container-fluid" style="padding: 0px">
 
                     <!--Navegacion entre disponibles y no disponibles-->
                     <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
@@ -703,7 +703,7 @@
 
                         <div class="tab-pane fade show active" id="CDisponibles" role="tabpanel"
                             aria-labelledby="CDisponibles-tab">
-                            
+
                             <div class="table-responsive container-fluid">
 
                                 <table class="table menu" class="table" id="CombosDisponibles"
@@ -818,7 +818,7 @@
                                                             </form>
                                                         </td>
                                                     </tr>
-                                                @endif                                                
+                                                @endif
                                             @endif
                                         @empty
                                         @endforelse
@@ -951,7 +951,7 @@
                                                             </form>
                                                         </td>
                                                     </tr>
-                                                @endif                                                
+                                                @endif
                                             @endif
                                         @empty
                                         @endforelse

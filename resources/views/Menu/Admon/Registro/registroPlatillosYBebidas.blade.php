@@ -2,10 +2,10 @@
 @section('title', 'Agregar platillo o bebida')
 @section('miga')
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('menuAdmon.index')}}">Administración de menú</a></li>
-<li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de platillo y bebida</li>
+<li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de productos</li>
 @endsection
-@section('tit','Registro de platillo o bebida')
-<!-- 
+@section('tit','Registro de productos')
+<!--
 <div>
     <a href="{{route('menuAdmon.index')}}" style="margin:0; padding:5px; width:160px; margin-top:25px" type="button" class="bg-light border-radius-sm text-center ">
         <i class="fa fa-arrow-left"></i>  Regresar
@@ -38,7 +38,7 @@
     </script>
 
     <div class="wrapper wrapper--w960"> <!--aquí iria el wrapper-->
-        <div class="card border-radius-sm border-0" style="">            
+        <div class="card border-radius-sm border-0" style="">
             <div class="card-body border-radius-sm border-0">
                 <h2 class="title" style="margin-bottom:0%"></h2>
                 <form method="post" action="" enctype="multipart/form-data">
@@ -48,34 +48,25 @@
 
                     <div class="row row-space">
                         <div class="col-3">
-                            <div>  
+                            <div>
                                 <img onclick="elegirImagen()" style="margin-left: 0;" src="/img/Loremplatillo.png" alt="" width="240px" height="240px" id="imagenmostrada">
                                 <br><br>
-                                <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px;" class="bg-light border-radius-sm text-center "> <i class="fa fa-file-image"></i> Seleccionar imagen</label>
+                                <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px;" class="btn btn-info text-center"> <i class="fa fa-file-image"></i> Seleccionar imagen</label>
                                 <input  style="display:none; margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" required value="{{ old('imagenPrevisualizacion') }}" onchange="colocarNombre();" style="color: white;width: 150px;">
                                 @error('imagen')
                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="col-4">
                             <div>
                                 <label for=""><strong>Tipo de producto:</strong></label>
                                 <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control border-radius-sm">
-                                    @if (old('tipo'))
-                                        @if (old('tipo') === 2)
-                                            <option disabled="disabled" selected="selected" value="2">Comida</option>
-                                        @else
-                                            @if (old('tipo') === 1)
-                                                <option disabled="disabled" selected="selected" value="1">Bebida</option>
-                                            @endif
-                                        @endif
-                                    @else
-                                        <option disabled="disabled" selected="selected" value="">Seleccione el tipo de producto</option>
-                                    @endif
-                                    <option value="1">Bebida</option>
-                                    <option value="2">Comida</option>
+                                    <option value="">Seleccione el tipo de producto</option>
+                                    <option @if (old('tipo') == 1) selected @endif value="1">Bebida</option>
+                                    <option @if (old('tipo') == 2) selected @endif value="2">Comida</option>
+                                    <option @if (old('tipo') == 3) selected @endif value="3">Complemento</option>
                                 </select>
                                 @error('tipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -98,7 +89,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="col-4">
                             <div>
                                 <label  style="margin-left: 0;"><strong>Tamaño:</strong></label>
@@ -128,7 +119,7 @@
                             </div>
 
                             <br>
-                            <div>                                
+                            <div>
                                 <label for=""><strong>Precio:</strong></label>
                                 <input class="form-control border-radius-sm" type="number" placeholder="Ingrese el precio" name="precio" id="precio"
                                 onkeypress="quitarerror()" step="0.01"
@@ -140,12 +131,12 @@
                             </div>
 
                             <br>
-                            <div class="row">                                
+                            <div class="row">
                                 <div id="bebida" style="display:">
                                     <label for=""><strong>Cantidad disponible</strong></label>
                                     <input class="form-control border-radius-sm" type="number" placeholder="Ingrese la cantidad disponible"
                                         name="cantidad" id="cantidad" value="{{ old('cantidad') }}"
-                                        onkeypress="quitarerror()" 
+                                        onkeypress="quitarerror()"
                                         onkeydown="javascript: return event.keyCode == 69 ? false : true" min="1"
                                         max="1000">
                                     @error('cantidad')
@@ -153,7 +144,7 @@
                                     @enderror
                                     <br><br>
                                 </div>
-        
+
                                 <div id="comida" style="display:none">
                                     <br>
                                     <label for=""><strong>Ingrese la cantidad de platillos disponibles</strong></label>
@@ -164,7 +155,7 @@
                                         max="1000" disabled>
                                     @error('disponible')
                                         <strong class="menerr" class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror                                        
+                                    @enderror
                                 </div>
                             </div>
                         </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePlatillosyBebidasRequest;
 use App\Http\Requests\UpdatePlatillosyBebidasRequest;
+use App\Models\Producto;
 
 class PlatillosyBebidasController extends Controller
 {
@@ -41,11 +42,11 @@ class PlatillosyBebidasController extends Controller
     public function store(Request $request)
     {
         $rules=[
-            'tipo' => 'required|in:2,1',
+            'tipo' => 'required|in:3,2,1',
             'nombre' => 'required|max:100|min:3',
-            'descripcion' => 'required|max:100|min:3',   
-            'precio' => 'required|min:1|max:1000|numeric',   
-            'tamanio' => 'required|max:100|min:3', 
+            'descripcion' => 'required|max:100|min:3',
+            'precio' => 'required|min:1|max:1000|numeric',
+            'tamanio' => 'required|max:100|min:3',
             'imagen' => 'required',
             'cantidad' => 'nullable|min:1|max:1000|numeric',
             'disponible' => 'nullable|min:1|max:1000|numeric',
@@ -101,9 +102,9 @@ class PlatillosyBebidasController extends Controller
                     ->with('mensaje', 'El platillo fue creada exitosamente');
             }
 
-        }else{
+        }else if($request->input('tipo') == 1 ){
             $platillos = new Bebida();
-            
+
             $platillos->nombre = $request->input('nombre');
             $platillos->descripcion = $request->input('descripcion');
             $platillos->precio = $request->input('precio');
@@ -122,6 +123,30 @@ class PlatillosyBebidasController extends Controller
             if ($creado) {
                 return redirect()->route('menuAdmon.index')
                     ->with('mensaje', 'La bebida fue creada exitosamente');
+            }
+        }else if($request->input('tipo') == 3 ){
+            $platillos = new Producto();
+
+            $platillos->nombre = $request->input('nombre');
+            $platillos->descripcion = $request->input('descripcion');
+            $platillos->precio = $request->input('precio');
+            $platillos->tamanio = $request->input('tamanio');
+            $platillos->disponible = $request->input('cantidad');
+            $platillos->esComplemento = 1;
+            $platillos->tipo = 0;
+
+            $file = $request->file('imagen');
+            $destinationPath = 'images/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+
+            $platillos->imagen = 'images/'.$filename;
+
+            $creado = $platillos->save();
+
+            if ($creado) {
+                return redirect()->route('menuAdmon.index')
+                    ->with('mensaje', 'El Complemeto fue creada exitosamente');
             }
         }
     }
