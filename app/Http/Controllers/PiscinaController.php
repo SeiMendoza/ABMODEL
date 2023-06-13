@@ -27,7 +27,7 @@ class PiscinaController extends Controller
     $prod = Piscina::all();
     $tip = PiscinaTipo::all();
     $text = trim($request->get('busqueda'));
-    $prod = Piscina::where('nombre', 'like', '%' . $text . '%')->paginate(10); 
+    $prod = Piscina::where('nombre', 'like', '%' . $text . '%')->paginate(10);
     $tip = PiscinaTipo::where('descripcion', 'like', '%' . $text . '%')->paginate(10);
         return view('Piscina/inventario/listaproductos',compact('prod','tip','text'));
 }*/
@@ -55,7 +55,7 @@ class PiscinaController extends Controller
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
 */
         $rules=[
-            'nombre' => 'required|regex:/^[\\pL\\s]+$/u',
+            'nombre' => 'required|regex:/^[\\pL\\s]+$/u|unique:piscinas',
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
            // 'expiracion' => 'required|date|after:'.$minima,
@@ -65,6 +65,7 @@ class PiscinaController extends Controller
         $mensaje=[
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.regex' => 'Solo se aceptan letras',
+            'nombre.unique' => 'El producto solo se puede registra una vez',
             'tipo.required' => 'El tipo de producto no puede estar vacío',
             'tipo.exists' => 'El tipo de producto no es valido',
             'uso.required' => 'El uso de producto no puede estar vacío',
@@ -133,7 +134,7 @@ class PiscinaController extends Controller
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
 */
         $rules=[
-            'nombre' => 'required|regex:/^[\\pL\\s]+$/u',
+            'nombre' => 'required|regex:/^[\\pL\\s]+$/u|unique:piscinas,nombre,'.$id,
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
            // 'expiracion' => 'required|date|after:'.$minima,
@@ -143,6 +144,7 @@ class PiscinaController extends Controller
         $mensaje=[
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.regex' => 'Solo se aceptan letras',
+            'nombre.unique' => 'El producto solo se puede registra una vez',
             'tipo.required' => 'El tipo de producto no puede estar vacío',
             'tipo.exists' => 'El tipo de producto no es valido',
             'uso.required' => 'El uso de producto no puede estar vacío',
