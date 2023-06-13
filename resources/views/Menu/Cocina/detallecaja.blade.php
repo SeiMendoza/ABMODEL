@@ -102,9 +102,12 @@
             <td class="informacion">L. <?= number_format($tot, 2, ".", ",") ?> </td>
         </tr> 
     </table>
+    
     <div class="mb-0 col-9 text-start" style="position:absolute;top:294%;width:100%;">
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
+                <a style="text-color:white;position:absolute;left:50%;padding:5px; width:100px;" href="#" 
+                class="bg-light border-radius-sm text-center">Nuevo</a>
                 <tr class="text-dark" style="background:rgba(255,179,71,0.6);">
                     <th scope="col" style="width:20%;text-align:center;">Nombre</th>
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>

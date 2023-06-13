@@ -306,8 +306,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             ->union(Combo::select('nombre')->where('estado', '=', '1'))
             ->union(Bebida::select('nombre')->where('estado', '=', '1'))
             ->get()
-            ->pluck('nombre');
-        //  $productos = DetallesUsuario::pluck('nombre')->unique();
+            ->pluck('nombre'); 
         return view('Menu/Cocina/editardetallecaja', compact('edit', 'pedido', 'productos'));
     }
     public function update(Request $request, $pedido_id, $detalle_id)
@@ -331,14 +330,23 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $detalle->nombre = $request->nombre;
         $detalle->cantidad = $request->input('cantidad');
         $detalle->precio = $request->input('precio');
+        // en cada detalle del pedido 
         $impuesto = $detalle->precio * $detalle->cantidad * 0.15; // calcular el impuesto
         $total = $detalle->precio * $detalle->cantidad; // calcular el total
-
         $pedido->imp = $impuesto;
         $pedido->total = $total;
-
-        $pedido->save();
         $detalle->save();
+        //actualiza el impuesto y el total del pedido general
+    $detalles = $pedido->detalles;
+    $total = 0;
+    foreach ($detalles as $detalle) {
+        $total += $detalle->cantidad * $detalle->precio;
+    }
+    $impuesto = $total * 0.15; // calcular el impuesto
+    // Actualizar el pedido con el nuevo valor del impuesto y el total
+    $pedido->imp = $impuesto;
+    $pedido->total = $total;
+    $pedido->save();
         return redirect()->route('pedidost.detalle', ['id' => $pedido_id])->with('mensaje', 'El detalle del pedido ha sido actualizado exitosamente.');
     }
     /**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
