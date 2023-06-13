@@ -29,12 +29,12 @@
     <link href="/assets/css/brands.css" rel="stylesheet">
     <link href={{ asset("/css/nucleo-icons.css") }} rel="stylesheet" type="text/css">
     <link href={{ asset("/css/nucleo-svg.css") }} rel="stylesheet"/>
- 
+
   <!-- CSS Files -->
   <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
   <link href="/css/main.css" rel="stylesheet" media="all">
 
-  <script src="{{ asset("/js/sweetalert2.all.min.js") }}"></script> 
+  <script src="{{ asset("/js/sweetalert2.all.min.js") }}"></script>
   <style media="screen">
     li:active a, li:focus-visible, li:hover{
         background-color: rgba(111, 143, 175, 0.319);
@@ -83,7 +83,7 @@
                 </div>
             </a>
         </div>
-        <div class="" style="margin:1% 0% 0 1%; width:81.6%; padding:0%; display:block; float:left">    
+        <div class="" style="margin:1% 0% 0 1%; width:81.6%; padding:0%; display:block; float:left">
             <nav class="navbar navbar-main navbar-expand-lg shadow-none border-radius-xl " id="navbarBlur"
                 data-scroll="false" style="padding: 0;">
                 <div class="container-fluid" style="padding: 0; height:70px;">
@@ -93,9 +93,9 @@
                                     href="{{route('index')}}">Inicio</a></li>
                         </ol>
                         <h2 class="font-weight-bolder text-white " style="margin:0">Villa Crisol</h2>
-                    </nav> 
+                    </nav>
                     <div class="collapse navbar-collapse " id="navbar">
-                        <div class="ms-md-auto pe-md-0 d-flex align-items-center"style="margin-top: 2.5%">   
+                        <div class="ms-md-auto pe-md-0 d-flex align-items-center"style="margin-top: 2.5%">
                             <div class="input-group">
                                 <span class="input-group-text text-body"><i class="fas fa-search"
                                         aria-hidden="true"></i></span>
@@ -120,7 +120,11 @@
                             <li class="nav-item dropdown pe-2 d-flex align-items-center">
                                 <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ni ni-bell-55 cursor-pointer"></i>
+                                    <i class="ni ni-bell-55 cursor-pointer" >
+                                        <span class="position-absolute top-10 start-80 translate-middle badge rounded-pill bg-danger">
+                                            {{ count($datosalerta) }}
+                                        </span>
+                                    </i>
                                 </a>
                                 <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"
                                     aria-labelledby="dropdownMenuButton">
@@ -135,13 +139,13 @@
                                                         Existencia de productos de piscina
                                                     </h6>
                                                     <p class="text-xs text-secondary mb-0">
-                                                        @foreach($datosalerta as $d) 
+                                                        @foreach($datosalerta as $d)
                                                             Productos de piscina en {{$d->descripcion}} tiene {{$d->total}}
-                                                            unidades con {{$d->peso}}  
-                                                            @if ($d->descripcion == "Polvo") 
-                                                                Libras 
-                                                            @else 
-                                                                Onzas 
+                                                            unidades con {{$d->peso}}
+                                                            @if ($d->descripcion == "Polvo")
+                                                                Libras
+                                                            @else
+                                                                Onzas
                                                             @endif
                                                             <br>
                                                         @endforeach
@@ -156,7 +160,7 @@
                             <div>
                             <!-- Informacion perfil-->
                                 <li class="">
-                                    <a href="javascript:;" class="nav-link text-white font-weight-bold px-0" 
+                                    <a href="javascript:;" class="nav-link text-white font-weight-bold px-0"
                                         id="dropdownMenuButton"  data-bs-toggle="dropdown" aria-expanded="false">
                                            {{auth()->user()->name ?? auth()->user()->username}}
                                         <img class="img-perfil rounded-circ" src="img/{{ Auth::user()->imagen}}" >
@@ -172,7 +176,7 @@
                                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                              Información
                                         </a>
-                                    
+
                                         <hr>
                                             <a class="dropdown-item" href="{{ route('cerrarSes.cerrar') }}" data-toggle="modal" data-target="logoutModal">
                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -291,47 +295,47 @@
                 <div class="row" style="margin: 0px; padding:0;">
                     <a href="{{ route('cliente_prueba') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
                         data-id="" style="margin:0px; border-radius:0%;">
-                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="text-center" style="text-align:center; padding: 0px;">
                             <div class="" style="margin-top: 5%">
                                 <i class="fa-solid fa-utensils fa-8x text-warning"></i>
-                            </div>             
+                            </div>
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
-                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    <strong class="h-25" style="font-size: 30px; width:100%;
                                     background-color:rgba(255, 0, 0, 0.504);
                                     position: absolute; bottom: 0; left:0;">Pedido</strong>
-                                </p>         
+                                </p>
                         </div>
                     </a>
                     <a href="{{route('pedidos.caja')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
                     data-id="" style="border-radius:0%; margin:0px 10px 0px 10px;">
-                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                    <div class="text-center" style="text-align:center; padding: 0px;">
                         <div class="" style="margin-top: 5%">
                             <i class="fa-solid fa-cash-register fa-8x text-warning" ></i>
-                        </div>             
+                        </div>
                         <!-- Nombre -->
                             <p id="precio" class="text-white font-robo text-decoration-line">
-                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                <strong class="h-25" style="font-size: 30px; width:100%;
                                 background-color:rgba(255, 0, 0, 0.504);
                                 position: absolute; bottom: 0; left:0;">Caja</strong>
-                            </p>         
+                            </p>
                     </div>
                     </a>
                     <a href="{{route('pedidosp.pedido')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
                         data-id="" style="margin:0px 10px 0px 0px; border-radius:0%;">
-                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="text-center" style="text-align:center; padding: 0px;">
                             <div class="" style="margin-top: 5%">
                                 <i class="fa-solid fa-kitchen-set fa-8x text-warning"></i>
-                            </div>             
+                            </div>
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
-                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    <strong class="h-25" style="font-size: 30px; width:100%;
                                     background-color:rgba(255, 0, 0, 0.504);
                                     position: absolute; bottom: 0; left:0;">Cocina</strong>
-                                </p>         
+                                </p>
                         </div>
                     </a>
-                </div> 
+                </div>
             </div>
             <!-- Cards Reservaciones -->
             <div class="row pt-3" style="margin:0px; padding:0px;">
@@ -339,30 +343,30 @@
                 <div class="row" style="margin:0px; padding:0px">
                     <a href="{{ route('kiosko_res.index') }}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
                     data-id="" style="border-radius:0%; margin:0px;">
-                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                    <div class="text-center" style="text-align:center; padding: 0px;">
                         <div class="" style="margin-top: 5%">
                             <i class="fa-solid fa-store fa-8x text-success" style=""></i>
-                        </div>             
+                        </div>
                         <!-- Nombre -->
                             <p id="precio" class="text-white font-robo text-decoration-line">
-                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                <strong class="h-25" style="font-size: 30px; width:100%;
                                 background-color:rgba(0, 173, 12, 0.504);
                                 position: absolute; bottom: 0; left:0;">Kioskos</strong>
-                            </p>         
+                            </p>
                     </div>
                     </a>
                     <a href="{{route('cliente.reservaLocal')}}" class="card btn height-200 col-xl-3 mb-xl-0 mb-2"
                         data-id="" style="margin:0px 10px 0px 10px;; border-radius:0%;">
-                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="text-center" style="text-align:center; padding: 0px;">
                             <div class="" style="margin-top: 5%">
                                 <i class="fa-solid fa-shop fa-8x text-success"></i>
-                            </div>             
+                            </div>
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
-                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    <strong class="h-25" style="font-size: 30px; width:100%;
                                     background-color:rgba(0, 173, 12, 0.504);
                                     position: absolute; bottom: 0; left:0;">Local</strong>
-                                </p>         
+                                </p>
                         </div>
                     </a>
                 </div>
@@ -373,69 +377,69 @@
                 <div class="row" style="margin:0px; padding:0px;">
                     <a href="{{ route('menuAdmon.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
                         data-id="" style="margin:0px; border-radius:0%;">
-                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="text-center" style="text-align:center; padding: 0px;">
                             <div class="" style="margin-top: 10%">
                                 <i class="fa-solid fa-glass-water fa-6x text-info"></i>
                                 <i class="fa-solid fa-burger fa-7x text-info"></i>
-                            </div>             
+                            </div>
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
-                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    <strong class="h-25" style="font-size: 30px; width:100%;
                                     background-color:rgba(0, 195, 255, 0.504);
                                     position: absolute; bottom: 0; left:0;">Menú</strong>
-                                </p>         
+                                </p>
                         </div>
                     </a>
                     <a href="{{route('kiosko.index')}}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
                         data-id="" style="margin:0px 10px 0px 10px; border-radius:0%;">
-                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="text-center" style="text-align:center; padding: 0px;">
                             <div class="" style="margin-top: 5%">
                                 <i class="fa-solid fa-store fa-8x text-info"></i>
-                            </div>             
+                            </div>
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
-                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    <strong class="h-25" style="font-size: 30px; width:100%;
                                     background-color:rgba(0, 195, 255, 0.504);
                                     position: absolute; bottom: 0; left:0;">Kioskos</strong>
-                                </p>         
+                                </p>
                         </div>
                     </a>
                     <a href="{{route('mesas_reg.index')}}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
                         data-id="" style="margin:0px 10px 0px 0px; border-radius:0%;">
-                        <div class="text-center" style="text-align:center; padding: 0px;">   
+                        <div class="text-center" style="text-align:center; padding: 0px;">
                             <div class="" style="margin-top: 4%">
                                 <i class="fa-regular fa-chair fa-9x text-info"></i>
-                            </div>             
+                            </div>
                             <!-- Nombre -->
                                 <p id="precio" class="text-white font-robo text-decoration-line">
-                                    <strong class="h-25" style="font-size: 30px; width:100%; 
+                                    <strong class="h-25" style="font-size: 30px; width:100%;
                                     background-color:rgba(0, 195, 255, 0.504);
                                     position: absolute; bottom: 0; left:0;">Mesas</strong>
-                                </p>         
+                                </p>
                         </div>
                     </a>
                     <a href="{{ route('prodpiscina.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
                     data-id="" style="margin:10px 10px 0px 0px; border-radius:0%;">
-                    <div class="text-center" style="text-align:center; padding: 0px;">   
+                    <div class="text-center" style="text-align:center; padding: 0px;">
                         <div class="" style="margin-top: 0%">
                             <i class="fa-solid fa-person-swimming fa-10x text-info"></i>
-                        </div>             
+                        </div>
                         <!-- Nombre -->
                             <p id="precio" class="text-white font-robo text-decoration-line">
-                                <strong class="h-25" style="font-size: 30px; width:100%; 
+                                <strong class="h-25" style="font-size: 30px; width:100%;
                                 background-color:rgba(11, 198, 255, 0.504);
                                 position: absolute; bottom: 0; left:0;">Piscina</strong>
-                            </p>         
+                            </p>
                     </div>
                 </a>
                 </div>
             </div>
-        
+
             <footer class="footer pt-3">
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 mb-lg-0 mb-4">
-                            
+
                         </div>
                         <div class="col-lg-6">
                             <ul class="nav nav-footer justify-content-center justify-content-lg-end">
@@ -453,16 +457,16 @@
                     </div>
                 </div>
 
-                
-            </footer> 
-        </div>  
-        
-    
+
+            </footer>
+        </div>
+
+
 
     </main>
 
     <div class="fixed-plugin">
-        
+
         <div class="card" style="height: 660px; bottom:10%;">
             <div class="card-header pb-0 pt-3 ">
                 <div class="float-start">
@@ -529,8 +533,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <!--    jquery Files   -->
     <script src="/assets/jquery/jquery.js"></script>
     <script src="/assets/jquery/jquery.min.js"></script>
