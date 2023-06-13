@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;     //nueva linea
+use Illuminate\Support\Facades\Session;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -68,5 +69,19 @@ class LoginController extends Controller
             return back()->withErrors(['email'=>'Correo no valido.'])
                     ->withInput([request('usuario')]);
         }
+    }
+
+    public function cerrar(){
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect()->to('/login');
+    }
+   
+    public function perfil()
+    {
+        $user = auth()->user();
+        return view('auth.perfil')->with('user', $user);
     }
 }

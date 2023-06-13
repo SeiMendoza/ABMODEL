@@ -168,7 +168,7 @@
                                  <!-- Usar Informacion -->
                                     <div class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"
                                         aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{ route('usuarios.perfil') }}">
                                           <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                            Perfil
                                         </a>
@@ -283,6 +283,16 @@
                         <span class="nav-link-text ms-1">Productos</span>
                     </a>
                 </li>
+                <!-- <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Usuarios</h6>
+                <li class="nav-item">
+                    <a class="nav-link " href="#">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-users text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Lista de Usuarios</span>
+                    </a>
+                </li> -->
             </ul>
         </div>
     </aside>

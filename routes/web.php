@@ -17,7 +17,6 @@ use App\Http\Controllers\ReservacionController;
 use App\Http\Controllers\ReservacionTotalController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\CerrarSesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +39,27 @@ Route::get('/tabla', [HomeController::class, 't'])
 ->name('t');
 Route::get('/billing', [HomeController::class, 'b'])
 ->name('b');
+
+/** LOGIN */
+Route::get('/registro', [RegistroController::class, 'show']);
+
+Route::post('/registro', [RegistroController::class, 'registro']);
+
+Route::get('/login', [LoginController::class, 'show']);
+
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])
+   ->name('cerrarSes.cerrar');
+
+/**PERFIL USUARIO */
+Route::get("/perfil", [LoginController::class, "perfil"])
+->name('usuarios.perfil')->where('id', '[0-9]+');
+
+
+
+
+
 
 /* Rutas Administracion de Restaurante */
 Route::get('/admonRestaurante', [HomeController::class, 'indexAdmon'])
@@ -374,16 +394,3 @@ Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Rea
   
 Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])
   ->name('detalle.realizadas');
-
-/** LOGIN */
-Route::get('/registro', [RegistroController::class, 'show']);
-
-Route::post('/registro', [RegistroController::class, 'registro']);
-
-Route::get('/login', [LoginController::class, 'show']);
-
-Route::post('/login', [LoginController::class, 'login']);
-
-Route::get('/CerrarSesión', [CerrarSesController::class, 'cerrar'])
-   ->name('cerrarSes.cerrar');
-
