@@ -55,7 +55,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Cliente</td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{$reservacion->nombre}}</td>
+                            <td class="titulo">{{$reservacion->nombreCliente}}</td>
                             <td class="informacion"></td>
                         </tr>
                     
@@ -77,9 +77,17 @@
 
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo">Hora</td>
+                            <td class="titulo">Hora Inicio</td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{$reservacion->hora}} </td>
+                            <td class="titulo">{{$reservacion->horaI}} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Hora Final</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservacion->horaF}} </td>
                             <td class="informacion"></td>
                         </tr>
 
@@ -93,17 +101,33 @@
 
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo">Cantidad</td>
+                            <td class="titulo">Cantidad Adultos</td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{$reservacion->cantidad}} </td>
+                            <td class="titulo">{{$reservacion->cantidadAdultos }} </td>
+                            <td class="informacion"></td>
+                        </tr> 
+                        
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Precio Adultos</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">L {{ number_format($reservacion->precioAdultos, 2, '.', ',') }} </td>
+                            <td class="informacion"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="informacion"></td>
+                            <td class="titulo">Cantidad Niños</td>
+                            <td class="informacion"></td>
+                            <td class="titulo">{{$reservacion->cantidadNinios}} </td>
                             <td class="informacion"></td>
                         </tr> 
 
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo">Precio</td>
+                            <td class="titulo">Precio Niños</td>
                             <td class="informacion"></td>
-                            <td class="titulo">L {{ number_format($reservacion->precio, 2, '.', ',') }} </td>
+                            <td class="titulo">L {{ number_format($reservacion->precioNinios, 2, '.', ',') }} </td>
                             <td class="informacion"></td>
                         </tr> 
 
@@ -135,7 +159,12 @@
                             <td class="informacion"></td>
                             <td class="titulo">Forma de pago</td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{$reservacion->formaPago}} </td>
+                            <td class="titulo">
+                            @if ($reservacion->formaPago === 1)
+                                Efectivo
+                            @else
+                                Transferencia
+                            @endif </td>
                             <td class="informacion"></td>
                         </tr> 
 

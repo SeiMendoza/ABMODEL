@@ -188,8 +188,8 @@
                                         @else
                                             <option disabled="disabled" selected="selected" value="">Seleccione una forma de pago</option>
                                         @endif
-                                        <option value="Efectivo">Efectivo</option>
-                                        <option value="Transferencia">Transferencia</option>
+                                        <option value="1">Efectivo</option>
+                                        <option value="0">Transferencia</option>
                                     </select>
                                     @error('formaPago')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>

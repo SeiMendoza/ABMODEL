@@ -29,24 +29,24 @@ class ReservacionController extends Controller
         $min = date('d-m-Y',$min = strtotime($fecha_act."+ 1 day"));
 
         $request -> validate ([
-            'nombre' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'name' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'celular' => 'required|numeric|regex:/^[2,3,8,9][0-9]{7}+$/|min_digits:8|max_digits:8|',
             'fecha' => 'required|date|after:'.$min,   
             'inicio' => 'required',   
             'fin' => 'required',
             'tipoE' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'kiosko' => 'required',
-            'cantidadN' => 'required|min:1|max:20|numeric|min_digits:1|max_digits:3',
+            'cantidadN' => 'min:1|max:20|numeric|min_digits:1|max_digits:3',
             'cantidad' => 'required|min:1|max:20|numeric|min_digits:1|max_digits:3',
             'total' => 'required|min:100|max:8000|numeric', 
             'anticipo' => 'required|numeric',
             'pendiente' => 'required|numeric',
             'formaPago' => 'required',   
         ],[
-            'nombre.required' => 'El nombre no puede estar vacío',
-            'nombre.regex'=> 'El nombre tiene caracteres no permitidos',
-            'nombre.max' => 'El nombre es muy extenso',
-            'nombre.min' => 'El nombre es muy corto',
+            'name.required' => 'El nombre no puede estar vacío',
+            'name.regex'=> 'El nombre tiene caracteres no permitidos',
+            'name.max' => 'El nombre es muy extenso',
+            'name.min' => 'El nombre es muy corto',
 
             'celular.required' => 'El número telefónico es obligatorio',
             'celular.numeric' => 'La cantidad debe ser de tipo numérico',
@@ -75,7 +75,7 @@ class ReservacionController extends Controller
             'cantidad.max' => 'la cantidad es muy alta',
             'cantidad.numeric' => 'La cantidad debe ser de tipo numérico',
 
-            'cantidadN.required' => 'La cantidad no puede estar vacía',
+           
             'cantidadN.min' => 'La cantidad es muy baja',
             'cantidadN.min_digits'=>'la cantidad debe tener mínimo 1 dígito',
             'cantidadN.max_digits'=>'la cantidad debe tener máximo 3 dígitos',
@@ -99,7 +99,7 @@ class ReservacionController extends Controller
       
         $nuevo = new Reservacion;
 
-        $nuevo->nombreCliente = $request->input('nombre');
+        $nuevo->nombreCliente = $request->input('name');
         $nuevo->celular=$request->input('celular');
         $nuevo->fecha=$request->input('fecha');
         $nuevo->horaI=$request->input('inicio');
@@ -108,6 +108,8 @@ class ReservacionController extends Controller
         $nuevo->tipo=$request->input('tipoE');
         $nuevo->cantidadNinios=$request->input('cantidadN');
         $nuevo->cantidadAdultos=$request->input('cantidad');
+        $nuevo->precioAdultos= 100;
+        $nuevo->precioNinios= 100;
         $nuevo->total=$request->input('total');
         $nuevo->anticipo=$request->input('anticipo');
         $nuevo->pendiente=$request->input('pendiente');

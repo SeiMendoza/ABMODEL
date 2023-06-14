@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('precioAdultos');
             $table->boolean('niños')->default(0);
             $table->integer('cantidadNinios')->default(0);
-            $table->integer('niñosPrecio')->default(0);
+            $table->integer('PrecioNinios')->default(0);
             $table->float('total');
             $table->float('anticipo');
             $table->float('pendiente');
