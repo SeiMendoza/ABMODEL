@@ -10,6 +10,6 @@ class Reservacion extends Model
     use HasFactory;
 
     public function kioskos(){
-        return $this->belongsToMany(Kiosko::class,'kiosko_reservacion');
+        return $this->belongsTo(Kiosko::class,'kiosko_id');
     }
 }

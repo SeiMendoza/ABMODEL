@@ -19,15 +19,17 @@ class ReservacionFactory extends Factory
     public function definition()
     {
         return [
-            'nombre'=>$this->faker->name,
+            'nombreCliente'=>$this->faker->name,
             'celular'=>$this->faker->randomElement(['8','2','9']).$this->faker->numerify('###-####'),
             'fecha'=>$this->faker->date(),
             'horaI'=>$this->faker->time(),
             'horaF'=>$this->faker->time(),
+            'kiosko_id'=> Kiosko::get('id')->random(),
             'tipo'=>$this->faker->randomElement(['Reunión','Cumpleaños','Otro']),
-            'alimentos'=>$this->faker->randomElement([0,1]),
-            'cantidad'=>$this->faker->numberBetween(1,20),
-            'precio'=>$this->faker->randomElement([80,100]),
+            'cantidadAdultos'=>$this->faker->numberBetween(1,20),
+            'cantidadNinios'=>$this->faker->numberBetween(1,20),
+            'precioAdultos'=>$this->faker->randomElement([80,100]),
+            'precioNinios'=>$this->faker->randomElement([80,100]),
             'total'=>$this->faker->randomFloat(2,100,1000),
             'anticipo'=>$this->faker->randomFloat(2,100,500),
             'pendiente'=>$this->faker->randomFloat(2,100,500),

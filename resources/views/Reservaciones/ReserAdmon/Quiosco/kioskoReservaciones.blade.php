@@ -35,9 +35,9 @@
                         
                         <tr style=" height:46px">
                             <td scope="col" style="text-align: center">{{++$i}}</td>
-                            <td scope="col" >{{$r->nombre}}</td> 
+                            <td scope="col" >{{$r->nombreCliente}}</td> 
                             <td scope="col"  style="text-align:right">{{$r->celular}}</td> 
-                            <td style="text-align: center;">{{$r->cantidad}}</td> 
+                            <td style="text-align: center;">{{$r->cantidadAdultos + $r->cantidadNinios}}</td> 
                             <td scope="col" style="text-align:left;" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('MMMM') }},
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('YYYY') }}</td> 
