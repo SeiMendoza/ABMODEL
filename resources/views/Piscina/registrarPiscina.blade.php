@@ -5,7 +5,7 @@
 <li class="breadcrumb-item text-sm text-white opacity-6">
     <a class="text-white" href="{{route('prodpiscina.index')}}">Productos Piscina</a>
 </li>
-<li class="breadcrumb-item text-sm active text-white active">Crear</li>
+<li class="breadcrumb-item text-sm active text-white active">Registro</li>
 @endsection
 
 @section('tit','Registro de producto de piscina')
@@ -137,7 +137,7 @@
                     </div>
                     <div class="col-4" id="contenedor">
                         <div class="font-robo form-group">
-                            <span style="width:90px;position:absolute;top:57%;right:25px;text-align:center;" class="form-control border-radius-sm" id="identificador"></span>
+                            <span style="width:90px;position:absolute;top:52%;right:25px;text-align:center;" class="form-control border-radius-sm" id="identificador"></span>
                         </div>
                     </div>
                 </div>

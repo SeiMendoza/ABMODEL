@@ -95,7 +95,7 @@
 
             <td class="informacion" id="tiempo"></td>
             <td class="titulo">Total:</td>
-            <td class="informacion">L. <{{$tot}} </td> 
+            <td class="informacion">L. {{$tot}} </td> 
         </tr>  
     </table>
     <div class="mb-0 col-9 text-start" style="position:absolute;top:260%;width:100%;">

@@ -11,6 +11,7 @@ use App\Models\DetallesPedido;
 use App\Models\Platillo;
 use Illuminate\Support\Facades\Session;
 use App\Models\PiscinaUso;
+use App\Models\Producto;
 use Database\Seeders\PlatillosyBebidasSeeder;
 
 use Illuminate\Http\Request;
@@ -213,8 +214,53 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $tot = number_format($suma, 2, ".", ",");
         return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido', 'tot', 'sub', 'isv'));
     }
-    /*   return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido', 'total','Sub_total', 'impuesto'));
-}*/
+    
+public function ACompl($id)
+{
+    $pedido = Pedido::findOrFail($id);
+    $productos = Producto::select('id', 'nombre')->where('esComplemento', '=', '1')->get();
+    return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos'));
+}
+public function Acomple(Request $request, $id)
+{
+    $rules = [
+        'producto_id' => 'required|exists:productos,id',
+        'cantidad' => 'required|numeric',
+    ];
+    $mensaje = [
+        'producto_id.required' => 'El nombre no puede estar vacío',
+        'producto_id.exists' => 'El nombre no existe',
+        'cantidad.required' => 'La cantidad es obligatoria',
+        'cantidad.numeric' => 'Solo se aceptan números',
+    ];
+    $this->validate($request, $rules, $mensaje);
+
+    $pedido = Pedido::findOrFail($id);
+    $producto_id = request('producto_id');
+    $cantidad = request('cantidad');
+    $producto = Producto::findOrFail($producto_id);
+
+    $complemento = new DetallesPedido();
+    $complemento->pedido_id = $pedido->id; 
+    $complemento->producto_id = $producto->id; // Obtener el nombre del producto
+    $complemento->precio = $producto->precio;
+    $complemento->cantidad = $cantidad;
+    $complemento->save();
+
+    // Actualizar el impuesto y el total del pedido general
+    $detalles = $pedido->detalles;
+    $total = 0;
+    foreach ($detalles as $detalle) {
+        $total += $detalle->cantidad * $detalle->precio;
+    }
+    $impuesto = $total * 0.15; // calcular el impuesto
+    $pedido->imp = $impuesto;
+    $pedido->total = $total;
+    $pedido->save();
+
+    return redirect()->back()->with('mensaje', 'Producto agregado como complemento correctamente.');
+}
+
 
     public function detalle_pedido_pendientes($id)
     {
@@ -302,12 +348,15 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     {
         $edit = DetallesPedido::findOrFail($detalle_id);
         $pedido = Pedido::findOrfail($pedido_id);
-        $productos = Platillo::select('nombre')
+        $productos = Producto::select('nombre')->where('estado','=','1')
+        ->orwhere('esComplemento','=','1')
+        ->get()->pluck('nombre'); 
+      /*  $productos = Platillo::select('nombre')
             ->where('estado', '=', '1')
             ->union(Combo::select('nombre')->where('estado', '=', '1'))
-            ->union(Bebida::select('nombre')->where('estado', '=', '1'))
+            ->union(Bebida::select('nombre')->where('estado', '=', '1')) 
             ->get()
-            ->pluck('nombre'); 
+            ->pluck('nombre'); */
         return view('Menu/Cocina/editardetallecaja', compact('edit', 'pedido', 'productos'));
     }
     public function update(Request $request, $pedido_id, $detalle_id)
@@ -315,65 +364,63 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $request->validate([
             'cantidad' => ['required', 'numeric', 'digits_between:1,3', 'min:1'],
             'precio' => ['required', 'numeric', 'min:1'],
+            'nombre' => ['required', 'string']
         ], [
             'cantidad.required' => 'La cantidad es obligatoria',
             'cantidad.numeric' => 'Solo se aceptan  números',
             'cantidad.min' => 'La cantidad minima es 1',
             'cantidad.digits_between' => 'Solo se permiten 3 dígitos',
-
             'precio.required' => 'La cantidad es obligatoria',
             'precio.numeric' => 'Solo se aceptan  números',
             'precio.min' => 'La cantidad minima es 1',
+            'nombre.required' => 'El nombre del producto es obligatorio',
+            'nombre.string' => 'El nombre del producto debe ser una cadena'
         ]);
-
+    
         $detalle = DetallesPedido::find($detalle_id);
         $pedido = $detalle->pedido;
-        $detalle->nombre = $request->nombre;
+    
+        $producto_nombre = $request->input('nombre');
+        $producto = Producto::where('nombre', $producto_nombre)->where('estado', 1)->firstOrFail();
+    
+        // Recupera el detalle del pedido 
+        $detalle = DetallesPedido::where('pedido_id', $pedido_id)->where('producto_id', $producto->id)->firstOrFail();
+    
+        $detalle->producto_id = $producto->id;
         $detalle->cantidad = $request->input('cantidad');
         $detalle->precio = $request->input('precio');
-        // en cada detalle del pedido 
-        $impuesto = $detalle->precio * $detalle->cantidad * 0.15; // calcular el impuesto
-        $total = $detalle->precio * $detalle->cantidad; // calcular el total
+        $detalle->save();
+    
+        // Actualizar los impuestos y totales correspondientes en el objeto Pedido
+        $detalles = $pedido->detalles;
+        $total = 0;
+        foreach ($detalles as $detalle) {
+            $total += $detalle->cantidad * $detalle->precio;
+        }
+        $impuesto = $total * 0.15;
         $pedido->imp = $impuesto;
         $pedido->total = $total;
-        $detalle->save();
-        //actualiza el impuesto y el total del pedido general
-    $detalles = $pedido->detalles;
-    $total = 0;
-    foreach ($detalles as $detalle) {
-        $total += $detalle->cantidad * $detalle->precio;
-    }
-    $impuesto = $total * 0.15; // calcular el impuesto
-    // Actualizar el pedido con el nuevo valor del impuesto y el total
-    $pedido->imp = $impuesto;
-    $pedido->total = $total;
-    $pedido->save();
+        $pedido->save();
+    
         return redirect()->route('pedidost.detalle', ['id' => $pedido_id])->with('mensaje', 'El detalle del pedido ha sido actualizado exitosamente.');
     }
     /**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
     public function obtenerPrecio(Request $request)
     {
         $producto = $request->input('producto');
-        $precio = DB::table('platillos')
-            ->select('platillos.precio')
-            ->where('platillos.nombre', $producto)
-            ->where('platillos.estado', '=', '1')
-            ->union(
-                DB::table('combos')
-                    ->select('combos.precio')
-                    ->where('combos.nombre', $producto)
-                    ->where('combos.estado', '=', '1')
-            )
-            ->union(
-                DB::table('bebidas')
-                    ->select('bebidas.precio')
-                    ->where('bebidas.nombre', $producto)
-                    ->where('bebidas.estado', '=', '1')
-            )
+        $precio = Producto::select('precio')->where('nombre', $producto)->where('estado', '=', '1')->first();
+        if ($precio) {
+            Session::put('producto_precio', $precio->precio);
+            return $precio->precio;
+        }
+        return null;
+      /*  $producto = $request->input('producto');
+        $precio = Producto::select('productos.precio')->where('productos.nombre', $producto)
+        ->where('productos.estado', '=', '1')
             ->get()
             ->pluck('precio')
             ->first();
         Session::put('producto_precio', $precio);
-        return $precio;
+        return $precio;*/
     }
 }

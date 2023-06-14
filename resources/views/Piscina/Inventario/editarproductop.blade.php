@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-4" id="contenedor">
                         <div class="font-robo form-group">
-                            <span style="width:90px;position:absolute;top:57%;right:25px;text-align:center;" class="form-control border-radius-sm" id="identificador"></span>
+                            <span style="width:90px;position:absolute;top:52%;right:25px;text-align:center;" class="form-control border-radius-sm" id="identificador"></span>
                         </div>
                     </div>
                 </div>

@@ -136,6 +136,11 @@ Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 
 Route::post('/obtener-precio',[PedidoUsuarioController::class, 'obtenerPrecio'])
 ->name('obtener-precio');
 
+Route::get('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'ACompl'])
+->name('ACompl');
+Route::post('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple'])
+->name('Acomple');
+
  /*****************************
   Rutas Para Menu de cliente
 ******************************/

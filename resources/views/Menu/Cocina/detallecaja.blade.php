@@ -106,8 +106,13 @@
     <div class="mb-0 col-9 text-start" style="position:absolute;top:294%;width:100%;">
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
-                <a style="text-color:white;position:absolute;left:50%;padding:5px; width:100px;" href="#" 
-                class="bg-light border-radius-sm text-center">Nuevo</a>
+            @if($pedido->estado_cocina == 0)
+<a href="{{ route('ACompl', $pedido->id) }}" 
+   class="border-radius-sm text-center"
+   style="background:rgba(255,179,71,0.6);position:absolute;left:65%;padding:5px; width:160px; z-index: 999;">
+   <strong>Agregar complemento</strong>
+</a>
+@endif
                 <tr class="text-dark" style="background:rgba(255,179,71,0.6);">
                     <th scope="col" style="width:20%;text-align:center;">Nombre</th>
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
@@ -120,7 +125,7 @@
             </thead>
             <tbody class="col" style="overflow:auto;" id="">
                 @foreach ($detapedido as $detalle)
-                <td scope="col" style="width:20%; text-align:center; height:20%;">{{$detalle->nombre}}</td>
+                <td scope="col" style="width:20%; text-align:center; height:20%;">{{$detalle->producto->nombre}}</td>
                 <td scope="col" style=" width:20%; text-align:center; height:20%;">{{ $detalle->cantidad }}</td>
                 <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
                 <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
