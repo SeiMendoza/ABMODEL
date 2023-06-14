@@ -7,13 +7,13 @@ use Illuminate\Http\File;
 use App\Http\Controllers\Controller;
 use App\Models\PlatillosyBebidas;
 use App\Models\Platillo;
-use App\Models\Bebida;
+use App\Models\Producto;
 
 class EditarPlatilloController extends Controller
 {
     //
     public function edit($id){
-        $Platillos = Platillo::findOrFail($id);
+        $Platillos = Producto::findOrFail($id);
         return view('Menu/Admon/edicion/editarPlatillo') 
               -> with('Platillos', $Platillos);
     }
@@ -51,7 +51,7 @@ class EditarPlatilloController extends Controller
         ]);
 
       
-        $actualizacion = Platillo::findOrFail($id);
+        $actualizacion = Producto::findOrFail($id);
 
         $actualizacion->nombre = $request->input('nombre');
         $actualizacion->descripcion = $request->input('descripcion');

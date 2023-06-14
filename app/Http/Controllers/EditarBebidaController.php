@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PlatillosyBebidas;
 use App\Models\Platillo;
-use App\Models\Bebida;
+use App\Models\Producto;
 
 class EditarBebidaController extends Controller
 {
     //
     public function edit($id){
-        $Bebidas = Bebida::findOrFail($id);
+        $Bebidas = Producto::findOrFail($id);
         return view('Menu/Admon/edicion/editarBebida') 
               -> with('Bebidas', $Bebidas);
     }
@@ -48,7 +48,7 @@ class EditarBebidaController extends Controller
             'cantidad.numeric' => 'El numero de bebidas disponibles debe de ser numerico',
         ]);
 
-            $actualizacion= Bebida::FindOrFail($id);
+            $actualizacion= Producto::FindOrFail($id);
 
             $actualizacion->nombre = $request->input('nombre');
             $actualizacion->descripcion = $request->input('descripcion');
