@@ -62,6 +62,15 @@ Route::get("/perfil", [LoginController::class, "perfil"])
 
 
 /* Rutas Administracion de Restaurante */
+
+Route::get('/admonRestauranteP', [HomeController::class, 'indexPlatillos'])
+->name('menuAdmon.platillos');
+Route::get('/admonRestauranteB', [HomeController::class, 'indexBebidas'])
+->name('menuAdmon.bebidas');
+Route::get('/admonRestauranteC', [HomeController::class, 'indexComplementos'])
+->name('menuAdmon.complementos');
+
+
 Route::get('/admonRestaurante', [HomeController::class, 'indexAdmon'])
 ->name('menuAdmon.index');
 Route::put('bebida/{id}/activar', [BebidaController::class, 'activar'])
@@ -245,26 +254,16 @@ Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'deta
 /****************************************
   Rutas Para Kioskos
 *****************************************/
-Route::get('/kioskos', [KioskoController::class, 'index'])->
-name('kiosko.index');
-
-Route::get('/kioskos/create', [KioskoController::class, 'create'])->
-name('kiosko.create');
-
-Route::post('/kiosko', [KioskoController::class, 'store'])->
-name('kiosko.store');
-
-Route::get('/kiosko/{id}/edit', [KioskoController::class, 'edit'])->
-name('kiosko.edit');
-
-Route::put('/kiosko/{id}/update', [KioskoController::class, 'update'])->
-name('kiosko.update');
-
+Route::controller(KioskoController::class)-> group( function (){
+  Route::get('/kioskos', 'index')->name('kiosko.index');
+  Route::get('/kioskos/create', 'create')->name('kiosko.create');
+  Route::post('/kiosko', 'store')->name('kiosko.store');
+  Route::get('/kiosko/{id}/edit', 'edit')->name('kiosko.edit');
+  Route::put('/kiosko/{id}/update','update')->name('kiosko.update');
+  Route::delete('/kiosko/{id}/destroy', 'destroy')->name('kiosko.destroy');
+});
 /*Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');*/
-
-Route::delete('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
-name('kiosko.destroy');
 
   /****************************************
   Rutas Para Piscina

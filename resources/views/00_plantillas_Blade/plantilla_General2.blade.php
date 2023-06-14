@@ -251,12 +251,12 @@
 
         //DATATABLES para Menú
         $(document).ready(function () {
-        $('.menu').DataTable();
+            $('table.menu').DataTable();
         });
 
         //DATATABLES para Kiosko
         $(document).ready(function () {
-        $('.kiosko').DataTable();
+            $('.kiosko').DataTable();
         });
 
 

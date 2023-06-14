@@ -16,9 +16,9 @@ class PlatilloController extends Controller
 
         if ($create) {
             if ($platillo->estado == 1) {
-                return back()->with('mensaje', 'Platillo Activado correctamente');
+                return response('¡Hola desde el controlador!', 200)->header('Content-Type', 'text/plain');
             }else{
-                return back()->with('mensaje', 'Platillo Desactivado correctamente');
+                return response('¡Hola desde el controlador!', 200)->header('Content-Type', 'text/plain');
             }
         }
 

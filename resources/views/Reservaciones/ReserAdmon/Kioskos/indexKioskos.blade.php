@@ -35,7 +35,7 @@
 <div class="container">
     <br>
     <div class="table-responsive ">
-        <table class="table kiosko" id="table">
+        <table class="table" id="example">
             <thead>
                 <tr>
                     <th scope="col" style="text-align: center">N</th>
