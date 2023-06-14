@@ -207,7 +207,7 @@ Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])
 
 
 /****************************************
-  Rutas Para Editar Platillos y Bebidas
+  Rutas Para Editar Productos
 *****************************************/
 Route::get('platillo/{id}/editar', [EditarPlatilloController::class, 'edit'])
     ->name('plato.editar');
@@ -220,6 +220,12 @@ Route::get('bebida/{id}/editar', [EditarBebidaController::class, 'edit'])
   
 Route::put('bebida/{id}/edicion', [EditarBebidaController::class, 'update'])
     ->name('bebida.update');
+
+Route::get('complemento/{id}/editar', [PlatillosyBebidasController::class, 'edit'])
+    ->name('complemento.editar');
+  
+Route::put('complemento/{id}/edicion', [PlatillosyBebidasController::class, 'update'])
+    ->name('complemento.update');
 
 /****************************************
   Rutas Para Editar Combos

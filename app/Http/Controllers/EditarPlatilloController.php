@@ -22,14 +22,13 @@ class EditarPlatilloController extends Controller
     public function update(Request $request, $id){
 
         $request -> validate ([
-            'tipo' => 'required|in:2,1',
+            'tipo' => 'required|in:3,2,1',
             'nombre' => 'required|max:100|min:3|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/',
             'descripcion' => 'required|max:100|min:3',   
             'precio' => 'required|min:1|max:1000|numeric',   
             'tamanio' => 'required|max:100|min:3', 
             'imagen' => '',
-            'cantidad' => 'nullable|min:1|max:1000|numeric',
-            'disponible' => 'nullable|min:1|max:1000|numeric',
+            'cantidad' => 'min:1|max:1000|numeric',
         ],[
             'tipo.required' => 'El tipo no puede estar vacío',
             'nombre.required' => 'El nombre no puede estar vacío',
@@ -46,12 +45,9 @@ class EditarPlatilloController extends Controller
             'tamanio.required' => 'El tamanio no puede estar vacío',
             'tamanio.max' => 'El tamanio es muy extenso',
             'tamanio.min' => 'El tamanio es muy corto',
-            'cantidad.max' => 'El numero de bebidas disponibles es muy grande',
-            'cantidad.min' => 'El numero de bebidas disponibles es muy pequeño',
-            'cantidad.numeric' => 'El numero de bebidas disponibles debe de ser numerico',
-            'disponible.max' => 'El numero de platillos disponibles es muy grande',
-            'disponible.min' => 'El numero de platillos disponibles es muy pequeño',
-            'disponible.numeric' => 'El numero de platillos disponibles debe de ser numerico',
+            'cantidad.max' => 'El numero de platillos disponibles es muy grande',
+            'cantidad.min' => 'El numero de platillos disponibles es muy pequeño',
+            'cantidad.numeric' => 'El numero de platillos disponibles debe de ser numerico',
         ]);
 
       
@@ -77,7 +73,7 @@ class EditarPlatilloController extends Controller
         $creado = $actualizacion->save();
 
         if ($creado) {
-            return redirect()->route('menuAdmon.index')
+            return redirect()->route('menuAdmon.platillos')
             ->with('mensaje', "Platillo ".$actualizacion->nombre." se actualizó correctamente");
         } 
         

@@ -146,7 +146,7 @@ class PlatillosyBebidasController extends Controller
 
             if ($creado) {
                 return redirect()->route('menuAdmon.index')
-                    ->with('mensaje', 'El Complemeto fue creada exitosamente');
+                    ->with('mensaje', 'El Complemento fue creado exitosamente');
             }
         }
     }
@@ -168,9 +168,10 @@ class PlatillosyBebidasController extends Controller
      * @param  \App\Models\PlatillosyBebidas  $platillosyBebidas
      * @return \Illuminate\Http\Response
      */
-    public function edit(PlatillosyBebidas $platillosyBebidas)
-    {
-        //
+    public function edit($id){
+        $Comple = Producto::findOrFail($id);
+        return view('Menu/Admon/edicion/editarComplemento') 
+              -> with('Comple', $Comple);
     }
 
     /**
@@ -180,10 +181,65 @@ class PlatillosyBebidasController extends Controller
      * @param  \App\Models\PlatillosyBebidas  $platillosyBebidas
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePlatillosyBebidasRequest $request, PlatillosyBebidas $platillosyBebidas)
-    {
-        //
-    }
+    public function update(Request $request, $id){
+
+        $request -> validate ([
+            'tipo' => 'required|in:3,2,1',
+            'nombre' => 'required|max:100|min:3|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/',
+            'descripcion' => 'required|max:100|min:3',   
+            'precio' => 'required|min:1|max:1000|numeric',   
+            'tamanio' => 'required|max:100|min:3', 
+            'imagen' => '',
+            'cantidad' => 'min:1|max:1000|numeric',
+        ],[
+            'tipo.required' => 'El tipo no puede estar vacío',
+            'nombre.required' => 'El nombre no puede estar vacío',
+            'nombre.max' => 'El nombre es muy extenso',
+            'nombre.min' => 'El nombre es muy corto',
+            'nombre.regex'=> 'El nombre debe tener solo letras',
+            'descripcion.required' => 'La descripcion no puede estar vacío',
+            'descripcion.max' => 'La descripcion es muy extenso',
+            'descripcion.min' => 'La descripcion es muy corto',
+            'precio.required' => 'El precio no puede estar vacío',
+            'precio.max' => 'El precio es muy grande',
+            'precio.min' => 'El precio es muy pequeño',
+            'precio.numeric' => 'El precio debe de ser numerico',
+            'tamanio.required' => 'El tamanio no puede estar vacío',
+            'tamanio.max' => 'El tamanio es muy extenso',
+            'tamanio.min' => 'El tamanio es muy corto',
+            'cantidad.max' => 'El número de complementos disponibles es muy grande',
+            'cantidad.min' => 'El número de complementos disponibles es muy pequeño',
+            'cantidad.numeric' => 'La cantidad de complementos disponibles debe de ser numerico',
+        ]);
+
+            $actualizacion= Producto::FindOrFail($id);
+
+            $actualizacion->nombre = $request->input('nombre');
+            $actualizacion->descripcion = $request->input('descripcion');
+            $actualizacion->precio = $request->input('precio');
+            $actualizacion->tamanio = $request->input('tamanio');
+            $actualizacion->disponible = $request->input('cantidad');
+            $actualizacion->esComplemento = 1;
+            $actualizacion->tipo = 0;
+
+            if($request->hasFile('imagen')){
+                $file = $request->file('imagen');
+                $destinationPath = 'images/';
+                $filename = time().'.'.$file->getClientOriginalName();
+                $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+                $actualizacion->imagen = 'images/'.$filename;
+    
+                }else{
+                    unset($actualizacion['imagen']);
+            }
+
+            $creado = $actualizacion->save();
+
+            if ($creado) {
+                return redirect()->route('menuAdmon.complementos')
+                    ->with('mensaje', "Complemento ".$actualizacion->nombre." se actualizó correctamente");
+            }
+        }
 
     /**
      * Remove the specified resource from storage.

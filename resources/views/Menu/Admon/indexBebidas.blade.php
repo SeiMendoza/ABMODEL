@@ -118,8 +118,9 @@
                                                         </div>
                                                     </form>
                                                 </td>
-                                                <td scope="col" style="text-align: center;"><a href="#"><i
-                                                            class="fa fa-edit text-success"></i></a></td>
+                                                <td scope="col" style="text-align: center;"><a
+                                                    href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
+                                                        class="fa fa-edit text-success"></i></a></td>
                                                 <td scope="col" style="text-align: center;">
                                                     <i data-bs-toggle="modal"
                                                         data-bs-target="#eliminarComplemento{{ $p->id }}"
@@ -242,7 +243,7 @@
                                                     </form>
                                                 </td>
                                                 <td scope="col" style="text-align: center;"><a
-                                                        href="{{ route('combo.editar', ['id' => $p->id]) }}"><i
+                                                        href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
                                                             class="fa fa-edit text-success"></i></a></td>
                                                 <td scope="col" style="text-align: center;">
                                                     <i data-bs-toggle="modal"
@@ -287,8 +288,8 @@
 
                                 @if (!$exits)
                                     <tr>
-                                        <td colspan="7" style="text-align: center;color: gray;">Todos
-                                            los Platillos están disponibles <br> </td>
+                                        <td colspan="7" style="text-align: center;color: gray;">Todas
+                                            las bebidas están disponibles <br> </td>
                                     </tr>
                                 @endif
                             </tbody>
