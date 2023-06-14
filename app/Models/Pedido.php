@@ -11,7 +11,7 @@ class Pedido extends Model
     protected $table = 'pedidos';
     public function detalles()
     {
-        return $this->hasMany(DetallesUsuario::class,'pedido_id');
+        return $this->hasMany(DetallesPedido::class,'pedido_id');
     }
     public function mesa_nombre()
 {

@@ -84,37 +84,40 @@
                                 <div class="container-fluid" style="padding: 0px">
                                     <div class="productos" id="productos" name="productos"
                                         style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
-                                        @foreach($bebidas as $pro)
-                                        <form action="{{route('cliente_menu.details')}}" method="post">
-                                            @csrf
-                                        <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden> 
-                                        <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
-                                        <input type="number" id="cantidad" name="cantidad" value="1" hidden>
-                                        <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
-                                        <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
-                                        <div class="container-fluid agregarCarrito" id="carritoA" 
-                                                style="display:block; height: 200px; width: 200px; padding: 3px ">
-                                            <button class="card h-100 btn btnCard" id="btn" type="submit" 
-                                                data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
-                                                <div class="text-center" 
-                                                style="text-align:center; ">
-                                                <!-- Nombre -->
-                                                <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
-                                                    <strong style="font-size: 20px; width:194px;
-                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                    position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
-                                                </p>                        
-                                                <!-- Precio -->
-                                                <p id="precio" class="text-dark text-decoration-line">
-                                                    <strong class="precio" style="font-size: 15px; width:194px;
-                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                    position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
-                                                </p>                        
+                                        @foreach($productos as $pro)
+                                        @if ($pro->tipo === 1)
+                                            <form action="{{route('cliente_menu.details')}}" method="post">
+                                                @csrf
+                                                <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden> 
+                                                <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
+                                                <input type="number" id="cantidad" name="cantidad" value="1" hidden>
+                                                <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
+                                                <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
+                                                <div class="container-fluid agregarCarrito" id="carritoA" 
+                                                        style="display:block; height: 200px; width: 200px; padding: 3px ">
+                                                    <button class="card h-100 btn btnCard" id="btn" type="submit" 
+                                                        data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
+                                                        background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                        <div class="text-center" 
+                                                        style="text-align:center; ">
+                                                        <!-- Nombre -->
+                                                        <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
+                                                            <strong style="font-size: 20px; width:194px;
+                                                            background-color:rgba(255, 255, 255, 0.677);
+                                                            position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
+                                                        </p>                        
+                                                        <!-- Precio -->
+                                                        <p id="precio" class="text-dark text-decoration-line">
+                                                            <strong class="precio" style="font-size: 15px; width:194px;
+                                                            background-color:rgba(255, 255, 255, 0.677);
+                                                            position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                                        </p>                        
+                                                        </div>
+                                                    </button>
                                                 </div>
-                                            </button>
-                                        </div>
-                                        </form>
+                                            </form> 
+                                        @endif
+                                        
                                         @endforeach
                                     </div>    
                                 </div>
@@ -130,35 +133,39 @@
                                 <div class="container-fluid" style="padding: 0px">
                                     <div class="productos" id="productos" name="productos"
                                         style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
-                                        @foreach($platillos as $pro)
-                                        <form action="{{route('cliente_menu.details')}}" method="post">
-                                            @csrf
-                                        <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden> 
-
-                                        <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
-                                        <input type="number" id="cantidad" name="cantidad" value="1" hidden>
-                                        <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
-                                        <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
-                                        <div class="container-fluid agregarCarrito" id="carritoA" 
-                                                style="display:block;  height: 200px; width: 200px; padding: 3px ">
-                                            <button class="card h-100 btn btnCard" id="btn" type="submit" 
-                                                data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                background: url('../{{$pro->imagen}}') top center/cover no-repeat;">
-                                                <section class="text-center" style="text-align:center; ">
-                                                    <!-- Nombre -->
-                                                    <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
-                                                        <strong style="font-size: 20px; width:194px;
-                                                        background-color:rgba(255, 255, 255, 0.677);
-                                                        position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
-                                                    
-                                                        <strong class="precio" style="font-size: 15px; width:194px;
-                                                        background-color:rgba(255, 255, 255, 0.677);
-                                                        position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
-                                                    </p>                        
-                                                </section>
-                                            </button>
-                                        </div>
-                                        </form>
+                                        @foreach($productos as $pro)
+                                        @if ($pro->tipo === 2)
+                                            <form action="{{route('cliente_menu.details')}}" method="post">
+                                                @csrf
+                                                <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden> 
+                                                <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
+                                                <input type="number" id="cantidad" name="cantidad" value="1" hidden>
+                                                <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
+                                                <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
+                                                <div class="container-fluid agregarCarrito" id="carritoA" 
+                                                        style="display:block; height: 200px; width: 200px; padding: 3px ">
+                                                    <button class="card h-100 btn btnCard" id="btn" type="submit" 
+                                                        data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
+                                                        background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                        <div class="text-center" 
+                                                        style="text-align:center; ">
+                                                        <!-- Nombre -->
+                                                        <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
+                                                            <strong style="font-size: 20px; width:194px;
+                                                            background-color:rgba(255, 255, 255, 0.677);
+                                                            position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
+                                                        </p>                        
+                                                        <!-- Precio -->
+                                                        <p id="precio" class="text-dark text-decoration-line">
+                                                            <strong class="precio" style="font-size: 15px; width:194px;
+                                                            background-color:rgba(255, 255, 255, 0.677);
+                                                            position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                                        </p>                        
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </form> 
+                                        @endif
                                         @endforeach
                                     </div>    
                                 </div>
@@ -173,37 +180,40 @@
                                 <div class="container-fluid" style="padding: 0px" id="xd">
                                     <div class="productos" id="productos" name="productos"
                                         style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
-                                        @foreach($combos as $pro)
-                                        <form action="{{route('cliente_menu.details')}}" method="post">
-                                            @csrf
-                                        <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden> 
-                                        <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
-                                        <input type="number" id="cantidad" name="cantidad" value="1" hidden>
-                                        <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
-                                        <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
-                                        <div class="container-fluid agregarCarrito" id="carritoA" 
-                                                style="display:block;  height: 200px; width: 200px; padding: 3px ">
-                                            <button class="card h-100 btn btnCard" id="btn" type="submit" 
-                                                data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
-                                                <div class="text-center" 
-                                                style="text-align:center; ">
-                                                <!-- Nombre -->
-                                                <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
-                                                    <strong style="font-size: 20px; width:194px;
-                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                    position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
-                                                </p>                        
-                                                <!-- Precio -->
-                                                <p id="precio" class="text-dark text-decoration-line">
-                                                    <strong class="precio" style="font-size: 15px; width:194px;
-                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                    position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
-                                                </p>                        
+                                        @foreach($productos as $pro)
+                                        @if ($pro->tipo === 0)
+                                            <form action="{{route('cliente_menu.details')}}" method="post">
+                                                @csrf
+                                                <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden> 
+                                                <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
+                                                <input type="number" id="cantidad" name="cantidad" value="1" hidden>
+                                                <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
+                                                <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
+                                                <div class="container-fluid agregarCarrito" id="carritoA" 
+                                                        style="display:block; height: 200px; width: 200px; padding: 3px ">
+                                                    <button class="card h-100 btn btnCard" id="btn" type="submit" 
+                                                        data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
+                                                        background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                        <div class="text-center" 
+                                                        style="text-align:center; ">
+                                                        <!-- Nombre -->
+                                                        <p class="nombre card-title pt-2 text-center text-dark" id="nombre"> 
+                                                            <strong style="font-size: 20px; width:194px;
+                                                            background-color:rgba(255, 255, 255, 0.677);
+                                                            position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
+                                                        </p>                        
+                                                        <!-- Precio -->
+                                                        <p id="precio" class="text-dark text-decoration-line">
+                                                            <strong class="precio" style="font-size: 15px; width:194px;
+                                                            background-color:rgba(255, 255, 255, 0.677);
+                                                            position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                                        </p>                        
+                                                        </div>
+                                                    </button>
                                                 </div>
-                                            </button>
-                                        </div>
-                                        </form>
+                                            </form> 
+                                        @endif
+                                        
                                         @endforeach
                                     </div>    
                                 </div>
@@ -287,7 +297,7 @@
                             @endphp
                             @forelse($detalles as $i => $detalle)
                                 <tr style="">  
-                                    <td scope="" class="" style="width:5%; text-align:left;">{{$detalle->nombre}}</td>
+                                    <td scope="" class="" style="width:5%; text-align:left;">{{$detalle->producto->nombre}}</td>
                                     <form action="{{route('cliente_detalles.edit', ['id' => $detalle->id])}}" method="post">
                                         @method('put')
                                         @csrf
@@ -404,7 +414,7 @@
                                 <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" 
                                 min="1" type="number"  
                                 style=" margin: 0px 0px 4px 55px; padding:0; text-align:right; height:42px;"
-                                value="{{number_format($sum, 2, ".", ",")}}" required readonly>
+                                value="{{$sum}}" required readonly>
                             </div> 
                         </div>
                     </div>

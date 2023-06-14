@@ -21,17 +21,15 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([BebidaSeeder::class,
-                        PlatilloSeeder::class,
-                        ComboSeeder::class,
+        $this->call([UserSeeder::class,
+                        ProductoSeeder::class,
                         PiscinaTipoSeeder::class,
                         PiscinaUsoSeeder::class,
                         PiscinaSeeder::class,
                         KioskoSeeder::class,
-                        MesaSeeder::class,
+                        //MesaSeeder::class,
                         ReservacionSeeder::class,
-                        UserSeeder::class,
-                        ProductoSeeder::class,
+                        
                         //PedidoSeeder::class,
                         //DetallesUsuarioSeeder::class,
                     ]);

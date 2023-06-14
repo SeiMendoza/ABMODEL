@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Componentestemporalcombo>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DetallesPedido>
  */
-class ComponentestemporalcomboFactory extends Factory
+class DetallesPedidoFactory extends Factory
 {
     /**
      * Define the model's default state.

@@ -52,7 +52,7 @@
                             <div class="col-6">
                                 <div class="font-robo form-group">
                                     <label for="name" style="margin-left: 0;">Nombre:</label>
-                                    <input class="form-control border-radius-sm" type="text" placeholder="Nombre" name="name" id="name" minlength="7" 
+                                    <input class="form-control border-radius-sm" type="text" placeholder="Mesa-00" name="name" id="name" minlength="7" 
                                     maxlength="7" value="{{old('name')}}" required>
                                     @error('name')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>

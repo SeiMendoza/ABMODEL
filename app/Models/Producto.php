@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     use HasFactory;
+
+    public function detalle_pedido()
+    {
+        return $this->hasOne(DetallesPedido::class);
+    }
 }

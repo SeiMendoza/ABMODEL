@@ -8,7 +8,7 @@
     <a class="text-white">Detalles</a>
 </li>
 @endsection
-
+@section('tit','Detalles del pedido')
 @section('b')
 <div>
     <a href="{{route('pedidos.caja')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center"> <i class="fa fa-arrow-left"></i> Regresar
@@ -38,7 +38,7 @@
     <table class="table" style="position: absolute;top:100%;width:100%;height:100%;">
 
         <h5 class="card text-lg" style="text-align:center; background:rgb(255,179,71); color:#fff;">
-            Detalles del pedido en caja: {{$pedido->nombreCliente}}</h5>
+            </h5>
         <tr>
             <td class="titulo">Número de mesa: </td>
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
@@ -62,7 +62,7 @@
                 @endif
             </td>
             <td class="titulo">Sub_Total:</td>
-            <td class="informacion">L. <?= number_format($sub, 2, ".", ",") ?> </td>
+            <td class="informacion">L. {{$sub}}</td>
         </tr>
         <tr>
             <?php $diferencia = $pedido->created_at->diff($pedido->updated_at) ?>
@@ -86,7 +86,7 @@
                 @endif
             </td>
             <td class="titulo">Impuesto: </td>
-            <td class="informacion">L. <?= number_format($isv, 2, ".", ",") ?></td>
+            <td class="informacion">L. {{$isv}}</td>
         </tr>
         <tr>
             <td class="titulo">Hora del finalizado en cocina: </td>
@@ -99,7 +99,7 @@
             <td class="titulo">Tiempo transcurrido en caja:</td>
             <td class="informacion" id="tiempo"></td>
             <td class="titulo">Total:</td>
-            <td class="informacion">L. <?= number_format($tot, 2, ".", ",") ?> </td>
+            <td class="informacion">L. {{$tot}}</td>
         </tr> 
     </table>
     

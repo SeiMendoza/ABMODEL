@@ -28,7 +28,7 @@
                             <div class="col-6">
                                 <div class="font-robo form-group">
                                     <label for="name" style="margin-left: 0;">Nombre:</label>
-                                    <input class="form-control border-radius-sm" type="text" placeholder="Nombre" name="name" id="name" minlength="7" 
+                                    <input class="form-control border-radius-sm" type="text" placeholder="Nombre del cliente" name="name" id="name" minlength="7" 
                                     maxlength="7" value="{{old('name')}}" required>
                                     @error('name')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -51,56 +51,9 @@
                         <div class="row row-space">
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="cantidad" style="margin-left: 0;">Cantidad de personas: </label>
-                                    <input name="cantidad" type="number" class="form-control border-radius-sm" id="cantidad"  max="50" min="2" maxlength="3" minlength="1"
-                                    required placeholder="Cantidad de personas a asistir" value="{{ old('cantidad') }}">
-                                    @error('cantidad')
-                                        <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
-                                    @enderror
-                                </div>   
-                            </div>
-                            <div class="col-4">
-                                <div class="font-robo form-group">
-                                    <label for="tipoE" style="margin-left: 0;">Evento: </label>
-                                    <input name="tipoE" type="text" class="form-control border-radius-sm" id="tipoE"
-                                    required placeholder="Ingrese el tipo del evento " value="{{ old('tipoE') }}"  >
-                                    @error('tipoE')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="font-robo form-group">
-                                    <label for="kiosko" style="margin-left: 0;">Kiosko a reservar: </label>
-                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" class="form-control border-radius-sm" required>
-                                        @if (old('kiosko'))
-                                            <option disabled="disabled" value="">Seleccione un kiosko</option> 
-                                            @foreach ($kiosko as $c)
-                                                @if (old('kiosko') == $c->id)
-                                                    <option selected="selected" value="{{$c->id}}">{{$c->id}}</option>
-                                                @else
-                                                    <option value="{{$c->id}}">{{$c->id}}</option>
-                                                @endif
-                                            @endforeach 
-                                        @else
-                                            <option disabled="disabled" selected="selected" value="">Seleccione un kiosko</option> 
-                                            @foreach ($kiosko as $c)
-                                                <option value="{{$c->id}}">{{$c->id}}</option>
-                                            @endforeach 
-                                        @endif
-                                    </select>
-                                    @error('kiosko')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-4">
-                                <div class="font-robo form-group">
                                     <label for="fecha" style="margin-left: 0;">Fecha: </label>
                                     <input name="fecha" type="date"  class="form-control border-radius-sm" id="fecha" style="height: 40px"
-                                    placeholder="Ingrese la fecha del evento" value="{{ old('fecha',)}}" required>  
+                                    placeholder="Ingrese la fecha del evento" value="{{ old('fecha')}}" required>  
                                     @error('fecha')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                     @enderror
@@ -127,28 +80,65 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row row-space">
+                            <div class="col-6">
+                                <div class="font-robo form-group">
+                                    <label for="tipoE" style="margin-left: 0;">Evento: </label>
+                                    <input name="tipoE" type="text" class="form-control border-radius-sm" id="tipoE"
+                                    required placeholder="Ingrese el tipo del evento " value="{{ old('tipoE') }}"  >
+                                    @error('tipoE')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="font-robo form-group">
+                                    <label for="kiosko" style="margin-left: 0;">Kiosko a reservar: </label>
+                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" class="form-control border-radius-sm" required>
+                                        @if (old('kiosko'))
+                                            <option disabled="disabled" value="">Seleccione un kiosko</option> 
+                                            @foreach ($kiosko as $c)
+                                                @if (old('kiosko') == $c->id)
+                                                    <option selected="selected" value="{{$c->id}}">{{$c->id}}</option>
+                                                @else
+                                                    <option value="{{$c->id}}">{{$c->id}}</option>
+                                                @endif
+                                            @endforeach 
+                                        @else
+                                            <option disabled="disabled" selected="selected" value="">Seleccione un kiosko</option> 
+                                            @foreach ($kiosko as $c)
+                                                <option value="{{$c->id}}">{{$c->id}}</option>
+                                            @endforeach 
+                                        @endif
+                                    </select>
+                                    @error('kiosko')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                         <h4 class="font-robo t" style="margin: 0; padding:0">Costo de la reservación: </h4>
                         <hr class="m-1" style="border: 0.1px solid rgba(111, 143, 175, 0.600)">
                         <div class="row row-space">
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="class" style="margin-left: 0;">Ingreso de alimentos: </label>
-                                    <input class="form-control border-radius-sm" type="number" placeholder="Ingrese una alimentos"
-                                    name="alimentos" id="alimentos" minlength="1" maxlength="3" min="80" max="100" value="{{old('alimentos')}}" required>
-                                    @error('alimentos')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror
+                                    <label for="cantidadN" style="margin-left: 0;">Cantidad de niños</label>
+                                    <input name="cantidadN" type="number" class="form-control border-radius-sm" id="cantidadN"  max="50" min="2" maxlength="3" minlength="1"
+                                        required placeholder="Cantidad de niños" value="{{ old('cantidadN') }}">
+                                        @error('cantidadN')
+                                            <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
+                                        @enderror
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="class" style="margin-left: 0;">Precio: </label>
-                                    <input class="form-control border-radius-sm" type="number" placeholder="Ingrese una precio"
-                                    name="precio" id="precio" minlength="1" maxlength="3" min="80" max="100" value="{{old('precio')}}" required>
-                                    @error('precio')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    <label for="cantidad" style="margin-left: 0;">Cantidad de Adultos: </label>
+                                    <input name="cantidad" type="number" class="form-control border-radius-sm" id="cantidad"  max="50" min="2" maxlength="3" minlength="1"
+                                    required placeholder="Cantidad de personas a asistir" value="{{ old('cantidad') }}">
+                                    @error('cantidad')
+                                        <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div>   
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">

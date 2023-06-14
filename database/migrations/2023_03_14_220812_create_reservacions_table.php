@@ -15,15 +15,19 @@ return new class extends Migration
     {
         Schema::create('reservacions', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 50);
+            $table->string('nombreCliente', 50);
             $table->string('celular', 9);
             $table->date('fecha');
             $table->time('horaI');
             $table->time('horaF');
+            $table->unsignedBigInteger('kiosko_id');
+            $table->foreign('kiosko_id')->references('id')->on('kioskos')->onUpdate('cascade')->onDelate('cascade');
             $table->string('tipo', 50);
-            $table->boolean('alimentos')->default(0);
-            $table->integer('cantidad');
-            $table->float('precio');
+            $table->integer('cantidadAdultos');
+            $table->integer('precioAdultos');
+            $table->boolean('niños')->default(0);
+            $table->integer('cantidadNinios')->default(0);
+            $table->integer('niñosPrecio')->default(0);
             $table->float('total');
             $table->float('anticipo');
             $table->float('pendiente');

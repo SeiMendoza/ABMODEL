@@ -7,6 +7,7 @@ use App\Models\Mesa;
 use App\Models\Pedido;
 use App\Models\Bebida;
 use App\Models\Combo;
+use App\Models\DetallesPedido;
 use App\Models\Platillo;
 use Illuminate\Support\Facades\Session;
 use App\Models\PiscinaUso;
@@ -42,7 +43,7 @@ class PedidoUsuarioController extends Controller
 
         for ($i = 0; $i < intval($request->input("tuplas")); $i++) {
             $array = explode(' ', $request->input("det-" . $i));
-            $detalle = new DetallesUsuario();
+            $detalle = new DetallesPedido();
             $detalle->pedido_id = $pedido->id;
             $detalle->producto_id = 1;
             $detalle->cantidad = 1;
@@ -186,7 +187,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     public function detalle_pedido_terminados($id)
     {
         $pedido = Pedido::findOrFail($id);
-        $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
+        $detapedido = DetallesPedido::where('pedido_id', $id)->get();
 
         /* $suma = 0;
     $Sub_total = 0;
@@ -217,7 +218,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
 
     public function detalle_pedido_pendientes($id)
     {
-        $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
+        $detapedido = DetallesPedido::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
         $suma = 0;
         $tasa_impuesto = 0.15;
@@ -234,7 +235,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
 
     public function detalle_terminados($id)
     {
-        $detapedido = DetallesUsuario::where('pedido_id', $id)->get();
+        $detapedido = DetallesPedido::where('pedido_id', $id)->get();
         $pedido = Pedido::findOrfail($id);
         $suma = 0;
         $tasa_impuesto = 0.15;
@@ -282,7 +283,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     }
     public function destroy($id)
     {
-       $detalle = DetallesUsuario::findOrfail($id);
+       $detalle = DetallesPedido::findOrfail($id);
         $pedido = $detalle->pedido;
         $detalle->delete();
     // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
@@ -299,7 +300,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     }
     public function edit($pedido_id, $detalle_id)
     {
-        $edit = DetallesUsuario::findOrFail($detalle_id);
+        $edit = DetallesPedido::findOrFail($detalle_id);
         $pedido = Pedido::findOrfail($pedido_id);
         $productos = Platillo::select('nombre')
             ->where('estado', '=', '1')
@@ -325,7 +326,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             'precio.min' => 'La cantidad minima es 1',
         ]);
 
-        $detalle = DetallesUsuario::find($detalle_id);
+        $detalle = DetallesPedido::find($detalle_id);
         $pedido = $detalle->pedido;
         $detalle->nombre = $request->nombre;
         $detalle->cantidad = $request->input('cantidad');

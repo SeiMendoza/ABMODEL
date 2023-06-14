@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('estado')->default('0'); 
             $table->boolean('estado_cocina')->default('0'); 
             $table->unsignedBigInteger('mesa_id');
-            $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete('cascade');
+            $table->foreign('mesa_id')->references('id')->on('mesas')->onUpdate('cascade')->onDelate('cascade');
             $table->timestamps();
         });
     }

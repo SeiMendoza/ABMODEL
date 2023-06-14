@@ -8,7 +8,7 @@
     <a class="text-white">Detalles</a>
 </li>
 @endsection
-
+@section('tit','Detalles del pedido')
 @section('b')
 <div>
     <a href="{{route('pedidosp.pedido')}}" style="margin:0; padding:5px; width:150px;" type="button" 
@@ -36,14 +36,14 @@
     <table class="table" style="position: absolute;top:100%;width:100%;height:100%;">
 
         <h5 class="card class-4 text-lg text-center" style="text-align:center;background:rgb(255,179,71); color:#fff;">
-            Detalles del pedido en cocina: {{$pedido->nombreCliente}}</h5>
+        </h5>
         <tr>
             <td class="titulo">Número de mesa: </td>
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
             <td class="titulo">Kiosko:</td>
             <td class="informacion">{{$pedido->quiosco}}</td>
             <td class="titulo">Sub_Total:</td>
-                <td class="informacion">L. <?= number_format($sub, 2, ".", ",") ?> </td>
+                <td class="informacion">L. {{$sub}} </td>
         </tr>
         <tr>
             <td class="titulo">Nombre del cliente: </td>
@@ -57,7 +57,7 @@
                 @endif
             </td>
             <td class="titulo">Impuesto: </td>
-            <td class="informacion">L. <?= number_format($isv, 2, ".", ",") ?></td>
+            <td class="informacion">L. {{$isv}}</td>
         </tr>
         <script>
             setInterval(() => {
@@ -95,7 +95,7 @@
 
             <td class="informacion" id="tiempo"></td>
             <td class="titulo">Total:</td>
-            <td class="informacion">L. <?= number_format($tot, 2, ".", ",") ?> </td> 
+            <td class="informacion">L. <{{$tot}} </td> 
         </tr>  
     </table>
     <div class="mb-0 col-9 text-start" style="position:absolute;top:260%;width:100%;">
@@ -115,7 +115,7 @@
                 @forelse($detapedido as $i => $detalle)
 
                 <tr>
-                    <td scope="" class="" style="width:20%; text-align:center; height:32px;">{{$detalle->nombre}}</td>
+                    <td scope="" class="" style="width:20%; text-align:center; height:32px;">{{$detalle->producto->nombre}}</td>
                     <td scope="" style=" width:20%; text-align:center; height:42px;">{{ $detalle->cantidad }}</td>
                     <td scope="col" style="text-align:right; width:20%; height:30px;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
                     <td scope="col" style="text-align:right; width:20%; height:30px;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>

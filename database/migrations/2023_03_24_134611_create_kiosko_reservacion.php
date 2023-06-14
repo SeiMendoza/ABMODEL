@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('kiosko_reservacion', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('kiosko_id');
+            
             $table->unsignedBigInteger('reservacion_id');
 
-            $table->foreign('kiosko_id')->references('id')->on('kioskos')->onUpdate('cascade')->onDelate('cascade');
+            
             $table->foreign('reservacion_id')->references('id')->on('reservacions')->onUpdate('cascade')->onDelate('cascade');
 
             $table->timestamps();

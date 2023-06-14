@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\Bebida;
-use App\Models\Combo;
-use App\Models\DetallesUsuario;
+use App\Models\DetallesPedido;
 use App\Models\Kiosko;
 use App\Models\Mesa;
 use App\Models\Pedido;
+use App\Models\Producto;
 use Illuminate\Http\Request;
-use App\Models\Platillo;
 use Illuminate\Validation\Rules\Exists;
 
 class MenuUsuarioController extends Controller
@@ -34,37 +32,46 @@ class MenuUsuarioController extends Controller
 
         }
 
-        $platillos = Platillo::where('estado', '=', '1')->get();
-        $bebidas = Bebida::where('estado', '=', '1')->get();
-        $combos = Combo::where('estado', '=', '1')->get();
+        $productos = Producto::where('estado', '=', '1')->get();
         $mesas = Mesa::where('estadoM', '=', 0)->get();
         $kiosko = Kiosko::all();
-        $detalles = DetallesUsuario::where('pedido_id', '=', $pedido->id)->where('estado', '=', '0')->get();
+        $detalles = DetallesPedido::where('pedido_id', '=', $pedido->id)->where('estado', '=', '0')->get();
 
         return view('Menu.Cliente.Prueba')->with('pedido', $pedido)->with('kiosko', $kiosko)
-            ->with('platillos', $platillos)->with('combos', $combos)->with('detalles', $detalles)
-            ->with('bebidas', $bebidas)->with('mesas', $mesas);
+            ->with('productos', $productos)->with('detalles', $detalles)
+            ->with('mesas', $mesas);
     }
 
     public function details(Request $request)
 
     {
-        $pedido = DetallesUsuario::where('estado', '=', '0')->get();
+        $pedido = DetallesPedido::where('estado', '=', '0')->get();
 
-        if ($pedido){
-        $detalle = new DetallesUsuario();
+        if ($pedido->count() == 0){
+        $detalle = new DetallesPedido();
         $detalle->pedido_id = $request->input('pedido');
-        $detalle->producto = $request->input('producto');
-        $detalle->nombre = $request->input('nombre');
+        $detalle->producto_id = $request->input('producto');
         $detalle->cantidad = $request->input('cantidad');
         $detalle->precio = $request->input('precio');
         $detalle->save();
         return redirect()->route("cliente_prueba")->with('mensaje', 'Producto añadido');
-        } else{
-            return redirect()->route("cliente_prueba")->with('mensaje', 'Producto existente');
-        }
-       
-
+        } 
+            
+        if ($pedido) {
+            foreach ($pedido as  $v) {
+                if ($v->producto_id == $request->input('producto')){
+                    return redirect()->route("cliente_prueba")->with('mensaje', 'Producto existente'); 
+                } else{
+                    $detalle = new DetallesPedido();
+                    $detalle->pedido_id = $request->input('pedido');
+                    $detalle->producto_id = $request->input('producto');
+                    $detalle->cantidad = $request->input('cantidad');
+                    $detalle->precio = $request->input('precio');
+                    $detalle->save();
+                    return redirect()->route("cliente_prueba")->with('mensaje', 'Producto añadido');
+                }
+            } 
+        } 
         
     }
     public function qr(){
@@ -99,7 +106,7 @@ class MenuUsuarioController extends Controller
             $mesa->estadoM = 1;
             $mesa->save();
 
-            $detalles = DetallesUsuario::where('pedido_id', '=', $pedido->id)->where('estado', '=', '0')->get();
+            $detalles = DetallesPedido::where('pedido_id', '=', $pedido->id)->where('estado', '=', '0')->get();
             foreach ($detalles as $detalle) {
                 $detalle->estado = 1;
                 $detalle->save();
@@ -120,7 +127,7 @@ class MenuUsuarioController extends Controller
             'numb.min' => 'La cantidad no puede ser menor a 1',
         ]);
 
-        $detal = DetallesUsuario::findOrFail($id);
+        $detal = DetallesPedido::findOrFail($id);
         $detal->cantidad = $request->input('numb');
         //$detal->save();
         $creado = $detal -> save();
@@ -133,7 +140,7 @@ class MenuUsuarioController extends Controller
 
     public function destroy($id)
     {
-        DetallesUsuario::destroy($id);
+        DetallesPedido::destroy($id);
         return redirect()->route('cliente_prueba')->with('mensaje', 'Detalle borrado correctamente');
     }
 }
