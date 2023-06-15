@@ -26,21 +26,19 @@ class ReservacionController extends Controller
     }
     public function store(Request $request){
         $fecha_act = date("d-m-Y");
-        $min = date('d-m-Y',$min = strtotime($fecha_act."+ 1 day"));
+        $min = date('d-m-Y',$min = strtotime($fecha_act));
 
         $request -> validate ([
             'name' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'celular' => 'required|numeric|regex:/^[2,3,8,9][0-9]{7}+$/|min_digits:8|max_digits:8|',
-            'fecha' => 'required|date|after:'.$min,   
+            'fecha' => 'required|date|after_or_equal:'.$min,   
             'inicio' => 'required',   
-            'fin' => 'required',
+            'fin' => 'required|after:inicio',
             'tipoE' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'kiosko' => 'required',
-            'cantidadN' => 'min:1|max:20|numeric|min_digits:1|max_digits:3',
-            'cantidad' => 'required|min:1|max:20|numeric|min_digits:1|max_digits:3',
-            'total' => 'required|min:100|max:8000|numeric', 
+            'cantidadN' => 'min:0|max:20|numeric|min_digits:1|max_digits:3',
+            'cantidad' => 'required|min:1|max:20|numeric|min_digits:1|max_digits:3', 
             'anticipo' => 'required|numeric',
-            'pendiente' => 'required|numeric',
             'formaPago' => 'required',   
         ],[
             'name.required' => 'El nombre no puede estar vacío',
@@ -60,6 +58,7 @@ class ReservacionController extends Controller
             
             'inicio.required'=> 'La hora es obligatoria',
             'fin.required'=> 'La hora es obligatoria',
+            'fin.after'=> 'La hora debe ser posterior a la de inicio',
 
             'tipoE.required' => 'El nombre no puede estar vacío',
             'tipoE.regex'=> 'El nombre tiene caracteres no permitidos',
@@ -82,23 +81,16 @@ class ReservacionController extends Controller
             'cantidadN.max' => 'la cantidad es muy alta',
             'cantidadN.numeric' => 'La cantidad debe ser de tipo numérico',
 
-            'total.required' => 'El pago no puede estar vacío',
-            'total.min' => 'El pago es muy bajo',
-            'total.max' => 'El pago es muy alto',
-            'total.numeric' => 'El pago debe de ser numérico',
-
             'anticipo.required' => 'El pago no puede estar vacío',
             'anticipo.numeric' => 'El pago debe de ser numérico',
-
-            'pendiente.required' => 'El pago no puede estar vacío',
-            'pendiente.numeric' => 'El pago debe de ser numérico',
 
             'formaPago.required' => 'La forma de pago no puede estar vacía',
         ]);
 
-      
-        $nuevo = new Reservacion;
+        $precioN = 50;
+        $precioA = 100;
 
+        $nuevo = new Reservacion;
         $nuevo->nombreCliente = $request->input('name');
         $nuevo->celular=$request->input('celular');
         $nuevo->fecha=$request->input('fecha');
@@ -108,11 +100,9 @@ class ReservacionController extends Controller
         $nuevo->tipo=$request->input('tipoE');
         $nuevo->cantidadNinios=$request->input('cantidadN');
         $nuevo->cantidadAdultos=$request->input('cantidad');
-        $nuevo->precioAdultos= 100;
-        $nuevo->precioNinios= 100;
-        $nuevo->total=$request->input('total');
+        $nuevo->precioAdultos= $precioA;
+        $nuevo->precioNinios= $precioN;
         $nuevo->anticipo=$request->input('anticipo');
-        $nuevo->pendiente=$request->input('pendiente');
         $nuevo->formaPago=$request->input('formaPago'); 
       
         $creado = $nuevo -> save();

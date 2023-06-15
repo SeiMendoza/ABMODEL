@@ -319,7 +319,7 @@ Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])
  * Registro de mesas
 */
 
-Route::get('/mesas/registro', [MesaController::class, 'index'])
+Route::get('/mesas/lista', [MesaController::class, 'index'])
 ->name('mesas_reg.index');
 /**ruta para qr por id de mesa */
 Route::get('/mesas/{id}/qr', [MesaController::class, 'Codigo_Qr'])

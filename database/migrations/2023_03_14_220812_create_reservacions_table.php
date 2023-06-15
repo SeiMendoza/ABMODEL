@@ -25,12 +25,9 @@ return new class extends Migration
             $table->string('tipo', 50);
             $table->integer('cantidadAdultos');
             $table->integer('precioAdultos');
-            $table->boolean('niños')->default(0);
             $table->integer('cantidadNinios')->default(0);
             $table->integer('PrecioNinios')->default(0);
-            $table->float('total');
             $table->float('anticipo');
-            $table->float('pendiente');
             $table->boolean('formaPago')->default(0);
             $table->boolean('estado')->default(0);
             $table->timestamps();

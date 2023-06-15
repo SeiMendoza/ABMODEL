@@ -52,7 +52,8 @@
                             <div class="col-4">
                                 <div class="font-robo form-group">
                                     <label for="fecha" style="margin-left: 0;">Fecha: </label>
-                                    <input name="fecha" type="date"  class="form-control border-radius-sm" id="fecha" style="height: 40px"
+                                    <input name="fecha" type="date"  class="form-control border-radius-sm" id="fecha"
+                                    min="{{ now()->toDateString('Y-m-d') }}" max="{{ date("Y-m-d",strtotime(now()."+ 2 month"));}}" style="height: 40px"
                                     placeholder="Ingrese la fecha del evento" value="{{ old('fecha')}}" required>  
                                     @error('fecha')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
@@ -62,7 +63,7 @@
                             <div class="col-4">
                                 <div class="font-robo form-group">
                                     <label for="inicio" style="margin-left: 0;">Hora de inicio</label>
-                                    <input name="inicio" type="time"  class="form-control border-radius-sm" id="inicio" min="08:00" max="18:00"
+                                    <input name="inicio" type="time"  class="form-control border-radius-sm" id="inicio" min="06:00" max="00:00"
                                         placeholder="Ingrese la hora de llegada" value="{{ old('inicio')}}" required>
                                     @error('inicio')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -72,7 +73,7 @@
                             <div class="col-4">
                                 <div class="font-robo form-group">
                                     <label for="fin" style="margin-left: 0;">Hora de salida</label>
-                                    <input name="fin" type="time"  class="form-control border-radius-sm" id="fin" min="08:00" max="00:00"
+                                    <input name="fin" type="time"  class="form-control border-radius-sm" id="fin" min="06:00" max="00:00"
                                         placeholder="Ingrese la hora de llegada" value="{{ old('fin')}}" required>
                                     @error('fin')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -122,9 +123,10 @@
                         <div class="row row-space">
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="cantidadN" style="margin-left: 0;">Cantidad de niños</label>
-                                    <input name="cantidadN" type="number" class="form-control border-radius-sm" id="cantidadN"  max="50" min="2" maxlength="3" minlength="1"
-                                        required placeholder="Cantidad de niños" value="{{ old('cantidadN') }}">
+                                    <label for="cantidadN" style="margin-left: 0;">Cantidad de niños (L 50.00): </label>
+                                    <input name="cantidadN" type="number" class="form-control border-radius-sm" id="cantidadN"  
+                                    max="20" min="0" maxlength="3" minlength="1" step="0.001" oninput="calcular()"
+                                        required placeholder="Cantidad de niños a asistir" value="{{ old('cantidadN') }}">
                                         @error('cantidadN')
                                             <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                         @enderror
@@ -132,8 +134,9 @@
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="cantidad" style="margin-left: 0;">Cantidad de Adultos: </label>
-                                    <input name="cantidad" type="number" class="form-control border-radius-sm" id="cantidad"  max="50" min="2" maxlength="3" minlength="1"
+                                    <label for="cantidad" style="margin-left: 0;">Cantidad de Adultos (L 100.00): </label>
+                                    <input name="cantidad" type="number" class="form-control border-radius-sm" id="cantidad" 
+                                     max="20" min="2" maxlength="3" minlength="1" step="0.001" oninput="calcular()"
                                     required placeholder="Cantidad de personas a asistir" value="{{ old('cantidad') }}">
                                     @error('cantidad')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
@@ -143,11 +146,9 @@
                             <div class="col-4">
                                 <div class="font-robo form-group">
                                     <label for="class" style="margin-left: 0;">Total: </label>
-                                    <input name="total" type="number" class="form-control border-radius-sm" id="total" step="0.001" oninput="calcular()"
-                                    placeholder="Ingrese el total a pagar" value="{{ old('total')}}" required>
-                                    @error('total')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror
+                                    <input name="total" type="number" class="form-control border-radius-sm" id="total" 
+                                    step="0.001"
+                                    placeholder="Ingrese el total a pagar" value="{{ old('total')}}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -155,8 +156,9 @@
                             <div class="col-4">
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="anticipo" style="margin-left: 0;">Pago anticipado: </label>
-                                    <input name="anticipo" type="number"  class="form-control border-radius-sm" id="anticipo" step="0.001" oninput="calcular()"
-                                    placeholder="Ingrese el saldo a cancelar" value="{{ old('anticipo')}}" required>
+                                    <input name="anticipo" type="number"  class="form-control border-radius-sm" id="anticipo" 
+                                    step="0.001" oninput="calcular()"
+                                    placeholder="Ingrese el pago adelantado" value="{{ old('anticipo')}}" required>
                                     @error('anticipo')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror
@@ -165,11 +167,10 @@
                             <div class="col-4">
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="pendiente" style="margin-left: 0;">Pago pendiente: </label>
-                                    <input name="pendiente" type="number"  class="form-control border-radius-sm" step="0.001" id="pendiente" 
-                                        placeholder="Saldo pendiente" value="{{ old('pendiente')}}" required>
-                                    @error('pendiente')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror
+                                    <input name="pendiente" type="number"  class="form-control border-radius-sm" 
+                                    step="0.001" 
+                                    id="pendiente" 
+                                        placeholder="Saldo pendiente" value="{{ old('pendiente')}}" readonly>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -209,12 +210,17 @@
         </div>
     </div>
     <script type="text/javascript">
+
         function calcular(){
           try{
-             var a = parseFloat(document.getElementById("total").value) || 0,
+             var a = 0.00;
+                 c = parseFloat(document.getElementById("cantidadN").value) || 0,
+                 d = parseFloat(document.getElementById("cantidad").value) || 0,
                  b = parseFloat(document.getElementById("anticipo").value) || 0;
     
-                 document.getElementById("pendiente").value = a - b;
+                a = c * 50 + d * 100;  
+                document.getElementById("total").value = a;
+                document.getElementById("pendiente").value = a - b;
             }catch (e) {}
         }
     </script>

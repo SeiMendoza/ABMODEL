@@ -30,9 +30,7 @@ class ReservacionFactory extends Factory
             'cantidadNinios'=>$this->faker->numberBetween(1,20),
             'precioAdultos'=>$this->faker->randomElement([80,100]),
             'precioNinios'=>$this->faker->randomElement([80,100]),
-            'total'=>$this->faker->randomFloat(2,100,1000),
             'anticipo'=>$this->faker->randomFloat(2,100,500),
-            'pendiente'=>$this->faker->randomFloat(2,100,500),
             'formaPago'=>$this->faker->randomElement([0,1]),
             'estado'=>$this->faker->randomElement([0,1]),
         ];

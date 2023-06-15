@@ -36,9 +36,9 @@ class HomeController extends Controller
     {
 
         $productos = Producto::all();
-        $platillos = Platillo::all();
+        /**$platillos = Platillo::all();
         $bebidas = Bebida::all();
-        $combos = Combo::all();
+        $combos = Combo::all();*/
         return view("/Menu/Admon/indexComplementos")->with(['productos' => $productos]);
     }
     public function indexPlatillos()
