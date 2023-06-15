@@ -19,7 +19,7 @@
                     <div class="col-6">
                         <div class="font-robo form-group">
                             <label for="">Producto: </label>
-                            <div style="">
+                            <div>
                                 <select name="producto_id" id="producto_id" class="form-control">
                                     <option value="">Seleccione un producto</option>
                                     @foreach($productos as $producto)
@@ -31,8 +31,8 @@
                                 @enderror
                                 <div class="select-dropdown"></div>
                             </div>
-                             <!-- Agrega un campo oculto para enviar el nombre del producto -->
-                        <input type="hidden" name="producto" value="{{ $producto->nombre }}"> 
+                            <!-- Agrega un campo oculto para enviar el nombre del producto -->
+                            <input type="hidden" name="producto" value="{{ $producto->nombre }}">
                         </div>
                     </div>
                     <div class="col">
@@ -52,6 +52,7 @@
                 </div>
             </form>
         </div>
-        </div>
+    </div>
 </div>
-    @endsection
+
+@endsection

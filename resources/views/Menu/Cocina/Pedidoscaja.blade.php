@@ -2,7 +2,7 @@
 @section('title', 'Caja')
 @section('miga')
 <li class="breadcrumb-item text-sm text-white active" aria-current="page">
-    <a class="text-white" href="{{route('terminados.terminados')}}">Pedidos terminados</a>
+    <a class="text-white" href="#">Pedidos</a>
 </li>
 @endsection
 @section('tit','Pedidos en caja')

@@ -1,7 +1,9 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Cocina')
 @section('miga')
-
+<li class="breadcrumb-item text-sm text-white active" aria-current="page">
+    <a class="text-white" href="#">Pedidos</a>
+</li>
 @endsection
 @section('tit','Pedidos en cocina')
 @section('b')

@@ -14,7 +14,8 @@
     <a class="text-white">Editar detalles</a>
 </li>
 @endsection
-
+@section('tit','Edición del pedido')
+ 
 @section('content')
 <div class="wrapper wrapper--w960 font-robo">
     <div class="card border-radius-sm border-0">
@@ -32,7 +33,7 @@
                             <label for="">Nombre del producto:</label>
                             <select class="form-control border-radius-sm producto" name="nombre" id="nombre">
                                 @foreach ($productos as $producto)
-                                <option value="{{ $producto }}" {{ old('nombre', $edit->nombre) == $producto ? 'selected' : '' }}>{{ $producto }}</option>
+                                <option value="{{ $producto }}" {{ old('nombre', $edit->producto->nombre) == $producto ? 'selected' : '' }}>{{ $producto }}</option>
                                 @endforeach
                             </select>
                             @error('nombre')

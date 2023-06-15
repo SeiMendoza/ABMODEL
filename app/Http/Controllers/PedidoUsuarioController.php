@@ -240,6 +240,30 @@ public function Acomple(Request $request, $id)
     $cantidad = request('cantidad');
     $producto = Producto::findOrFail($producto_id);
 
+    //si ya existe un complemento con el mismo producto y precio
+    $precio = $producto->precio;
+    $complemento_existente = $pedido->detalles()->where([
+        ['producto_id', '=', $producto_id],
+        ['precio', '=', $precio],
+    ])->first();
+
+    if ($complemento_existente) {
+        // Si el complemento ya existe solo suma la cantidad
+        $complemento_existente->cantidad += $cantidad;
+        $complemento_existente->save();
+        // Actualizar el impuesto y el total del pedido general
+    $detalles = $pedido->detalles;
+    $total = 0;
+    foreach ($detalles as $detalle) {
+        $total += $detalle->cantidad * $detalle->precio;
+    }
+    $impuesto = $total * 0.15; // calcular el impuesto
+    $pedido->imp = $impuesto;
+    $pedido->total = $total;
+    $pedido->save();
+        return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
+    } else {
+        //si no agrega un producto
     $complemento = new DetallesPedido();
     $complemento->pedido_id = $pedido->id; 
     $complemento->producto_id = $producto->id; // Obtener el nombre del producto
@@ -258,10 +282,10 @@ public function Acomple(Request $request, $id)
     $pedido->total = $total;
     $pedido->save();
 
-    return redirect()->back()->with('mensaje', 'Producto agregado como complemento correctamente.');
+    return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
 }
 
-
+}
     public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesPedido::where('pedido_id', $id)->get();
@@ -341,6 +365,16 @@ public function Acomple(Request $request, $id)
         return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
         }
         else{
+             // Actualizar el impuesto y el total del pedido general
+        $detalles = $pedido->detalles;
+        $total = 0;
+        foreach ($detalles as $detalle) {
+            $total += $detalle->cantidad * $detalle->precio;
+        }
+        $impuesto = $total * 0.15; // calcular el impuesto
+        $pedido->imp = $impuesto;
+        $pedido->total = $total;
+        $pedido->save();
             return redirect()->route('pedidost.detalle',$pedido->id)->with('mensaje', 'Detalle borrado correctamente');
     }
     }
@@ -351,6 +385,8 @@ public function Acomple(Request $request, $id)
         $productos = Producto::select('nombre')->where('estado','=','1')
         ->orwhere('esComplemento','=','1')
         ->get()->pluck('nombre'); 
+         // Agregar el precio del producto al input
+    Session::put('producto_precio', $edit->precio);
       /*  $productos = Platillo::select('nombre')
             ->where('estado', '=', '1')
             ->union(Combo::select('nombre')->where('estado', '=', '1'))
