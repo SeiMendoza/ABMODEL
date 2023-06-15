@@ -7,7 +7,7 @@
 @section('b')
     <!-- Botón registrar -->
     <div>
-        <a href="{{ route('bebidasyplatillos.create') }}" style="margin:0; padding:5px; width:200px;" type="button"
+        <a href="{{ route('bebidasyplatillos.create') }}" style="margin:8px; padding:5px; width:200px;" type="button"
             class="bg-light border-radius-sm text-center">
             <i class="fa fa-plus-circle"></i> Agregar Productos
         </a>

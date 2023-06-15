@@ -251,7 +251,7 @@
 
         //DATATABLES para Menú
         $(document).ready(function () {
-            $('table.menu').DataTable();
+            $('.menu').DataTable();
         });
 
         //DATATABLES para Kiosko

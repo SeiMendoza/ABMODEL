@@ -49,7 +49,7 @@
 
             <div class="tab-content" id="myTabContent" style="height: 500px; overflow-x: hidden;">
                 <br>
-                <!--complementos Disponibles-->
+                <!--Bebidas Disponibles-->
 
                 <div class="tab-pane fade show active" id="CDisponibles" role="tabpanel" aria-labelledby="CDisponibles-tab">
 
@@ -60,6 +60,7 @@
                                 <tr>
                                     <th scope="col" style="text-align: center;">N</th>
                                     <th scope="col" style="text-align: start;">Nombre</th>
+                                    <th scope="col" style="text-align: center;">Disponibles</th>
                                     <th scope="col" style="text-align: end;">Precio</th>
                                     <th scope="col" style="text-align: center;">Acción</th>
                                     <th scope="col" style="text-align: center;">Editar</th>
@@ -70,48 +71,41 @@
                             <tbody>
                                 @php $i = 0; @endphp
                                 @forelse($productos as $p)
-                                    @if ($p->tipo == 0)
+                                    @if ($p->tipo == 1)
                                         @if ($p->estado == 1)
-                                            @php
-                                                $exits = true;
-                                                $i++;
-                                            @endphp
+                                            @php $i++; @endphp
                                             <tr>
                                                 <td scope="col" style="text-align: center;">@php echo $i @endphp</td>
                                                 <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
+                                                <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
                                                 <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
                                                 <td scope="col" style="text-align: center;">
-                                                    <i data-bs-toggle="modal"
-                                                        data-bs-target="#activarComplemento{{ $p->id }}">
-                                                        <a class="fa fa-times-circle text-warning"></a>
-                                                        Desactivar</i>
-                                                    <form action="{{ route('combo.activar', ['id' => $p->id]) }}"
-                                                        method="post" enctype="multipart/form-data">
+                                                    <i data-bs-toggle="modal" data-bs-target="#desactivarBebida{{ $p->id }}">
+                                                        <a class="fa fa-times-circle text-warning"></a> Desactivar
+                                                    </i>
+                                                    <form action="{{ route('bebida.activar', ['id' => $p->id]) }}" method="post"
+                                                        enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
-                                                        <div class="modal fade" id="activarComplemento{{ $p->id }}"
-                                                            data-bs-backdrop="static" data-bs-keyboard="false"
-                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                        <div class="modal fade" id="desactivarBebida{{ $p->id }}" data-bs-backdrop="static"
+                                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                                             aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="staticBackdropLabel">
                                                                             Desactivar
-                                                                            complemento</h5>
+                                                                            Bebida</h5>
                                                                     </div>
-                                                                    <div class="modal-body"> ¿Está seguro de
-                                                                        desactivar el complemento:
+                                                                    <div class="modal-body">
+                                                                        ¿Está seguro de desactivar la bebida:
                                                                         <strong>{{ $p->nombre }}</strong>?
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input id="activar" name="activar"
-                                                                            style="display:none" value="0">
-                                                                        <button type="submit"
-                                                                            class="btn btn-danger">Si</button>
+                                                                        <input id="activar" name="activar" style="display:none" value="0">
+                                                                        <button type="submit" class="btn btn-danger">Si</button>
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">No</button>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -119,21 +113,17 @@
                                                     </form>
                                                 </td>
                                                 <td scope="col" style="text-align: center;"><a
-                                                    href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
-                                                        class="fa fa-edit text-success"></i></a></td>
+                                                        href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
+                                                            class="fa fa-edit text-success"></i></a></td>
                                                 <td scope="col" style="text-align: center;">
-                                                    <i data-bs-toggle="modal"
-                                                        data-bs-target="#eliminarComplemento{{ $p->id }}"
-                                                        class="fa-solid fa-trash-can text-danger"
-                                                        style="color:crimson"></i>
-                                                    <form action="{{ route('combo.borrar', ['id' => $p->id]) }}"
-                                                        method="post" enctype="multipart/form-data">
+                                                    <i data-bs-toggle="modal" data-bs-target="#staticBackdropEb{{ $p->id }}"
+                                                        class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
+                                                    <form action="{{ route('bebida.borrar', ['id' => $p->id]) }}" method="post"
+                                                        enctype="multipart/form-data">
                                                         @method('delete')
                                                         @csrf
-                                                        <div class="modal fade"
-                                                            id="eliminarComplemento{{ $p->id }}"
-                                                            data-bs-backdrop="static" data-bs-keyboard="false"
-                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                        <div class="modal fade" id="staticBackdropEb{{ $p->id }}" data-bs-backdrop="static"
+                                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                                             aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
@@ -143,12 +133,11 @@
                                                                             producto</h5>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        ¿Está seguro de eliminar el complemento:
+                                                                        ¿Está seguro de eliminar la bebida:
                                                                         <strong>{{ $p->nombre }}</strong>?
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="submit"
-                                                                            class="btn btn-danger">Si</button>
+                                                                        <button type="submit" class="btn btn-danger">Si</button>
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">No</button>
                                                                     </div>
@@ -169,7 +158,7 @@
 
                 </div>
 
-                <!--complementos no Disponibles-->
+                <!--Bebidas no Disponibles-->
 
                 <div class="tab-pane fade " id="CNoDisponibles" role="tabpanel" aria-labelledby="CNoDisponibles-tab">
 
@@ -179,7 +168,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center;">N</th>
-                                    <th scope="col" style="text-align: satar;">Nombre</th>
+                                    <th scope="col" style="text-align: star;">Nombre</th>
+                                    <th scope="col" style="text-align: center;">Disponibles</th>
                                     <th scope="col" style="text-align: end;">Precio</th>
                                     <th scope="col" style="text-align: center;">Acción</th>
                                     <th scope="col" style="text-align: center;">Editar</th>
@@ -188,90 +178,77 @@
                             </thead>
 
                             <tbody>
-                                @php
-                                    $exits = false;
-                                    $i = 0;
-                                @endphp
+                                @php $i = 0;   @endphp
                                 @forelse($productos as $p)
-                                    @if ($p->tipo == 0)
+                                    @if ($p->tipo == 1)
                                         @if ($p->estado == 0)
-                                            @php
-                                                $exits = true;
-                                                $i++;
-                                            @endphp
+                                            @php $i++; @endphp
                                             <tr>
-                                                <th scope="col" style="text-align: center;">@php echo $i @endphp</th>
-                                                <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
-                                                <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
-                                                <td scope="col" style="text-align: center;">
-                                                    <i data-bs-toggle="modal"
-                                                        data-bs-target="#activarComplemento{{ $p->id }}">
+                                                <td scope="col" style="text-align: center">@php echo $i @endphp</td>
+                                                <td scope="col" style="text-align: start">{{ $p->nombre }}</td>
+                                                <td scope="col" style="text-align: center">{{ $p->disponible }}
+                                                </td>
+                                                <td scope="col" style="text-align: end">L {{ $p->precio }}.00
+                                                </td>
+                                                <td scope="col" style="text-align: center">
+                                                    <i data-bs-toggle="modal" data-bs-target="#activarBebida{{ $p->id }}">
                                                         <a class="fa fa-check-circle text-success"></a>
                                                         Activar</i>
-                                                    <form action="{{ route('combo.activar', ['id' => $p->id]) }}"
-                                                        method="post" enctype="multipart/form-data">
+                                                    <form action="{{ route('bebida.activar', ['id' => $p->id]) }}" method="post"
+                                                        enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
-                                                        <div class="modal fade"
-                                                            id="activarComplemento{{ $p->id }}"
-                                                            data-bs-backdrop="static" data-bs-keyboard="false"
-                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                        <div class="modal fade" id="activarBebida{{ $p->id }}" data-bs-backdrop="static"
+                                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                                             aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="staticBackdropLabel">
-                                                                            Activar
-                                                                            Complemento</h5>
+                                                                        <h5 class="modal-title" id="staticBackdropLabel">Activar
+                                                                            Bebida</h5>
                                                                     </div>
-                                                                    <div class="modal-body"> ¿Está seguro de
-                                                                        activar el complemento:
+                                                                    <div class="modal-body">
+                                                                        ¿Está seguro de activar la bebida:
                                                                         <strong>{{ $p->nombre }}</strong>?
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input id="activar" name="activar"
-                                                                            style="display:none" value="1">
-                                                                        <button type="submit"
-                                                                            class="btn btn-danger">Si</button>
+                                                                        <input id="activar" name="activar" style="display:none"
+                                                                            value="1">
+                                                                        <button type="submit" class="btn btn-danger">Si</button>
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">No</button>
-
+                
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </form>
                                                 </td>
-                                                <td scope="col" style="text-align: center;"><a
+                                                <td scope="col" style="text-align: center"><a
                                                         href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
                                                             class="fa fa-edit text-success"></i></a></td>
-                                                <td scope="col" style="text-align: center;">
-                                                    <i data-bs-toggle="modal"
-                                                        data-bs-target="#eliminarCombo{{ $p->id }}"
-                                                        class="fa-solid fa-trash-can text-danger"
-                                                        style="color:crimson"></i>
-                                                    <form action="{{ route('combo.borrar', ['id' => $p->id]) }}"
-                                                        method="post" enctype="multipart/form-data">
+                                                <td scope="col" style="text-align: center">
+                                                    <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{ $p->id }}"
+                                                        class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
+                                                    <form action="{{ route('bebida.borrar', ['id' => $p->id]) }}" method="post"
+                                                        enctype="multipart/form-data">
                                                         @method('delete')
                                                         @csrf
-                                                        <div class="modal fade" id="eliminarCombo{{ $p->id }}"
-                                                            data-bs-backdrop="static" data-bs-keyboard="false"
-                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                                            aria-hidden="true">
+                                                        <div class="modal fade" id="staticBackdropE{{ $p->id }}"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="staticBackdropLabel">
-                                                                            Eliminar
+                                                                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar
                                                                             producto</h5>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        ¿Está seguro de eliminar el complemento:
+                                                                        ¿Está seguro de eliminar la bebida:
                                                                         <strong>{{ $p->nombre }}</strong>?
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="submit"
-                                                                            class="btn btn-danger">Si</button>
+                                                                        <button type="submit" class="btn btn-danger">Si</button>
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">No</button>
                                                                     </div>
@@ -285,13 +262,6 @@
                                     @endif
                                 @empty
                                 @endforelse
-
-                                @if (!$exits)
-                                    <tr>
-                                        <td colspan="7" style="text-align: center;color: gray;">Todas
-                                            las bebidas están disponibles <br> </td>
-                                    </tr>
-                                @endif
                             </tbody>
                         </table>
 
