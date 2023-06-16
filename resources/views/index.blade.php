@@ -34,6 +34,7 @@
   <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
   <link href="/css/main.css" rel="stylesheet" media="all">
 
+  @routes
   <script src="{{ asset("/js/sweetalert2.all.min.js") }}"></script>
   <style media="screen">
     li:active a, li:focus-visible, li:hover{

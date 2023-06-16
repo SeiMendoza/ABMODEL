@@ -73,11 +73,9 @@
                                             <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
                                             <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
                                             <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
-                                            <td scope="col" style="text-align: center;">
-                                                <i data-bs-toggle="modal" data-bs-target="#activarPlatillo{{ $p->id }}">
-                                                    <a class="fa fa-times-circle text-warning"></a>
-                                                    Desactivar</i>
-                                                <form action="{{ route('platillo.activar', ['id' => $p->id]) }}" method="post"
+                                            <td scope="col" style="text-align: center;">                                                
+                                                <button data-bs-toggle="modal" data-bs-target="#activarPlatillo{{ $p->id }}"><i class="fa fa-times-circle text-warning"></i> Desactivar</button>
+                                                <form action="{{ route('platillo.activar', ['id' => $p->id]) }}" name="activar{{ $p->id }}" method="post"
                                                     enctype="multipart/form-data">
                                                     @method('put')
                                                     @csrf
@@ -182,10 +180,8 @@
                                                 <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
                                                 <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
                                                 <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
-                                                <td scope="col" style="text-align: center;">
-                                                    <i data-bs-toggle="modal" data-bs-target="#activarPlatillo{{ $p->id }}">
-                                                        <a class="fa fa-check-circle text-success"></a>
-                                                        Activar</i>
+                                                <td scope="col" style="text-align: center;">                                                    
+                                                    <button data-bs-toggle="modal" data-bs-target="#activarPlatillo{{ $p->id }}"><i class="fa fa-check-circle text-success"></i> Activar</button>
                                                     <form action="{{ route('platillo.activar', ['id' => $p->id]) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @method('put')

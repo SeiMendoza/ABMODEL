@@ -1,3 +1,8 @@
+import route from 'ziggy-js';
+import { Ziggy } from './ziggy';
+
+route('platillo.activar');
+
 function rellenar() {
     document.getElementById("nombre2").value = document.getElementById("nombre").value;
     document.getElementById("descripcion2").value = document.getElementById("descripcion").value;

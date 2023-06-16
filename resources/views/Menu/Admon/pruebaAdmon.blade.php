@@ -134,11 +134,8 @@
                                                 <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
                                                 <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
                                                 <td scope="col" style="text-align: start;"> {{ $p->tipo === 0 ? 'Complemento' : ($p->tipo === 1 ? 'Platillo' : 'Bebida')}}</td>
-                                                <td scope="col" style="text-align: center;">
-                                                    <i onclick="activar('{{ $p->nombre }}', {{ $p->id }}, 'menu.admon');">
-                                                        <a class="fa fa-times-circle text-warning"></a>
-                                                        Desactivar</i>
-                                                    
+                                                <td scope="col" style="text-align: center;">                                                    
+                                                        <button onclick="activar('{{ $p->nombre }}', {{ $p->id }}, 'menu.admon');"><i class="fa fa-times-circle text-warning"></i> Desactivar</button>
                                                 </td>
                                                 <td scope="col" style="text-align: center;">
                                                     <a href="{{ route('plato.editar', ['id' => $p->id]) }}">
@@ -151,7 +148,7 @@
                                                         class="fa-solid fa-trash-can text-danger"
                                                         style="color:crimson"></i>
                                                     <form
-                                                        action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
+                                                         action="{{ route('platillo.borrar', ['id' => $p->id]) }}"
                                                         method="post" enctype="multipart/form-data">
                                                         @method('delete')
                                                         @csrf
@@ -248,7 +245,7 @@
                                                         Activar</i>
                                                     <form
                                                         action="{{ route('platillo.activar', ['id' => $p->id]) }}"
-                                                        method="post" enctype="multipart/form-data">
+                                                        method="post" name="activar{{ $p->id }}" enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
                                                         <div class="modal fade"
@@ -357,8 +354,9 @@
                 allowOutsideClick: false,
             }).then(resultado => {
                 if (resultado.value) {
-                    
-                    window.location.href = '/'+ ruta;
+                    let form = 'activar'+id;                    
+                    document.getElementById(form).submit();
+                    //window.location.href = '/'+ ruta;
                 } else {
                     // Dijeron que no
                 }

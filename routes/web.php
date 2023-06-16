@@ -71,7 +71,7 @@ Route::get('/admonRestauranteC', [HomeController::class, 'indexComplementos'])
 ->name('menuAdmon.complementos');
 
 
-Route::get('/admonRestaurante', [HomeController::class, 'indexAdmon'])
+Route::get('/admonRestaurante', [HomeController::class, 'indexPlatillos'])
 ->name('menuAdmon.index');
 Route::put('bebida/{id}/activar', [BebidaController::class, 'activar'])
 ->name('bebida.activar');
