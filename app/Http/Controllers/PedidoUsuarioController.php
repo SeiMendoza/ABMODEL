@@ -218,7 +218,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
 public function ACompl($id)
 {
     $pedido = Pedido::findOrFail($id);
-    $productos = Producto::select('id', 'nombre')->where('esComplemento', '=', '1')->get();
+    $productos = Producto::select('id', 'nombre')->where('tipo', '=', '0')->get();
     return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos'));
 }
 public function Acomple(Request $request, $id)
@@ -383,7 +383,7 @@ public function Acomple(Request $request, $id)
         $edit = DetallesPedido::findOrFail($detalle_id);
         $pedido = Pedido::findOrfail($pedido_id);
         $productos = Producto::select('nombre')->where('estado','=','1')
-        ->orwhere('esComplemento','=','1')
+        ->orwhere('tipo','=','0')
         ->get()->pluck('nombre'); 
          // Agregar el precio del producto al input
     Session::put('producto_precio', $edit->precio);
