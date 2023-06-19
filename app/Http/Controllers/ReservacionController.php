@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Kiosko;
 use App\Models\Reservacion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReservacionController extends Controller
@@ -37,7 +38,9 @@ class ReservacionController extends Controller
             'tipoE' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'kiosko' => 'required',
             'cantidadN' => 'min:0|max:20|numeric|min_digits:1|max_digits:3',
+            'precioN' => 'min:30|max:100|numeric|min_digits:1|max_digits:3',
             'cantidad' => 'required|min:1|max:20|numeric|min_digits:1|max_digits:3', 
+            'precio' => 'required|min:80|max:200|numeric|min_digits:1|max_digits:3',
             'anticipo' => 'required|numeric',
             'formaPago' => 'required',   
         ],[
@@ -74,6 +77,12 @@ class ReservacionController extends Controller
             'cantidad.max' => 'la cantidad es muy alta',
             'cantidad.numeric' => 'La cantidad debe ser de tipo numérico',
 
+            'precio.required' => 'EL precio no puede estar vacía',
+            'precio.min' => 'EL precio es muy bajo',
+            'precio.min_digits'=>'El precio debe tener mínimo 1 dígito',
+            'precio.max_digits'=>'El precio debe tener máximo 3 dígitos',
+            'precio.max' => 'El precio es muy alta',
+            'precio.numeric' => 'El precio debe ser de tipo numérico',
            
             'cantidadN.min' => 'La cantidad es muy baja',
             'cantidadN.min_digits'=>'la cantidad debe tener mínimo 1 dígito',
@@ -81,14 +90,17 @@ class ReservacionController extends Controller
             'cantidadN.max' => 'la cantidad es muy alta',
             'cantidadN.numeric' => 'La cantidad debe ser de tipo numérico',
 
+            'precioN.min' => 'El precio es muy baja',
+            'precioN.min_digits'=>'El precio debe tener mínimo 1 dígito',
+            'precioN.max_digits'=>'El precio debe tener máximo 3 dígitos',
+            'precioN.max' => 'El precio es muy alta',
+            'precioN.numeric' => 'El precio debe ser de tipo numérico',
+
             'anticipo.required' => 'El pago no puede estar vacío',
             'anticipo.numeric' => 'El pago debe de ser numérico',
 
             'formaPago.required' => 'La forma de pago no puede estar vacía',
         ]);
-
-        $precioN = 50;
-        $precioA = 100;
 
         $nuevo = new Reservacion;
         $nuevo->nombreCliente = $request->input('name');
@@ -100,8 +112,8 @@ class ReservacionController extends Controller
         $nuevo->tipo=$request->input('tipoE');
         $nuevo->cantidadNinios=$request->input('cantidadN');
         $nuevo->cantidadAdultos=$request->input('cantidad');
-        $nuevo->precioAdultos= $precioA;
-        $nuevo->precioNinios= $precioN;
+        $nuevo->precioAdultos= $request->input('precio');
+        $nuevo->precioNinios= $request->input('precioN');
         $nuevo->anticipo=$request->input('anticipo');
         $nuevo->formaPago=$request->input('formaPago'); 
       

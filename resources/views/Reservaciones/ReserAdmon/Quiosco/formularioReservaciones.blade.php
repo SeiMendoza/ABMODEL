@@ -53,7 +53,7 @@
                                 <div class="font-robo form-group">
                                     <label for="fecha" style="margin-left: 0;">Fecha: </label>
                                     <input name="fecha" type="date"  class="form-control border-radius-sm" id="fecha"
-                                    min="{{ now()->toDateString('Y-m-d') }}" max="{{ date("Y-m-d",strtotime(now()."+ 2 month"));}}" style="height: 40px"
+                                    min="{{ now()->toDateString('Y-m-d') }}" max="{{ date("Y-m-d",strtotime(now()."+ 2 month"))}}" style="height: 40px"
                                     placeholder="Ingrese la fecha del evento" value="{{ old('fecha')}}" required>  
                                     @error('fecha')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
@@ -63,7 +63,7 @@
                             <div class="col-4">
                                 <div class="font-robo form-group">
                                     <label for="inicio" style="margin-left: 0;">Hora de inicio</label>
-                                    <input name="inicio" type="time"  class="form-control border-radius-sm" id="inicio" min="06:00" max="00:00"
+                                    <input name="inicio" type="time"  class="form-control border-radius-sm" id="inicio" 
                                         placeholder="Ingrese la hora de llegada" value="{{ old('inicio')}}" required>
                                     @error('inicio')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -123,7 +123,7 @@
                         <div class="row row-space">
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="cantidadN" style="margin-left: 0;">Cantidad de niños (L 50.00): </label>
+                                    <label for="cantidadN" style="margin-left: 0;">Cantidad de niños: </label>
                                     <input name="cantidadN" type="number" class="form-control border-radius-sm" id="cantidadN"  
                                     max="20" min="0" maxlength="3" minlength="1" step="0.001" oninput="calcular()"
                                         required placeholder="Cantidad de niños a asistir" value="{{ old('cantidadN') }}">
@@ -134,14 +134,36 @@
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
-                                    <label for="cantidad" style="margin-left: 0;">Cantidad de Adultos (L 100.00): </label>
+                                    <label for="class" style="margin-left: 0;">Precio para niños: </label>
+                                    <input class="form-control border-radius-sm" type="number" placeholder="Ingrese una precio"
+                                    name="precioN" id="precioN" minlength="1" maxlength="3" min="30" max="100" 
+                                    step="0.001" oninput="calcular()" value="{{old('precioN', 50)}}" required>
+                                    @error('precioN')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="font-robo form-group">
+                                    <label for="cantidad" style="margin-left: 0;">Cantidad de Adultos: </label>
                                     <input name="cantidad" type="number" class="form-control border-radius-sm" id="cantidad" 
                                      max="20" min="2" maxlength="3" minlength="1" step="0.001" oninput="calcular()"
-                                    required placeholder="Cantidad de personas a asistir" value="{{ old('cantidad') }}">
+                                    required placeholder="Cantidad de personas a asistir" value="{{ old('cantidad')}}">
                                     @error('cantidad')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                     @enderror
                                 </div>   
+                            </div>
+                            <div class="col-4">
+                                <div class="font-robo form-group">
+                                    <label for="class" style="margin-left: 0;">Precio para adultos: </label>
+                                    <input class="form-control border-radius-sm" type="number" placeholder="Ingrese una precio"
+                                    name="precio" id="precio" minlength="1" maxlength="3" min="80" max="200"
+                                    step="0.001" oninput="calcular()" value="{{old('precio', 100)}}" required>
+                                    @error('precio')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="col-4">
                                 <div class="font-robo form-group">
@@ -151,8 +173,6 @@
                                     placeholder="Ingrese el total a pagar" value="{{ old('total')}}" readonly>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row row-space">
                             <div class="col-4">
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="anticipo" style="margin-left: 0;">Pago anticipado: </label>
@@ -164,7 +184,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-4">
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-6">
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="pendiente" style="margin-left: 0;">Pago pendiente: </label>
                                     <input name="pendiente" type="number"  class="form-control border-radius-sm" 
@@ -173,7 +195,7 @@
                                         placeholder="Saldo pendiente" value="{{ old('pendiente')}}" readonly>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="formaPago" style="margin-left: 0;">Forma de pago: </label>
                                     <select name="formaPago" required onchange="quitarerror()"  class="form-control border-radius-sm">
@@ -216,9 +238,11 @@
              var a = 0.00;
                  c = parseFloat(document.getElementById("cantidadN").value) || 0,
                  d = parseFloat(document.getElementById("cantidad").value) || 0,
+                 e = parseFloat(document.getElementById("precioN").value) || 0,
+                 f = parseFloat(document.getElementById("precio").value) || 0,
                  b = parseFloat(document.getElementById("anticipo").value) || 0;
     
-                a = c * 50 + d * 100;  
+                a = c * e + d * f;  
                 document.getElementById("total").value = a;
                 document.getElementById("pendiente").value = a - b;
             }catch (e) {}
