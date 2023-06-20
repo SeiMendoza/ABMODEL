@@ -25,7 +25,6 @@ class ProductoFactory extends Factory
             'disponible'=>$this->faker->randomElement([1,2]),
             'fecha'=>$this->faker->date(),
             'tipo'=>$this->faker->randomElement([0 ,1 ,2]),
-            'esComplemento'=>$this->faker->boolean(),
             'estado'=>$this->faker->boolean(),
             
         ];

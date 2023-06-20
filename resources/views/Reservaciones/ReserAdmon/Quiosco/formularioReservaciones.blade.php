@@ -234,7 +234,7 @@
     <script type="text/javascript">
 
         function calcular(){
-          try{
+            try{
              var a = 0.00;
                  c = parseFloat(document.getElementById("cantidadN").value) || 0,
                  d = parseFloat(document.getElementById("cantidad").value) || 0,
