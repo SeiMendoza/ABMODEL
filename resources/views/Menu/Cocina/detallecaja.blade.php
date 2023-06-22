@@ -38,7 +38,7 @@
     <table class="table" style="position: absolute;top:100%;width:100%;height:100%;">
 
         <h5 class="card text-lg" style="text-align:center; background:rgb(255,179,71); color:#fff;">
-            </h5>
+        </h5>
         <tr>
             <td class="titulo">Número de mesa: </td>
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
@@ -100,19 +100,17 @@
             <td class="informacion" id="tiempo"></td>
             <td class="titulo">Total:</td>
             <td class="informacion">L. {{$tot}}</td>
-        </tr> 
+        </tr>
     </table>
-    
+
     <div class="mb-0 col-9 text-start" style="position:absolute;top:294%;width:100%;">
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
-            @if($pedido->estado_cocina == 0)
-<a href="{{ route('ACompl', $pedido->id) }}" 
-   class="border-radius-sm text-center"
-   style="background:rgba(255,179,71,0.6);position:absolute;left:65%;padding:5px; width:160px; z-index: 999;">
-   <strong>Agregar complemento</strong>
-</a>
-@endif
+                @if($pedido->estado_cocina == 0)
+                <a href="{{ route('ACompl', $pedido->id) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:65%;padding:5px; width:160px; z-index: 999;">
+                    <strong>Agregar complemento</strong>
+                </a>
+                @endif
                 <tr class="text-dark" style="background:rgba(255,179,71,0.6);">
                     <th scope="col" style="width:20%;text-align:center;">Nombre</th>
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
@@ -135,28 +133,27 @@
                         <a href="{{ route('detallep.edit', ['pedido_id' => $pedido->id, 'detalle_id' => $detalle->id]) }}" style="margin-right: 10px;">
                             <i class="fa-solid fa-edit text-success" style="color: rgb(33, 195, 247);"></i>
                         </a>
-                        <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$detalle->id}}" class="fa-solid fa-trash-can text-danger" 
-                        style="color:crimson;text-align:center;position: absolute; margin-left:20%; top: 50%;transform: translateY(-50%);"></i>
-                    <form action="{{route('detallep.destroy', ['id' => $detalle->id])}}" method="post" enctype="multipart/form-data">
-                        @method('delete')
-                        @csrf
-                        <div class="modal fade" id="staticBackdropE{{$detalle->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar producto</h5>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Está seguro de borrar el <strong>{{$detalle->nombre}}</strong>?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-danger">Si</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$detalle->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson;text-align:center;position: absolute; margin-left:20%; top: 50%;transform: translateY(-50%);"></i>
+                        <form action="{{route('detallep.destroy', ['id' => $detalle->id])}}" method="post" enctype="multipart/form-data">
+                            @method('delete')
+                            @csrf
+                            <div class="modal fade" id="staticBackdropE{{$detalle->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar producto</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Está seguro de borrar el producto <strong>{{$detalle->producto->nombre}}</strong>?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Si</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
                     </div>
                 </td>
                 @endif

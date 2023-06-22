@@ -16,6 +16,8 @@ use Database\Seeders\PlatillosyBebidasSeeder;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\LaravelIgnition\FlareMiddleware\AddDumps;
+use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
 use Symfony\Component\Console\Input\Input;
 
 class PedidoUsuarioController extends Controller
@@ -58,7 +60,7 @@ class PedidoUsuarioController extends Controller
     {
         $pedido = Pedido::where('estado', 0)
             ->orwhere('estado', 1)
-            ->orwhere('estado', 2) 
+            ->orwhere('estado', 2)
             ->orderby('id')
             ->get();
         $p = Mesa::all();
@@ -151,9 +153,9 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     {
         $request->validate([
             'estado' => 'required|in:3', // El campo estado es obligatorio y solo puede ser 2
-             ]);
+        ]);
         $activar = Pedido::findOrfail($id);
-        $kiosko = Mesa::findOrFail($request->input('mesa')); 
+        $kiosko = Mesa::findOrFail($request->input('mesa'));
 
         $activar->estado = $request->input('estado');
         $activar->quiosco = $kiosko->kiosko->id;
@@ -214,78 +216,80 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $tot = number_format($suma, 2, ".", ",");
         return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido', 'tot', 'sub', 'isv'));
     }
-    
-public function ACompl($id)
-{
-    $pedido = Pedido::findOrFail($id);
-    $productos = Producto::select('id', 'nombre')->where('tipo', '=', '0')->get();
-    return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos'));
-}
-public function Acomple(Request $request, $id)
-{
-    $rules = [
-        'producto_id' => 'required|exists:productos,id',
-        'cantidad' => 'required|numeric',
-    ];
-    $mensaje = [
-        'producto_id.required' => 'El nombre no puede estar vacío',
-        'producto_id.exists' => 'El nombre no existe',
-        'cantidad.required' => 'La cantidad es obligatoria',
-        'cantidad.numeric' => 'Solo se aceptan números',
-    ];
-    $this->validate($request, $rules, $mensaje);
 
-    $pedido = Pedido::findOrFail($id);
-    $producto_id = request('producto_id');
-    $cantidad = request('cantidad');
-    $producto = Producto::findOrFail($producto_id);
-
-    //si ya existe un complemento con el mismo producto y precio
-    $precio = $producto->precio;
-    $complemento_existente = $pedido->detalles()->where([
-        ['producto_id', '=', $producto_id],
-        ['precio', '=', $precio],
-    ])->first();
-
-    if ($complemento_existente) {
-        // Si el complemento ya existe solo suma la cantidad
-        $complemento_existente->cantidad += $cantidad;
-        $complemento_existente->save();
-        // Actualizar el impuesto y el total del pedido general
-    $detalles = $pedido->detalles;
-    $total = 0;
-    foreach ($detalles as $detalle) {
-        $total += $detalle->cantidad * $detalle->precio;
+    public function ACompl($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $productos = Producto::select('id', 'nombre')
+            ->where('estado', '=', '1')
+            ->where('tipo', '=', '0')->get();
+        return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos'));
     }
-    $impuesto = $total * 0.15; // calcular el impuesto
-    $pedido->imp = $impuesto;
-    $pedido->total = $total;
-    $pedido->save();
-        return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
-    } else {
-        //si no agrega un producto
-    $complemento = new DetallesPedido();
-    $complemento->pedido_id = $pedido->id; 
-    $complemento->producto_id = $producto->id; // Obtener el nombre del producto
-    $complemento->precio = $producto->precio;
-    $complemento->cantidad = $cantidad;
-    $complemento->save();
+    public function Acomple(Request $request, $id)
+    {
+        $rules = [
+            'producto_id' => 'required|exists:productos,id',
+            'cantidad' => 'required|numeric|digits_between:1,3',
+        ];
+        $mensaje = [
+            'producto_id.required' => 'El nombre no puede estar vacío',
+            'producto_id.exists' => 'El nombre no existe',
+            'cantidad.required' => 'La cantidad es obligatoria',
+            'cantidad.numeric' => 'Solo se aceptan números',
+            'cantidad.digits_between' => 'Cantidad maxima de dígitos 3',
+        ];
+        $this->validate($request, $rules, $mensaje);
 
-    // Actualizar el impuesto y el total del pedido general
-    $detalles = $pedido->detalles;
-    $total = 0;
-    foreach ($detalles as $detalle) {
-        $total += $detalle->cantidad * $detalle->precio;
+        $pedido = Pedido::findOrFail($id);
+        $producto_id = request('producto_id');
+        $cantidad = request('cantidad');
+        $producto = Producto::findOrFail($producto_id);
+
+        //si ya existe un complemento con el mismo producto y precio
+        $precio = $producto->precio;
+        $complemento_existente = $pedido->detalles()->where([
+            ['producto_id', '=', $producto_id],
+            ['precio', '=', $precio],
+        ])->first();
+
+        if ($complemento_existente) {
+            // Si el complemento ya existe solo suma la cantidad
+            $complemento_existente->cantidad += $cantidad;
+            $complemento_existente->save();
+            // Actualizar el impuesto y el total del pedido general
+            $detalles = $pedido->detalles;
+            $total = 0;
+            foreach ($detalles as $detalle) {
+                $total += $detalle->cantidad * $detalle->precio;
+            }
+            $impuesto = $total * 0.15; // calcular el impuesto
+            $pedido->imp = $impuesto;
+            $pedido->total = $total;
+            $pedido->save();
+            return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
+        } else {
+            //si no agrega un producto
+            $complemento = new DetallesPedido();
+            $complemento->pedido_id = $pedido->id;
+            $complemento->producto_id = $producto->id; // Obtener el nombre del producto
+            $complemento->precio = $producto->precio;
+            $complemento->cantidad = $cantidad;
+            $complemento->save();
+
+            // Actualizar el impuesto y el total del pedido general
+            $detalles = $pedido->detalles;
+            $total = 0;
+            foreach ($detalles as $detalle) {
+                $total += $detalle->cantidad * $detalle->precio;
+            }
+            $impuesto = $total * 0.15; // calcular el impuesto
+            $pedido->imp = $impuesto;
+            $pedido->total = $total;
+            $pedido->save();
+
+            return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
+        }
     }
-    $impuesto = $total * 0.15; // calcular el impuesto
-    $pedido->imp = $impuesto;
-    $pedido->total = $total;
-    $pedido->save();
-
-    return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
-}
-
-}
     public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesPedido::where('pedido_id', $id)->get();
@@ -353,46 +357,40 @@ public function Acomple(Request $request, $id)
     }
     public function destroy($id)
     {
-       $detalle = DetallesPedido::findOrfail($id);
+        $detalle = DetallesPedido::findOrfail($id);
         $pedido = $detalle->pedido;
         $detalle->delete();
-    // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
+        // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
         if ($pedido->detalles->count() == 0) {
             $mesa = $pedido->mesa_nombre;
             $mesa->estadoM = 0;
             $mesa->save();
             $pedido->delete();
-        return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
+            return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
+        } else {
+            // Actualizar el impuesto y el total del pedido general
+            $detalles = $pedido->detalles;
+            $total = 0;
+            foreach ($detalles as $detalle) {
+                $total += $detalle->cantidad * $detalle->precio;
+            }
+            $impuesto = $total * 0.15; // calcular el impuesto
+            $pedido->imp = $impuesto;
+            $pedido->total = $total;
+            $pedido->save();
+            return redirect()->route('pedidost.detalle', $pedido->id)->with('mensaje', 'Detalle borrado correctamente');
         }
-        else{
-             // Actualizar el impuesto y el total del pedido general
-        $detalles = $pedido->detalles;
-        $total = 0;
-        foreach ($detalles as $detalle) {
-            $total += $detalle->cantidad * $detalle->precio;
-        }
-        $impuesto = $total * 0.15; // calcular el impuesto
-        $pedido->imp = $impuesto;
-        $pedido->total = $total;
-        $pedido->save();
-            return redirect()->route('pedidost.detalle',$pedido->id)->with('mensaje', 'Detalle borrado correctamente');
-    }
     }
     public function edit($pedido_id, $detalle_id)
     {
         $edit = DetallesPedido::findOrFail($detalle_id);
         $pedido = Pedido::findOrfail($pedido_id);
-        $productos = Producto::select('nombre')->where('estado','=','1')
-        ->orwhere('tipo','=','0')
-        ->get()->pluck('nombre'); 
-         // Agregar el precio del producto al input
-    Session::put('producto_precio', $edit->precio);
-      /*  $productos = Platillo::select('nombre')
-            ->where('estado', '=', '1')
-            ->union(Combo::select('nombre')->where('estado', '=', '1'))
-            ->union(Bebida::select('nombre')->where('estado', '=', '1')) 
-            ->get()
-            ->pluck('nombre'); */
+        $productos = Producto::select('id', 'nombre')->where('estado', '=', '1')
+            ->whereIn('tipo', ['0', '1', '2'])
+            //->orwhere('tipo', '=', '0')
+            ->get();
+        // Agregar el precio del producto al input
+        Session::put('producto_precio', $edit->precio);
         return view('Menu/Cocina/editardetallecaja', compact('edit', 'pedido', 'productos'));
     }
     public function update(Request $request, $pedido_id, $detalle_id)
@@ -400,7 +398,7 @@ public function Acomple(Request $request, $id)
         $request->validate([
             'cantidad' => ['required', 'numeric', 'digits_between:1,3', 'min:1'],
             'precio' => ['required', 'numeric', 'min:1'],
-            'nombre' => ['required', 'string']
+            'producto_id' => ['required', 'exists:productos,id']
         ], [
             'cantidad.required' => 'La cantidad es obligatoria',
             'cantidad.numeric' => 'Solo se aceptan  números',
@@ -409,24 +407,22 @@ public function Acomple(Request $request, $id)
             'precio.required' => 'La cantidad es obligatoria',
             'precio.numeric' => 'Solo se aceptan  números',
             'precio.min' => 'La cantidad minima es 1',
-            'nombre.required' => 'El nombre del producto es obligatorio',
-            'nombre.string' => 'El nombre del producto debe ser una cadena'
+            'producto_id.required' => 'El nombre del producto es obligatorio',
+            'producto_id.exists' => 'El nombre del producto no existe'
         ]);
-    
-        $detalle = DetallesPedido::find($detalle_id);
+
+        $detalle = DetallesPedido::findOrfail($detalle_id);
         $pedido = $detalle->pedido;
-    
-        $producto_nombre = $request->input('nombre');
-        $producto = Producto::where('nombre', $producto_nombre)->where('estado', 1)->firstOrFail();
-    
-        // Recupera el detalle del pedido 
-        $detalle = DetallesPedido::where('pedido_id', $pedido_id)->where('producto_id', $producto->id)->firstOrFail();
-    
+
+        $producto_id = $request->input('producto_id');
+        $producto = Producto::where('id', $producto_id)->where('estado', '=', '1')
+            ->firstOrFail();
+
         $detalle->producto_id = $producto->id;
         $detalle->cantidad = $request->input('cantidad');
         $detalle->precio = $request->input('precio');
         $detalle->save();
-    
+
         // Actualizar los impuestos y totales correspondientes en el objeto Pedido
         $detalles = $pedido->detalles;
         $total = 0;
@@ -437,26 +433,17 @@ public function Acomple(Request $request, $id)
         $pedido->imp = $impuesto;
         $pedido->total = $total;
         $pedido->save();
-    
+
         return redirect()->route('pedidost.detalle', ['id' => $pedido_id])->with('mensaje', 'El detalle del pedido ha sido actualizado exitosamente.');
     }
     /**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
-    public function obtenerPrecio(Request $request)
+    public function  PrecioAcompl(Request $request)
     {
-        $producto = $request->input('producto');
-        $precio = Producto::select('precio')->where('nombre', $producto)->where('estado', '=', '1')->first();
-        if ($precio) {
-            Session::put('producto_precio', $precio->precio);
-            return $precio->precio;
+        $producto = Producto::find($request->producto);
+        if ($producto) {
+            return response()->json($producto->precio);
+        } else {
+            return response()->json(null);
         }
-        return null;
-      /*  $producto = $request->input('producto');
-        $precio = Producto::select('productos.precio')->where('productos.nombre', $producto)
-        ->where('productos.estado', '=', '1')
-            ->get()
-            ->pluck('precio')
-            ->first();
-        Session::put('producto_precio', $precio);
-        return $precio;*/
     }
 }

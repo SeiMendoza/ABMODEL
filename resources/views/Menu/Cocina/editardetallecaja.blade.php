@@ -1,6 +1,6 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Detalles-pedido')
- 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
     .cont {
         overflow-x: hidden;
@@ -15,12 +15,12 @@
 </li>
 @endsection
 @section('tit','Edición del pedido')
- 
+
 @section('content')
 <div class="wrapper wrapper--w960 font-robo">
     <div class="card border-radius-sm border-0">
         <div class="card-body border-radius-sm border-0">
-            <h2 class="title" style="margin-bottom:0">Información de: {{$pedido->nombreCliente}}</h2>
+            <h2 class="title" style="margin-bottom:0">Información de: {{$edit->producto->nombre}}</h2>
             <h4 class="font-robo t" style="margin: 0; padding:0">Datos del producto: </h4>
             <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
             @if($pedido)
@@ -31,12 +31,12 @@
                     <div class="col-6">
                         <div class="font-robo form-group">
                             <label for="">Nombre del producto:</label>
-                            <select class="form-control border-radius-sm producto" name="nombre" id="nombre">
+                            <select class="form-control border-radius-sm producto_id" name="producto_id" id="producto_id">
                                 @foreach ($productos as $producto)
-                                <option value="{{ $producto }}" {{ old('nombre', $edit->producto->nombre) == $producto ? 'selected' : '' }}>{{ $producto }}</option>
+                                <option value="{{ $producto->id }}" {{ old('producto_id', $edit->producto->id) == $producto->id ? 'selected' : '' }}>{{ $producto->nombre }}</option>
                                 @endforeach
                             </select>
-                            @error('nombre')
+                            @error('producto_id')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
                         </div>
@@ -44,8 +44,7 @@
                     <div class="col">
                         <div class="font-robo form-group">
                             <label for="">Cantidad de producto:</label>
-                            <input style="padding-left: 8px;" class="form-control border-radius-sm" type="number" name="cantidad" id="cantidad" step="1" placeholder="Ingrese de producto" 
-                            value="@if(Session::has('cantidad')){{Session::get('cantidad')}}
+                            <input style="padding-left: 8px;" class="form-control border-radius-sm" type="number" name="cantidad" id="cantidad" step="1" placeholder="Ingrese de producto" value="@if(Session::has('cantidad')){{Session::get('cantidad')}}
                             @else{{old('cantidad',$edit->cantidad)}}@endif" onkeypress="quitarerror()">
                             @error('cantidad')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -57,9 +56,7 @@
                     <div class="col-6">
                         <div class="font-robo form-group">
                             <label for="">Precio del producto:</label>
-                            <input style="padding-left: 8px;" class="form-control border-radius-sm precio" 
-                            placeholder="Precio del producto" name="precio" id="precio" readonly 
-                            value="@if(Session::has('producto_precio')){{Session::get('producto_precio')}}
+                            <input style="padding-left: 8px;" class="form-control border-radius-sm precio" placeholder="Precio del producto" name="precio" id="precio" readonly value="@if(Session::has('producto_precio')){{Session::get('producto_precio')}}
                             @else{{old('',$edit->precio_producto)}}@endif">
                             @error('precio')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -80,7 +77,7 @@
                 $imp=$edit->precio * $edit->cantidad * 0.15;
                 $sub=$edit->precio * $edit->cantidad -$imp;
                 @endphp
-            
+
                 <div class="row row-space">
                     <div class="col-6">
                         <div class="font-robo form-group">
@@ -102,7 +99,7 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
                 <div style="float: right;margin-top: 5px">
                     <button type="button" onclick="cancelar('pedidos/caja/detalle/{{$pedido->id}}')" class="btn btn-danger">Cancelar</button>
@@ -114,29 +111,7 @@
     </div>
 </div>
 <script>
-   /* function cancelarp(ruta) {
 
-        Swal
-            .fire({
-                title: "¿Cancelar actualización?",
-                text: "¿Desea cancelar los cambios?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: "Si",
-                cancelButtonText: "No",
-            })
-            .then(resultado => {
-                if (resultado.value) {
-                    // Hicieron click en "Sí"
-                    window.location.href = '/' + ruta;
-                } else {
-                    // Dijeron que no
-                }
-            });
-
-    }
-*/
-    
 </script>
 
 @endsection

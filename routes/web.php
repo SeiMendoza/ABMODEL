@@ -132,10 +132,10 @@ Route::get('/pedidos/cocina/detalle/{id}', [PedidoUsuarioController::class, 'det
 ->name('pedidosp.detalle');/*detalle de pedidos pendientes en cocina*/
 Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 'detalle_terminados'])
 ->name('terminados.detalle'); /*lista de pedidos terminados*/
-
-Route::post('/obtener-precio',[PedidoUsuarioController::class, 'obtenerPrecio'])
-->name('obtener-precio');
-
+//obtener el precio de los productos
+Route::post('/precio-acompl',[PedidoUsuarioController::class, 'PrecioAcompl'])
+->name('precio-acompl');
+//agrega el complemento al detalle del pedido
 Route::get('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'ACompl'])
 ->name('ACompl');
 Route::post('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple'])

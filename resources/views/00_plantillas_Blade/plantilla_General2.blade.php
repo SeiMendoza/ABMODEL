@@ -320,13 +320,14 @@
                 }
         });
     }
-/**CAMBIA EL PRECIO DE LOS PRODUCTOS EN EDICION EN CAJA ANTES DE SER ENVIADOS A COCINA */
-$(document).ready(function() {
-    $('.producto, #cantidad').change(function() {
-        var producto = $('.producto').val();
+    $(document).ready(function() {
+    // Agrega un evento "change" al elemento select con ID "producto_id"
+    $('#producto_id,#cantidad').change(function() {
+        var producto = $('#producto_id').val(); // Obtiene el ID del producto seleccionado
         var cantidad = parseFloat($('#cantidad').val());
+        // Realiza una solicitud AJAX para obtener el precio del producto
         $.ajax({
-            url: '/obtener-precio',
+            url: '/precio-acompl',
             type: 'POST',
             data: {
                 producto: producto,
@@ -338,7 +339,7 @@ $(document).ready(function() {
                     var impuesto = cantidad * precio * 0.15; // Calcula el impuesto como el 15% del precio total
                     var sub_total = precio * cantidad - impuesto;
                     var total = precio * cantidad;
-                    $('#precio').val(response);
+                    $('#precio').val(precio.toFixed(2)); // Muestra el precio con 2 decimales
                     $('#impuesto').val(impuesto.toFixed(2)); // Muestra el impuesto con 2 decimales
                     $('#sub_total').val(sub_total.toFixed(2)); // Muestra el sub_total con 2 decimales
                     $('#total').val(total.toFixed(2)); // Muestra el total con 2 decimales
@@ -349,8 +350,8 @@ $(document).ready(function() {
             }
         });
     });
-    // actualiza el precio del producto que esta seleccionado
-$('.producto').trigger('change');
+      // actualiza el precio del producto que esta seleccionado
+$('#producto_id').trigger('change');
 });
     </script>
     <script src="/js/global.js"></script>

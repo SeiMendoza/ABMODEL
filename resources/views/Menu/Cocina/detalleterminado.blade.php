@@ -12,8 +12,7 @@
 
 @section('b')
 <div>
-    <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" 
-        type="button" class="bg-light border-radius-sm text-center">  <i class="fa fa-arrow-left"></i> Regresar</a>
+    <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center"> <i class="fa fa-arrow-left"></i> Regresar</a>
 </div>
 @endsection
 
@@ -97,7 +96,7 @@
                 @forelse($detapedido as $i => $detalle)
 
                 <tr>
-                    <td scope="" class="" style="width:20%; text-align:center; height:20%;">{{$detalle->nombre}}</td>
+                    <td scope="" class="" style="width:20%; text-align:center; height:20%;">{{$detalle->producto->nombre}}</td>
                     <td scope="" style=" width:20%; text-align:center; height:20%;">{{ $detalle->cantidad }}</td>
                     <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
                     <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
