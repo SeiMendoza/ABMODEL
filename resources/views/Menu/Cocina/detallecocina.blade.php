@@ -42,7 +42,7 @@
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
             <td class="titulo">Kiosko:</td>
             <td class="informacion">{{$pedido->quiosco}}</td>
-            <td class="titulo">Sub_Total:</td>
+            <td class="titulo">Sub total:</td>
                 <td class="informacion">L. {{$sub}} </td>
         </tr>
         <tr>
@@ -105,7 +105,7 @@
                     <th scope="col" style="width:20%; text-align:center;">Nombre</th>
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
                     <th scope="col" style="width:20%; text-align:center;">Precio</th>
-                    <th scope="col" style="width:20%; text-align:center;">Sub-total</th>
+                    <th scope="col" style="width:20%; text-align:center;">Sub total</th>
                 </tr>
             </thead>
             <tbody class="col" style="overflow:auto;" id="">

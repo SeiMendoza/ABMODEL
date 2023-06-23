@@ -9,7 +9,7 @@
 @section('b')
 <div>
     <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center">
-    <i class="fa-regular fa-check-double"></i> Pedidos terminados
+        <i class="fa-regular fa-check-double"></i> Pedidos terminados
     </a>
 </div>
 @endsection
@@ -86,8 +86,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title font-weight-bolder" id="staticBackdropLabel">Terminar pedido</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Terminar pedido</h5>
                         </div>
                         <div class="modal-body" style="text-align: center;">
                             ¿Está seguro de terminar el pedido de: <strong>{{$p->nombreCliente}}</strong>?
@@ -97,8 +96,8 @@
                                 @method('put')
                                 @csrf
                                 <div style="display: none">
-                                    <input type="text" id="estado" name="estado" value="3"> 
-                                    <input type="hidden" name="mesa" value="{{ $p->mesa_id }}"> 
+                                    <input type="text" id="estado" name="estado" value="3">
+                                    <input type="hidden" name="mesa" value="{{ $p->mesa_id }}">
                                 </div>
                                 <button type="submit" class="btn btn-danger">Si</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
@@ -110,13 +109,12 @@
             <!-------Envia los pedidos por id a la cocina--------->
             <div class="modal fade" id="static{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                            <h5 class="modal-title font-weight-bolder" id="staticBackdropLabel">Enviar pedido a cocina</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Enviar pedido a cocina</h5>
                         </div>
                         <div class="modal-body" style="text-align: center;">
-                            !El pedido para¡ <strong>{{$p->nombreCliente}}</strong> se enviará a cocina
+                            !El pedido para <strong>{{$p->nombreCliente}}</strong> se enviará a cocina¡
                         </div>
                         <div class="modal-footer">
                             <form action="{{route('env.env_a_cocina', ['id'=>$p->id])}}" method="POST">
@@ -129,17 +127,18 @@
                                 <button type="submit" class="btn btn-danger">Si</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
-            @endif
-            @endif
-            @empty
+</div>
+</form>
+@endif
+@endif
+@empty
 
-            @endforelse
-        </tbody>
-    </table>
+@endforelse
+</tbody>
+</table>
 </div>
 
 @endsection

@@ -79,7 +79,7 @@
                 <div class="row row-space">
                     <div class="col-6">
                         <div class="font-robo form-group">
-                            <label for="">Sub_total:</label>
+                            <label for="">Sub total:</label>
                             <input class="form-control border-radius-sm" type="number" name="sub_total" id="sub_total" step="" placeholder="0.00" value="{{old('sub_total')}}" readonly onkeypress="quitarerror()">
                             @error('sub_total')
                             <strong class="menerr" style="color:red">{{ $message }}</strong>

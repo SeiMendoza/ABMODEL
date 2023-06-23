@@ -18,6 +18,12 @@ class MenuUsuarioController extends Controller
          
     public function prueba()
     {
+         // Verificar si hay una mesa disponible
+    $mesas = Mesa::where('estadoM', '=', 0)->count();
+    if ($mesas == 0) {
+        return redirect()->route("index")->with('mensaje', 'No hay mesas disponibles.');
+    }
+ 
         $pedido = Pedido::where('estado', '=', '0')->first();
 
         if (!$pedido) {

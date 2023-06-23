@@ -61,7 +61,7 @@
 
                 @endif
             </td>
-            <td class="titulo">Sub_Total:</td>
+            <td class="titulo">Sub total:</td>
             <td class="informacion">L. {{$sub}}</td>
         </tr>
         <tr>
@@ -107,15 +107,15 @@
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
                 @if($pedido->estado_cocina == 0)
-                <a href="{{ route('ACompl', $pedido->id) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:65%;padding:5px; width:160px; z-index: 999;">
-                    <strong>Agregar complemento</strong>
+                <a href="{{ route('ACompl', $pedido->id) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:62%;padding:5px; width:190px; z-index: 999;">
+                <i class="fa fa-plus-circle"></i> <strong>Agregar complemento</strong>
                 </a>
                 @endif
                 <tr class="text-dark" style="background:rgba(255,179,71,0.6);">
                     <th scope="col" style="width:20%;text-align:center;">Nombre</th>
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
                     <th scope="col" style="width:20%; text-align:center;">Precio</th>
-                    <th scope="col" style="width:20%; text-align:center;">Sub-total</th>
+                    <th scope="col" style="width:20%; text-align:center;">Sub total</th>
                     @if($pedido->estado_cocina == 0)
                     <th scope="col" style="width:20%; text-align:center;">Acciones</th>
                     @endif

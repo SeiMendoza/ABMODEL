@@ -83,14 +83,13 @@
                     </td>
                 </tr>
                 <div class="modal fade" id="staticBackdrop{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title font-weight-bolder" id="staticBackdropLabel">Completar pedido</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Completar pedido</h5>
+                        </div>
                             <div class="modal-body" style="text-align: center;">
-                                ! Pedido completado ¡ para: <strong>{{$p->nombreCliente}}</strong>?
+                                ¿Pedido completado para?: <strong>{{$p->nombreCliente}}</strong>
                             </div>
                             <div class="modal-footer">
                                 <form action="{{route('pedidosPendientes_Cocina.pedidosPendientes_Cocina', ['id'=>$p->id])}}" method="POST">
