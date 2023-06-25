@@ -60,7 +60,7 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100" style="">
-  
+
     <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
@@ -130,7 +130,7 @@
                                 <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"
                                     aria-labelledby="dropdownMenuButton">
                                     <li>
-                                        <a class="dropdown-item border-radius-md" href="{{Route('piscina.create')}}">
+                                        <a class="dropdown-item border-radius-md" href="{{Route('prodpiscina.index')}}">
                                             <div class="d-flex py-1">
                                                 <div class="avatar avatar-sm bg-black  me-3  my-auto">
                                                     <i class="fa-solid fa-person-swimming text-info fa-3x"></i>
@@ -292,7 +292,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Usuarios</span>
                     </a>
-                </li> 
+                </li>
             </ul>
         </div>
     </aside>
