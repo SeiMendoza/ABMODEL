@@ -41,21 +41,46 @@ Route::get('/tabla', [HomeController::class, 't'])
 Route::get('/billing', [HomeController::class, 'b'])
 ->name('b');
 
-/** LOGIN */
+/** REGISTRO Y LOGIN */
 Route::get('/registro', [RegistroController::class, 'show']);
 
-Route::post('/registro', [RegistroController::class, 'registro']);
+Route::post('/registro', [RegistroController::class, 'registro']); 
 
+Route::get('/listaUsuarios', [RegistroController::class, 'users'])
+->name('usuarios.users');
+
+Route::get('/usuarios/create', [RegistroController::class, 'create'])
+->name("usuarios.create"); 
+
+Route::post('/usuarios/create', [RegistroController::class, 'store'])
+->name("usuarios.store");
+
+Route::get('/usuarios/{id}/edit', [RegistroController::class, 'edit'])
+->name("usuarios.editar")->where('id', '[0-9]+');
+
+Route::put('/usuarios/{id}/edit', [RegistroController::class, 'update'])
+->name('usuarios.update')->where('id', '[0-9]+'); 
+
+Route::delete('usuarios/{id}/borrar', [RegistroController::class, 'destroy'])
+->name('usuarios.destroy');
+
+
+/**PERFIL USUARIO */
 Route::get('/login', [LoginController::class, 'show']);
 
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])
-   ->name('cerrarSes.cerrar');
+->name('cerrarSes.cerrar');
 
-/**PERFIL USUARIO */
-Route::get("/perfil", [LoginController::class, "perfil"])
+Route::get('/perfil', [LoginController::class, 'perfil'])
 ->name('usuarios.perfil')->where('id', '[0-9]+');
+
+Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])
+->name("usuarios.editarPerfil")->where('id', '[0-9]+');
+
+Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])
+->name('usuarios.updatePerfil')->where('id', '[0-9]+'); 
 
 
 

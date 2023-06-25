@@ -18,7 +18,6 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name'=>'Cristiana Ferrera',
-            'username'=>'Cristiana',
             'email'=>'cristiana.ferrera@unah.edu.hn',
             'password' => bcrypt('12345678'),
             'address'=>'1303 San Jacinto Street Houston TX 77002 USA',
@@ -28,7 +27,6 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name'=>'Lester Bogran',
-            'username'=>'Lester',
             'email'=>'lester.bogran@unah.edu.hn',
             'password' => bcrypt('12345678'),
             'address'=>'1303 San Jacinto Street Houston TX 77002 USA',
@@ -38,7 +36,6 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name'=>'Asly Reyes',
-            'username'=>'Asly24',
             'email'=>'asly.reyes@unah.hn',
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
@@ -48,7 +45,6 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name'=>'Seily Mendoza',
-            'username'=>'Ale25',
             'email'=>'seily.mendoza@unah.hn',
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
@@ -58,7 +54,6 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name'=>'Juan Pastor',
-            'username'=>'Juan26',
             'email'=>'juan.pastor@unah.hn',
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
@@ -68,7 +63,6 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name'=>'Edgar Lopez',
-            'username'=>'Edgar27',
             'email'=>'ejlopezl@unah.hn',
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
@@ -78,7 +72,6 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name'=>'Rolando Hernández',
-            'username'=>'Rolando28',
             'email'=>'rolandohernndez@unah.hn',
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston TX 77002 USA',

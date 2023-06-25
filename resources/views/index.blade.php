@@ -12,6 +12,7 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+@auth
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +60,7 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100" style="">
-    @auth
+  
     <script>
         var msg = '{{Session::get('mensaje')}}';
         var exist = '{{Session::has('mensaje')}}';
@@ -163,7 +164,7 @@
                                     <a href="javascript:;" class="nav-link text-white font-weight-bold px-0"
                                         id="dropdownMenuButton"  data-bs-toggle="dropdown" aria-expanded="false">
                                            {{auth()->user()->name ?? auth()->user()->username}}
-                                        <img class="img-perfil rounded-circ" src="img/{{ Auth::user()->imagen}}" >
+                                        <img class="img-perfil rounded-circ" src="images/{{ Auth::user()->imagen}}" >
                                     </a>
                                  <!-- Usar Informacion -->
                                     <div class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"
@@ -283,16 +284,15 @@
                         <span class="nav-link-text ms-1">Productos</span>
                     </a>
                 </li>
-                <!-- <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Usuarios</h6>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link " href="{{ route('usuarios.users') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-users text-success text-sm opacity-10"></i>
+                            <i class="fa fa-users text-info text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Lista de Usuarios</span>
+                        <span class="nav-link-text ms-1">Usuarios</span>
                     </a>
-                </li> -->
+                </li> 
             </ul>
         </div>
     </aside>
@@ -439,6 +439,20 @@
                                 <strong class="h-25" style="font-size: 30px; width:100%;
                                 background-color:rgba(11, 198, 255, 0.504);
                                 position: absolute; bottom: 0; left:0;">Piscina</strong>
+                            </p>
+                    </div>
+
+                    <a href="{{ route('usuarios.users') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                    data-id="" style="margin:10px 10px 0px 0px; border-radius:0%;">
+                    <div class="text-center" style="text-align:center; padding: 0px;">
+                        <div class="" style="margin-top: 0%">
+                            <i class="fa-solid fa-user fa-10x text-info"></i>
+                        </div>
+                        <!-- Nombre -->
+                            <p id="precio" class="text-white font-robo text-decoration-line">
+                                <strong class="h-25" style="font-size: 30px; width:100%;
+                                background-color:rgba(11, 198, 255, 0.504);
+                                position: absolute; bottom: 0; left:0;">Usuarios</strong>
                             </p>
                     </div>
                 </a>

@@ -76,7 +76,7 @@
             <div class="col-md-4 gradient-custom text-center text-white"
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;"> 
              <BR> <BR> 
-              <img src="img/{{ $user->imagen }}" 
+              <img src="images/{{ $user->imagen }}" 
                 class="img-perfil rounded-circ"  width="160px"/>
               <h4 style="margin-top:3%; "><strong>{{$user->name}}</strong></h4>
 
@@ -84,7 +84,7 @@
 
               <div class="row justify-content-center">
                 <div style=" flex: 0 0 auto; width: 50%;">
-                  <a href="#" style="width: 70%;  margin-left:30% " class="btn btn-primary" id="">Editar</a>
+                  <a href="{{ route('usuarios.editarPerfil', ['id' => $user->id]) }}" style="width: 70%;  margin-left:30% " class="btn btn-primary" id="">Editar</a>
                 </div>
                 <div  style=" flex: 0 0 auto; width: 50%;">
                   <a href="{{ route('index') }}" style="width: 70%;  margin-right:30% " class="btn btn-secondary" id="">Regresar</a>
@@ -100,19 +100,22 @@
                 <BR>
                 <form class="form-horizontal form-material mx-2" data-bitwarden-watching="1">
                   <div class="form-group">
-                    <label for="name" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px"><b>Nombre Completo:</b></label>
+                    <label for="name" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px">
+                      <b>Nombre Completo:</b></label>
                     <div class="col-md-12">
                       <input readonly type="name" value="{{$user->name}}" class="form-control form-control-line" name="name" id="name">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="email" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px"><b>Correo:</b></label>
+                    <label for="email" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px">
+                      <b>Correo:</b></label>
                     <div class="col-md-12">
                       <input readonly type="email" value="{{$user->email}}" class="form-control form-control-line" name="email" id="email">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="address" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px"><b>Dirección:</b></label>
+                    <label for="address" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px">
+                      <b>Dirección:</b></label>
                     <div class="col-md-12">
                       <input readonly type="address" value="{{$user->address}}" class="form-control form-control-line" name="address" id="address">
                     </div>
