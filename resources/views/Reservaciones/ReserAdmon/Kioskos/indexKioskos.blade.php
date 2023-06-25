@@ -51,7 +51,7 @@
                 @php $i = 1; @endphp
                     @forelse($kioskos as $k)
                         <tr>
-                            <td scope="col" style="text-align: center">{{ $k->id }}</td>
+                            <td scope="col" style="text-align: center">{{ $i++ }}</td>
                             <td scope="col" style="text-align: center">{{ $k->codigo }}</td>
                             <td scope="col" style="text-align: center">{{ $k->cantidad_de_Mesas }}</td>
                             <td scope="col" style="text-align: start">{{ $k->ubicacion }}</td>
@@ -87,8 +87,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="modal-body">
-                                                    ¿Está seguro de eliminar el
-                                                    kiosko:<strong>{{ $k->codigo }}</strong>?
+                                                    ¿Está seguro de eliminar el kiosko:<strong>{{ $k->codigo }}</strong>? <br>Esto eliminará todas las mesas contenidas y los pedidos de estas mesas
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input id="activar" name="activar" style="display:none" value="0">

@@ -200,10 +200,7 @@
                             </thead>
 
                             <tbody>
-                                @php
-                                    $exits = false;
-                                    $i = 0;
-                                @endphp
+                                @php $i = 0; @endphp
                                 @forelse($productos as $p)
                                     @if ($p->tipo == 0)
                                         @if ($p->estado == 0)
@@ -288,16 +285,9 @@
                                                 </td>
                                             </tr>
                                         @endif
-                                    @endif
-                                @empty
+                                    @endif  
+                                @empty                              
                                 @endforelse
-
-                                @if (!$exits)
-                                    <tr>
-                                        <td colspan="7" style="text-align: center;color: gray;">Todos
-                                            los complementos están disponibles <br> </td>
-                                    </tr>
-                                @endif
                             </tbody>
                         </table>
 

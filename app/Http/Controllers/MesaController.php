@@ -140,6 +140,9 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
 
     public function destroy($id)
     {
+        $mesa = Mesa::findOrFail($id);
+        $mesa->pedidos()->delete();
+        
         Mesa::destroy($id);
         return redirect()->route('mesas_reg.index')->with('mensaje', 'Mesa borrada correctamente');
     }

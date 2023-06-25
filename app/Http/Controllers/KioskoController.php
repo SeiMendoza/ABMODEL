@@ -88,7 +88,10 @@ class KioskoController extends Controller
 
     public function destroy($id){
 
-        Kiosko::findOrFail($id)->delete();
+        $k = Kiosko::findOrFail($id);
+        $k->reservaciones()->delete();
+        $k->mesas()->delete();
+        $k->delete();
 
         return to_route('kiosko.index')->with('mensaje', 'Kiosko eliminado correctamente');
 
