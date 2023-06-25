@@ -13,28 +13,30 @@
 @endsection
 @section('tit','Productos de piscina')
 @section('b')
-<!---<h3 class="font-weight-bolder opacity-8  text-gray mb-0" 
+<!---<h3 class="font-weight-bolder opacity-8  text-gray mb-0"
 style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
-<div class="" style=""> 
-    <a href="{{route('piscina.store')}}" style="margin:0; padding:5px; width:150px;" 
-    type="button" class="bg-light border-radius-sm text-center">
+<div class="" style="">
+    <a href="{{route('piscina.store')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center">
         <i class="fa fa-plus-circle"></i> Nuevo producto
     </a>
 </div>
 @endsection
+
+
 @section('content')
 @if($errors->any())
 @foreach($errors->all() as $error)
 <script>
     Swal.fire({
-        position: 'top-end',
-        icon: 'warning',
-        title: '{{$error}}',
-        showConfirmButton: false,
-        toast: true,
-        background: '#fff',
-        timer: 5500
+        position: 'top-end'
+        , icon: 'warning'
+        , title: '{{$error}}'
+        , showConfirmButton: false
+        , toast: true
+        , background: '#fff'
+        , timer: 5500
     })
+
 </script>
 @endforeach
 @endif
@@ -45,6 +47,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
         line-height: 30px;
         margin-bottom: 0px;
     }
+
 </style>
 
 <!--------Lista de productos---------------->
@@ -80,58 +83,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                         <i style="text-size-adjust: 2px;" class="fa fa-plus-circle" aria-hidden="true"></i>
                     </a>
 
-                    <!--Modal de agregar cantidad-->
-                    <div class="modal fade" id="agregar{{$p->id}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-success d-flex align-items-center">
-                                    <strong>
-                                        <h3 class="mx-auto">
-                                            Agregar @if ($p->tipo_producto->id == 1) Libras @else Onzas @endif a {{$p->nombre}}
-                                        </h3>
-                                    </strong>
-                                </div>
-                                <form method="post" action="{{ route('piscina.agregar',['id'=>$p->id]) }}">
-                                    @csrf
-                                    <div class="modal-body">
-                                        <label for="">Ingrese la cantidad que se sumara:</label>
-                                        <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad" class="form-control" step="0.01" style="width:250px;height:30px;">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!--Modal de quitar cantidad-->
-                    <div class="modal fade" id="restar{{$p->id}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-danger d-flex align-items-center">
-                                    <strong>
-                                        <h3 class="mx-auto">
-                                            Restar @if ($p->tipo_producto->id == 1) Libras @else Onzas @endif a {{$p->nombre}}
-                                        </h3>
-                                    </strong>
-                                </div>
-                                <form method="post" action="{{ route('piscina.restar',['id'=>$p->id]) }}">
-                                    @csrf
-                                    <div class="modal-body">
-                                        <label for="">Ingrese la cantidad que se restara:</label>
-                                        <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad" class="form-control" step="0.01" style="width:250px;height:30px;">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!----icono para editar el producto------>
                 </td>
                 <td>
                     <a type="buttom" href="{{route('piscina.show',['id'=>$p->id])}}">
@@ -148,7 +100,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                     <form action="{{route('prodpiscina.destroy', ['id' => $p->id])}}" method="post" enctype="multipart/form-data">
                         @method('delete')
                         @csrf
-                        <div class="modal fade" id="staticBackdropE{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="staticBackdropE{{$p->id}}" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -167,8 +119,60 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                     </form>
                 </td>
             </tr>
+            <!--Modal de agregar cantidad-->
+            <div class="modal fade" id="agregar{{$p->id}}" tabindex="-1" role="dialog" aria-hidden="false" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-success d-flex align-items-center">
+                            <strong>
+                                <h3 class="mx-auto">
+                                    Agregar @if ($p->tipo_producto->id == 1) Libras @else Onzas @endif a {{$p->nombre}}
+                                </h3>
+                            </strong>
+                        </div>
+                        <form method="post" action="{{ route('piscina.agregar',['id'=>$p->id]) }}">
+                            @csrf
+                            <div class="modal-body">
+                                <label for="">Ingrese la cantidad que se sumara:</label>
+                                <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad" class="form-control" step="0.01" style="width:250px;height:30px;">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--Modal de quitar cantidad-->
+            <div class="modal fade" id="restar{{$p->id}}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger d-flex align-items-center">
+                            <strong>
+                                <h3 class="mx-auto">
+                                    Restar @if ($p->tipo_producto->id == 1) Libras @else Onzas @endif a {{$p->nombre}}
+                                </h3>
+                            </strong>
+                        </div>
+                        <form method="post" action="{{ route('piscina.restar',['id'=>$p->id]) }}">
+                            @csrf
+                            <div class="modal-body">
+                                <label for="">Ingrese la cantidad que se restara:</label>
+                                <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad" class="form-control" step="0.01" style="width:250px;height:30px;">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!----icono para editar el producto------>
             @empty
-             
+
             @endforelse
         </tbody>
     </table>
