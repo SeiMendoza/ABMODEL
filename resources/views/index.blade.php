@@ -71,7 +71,7 @@
                 title: msg,
                 showConfirmButton: false,
                 toast: true,
-                background: '#0be004ab',
+                background: '#fff',
                 timer: 5500
             })
         }
