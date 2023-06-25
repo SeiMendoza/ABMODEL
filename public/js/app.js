@@ -1,7 +1,4 @@
-import route from 'ziggy-js';
-import { Ziggy } from './ziggy';
-
-route('platillo.activar');
+import 'datatables.net-responsive-dt';
 
 function rellenar() {
     document.getElementById("nombre2").value = document.getElementById("nombre").value;

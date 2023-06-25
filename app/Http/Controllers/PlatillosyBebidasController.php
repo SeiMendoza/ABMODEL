@@ -28,9 +28,9 @@ class PlatillosyBebidasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($origen)
     {
-        return view('/Menu/Admon/Registro/registroPlatillosYBebidas');
+        return view('/Menu/Admon/Registro/registroPlatillosYBebidas')->with('origen',  $origen);
     }
 
     /**
@@ -42,7 +42,7 @@ class PlatillosyBebidasController extends Controller
     public function store(Request $request)
     {
         $rules=[
-            'tipo' => 'required|in:3,2,1',
+            'tipo' => 'required|in:0,2,1',
             'nombre' => 'required|max:100|min:3',
             'descripcion' => 'required|max:100|min:3',
             'precio' => 'required|min:1|max:1000|numeric',
@@ -80,51 +80,6 @@ class PlatillosyBebidasController extends Controller
         $this->validate($request,$rules,$mensaje);
 
         if ($request->input('tipo') == 2) {
-            $platillos = new Platillo();
-
-            $platillos->nombre = $request->input('nombre');
-            $platillos->descripcion = $request->input('descripcion');
-            $platillos->precio = $request->input('precio');
-            $platillos->tamanio = $request->input('tamanio');
-            $platillos->disponible = $request->input('cantidad');
-
-            $file = $request->file('imagen');
-            $destinationPath = 'images/';
-            $filename = time().'.'.$file->getClientOriginalName();
-            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
-
-            $platillos->imagen = 'images/'.$filename;
-
-            $creado = $platillos->save();
-
-            if ($creado) {
-                return redirect()->route('menuAdmon.index')
-                    ->with('mensaje', 'El platillo fue creada exitosamente');
-            }
-
-        }else if($request->input('tipo') == 1 ){
-            $platillos = new Bebida();
-
-            $platillos->nombre = $request->input('nombre');
-            $platillos->descripcion = $request->input('descripcion');
-            $platillos->precio = $request->input('precio');
-            $platillos->tamanio = $request->input('tamanio');
-            $platillos->disponible = $request->input('cantidad');
-
-            $file = $request->file('imagen');
-            $destinationPath = 'images/';
-            $filename = time().'.'.$file->getClientOriginalName();
-            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
-
-            $platillos->imagen = 'images/'.$filename;
-
-            $creado = $platillos->save();
-
-            if ($creado) {
-                return redirect()->route('menuAdmon.index')
-                    ->with('mensaje', 'La bebida fue creada exitosamente');
-            }
-        }else if($request->input('tipo') == 3 ){
             $platillos = new Producto();
 
             $platillos->nombre = $request->input('nombre');
@@ -132,8 +87,8 @@ class PlatillosyBebidasController extends Controller
             $platillos->precio = $request->input('precio');
             $platillos->tamanio = $request->input('tamanio');
             $platillos->disponible = $request->input('cantidad');
-            $platillos->esComplemento = 1;
-            $platillos->tipo = 0;
+            $platillos->tipo = $request->input('tipo');
+
 
             $file = $request->file('imagen');
             $destinationPath = 'images/';
@@ -145,7 +100,54 @@ class PlatillosyBebidasController extends Controller
             $creado = $platillos->save();
 
             if ($creado) {
-                return redirect()->route('menuAdmon.index')
+                return redirect()->route('menuAdmon.platillos')
+                    ->with('mensaje', 'El platillo fue creada exitosamente');
+            }
+
+        }else if($request->input('tipo') == 1 ){
+            $platillos = new Producto();
+
+            $platillos->nombre = $request->input('nombre');
+            $platillos->descripcion = $request->input('descripcion');
+            $platillos->precio = $request->input('precio');
+            $platillos->tamanio = $request->input('tamanio');
+            $platillos->disponible = $request->input('cantidad');
+            $platillos->tipo = $request->input('tipo');
+
+            $file = $request->file('imagen');
+            $destinationPath = 'images/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+
+            $platillos->imagen = 'images/'.$filename;
+
+            $creado = $platillos->save();
+
+            if ($creado) {
+                return redirect()->route('menuAdmon.bebidas')
+                    ->with('mensaje', 'La bebida fue creada exitosamente');
+            }
+        }else if($request->input('tipo') == 0){
+            $platillos = new Producto();
+
+            $platillos->nombre = $request->input('nombre');
+            $platillos->descripcion = $request->input('descripcion');
+            $platillos->precio = $request->input('precio');
+            $platillos->tamanio = $request->input('tamanio');
+            $platillos->disponible = $request->input('cantidad');
+            $platillos->tipo = $request->input('tipo');
+
+            $file = $request->file('imagen');
+            $destinationPath = 'images/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+
+            $platillos->imagen = 'images/'.$filename;
+
+            $creado = $platillos->save();
+
+            if ($creado) {
+                return redirect()->route('menuAdmon.complementos')
                     ->with('mensaje', 'El Complemento fue creado exitosamente');
             }
         }
@@ -168,11 +170,7 @@ class PlatillosyBebidasController extends Controller
      * @param  \App\Models\PlatillosyBebidas  $platillosyBebidas
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
-        $Comple = Producto::findOrFail($id);
-        return view('Menu/Admon/edicion/editarComplemento') 
-              -> with('Comple', $Comple);
-    }
+   
 
     /**
      * Update the specified resource in storage.

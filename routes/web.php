@@ -11,6 +11,7 @@ use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
 use App\Http\Controllers\EditarPlatilloController;
 use App\Http\Controllers\EditarBebidaController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PiscinaController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ReservacionController;
@@ -73,12 +74,9 @@ Route::get('/admonRestauranteC', [HomeController::class, 'indexComplementos'])
 
 Route::get('/admonRestaurante', [HomeController::class, 'indexPlatillos'])
 ->name('menuAdmon.index');
-Route::put('bebida/{id}/activar', [BebidaController::class, 'activar'])
-->name('bebida.activar');
-Route::put('platillo/{id}/activar', [PlatilloController::class, 'activar'])
-->name('platillo.activar');
-Route::put('combo/{id}/activar', [ComboController::class, 'activar'])
-->name('combo.activar');
+Route::put('producto/{id}/activar', [ProductoController::class, 'activar'])
+->name('producto.activar');
+
 
 /** Rutas de Prueba AmonMenu */
 Route::get('/pruebaAdmon', [HomeController::class, 'pruebaAdmon'])
@@ -168,29 +166,12 @@ Route::delete('/menu/detalles/{id}/borrar', [MenuUsuarioController::class, 'dest
 ******************************/
 Route::get('/menu/cliente', [PlatillosyBebidasController::class, 'index'])
 ->name('cliente_menu.index');
-Route::get('/bebidasyplatillos/nuevo', [PlatillosyBebidasController::class, 'create'])
+
+Route::get('/bebidasyplatillos/nuevo/{origen}', [PlatillosyBebidasController::class, 'create'])
 ->name('bebidasyplatillos.create');
 
-Route::post('/bebidasyplatillos/nuevo',[PlatillosyBebidasController::class, 'store'])
+Route::post('/bebidasyplatillos/nuevo/',[PlatillosyBebidasController::class, 'store'])
     ->name('bebidasyplatillos.store');
-
-/*****************************
-  Rutas Para Combos
-******************************/
-Route::get('/combos/nuevo', [ComboController::class, 'create'])
-->name('combo.create');
-
-Route::post('/combos/nuevo',[ComboController::class, 'store'])
-    ->name('combo.store');
-
-Route::post('/combos/temporal',[ComboController::class, 'temporal'])
-    ->name('combo.temporal');
-
-Route::delete('/combos/{id}',[ComboController::class, 'destroy'])
-  ->name('combo.destroy');
-
-  Route::delete('combo/{id}/borrar', [ComboController::class, 'destroyC'])
-  ->name('combo.borrar');
 
 /*****************************
   Rutas De estado
@@ -209,40 +190,21 @@ Route::post('/estado/nuevo',[ComboController::class, 'estadoactualizar'])
 Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])
     ->name('busqueda.index');
 
-
-
 /****************************************
   Rutas Para Editar Productos
 *****************************************/
-Route::get('platillo/{id}/editar', [EditarPlatilloController::class, 'edit'])
-    ->name('plato.editar');
 
-Route::put('platillo/{id}/edicion', [EditarPlatilloController::class, 'update'])
-    ->name('plato.update');
+Route::get('producto/{id}/editar', [ProductoController::class, 'edit'])
+    ->name('producto.editar');
 
-Route::get('bebida/{id}/editar', [EditarBebidaController::class, 'edit'])
-    ->name('bebida.editar');
+Route::put('platillo/{id}/edicion', [ProductoController::class, 'updateP'])
+    ->name('productoP.update');
   
-Route::put('bebida/{id}/edicion', [EditarBebidaController::class, 'update'])
-    ->name('bebida.update');
+Route::put('bebida/{id}/edicion', [ProductoController::class, 'updateB'])
+    ->name('productoB.update');
 
-Route::get('complemento/{id}/editar', [PlatillosyBebidasController::class, 'edit'])
-    ->name('complemento.editar');
-  
-Route::put('complemento/{id}/edicion', [PlatillosyBebidasController::class, 'update'])
-    ->name('complemento.update');
-
-/****************************************
-  Rutas Para Editar Combos
-*****************************************/
-Route::get('combo/{id}/editar', [ComboController::class, 'edit'])
-    ->name('combo.editar');
-  
-Route::put('combo/{id}/edicion', [ComboController::class, 'update'])
-    ->name('combo.update');
-
-
-
+Route::put('complemento/{id}/edicion', [ProductoController::class, 'updateC'])
+    ->name('productoC.update');
 
 /*lista de pedidos anteriores*/
 Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])
@@ -254,11 +216,12 @@ Route::delete('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])
 Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])
 ->name('pedidoAnterior.detalle'); 
 
+
 /****************************************
   Rutas Para eliminar Platillos y Bebidas
 *****************************************/
- Route::delete('platillo/{id}/borrar', [PlatilloController::class, 'destroy'])
-    ->name('platillo.borrar');
+ Route::delete('producto/{id}/borrar', [ProductoController::class, 'destroy'])
+    ->name('producto.borrar');
  Route::delete('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
     ->name('bebida.borrar');
 

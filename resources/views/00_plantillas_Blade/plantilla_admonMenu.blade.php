@@ -4,22 +4,6 @@
     <li class="breadcrumb-item text-sm text-white active" aria-current="page">Administración de menú</li>
 @endsection
 @section('tit', 'Administración de menú')
-@section('b')
-    <!-- Botón registrar -->
-    <div>
-        <a href="{{ route('bebidasyplatillos.create') }}" style="margin:8px; padding:5px; width:200px;" type="button"
-            class="bg-light border-radius-sm text-center">
-            <i class="fa fa-plus-circle"></i> Agregar Productos
-        </a>
-    </div>
-    <div>
-        <a href="{{ route('cliente_prueba') }}" style="margin:0; padding:5px; width:160px;" type="button"
-            class="bg-light border-radius-sm text-center ">
-            <i class="fa fa-users"></i> Menú cliente
-        </a>
-    </div>
-
-@endsection
 
 @section('content')
     <script>
@@ -39,7 +23,7 @@
     </script>
 
     <br>
-        @yield('selection')
+    @yield('selection')
     <br>
 
     <!--Menu de Productos-->
@@ -50,6 +34,23 @@
 
         </div>
     </div>
-    
+
+
+    <script src="/JQuery/jquery-3.7.0.js"></script>
+    <script src="/JQuery/jquery-3.7.0.min.js"></script>
+    <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
+    <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        //DATATABLES para Menú
+        $(document).ready(function {}(
+            $('.menu').DataTable();));
+
+        //DATATABLES para Kiosko
+        $(document).ready(function() {
+            $('.kiosko').DataTable();
+        });
+
+        
+    </script>
 
 @endsection

@@ -1,4 +1,20 @@
 @extends('00_plantillas_Blade.plantilla_admonMenu')
+@section('b')
+    <!-- Botón registrar -->
+    <div>
+        <a href="{{ route('bebidasyplatillos.create', ['origen' => 1]) }}" style="margin:8px; padding:5px; width:200px;" type="button"
+            class="bg-light border-radius-sm text-center">
+            <i class="fa fa-plus-circle"></i> Agregar Productos
+        </a>
+    </div>
+    <div>
+        <a href="{{ route('cliente_prueba') }}" style="margin:0; padding:5px; width:160px;" type="button"
+            class="bg-light border-radius-sm text-center ">
+            <i class="fa fa-users"></i> Menú cliente
+        </a>
+    </div>
+
+@endsection
 @section('selection')
     <div>
         <div>
@@ -80,10 +96,8 @@
                                                 <td scope="col" style="text-align: center;">{{ $p->disponible }}</td>
                                                 <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
                                                 <td scope="col" style="text-align: center;">
-                                                    <i data-bs-toggle="modal" data-bs-target="#desactivarBebida{{ $p->id }}">
-                                                        <a class="fa fa-times-circle text-warning"></a> Desactivar
-                                                    </i>
-                                                    <form action="{{ route('bebida.activar', ['id' => $p->id]) }}" method="post"
+                                                    <button data-bs-toggle="modal" data-bs-target="#desactivarBebida{{ $p->id }}"><i class="fa fa-times-circle text-warning"></i> Desactivar</button>
+                                                    <form action="{{ route('producto.activar', ['id' => $p->id]) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
@@ -113,12 +127,12 @@
                                                     </form>
                                                 </td>
                                                 <td scope="col" style="text-align: center;"><a
-                                                        href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
+                                                        href="{{ route('producto.editar', ['id' => $p->id]) }}"><i
                                                             class="fa fa-edit text-success"></i></a></td>
                                                 <td scope="col" style="text-align: center;">
                                                     <i data-bs-toggle="modal" data-bs-target="#staticBackdropEb{{ $p->id }}"
                                                         class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
-                                                    <form action="{{ route('bebida.borrar', ['id' => $p->id]) }}" method="post"
+                                                    <form action="{{ route('producto.borrar', ['id' => $p->id]) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @method('delete')
                                                         @csrf
@@ -186,15 +200,11 @@
                                             <tr>
                                                 <td scope="col" style="text-align: center">@php echo $i @endphp</td>
                                                 <td scope="col" style="text-align: start">{{ $p->nombre }}</td>
-                                                <td scope="col" style="text-align: center">{{ $p->disponible }}
-                                                </td>
-                                                <td scope="col" style="text-align: end">L {{ $p->precio }}.00
-                                                </td>
+                                                <td scope="col" style="text-align: center">{{ $p->disponible }}</td>
+                                                <td scope="col" style="text-align: end">L {{ $p->precio }}.00</td>
                                                 <td scope="col" style="text-align: center">
-                                                    <i data-bs-toggle="modal" data-bs-target="#activarBebida{{ $p->id }}">
-                                                        <a class="fa fa-check-circle text-success"></a>
-                                                        Activar</i>
-                                                    <form action="{{ route('bebida.activar', ['id' => $p->id]) }}" method="post"
+                                                    <button data-bs-toggle="modal" data-bs-target="#activarBebida{{ $p->id }}"><i class="fa fa-check-circle text-success"></i> Activar</button>
+                                                    <form action="{{ route('producto.activar', ['id' => $p->id]) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
@@ -225,12 +235,12 @@
                                                     </form>
                                                 </td>
                                                 <td scope="col" style="text-align: center"><a
-                                                        href="{{ route('bebida.editar', ['id' => $p->id]) }}"><i
+                                                        href="{{ route('producto.editar', ['id' => $p->id]) }}"><i
                                                             class="fa fa-edit text-success"></i></a></td>
                                                 <td scope="col" style="text-align: center">
                                                     <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{ $p->id }}"
                                                         class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
-                                                    <form action="{{ route('bebida.borrar', ['id' => $p->id]) }}" method="post"
+                                                    <form action="{{ route('producto.borrar', ['id' => $p->id]) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @method('delete')
                                                         @csrf

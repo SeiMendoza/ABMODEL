@@ -5,10 +5,9 @@
 <li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Registro de productos</li>
 @endsection
 @section('tit','Registro de productos')
-
 @section('b')
 <div>
-    <a href="{{route('menuAdmon.index')}}" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+    <a onclick="cancelarMenu({{ $origen }})" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
         <i class="fa fa-arrow-left"></i>  Regresar
     </a>
 </div>
@@ -35,7 +34,7 @@
         <div class="card border-radius-sm border-0" style="">
             <div class="card-body border-radius-sm border-0">
                 <h2 class="title" style="margin-bottom:0%"></h2>
-                <form method="post" action="" enctype="multipart/form-data">
+                <form method="post" action="{{ route('bebidasyplatillos.store') }}" enctype="multipart/form-data">
                     @csrf
                     <h4 class="font-robo t" style="margin: 0; padding:0">Datos del producto</h4>
                     <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
@@ -59,10 +58,10 @@
                                 <div class="col">
                                 <label for=""><strong>Tipo de producto:</strong></label>
                                 <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control border-radius-sm">
-                                    <option value="">Seleccione el tipo de producto</option>
+                                    <option value="0">Seleccione el tipo de producto</option>
                                     <option @if (old('tipo') == 1) selected @endif value="1">Bebida</option>
                                     <option @if (old('tipo') == 2) selected @endif value="2">Comida</option>
-                                    <option @if (old('tipo') == 3) selected @endif value="3">Complemento</option>
+                                    <option @if (old('tipo') == 0) selected @endif value="0">Complemento</option>
                                 </select>
                                 @error('tipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -166,7 +165,7 @@
                     </div>
                     <div style="float: right;margin-top: 5px">
                         <button type="submit" class="btn btn-success">Guardar</button>
-                        <button type="button" onclick="cancelar('admonRestaurante')"
+                        <button type="button" onclick="cancelarMenu({{ $origen }})"
                             class="btn btn-warning">Cancelar</button>
                     </div>
 

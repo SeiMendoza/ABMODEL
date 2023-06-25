@@ -1,4 +1,20 @@
 @extends('00_plantillas_Blade.plantilla_admonMenu')
+@section('b')
+    <!-- Botón registrar -->
+    <div>
+        <a href="{{ route('bebidasyplatillos.create', ['origen' => 2]) }}" style="margin:8px; padding:5px; width:200px;" type="button"
+            class="bg-light border-radius-sm text-center">
+            <i class="fa fa-plus-circle"></i> Agregar Productos
+        </a>
+    </div>
+    <div>
+        <a href="{{ route('cliente_prueba') }}" style="margin:0; padding:5px; width:160px;" type="button"
+            class="bg-light border-radius-sm text-center ">
+            <i class="fa fa-users"></i> Menú cliente
+        </a>
+    </div>
+
+@endsection
 @section('selection')
     <div>
         <div>
@@ -75,7 +91,7 @@
                                             <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
                                             <td scope="col" style="text-align: center;">                                                
                                                 <button data-bs-toggle="modal" data-bs-target="#activarPlatillo{{ $p->id }}"><i class="fa fa-times-circle text-warning"></i> Desactivar</button>
-                                                <form action="{{ route('platillo.activar', ['id' => $p->id]) }}" name="activar{{ $p->id }}" method="post"
+                                                <form action="{{ route('producto.activar', ['id' => $p->id]) }}" name="activar{{ $p->id }}" method="post"
                                                     enctype="multipart/form-data">
                                                     @method('put')
                                                     @csrf
@@ -105,14 +121,14 @@
                                                 </form>
                                             </td>
                                             <td scope="col" style="text-align: center;">
-                                                <a href="{{ route('plato.editar', ['id' => $p->id]) }}">
+                                                <a href="{{ route('producto.editar', ['id' => $p->id]) }}">
                                                     <i class="fa fa-edit text-success"></i>
                                                 </a>
                                             </td>
                                             <td scope="col" style="text-align: center;">
                                                 <i data-bs-toggle="modal" data-bs-target="#staticBackdropEe{{ $p->id }}"
                                                     class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
-                                                <form action="{{ route('platillo.borrar', ['id' => $p->id]) }}" method="post"
+                                                <form action="{{ route('producto.borrar', ['id' => $p->id]) }}" method="post"
                                                     enctype="multipart/form-data">
                                                     @method('delete')
                                                     @csrf
@@ -182,7 +198,7 @@
                                                 <td scope="col" style="text-align: end;">L {{ $p->precio }}.00</td>
                                                 <td scope="col" style="text-align: center;">                                                    
                                                     <button data-bs-toggle="modal" data-bs-target="#activarPlatillo{{ $p->id }}"><i class="fa fa-check-circle text-success"></i> Activar</button>
-                                                    <form action="{{ route('platillo.activar', ['id' => $p->id]) }}" method="post"
+                                                    <form action="{{ route('producto.activar', ['id' => $p->id]) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
@@ -213,12 +229,12 @@
                                                     </form>
                                                 </td>
                                                 <td scope="col" style="text-align: center;"><a
-                                                        href="{{ route('plato.editar', ['id' => $p->id]) }}"><i
+                                                        href="{{ route('producto.editar', ['id' => $p->id]) }}"><i
                                                             class="fa fa-edit text-success"></i></a></td>
                                                 <td scope="col" style="text-align: center;">
                                                     <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{ $p->id }}"
                                                         class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
-                                                    <form action="{{ route('platillo.borrar', ['id' => $p->id]) }}" method="post"
+                                                    <form action="{{ route('producto.borrar', ['id' => $p->id]) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @method('delete')
                                                         @csrf
