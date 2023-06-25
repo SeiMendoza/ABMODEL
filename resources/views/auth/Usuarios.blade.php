@@ -21,7 +21,7 @@
                 <th scope="col" style="text-align: left;  ">Name</th>
                 <th scope="col" style="text-align: left;  ">Correo</th>
                 <th scope="col" style="text-align: right; width:10% ">Teléfono</th>
-                <th scope="col" style="text-align: center;">Detalles</th>
+                <th scope="col" style="text-align: center;">Dirección</th>
                 <th scope="col" style="text-align: center;">Editar</th>
                 <th scope="col" style="text-align: center; ">Eliminar</th>
             </tr>
@@ -33,10 +33,8 @@
                 <td scope="col" style="text-align: left;">{{$l->name}} </td>
                 <td scope="col" style="text-align: left;">{{$l->email}} </td>
                 <td scope="col" style="text-align: right;">{{$l->telephone}}</td>
-                <td scope="col" style="text-align: center;"><a type="buttom" href="#">
-                       <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
-                   </a> 
-                </td>
+                <td scope="col" style="text-align: right;">{{$l->address}}</td>
+
                 <td style="text-align: center;"><a href="{{ route('usuarios.editar', ['id' => $l->id]) }}"><i class="fa fa-edit text-success"></i></a></td>
                 <td scope="col" style="text-align: center;">
                     <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$l->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>

@@ -93,28 +93,7 @@
                                     @enderror
                                 </div>  
                         </div>
-
-						<!--<BR>
-						<div class="row" style="margin-left:20px">
-							<div class="col">
-								 <label for="password"><strong>Contraseña:</strong></label>
-								 <input class="form-control border-radius-sm" type="password" placeholder="Ingrese una contraseña" name="password"
-								   value="{{ old('password', $user->password) }}" maxlength="40" required onkeypress="quitarerror()" autocomplete="new-password">
-								@error('password')
-								   <strong class="menerr" style="color:red">{{ $message }}</strong>
-								@enderror
-							</div>
-
-							<div class="col">
-								<label for="confirm"><strong>Confirmar Contraseña:</strong></label>
-								<input class="form-control border-radius-sm" type="password" placeholder="Confirmar la contraseña" name="password_confirmation" 
-								   value="{{ old('confirm', $user->confirm) }}" required onkeypress="quitarerror()" required autocomplete="new-password">
-								@error('confirm')
-									<strong class="menerr" style="color:red">{{ $message }}</strong>
-								@enderror
-							</div>
-						</div>-->
-
+						
 						<BR>
                             <div class="row" style="margin-left:20px">
                                 <div class="col">

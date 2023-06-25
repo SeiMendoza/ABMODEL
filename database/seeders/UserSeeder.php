@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'name'=>'Cristiana Ferrera',
             'email'=>'cristiana.ferrera@unah.edu.hn',
             'password' => bcrypt('12345678'),
-            'address'=>'1303 San Jacinto Street Houston TX 77002 USA',
+            'address'=>'1303 San Jacinto Street Houston 77002',
             'telephone'=>'94896083',
             'imagen'=>'balneario.jpg',
         ]);
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'name'=>'Lester Bogran',
             'email'=>'lester.bogran@unah.edu.hn',
             'password' => bcrypt('12345678'),
-            'address'=>'1303 San Jacinto Street Houston TX 77002 USA',
+            'address'=>'1303 San Jacinto Street Houston 77002 ',
             'telephone'=>'98967485',
             'imagen'=>'apple-icon.png',
         ]);
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
             'name'=>'Asly Reyes',
             'email'=>'asly.reyes@unah.hn',
             'password' => bcrypt('12345678'),
-            'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
+            'address'=>'1305 San Jacinto Street Houston 77002',
             'telephone'=>'96324578',
             'imagen'=>'unass.jpg',
         ]);
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
             'name'=>'Seily Mendoza',
             'email'=>'seily.mendoza@unah.hn',
             'password' => bcrypt('12345678'),
-            'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
+            'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'97851263',
             'imagen'=>'unass.jpg',
         ]);
@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
             'name'=>'Juan Pastor',
             'email'=>'juan.pastor@unah.hn',
             'password' => bcrypt('12345678'),
-            'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
+            'address'=>'1305 San Jacinto Street Houston 77002',
             'telephone'=>'99124578',
             'imagen'=>'123.png',
         ]);
@@ -65,7 +65,7 @@ class UserSeeder extends Seeder
             'name'=>'Edgar Lopez',
             'email'=>'ejlopezl@unah.hn',
             'password' => bcrypt('12345678'),
-            'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
+            'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'92145896',
             'imagen'=>'carousel-1.jpg',
         ]);
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
             'name'=>'Rolando Hernández',
             'email'=>'rolandohernndez@unah.hn',
             'password' => bcrypt('12345678'),
-            'address'=>'1305 San Jacinto Street Houston TX 77002 USA',
+            'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'91235896',
             'imagen'=>'carousel-3.jpg',
         ]);

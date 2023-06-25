@@ -98,7 +98,6 @@ class LoginController extends Controller
         $this->validate($request, [
              'name' => 'required|min:3|max:40|regex:/^[a-zA-Z]+\s[a-zA-Z]+(\s[a-zA-Z]+)?(\s[a-zA-Z]+)?$/',
              'email' => 'required|string|email|max:50',
-             'password' => '',
              'address' => 'required|string|min:3|max:300',
              'telephone' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
              'imagen' => ''
@@ -113,10 +112,6 @@ class LoginController extends Controller
              'email.email' => '¡Debes ingresar un correo electrónico válido!',
              'email.max' => '¡Has excedido el limite máximo de letras!',
  
-             'password.required' => '¡Debes ingresar una contraseña!',
-             'password.confirmed' => '¡Debes confirmar tu contraseña!',
-             'password.min' => '¡Debes ingresar una contraseña segura!',
- 
              'address.required' => '¡Debes ingresar tu dirección!',
              'address.string' => '¡Debes ingresar tu dirección, verifica la información!',
              'address.min' => '¡Ingresa tu dirección completa, sin abreviaturas!',
@@ -128,18 +123,18 @@ class LoginController extends Controller
              'telephone.regex'=>'¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!',
  
          ]);
- 
-         $input = $request->all();
-         $password = $request->input('password');
-         $input['password'] = bcrypt($password);
- 
+         
          $actualizarUser = User::findOrFail($id);
  
          $actualizarUser->name=$request->input('name');
          $actualizarUser->email=$request->input('email');
-         $actualizarUser->password=$request->input('password');
          $actualizarUser->address=$request->input('address');
          $actualizarUser->telephone=$request->input('telephone');
+
+         if ($request->has('password')) {
+            // Solo se actualiza la contraseña si se proporciona una nueva
+            $actualizarUser->password = bcrypt($request->input('password'));
+        }
  
          if($request->hasFile('imagen')){
              $file = $request->file('imagen');
@@ -157,7 +152,8 @@ class LoginController extends Controller
  
          if($creado){
             return redirect()->route('usuarios.perfil')
-            ->with('mensaje', "Se actualizó exitosamente el usuario: ".$actualizarUser->name." ");
+            ->with('mensaje', "Se actualizó exitosamente el perfil: ".$actualizarUser->name." ");
          }
-     }
+    }
+
 }

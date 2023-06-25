@@ -142,17 +142,17 @@ class RegistroController extends Controller
 
         ]);
 
-        $input = $request->all();
-        $password = $request->input('password');
-        $input['password'] = bcrypt($password);
-
         $actualizarUser = User::findOrFail($id);
 
         $actualizarUser->name=$request->input('name');
         $actualizarUser->email=$request->input('email');
-        $actualizarUser->password=$request->input('password');
         $actualizarUser->address=$request->input('address');
         $actualizarUser->telephone=$request->input('telephone');
+
+        if ($request->has('password')) {
+            // Solo se actualiza la contraseña si se proporciona una nueva
+            $actualizarUser->password = bcrypt($request->input('password'));
+        }
 
         if($request->hasFile('imagen')){
             $file = $request->file('imagen');
@@ -180,13 +180,11 @@ class RegistroController extends Controller
          return to_route('usuarios.users')->with('mensaje', 'Usuario eliminado correctamente!');
     }
 
-    
-
 
     /**Vista de usuarios */
     public function users(Request $request)
     {
-        $listaUs = User::paginate(10);
+        $listaUs = User::all();
         return view('auth/Usuarios', compact('listaUs'));
     }
 }
