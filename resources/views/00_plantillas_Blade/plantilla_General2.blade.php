@@ -27,7 +27,7 @@
     <!-- Main CSS-->
     <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet" media="all">
-
+    
     <script src="{{ asset('/js/sweetalert2.all.min.js') }}"></script>
 
 
@@ -221,6 +221,7 @@
     </aside>
 
     <main class="main-content" style="padding: 0px; margin: 93px 1% 0% 17.3%;">
+    
         <script>
             var msg = '{{ Session::get('mensaje') }}';
             var exist = '{{ Session::has('mensaje') }}';
@@ -267,6 +268,7 @@
     <script>
         let table = new DataTable('#example', {});
     </script>
+
     <script>
         (function() {
             'use strict'

@@ -25,12 +25,5 @@ class PlatilloController extends Controller
 
     }
 
-    public function destroy($id){
-
-        $platillo = Platillo::findOrFail($id);
-        $platillo->delete();
-
-        return back()->with('mensaje', 'Platillo borrado correctamente');
-
-    }
+    
 }
