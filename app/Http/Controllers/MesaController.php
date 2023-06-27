@@ -47,7 +47,7 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
         $request->validate([
             'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7',
             'name' => 'required|regex:/^[a-zA-Z]{4}+[-][0-9][0-9]$/|max:7|min:7',
-            'cantidad' => 'required|min:1|max:20|numeric',
+            'cantidad' => 'required|min:6|max:8|numeric',
             'kiosko' => 'required' 
         ], [
             'codigo.required' => 'El código no puede estar vacío',
@@ -106,7 +106,7 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
         $request->validate([
             'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7',
             'name' => 'required|regex:/^[M][e][s][a][-][0-9][0-9]$/|max:7|min:7',
-            'cantidad' => 'required|min:1|max:20|numeric',
+            'cantidad' => 'required|min:6|max:8|numeric',
             'kiosko' => 'required'
         ], [
             'codigo.required' => 'El código no puede estar vacío',
