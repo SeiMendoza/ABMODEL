@@ -76,7 +76,7 @@
             <div class="col-md-4 gradient-custom text-center text-white"
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;"> 
              <BR> <BR> 
-              <img src="images/{{ $user->imagen }}" 
+              <img src="/{{ $user->imagen }}" 
                 class="img-perfil rounded-circ"  width="160px"/>
               <h4 style="margin-top:3%; "><strong>{{$user->name}}</strong></h4>
 

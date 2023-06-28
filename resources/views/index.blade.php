@@ -164,7 +164,7 @@
                                     <a href="javascript:;" class="nav-link text-white font-weight-bold px-0"
                                         id="dropdownMenuButton"  data-bs-toggle="dropdown" aria-expanded="false">
                                            {{auth()->user()->name ?? auth()->user()->username}}
-                                        <img class="img-perfil rounded-circ" src="images/{{ Auth::user()->imagen}}" >
+                                        <img class="img-perfil rounded-circ" src="/{{ Auth::user()->imagen}}" >
                                     </a>
                                  <!-- Usar Informacion -->
                                     <div class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"

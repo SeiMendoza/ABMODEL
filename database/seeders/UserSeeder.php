@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'address'=>'1303 San Jacinto Street Houston 77002',
             'telephone'=>'94896083',
-            'imagen'=>'balneario.jpg',
+            'imagen'=>'images/balneario.jpg',
         ]);
 
         DB::table('users')->insert([
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'address'=>'1303 San Jacinto Street Houston 77002 ',
             'telephone'=>'98967485',
-            'imagen'=>'apple-icon.png',
+            'imagen'=>'images/apple-icon.png',
         ]);
 
         DB::table('users')->insert([
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston 77002',
             'telephone'=>'96324578',
-            'imagen'=>'unass.jpg',
+            'imagen'=>'images/unass.jpg',
         ]);
 
         DB::table('users')->insert([
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'97851263',
-            'imagen'=>'unass.jpg',
+            'imagen'=>'images/unass.jpg',
         ]);
 
         DB::table('users')->insert([
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston 77002',
             'telephone'=>'99124578',
-            'imagen'=>'123.png',
+            'imagen'=>'images/123.png',
         ]);
 
         DB::table('users')->insert([
@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'92145896',
-            'imagen'=>'carousel-1.jpg',
+            'imagen'=>'images/carousel-1.jpg',
         ]);
 
         DB::table('users')->insert([
@@ -76,7 +76,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'91235896',
-            'imagen'=>'carousel-3.jpg',
+            'imagen'=>'images/carousel-3.jpg',
         ]);
     }
 }
