@@ -135,7 +135,11 @@
                             <td class="informacion"></td>
                             <td class="titulo">Total</td>
                             <td class="informacion"></td>
-                            <td class="titulo"> L {{ number_format($reservacion->total, 2, '.', ',') }}  </td>
+                            @php
+                                $total = $reservacion->precioNinios * $reservacion->cantidadNinios +
+                                $reservacion->precioAdultos * $reservacion->cantidadAdultos;
+                            @endphp
+                            <td class="titulo"> L {{ number_format($total, 2, '.', ',') }}  </td>
                             <td class="informacion"></td>
                         </tr> 
 
@@ -151,7 +155,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Pendiente</td>
                             <td class="informacion"></td>
-                            <td class="titulo">L {{ number_format($reservacion->pendiente, 2, '.', ',') }}  </td>
+                            <td class="titulo">L {{ number_format($total - $reservacion->anticipo, 2, '.', ',') }}  </td>
                             <td class="informacion"></td>
                         </tr> 
 

@@ -41,7 +41,11 @@
                             <td scope="col" style="text-align:left;" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('MMMM') }},
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('YYYY') }}</td> 
-                            <td class="" style="text-align:right" scope="col">L {{ number_format($r->total, 2, '.', ',') }}</td>
+                                @php
+                                $total = $r->precioNinios * $r->cantidadNinios +
+                                $r->precioAdultos * $r->cantidadAdultos;
+                                @endphp
+                            <td class="" style="text-align:right" scope="col">L {{ number_format($total, 2, '.', ',') }}</td>
                             <td class="" style="text-align:right" scope="col">L {{ number_format($r->anticipo, 2, '.', ',') }}</td> 
                             <td scope="col"  style="text-align: center;">
                                 <a type="buttom" href="{{route('kiosko.detail',['id'=>$r->id])}}">
