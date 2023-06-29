@@ -19,15 +19,9 @@ class MesaController extends Controller
     }
     public function Codigo_Qr($id)
     {
-        $reg = Mesa::findOrfail($id);
-        
- // Convertir el blob en una cadena base64
-$base64 = base64_encode($reg->mesa_qr);
-
-// Convertir la cadena base64 en una cadena de datos URI en formato SVG
-$qr = 'data:image/svg+xml;base64,' . $base64;
-       // $qr = QrCode::Color(255, 0, 0)->size(250)->generate('https://registro.unah.edu.hn/');
-        return view('Reservaciones.ReserAdmon.Mesas.mesa_qr',  compact('reg','qr'));
+        $mesa = Mesa::findOrFail($id);
+    $Qr = asset($mesa->mesa_qr); // ruta para mostrar el qr
+        return view('Reservaciones.ReserAdmon.Mesas.mesa_qr', compact('mesa', 'Qr'));
     }
     public function search(Request $request)
     {
@@ -42,56 +36,59 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
         return view('Reservaciones.ReserAdmon.Mesas.formularioRegistro', compact('kiosko'));
     }
     public function store(Request $request)
-    {
+{
+    $request->validate([
+        'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7',
+        'name' => 'required|regex:/^[a-zA-Z]{4}+[-][0-9][0-9]$/|max:7|min:7',
+        'cantidad' => 'required|min:6|max:8|numeric',
+        'kiosko' => 'required' 
+    ], [
+        'codigo.required' => 'El código no puede estar vacío',
+        'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01-M01',
+        'codigo.max' => 'El código es muy extenso',
+        'codigo.min' => 'El código es muy corto',
+        'name.required' => 'El nombre no puede estar vacío',
+        'name.regex' => 'El nombre no es válido, uno válido es: Mesa-00',
+        'name.max' => 'El nombre es muy extenso',
+        'name.min' => 'El nombre es muy corto',
+        'cantidad.required' => 'La cantidad no puede estar vacío',
+        'cantidad.max' => 'la cantidad es muy alta',
+        'cantidad.min' => 'La cantidad es muy baja',
+        'cantidad.numeric' => 'La cantidad debe ser de tipo numérico',
+        'kiosko.required' => 'Kiosko no puede estar vacío',
+    ]);
 
-        $request->validate([
-            'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7',
-            'name' => 'required|regex:/^[a-zA-Z]{4}+[-][0-9][0-9]$/|max:7|min:7',
-            'cantidad' => 'required|min:6|max:8|numeric',
-            'kiosko' => 'required' 
-        ], [
-            'codigo.required' => 'El código no puede estar vacío',
-            'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01-M01',
-            'codigo.max' => 'El código es muy extenso',
-            'codigo.min' => 'El código es muy corto',
-            'name.required' => 'El nombre no puede estar vacío',
-            'name.regex' => 'El nombre no es válido, uno válido es: Mesa-00',
-            'name.max' => 'El nombre es muy extenso',
-            'name.min' => 'El nombre es muy corto',
-            'cantidad.required' => 'La cantidad no puede estar vacío',
-            'cantidad.max' => 'la cantidad es muy alta',
-            'cantidad.min' => 'La cantidad es muy baja',
-            'cantidad.numeric' => 'La cantidad debe se dde tipo numérico',
-            'kiosko.required' => 'Kiosko no puede estar vacío',
-        ]);
+    $nuevo = new Mesa; 
+    $nuevo->codigo = $request->input('codigo');
+    $nuevo->nombre = $request->input('name');
+    $nuevo->cantidad = $request->input('cantidad');
+    $nuevo->kiosko_id = $request->input('kiosko');
+    
+    // Generar el código QR
+    $qrCode = QrCode::format('svg')->size(250)->generate('https://www.facebook.com/villacrisol/'.$nuevo->nombre );
 
+    // Generar un nombre para la imagen
+    $filename = 'Qr_'.$nuevo->nombre.'.svg';
 
-        $nuevo = new Mesa; 
-        $nuevo->codigo = $request->input('codigo');
-        $nuevo->nombre = $request->input('name');
-        $nuevo->cantidad = $request->input('cantidad');
-        $nuevo->kiosko_id = $request->input('kiosko');;
-        $qr = QrCode::size(250)->generate('https://www.facebook.com/villacrisol/');
+    // Guardar la imagen en la capeta public/imagenes
+    $storagePath = public_path('imagenes/' . $filename);
+    file_put_contents($storagePath, $qrCode);
 
-        //Sumar mesa al kiosko 
+    // Guardar la ruta relativa de la imagen en  mesa_qr de la mesa
+    $nuevo->mesa_qr = 'imagenes/' . $filename;
+
+    // Guardar la nueva mesa en la base de datos
+    $creado = $nuevo->save();
+
+    if ($creado) {
+        // Sumar mesa al kiosko 
         $kiosko = Kiosko::findOrFail($request->input('kiosko'));
         $kiosko->cantidad_de_Mesas = $kiosko->cantidad_de_Mesas + 1;
         $kiosko->save();
 
- // Guardar el QR en la carpeta 'public'
-//Storage::putFileAs('public', new \Illuminate\Http\File(storage_path('app/mesa_qr.png')), 'mesa_qr.png');
-
-// Asignar la ruta del archivo a la propiedad de la mesa
-//$nuevo->mesa_qr = 'storage/mesa_qr.png';
-
-        $nuevo->mesa_qr = $qr;
-        $creado = $nuevo->save();
-
-        if ($creado) {
-            return redirect()->route('mesas_reg.index')
-                ->with('mensaje', "" . $nuevo->nombre . " creada correctamente");
-        }
+        return redirect()->route('mesas_reg.index')->with('mensaje', "" . $nuevo->nombre . " creada correctamente");
     }
+}
 
     public function edit($id)
     {
@@ -130,7 +127,24 @@ $qr = 'data:image/svg+xml;base64,' . $base64;
         $actualizacion->nombre = $request->input('name');
         $actualizacion->cantidad = $request->input('cantidad');
         $actualizacion->kiosko_id = $request->input('kiosko');
-        $creado = $actualizacion->save();
+
+        // Generar el nuevo código QR en base al nombre actualizado de la mesa
+    $qrCode = QrCode::format('svg')->size(250)->generate('https://www.facebook.com/villacrisol/'.$actualizacion->nombre );
+
+    // Generar un nombre de archivo único para la imagen
+    $filename = 'Qr_'.$actualizacion->nombre.'.svg';
+    
+    // Guardar la nueva imagen en la carpeta public/imagenes
+    $storagePath = public_path('imagenes/' . $filename);
+    file_put_contents($storagePath, $qrCode);
+    
+    // Actualizar la ruta relativa de la imagen en mesa_qr de la mesa actualizada
+    $actualizacion->mesa_qr = 'imagenes/' . $filename;
+    
+    // Guardar la mesa actualizada en la base de datos
+    $creado = $actualizacion->save();
+    //guarda la actualización
+     $creado = $actualizacion->save();
 
         if ($creado) {
             return redirect()->route('mesas_reg.index')

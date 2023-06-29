@@ -10,12 +10,11 @@
 @endsection
 @section('tit','Código Qr de mesas')
 @section('b')
-    <div class="" style="">    
-        <a href="{{route('mesas_reg.index')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" 
-        class="bg-light border-radius-sm text-center">
+<div class="" style="">
+    <a href="{{route('mesas_reg.index')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
         <i class="fa fa-arrow-left"></i> Regresar
-       </a> 
-    </div>
+    </a>
+</div>
 @endsection
 @section('content')
 
@@ -23,11 +22,9 @@
     <div class="card border-radius-sm border-0">
         <div class="card-body border-radius-sm border-0"> <BR><BR>
             <h3 class="border-radius-md h-6 text-center text-gray font-weight-bolder" style="text-align:right">
-                Código Qr para: {{$reg->nombre}} </h3><br>
+                Código Qr para: {{$mesa->nombre}} </h3><br>
             <div style="text-align:center;">
-                <svg style="width:250px; height:250px;">
-                    <image xlink:href="{{ $qr }}" style="width:80%; height:80%;" />
-                </svg>
+                <img src="{{$Qr}}" />
             </div>
             <br>
         </div>

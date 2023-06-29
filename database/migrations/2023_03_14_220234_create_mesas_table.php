@@ -20,9 +20,9 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->unsignedBigInteger('kiosko_id');
             $table->foreign("kiosko_id")->references("id")->on("kioskos")->onDelete('cascade');
-            $table->foreign("id")->references("id")->on("kioskos")->onDelete('cascade');
+           // $table->foreign("id")->references("id")->on("kioskos")->onDelete('cascade');
             $table->boolean('estadoM')->default(0);
-            $table->binary('mesa_qr');
+            $table->text('mesa_qr');
             $table->timestamps();
         });
     }
