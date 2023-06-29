@@ -100,15 +100,15 @@
                                             <option disabled="disabled" value="">Seleccione un kiosko</option> 
                                             @foreach ($kiosko as $c)
                                                 @if (old('kiosko') == $c->id)
-                                                    <option selected="selected" value="{{$c->id}}">{{$c->id}}</option>
+                                                    <option selected="selected" value="{{$c->id}}">{{$c->codigo}}</option>
                                                 @else
-                                                    <option value="{{$c->id}}">{{$c->id}}</option>
+                                                    <option value="{{$c->id}}">{{$c->codigo}}</option>
                                                 @endif
                                             @endforeach 
                                         @else
                                             <option disabled="disabled" selected="selected" value="">Seleccione un kiosko</option> 
                                             @foreach ($kiosko as $c)
-                                                <option value="{{$c->id}}">{{$c->id}}</option>
+                                                <option value="{{$c->id}}">{{$c->codigo}}</option>
                                             @endforeach 
                                         @endif
                                     </select>

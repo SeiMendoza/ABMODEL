@@ -79,9 +79,7 @@
                         </tr>
                     
                 @empty
-                    <tr>
-                        <td colspan="7" style=";">No hay resultados</td>
-                    </tr>
+                    
                 @endforelse
             </tbody>
         </table>

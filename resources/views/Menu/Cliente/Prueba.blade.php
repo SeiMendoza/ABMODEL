@@ -354,15 +354,15 @@
                                     <option disabled="disabled" value="">Seleccione una mesa</option> 
                                     @foreach ($mesas as $c)
                                         @if (old('mesa') == $c->id)
-                                            <option selected="selected" value="{{$c->id}}">{{$c->nombre}}</option>
+                                            <option selected="selected" value="{{$c->id}}">{{$c->nombre}} - Kiosko: {{$c->kiosko->codigo}}</option>
                                         @else
-                                            <option value="{{$c->id}}">{{$c->nombre}}</option>
+                                            <option value="{{$c->id}}">{{$c->nombre}} - Kiosko: {{$c->kiosko->codigo}}</option>
                                         @endif
                                     @endforeach 
                                 @else
                                     <option disabled="disabled" selected="selected" value="">Seleccione una mesa</option> 
                                     @foreach ($mesas as $c)
-                                        <option value="{{$c->id}}">{{$c->nombre}}</option>
+                                        <option value="{{$c->id}}">{{$c->nombre}} - Kiosko: {{$c->kiosko->codigo}}</option>
                                     @endforeach 
                                 @endif
                                 </select>
