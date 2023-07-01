@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kiosko;
+use App\Models\Mesa;
 use Illuminate\Http\Request;
 
 class KioskoController extends Controller
@@ -95,5 +96,16 @@ class KioskoController extends Controller
 
         return to_route('kiosko.index')->with('mensaje', 'Kiosko eliminado correctamente');
 
+    }
+
+    public function detalle($id){
+
+        $kiosko = Kiosko::findOrFail($id);
+        $mesas = Mesa::where('kiosko_id', '=', $id)->get();
+        return view('Reservaciones.ReserAdmon.Kioskos.detalleKiosko', compact('kiosko', 'mesas'));
+    }
+
+    public function back(){
+        return back();
     }
 }

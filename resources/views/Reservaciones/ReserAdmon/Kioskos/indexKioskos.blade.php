@@ -32,7 +32,7 @@
 
 </script>
 
-<div class="container">
+<div class=>
     <br>
     <div class="table-responsive ">
         <table class="table" id="example">
@@ -40,9 +40,8 @@
                 <tr>
                     <th scope="col" style="text-align: center">N</th>
                     <th scope="col" style="text-align: center">Código</th>
-                    <th scope="col" style="text-align: center">Cantidad de Mesas</th>
                     <th scope="col" style="text-align: start">Ubicación</th>
-                    <th scope="col" style="text-align: center">Disponible</th>
+                    <th scope="col" style="text-align: center">Detalle</th>
                     <th scope="col" style="text-align: center">Editar</th>
                     <th scope="col" style="text-align: center">Eliminar</th>
                 </tr>
@@ -53,14 +52,11 @@
                         <tr>
                             <td scope="col" style="text-align: center">{{ $i++ }}</td>
                             <td scope="col" style="text-align: center">{{ $k->codigo }}</td>
-                            <td scope="col" style="text-align: center">{{ $k->cantidad_de_Mesas }}</td>
                             <td scope="col" style="text-align: start">{{ $k->ubicacion }}</td>
                             <td scope="col" style="text-align: center">
-                                @if($k->disponible == 1)
-                                    <i class="fa fa-check-circle text-success"></i>
-                                @else
-                                    <i class="fa fa-times-circle text-danger"></i>
-                                @endif
+                                <a type="buttom" href="{{route('kiosko.detalle',['id'=>$k->id])}}">
+                                    <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
+                                </a>                                 
                             </td>
 
                             <td scope="col" style="text-align: center">

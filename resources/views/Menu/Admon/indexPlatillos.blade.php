@@ -44,7 +44,7 @@
 @section('show')
     <!--Platillos-->
     <div class="tab-pane fade show active" id="pills-platillos" role="tabpanel" aria-labelledby="pills-Pdisponible-tab">
-        <div class="container-fluid" style="padding: 0px">
+        <div class="container-fluid pt-3" style="padding: 0px">
 
             <!--Navegacion entre disponibles y no disponibles-->
             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
@@ -63,7 +63,7 @@
             <div class="tab-content" id="myTabContent" style="height: 500px; overflow-x: hidden;">
                 <!--Platillos Disponibles-->
                 <div class="tab-pane fade show active" id="PDisponibles" role="tabpanel" aria-labelledby="PDisponibles-tab">
-                    <div class="table-responsive container-fluid"> <br>
+                    <div class="table-responsive"> <br>
                         <table class="table menu" id="example" style="">
                             <thead>
                                 <tr>
@@ -169,7 +169,7 @@
                 <!--Platillos No Disponibles-->
                 <div class="tab-pane fade" id="PNoDisponibles" role="tabpanel" aria-labelledby="PNoDisponibles-tab">
 
-                    <div class="table-responsive container-fluid">
+                    <div class="table-responsive">
                         <br>
 
                         <table class="table menu" class="example" id="example">

@@ -46,7 +46,7 @@
     <!--complementos-->
     <div class="tab-pane fade show active" id="pills-complementos" role="tabpanel" aria-labelledby="pills-Cdisponible-tab">
 
-        <div class="container-fluid" style="padding: 0px">
+        <div class="container-fluid pt-3" style="padding: 0px">
 
             <!--Navegacion entre disponibles y no disponibles-->
             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
@@ -69,7 +69,7 @@
 
                 <div class="tab-pane fade show active" id="CDisponibles" role="tabpanel" aria-labelledby="CDisponibles-tab">
 
-                    <div class="table-responsive container-fluid">
+                    <div class="table-responsive">
 
                         <table class="table menu" class="table" id="CombosDisponibles" style="">
                             <thead>
@@ -176,7 +176,7 @@
 
                 <div class="tab-pane fade " id="CNoDisponibles" role="tabpanel" aria-labelledby="CNoDisponibles-tab">
 
-                    <div class="table-responsive container-fluid">
+                    <div class="table-responsive">
 
                         <table class="table menu" class="table" id="CombosNoDisponibles" style="">
                             <thead>

@@ -21,10 +21,9 @@
             })
         }
     </script>
-
-    <br>
-    @yield('selection')
-    <br>
+    <div class="pt-2">
+        @yield('selection')
+    </div>
 
     <!--Menu de Productos-->
     <div class="table-responsive" id="pills-tabContent">
@@ -34,6 +33,8 @@
 
         </div>
     </div>
+
+    @yield('scritps')
 
 
     <script src="/JQuery/jquery-3.7.0.js"></script>
@@ -50,7 +51,6 @@
             $('.kiosko').DataTable();
         });
 
-        
     </script>
 
 @endsection
