@@ -44,7 +44,7 @@
                         <div class="col-3">
 							<BR>
                             <div>
-                                <img onclick="elegirImagen()" style="margin-left: 0;" src="/images/usuario.png" alt="" width="240px" height="240px" id="imagenmostrada">
+                                <img onclick="elegirImagen()" style="margin-left: 0;" src="/img/Perfil/usuario.png" alt="" width="240px" height="240px" id="imagenmostrada">
                                 <br><br>
                                 <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px;" class="btn btn-info text-center "> 
 									<i class="fa fa-file-image"></i> Seleccionar imagen</label>

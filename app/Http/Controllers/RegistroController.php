@@ -39,7 +39,7 @@ class RegistroController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'address' => 'required|string|min:3|max:300',
             'telephone' => 'required|min_digits:8|max_digits:8|regex:/^[2,3,8,9][0-9]{7}+$/',
-            'imagen' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:10240'
+            'imagen' => 'required|image|mimes:jpg,png,jpeg,gif,svg'
         ], [
             'name.required' => '¡Debes ingresar tu nombre completo!',
             'name.min' => '¡Ingresa tu nombre completo, sin abreviaturas!',
@@ -86,8 +86,8 @@ class RegistroController extends Controller
         $file = $request->file('imagen');
         $destinationPath = 'images/';
         $filename = time().'.'.$file->getClientOriginalName();
-        $nuevoUser->imagen = 'images/'.$filename;$uploadSuccess = $request->file('imagen')
-        ->move($destinationPath,$filename);
+        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+        $nuevoUser->imagen = 'images/'.$filename; 
 
         /*Variable para guardar los nuevos registros */
         $creado = $nuevoUser->save();
