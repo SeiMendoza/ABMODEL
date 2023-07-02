@@ -33,7 +33,7 @@
 
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo">Codigo</td>
+                            <td class="titulo"><strong>Codigo</strong></td>
                             <td class="informacion"></td>
                             <td class="titulo">{{$kiosko->codigo}}</td>
                             <td class="informacion"></td>
@@ -41,7 +41,7 @@
                     
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo">Descripción</td>
+                            <td class="titulo"><strong>Descripción</strong></td>
                             <td class="informacion"></td>
                             <td class="titulo">{{$kiosko->descripcion}} </td>
                             <td class="informacion"></td>
@@ -49,21 +49,30 @@
 
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo">Disponible</td>
+                            <td class="titulo"><strong>Estado</strong></td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{ $kiosko->disponible }} </td>
+                                @if ($kiosko->disponible)
+                                <td class="titulo text-success">Disponible</td>
+                                @else
+                                <td class="titulo text-danger">Ocupado</td>
+                                @endif
                             <td class="informacion"></td>
                         </tr> 
 
                         <tr>
                             <td class="informacion"></td>
-                            <td class="titulo">Mesas Contenidas</td>
+                            <td class="titulo"><strong>Mesas Contenidas</strong></td>
                             <td class="informacion"></td>
                             <td class="titulo">
                                 @forelse ($mesas as $m)
                                 <a href="{{ route('mesas_reg.edit', ['id' => $m->id]) }}">{{ $m->nombre }}, </a> 
                                 @empty
-                            
+                                <div class="row">
+                                    <div class="col"><p>No hay mesas en este kiosko</div>
+                                    <div class="col" style="text-align: end;"><a href="{{ route('mesas_reg.create') }}" style="margin:0; padding:px; width:110px;" type="button" class="bg-light border-radius-sm text-center ">
+                                        <i class="fa fa-plus-circle"></i>  Agregar
+                                    </a></p></div>
+                                </div>
                                 @endforelse </td>
                             <td class="informacion"></td>
                         </tr>       

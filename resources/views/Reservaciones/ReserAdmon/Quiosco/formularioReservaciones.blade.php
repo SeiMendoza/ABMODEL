@@ -98,13 +98,15 @@
                                     <select name="kiosko" onchange="quitarerror()" id="kiosko" class="form-control border-radius-sm" required>
                                         @if (old('kiosko'))
                                             <option disabled="disabled" value="">Seleccione un kiosko</option> 
-                                            @foreach ($kiosko as $c)
+                                            @forelse ($kiosko as $c)
                                                 @if (old('kiosko') == $c->id)
                                                     <option selected="selected" value="{{$c->id}}">{{$c->codigo}}</option>
                                                 @else
                                                     <option value="{{$c->id}}">{{$c->codigo}}</option>
                                                 @endif
-                                            @endforeach 
+                                            @empty
+                                                <option disabled="disabled" selected="selected" value="">No hay Kioskos diponibles</option> 
+                                            @endforelse 
                                         @else
                                             <option disabled="disabled" selected="selected" value="">Seleccione un kiosko</option> 
                                             @foreach ($kiosko as $c)

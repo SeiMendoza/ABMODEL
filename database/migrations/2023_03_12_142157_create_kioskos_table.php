@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->integer('cantidad_de_Mesas')->required();
             $table->string('ubicacion')->nullable();
-            $table->boolean('disponible')->default(1)->required();
+            $table->boolean('disponible')->default(1)->required(); // 1 para disponible 0 para no disponible
             $table->string('imagen');
         });
     }

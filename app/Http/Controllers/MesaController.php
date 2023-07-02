@@ -72,7 +72,7 @@ class MesaController extends Controller
 
     // Guardar la imagen en la capeta public/imagenes
     $storagePath = public_path('imagenes/' . $filename);
-    file_put_contents($storagePath, $qrCode);
+    //file_put_contents($storagePath, $qrCode);
 
     // Guardar la ruta relativa de la imagen en  mesa_qr de la mesa
     $nuevo->mesa_qr = 'imagenes/' . $filename;
@@ -136,7 +136,7 @@ class MesaController extends Controller
     
     // Guardar la nueva imagen en la carpeta public/imagenes
     $storagePath = public_path('imagenes/' . $filename);
-    file_put_contents($storagePath, $qrCode);
+    //file_put_contents($storagePath, $qrCode);
     
     // Actualizar la ruta relativa de la imagen en mesa_qr de la mesa actualizada
     $actualizacion->mesa_qr = 'imagenes/' . $filename;

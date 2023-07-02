@@ -26,7 +26,7 @@
             showConfirmButton: false,
             toast: true,
             background: '#fff',
-            timer: 3500
+            timer: 1500
         })
     }
 
@@ -41,6 +41,7 @@
                     <th scope="col" style="text-align: center">N</th>
                     <th scope="col" style="text-align: center">Código</th>
                     <th scope="col" style="text-align: start">Ubicación</th>
+                    <th scope="col" style="text-align: center">Reservaciones</th>
                     <th scope="col" style="text-align: center">Detalle</th>
                     <th scope="col" style="text-align: center">Editar</th>
                     <th scope="col" style="text-align: center">Eliminar</th>
@@ -53,6 +54,7 @@
                             <td scope="col" style="text-align: center">{{ $i++ }}</td>
                             <td scope="col" style="text-align: center">{{ $k->codigo }}</td>
                             <td scope="col" style="text-align: start">{{ $k->ubicacion }}</td>
+                            <td scope="col" style="text-align: center"><a class="text-info" href="{{ route('kiosko.reservaciones', ['id' => $k->id]) }}"> <i class="fa-regular fa-building-user"></i><i> Ver listado de reservaciones</i></a></td>
                             <td scope="col" style="text-align: center">
                                 <a type="buttom" href="{{route('kiosko.detalle',['id'=>$k->id])}}">
                                     <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
@@ -62,7 +64,7 @@
                             <td scope="col" style="text-align: center">
                                 <a
                                     href="{{ route('kiosko.edit', ['id' => $k->id]) }}">
-                                    <i class="fa fa-edit text-info"></i>
+                                    <i class="fa fa-edit text-success"></i>
                                 </a>
                             </td>
                             <td scope="col" style="text-align: center">

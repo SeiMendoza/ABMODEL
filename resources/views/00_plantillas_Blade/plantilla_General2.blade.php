@@ -30,7 +30,6 @@
     
     <script src="{{ asset('/js/sweetalert2.all.min.js') }}"></script>
 
-
     <title>Villa Crisol - @yield('title') </title>
 
     <style media="screen">

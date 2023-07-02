@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kiosko;
+use App\Models\Mesa;
 use App\Models\Reservacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class ReservacionController extends Controller
         return view("Reservaciones.ReserAdmon.Quiosco.kioskoReservaciones", compact('reservaciones', 'text'));
     }*/
     public function create()
-    {   $kiosko = Kiosko::all();
+    {   $kiosko = Kiosko::where('disponible', '=', 1)->get();
         return view('Reservaciones.ReserAdmon.Quiosco.formularioReservaciones', compact('kiosko'));
     }
     public function store(Request $request){
@@ -115,13 +116,23 @@ class ReservacionController extends Controller
         $nuevo->precioAdultos= $request->input('precio');
         $nuevo->precioNinios= $request->input('precioN');
         $nuevo->anticipo=$request->input('anticipo');
-        $nuevo->formaPago=$request->input('formaPago'); 
+        $nuevo->formaPago=$request->input('formaPago');
+        
+        //Quita disponibilidad al Kiosko
+        $kiosko= Kiosko::findOrFail($nuevo->kiosko_id)->get();
+        $kiosko->disponible = 0;
+
+        //Quita disponibilidad a las mesas del kiosko
+        $mesas = Mesa::where('kiosko_id', '=', $kiosko->id)->get();
+        foreach($mesas as $m){
+            $m->estadoM = 0;
+        }
       
         $creado = $nuevo -> save();
 
         if ($creado) {
             return redirect()->route('kiosko_res.index')
-            ->with('mensaje', "".$nuevo->nombre." creada correctamente");
+            ->with('mensaje', "".$nuevo->nombre." Creada correctamente");
         }
         
     }
@@ -226,6 +237,16 @@ class ReservacionController extends Controller
         $actualizar->formaPago=$request->input('formaPago');                
         $creado = $actualizar -> save();
 
+        //Quita disponibilidad al Kiosko
+        $kiosko= Kiosko::findOrFail($actualizar->kiosko_id)->get();
+        $kiosko->disponible = 0;
+
+        //Quita disponibilidad a las mesas del kiosko
+        $mesas = Mesa::where('kiosko_id', '=', $actualizar->id)->get();
+        foreach($mesas as $m){
+            $m->estadoM = 0;
+        }
+
         if ($creado) {
             return redirect()->route('kiosko_res.index')
             ->with('mensaje', "".$actualizar->nombre." actualizada correctamente");
@@ -234,7 +255,7 @@ class ReservacionController extends Controller
     }
     public function destroy($id){
         Reservacion::destroy($id);
-        return redirect()->route('kiosko_res.index')->with('mensaje', 'Reservación borrada correctamente');
+        return back()->with('mensaje', 'Reservación borrada correctamente');
     }
     public function detail($id){
         $reservacion = Reservacion::findOrFail($id);

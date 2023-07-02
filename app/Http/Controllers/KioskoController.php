@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Kiosko;
 use App\Models\Mesa;
+use App\Models\Reservacion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class KioskoController extends Controller
@@ -105,7 +107,15 @@ class KioskoController extends Controller
         return view('Reservaciones.ReserAdmon.Kioskos.detalleKiosko', compact('kiosko', 'mesas'));
     }
 
-    public function back(){
-        return back();
+    public function reservaciones($id){
+        
+        $kiosko = Kiosko::findOrFail($id);
+        $reservaciones = Reservacion::where('kiosko_id', '=', $id)->orderBy('fecha')->get();
+        $now = Carbon::now()->format('Y-m-d');
+
+        if(!$reservaciones->isEmpty())
+            return view('Reservaciones.ReserAdmon.Kioskos.detallesReservacionKiosko', compact('reservaciones', 'kiosko', 'now'));
+        else
+            return back()->with(['mensaje' => 'No hay reservaciones en '. $kiosko->codigo], ['icon'=> 'info']);
     }
 }

@@ -261,7 +261,7 @@ Route::controller(KioskoController::class)-> group( function (){
   Route::put('/kiosko/{id}/update','update')->name('kiosko.update');
   Route::get('/kiosko/{id}/detalle', 'detalle')->name('kiosko.detalle');
   Route::delete('/kiosko/{id}/destroy', 'destroy')->name('kiosko.destroy');
-  Route::get('/kiosko/regresar', 'back')->name('kiosko.back');
+  Route::get('/kiosko/{id}/reservaciones', 'reservaciones')->name('kiosko.reservaciones');
 });
 /*Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');*/
