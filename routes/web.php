@@ -19,6 +19,7 @@ use App\Http\Controllers\ReservacionTotalController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,37 +32,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/**Home */
 /**Home */
 Route::get('/', [LoginController::class, 'show'])
-->name('login'); 
-Route::get('/ab', [HomeController::class, 'index'])
+->name('login');
+Route::get('/ab', [HomeController::class, 'index'])->middleware('auth')
 ->name('index');
+
 Route::get('/tabla', [HomeController::class, 't'])
 ->name('t');
 Route::get('/billing', [HomeController::class, 'b'])
 ->name('b');
 
-/** REGISTRO Y LOGIN */
-Route::get('/registro', [RegistroController::class, 'show']);
+/** REGISTRO Y LOGIN */ 
 
-Route::post('/registro', [RegistroController::class, 'registro']); 
-
-Route::get('/listaUsuarios', [RegistroController::class, 'users'])
+Route::get('/listaUsuarios', [RegistroController::class, 'users'])->middleware('auth')
 ->name('usuarios.users');
 
-Route::get('/usuarios/create', [RegistroController::class, 'create'])
+Route::get('/usuarios/create', [RegistroController::class, 'create'])->middleware('auth')
 ->name("usuarios.create"); 
 
-Route::post('/usuarios/create', [RegistroController::class, 'store'])
+Route::post('/usuarios/create', [RegistroController::class, 'store'])->middleware('auth')
 ->name("usuarios.store");
 
-Route::get('/usuarios/{id}/edit', [RegistroController::class, 'edit'])
+Route::get('/usuarios/{id}/edit', [RegistroController::class, 'edit'])->middleware('auth')
 ->name("usuarios.editar")->where('id', '[0-9]+');
 
-Route::put('/usuarios/{id}/edit', [RegistroController::class, 'update'])
+Route::put('/usuarios/{id}/edit', [RegistroController::class, 'update'])->middleware('auth')
 ->name('usuarios.update')->where('id', '[0-9]+'); 
 
-Route::delete('usuarios/{id}/borrar', [RegistroController::class, 'destroy'])
+Route::delete('usuarios/{id}/borrar', [RegistroController::class, 'destroy'])->middleware('auth')
 ->name('usuarios.destroy');
 
 
@@ -70,41 +71,38 @@ Route::get('/login', [LoginController::class, 'show']);
 
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])
+Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('auth')
 ->name('cerrarSes.cerrar');
 
-Route::get('/perfil', [LoginController::class, 'perfil'])
-->name('usuarios.perfil')->where('id', '[0-9]+');
+Route::get('/perfil', [LoginController::class, 'perfil'])->middleware('auth')
+->name('usuarios.perfil');
 
-Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])
-->name("usuarios.editarPerfil")->where('id', '[0-9]+');
+Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])->middleware('auth')
+->name("usuarios.editarPerfil");
 
-Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])
-->name('usuarios.updatePerfil')->where('id', '[0-9]+'); 
-
-
-
+Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])->middleware('auth')
+->name('usuarios.updatePerfil'); 
 
 
 
 /* Rutas Administracion de Restaurante */
 
-Route::get('/admonRestauranteP', [HomeController::class, 'indexPlatillos'])
+Route::get('/admonRestauranteP', [HomeController::class, 'indexPlatillos'])->middleware('auth')
 ->name('menuAdmon.platillos');
-Route::get('/admonRestauranteB', [HomeController::class, 'indexBebidas'])
+Route::get('/admonRestauranteB', [HomeController::class, 'indexBebidas'])->middleware('auth')
 ->name('menuAdmon.bebidas');
-Route::get('/admonRestauranteC', [HomeController::class, 'indexComplementos'])
+Route::get('/admonRestauranteC', [HomeController::class, 'indexComplementos'])->middleware('auth')
 ->name('menuAdmon.complementos');
 
 
-Route::get('/admonRestaurante', [HomeController::class, 'indexPlatillos'])
+Route::get('/admonRestaurante', [HomeController::class, 'indexPlatillos'])->middleware('auth')
 ->name('menuAdmon.index');
-Route::put('producto/{id}/activar', [ProductoController::class, 'activar'])
+Route::put('producto/{id}/activar', [ProductoController::class, 'activar'])    
 ->name('producto.activar');
 
 
 /** Rutas de Prueba AmonMenu */
-Route::get('/pruebaAdmon', [HomeController::class, 'pruebaAdmon'])
+Route::get('/pruebaAdmon', [HomeController::class, 'pruebaAdmon'])->middleware('auth')
 ->name('menuAdmon.prueba');
 
 
@@ -118,69 +116,69 @@ Route::get('dashboard', [HomeController::class, 'd'])
 ->name('d');
 Route::get('/sing-up', [HomeController::class, 'u'])
 ->name('u');
-Route::get('/registro', [HomeController::class, 'registro'])
+Route::get('/registro', [HomeController::class, 'registro'])->middleware('auth')
 ->name('registro');
 
 /*****************************
   Rutas Para Menú de usuario
 ******************************/
 
-Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])
+Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class,'terminarp'])->middleware('auth')
 ->name('terminar.terminarp')->where('id','[0-9]+');/*terminar pedidos en caja*/
-Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class,'env_a_cocina'])
+Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class,'env_a_cocina'])->middleware('auth')
 ->name('env.env_a_cocina')->where('id','[0-9]+');/*enviar a cocina*/
-Route::get('/pedidos/caja', [PedidoUsuarioController::class, 'pedido_terminados'])
+Route::get('/pedidos/caja', [PedidoUsuarioController::class, 'pedido_terminados'])->middleware('auth')
 ->name('pedidos.caja');/*lista de pedidos pendientes de terminar en caja*/
-Route::get('/pedidos/caja/search', [PedidoUsuarioController::class, 'psearch'])
+Route::get('/pedidos/caja/search', [PedidoUsuarioController::class, 'psearch'])->middleware('auth')
 ->name('pedidos.psearch');/*buscar pedidos en caja*/
-Route::put('/pedidos/{id}/pendiente_cocina', [PedidoUsuarioController::class,'pedidosPendientes_Cocina'])
+Route::put('/pedidos/{id}/pendiente_cocina', [PedidoUsuarioController::class,'pedidosPendientes_Cocina'])->middleware('auth')
 ->name('pedidosPendientes_Cocina.pedidosPendientes_Cocina')->where('id','[0-9]+');/*terminar pedido en cocina*/
-Route::get('/pedidos/cocina', [PedidoUsuarioController::class, 'pedido_pendientes'])
+Route::get('/pedidos/cocina', [PedidoUsuarioController::class, 'pedido_pendientes'])->middleware('auth')
 ->name('pedidosp.pedido');/*lista de pedidos pendientes en cocina*/
-Route::get('/menu/pedidop/cocina', [PedidoUsuarioController::class, 'pcsearch'])
+Route::get('/menu/pedidop/cocina', [PedidoUsuarioController::class, 'pcsearch'])->middleware('auth')
 ->name('pedidosp.pcsearch');/*buscar pedidos en cocina*/
-Route::get('/pedidos/terminados', [PedidoUsuarioController::class, 'terminados'])
+Route::get('/pedidos/terminados', [PedidoUsuarioController::class, 'terminados'])->middleware('auth')
 ->name('terminados.terminados'); /*lista de pedidos terminados*/
-Route::get('/menu/pedidost', [PedidoUsuarioController::class, 'search'])
+Route::get('/menu/pedidost', [PedidoUsuarioController::class, 'search'])->middleware('auth')
 ->name('pedidost.search');/*buscar pedidos terminados*/
-Route::get('/pedidos/caja/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])
+Route::get('/pedidos/caja/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])->middleware('auth')
 ->name('pedidost.detalle');/*detalle de pedidos pendientes de terminar en caja*/
-Route::delete('/pedidos/detalles/{id}/borrar', [PedidoUsuarioController::class, 'destroy'])
+Route::delete('/pedidos/detalles/{id}/borrar', [PedidoUsuarioController::class, 'destroy'])->middleware('auth')
 ->name('detallep.destroy')->where('id','[0-9]+');/**borrar detalle de caja */
-Route::get('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'edit'])
+Route::get('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'edit'])->middleware('auth')
     ->name('detallep.edit');
-Route::put('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'update'])
+Route::put('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'update'])->middleware('auth')
 ->name('detallep.update')->where('id','[0-9]+');/**editar detalle de caja */
-Route::get('/pedidos/cocina/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_pendientes'])
+Route::get('/pedidos/cocina/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_pendientes'])->middleware('auth')
 ->name('pedidosp.detalle');/*detalle de pedidos pendientes en cocina*/
-Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 'detalle_terminados'])
+Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 'detalle_terminados'])->middleware('auth')
 ->name('terminados.detalle'); /*lista de pedidos terminados*/
 //obtener el precio de los productos
-Route::post('/precio-acompl',[PedidoUsuarioController::class, 'PrecioAcompl'])
+Route::post('/precio-acompl',[PedidoUsuarioController::class, 'PrecioAcompl'])->middleware('auth')
 ->name('precio-acompl');
 //agrega el complemento al detalle del pedido
-Route::get('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'ACompl'])
+Route::get('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'ACompl'])->middleware('auth')
 ->name('ACompl');
-Route::post('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple'])
+Route::post('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple'])->middleware('auth')
 ->name('Acomple');
 
  /*****************************
   Rutas Para Menu de cliente
 ******************************/
 
-Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])
+Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])->middleware('auth')
 ->name('cliente_menu.details');
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])
 ->name('cliente_menu.qr');
-Route::get('/menu/prueba', [MenuUsuarioController::class, 'prueba'])
+Route::get('/menu/prueba', [MenuUsuarioController::class, 'prueba'])->middleware('auth')
 ->name('cliente_prueba');
-Route::get('/menu/usuario/pedido', [MenuUsuarioController::class, 'create'])
+Route::get('/menu/usuario/pedido', [MenuUsuarioController::class, 'create'])->middleware('auth')
 ->name('usuario_pedido.create');
-Route::post('/menu/usuario/pedido', [MenuUsuarioController::class, 'store'])
+Route::post('/menu/usuario/pedido', [MenuUsuarioController::class, 'store'])->middleware('auth')
 ->name('cliente_pedido.store');
-Route::put('/menu/detalles/{id}/editar', [MenuUsuarioController::class, 'edit'])
+Route::put('/menu/detalles/{id}/editar', [MenuUsuarioController::class, 'edit'])->middleware('auth')
 ->name('cliente_detalles.edit')->where('id','[0-9]+');
-Route::delete('/menu/detalles/{id}/borrar', [MenuUsuarioController::class, 'destroy'])
+Route::delete('/menu/detalles/{id}/borrar', [MenuUsuarioController::class, 'destroy'])->middleware('auth')
 ->name('cliente_detalles.destroy')->where('id','[0-9]+');
  
 //Route::get('/menu', [MenuUsuarioController::class,'search'])
@@ -189,22 +187,22 @@ Route::delete('/menu/detalles/{id}/borrar', [MenuUsuarioController::class, 'dest
 /*****************************
   Rutas Para Platillos y Bebidas
 ******************************/
-Route::get('/menu/cliente', [PlatillosyBebidasController::class, 'index'])
+Route::get('/menu/cliente', [PlatillosyBebidasController::class, 'index'])->middleware('auth')
 ->name('cliente_menu.index');
 
-Route::get('/bebidasyplatillos/nuevo/{origen}', [PlatillosyBebidasController::class, 'create'])
+Route::get('/bebidasyplatillos/nuevo/{origen}', [PlatillosyBebidasController::class, 'create'])->middleware('auth')
 ->name('bebidasyplatillos.create');
 
-Route::post('/bebidasyplatillos/nuevo/',[PlatillosyBebidasController::class, 'store'])
+Route::post('/bebidasyplatillos/nuevo/',[PlatillosyBebidasController::class, 'store'])->middleware('auth')
     ->name('bebidasyplatillos.store');
 
 /*****************************
   Rutas De estado
 ******************************/
-Route::get('/estado/nuevo', [ComboController::class, 'estado'])
+Route::get('/estado/nuevo', [ComboController::class, 'estado'])->middleware('auth')
 ->name('estado.create');
 
-Route::post('/estado/nuevo',[ComboController::class, 'estadoactualizar'])
+Route::post('/estado/nuevo',[ComboController::class, 'estadoactualizar'])->middleware('auth')
     ->name('estado.store');
 
 
@@ -212,48 +210,48 @@ Route::post('/estado/nuevo',[ComboController::class, 'estadoactualizar'])
 /*****************************
   Rutas Para Administración
 ******************************/
-Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])
+Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])->middleware('auth')
     ->name('busqueda.index');
 
 /****************************************
   Rutas Para Editar Productos
 *****************************************/
 
-Route::get('producto/{id}/editar', [ProductoController::class, 'edit'])
+Route::get('producto/{id}/editar', [ProductoController::class, 'edit'])->middleware('auth')
     ->name('producto.editar');
 
-Route::put('platillo/{id}/edicion', [ProductoController::class, 'updateP'])
+Route::put('platillo/{id}/edicion', [ProductoController::class, 'updateP'])->middleware('auth')
     ->name('productoP.update');
   
-Route::put('bebida/{id}/edicion', [ProductoController::class, 'updateB'])
+Route::put('bebida/{id}/edicion', [ProductoController::class, 'updateB'])->middleware('auth')
     ->name('productoB.update');
 
-Route::put('complemento/{id}/edicion', [ProductoController::class, 'updateC'])
+Route::put('complemento/{id}/edicion', [ProductoController::class, 'updateC'])->middleware('auth')
     ->name('productoC.update');
 
 /*lista de pedidos anteriores*/
-Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])
+Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])->middleware('auth')
     ->name('pedidoant.pedidos_anteriores'); 
 /*Borrar pedidos anteriores*/
-Route::delete('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])
+Route::delete('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])->middleware('auth')
     ->name('borrar.borrarDatos');
 /* Detalles pedidos anteriores */
-Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])
+Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])->middleware('auth')
 ->name('pedidoAnterior.detalle'); 
 
 
 /****************************************
   Rutas Para eliminar Platillos y Bebidas
 *****************************************/
- Route::delete('producto/{id}/borrar', [ProductoController::class, 'destroy'])
+ Route::delete('producto/{id}/borrar', [ProductoController::class, 'destroy'])->middleware('auth')
     ->name('producto.borrar');
- Route::delete('bebida/{id}/borrar', [BebidaController::class, 'destroy'])
+ Route::delete('bebida/{id}/borrar', [BebidaController::class, 'destroy'])->middleware('auth')
     ->name('bebida.borrar');
 
 /****************************************
   Rutas Para Kioskos
 *****************************************/
-Route::controller(KioskoController::class)-> group( function (){
+Route::controller(KioskoController::class)->middleware('auth')-> group( function (){
   Route::get('/kioskos', 'index')->name('kiosko.index');
   Route::get('/kioskos/create', 'create')->name('kiosko.create');
   Route::post('/kiosko', 'store')->name('kiosko.store');
@@ -270,26 +268,26 @@ name('kiosko.destroy');*/
   Rutas Para Piscina
 *****************************************/
 //Route::get('/piscina/productos', [PiscinaController::class, 'index'])->
-Route::get('/productos', [PiscinaController::class, 'index'])->
-name('prodpiscina.index');
-Route::get('/piscina/producto/buscar', [PiscinaController::class, 'search'])
+Route::get('/productos', [PiscinaController::class, 'index'])->middleware('auth')
+->name('prodpiscina.index');
+Route::get('/piscina/producto/buscar', [PiscinaController::class, 'search'])->middleware('auth')
 ->name('producto.search');
-Route::get('/piscina/create', [PiscinaController::class, 'create'])->
-name('piscina.create');
-Route::post('/piscina/create', [PiscinaController::class, 'store'])->
-name('piscina.store');
-Route::get('piscina/{id}/editar', [PiscinaController::class, 'edit'])
-    ->name('producto.edit');
-    Route::delete('/piscina/{id}/borrar', [PiscinaController::class, 'destroy'])
-    ->name('prodpiscina.destroy')->where('id','[0-9]+');
-Route::put('piscina/{id}/edicion', [PiscinaController::class, 'update'])
-    ->name('producto.update');
-Route::post('/piscina/agregar/{id}', [PiscinaController::class, 'agregar'])->
-name('piscina.agregar');
-Route::post('/piscina/restar/{id}', [PiscinaController::class, 'restar'])->
-name('piscina.restar');
-Route::get('piscina/{id}', [PiscinaController::class, 'show'])
-    ->name('piscina.show');
+Route::get('/piscina/create', [PiscinaController::class, 'create'])->middleware('auth')
+->name('piscina.create');
+Route::post('/piscina/create', [PiscinaController::class, 'store'])->middleware('auth')
+->name('piscina.store');
+Route::get('piscina/{id}/editar', [PiscinaController::class, 'edit'])->middleware('auth')
+->name('producto.edit');
+Route::delete('/piscina/{id}/borrar', [PiscinaController::class, 'destroy'])->middleware('auth')
+->name('prodpiscina.destroy')->where('id','[0-9]+');
+Route::put('piscina/{id}/edicion', [PiscinaController::class, 'update'])->middleware('auth')
+->name('producto.update');
+Route::post('/piscina/agregar/{id}', [PiscinaController::class, 'agregar'])->middleware('auth')
+->name('piscina.agregar');
+Route::post('/piscina/restar/{id}', [PiscinaController::class, 'restar'])->middleware('auth')
+->name('piscina.restar');
+Route::get('piscina/{id}', [PiscinaController::class, 'show'])->middleware('auth')
+->name('piscina.show');
 
 /****************************************
   Rutas Para Mesas
@@ -309,7 +307,7 @@ Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])
  * Registro de mesas
 */
 
-Route::get('/mesas/lista', [MesaController::class, 'index'])
+Route::get('/mesas/lista', [MesaController::class, 'index'])->middleware('auth')
 ->name('mesas_reg.index');
 /**ruta para qr por id de mesa */
 Route::get('/mesas/{id}/qr', [MesaController::class, 'Codigo_Qr'])
@@ -337,60 +335,61 @@ Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])
  * Reservaciones de kioskos
 */
 
-Route::get('/kiosko/reservaciones', [ReservacionController::class, 'index2'])
+Route::get('/kiosko/reservaciones', [ReservacionController::class, 'index2'])->middleware('auth')
 ->name('kiosko_res.index');
 
-Route::get('/kiosko/reservaciones/nuevo',[ReservacionController::class, 'create'])
+Route::get('/kiosko/reservaciones/nuevo',[ReservacionController::class, 'create'])->middleware('auth')
 ->name('kiosko_res.create');
 
-Route::post('/kiosko/reservaciones/nuevo',[ReservacionController::class, 'store'])
+Route::post('/kiosko/reservaciones/nuevo',[ReservacionController::class, 'store'])->middleware('auth')
 ->name('kiosko_res.store');
 
-Route::get('/kiosko/reservaciones/{id}/edicion', [ReservacionController::class, 'edit'])
+Route::get('/kiosko/reservaciones/{id}/edicion', [ReservacionController::class, 'edit'])->middleware('auth')
 ->name('kiosko_res.edit')->where('id','[0-9]+');
 
-Route::put('/kiosko/reservaciones/{id}/edicion', [ReservacionController::class, 'update'])
+Route::put('/kiosko/reservaciones/{id}/edicion', [ReservacionController::class, 'update'])->middleware('auth')
 ->name('kiosko_res.update')->where('id','[0-9]+');
 
-Route::delete('/kiosko/reservaciones/{id}/borrar', [ReservacionController::class, 'destroy'])
+Route::delete('/kiosko/reservaciones/{id}/borrar', [ReservacionController::class, 'destroy'])->middleware('auth')
 ->name('kiosko_res.destroy')->where('id','[0-9]+');
 
-Route::get('/kiosko/reservaciones/buscar', [ReservacionController::class, 'search2'])
+Route::get('/kiosko/reservaciones/buscar', [ReservacionController::class, 'search2'])->middleware('auth')
 ->name('kiosko_res.search');
 
-Route::get('/kiosko/reservaciones/{id}/detail', [ReservacionController::class, 'detail'])->
-name('kiosko.detail');
+Route::get('/kiosko/reservaciones/{id}/detail', [ReservacionController::class, 'detail'])->middleware('auth')
+->name('kiosko.detail');
 
 /* Rutas para reservar local*/
-Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])
-  ->name('cliente.reservaLocal');
+Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])->middleware('auth')
+->name('cliente.reservaLocal');
       
- Route::get('Evento/Realizado', [ReservacionTotalController::class, 'reali'])
-  ->name('evento.realizado');      
+ Route::get('Evento/Realizado', [ReservacionTotalController::class, 'reali'])->middleware('auth')
+->name('evento.realizado');      
 
-Route::get('/Local/create', [ReservacionTotalController::class, 'create'])
+Route::get('/Local/create', [ReservacionTotalController::class, 'create'])->middleware('auth')
    -> name('ReserLocal.create');
 
-Route::post('/Reservacion/Local', [ReservacionTotalController::class, 'store'])
+Route::post('/Reservacion/Local', [ReservacionTotalController::class, 'store'])->middleware('auth')
 ->name('ReserLocal.store');
 
-Route::get('/cliente/reservacion/{id}/detalles', [ReservacionTotalController::class, 'detalle_reservacion'])
-  ->name('detalle.reservacion');
+Route::get('/cliente/reservacion/{id}/detalles', [ReservacionTotalController::class, 'detalle_reservacion'])->middleware('auth')
+->name('detalle.reservacion');
  
-Route::get('Cliente/{id}/Editando', [ReservacionTotalController::class, 'edit'])
-  ->name('ResCliente.editar');
+Route::get('Cliente/{id}/Editando', [ReservacionTotalController::class, 'edit'])->middleware('auth')
+->name('ResCliente.editar');
 
-Route::put('Cliente/{id}/edicion', [ReservacionTotalController::class, 'update'])
-  ->name('resCliente.update');
+Route::put('Cliente/{id}/Editando', [ReservacionTotalController::class, 'update'])->middleware('auth')
+->name('resCliente.update');
 
-Route::delete('cliente/{id}/borrar', [ReservacionTotalController::class, 'destroy'])
-  ->name('cliente.destroy');
+Route::delete('cliente/{id}/borrar', [ReservacionTotalController::class, 'destroy'])->middleware('auth')
+->name('cliente.destroy');
 
-Route::put('/cliente/{id}/reservacionRealizada', [ReservacionTotalController::class,'reservacionesRealizadas'])
-  ->name('reservacionRealizada')->where('id','[0-9]+');
+Route::put('/cliente/{id}/reservacionRealizada', [ReservacionTotalController::class,'reservacionesRealizadas'])->middleware('auth')
+->name('reservacionRealizada')->where('id','[0-9]+');
 
-Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Realizadas'])
-  ->name('realizadas.realizadas'); /*lista de reservaciones realizadas */
+Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Realizadas'])->middleware('auth')
+->name('realizadas.realizadas'); /*lista de reservaciones realizadas */
   
-Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])
-  ->name('detalle.realizadas');
+Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])->middleware('auth')
+->name('detalle.realizadas');
+
