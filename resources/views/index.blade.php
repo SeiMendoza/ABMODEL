@@ -118,44 +118,49 @@
                                     <i class="ni ni-diamond fixed-plugin-button-nav cursor-pointer"></i>
                                 </a>
                             </li>
+
+                            @php
+                                $colors = ['danger', 'success', 'primary', 'warning', 'info', 'secondary'];
+                            @endphp
+
                             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                                <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ni ni-bell-55 cursor-pointer" >
-                                        <span class="position-absolute top-10 start-80 translate-middle badge rounded-pill bg-danger">
-                                            {{ count($datosalerta) }}
-                                        </span>
-                                    </i>
+                                <a href="#" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ni ni-bell-55 cursor-pointer"></i>
+                                    <span class="position-absolute top-10 start-80 translate-middle badge rounded-pill bg-danger">
+                                        {{ count($datosalerta) }}
+                                    </span>
                                 </a>
-                                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"
-                                    aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="{{Route('prodpiscina.index')}}">
-                                            <div class="d-flex py-1">
-                                                <div class="avatar avatar-sm bg-black  me-3  my-auto">
-                                                    <i class="fa-solid fa-person-swimming text-info fa-3x"></i>
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="text-sm font-weight-normal mb-1">
-                                                        Existencia de productos de piscina
-                                                    </h6>
-                                                    <p class="text-xs text-secondary mb-0">
-                                                        @foreach($datosalerta as $d)
-                                                            Productos de piscina en {{$d->descripcion}} tiene {{$d->total}}
-                                                            unidades con {{$d->peso}}
-                                                            @if ($d->descripcion == "Polvo")
-                                                                Libras
-                                                            @else
-                                                                Onzas
-                                                            @endif
-                                                            <br>
-                                                        @endforeach
-                                                    </p>
-                                                </div>
+
+                                <div class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n0" aria-labelledby="dropdownMenuButton">
+                                    <div class="d-flex py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-bold mb-1" style="pointer-events: none;">
+                                                Existencia de productos de piscina
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    @foreach($datosalerta as $index => $d)
+                                    <a class="dropdown-item border-radius-md" href="{{ Route('prodpiscina.index') }}">
+                                        <div class="d-flex py-1">
+                                            <div class="avatar avatar-sm me-3 my-auto bg-{{ $colors[$index % count($colors)] }}">
+                                                <i class="fas fa-swimmer text-white"></i>
                                             </div>
-                                        </a>
-                                    </li>
-                                </ul>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <p class="text-secondary mb-0" style="font-size: 12px;">
+                                                    <hr style="border: none; height: 2px; background-color: #000; margin: 10px 0;">
+                                                    Productos de piscina en {{ $d->descripcion }} tiene {{ $d->total }} unidades con {{ $d->peso }}
+                                                    @if ($d->descripcion == "Polvo")
+                                                        Libras
+                                                    @else
+                                                        Onzas
+                                                    @endif
+                                                    <hr style="border: none; height: 2px; background-color: #000; margin: 10px 0;">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                </div>
                             </li>
 
                             <div>
