@@ -6,6 +6,7 @@ use App\Models\Piscina;
 use App\Models\PiscinaTipo;
 use App\Models\PiscinaUso;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule as ValidationRule;
 use App\Http\Requests\StorePiscinaRequest;
 use App\Http\Requests\UpdatePiscinaRequest;
 use Illuminate\Http\Request;
@@ -130,11 +131,15 @@ class PiscinaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $piscina = Piscina::FindOrFail($id);
     /*    $fecha_actual = date("d-m-Y");
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
 */
         $rules=[
-            'nombre' => 'required|regex:/^[\\pL\\s]+$/u|unique:piscinas,nombre,'.$id,
+            'nombre' => [
+                'required',
+                'regex:/^[\\pL\\s]+$/u',
+                ValidationRule::unique('piscinas')->ignore($piscina->id),],
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
            // 'expiracion' => 'required|date|after:'.$minima,
