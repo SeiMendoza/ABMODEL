@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePiscinaRequest;
 use App\Http\Requests\UpdatePiscinaRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule as ValidationRule;
 class PiscinaController extends Controller
 {
     /**
@@ -130,17 +130,20 @@ class PiscinaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $piscina = Piscina::FindOrFail($id);
     /*    $fecha_actual = date("d-m-Y");
         $minima = date('d-m-Y',$minima = strtotime($fecha_actual."+ 1 month"));
 */
-        $rules=[
-            'nombre' => 'required|regex:/^[\\pL\\s]+$/u|unique:piscinas,nombre,'.$id,
+$request -> validate([
+    'nombre' => [
+        'required',
+        'regex:/^[\\pL\\s]+$/u',
+        ValidationRule::unique('piscinas')->ignore($piscina->id),],
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
            // 'expiracion' => 'required|date|after:'.$minima,
             'kilos' => 'required|numeric|min:1|max:1000'
-        ];
-
+        ],
         $mensaje=[
             'nombre.required' => 'El nombre no puede estar vacío',
             'nombre.regex' => 'Solo se aceptan letras',
@@ -156,11 +159,9 @@ class PiscinaController extends Controller
             'kilos.max' => 'El peso es muy grande',
             'kilos.min' => 'El peso es muy pequeño',
             'kilos.numeric' => 'El peso debe de ser numerico',
-        ];
+        ]);
 
-        $this->validate($request,$rules,$mensaje);
-
-        $piscina = Piscina::FindOrFail($id);
+        $this->validate($request,$mensaje);
 
             $piscina->nombre = $request->input('nombre');
             $piscina->tipo = $request->input('tipo');

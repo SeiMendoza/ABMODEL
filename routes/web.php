@@ -312,6 +312,8 @@ Route::get('/mesas/lista', [MesaController::class, 'index'])->middleware('auth')
 /**ruta para qr por id de mesa */
 Route::get('/mesas/{id}/qr', [MesaController::class, 'Codigo_Qr'])
 ->name('mesa.Codigo_Qr')->where('id','[0-9]+');
+Route::get('/qr-pdf/{id}',[MesaController::class, 'Qr_pdf'])
+->name('qr-pdf');
 
 Route::get('/mesas/registro/nuevo',[MesaController::class, 'create'])
 ->name('mesas_reg.create');
