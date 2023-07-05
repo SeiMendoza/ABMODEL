@@ -10,7 +10,7 @@
         </title>
 
         <!-- Icons -->
-        <link href={{ asset('/css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
+        <link href={{ asset('/css/nucleo-icons.css') }} rel="stylesheet" type="text/css" />
         <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet" />
         <link href="/assets/css/fontawesome.css" rel="stylesheet">
         <link href="/assets/css/solid.css" rel="stylesheet">
@@ -97,7 +97,7 @@
                                                         style="display:block; height: 200px; width: 200px; padding: 3px ">
                                                     <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                         data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                        background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                        background: url('/{{ $pro->imagen }}') top center/cover no-repeat;">
                                                         <div class="text-center" 
                                                         style="text-align:center; ">
                                                         <!-- Nombre -->
@@ -146,7 +146,7 @@
                                                         style="display:block; height: 200px; width: 200px; padding: 3px ">
                                                     <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                         data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                        background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                        background: url('/{{ $pro->imagen }}') top center/cover no-repeat;">
                                                         <div class="text-center" 
                                                         style="text-align:center; ">
                                                         <!-- Nombre -->
@@ -193,7 +193,7 @@
                                                         style="display:block; height: 200px; width: 200px; padding: 3px ">
                                                     <button class="card h-100 btn btnCard" id="btn" type="submit" 
                                                         data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                        background: url('../{{ $pro->imagen }}') top center/cover no-repeat;">
+                                                        background: url('/{{ $pro->imagen }}') top center/cover no-repeat;">
                                                         <div class="text-center" 
                                                         style="text-align:center; ">
                                                         <!-- Nombre -->

@@ -123,7 +123,7 @@ class ReservacionController extends Controller
         $kiosko->disponible = 0;
 
         //Quita disponibilidad a las mesas del kiosko
-        $mesas = Mesa::where('kiosko_id', '=', $kiosko->id)->get();
+        $mesas = Mesa::where('kiosko_id', '=', $request->input('kiosko'))->get();
         foreach($mesas as $m){
             $m->estadoM = 0;
         }
