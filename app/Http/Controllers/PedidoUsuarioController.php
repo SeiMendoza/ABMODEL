@@ -2,23 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetallesUsuario;
 use App\Models\Mesa;
 use App\Models\Pedido;
-use App\Models\Bebida;
-use App\Models\Combo;
 use App\Models\DetallesPedido;
-use App\Models\Platillo;
-use Illuminate\Support\Facades\Session;
-use App\Models\PiscinaUso;
-use App\Models\Producto;
-use Database\Seeders\PlatillosyBebidasSeeder;
-
+use Illuminate\Support\Facades\Session; 
+use App\Models\Producto; 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Spatie\LaravelIgnition\FlareMiddleware\AddDumps;
-use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
-use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\DB; 
 
 class PedidoUsuarioController extends Controller
 {
@@ -67,21 +57,7 @@ class PedidoUsuarioController extends Controller
         $texto = "";
         return view('Menu/Cocina/Pedidoscaja', compact('pedido', 'texto', 'p'));
     }
-    public function psearch(Request $request)
-    {
-        /*  $texto = trim($request->get('busqueda'));
-$pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
-    ->orWhere('quiosco', 'like', '%' . $texto . '%')
-    ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
-        $query->where('nombre', 'like', '%' . $texto . '%');
-    })->paginate(10);
-    return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));
-        //recuperar datos del filtro
-     /*  $texto=trim($request->get('busqueda'));
-        $pedido = Pedido::where('mesa', 'like', '%' . $texto . '%')
-        ->orwhere('quiosco', 'like', '%' . $texto . '%')->paginate(10);
-        return view('Menu/Cocina/Pedidosterminados', compact('pedido','texto'));*/
-    }
+     
     public function terminados()
     {
         $pedido = Pedido::where('estado', 3)->orderby('id')->get();
@@ -135,20 +111,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             return redirect()->route('pedidos.caja')->with('mensaje', 'Pedido enviado a cocina!');
         }
     }
-    /* public function env_a_caja(Request $request,  $id)
-    {
-        $request->validate([
-            'estado' => 'required|in:2', // El campo estado es obligatorio y solo puede ser 1
-        ]);
-        $activar = Pedido::findOrfail($id);
-        $activar->estado = $request->input('estado');
-
-        $create = $activar->save();
-
-        if ($create) {
-            return redirect()->route('pedidost.pedido')->with('mensaje', 'Pedido enviado a caja!');
-        }
-    } */
+    
     public function terminarp(Request $request,  $id)
     {
         $request->validate([
@@ -189,21 +152,9 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     }
     public function detalle_pedido_terminados($id)
     {
+      
         $pedido = Pedido::findOrFail($id);
         $detapedido = DetallesPedido::where('pedido_id', $id)->get();
-
-        /* $suma = 0;
-    $Sub_total = 0;
-    $impuesto = 0;
-
-    foreach ($detapedido as $detalle) {
-        $tasa_impuesto = 0.15;
-        $suma += $detalle->precio * $detalle->cantidad;
-        $impuesto = $suma * $tasa_impuesto;
-        $Sub_total = $suma - $suma * $impuesto;
-        $total = $Sub_total + $impuesto;
-    }*/
-
         $suma = 0;
         $tasa_impuesto = 0.15;
 
@@ -222,29 +173,37 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
         $pedido = Pedido::findOrFail($id);
         $productos = Producto::select('id', 'nombre')
             ->where('estado', '=', '1')
-            ->where('tipo', '=', '0')->get();
+            ->where('tipo', '=', '0')
+            ->where('disponible', '>', 0)
+            ->get();
+            // si no hay complementos muestra mensaje
+    if ($productos->isEmpty()) {
+        return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'No hay complementos disponibles');
+    }
         return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos'));
     }
     public function Acomple(Request $request, $id)
     {
+        $producto_id = request('producto_id');
+        $producto = Producto::findOrFail($producto_id);
+        $disponible = $producto->disponible;
         $rules = [
             'producto_id' => 'required|exists:productos,id',
-            'cantidad' => 'required|numeric|digits_between:1,3',
+            'cantidad' => 'required|numeric|min:1|max:'.$disponible,
         ];
         $mensaje = [
             'producto_id.required' => 'El nombre no puede estar vacío',
             'producto_id.exists' => 'El nombre no existe',
             'cantidad.required' => 'La cantidad es obligatoria',
             'cantidad.numeric' => 'Solo se aceptan números',
-            'cantidad.digits_between' => 'Cantidad maxima de dígitos 3',
+            'cantidad.min' => 'Cantidad minima es 1',
+            'cantidad.max' => 'La cantidad maxima no debe ser mayor a ' .$disponible,
         ];
         $this->validate($request, $rules, $mensaje);
-
+        
         $pedido = Pedido::findOrFail($id);
-        $producto_id = request('producto_id');
         $cantidad = request('cantidad');
-        $producto = Producto::findOrFail($producto_id);
-
+         
         //si ya existe un complemento con el mismo producto y precio
         $precio = $producto->precio;
         $complemento_existente = $pedido->detalles()->where([
@@ -254,7 +213,8 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
 
         if ($complemento_existente) {
             // Si el complemento ya existe solo suma la cantidad
-            $complemento_existente->cantidad += $cantidad;
+            $complemento_existente->cantidad += $cantidad; 
+           // $complemento_existente->estado = 1;
             $complemento_existente->save();
             // Actualizar el impuesto y el total del pedido general
             $detalles = $pedido->detalles;
@@ -264,8 +224,12 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             }
             $impuesto = $total * 0.15; // calcular el impuesto
             $pedido->imp = $impuesto;
-            $pedido->total = $total;
+            $pedido->total = $total; 
             $pedido->save();
+        //restar la cantidad disponible del producto
+        $producto->disponible -= $cantidad;
+        $producto->save();
+
             return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
         } else {
             //si no agrega un producto
@@ -274,6 +238,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             $complemento->producto_id = $producto->id; // Obtener el nombre del producto
             $complemento->precio = $producto->precio;
             $complemento->cantidad = $cantidad;
+            $complemento->estado = 1;// cambia el estado del detalle del pedido
             $complemento->save();
 
             // Actualizar el impuesto y el total del pedido general
@@ -284,9 +249,12 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             }
             $impuesto = $total * 0.15; // calcular el impuesto
             $pedido->imp = $impuesto;
-            $pedido->total = $total;
+            $pedido->total = $total; 
             $pedido->save();
-
+            
+        //Restar la cantidad disponible del producto
+        $producto->disponible -= $cantidad;
+        $producto->save();
             return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
         }
     }
@@ -340,7 +308,7 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
             DB::table('Pedidos')->where('estado', 3)->delete();
             return back()->with('mensaje', 'Pedidos borrados correctamente.');
         } else {
-            return back()->with('errors', 'No hay pedidos para borrar.');
+            return redirect()->route("terminados.terminados")->with('errors', 'No hay pedidos para borrar.');
         }
     }
 
@@ -357,9 +325,15 @@ $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
     }
     public function destroy($id)
     {
-        $detalle = DetallesPedido::findOrfail($id);
+        $detalle = DetallesPedido::findOrfail($id); 
         $pedido = $detalle->pedido;
+        $detalle->estado = 0;
         $detalle->delete();
+
+    //sumar la cantidad disponible del producto borrado
+    $producto = $detalle->producto;
+    $producto->disponible += $detalle->cantidad;
+    $producto->save();
         // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
         if ($pedido->detalles->count() == 0) {
             $mesa = $pedido->mesa_nombre;
