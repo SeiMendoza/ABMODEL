@@ -407,7 +407,10 @@ class PedidoUsuarioController extends Controller
         $pedido->imp = $impuesto;
         $pedido->total = $total;
         $pedido->save();
-
+        //restar la cantidad disponible del producto borrado
+    $producto = $detalle->producto;
+    $producto->disponible -= $detalle->cantidad;
+    $producto->save();
         return redirect()->route('pedidost.detalle', ['id' => $pedido_id])->with('mensaje', 'El detalle del pedido ha sido actualizado exitosamente.');
     }
     /**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
