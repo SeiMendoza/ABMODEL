@@ -361,7 +361,7 @@ class PedidoUsuarioController extends Controller
         $pedido = Pedido::findOrfail($pedido_id);
         $productos = Producto::select('id', 'nombre')->where('estado', '=', '1')
             ->whereIn('tipo', ['0', '1', '2'])
-            //->orwhere('tipo', '=', '0')
+            //->orwhere('disponible', '>', 0)
             ->get();
         // Agregar el precio del producto al input
         Session::put('producto_precio', $edit->precio);
@@ -369,29 +369,29 @@ class PedidoUsuarioController extends Controller
     }
     public function update(Request $request, $pedido_id, $detalle_id)
     {
+        $producto_id = $request->input('producto_id');
+        $producto = Producto::where('id', $producto_id)->where('estado', '=', '1')
+            ->firstOrFail();
+        $disponible = $producto->disponible;
+        $precio = $producto->precio;
         $request->validate([
-            'cantidad' => ['required', 'numeric', 'digits_between:1,3', 'min:1'],
-            'precio' => ['required', 'numeric', 'min:1'],
+            'cantidad' => ['required', 'numeric','min:1','max:'.$disponible],
+            'precio' => ['required', 'numeric', 'min:'.$precio],
             'producto_id' => ['required', 'exists:productos,id']
         ], [
             'cantidad.required' => 'La cantidad es obligatoria',
             'cantidad.numeric' => 'Solo se aceptan  números',
             'cantidad.min' => 'La cantidad minima es 1',
-            'cantidad.digits_between' => 'Solo se permiten 3 dígitos',
+            'cantidad.max' => 'La cantidad maxima no debe ser mayor a ' .$disponible,
             'precio.required' => 'La cantidad es obligatoria',
             'precio.numeric' => 'Solo se aceptan  números',
-            'precio.min' => 'La cantidad minima es 1',
+            'precio.min' => 'La cantidad minima es '.$precio,
             'producto_id.required' => 'El nombre del producto es obligatorio',
             'producto_id.exists' => 'El nombre del producto no existe'
         ]);
 
         $detalle = DetallesPedido::findOrfail($detalle_id);
         $pedido = $detalle->pedido;
-
-        $producto_id = $request->input('producto_id');
-        $producto = Producto::where('id', $producto_id)->where('estado', '=', '1')
-            ->firstOrFail();
-
         $detalle->producto_id = $producto->id;
         $detalle->cantidad = $request->input('cantidad');
         $detalle->precio = $request->input('precio');
