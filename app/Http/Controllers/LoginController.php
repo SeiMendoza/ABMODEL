@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-//use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
+use Illuminate\Database\QueryException;
 use App\Models\User;
 
 class LoginController extends Controller
@@ -21,38 +23,22 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-
-        $acc=request()->validate([
-            'email'=> 'required',
+        $credentials = $request->validate([
+            'email' => 'required',
             'password' => 'required'
-        ],
-        [
+        ], [
             'email.required' => 'El correo es obligatorio.',
             'password.required' => 'La contraseña es obligatoria.',
         ]);
-
-        if(Auth::attempt($acc))
-        {
-            $con='OK';
-        }
-        $email = $request->get('email');
-        $query = User::where('email','=',$email)->get();
-        if($query->count() !=0)
-        {
-            $hashp=$query[0]->password;
-            $password=$request->get('password');
-            if(password_verify($password,$hashp))
-            {
-                return redirect('/ab');
-            }
-            else{
-                return back()->withErrors(['password'=>'Contraseña no valida.'])
-                    ->withInput([request('password')]);
-            }
-        }
-        else{
-            return back()->withErrors(['email'=>'Correo no valido.'])
-                    ->withInput([request('usuario')]);
+    
+        $user = User::where('email', $credentials['email'])->first();
+    
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            Auth::login($user);
+            return redirect('/ab');
+        } else {
+            return back()->withErrors(['password' => 'Correo o contraseña no válidos.'])
+                ->withInput(['email' => $request->email]);
         }
     }
 
@@ -72,21 +58,21 @@ class LoginController extends Controller
 
 
      /**Editar Usuario - en vista de perfil*/
-     public function edit($id)
-     {
+    public function edit($id)
+    {
          $user = User::findOrFail($id);
          return view('auth.EditarUserPrin')->with('user', $user);
-     }
+    }
  
-     public function update(Request $request, $id)
-     {
+    public function update(Request $request, $id)
+    {
         $this->validate($request, [
              'name' => 'required|min:3|max:40|regex:/^[a-zA-Z]+\s[a-zA-Z]+(\s[a-zA-Z]+)?(\s[a-zA-Z]+)?$/',
-             'email' => 'required|string|email|max:50',
-             'address' => 'required|string|min:3|max:300',
+             'email' => 'required|string|email|max:50', Rule::unique('users')->ignore($id),
+             'address' => 'required|string|min:3|max:250',
              'telephone' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
              'imagen' => ''
-         ], [
+        ], [
              'name.required' => '¡Debes ingresar tu nombre completo!',
              'name.min' => '¡Ingresa tu nombre completo, sin abreviaturas!',
              'name.max' => '¡Has excedido el limite máximo de letras!',
@@ -106,39 +92,66 @@ class LoginController extends Controller
              'telephone.min'=>'¡El número telefónico debe tener minimo: 8 dígitos!',
              'telephone.max'=>'¡El número telefónico debe tener maximo: 8 dígitos!',
              'telephone.regex'=>'¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!',
- 
-         ]);
-         
-         $actualizarUser = User::findOrFail($id);
- 
-         $actualizarUser->name=$request->input('name');
-         $actualizarUser->email=$request->input('email');
-         $actualizarUser->address=$request->input('address');
-         $actualizarUser->telephone=$request->input('telephone');
+        ]);
 
-         if ($request->has('password')) {
-            // Solo se actualiza la contraseña si se proporciona una nueva
-            $actualizarUser->password = bcrypt($request->input('password'));
+        try{
+         
+            $actualizarUser = User::findOrFail($id);
+ 
+            $actualizarUser->name=$request->input('name');
+            $actualizarUser->email=$request->input('email');
+            $actualizarUser->address=$request->input('address');
+            $actualizarUser->telephone=$request->input('telephone');
+
+            if ($request->filled('new_password')) {
+                $this->validate($request, [
+                    'current_password' => 'required',
+                    'new_password' => 'confirmed|min:8',
+                ], $this->customMessages);
+    
+                 // Verificar si la contraseña actual coincide
+                if (Hash::check($request->input('current_password'), $actualizarUser->password)) {
+                    // La contraseña actual coincide, se puede cambiar la contraseña
+                   $actualizarUser->password = bcrypt($request->input('new_password'));
+                } else {
+                   // La contraseña actual no coincide, se mantiene la contraseña anterior
+                    return redirect()->back()->withErrors(['current_password' => 'La contraseña actual no es correcta.']);
+                }
+            }
+ 
+            if($request->hasFile('imagen')){
+                $file = $request->file('imagen');
+                $destinationPath = 'images/';
+                $filename = time().'.'.$file->getClientOriginalName();
+                $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
+                $actualizarUser->imagen = 'images/'.$filename;
+            }else{
+                unset($actualizarUser['imagen']);
+            }
+ 
+            /*Variable para guardar los nuevos cambios */
+            $creado = $actualizarUser->save();
+ 
+            if($creado){
+                return redirect()->route('usuarios.perfil')
+                ->with('mensaje', "Se actualizó exitosamente el perfil: ".$actualizarUser->name." ");
+            }
         }
- 
-         if($request->hasFile('imagen')){
-             $file = $request->file('imagen');
-             $destinationPath = 'images/';
-             $filename = time().'.'.$file->getClientOriginalName();
-             $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
-             $actualizarUser->imagen = 'images/'.$filename;
- 
-             }else{
-                 unset($actualizarUser['imagen']);
-         }
- 
-         /*Variable para guardar los nuevos cambios */
-         $creado = $actualizarUser->save();
- 
-         if($creado){
-            return redirect()->route('usuarios.perfil')
-            ->with('mensaje', "Se actualizó exitosamente el perfil: ".$actualizarUser->name." ");
-         }
+       
+        catch (QueryException $exception) {
+              $errorCode = $exception->errorInfo[1];
+            if ($errorCode == 1062) {
+             // Código de error 1062: Entrada duplicada
+              return redirect()->back()->withErrors(['email' => 'El correo electrónico ya está en uso.'])->withInput();
+            }
+             throw $exception;
+        }
     }
 
+    private $customMessages = [
+        'current_password.required' => '¡Este campo es obligatorio, si deseas cambiar la contraseña!',
+        'new_password.confirmed' => '¡Debes confirmar tu contraseña!',
+        'new_password.min' => '¡Debes ingresar una contraseña segura, minimo 8 caracteres!',
+    ];
 }
+

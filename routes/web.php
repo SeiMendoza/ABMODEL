@@ -106,15 +106,15 @@ Route::get('/pruebaAdmon', [HomeController::class, 'pruebaAdmon'])->middleware('
 ->name('menuAdmon.prueba');
 
 
-Route::get('/profile', [HomeController::class, 'p'])
+Route::get('/profile', [HomeController::class, 'p'])->middleware('auth')
 ->name('p');
-Route::get('/sing', [HomeController::class, 's'])
+Route::get('/sing', [HomeController::class, 's'])->middleware('auth')
 ->name('s');
-Route::get('/rtl', [HomeController::class, 'r'])
+Route::get('/rtl', [HomeController::class, 'r'])->middleware('auth')
 ->name('r');
-Route::get('dashboard', [HomeController::class, 'd'])
+Route::get('dashboard', [HomeController::class, 'd'])->middleware('auth')
 ->name('d');
-Route::get('/sing-up', [HomeController::class, 'u'])
+Route::get('/sing-up', [HomeController::class, 'u'])->middleware('auth')
 ->name('u');
 Route::get('/registro', [HomeController::class, 'registro'])->middleware('auth')
 ->name('registro');
@@ -168,7 +168,7 @@ Route::post('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple']
 
 Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])->middleware('auth')
 ->name('cliente_menu.details');
-Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])
+Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])->middleware('auth')
 ->name('cliente_menu.qr');
 Route::get('/menu/prueba', [MenuUsuarioController::class, 'prueba'])->middleware('auth')
 ->name('cliente_prueba');
@@ -297,10 +297,10 @@ Route::get('piscina/{id}', [PiscinaController::class, 'show'])->middleware('auth
  * Reservaciones de mesas
 */
 
-Route::get('/mesas/reservaciones', [MesaController::class, 'indexR'])
+Route::get('/mesas/reservaciones', [MesaController::class, 'indexR'])->middleware('auth')
 ->name('mesas_res.index');
 
-Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])
+Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])->middleware('auth')
 ->name('mesas_res.show');
 
 /**
@@ -310,28 +310,28 @@ Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])
 Route::get('/mesas/lista', [MesaController::class, 'index'])->middleware('auth')
 ->name('mesas_reg.index');
 /**ruta para qr por id de mesa */
-Route::get('/mesas/{id}/qr', [MesaController::class, 'Codigo_Qr'])
+Route::get('/mesas/{id}/qr', [MesaController::class, 'Codigo_Qr'])->middleware('auth')
 ->name('mesa.Codigo_Qr')->where('id','[0-9]+');
 /**ruta para imprimir el qr de cada mesa */
-Route::get('/qr-pdf/{id}',[MesaController::class, 'Qr_pdf'])
+Route::get('/qr-pdf/{id}',[MesaController::class, 'Qr_pdf'])->middleware('auth')
 ->name('qr-pdf');
 
-Route::get('/mesas/registro/nuevo',[MesaController::class, 'create'])
+Route::get('/mesas/registro/nuevo',[MesaController::class, 'create'])->middleware('auth')
 ->name('mesas_reg.create');
 
-Route::post('/mesas/registro/nuevo',[MesaController::class, 'store'])
+Route::post('/mesas/registro/nuevo',[MesaController::class, 'store'])->middleware('auth')
 ->name('mesas_reg.store');
 
-Route::get('/mesas/registro/{id}/edicion', [MesaController::class, 'edit'])
+Route::get('/mesas/registro/{id}/edicion', [MesaController::class, 'edit'])->middleware('auth')
 ->name('mesas_reg.edit')->where('id','[0-9]+');
 
-Route::put('/mesas/registro/{id}/edicion', [MesaController::class, 'update'])
+Route::put('/mesas/registro/{id}/edicion', [MesaController::class, 'update'])->middleware('auth')
 ->name('mesas_reg.update')->where('id','[0-9]+');
 
-Route::delete('/mesas/registro/{id}/borrar', [MesaController::class, 'destroy'])
+Route::delete('/mesas/registro/{id}/borrar', [MesaController::class, 'destroy'])->middleware('auth')
 ->name('mesas_reg.destroy')->where('id','[0-9]+');
 
-Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])
+Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])->middleware('auth')
 ->name('mesas_reg.search');
 
 /**

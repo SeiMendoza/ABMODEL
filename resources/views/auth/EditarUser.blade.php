@@ -43,7 +43,7 @@
                     
                     <div class="row row-space">
                         <div class="col-3">
-							
+							<BR>
                             <div>
                                 <img onclick="elegirImagen()" src="{{asset($user->imagen)}}" alt="" width="240px" height="240px" id="imagenmostrada">
                                 <br><br>
@@ -92,28 +92,37 @@
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror
                                 </div>  
+
+                                <div class="col">
+                                    <label for="current_password"><strong>Contraseña Actual:</strong></label>
+                                    <input class="form-control border-radius-sm" type="password" placeholder="Ingrese la contraseña actual" name="current_password" 
+                                       value="{{ old('current_password') }}" onkeypress="quitarerror()" >
+                                    @error('current_password')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
+                                </div>
                         </div>
 
-						<!--<BR>
+						<BR>
 						<div class="row" style="margin-left:20px">
-							<div class="col">
-								 <label for="password"><strong>Contraseña:</strong></label>
-								 <input class="form-control border-radius-sm" type="password" placeholder="Ingrese una contraseña" name="password"
-								   value="{{ old('password', $user->password) }}" maxlength="40" required onkeypress="quitarerror()" autocomplete="new-password">
-								@error('password')
-								   <strong class="menerr" style="color:red">{{ $message }}</strong>
-								@enderror
-							</div>
-
-							<div class="col">
-								<label for="confirm"><strong>Confirmar Contraseña:</strong></label>
-								<input class="form-control border-radius-sm" type="password" placeholder="Confirmar la contraseña" name="password_confirmation" 
-								   value="{{ old('confirm', $user->confirm) }}" required onkeypress="quitarerror()" required autocomplete="new-password">
-								@error('confirm')
-									<strong class="menerr" style="color:red">{{ $message }}</strong>
-								@enderror
-							</div>
-						</div>-->
+                        <div class="col">
+                            <label for="new_password"><strong>Nueva contraseña:</strong></label>
+                            <input class="form-control border-radius-sm" type="password" placeholder="Ingrese una nueva contraseña" name="new_password"
+                               value="{{ old('new_password') }}" onkeypress="quitarerror()" >
+                            @error('new_password')
+                               <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+                        </div>
+                        
+                        <div class="col">
+                            <label for="new_password_confirmation"><strong>Confirmar nueva contraseña:</strong></label>
+                            <input class="form-control border-radius-sm" type="password" placeholder="Confirmar la nueva contraseña" name="new_password_confirmation" 
+                               value="{{ old('new_password_confirmation') }}" onkeypress="quitarerror()" >
+                            @error('new_password_confirmation')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                            @enderror
+                        </div>
+                        </div>
 
 						<BR>
                             <div class="row" style="margin-left:20px">
