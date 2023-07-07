@@ -27,7 +27,7 @@
     <!-- Main CSS-->
     <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet" media="all">
-    
+
     <script src="{{ asset('/js/sweetalert2.all.min.js') }}"></script>
 
     <title>Villa Crisol - @yield('title') </title>
@@ -77,6 +77,11 @@
 
         div .card {
             margin-top: 100px;
+        }
+
+        .fila-marca {
+            background-color: #e06464 !important; /* Color de fondo rojo */
+            color: #FFFFFF; /* Texto en color blanco */
         }
     </style>
 </head>
@@ -223,13 +228,13 @@
                         </div>
                         <span class="nav-link-text ms-1">Usuarios</span>
                     </a>
-                </li> 
+                </li>
             </ul>
         </div>
     </aside>
 
     <main class="main-content" style="padding: 0px; margin: 93px 1% 0% 17.3%;">
-    
+
         <script>
             var msg = '{{ Session::get('mensaje') }}';
             var exist = '{{ Session::has('mensaje') }}';
@@ -274,7 +279,45 @@
     <script src="/assets/datepicker/moment.min.js"></script>
     <script src="/assets/datepicker/daterangepicker.js"></script>
     <script>
-        let table = new DataTable('#example', {});
+        @if (isset($idProducto))
+        var numeroPagina;
+        let table = $('#example').DataTable({
+            "createdRow": function(row, data, dataIndex) {
+                if (data[1] === '{{ $idProducto }}') {
+                    $(row).addClass('fila-marca');
+                    console.log(row._DT_RowIndex+1)
+                    console.log(JSON.stringify(data))
+                    console.log(JSON.stringify(dataIndex))
+
+                    numeroPagina = Math.floor(dataIndex / 10);
+                    console.log("La fila " + (dataIndex + 1) + " se encuentra en la página: " + numeroPagina);
+
+                }
+            },
+            "pageLength": 10,
+            "columnDefs": [
+            {
+                "targets": [1], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
+                "visible": false
+            }
+        ]
+        });
+
+        table.page(numeroPagina).draw(false);
+        @else
+        let table = $('#example').DataTable({
+            "displayStart": 0,
+            "pageLength": 10,
+            "columnDefs": [
+            {
+                "targets": [1], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
+                "visible": false
+            }
+        ]
+        });
+
+        @endif
+
     </script>
 
     <script>

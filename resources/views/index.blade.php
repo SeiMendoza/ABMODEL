@@ -131,7 +131,7 @@
                                     </span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n0" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n0" style=" max-height: 600px; overflow-y: auto; aria-labelledby="dropdownMenuButton">
                                     <div class="d-flex py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-bold mb-1" style="pointer-events: none;">
@@ -140,7 +140,7 @@
                                         </div>
                                     </div>
                                     @foreach($datosalerta as $index => $d)
-                                    <a class="dropdown-item border-radius-md" href="{{ Route('prodpiscina.index') }}">
+                                    <a class="dropdown-item border-radius-md" href="{{ Route('prodpiscina.index',['id_producto' => $d->id]) }}">
                                         <div class="d-flex py-1">
                                             <div class="avatar avatar-sm me-3 my-auto bg-{{ $colors[$index % count($colors)] }}">
                                                 <i class="fas fa-swimmer text-white"></i>

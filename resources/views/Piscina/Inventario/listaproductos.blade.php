@@ -57,6 +57,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
         <thead>
             <tr>
                 <th scope="col" style="text-align:center">N</th>
+                <th scope="col" style="text-align:center; display: nome">id</th>
                 <th scope="col" style="text-align:center">Producto</th>
                 <th scope="col" style="text-align:center;text-transform:initial;">Tipo de producto</th>
                 <th scope="col" style="text-align:center">Cantidad</th>
@@ -69,6 +70,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
             @forelse($prod as $i => $p)
             <tr style="text-align:center;">
                 <td scope="col">{{++$i}}</td>
+                <td scope="col"  style="text-align:center; display: nome">{{$p->id}}</td>
                 <td scope="col">{{$p->nombre}}</td>
                 <td scope="col">{{$p->tipo_producto->descripcion}}</td>
                 <td scope="col">

@@ -22,7 +22,13 @@ class PiscinaController extends Controller
     {
         $prod = Piscina::all();
         $tip = PiscinaTipo::all();
-        return view('Piscina/inventario/listaproductos',compact('prod','tip'));
+
+        if(isset($_GET['id_producto'])){
+            $idProducto = $_GET['id_producto'];
+            return view('Piscina.inventario.listaproductos',compact('prod','tip','idProducto'));
+        }
+
+        return view('Piscina.inventario.listaproductos',compact('prod','tip',));
     }
 /*public function search(Request $request){
     $prod = Piscina::all();

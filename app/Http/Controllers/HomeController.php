@@ -16,8 +16,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $datosalerta = Piscina::select('piscina_tipos.descripcion',DB::raw('COUNT(*) AS total'),DB::raw('SUM(piscinas.peso) AS peso'))
-        ->join('piscina_tipos','piscinas.tipo','=','piscina_tipos.id')->groupby('piscina_tipos.descripcion')->get();
+        $datosalerta = Piscina::select('piscinas.id','piscina_tipos.descripcion',DB::raw('COUNT(*) AS total'),DB::raw('SUM(piscinas.peso) AS peso'))
+        ->join('piscina_tipos','piscinas.tipo','=','piscina_tipos.id')->groupby('piscinas.id','piscina_tipos.descripcion')->get();
 
         return view("index",compact('datosalerta'));
     }
