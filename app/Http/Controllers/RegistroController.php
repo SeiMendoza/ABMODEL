@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 
 class RegistroController extends Controller
@@ -197,13 +198,38 @@ class RegistroController extends Controller
         'new_password.confirmed' => '¡Debes confirmar tu contraseña!',
         'new_password.min' => '¡Debes ingresar una contraseña segura, minimo 8 caracteres!',
     ];
-    
-    /*Borrar usuario*/ 
-    public function destroy($id){
-         User::findOrFail($id)->delete();
-         return to_route('usuarios.users')->with('mensaje', 'Usuario eliminado correctamente!');
-    }
 
+    
+    /*Borrar usuario con permisos*/ 
+    public function destroy($id)
+    {
+        // usuario actualmente autenticado
+        $currentUser = Auth::user();
+
+        // Verifica si el usuario actual tiene el marcador "is_default" establecido en true
+        if ($currentUser->is_default) {
+        // Verifica si el usuario a eliminar existe
+        $userToDelete = User::find($id);
+        if (!$userToDelete) {
+            return redirect()->back()->with('error', 'El usuario a eliminar no existe.');
+        }
+
+        // Verifica si el usuario a eliminar no es el propio usuario actual
+        if ($userToDelete->id === $currentUser->id) {
+            return redirect()->back()->with('error', 'No puedes eliminarte a ti mismo.');
+        }
+
+        // Elimina al usuario seleccionado
+        $userToDelete->delete();
+
+        return redirect()->route('usuarios.users')->with('success', 'Usuario eliminado correctamente.');
+
+        } else {
+           // El usuario actual no tiene el permiso de eliminar a otros 
+           return redirect()->back()->with('error', 'No tienes permiso para eliminar este usuario.');
+        }
+    }
+     
 
     /**Vista de usuarios */
     public function users(Request $request)

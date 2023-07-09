@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'address'=>'1303 San Jacinto Street Houston 77002',
             'telephone'=>'94896083',
             'imagen'=>'img/Perfil/balneario.jpg',
+            'is_default' => true, //Eliminar usuarios
         ]);
 
         DB::table('users')->insert([

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address', 250);
             $table->string('telephone', 8);
             $table->string('imagen');
+            $table->boolean('is_default')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
