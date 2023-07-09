@@ -163,12 +163,15 @@ class MesaController extends Controller
     public function destroy($id)
     {
         $mesa = Mesa::findOrFail($id);
-        $mesa->pedidos()->delete();
-        
-        Mesa::destroy($id);
+        if(!$mesa->pedidos->count()){
+        $mesa->delete();
+       // Mesa::destroy($id);
         return redirect()->route('mesas_reg.index')->with('mensaje', 'Mesa borrada correctamente');
+    }else {
+        return redirect()->route('mesas_reg.index')->with('errors', 'No se puede eliminar la mesa');
     }
 
+    }
     //Reservaciones
 
     public function indexR()

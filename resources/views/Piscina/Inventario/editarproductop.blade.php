@@ -48,9 +48,9 @@
                             <label for="">Tipo de producto: </label>
                             <div style="">
                                 <select onchange="cambioPeso()" class="form-control border-radius-sm" style="text-indent: 8px !important;" name="tipo" id="tipo">
-                                    <option value="1" {{$piscina->tipo =="1" ? 'selected' :''}}>Polvo</option>
-                                    <option value="2" {{$piscina->tipo =="2" ? 'selected' :''}}>Liquido</option>
-                                </select>
+                                <option value="1" {{ old('tipo', $piscina->tipo) == "1" ? 'selected' : '' }}>Polvo</option>
+                                <option value="2" {{ old('tipo', $piscina->tipo) == "2" ? 'selected' : '' }}>Liquido</option>   
+                                </select> 
                                 @error('tipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror
@@ -65,9 +65,9 @@
                             <label for="">Tipo de uso: </label>
                             <div style="">
                                 <select  class="form-control border-radius-sm" name="uso" id="uso">
-                                    <option value="1" {{$piscina->uso =="1" ? 'selected' :''}}>Diario</option>
-                                    <option value="2" {{$piscina->uso =="2" ? 'selected' :''}}>Semanal</option>
-                                    <option value="3" {{$piscina->uso =="3" ? 'selected' :''}}>Mensual</option>
+                                    <option value="1" {{ old('uso', $piscina->uso) =="1" ? 'selected' :''}}>Diario</option>
+                                    <option value="2" {{ old('uso', $piscina->uso) =="2" ? 'selected' :''}}>Semanal</option>
+                                    <option value="3" {{ old('uso', $piscina->uso) =="3" ? 'selected' :''}}>Mensual</option>
                                 </select>
                                 @error('uso')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
