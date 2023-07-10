@@ -53,7 +53,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
 <!--------Lista de productos---------------->
 
 <div class="table-responsive">
-    <table class="table" id="example">
+    <table class="table" id="example" style="width:100%;">
         <thead>
             <tr>
                 <th scope="col" style="text-align:center">N</th>

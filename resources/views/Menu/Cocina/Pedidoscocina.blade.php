@@ -15,7 +15,7 @@
 
 <div class="">
     <div class="table-responsive">
-        <table class="table" id="example">
+        <table class="table" id="example" style="width:100%;">
             <thead>
                 <tr>
                     <th scope="col" style="text-align:center">N</th>
