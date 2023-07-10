@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('cantidadNinios')->default(0);
             $table->integer('precioNinios')->default(0);
             $table->float('anticipo');
-            $table->boolean('formaPago')->default(0);
+            $table->boolean('formaPago')->default(1);
             $table->boolean('estado')->default(0);
             $table->timestamps();
         });

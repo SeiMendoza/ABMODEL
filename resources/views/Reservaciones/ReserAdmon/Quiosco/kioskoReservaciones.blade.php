@@ -18,42 +18,41 @@
         <table class="table" id="example" style="">
             <thead style="">
                 <tr>
-                    <th scope="col" style="text-align:center">N</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col" style="text-align: center;" >Celular</th>
-                    <th scope="col" style="text-align: center;">Cantidad</th>
-                    <th scope="col">fecha</th>
-                    <th scope="col" style="text-align:right;">Pago</th>
-                    <th scope="col" style="text-align:right;">Anticipo</th>
-                    <th scope="col" style="text-align:right;"> Detalle</th>
-                    <th scope="col" style="text-align: center;">Editar</th>
-                    <th scope="col" style="text-align: center;">Eliminar</th>
+                    <th style="text-align: center; width: 50px">N</th>
+                    <th>Cliente</th>
+                    <th style="text-align: center; width: 50px" >Celular</th>
+                    <th style="text-align: center; width: 50px">Personas</th>
+                    <th style="text-align: center; width: 50px">fecha</th>
+                    <th style="text-align:right; width: 50px">Total</th>
+                    <th style="text-align:right; width: 50px">Pendiente</th>
+                    <th style="text-align:right; width: 50px"> Detalle</th>
+                    <th style="text-align: center; width: 50px">Editar</th>
+                    <th style="text-align: center; width: 50px">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($reservaciones  as $i => $r)
-                        
                         <tr style=" height:46px">
-                            <td scope="col" style="text-align: center">{{++$i}}</td>
-                            <td scope="col" >{{$r->nombreCliente}}</td> 
-                            <td scope="col"  style="text-align:right">{{$r->celular}}</td> 
-                            <td style="text-align: center;">{{$r->cantidadAdultos + $r->cantidadNinios}}</td> 
-                            <td scope="col" style="text-align:left;" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
+                            <td style="text-align: center; width: 50px"> {{++$i}} </td>
+                            <td style="width: 100px">{{$r->nombreCliente}}</td> 
+                            <td style="text-align:right; width: 50px">{{$r->celular}}</td> 
+                            <td style="text-align: center; width: 50px">{{$r->cantidadAdultos + $r->cantidadNinios}}</td> 
+                            <td style="text-align:right; width: 50px" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('MMMM') }},
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('YYYY') }}</td> 
                                 @php
                                 $total = $r->precioNinios * $r->cantidadNinios +
                                 $r->precioAdultos * $r->cantidadAdultos;
                                 @endphp
-                            <td class="" style="text-align:right" scope="col">L {{ number_format($total, 2, '.', ',') }}</td>
-                            <td class="" style="text-align:right" scope="col">L {{ number_format($r->anticipo, 2, '.', ',') }}</td> 
-                            <td scope="col"  style="text-align: center;">
+                            <td style="text-align:right; width: 50px">L {{ number_format($total, 2, '.', ',') }}</td> 
+                            <td class="" style="text-align:right; width: 50px" scope="col">L {{ number_format($total - $r->anticipo, 2, '.', ',') }}</td>
+                            <td style="text-align: center; width: 50px;">
                                 <a type="buttom" href="{{route('kiosko.detail',['id'=>$r->id])}}">
                                     <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
                                 </a>
                             </td>
-                            <td scope="col" style="text-align: center;" ><a href="{{route('kiosko_res.edit', ['id' => $r->id])}}"><i class="fa-solid fa-edit text-success"></i></a></td>
-                            <td scope="col" style="text-align: center;">
+                            <td style="text-align: center; width: 50px"><a href="{{route('kiosko_res.edit', ['id' => $r->id])}}"><i class="fa-solid fa-edit text-success"></i></a></td>
+                            <td style="text-align: center; width: 50px">
                                 <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$r->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
                                 <form action="{{route('kiosko_res.destroy', ['id' => $r->id])}}" method="post" enctype="multipart/form-data">
                                     @method('delete')

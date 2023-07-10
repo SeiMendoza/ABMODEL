@@ -9,6 +9,7 @@ use App\Http\Controllers\PlatilloController;
 use App\Http\Controllers\PlatillosyBebidasController;
 use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
+use App\Http\Controllers\DetallesPedidoController;
 use App\Http\Controllers\EditarPlatilloController;
 use App\Http\Controllers\EditarBebidaController;
 use App\Http\Controllers\ProductoController;
@@ -396,3 +397,7 @@ Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Rea
 Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])->middleware('auth')
 ->name('detalle.realizadas');
 
+
+
+Route::get('/pedidoCaja', [DetallesPedidoController::class, 'index'])
+->name('pedidoCaja.index');

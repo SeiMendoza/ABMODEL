@@ -203,20 +203,20 @@
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="formaPago" style="margin-left: 0;">Forma de pago: </label>
                                     <select name="formaPago" required onchange="quitarerror()"  class="form-control border-radius-sm">
-                                        @if (old('formaPago'))
-                                            @if (old('formaPago') === 'Efectivo')
-                                                <option style="display: none" selected="selected" value="Efectivo">Efectivo</option>
+                                        @if (old('formaPago', $registro->formaPago))
+                                            <option disabled="disabled" selected="selected" value="">Seleccione una forma de pago</option>
+                                            @if (old('formaPago', $registro->formaPago) == 1)
+                                                <option style="display: none" selected="selected" value="1">Efectivo</option>
                                             @else
-                                                @if (old('formaPago') === 'Transferencia')
-                                                    <option style="display: none" selected="selected" value="Transferencia">Transferencia</option>
-                                                @else
+                                                @if (old('formaPago', $registro->formaPago) == 2)
+                                                    <option style="display: none" selected="selected" value="2">Transferencia</option>
                                                 @endif
                                             @endif
                                         @else
-                                            <option disabled="disabled" selected="selected" value="{{$registro->formaPago}}">Seleccione una forma de pago</option>
+                                            <option disabled="disabled" selected="selected" value="{{old('formaPago', $registro->formaPago)}}">Seleccione una forma de pago</option>
                                         @endif
-                                        <option value="1"{{$registro->formaPago === 1 ? 'selected' : ''}}>Efectivo</option>
-                                        <option value="0"{{$registro->formaPago === 0 ? 'selected' : ''}}>Transferencia</option>
+                                        <option value="1">Efectivo</option>
+                                        <option value="2">Transferencia</option>
                                     </select>
                                     @error('formaPago')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>

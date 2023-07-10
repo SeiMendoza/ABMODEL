@@ -201,25 +201,24 @@
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="formaPago" style="margin-left: 0;">Forma de pago: </label>
                                     <select name="formaPago" required onchange="quitarerror()"  class="form-control border-radius-sm">
-                                        @if (old('formaPago'))
-                                            @if (old('formaPago') === 'Efectivo')
-                                                <option style="display: none" selected="selected" value="Efectivo">Efectivo</option>
-                                            @else
-                                                @if (old('formaPago') === 'Transferencia')
-                                                    <option style="display: none" selected="selected" value="Transferencia">Transferencia</option>
-                                                @else
-                                                @endif
-                                            @endif
+                                    @if (old('formaPago'))
+                                    <option disabled="disabled" selected="selected" value="">Seleccione una forma de pago</option>
+                                        @if (old('formaPago') == 1)
+                                            <option style="display: none" selected="selected" value="1">Efectivo</option>
                                         @else
-                                            <option disabled="disabled" selected="selected" value="">Seleccione una forma de pago</option>
+                                            @if (old('formaPago') == 2)
+                                                <option style="display: none" selected="selected" value="2">Transferencia</option>
+                                            @endif
                                         @endif
-                                        <option value="1">Efectivo</option>
-                                        <option value="0">Transferencia</option>
+                                    @else
+                                        <option disabled="disabled" selected="selected" value="">Seleccione una forma de pago</option>
+                                    @endif
+                                    <option value="1">Efectivo</option>
+                                    <option value="2">Transferencia</option>
                                     </select>
                                     @error('formaPago')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                      @enderror
-                                </div>
                                 </div>
                             </div>
                             <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">

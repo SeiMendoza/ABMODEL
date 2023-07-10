@@ -233,7 +233,7 @@
         </div>
     </aside>
 
-    <main class="main-content" style="padding: 0px; margin: 93px 1% 0% 17.3%;">
+    <main class="main-content" style="padding: 0px; margin: 93px 1% 0% 17.2%;">
 
         <script>
             var msg = '{{ Session::get('mensaje') }}';
@@ -279,9 +279,14 @@
     <script src="/assets/datepicker/moment.min.js"></script>
     <script src="/assets/datepicker/daterangepicker.js"></script>
     <script>
+        $('#example').DataTable( {
+    responsive: true
+        } );
+    </script>
+    <script>
         @if (isset($idProducto))
         var numeroPagina;
-        let table = $('#example').DataTable({
+        let table = $('#examples').DataTable({
             "createdRow": function(row, data, dataIndex) {
                 if (data[1] === '{{ $idProducto }}') {
                     $(row).addClass('fila-marca');
@@ -305,7 +310,7 @@
 
         table.page(numeroPagina).draw(false);
         @else
-        let table = $('#example').DataTable({
+        let table = $('#examples').DataTable({
             "displayStart": 0,
             "pageLength": 10,
             "columnDefs": [

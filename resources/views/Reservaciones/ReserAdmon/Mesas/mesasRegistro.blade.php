@@ -18,9 +18,8 @@
         <table class="table" id="example" style="">
             <thead class="">
                 <tr style="">
-                    <th scope="col" style="text-align:center">N</th>
-                    <th scope="col" style="">Código</th>
-                    <th scope="col" style="">Mesa</th>
+                    <th scope="col" style="text-align:center;">Código</th>
+                    <th scope="col" style="text-align:center;">Mesa</th>
                     <th scope="col" style="text-align:center;  text-transform:initial;">Cantidad de personas</th>
                     <th scope="col" style="text-align:center">Kiosko</th>
                     <th scope="col" style="text-align:;">Estado</th>
@@ -33,9 +32,8 @@
                 @forelse($registros as $i => $r)
                         
                         <tr class="" style="text-align:center; height:46px">
-                            <td scope="col" style="">{{++$i}}</td>
-                            <td scope="col" style="text-align: left"> {{$r->codigo}}</td>
-                            <td scope="col" style="text-align: left">{{$r->nombre}}</td> 
+                            <td scope="col" style="text-align: center; width:150px"><strong>{{$r->codigo}}</strong></td>
+                            <td scope="col" style="text-align: center; width:200px">{{$r->nombre}}</td> 
                             <td scope="col">{{$r->cantidad}}</td>
                             <td scope="col">{{$r->kiosko_id}}</td>
                             <td scope="col" style="text-align: left">
