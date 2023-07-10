@@ -15,7 +15,7 @@
 @section('content')
     <!-- ========== Tabla========== -->
     <div class="table-responsive">
-        <table class="table" id="example" style="width:100%;">
+        <table class="table" id="example" style="">
             <thead class="">
                 <tr style="">
                     <th scope="col" style="text-align:center">N</th>

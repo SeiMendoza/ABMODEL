@@ -31,7 +31,7 @@
 @endsection
 @section('content')
 <div class="table-responsive">
-    <table class="table" id="example" style="width:100%;">
+    <table class="table" id="example">
         <thead>
             <tr>
                 <th scope="col" style="text-align:center">N</th>
@@ -48,7 +48,7 @@
             <tr class="" style="text-align:center;">
                 <td scope="col">{{++$i}}</td>
                 <td scope="col">{{$p->mesa_nombre->nombre}}</td>
-                <td scope="col">{{$p->mesa_nombre->kiosko->codigo}}</td>
+                <td scope="col">{{$p->quiosco}}</td>
                 <td scope="col">{{$p->nombreCliente}}</td>
                 <td>
                     @if($p->estado == 3)

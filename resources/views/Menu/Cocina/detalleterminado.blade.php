@@ -44,7 +44,7 @@
             <td class="titulo">Número de mesa: </td>
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
             <td class="titulo">Kiosko:</td>
-            <td class="informacion">{{$pedido->mesa_nombre->kiosko->codigo}}</td>
+            <td class="informacion">{{$pedido->quiosco}}</td>
             <td class="titulo">Sub total:</td>
             <td class="informacion">L. <?= number_format($sub, 2, ".", ",") ?> </td>
         </tr>
