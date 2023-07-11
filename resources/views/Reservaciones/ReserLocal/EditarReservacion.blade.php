@@ -41,7 +41,8 @@
                         <div class="form-group col-md-4 ">
                             <label for="NombreCliente" style="margin-left: 0;">Nombre:</label>
                                 <input name="Nombre_Cliente" type="text" class=" form-control border-radius-sm" id="Nombre_Cliente" maxlength="20"
-                                        required placeholder="Ingrese el nombre" value="{{ old('Nombre_Cliente', $r->Nombre_Cliente) }}">
+                                        required placeholder="Ingrese el nombre" value="{{ old('Nombre_Cliente', $r->Nombre_Cliente) }}"
+                                        onkeypress="return funcionConvLetrasMay(event);">
                                  @error('Nombre_Cliente')
                                      <strong class="menerr" style="color:red">{{ $message }}</strong>
                                  @enderror
@@ -50,7 +51,8 @@
                         <div class="form-group col-md-4">
                             <label for="Apellido_Cliente" style="margin-left: 0;">Apellido:</label>
                             <input name="Apellido_Cliente" type="text" class="form-control border-radius-sm" id="ApellidoCliente" 
-                              required placeholder="Ingrese el apellido" value="{{ old('Apellido_Cliente', $r->Apellido_Cliente) }}">
+                              required placeholder="Ingrese el apellido" value="{{ old('Apellido_Cliente', $r->Apellido_Cliente) }}"
+                              onkeypress="return funcionConvLetrasMay(event);">
                             @error('Apellido_Cliente')
                                 <strong  class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -209,3 +211,39 @@
         </div>
    </div>
 @endsection
+
+<script type="">
+	function funcionConvLetrasMay(evt) {
+		var code = (evt.which) ? evt.which : evt.keyCode;
+		var input = evt.target.value;
+
+		// No permitir símbolos, ni numeros
+		if (code >= 33 && code <= 64 || code >= 186 && code <= 222 || code >= 91 && code <= 96) {
+			return false;
+		}
+
+		// No permitir espacios al inicio
+		if (code == 32 && input.length === 0) {
+			return false;
+		}
+
+		// Cambiar la primera letra de cada palabra a mayúscula
+		var words = input.split(" ");
+		for (var i = 0; i < words.length; i++) {
+			words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+		}
+		var modifiedInput = words.join(" ");
+		evt.target.value = modifiedInput;
+
+		// Permitir separar palabras (min una vez, max tres)
+		if (code == 32) {
+			var spaceCount = (input.match(/ /g) || []).length;
+			if (spaceCount >= 3) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	
+</script>

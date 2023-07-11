@@ -141,7 +141,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Saldo pendiente</td>
                             <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Pendiente}} </td>
+                            <td class="titulo">L {{ number_format($reservar->Pendiente, 2, '.', ',') }} </td>
                             <td class="informacion"></td>
                         </tr>
                     </tbody>

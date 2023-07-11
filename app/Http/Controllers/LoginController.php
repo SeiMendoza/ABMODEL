@@ -67,7 +67,7 @@ class LoginController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-             'name' => 'required|min:3|max:40|regex:/^[a-zA-Z]+\s[a-zA-Z]+(\s[a-zA-Z]+)?(\s[a-zA-Z]+)?$/',
+             'name' => 'required|min:3|max:40|regex:/^[a-zA-ZáÁéÉíÍóÓúÚñÑ]+\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?$/',
              'email' => 'required|string|email|max:50', Rule::unique('users')->ignore($id),
              'address' => 'required|string|min:3|max:250',
              'telephone' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',

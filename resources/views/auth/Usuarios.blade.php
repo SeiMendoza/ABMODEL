@@ -52,7 +52,7 @@
 
 @if(session('success'))
     <div id="error-success" class="alert alert-success custom-exit">
-        <strong>Éxito:</strong> {{ session('success') }}
+        <strong>{{ session('success') }}</strong>
     </div>
 
     <script>
@@ -68,7 +68,7 @@
         <thead style="">
             <tr>
                 <th scope="col" style="text-align: left;  ">Nombre</th>
-                <th scope="col" style="text-align: left;  "></th>
+                
                 <th scope="col" style="text-align: left;">Correo Electrónico</th>
                 <th scope="col" style="text-align: right; width:10% ">Teléfono</th>
                 <th scope="col" style="text-align: center;">Dirección</th>
@@ -81,16 +81,16 @@
             @forelse($listaUs as $u => $l)
             <tr style=" height:46px">
                 <td scope="col" style="text-align: left;">{{$l->name}} </td>
-                <td scope="col" style="text-align: left;"></td>
+                
                 <td scope="col" style="text-align: left;">{{$l->email}} </td>
                 <td scope="col" style="text-align: right;">{{$l->telephone}}</td>
                 <td scope="col" style="text-align: right;">{{$l->address}}</td>
 
                 <td style="text-align: center;">
-                    @if ($l->id == Auth::user()->id)
+                    @if ($l->id == Auth::user()->id || Auth::user()->is_default)
                     <a href="{{ route('usuarios.editar', ['id' => $l->id]) }}" ><i class="fa fa-edit text-success"></i></a>
                     @else
-                    <a ><i data-bs-toggle="modal" data-bs-target="#static{{$l->id}}" class="fas fa-info-circle text-success"></i></a> <!-- Icono para los demás usuarios -->
+                    <a ><i data-bs-toggle="modal" data-bs-target="#static{{$l->id}}" class="fas fa-times-circle text-success"></i></a> <!-- Icono para los demás usuarios -->
                     <div class="modal fade" id="static{{$l->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog ">
                             <div class="modal-content">
@@ -172,8 +172,8 @@
         @if(session('error'))
             var errorDiv = document.createElement('div');
             errorDiv.className = 'alert alert-danger';   //estilos de la alerta
-            errorDiv.innerHTML = '<strong>Error:</strong> {{ session('error') }}';  //concatenar mensaje de error
-            document.body.appendChild(errorDiv);     //Alerta aparezca en la vista principal
+            //errorDiv.innerHTML = '<strong>Error:</strong> {{ session('error') }}';  concatenar mensaje de error
+            //document.body.appendChild(errorDiv);    Alerta aparezca en la vista principal
         @endif
     }
 </script>

@@ -42,7 +42,7 @@
                             {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('MMMM') }},
                             {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('YYYY') }}</td> 
                         <td scope="col" style="text-align: right;">L {{ number_format($r->Total, 2, '.', ',') }}</td>
-                        <td scope="col" style="text-align: right;">L 0.00</td>
+                        <td scope="col" style="text-align: right;">L. {{ number_format($r->Pendiente, 2, '.', ',') }}</td>
                         <td scope="col" style="text-align: center;"><input disabled type="checkbox" id="list" name="list" {{ old('list') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$r->id}}" 
                             style="background:teal; width:15px; height:15px;"> </td>
                          

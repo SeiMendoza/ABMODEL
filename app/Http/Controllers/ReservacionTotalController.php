@@ -33,12 +33,12 @@ class ReservacionTotalController extends Controller
 
     public function create(){
         $reservacion = reservacion_total::orderBy('Fecha', 'ASC')->get();
-        return view('/Reservaciones/ReserLocal/FormularioReg');
+        return view('/Reservaciones/ReserLocal/FormularioReg', compact('reservacion'));
     }
 
     public function store(Request $request,){
         $fecha_act = date("d-m-Y");
-        $min = date('d-m-Y',$min = strtotime($fecha_act."+ 1 day"));
+        $min = date('d-m-Y',$min = strtotime($fecha_act));
 
         $request -> validate([
             'Nombre_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:3',
@@ -49,7 +49,7 @@ class ReservacionTotalController extends Controller
             'Tipo_Evento' => 'required|max:50',
             'Fecha' => 'required|date|after:'.$min,   
             'HoraEntrada' => 'required',
-            'HoraSalida' => 'required', 
+            'HoraSalida' => 'required|after:HoraEntrada', 
             'Total' => 'required|min:1500|max:15000|numeric', 
             'FormaPago' => 'required',
             'Anticipo' => 'required|min:500|max:15000|numeric',
@@ -88,6 +88,7 @@ class ReservacionTotalController extends Controller
             'HoraEntrada.required'=> 'La hora de llegada es obligatoria',
 
             'HoraSalida.required'=> 'La hora de salida es obligatoria',
+            'HoraSalida.after'=> 'La hora debe ser posterior a la hora de llegada',
 
             'Total.required' => 'El precio no puede estar vacío',
             'Total.min' => 'El precio es muy bajo',
@@ -139,7 +140,7 @@ class ReservacionTotalController extends Controller
     public function update(Request $request, $id){
 
         $fecha_act = date("d-m-Y");
-        $min = date('d-m-Y',$min = strtotime($fecha_act."+ 1 day"));
+        $min = date('d-m-Y',$min = strtotime($fecha_act));
 
         $request -> validate([
             'Nombre_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:3',
@@ -150,7 +151,7 @@ class ReservacionTotalController extends Controller
             'Tipo_Evento' => 'required|max:50',
             'Fecha' => 'required|date|after:'.$min,   
             'HoraEntrada' => 'required',
-            'HoraSalida' => 'required|after:Hora',
+            'HoraSalida' => 'required|after:HoraEntrada',
             'Total' => 'required|min:1500|max:15000|numeric', 
             'FormaPago' => 'required',
             'Anticipo' => 'required|min:500|max:15000|numeric',
@@ -189,6 +190,7 @@ class ReservacionTotalController extends Controller
             'HoraEntrada.required'=> 'La hora de llegada es obligatoria',
 
             'HoraSalida.required'=> 'La hora de salida es obligatoria',
+            'HoraSalida.after'=> 'La hora debe ser posterior a la hora de llegada',
 
             'Total.required' => 'El precio no puede estar vacío',
             'Total.min' => 'El precio es muy bajo',
@@ -248,6 +250,8 @@ class ReservacionTotalController extends Controller
         ]);
         $activar = reservacion_total::findOrfail($id);
         $activar->estado = $request->input('estado');
+        $activar->Pendiente = 0.00;
+
         $create = $activar->save();
 
         if ($create) {
@@ -258,6 +262,7 @@ class ReservacionTotalController extends Controller
     /**Reservaciones realizadas */
     public function Realizadas() { 
         $reservacion = reservacion_total::where('estado', 1)->orderBy('Fecha','ASC')->get();
+        
         return view('Reservaciones/ReserLocal/ReservRealizadas', compact('reservacion'));
     }
 
