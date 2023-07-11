@@ -48,7 +48,7 @@
             <tr class="" style="text-align:center;">
                 <td scope="col">{{++$i}}</td>
                 <td scope="col">{{$p->mesa_nombre->nombre}}</td>
-                <td scope="col">{{$p->quiosco}}</td>
+                <td scope="col">{{$p->mesa_nombre->kiosko->codigo}}</td>
                 <td scope="col">{{$p->nombreCliente}}</td>
                 <td>
                     @if($p->estado == 3)
@@ -73,21 +73,22 @@
 <form action="{{route('borrar.borrarDatos')}}" method="post" enctype="multipart/form-data">
     @method('delete')
     @csrf
-    <div class="modal fade" id="exampleModalCenter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 style="text-color:red;" class="modal-title" id="exampleModalLongTitle">Eliminar Pedidos</h4>
-                </div>
-                <div class="modal-body">
-                    ¿Está seguro de eliminar los pedidos entregados?
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">SÍ</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
-                </div>
-            </div>
-        </div>
-</form>
+    <div class="modal fade" id="exampleModalCenter"  data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar Pedidos</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                    ¿Está seguro de eliminar los pedidos entregados?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Si</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
 @endsection

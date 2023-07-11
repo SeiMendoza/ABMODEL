@@ -11,7 +11,7 @@
 @section('tit','Código Qr de mesas')
 @section('b')
 <div class="" style="">
-    <a href="{{route('mesas_reg.index')}}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
+    <a href="{{route('mesas_reg.index')}}" style="margin-right:10px; padding:5px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
         <i class="fa fa-arrow-left"></i> Regresar
     </a>
     <a href="{{ route('qr-pdf', ['id' => $mesa->id]) }}" style="margin:0; padding:5px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">

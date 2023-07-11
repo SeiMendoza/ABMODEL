@@ -53,15 +53,14 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
 <!--------Lista de productos---------------->
 
 <div class="table-responsive">
-    <table class="table" id="example">
+    <table class="table" id="examples">
         <thead>
             <tr>
                 <th scope="col" style="text-align:center">N</th>
                 <th scope="col" style="text-align:center; display: nome">id</th>
                 <th scope="col" style="text-align:center">Producto</th>
                 <th scope="col" style="text-align:center;text-transform:initial;">Tipo de producto</th>
-                <th scope="col" style="text-align:center">Cantidad</th>
-                <th scope="col" style="text-align:center">Detalle</th>
+                <th scope="col" style="text-align:center">Cantidad</th> 
                 <th scope="col" style="text-align:center">Editar</th>
                 <th scope="col" style="text-align:center">Eliminar</th>
             </tr>
@@ -83,13 +82,6 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                     <!--Boton para agregar cantidad-->
                     <a style="color: blue;" class="productpiscina" data-toggle="modal" data-target="#agregar{{$p->id}}">
                         <i style="text-size-adjust: 2px;" class="fa fa-plus-circle" aria-hidden="true"></i>
-                    </a>
-
-
-                </td>
-                <td>
-                    <a type="buttom" href="{{route('piscina.show',['id'=>$p->id])}}">
-                        <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
                     </a>
                 </td>
                 <td>

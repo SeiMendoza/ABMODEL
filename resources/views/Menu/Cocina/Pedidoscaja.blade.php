@@ -37,7 +37,7 @@
             <tr style="text-align:center">
                 <td scope="col">{{++$i}}</td>
                 <td scope="col">{{$p->mesa_nombre->nombre}}</td>
-                <td scope="col">{{$p->quiosco}}</td>
+                <td scope="col">{{$p->mesa_nombre->kiosko->codigo}}</td>
                 <td scope="col">
                     <!---enviar a cocina--si existe en la columna estado_cocina 1 o 2 mostrara un texto o mostrar un icono para enviar------>
                     @if ($p->estado_cocina == 1)
@@ -47,9 +47,34 @@
                     <!--Entregar-->
                     <i class="fa fa-check-double text-success"></i>
                     @else
-                    <a href="#" id="envia_a_cocina" name="envia_a_cocina" data-bs-toggle="modal" data-bs-target="#static{{$p->id}}">
-                        <i class="fa-solid fa-truck-fast text-success"></i>
-                    </a>
+                   <!--- <a href="#" id="envia_a_cocina" name="envia_a_cocina" data-bs-toggle="modal" data-bs-target="#static{{$p->id}}">
+                        <i class="fa-solid fa-truck-fast text-success"></i> 
+                    </a>--->
+                    <i data-bs-toggle="modal" data-bs-target="#static{{$p->id}}" class="fa-solid fa-truck-fast text-success"></i>
+                    <form action="{{route('env.env_a_cocina', ['id'=>$p->id])}}" method="POST">
+                                @method('put')
+                                @csrf
+                                <div class="modal fade" id="static{{$p->id}}" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Enviar pedido a cocina</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Enviar pedido a cocina para: {{$p->nombreCliente}}?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <div style="display: none">
+                                    <input type="text" id="estado_cocina" name="estado_cocina" value="1">
+                                    <input type="text" id="estado" name="estado" value="1">   
+                                    </div>
+                                        <button type="submit" class="btn btn-danger">Si</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     @endif
                 </td>
                 <!--- enviado de cocina--si existe en la columna estado_cocina 1 o 2 mostrara un texto------>
@@ -67,9 +92,34 @@
                 <td scope="col">
                     <!---terminar en caja--si existe en la columna estado_cocina 2 mostrara un icono para terminar el pedido------>
                     @if($p->estado_cocina == 2)
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}">
+                   <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}">
                         <i class="fa-solid fa-truck-fast text-success"></i>
-                    </a>
+                    </a>-->
+                    <i data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}" class="fa-solid fa-truck-fast text-success"></i>
+                    <form action="{{route('terminar.terminarp', ['id'=>$p->id])}}" method="POST">
+                                @method('put')
+                                @csrf
+                                <div class="modal fade" id="staticBackdrop{{$p->id}}"  data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Terminar pedido</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro de terminar el pedido de: {{$p->nombreCliente}}?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <div style="display: none"> 
+                                    <input type="text" id="estado" name="estado" value="3">
+                                    <input type="hidden" name="mesa" value="{{ $p->mesa_id }}">
+                                    </div>
+                                        <button type="submit" class="btn btn-danger">Si</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     @elseif($p->estado_cocina == 1)
                     <!--Esperando de cocina-->
                     <i class="fa fa-check"></i>
@@ -81,7 +131,7 @@
                     </a>
                 </td>
             </tr>
-            <!-------Termina los pedidos y los envia a pedidos terminados-------->
+            <!-------Termina los pedidos y los envia a pedidos terminados 
             <div class="modal fade" id="staticBackdrop{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -105,16 +155,16 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <!-------Envia los pedidos por id a la cocina--------->
+            </div>-------->
+            <!-------Envia los pedidos por id a la cocina 
             <div class="modal fade" id="static{{$p->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Enviar pedido a cocina</h5>
                         </div>
-                        <div class="modal-body" style="text-align: center;">
-                            !El pedido para <strong>{{$p->nombreCliente}}</strong> se enviará a cocina¡
+                        <div class="modal-body">
+                            ¿Enviar pedido a cocina para: {{$p->nombreCliente}}?
                         </div>
                         <div class="modal-footer">
                             <form action="{{route('env.env_a_cocina', ['id'=>$p->id])}}" method="POST">
@@ -130,8 +180,8 @@
                     </div>
                 </div>
             </div>
-</div>
-</form>
+        </div>
+</form>--------->
 @endif
 @endif
 @empty
