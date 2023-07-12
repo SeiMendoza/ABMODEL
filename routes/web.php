@@ -9,6 +9,7 @@ use App\Http\Controllers\PlatilloController;
 use App\Http\Controllers\PlatillosyBebidasController;
 use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetallesPedidoController;
 use App\Http\Controllers\EditarPlatilloController;
 use App\Http\Controllers\EditarBebidaController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\ReservacionController;
 use App\Http\Controllers\ReservacionTotalController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController;
+use App\Http\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -397,7 +399,8 @@ Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Rea
 Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])->middleware('auth')
 ->name('detalle.realizadas');
 
+Route::get('/counter', [Counter::class, 'render'])
+->name('counter.index');
 
-
-Route::get('/pedidoCaja', [DetallesPedidoController::class, 'index'])
-->name('pedidoCaja.index');
+Route::resource('/cart', CartController::class); 
+Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');

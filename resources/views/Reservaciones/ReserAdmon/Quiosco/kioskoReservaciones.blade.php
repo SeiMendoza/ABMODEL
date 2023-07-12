@@ -37,7 +37,7 @@
                             <td style="width: 100px">{{$r->nombreCliente}}</td> 
                             <td style="text-align:right; width: 50px">{{$r->celular}}</td> 
                             <td style="text-align: center; width: 50px">{{$r->cantidadAdultos + $r->cantidadNinios}}</td> 
-                            <td style="text-align:right; width: 50px" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
+                            <td style="text-align:center; width: 50px" >{{ \Carbon\Carbon::parse($r->fecha)->isoFormat('DD') }} de
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('MMMM') }},
                                 {{ \Carbon\Carbon::parse($r->fecha)->isoFormat('YYYY') }}</td> 
                                 @php
