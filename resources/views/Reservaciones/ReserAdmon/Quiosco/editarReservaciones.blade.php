@@ -101,8 +101,9 @@
                                             @foreach ($kiosko as $c)
                                                 @if (old('kiosko', $registro->kiosko_id) == $c->id)
                                                     <option selected="selected" value="{{$c->id}}">{{$c->codigo}}</option>
-                                                @else
+                                                @else @if ($c->disponible)                                                    
                                                     <option value="{{$c->id}}">{{$c->codigo}}</option>
+                                                    @endif
                                                 @endif
                                             @endforeach 
                                         @else

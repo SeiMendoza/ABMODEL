@@ -36,9 +36,6 @@ class HomeController extends Controller
     {
 
         $productos = Producto::all();
-        /**$platillos = Platillo::all();
-        $bebidas = Bebida::all();
-        $combos = Combo::all();*/
         return view("/Menu/Admon/indexComplementos")->with(['productos' => $productos]);
     }
     public function indexPlatillos()
@@ -61,10 +58,7 @@ class HomeController extends Controller
     public function pruebaAdmon(){
 
         $productos = Producto::all();
-        $platillos = Platillo::all();
-        $bebidas = Bebida::all();
-        $combos = Combo::all();
-        return view("/Menu/Admon/pruebaAdmon")->with(['productos' => $productos, 'platillos' => $platillos, 'bebidas' => $bebidas, 'combos' => $combos]);
+        return view("/Menu/Admon/pruebaAdmon")->with(['productos' => $productos]);
     }
 
 

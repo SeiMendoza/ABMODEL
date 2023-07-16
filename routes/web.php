@@ -263,6 +263,7 @@ Route::controller(KioskoController::class)->middleware('auth')-> group( function
   Route::get('/kiosko/{id}/detalle', 'detalle')->name('kiosko.detalle');
   Route::delete('/kiosko/{id}/destroy', 'destroy')->name('kiosko.destroy');
   Route::get('/kiosko/{id}/reservaciones', 'reservaciones')->name('kiosko.reservaciones');
+  Route::get('/kiosko/{id}/historialReservaciones', 'reservacionesHistorial')->name('kiosko.reservacioneshistorial');
 });
 /*Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');*/

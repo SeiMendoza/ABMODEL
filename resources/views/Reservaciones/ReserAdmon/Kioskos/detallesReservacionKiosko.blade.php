@@ -7,12 +7,14 @@
 @section('tit', 'Detalle de reservación del kiosko ' .$kiosko->codigo)
 @section('b')
 <div>
-    <a href="" style="margin:10px; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+    <a href="{{ route('kiosko.reservacioneshistorial', ['id' => $kiosko->id]) }}" style="margin:10px; padding:5px; width:190px;" type="button" class="bg-light border-radius-sm text-center ">
         <i class="fa-solid fa-clock-rotate-left"></i> Historial de Reservaciones
     </a>
+
     <a href="{{ route('kiosko.index') }}" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
         <i class="fa fa-arrow-left"></i>  Regresar
     </a>
+    
 </div>
 @endsection
 @section('content')
@@ -108,7 +110,7 @@
                                         </form>
                                     </td>
                                 </tr>      
-                                @php $rHoy = true; @endphp                        
+                                @php //$rHoy = true; @endphp                        
                             @endif                      
                         @empty                        
                         @endforelse

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Kiosko;
 use App\Models\Mesa;
+use App\Models\Pedido;
 use App\Models\Reservacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -93,6 +94,9 @@ class KioskoController extends Controller
 
         $k = Kiosko::findOrFail($id);
         $k->reservaciones()->delete();
+        $m = Mesa::where('kiosko_id', '=', $id);
+        $p = Pedido::where('quiosco', '=', $id);
+        $p->delete();
         $k->mesas()->delete();
         $k->delete();
 
@@ -117,5 +121,17 @@ class KioskoController extends Controller
             return view('Reservaciones.ReserAdmon.Kioskos.detallesReservacionKiosko', compact('reservaciones', 'kiosko', 'now'));
         else
             return back()->with(['mensaje' => 'No hay reservaciones en '. $kiosko->codigo], ['icon'=> 'info']);
+    }
+
+    public function reservacionesHistorial($id){
+
+        $kiosko = Kiosko::findOrFail($id);
+        $now = Carbon::now()->format('Y-m-d');
+        $reservaciones = Reservacion::where('kiosko_id', '=', $id)->where('fecha', '<', $now)->orderBy('fecha')->get();
+
+        if(!$reservaciones->isEmpty())
+            return view('Reservaciones.ReserAdmon.Kioskos.detallesReservacionesAnterioresKiosko', compact('reservaciones', 'kiosko', 'now'));
+        else
+            return back()->with(['mensaje' => 'No hay historial de reservaciones'], ['icon'=> 'info']);
     }
 }

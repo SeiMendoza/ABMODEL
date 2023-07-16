@@ -85,7 +85,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="modal-body">
-                                                    ¿Está seguro de eliminar el kiosko:<strong>{{ $k->codigo }}</strong>? <br>Esto eliminará todas las mesas contenidas y los pedidos de estas mesas
+                                                    ¿Está seguro de eliminar el kiosko:<strong>{{ $k->codigo }}</strong>? <br>Esto eliminará todas las mesas, reservaciones  <br> y los pedidos contenidos en este kiosko
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input id="activar" name="activar" style="display:none" value="0">

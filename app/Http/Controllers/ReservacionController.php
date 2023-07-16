@@ -221,6 +221,7 @@ class ReservacionController extends Controller
         ]);
 
         $actualizar = Reservacion::findOrFail($id);
+        $anterior = Reservacion::findOrFail($id);
 
         $actualizar->nombreCliente = $request->input('name');
         $actualizar->celular=$request->input('celular');
@@ -237,19 +238,34 @@ class ReservacionController extends Controller
         $actualizar->formaPago=$request->input('formaPago');                
         $creado = $actualizar -> save();
 
-        //Quita disponibilidad al Kiosko
-        $kiosko= Kiosko::findOrFail($actualizar->kiosko_id)->get();
-        $kiosko->disponible = 0;
-
-        //Quita disponibilidad a las mesas del kiosko
-        $mesas = Mesa::where('kiosko_id', '=', $actualizar->id)->get();
-        foreach($mesas as $m){
-            $m->estadoM = 0;
-        }
-
+        
         if ($creado) {
+            //Da disponibilidad al Kiosko anterior
+            $kiosko= Kiosko::find($anterior->kiosko_id);
+            $kiosko->disponible = 1;
+            $kiosko->save();
+
+            //Da disponibilidad a las mesas del kiosko anterior
+            $mesasA = Mesa::where('kiosko_id', '=', $anterior->kiosko_id);
+            foreach($mesasA as $m){
+                $m->estadoM = 1;
+                $m->save();
+            }
+
+            //Quita disponibilidad al Kiosko nuevo
+            $kiosko= Kiosko::find($actualizar->kiosko_id);
+            $kiosko->disponible = 0;
+            $kiosko->save();
+
+            //Quita disponibilidad a las mesas del kiosko
+            $mesas = Mesa::where('kiosko_id', '=', $actualizar->kiosko_id);
+            foreach($mesas as $m){
+                $m->estadoM = 0;
+                $m->save();
+            }
+
             return redirect()->route('kiosko_res.index')
-            ->with('mensaje', "".$actualizar->nombre." actualizada correctamente");
+            ->with('mensaje', "Reservación de ".$actualizar->nombreCliente. " actualizada correctamente".$mesasA->count());
         } 
         
     }

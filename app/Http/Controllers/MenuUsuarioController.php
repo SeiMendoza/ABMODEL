@@ -33,7 +33,7 @@ class MenuUsuarioController extends Controller
             $pedido->nombreCliente = "";
             $pedido->imp = 0;
             $pedido->total = 0;
-            $pedido->mesa_id = 1; 
+            $pedido->mesa_id = Mesa::where('estadoM', '=', 0)->first()->id; //selecciona la primera mesa disponible.
             $pedido->save();
 
         }
