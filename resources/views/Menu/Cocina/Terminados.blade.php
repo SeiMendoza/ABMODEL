@@ -30,14 +30,42 @@
 
 @endsection
 @section('content')
+<script>
+            var msg = "{{ Session::get('mensaje') }}";
+            var exist = "{{ Session::has('mensaje') }}";
+            if (exist) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: msg,
+                    showConfirmButton: false,
+                    toast: true,
+                    background: '#fff',
+                    timer: 5500
+                })
+            }
+            var ms = "{{ Session::get('errors') }}";
+            var exis = "{{ Session::has('errors') }}";
+            if (exis) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: ms,
+                    showConfirmButton: false,
+                    toast: true,
+                    background: '#fff',
+                    timer: 5500
+                })
+            }
+        </script>
 <div class="table-responsive">
     <table class="table" id="example">
         <thead>
             <tr>
                 <th scope="col" style="text-align:center">N</th>
-                <th scope="col" style="text-align:center">Número de mesa</th>
+                <th scope="col" style="text-align:center">Mesa</th>
                 <th scope="col" style="text-align:center">Kiosko</th>
-                <th scope="col" style="text-align:center">Nombre del cliente</th>
+                <th scope="col" style="text-align:center;text-transform:initial;">Nombre del cliente</th>
                 <th scope="col" style="text-align:center">Terminado</th>
                 <th scope="col" style="text-align:center">Detalles</th>
             </tr>

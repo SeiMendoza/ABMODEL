@@ -21,9 +21,9 @@
                     <th scope="col" style="text-align:center">N</th>
                     <th scope="col" style="text-align:center">Mesa</th>
                     <th scope="col" style="text-align:center">Kiosko</th>
-                    <th scope="col" style="text-align:center">Nombre del cliente</th>
-                    <th scope="col" style="text-align:center">Tiempo transcurrido</th>
-                    <th scope="col" style="text-align:center">Enviar a caja</th>
+                    <th scope="col" style="text-align:center;text-transform:initial;">Nombre del cliente</th>
+                    <th scope="col" style="text-align:center;text-transform:initial;">Tiempo transcurrido</th>
+                    <th scope="col" style="text-align:center;text-transform:initial;">Enviar a caja</th>
                     <th scope="col" style="text-align:center">Detalles</th>
                 </tr>
             </thead>

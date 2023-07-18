@@ -436,7 +436,9 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        var precio = parseFloat(response);
+                        var precio = parseFloat(response.precio);
+                        var imagen = response.imagen;
+                        var descrip = response.descrip;
                         if (!isNaN(precio)) { // Verifica si el valor de precio es válido
                             var impuesto = cantidad * precio *
                                 0.15; // Calcula el impuesto como el 15% del precio total
@@ -449,7 +451,10 @@
                             $('#sub_total').val(sub_total.toFixed(
                                 2)); // Muestra el sub_total con 2 decimales
                             $('#total').val(total.toFixed(
-                                2)); // Muestra el total con 2 decimales
+                                2)); // Muestra la descripción del producto
+                                $('#descrip').text(descrip)
+                                // Actualiza la imagen del producto
+                    $('#imagen-producto').attr('src', response.imagen);
                         }
                     },
                     error: function(xhr) {

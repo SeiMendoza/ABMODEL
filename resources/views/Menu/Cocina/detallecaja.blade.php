@@ -28,7 +28,6 @@
     }
 
     .informacion {
-        width: 20%;
         height: 40%;
         line-height: 190%;
     }
@@ -44,8 +43,21 @@
             <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
             <td class="titulo">Kiosko:</td>
             <td class="informacion">{{$pedido->mesa_nombre->kiosko->codigo}}</td>
-            <td class="titulo"></td>
-            <td class="informacion"></td>
+            <td class="titulo">Cambiar mesa:</td>
+            <td class="">
+                <form action="{{ route('cambiar_mesa', $pedido->id) }}" method="POST">
+                    @csrf
+                    <select style="width: max-content;" name="nueva_mesa" class="form-control" onchange="this.form.submit();">
+                        <option>Selccione una mesa</option>
+                        @foreach($mesas as $mesa)
+                        <option value="{{$mesa->id}}">{{$mesa->nombre}} - {{$mesa->kiosko->codigo}}</option> 
+                        @endforeach
+                    </select>
+                    @error('nueva_mesa')
+                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                    @enderror
+                </form>
+            </td>
         </tr>
         <tr>
             <td class="titulo">Nombre del cliente: </td>
@@ -103,12 +115,12 @@
         </tr>
     </table>
 
-    <div class="mb-0 col-9 text-start" style="position:absolute;top:294%;width:100%;">
+    <div class="mb-0 col-9 text-start" style="position:absolute;top:330%;width:100%;">
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
                 @if($pedido->estado_cocina == 0)
-                <a href="{{ route('ACompl', $pedido->id) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:62%;padding:5px; width:190px; z-index: 999;">
-                <i class="fa fa-plus-circle"></i> <strong>Agregar complemento</strong>
+                <a href="{{ route('ACompl', $pedido->id) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:62%;padding:5px; width:150px; z-index: 999;">
+                    <i class="fa fa-plus-circle"></i> <strong>Nuevo</strong>
                 </a>
                 @endif
                 <tr class="text-dark" style="background:rgba(255,179,71,0.6);">

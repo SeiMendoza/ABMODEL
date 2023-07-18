@@ -164,6 +164,9 @@ Route::get('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'ACompl'])-
 ->name('ACompl');
 Route::post('/pedido/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple'])->middleware('auth')
 ->name('Acomple');
+// cambiar la mesa del pedido en detalles de caja
+Route::post('/pedidos/{id}/cambiarmesa', [PedidoUsuarioController::class,'Cambiar_mesa'])
+->name('cambiar_mesa');
 
  /*****************************
   Rutas Para Menu de cliente
