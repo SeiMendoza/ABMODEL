@@ -61,7 +61,7 @@
         </tr>
         <script>
             setInterval(() => {
-                var creacion = new Date('{{$pedido->created_at}}')
+                var creacion = new Date('{{$pedido->updated_at}}')
                 var actual = new Date();
                 var msr = actual - creacion;
 
@@ -92,7 +92,6 @@
             <td class="titulo">Hora del pedido: </td>
             <td class="informacion">{{date('h:i:s a',strtotime($pedido->created_at))}}</td>
             <td class="titulo">Tiempo transcurrido en cocina:</td>
-
             <td class="informacion" id="tiempo"></td>
             <td class="titulo">Total:</td>
             <td class="informacion">L. {{$tot}} </td> 

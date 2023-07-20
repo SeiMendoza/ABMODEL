@@ -48,10 +48,14 @@
                 <form action="{{ route('cambiar_mesa', $pedido->id) }}" method="POST">
                     @csrf
                     <select style="width: max-content;" name="nueva_mesa" class="form-control" onchange="this.form.submit();">
+                        @if (count($mesas) === 0)
+                        <option>No hay mesas disponibles</option>
+                        @else
                         <option>Selccione una mesa</option>
                         @foreach($mesas as $mesa)
-                        <option value="{{$mesa->id}}">{{$mesa->nombre}} - {{$mesa->kiosko->codigo}}</option> 
+                        <option value="{{$mesa->id}}">{{$mesa->nombre}} - {{$mesa->kiosko->codigo}}</option>
                         @endforeach
+                        @endif
                     </select>
                     @error('nueva_mesa')
                     <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -81,9 +85,11 @@
             <td class="titulo">Hora del pedido: </td>
             <td class="informacion">{{date('h:i:s a',strtotime($pedido->created_at))}}</td>
             <td class="titulo">Tiempo transcurrido en cocina:</td>
+            @if($pedido->estado_cocina==1)
+            <td class="informacion" id="tiempo">
+                @else
             <td class="informacion">
-                @if($pedido->estado_cocina==1)
-
+                @if($pedido->estado_cocina==2)
                 @if ($diferencia->format('%H')!=0)
                 @if ($diferencia->format('%H')==1)
                 {{$diferencia->format('%H hora %i minutos %s segundos')}}
@@ -97,6 +103,7 @@
                 HH:MM:SS
                 @endif
             </td>
+            @endif
             <td class="titulo">Impuesto: </td>
             <td class="informacion">L. {{$isv}}</td>
         </tr>
@@ -109,7 +116,40 @@
                 @endif
             </td>
             <td class="titulo">Tiempo transcurrido en caja:</td>
-            <td class="informacion" id="tiempo"></td>
+            <td class="informacion" id="tiempo{{$pedido->id}}">
+                <script>
+                    setInterval(() => {
+                        var creacion = new Date('{{$pedido->created_at}}')
+                        var actual = new Date();
+                        var msr = actual - creacion;
+
+                        var hora = Math.floor((msr) / 1000 / 60 / 60);
+
+                        msr = msr - (hora * 60 * 60 * 1000);
+
+                        var minuto = Math.floor((msr) / 1000 / 60);
+                        msr = msr - (minuto * 60 * 1000);
+
+                        var segundos = Math.floor((msr) / 1000);
+
+                        var texto = '';
+
+                        if (hora != 0) {
+                            if (hora == 1) {
+                                texto = hora + ' hora '
+                            } else {
+                                texto = hora + ' horas '
+                            }
+                            texto = texto + minuto + ' minutos ';
+                        } else {
+                            texto = texto + minuto + ' minutos ' + segundos + ' segundos';
+                        }
+
+
+                        document.getElementById("tiempo{{$pedido->id}}").innerHTML = texto;
+                    }, 100);
+                </script>
+            </td>
             <td class="titulo">Total:</td>
             <td class="informacion">L. {{$tot}}</td>
         </tr>
