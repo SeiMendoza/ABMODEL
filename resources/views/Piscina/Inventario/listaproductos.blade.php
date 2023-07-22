@@ -60,7 +60,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                 <th scope="col" style="text-align:center; display: nome">id</th>
                 <th scope="col" style="text-align:center">Producto</th>
                 <th scope="col" style="text-align:center;text-transform:initial;">Tipo de producto</th>
-                <th scope="col" style="text-align:center">Cantidad</th> 
+                <th scope="col" style="text-align:center">Cantidad</th>
                 <th scope="col" style="text-align:center">Editar</th>
                 <th scope="col" style="text-align:center">Eliminar</th>
             </tr>
@@ -69,7 +69,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
             @forelse($prod as $i => $p)
             <tr style="text-align:center;">
                 <td scope="col">{{++$i}}</td>
-                <td scope="col"  style="text-align:center; display: nome">{{$p->id}}</td>
+                <td scope="col" style="text-align:center; display: nome">{{$p->id}}</td>
                 <td scope="col">{{$p->nombre}}</td>
                 <td scope="col">{{$p->tipo_producto->descripcion}}</td>
                 <td scope="col">
@@ -124,11 +124,11 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                                 </h3>
                             </strong>
                         </div>
-                        <form method="post" action="{{ route('piscina.agregar',['id'=>$p->id]) }}">
+                        <form id="formularioAgregar{{$p->id}}" method="post" action="{{ route('piscina.agregar',['id'=>$p->id]) }}" onsubmit="agregar({{$p->id}})">
                             @csrf
                             <div class="modal-body">
                                 <label for="">Ingrese la cantidad que se sumara:</label>
-                                <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad" class="form-control" step="0.01" style="width:250px;height:30px;">
+                                <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad{{$p->id}}" class="form-control" step="0.01" style="width:250px;height:30px;">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -150,11 +150,11 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                                 </h3>
                             </strong>
                         </div>
-                        <form method="post" action="{{ route('piscina.restar',['id'=>$p->id]) }}">
+                        <form id="formulariorestar{{$p->id}}" method="post" action="{{ route('piscina.restar',['id'=>$p->id]) }}" onsubmit="restar({{$p->id}})">
                             @csrf
                             <div class="modal-body">
                                 <label for="">Ingrese la cantidad que se restara:</label>
-                                <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidad" class="form-control" step="0.01" style="width:250px;height:30px;">
+                                <input type="number" placeholder="Ingrese la cantidad" name="cantidad" id="cantidadRestar{{$p->id}}" class="form-control" step="0.01" style="width:250px;height:30px;">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -172,8 +172,116 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
     </table>
 
 </div>
+<script>
+    @if(isset($idProducto))
+    setTimeout(function() {
+        window.location.href = "{{ route('producto.edit', ['id' => $idProducto]) }}";
+    }, 500); //
+    @endif
 
+    function agregar(id) {
+
+        let valor = document.getElementById('cantidad' + id).value;
+
+        if (valor === '') {
+            Swal.fire({
+                position: 'top-end'
+                , icon: 'warning'
+                , title: 'La cantidad no puede estar vacío'
+                , showConfirmButton: false
+                , toast: true
+                , background: '#fff'
+                , timer: 5500
+            })
+            event.preventDefault();
+            return false;
+        }
+
+        if (valor > 1000) {
+            Swal.fire({
+                position: 'top-end'
+                , icon: 'warning'
+                , title: 'La cantidad es muy grande'
+                , showConfirmButton: false
+                , toast: true
+                , background: '#fff'
+                , timer: 5500
+            })
+            event.preventDefault();
+            return false;
+        }
+
+        if (valor <= 0) {
+            Swal.fire({
+                position: 'top-end'
+                , icon: 'warning'
+                , title: 'La cantidad es muy pequeño'
+                , showConfirmButton: false
+                , toast: true
+                , background: '#fff'
+                , timer: 5500
+            })
+            event.preventDefault();
+            return false;
+        }
+        document.getElementById('formularioAgregar' + id).submit();
+        event.preventDefault();
+
+    }
+
+    function restar(id) {
+
+        let valor = document.getElementById('cantidadRestar' + id).value;
+
+        if (valor === '') {
+            Swal.fire({
+                position: 'top-end'
+                , icon: 'warning'
+                , title: 'La cantidad no puede estar vacío'
+                , showConfirmButton: false
+                , toast: true
+                , background: '#fff'
+                , timer: 5500
+            })
+            event.preventDefault();
+            return false;
+        }
+
+        if (valor > 1000) {
+            Swal.fire({
+                position: 'top-end'
+                , icon: 'warning'
+                , title: 'La cantidad es muy grande'
+                , showConfirmButton: false
+                , toast: true
+                , background: '#fff'
+                , timer: 5500
+            })
+            event.preventDefault();
+            return false;
+        }
+
+        if (valor <= 0) {
+            Swal.fire({
+                position: 'top-end'
+                , icon: 'warning'
+                , title: 'La cantidad es muy pequeño'
+                , showConfirmButton: false
+                , toast: true
+                , background: '#fff'
+                , timer: 5500
+            })
+            event.preventDefault();
+            return false;
+        }
+        document.getElementById('formulariorestar' + id).submit();
+        event.preventDefault();
+
+    }
+
+</script>
 
 
 
 @endsection
+
