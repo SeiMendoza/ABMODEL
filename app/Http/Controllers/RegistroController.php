@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Auth\Access\AuthorizationException;
 
 class RegistroController extends Controller
 {
@@ -29,6 +29,7 @@ class RegistroController extends Controller
         return redirect('/login')->with('success', 'Cuenta creada con éxito');
     } */
 
+
     public function create()
     {
         return view('auth/registro');
@@ -39,6 +40,7 @@ class RegistroController extends Controller
         $this->validate($request, [
             'name' => 'required|min:3|max:40|regex:/^[a-zA-ZáÁéÉíÍóÓúÚñÑ]+\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?$/',
             'email' => 'required|string|email|max:50|unique:users',
+            'is_default' => ['required', Rule::in(['Administrador', 'Usuario'])],
             'password' => 'required|string|min:8|confirmed',
             'address' => 'required|string|min:3|max:250',
             'telephone' => 'required|min_digits:8|max_digits:8|regex:/^[2,3,8,9][0-9]{7}+$/',
@@ -54,6 +56,8 @@ class RegistroController extends Controller
             'email.email' => '¡Debes ingresar un correo electrónico válido!',
             'email.max' => '¡Has excedido el limite máximo de letras!',
             'email.unique' => '¡Debes ingresar un correo electrónico diferente!',
+
+            'is_default.required' => '¡Este campo es obligatorio!',
 
             'password.required' => '¡Debes ingresar una contraseña!',
             'password.confirmed' => '¡Debes confirmar tu contraseña!',
@@ -74,6 +78,11 @@ class RegistroController extends Controller
             'image.mimes' => '¡Debes seleccionar una imagen en el formato correcto!'
         ]);
 
+        $isDefaultOptions = [
+            true => 'Administrador',
+            false => 'Usuario',
+        ];
+
         $input = $request->all();
         $password = $request->input('password');
         $input['password'] = bcrypt($password);
@@ -82,6 +91,7 @@ class RegistroController extends Controller
 
         $nuevoUser->name=$request->input('name');
         $nuevoUser->email=$request->input('email');
+        $nuevoUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];
         $nuevoUser->password= bcrypt($request->input('password'));
         $nuevoUser->address=$request->input('address');
         $nuevoUser->telephone=$request->input('telephone');
@@ -102,8 +112,15 @@ class RegistroController extends Controller
     }
 
     /**Editar Usuario */
-    public function edit($id)
+    public function edit($id, User $user)
     {
+        //Mensaje para cuando un usuario quiera editar otro
+        try {
+            $this->authorize('update', $user);
+        } catch (AuthorizationException $e) {
+            return view('auth/PermisoDenegado'); 
+        }
+
         $user = User::findOrFail($id);
         return view('auth/EditarUser')->with('user', $user);
     }
@@ -113,6 +130,7 @@ class RegistroController extends Controller
         $this->validate($request, [
             'name' => 'required|min:3|max:40|regex:/^[a-zA-ZáÁéÉíÍóÓúÚñÑ]+\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?$/',
             'email' => 'required|string|email|max:50', Rule::unique('users')->ignore($id),
+            'is_default' => ['required', Rule::in(['Administrador', 'Usuario'])],
             'address' => 'required|string|min:3|max:250',
             'telephone' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
             'imagen' => ''
@@ -127,6 +145,8 @@ class RegistroController extends Controller
             'email.email' => '¡Debes ingresar un correo electrónico válido!',
             'email.max' => '¡Has excedido el limite máximo de letras!',
 
+            'is_default.required' => '¡Este campo es obligatorio!',
+
             'address.required' => '¡Debes ingresar tu dirección!',
             'address.string' => '¡Debes ingresar tu dirección, verifica la información!',
             'address.min' => '¡Ingresa tu dirección completa, sin abreviaturas!',
@@ -139,29 +159,28 @@ class RegistroController extends Controller
 
         ]);
 
+        $isDefaultOptions = [
+            true => 'Administrador',
+            false => 'Usuario',
+        ];
+
         try{
 
             $actualizarUser = User::findOrFail($id);
 
             $actualizarUser->name=$request->input('name');
             $actualizarUser->email=$request->input('email');
+            $actualizarUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];
             $actualizarUser->address=$request->input('address');
             $actualizarUser->telephone=$request->input('telephone');
 
             if ($request->filled('new_password')) {
                 $this->validate($request, [
-                   'current_password' => 'required',
                    'new_password' => 'confirmed|min:8',
                 ], $this->customMessages);
     
-                // Verificar si la contraseña actual coincide
-                if (Hash::check($request->input('current_password'), $actualizarUser->password)) {
-                    // La contraseña actual coincide, se puede cambiar la contraseña
-                    $actualizarUser->password = bcrypt($request->input('new_password'));
-                } else {
-                    // La contraseña actual no coincide, se mantiene la contraseña anterior
-                    return redirect()->back()->withErrors(['current_password' => 'La contraseña actual no es correcta.']);
-                }
+                // Actualizar la contraseña con la nueva contraseña ingresada
+                $actualizarUser->password = bcrypt($request->input('new_password'));
             }
 
             if($request->hasFile('imagen')){
@@ -194,7 +213,6 @@ class RegistroController extends Controller
     }
 
     private $customMessages = [
-        'current_password.required' => '¡Este campo es obligatorio, si deseas cambiar la contraseña!',
         'new_password.confirmed' => '¡Debes confirmar tu contraseña!',
         'new_password.min' => '¡Debes ingresar una contraseña segura, minimo 8 caracteres!',
     ];
@@ -203,31 +221,14 @@ class RegistroController extends Controller
     /*Borrar usuario con permisos*/ 
     public function destroy($id)
     {
-        // usuario actualmente autenticado
-        $currentUser = Auth::user();
-
-        // Verifica si el usuario actual tiene el marcador "is_default" establecido en true
-        if ($currentUser->is_default) {
         // Verifica si el usuario a eliminar existe
         $userToDelete = User::find($id);
-        if (!$userToDelete) {
-            return redirect()->back()->with('error', 'El usuario a eliminar no existe.');
-        }
-
-        // Verifica si el usuario a eliminar no es el propio usuario actual
-        if ($userToDelete->id === $currentUser->id) {
-            return redirect()->back()->with('error', 'No puedes eliminarte a ti mismo.');
-        }
 
         // Elimina al usuario seleccionado
         $userToDelete->delete();
 
         return redirect()->route('usuarios.users')->with('success', 'Usuario eliminado correctamente.');
 
-        } else {
-           // El usuario actual no tiene el permiso de eliminar a otros 
-           return redirect()->back()->with('error', 'No tienes permiso para eliminar este usuario.');
-        }
     }
      
 

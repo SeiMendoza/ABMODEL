@@ -83,6 +83,54 @@
             background-color: #e06464 !important; /* Color de fondo rojo */
             color: #FFFFFF; /* Texto en color blanco */
         }
+
+        .img-perfils, .topbar .nav-item .nav-link .img-perfils {
+            height: 2.3rem;
+            width: 2.3rem;
+            margin-top: 20px;
+            margin-left: 5px;
+        }
+        .rounded-circulo {
+            border-radius: 50%!important;
+        }
+        
+    .dropdown-menu {
+    --bs-dropdown-min-width: 5rem;
+    --bs-dropdown-spacer: 5px;
+    --bs-dropdown-font-size: 1rem;
+    --bs-dropdown-border-color: var(--bs-border-color-translucent);
+    --bs-dropdown-border-radius: 0.375rem;
+    --bs-dropdown-border-width: 1px;
+    --bs-dropdown-item-padding-y: 0.25rem;
+    position: absolute;
+    margin-right: 0.8px;
+    font-size: var(--bs-dropdown-font-size);
+    color: var(--bs-dropdown-color);
+    text-align: left;
+    list-style: none;
+    background-color: var(--bs-dropdown-bg);
+    background-clip: padding-box;
+    border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
+    border-radius: var(--bs-dropdown-border-radius);
+    }
+
+    .dropdown .dropdown-menu {
+      font-size: .85rem;
+    }
+
+    .dropdown-divider {
+      height: 0;
+      margin: .6rem 0;
+      overflow: hidden;
+      border-top: 1px solid #eaecf4;
+    }
+
+    .dropdown-menu.dropdown-menu-right {
+        margin-right: 10px;
+        right: 0; /* Posiciona el menú desplegable a la derecha */
+        left: auto; /* Asegura que el menú no se extienda a la izquierda */
+    }
+
     </style>
 </head>
 
@@ -111,10 +159,18 @@
                     <div class="collapse navbar-collapse " id="navbar">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center"style="margin-top: 2.5%">
                         </div>
-                        <ul class="navbar-nav  justify-content-end">
+                        <ul class="navbar-nav justify-content-end">
                             <li class="nav-item d-flex align-items-center" style="margin-top: 23px">
                                 @yield('b')
                             </li>
+                            
+                            <li class="">
+                                <a href="javascript:;" class="nav-link text-white font-weight-bold px-0"
+                                     id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                     <img class="img-perfils rounded-circulo" src="/{{ Auth::user()->imagen}}" >
+                                </a>
+                            </li>
+                            
                             <li class="nav-item d-xl-none ps-3 d-flex align-items-center" style="margin-top: 23px">
                                 <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                                     <div class="sidenav-toggler-inner">
@@ -132,6 +188,7 @@
     </header>
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 fixed-start"
         id="sidenav-main" style="margin:90px 0 0 0">
+
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
@@ -221,6 +278,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    @if(auth()->user()->isAdmin())  <!--Solo mostrar a usuarios con permisos de crear, editar y eliminar usuarios-->
                     <a class="nav-link " href="{{ route('usuarios.users') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -228,6 +286,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Usuarios</span>
                     </a>
+                    @endif
                 </li>
             </ul>
         </div>
@@ -263,9 +322,30 @@
                 })
             }
         </script>
+
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in "
+            aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="{{ route('usuarios.perfil') }}">
+                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                Perfil
+            </a>
+            <a class="dropdown-item" href="#">
+                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                Información
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="{{ route('cerrarSes.cerrar') }}" >
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Cerrar sesión
+            </a>
+        </div>
+
         <div class="font-robo content-cell" style="">
             @yield('content')
         </div>
+
         <div class="row container-fluid footer font-robo" style="padding: 0; margin:0;">
             @yield('pie')
         </div>
@@ -324,6 +404,15 @@
         @endif
 
     </script>
+
+<script>
+    // Agrega un evento de clic para mostrar el dropdown
+    document.getElementById('dropdownMenuButton').addEventListener('click', function() {
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+        dropdownMenu.classList.toggle('show');
+    });
+</script>
+
 
     <script>
         (function() {

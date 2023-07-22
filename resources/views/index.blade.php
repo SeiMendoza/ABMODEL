@@ -56,6 +56,38 @@
     .rounded-circ {
       border-radius: 50%!important;
     }
+
+    .dropdown-menu {
+    --bs-dropdown-min-width: 5rem;
+    --bs-dropdown-spacer: 5px;
+    --bs-dropdown-font-size: 1rem;
+    --bs-dropdown-border-color: var(--bs-border-color-translucent);
+    --bs-dropdown-border-radius: 0.375rem;
+    --bs-dropdown-border-width: 1px;
+    --bs-dropdown-item-padding-y: 0.25rem;
+    position: absolute;
+    margin-top: 30px;
+    margin-right: 0.8px;
+    font-size: var(--bs-dropdown-font-size);
+    color: var(--bs-dropdown-color);
+    text-align: left;
+    list-style: none;
+    background-color: var(--bs-dropdown-bg);
+    background-clip: padding-box;
+    border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
+    border-radius: var(--bs-dropdown-border-radius);
+}
+
+.dropdown .dropdown-menu {
+    font-size: .85rem;
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: .6rem 0;
+    overflow: hidden;
+    border-top: 1px solid #eaecf4;
+}
 </style>
 </head>
 
@@ -171,23 +203,25 @@
                                            {{auth()->user()->name ?? auth()->user()->username}}
                                         <img class="img-perfil rounded-circ" src="/{{ Auth::user()->imagen}}" >
                                     </a>
-                                 <!-- Usar Informacion -->
-                                    <div class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n0"
-                                        aria-labelledby="dropdownMenuButton">
+                                    
+                                     <!-- Usar Informacion -->
+                                    <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in"
+                                       aria-labelledby="userDropdown">
                                         <a class="dropdown-item" href="{{ route('usuarios.perfil') }}">
-                                          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                           Perfil
+                                           <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                             Perfil
                                         </a>
                                         <a class="dropdown-item" href="#">
-                                           <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                             Información
+                                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                              Información
                                         </a>
-
-                                        <hr>
-                                            <a class="dropdown-item" href="{{ route('cerrarSes.cerrar') }}" data-toggle="modal" data-target="logoutModal">
-                                               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Cerrar sesión
-                                            </a>
+                                      
+                                        <div class="dropdown-divider"></div>
+                                
+                                        <a class="dropdown-item" href="{{ route('cerrarSes.cerrar') }}" data-toggle="modal" data-target="logoutModal">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                              Cerrar sesión
+                                        </a>
                                     </div>
                                 </li>
                             </div>
@@ -290,6 +324,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    @if(auth()->user()->isAdmin())  <!--Solo mostrar a usuarios con permisos de crear, editar y eliminar usuarios-->
                     <a class="nav-link " href="{{ route('usuarios.users') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -297,6 +332,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Usuarios</span>
                     </a>
+                    @endif 
                 </li>
             </ul>
         </div>
@@ -447,6 +483,7 @@
                             </p>
                     </div>
 
+                    @if(auth()->user()->isAdmin())  <!--Solo mostrar a usuarios con permisos de crear, editar y eliminar usuarios-->
                     <a href="{{ route('usuarios.users') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
                     data-id="" style="margin:10px 10px 0px 0px; border-radius:0%;">
                     <div class="text-center" style="text-align:center; padding: 0px;">
@@ -460,6 +497,7 @@
                                 position: absolute; bottom: 0; left:0;">Usuarios</strong>
                             </p>
                     </div>
+                    @endif
                 </a>
                 </div>
             </div>

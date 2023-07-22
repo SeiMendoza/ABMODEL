@@ -11,7 +11,7 @@
     <a href="{{route('usuarios.users')}}" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
         <i class="fa fa-arrow-left"></i>  Regresar
     </a>
-</div>
+</div> 
 @endsection
 
 @section('content')
@@ -49,7 +49,7 @@
                                 <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px;" class="btn btn-info text-center "> 
 									<i class="fa fa-file-image"></i> Seleccionar imagen</label>
                                 <input  style="display:none; margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" required value="{{ old('imagenPrevisualizacion') }}" 
-								onchange="colocarNombre();" style="color: white;width: 150px;">
+                                onchange="colocarNombre();" style="color: white;width: 150px;">
                                 @error('imagen')
                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror
@@ -90,7 +90,32 @@
                                     @error('email')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror
-                                </div>  
+                                </div> 
+                                
+                                <div class="col">
+                                <div class="font-robo form-group" style="margin-bottom: 5px">
+                                    <label for="is_default" style="margin-left: 0;">Permisos: </label>
+                                    <select name="is_default"  id="is_default" required onchange="quitarerror()"  class="form-control border-radius-sm">
+                                    @if (old('is_default'))
+                                    <option disabled="disabled" selected="selected" value="">Seleccione</option>
+                                        @if (old('is_default') == 'Administrador')
+                                            <option style="display: none" selected="selected" value="Administrador">Administrador</option>
+                                        @else
+                                            @if (old('is_default') == 'Usuario')
+                                                <option style="display: none" selected="selected" value="Usuario">Usuario</option>
+                                            @endif
+                                        @endif
+                                    @else
+                                        <option disabled="disabled" selected="selected" value="">Seleccione</option>
+                                    @endif
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Usuario">Usuario</option>
+                                    </select>
+                                    @error('is_default')
+                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
 						<BR>

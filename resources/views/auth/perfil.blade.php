@@ -4,20 +4,27 @@
 <li class="breadcrumb-item text-sm text-white active m-0" aria-current="page">Perfil</li>
 @endsection
 @section('tit', 'Perfil de Usuario')
+@section('b')
+<!--<div>
+    <a href="{{route('usuarios.users')}}" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
+        <i class="fa fa-arrow-left"></i>  Regresar
+    </a>
+</div>-->
+@endsection
 
 @section('content')
 <style>
 .img-perfil, .topbar .nav-item .nav-link .img-perfil {
-  height: 10rem;
-  width: 10rem;
+  height: 13rem;
+  width: 13rem;
 }
 .rounded-circ {
   border-radius: 50%!important;
 }
 
 .gradient-custom {
-  background-image: linear-gradient(rgba(110, 225, 240, 0.364), rgba(136, 247, 119, 0.353)),                  
-    url("img/balneario.jpg");
+  background-image: linear-gradient(rgba(241, 249, 250, 0.364), rgba(245, 249, 248, 0.353));               
+  border-right: 1px solid #e9edf2;
 }
 
 .form-material .form-group {
@@ -65,7 +72,7 @@
   border-bottom: 1px solid #f6f9ff;
 }
 .form-control-line .form-control:focus {
-  border-bottom: 1px solid #398bf7;
+  border-bottom: 1px solid rgba(111, 143, 175) ;
 }
 </style>
 
@@ -87,14 +94,14 @@
                   <a href="{{ route('usuarios.editarPerfil', ['id' => $user->id]) }}" style="width: 70%;  margin-left:30% " class="btn btn-primary" id="">Editar</a>
                 </div>
                 <div  style=" flex: 0 0 auto; width: 50%;">
-                  <a href="{{ route('index') }}" style="width: 70%;  margin-right:30% " class="btn btn-secondary" id="">Regresar</a>
+                  <a href="#" style="width: 70%;  margin-right:30% " class="btn btn-secondary" onclick="goBack()" >Regresar</a>
                 </div>
             </div>
 
             <BR>
         
 
-            </div>
+          </div>
             <div class="col-md-8">
               <div class="card-body p-4">
                 <BR>
@@ -106,6 +113,7 @@
                       <input readonly type="name" value="{{$user->name}}" class="form-control form-control-line" name="name" id="name">
                     </div>
                   </div>
+
                   <div class="form-group">
                     <label for="email" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px">
                       <b>Correo:</b></label>
@@ -113,6 +121,15 @@
                       <input readonly type="email" value="{{$user->email}}" class="form-control form-control-line" name="email" id="email">
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <label for="telephone" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px">
+                      <b>Teléfono:</b></label>
+                    <div class="col-md-12">
+                      <input readonly type="telephone" value="{{$user->telephone}}" class="form-control form-control-line" name="telephone" id="telephone">
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <label for="address" class="col-md-12" style="text-align: left; margin-top: 10px; margin-left: 1px">
                       <b>Dirección:</b></label>
@@ -127,3 +144,10 @@
     </div>
 </div>
 @endsection
+
+<script>
+  function goBack() {
+      // Retornar a la vista de la cual accedio
+      window.history.back();
+  }
+</script>

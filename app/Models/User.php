@@ -20,11 +20,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'is_default',
         'password',
         'address',
         'telephone',
         'imagen',
-        'is_default',
     ];
 
     /**
@@ -44,6 +44,14 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_default' => 'string',
     ];
+
+    //Verificar tipo de usuario
+    public function isAdmin()
+    {
+        return $this->is_default === 'Administrador';
+    }
+    
     
 }

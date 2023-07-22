@@ -94,14 +94,30 @@
                                 </div>  
 
                                 <div class="col">
-                                    <label for="current_password"><strong>Contraseña Actual:</strong></label>
-                                    <input class="form-control border-radius-sm" type="password" placeholder="Ingrese la contraseña actual" name="current_password" 
-                                       value="{{ old('current_password') }}" onkeypress="quitarerror()" >
-                                    @error('current_password')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror
+                                    <div class="font-robo form-group" style="margin-bottom: 5px">
+                                        <label for="is_default" style="margin-left: 0;">Permisos: </label>
+                                        <select name="is_default"  id="is_default" required onchange="quitarerror()"  class="form-control border-radius-sm">
+                                        @if (old('is_default', $user->is_default))
+                                        <option disabled="disabled" selected="selected" value="">Seleccione</option>
+                                            @if (old('is_default', $user->is_default) == 'Administrador')
+                                                <option style="display: none" selected="selected" value="Administrador">Administrador</option>
+                                            @else
+                                                @if (old('is_default', $user->is_default) == 'Usuario')
+                                                    <option style="display: none" selected="selected" value="Usuario">Usuario</option>
+                                                @endif
+                                            @endif
+                                        @else
+                                            <option disabled="disabled" selected="selected" value="{{old('is_default', $user->is_default) == 'Usuario'}}">Seleccione</option>
+                                        @endif
+                                        <option value="Administrador">Administrador</option>
+                                        <option value="Usuario">Usuario</option>
+                                        </select>
+                                        @error('is_default')
+                                            <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                        @enderror
+                                    </div>
                                 </div>
-                        </div>
+                            </div>
 
 						<BR>
 						<div class="row" style="margin-left:20px">

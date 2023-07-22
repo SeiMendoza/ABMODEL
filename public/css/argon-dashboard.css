@@ -3854,7 +3854,7 @@ fieldset:disabled .btn {
 }
 
 .dropdown-menu-end[data-bs-popper] {
-    right: 0;
+    right: 0; 
     left: auto;
 }
 
@@ -3871,7 +3871,7 @@ fieldset:disabled .btn {
     }
     .dropdown-menu-sm-end[data-bs-popper] {
         right: 0;
-        left: auto;
+        
     }
 }
 

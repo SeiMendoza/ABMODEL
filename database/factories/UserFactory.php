@@ -20,12 +20,13 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'is_default'=>$this->faker->randomElement(['Administrador', 'Usuario']),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'address' => $this->faker->address,
             'telephone' => $this->faker->randomElement(['8','2','9']).$this->faker->numerify('#######'),
             'imagen' => $this->fakerimageUrl(150, 150),
-            'remember_token' => Str::random(10),
+            'remember_token' => Str::random(10), 
         ];
     }
 

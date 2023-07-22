@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'address'=>'1303 San Jacinto Street Houston 77002',
             'telephone'=>'94896083',
             'imagen'=>'img/Perfil/balneario.jpg',
-            'is_default' => true, //Eliminar usuarios
+            'is_default' => 'Administrador', 
         ]);
 
         DB::table('users')->insert([
@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
             'address'=>'1303 San Jacinto Street Houston 77002 ',
             'telephone'=>'98967485',
             'imagen'=>'img/Perfil/apple-icon.png',
+            'is_default' => 'Usuario', 
         ]);
 
         DB::table('users')->insert([
@@ -42,6 +43,7 @@ class UserSeeder extends Seeder
             'address'=>'1305 San Jacinto Street Houston 77002',
             'telephone'=>'96324578',
             'imagen'=>'img/Perfil/unass.jpg',
+            'is_default' => 'Usuario', 
         ]);
 
         DB::table('users')->insert([
@@ -51,6 +53,7 @@ class UserSeeder extends Seeder
             'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'97851263',
             'imagen'=>'img/Perfil/unass.jpg',
+            'is_default' => 'Usuario', 
         ]);
 
         DB::table('users')->insert([
@@ -60,6 +63,7 @@ class UserSeeder extends Seeder
             'address'=>'1305 San Jacinto Street Houston 77002',
             'telephone'=>'99124578',
             'imagen'=>'img/Perfil/123.png',
+            'is_default' => 'Usuario', 
         ]);
 
         DB::table('users')->insert([
@@ -69,6 +73,7 @@ class UserSeeder extends Seeder
             'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'92145896',
             'imagen'=>'img/Perfil/carousel-1.jpg',
+            'is_default' => 'Usuario', 
         ]);
 
         DB::table('users')->insert([
@@ -78,6 +83,7 @@ class UserSeeder extends Seeder
             'address'=>'1305 San Jacinto Street Houston 77002 ',
             'telephone'=>'91235896',
             'imagen'=>'img/Perfil/carousel-3.jpg',
+            'is_default' => 'Usuario', 
         ]);
     }
 }

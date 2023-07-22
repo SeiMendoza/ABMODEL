@@ -1,17 +1,17 @@
 @extends('00_plantillas_Blade.plantilla_General2')
 @section('title', 'Editar Perfil')
 @section('miga')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('usuarios.perfil')}}">Perfil</a></li>
-<li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Editar</li>
+    <li class="breadcrumb-item text-sm">
+      <a class="opacity-5 text-white" href="{{route('usuarios.perfil')}}">Perfil</a></li>
+    <li class="breadcrumb-item text-sm text-dark active text-white" aria-current="page">Editar</li>
 @endsection
 @section('tit','Edición de Perfil')
-
 @section('b')
 <div>
     <a href="{{route('usuarios.perfil')}}" style="margin:0; padding:5px; width:160px;" type="button" class="bg-light border-radius-sm text-center ">
         <i class="fa fa-arrow-left"></i>  Regresar
     </a>
-</div>
+</div> 
 @endsection
 
 @section('content')
@@ -152,7 +152,7 @@
             </div>
         </div>
     </div>
-@stop
+@endsection
 
 <script type="">
 	function funcionConversionLetras(evt) {

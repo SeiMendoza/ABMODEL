@@ -59,7 +59,7 @@ Route::get('/usuarios/create', [RegistroController::class, 'create'])->middlewar
 Route::post('/usuarios/create', [RegistroController::class, 'store'])->middleware('auth')
 ->name("usuarios.store");
 
-Route::get('/usuarios/{id}/edit', [RegistroController::class, 'edit'])->middleware('auth')
+Route::get('/usuarios/{id}/edit', [RegistroController::class, 'edit'])->middleware('can:update,user')
 ->name("usuarios.editar")->where('id', '[0-9]+');
 
 Route::put('/usuarios/{id}/edit', [RegistroController::class, 'update'])->middleware('auth')
