@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
-use Darryldecode\Cart\Cart;
+use Cart;
 
 class DetallesPedidoController extends Controller
 {
-    public function shop()
+    public function index()
     {
         $products = Producto::all();
-       //dd($products);
-        return view('Menu.Cliente.menuCaja')->with(['products' => $products]);
+        return view('Menu.Pedido.Pedido')->with(['products' => $products]);
     }
  
 

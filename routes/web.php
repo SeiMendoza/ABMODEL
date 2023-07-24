@@ -406,5 +406,8 @@ Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::
 Route::get('/counter', [Counter::class, 'render'])
 ->name('counter.index');
 
-Route::resource('/cart', CartController::class); 
-Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::resource('/cart', CartController::class);
+Route::post('/create', [CartController::class, 'create'])->name('cart.create');
+Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+Route::resource('/pedido/todo', DetallesPedidoController::class);

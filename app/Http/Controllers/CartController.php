@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetallesPedido;
+use App\Models\Mesa;
+use App\Models\Pedido;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Cart;
 use Darryldecode\Cart\Cart as CartCart;
@@ -15,7 +19,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('Menu.Cliente.menuCaja');
+        $products = Producto::where('estado', '=', '1')->get();
+        return view('Menu.Pedido.Pedido', compact('products'));
     }
 
     /**
@@ -23,20 +28,9 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-    Cart::add(array(
+        Cart::add(array(
             'id' => $request->id, // inique row ID
             'name' => $request->name,
             'price' =>$request->price,
@@ -50,14 +44,75 @@ class CartController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {   
+        /*$request->validate([
+            'nombre' => ['required'],
+            'mesa' => ['required'],
+            't' => ['min:1'],
+        ], [
+            'name.required' => 'No tiene un nombre ingresado',
+            'mesa.required' => 'Seleccione una mesa',
+            't.min' => 'El pedido esta vacio',
+        ]);*/
+
+        //$kiosko = Mesa::findOrFail($request->input('mesa')); 
+        $pedido = new Pedido();
+
+        //if ($request->input('t') > 0) {
+            $pedido->quiosco = 1;
+            $pedido->nombreCliente = "Fulano";
+            $pedido->imp = (Cart::getTotal() * 0.15 );
+            $pedido->total = Cart::getTotal();
+            $pedido->estado = 1;
+            $pedido->mesa_id = 1;
+            $pedido->save();
+
+            $mesa = Mesa::findOrFail($pedido->mesa_id);
+            $mesa->estadoM = 1;
+            $mesa->save();
+
+            
+            $items = Cart::getContent();
+            
+            foreach($items as $row) {
+            $detalle = new DetallesPedido();
+            $detalle->pedido_id = $pedido->id;
+            $detalle->producto_id = $row->id;
+            $detalle->precio = $row->price;
+            $detalle->cantidad = $row->quantity;
+            $detalle->save();
+            }
+
+            $a = $pedido->save();
+            $b = $mesa->save();
+            $c = $detalle->save();
+
+            if ($a & $b & $c ) {
+                return redirect()->route('cart.index')->with('success_msg', 'Pedido Realizado');
+            } else {
+                return redirect()->route('cart.index')->with('success_msg', 'Pedido No Realizado');
+            }
+            
+        //}
+        //}else{
+            
+        //}
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function ver()
     {
-        //
     }
 
     /**
@@ -83,7 +138,7 @@ class CartController extends Controller
         Cart::update($request->id,
             array(
                 'quantity' => 1));
-        return redirect()->route('cart.index')->with('success_msg', 'Cart is Updated!');
+        return back();
     }
 
     /**
@@ -97,9 +152,10 @@ class CartController extends Controller
         Cart::remove($cart);
         return back();
     }
+    
     public function clear(){
         Cart::clear();
-        return back();
+        return redirect()->route('cart.index')->with('success_msg', 'Car is cleared!');
     }
 
 }
