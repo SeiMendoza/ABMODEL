@@ -84,6 +84,12 @@
             color: #FFFFFF; /* Texto en color blanco */
         }
 
+
+        .fila-marca-sin-existencia {
+            background-color: #fff700 !important; /* Color de fondo rojo */
+            color: #000000; /* Texto en color blanco */
+        }
+
         .img-perfils, .topbar .nav-item .nav-link .img-perfils {
             height: 2.3rem;
             width: 2.3rem;
@@ -93,7 +99,7 @@
         .rounded-circulo {
             border-radius: 50%!important;
         }
-        
+
     .dropdown-menu {
     --bs-dropdown-min-width: 5rem;
     --bs-dropdown-spacer: 5px;
@@ -163,14 +169,14 @@
                             <li class="nav-item d-flex align-items-center" style="margin-top: 23px">
                                 @yield('b')
                             </li>
-                            
+
                             <li class="">
                                 <a href="javascript:;" class="nav-link text-white font-weight-bold px-0"
                                      id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                      <img class="img-perfils rounded-circulo" src="/{{ Auth::user()->imagen}}" >
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item d-xl-none ps-3 d-flex align-items-center" style="margin-top: 23px">
                                 <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                                     <div class="sidenav-toggler-inner">
@@ -370,19 +376,20 @@
             "createdRow": function(row, data, dataIndex) {
                 if (data[1] === '{{ $idProducto }}') {
                     $(row).addClass('fila-marca');
-                    console.log(row._DT_RowIndex+1)
-                    console.log(JSON.stringify(data))
-                    console.log(JSON.stringify(dataIndex))
 
                     numeroPagina = Math.floor(dataIndex / 10);
                     console.log("La fila " + (dataIndex + 1) + " se encuentra en la página: " + numeroPagina);
 
                 }
+
+                if(parseFloat(data[2]) == 0){
+                    $(row).addClass('fila-marca-sin-existencia');
+                }
             },
             "pageLength": 10,
             "columnDefs": [
             {
-                "targets": [1], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
+                "targets": [1,2], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
                 "visible": false
             }
         ]
@@ -391,11 +398,18 @@
         table.page(numeroPagina).draw(false);
         @else
         let table = $('#examples').DataTable({
+            "createdRow": function(row, data, dataIndex) {
+
+
+                if(parseFloat(data[2]) == 0){
+                    $(row).addClass('fila-marca-sin-existencia');
+                }
+            },
             "displayStart": 0,
             "pageLength": 10,
             "columnDefs": [
             {
-                "targets": [1], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
+                "targets": [1,2], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
                 "visible": false
             }
         ]
