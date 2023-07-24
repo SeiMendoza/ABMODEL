@@ -1,4 +1,3 @@
-import 'datatables.net-responsive-dt';
 
 function rellenar() {
     document.getElementById("nombre2").value = document.getElementById("nombre").value;

@@ -87,8 +87,7 @@
         </a>
 
         <li class=" dropdown d-flex">
-            <div class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n0"
-                style=" max-height: 600px; overflow-y: auto; aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n0" style=" max-height: 600px; overflow-y: auto; aria-labelledby="dropdownMenuButton">
                 <div class="d-flex py-1">
                     <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-bold mb-1" style="pointer-events: none;">
@@ -96,7 +95,6 @@
                         </h6>
                     </div>
                 </div>
-    
             </div>
         </li>
 

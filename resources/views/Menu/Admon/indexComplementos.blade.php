@@ -195,7 +195,9 @@
                                     <th scope="col" style="text-align: center;">N</th>
                                     <th scope="col" style="text-align: satar;">Nombre</th>
                                     <th scope="col" style="text-align: end;">Precio</th>
-                                    <th scope="col" style="text-align: center;">Acciones</th>
+                                    <th scope="col" style="text-align: center;">Acción</th>
+                                    <th scope="col" style="text-align: center;">Editar</th>
+                                    <th scope="col" style="text-align: center;">Eliminar</th>
                                 </tr>
                             </thead>
 
@@ -210,10 +212,8 @@
                                                 <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
                                                 <td scope="col" style="text-align: end;">L {{number_format($p->precio, 2, ".", ",")}}</td>
                                                 <td scope="col" style="text-align: center;">
-                                                    <button data-bs-toggle="modal" data-bs-target="#activarComplemento{{ $p->id }}"><i class="fa fa-check-circle text-success"></i> Activar |  </button>
-                                                    <a href="{{ route('producto.editar', ['id' => $p->id]) }}"><i class="fa fa-edit text-success"></i> | </a>  
-                                                    <i onclick="activar('{{ $p->nombre }}', {{ $p->id }}, {{ $p->tipo }})" data-bs-toggle="modal" data-bs-target="#eliminarcomplemento{{ $p->id }}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
-
+                                                    <button data-bs-toggle="modal" data-bs-target="#activarComplemento{{ $p->id }}"><i class="fa fa-check-circle text-success"></i> Activar</button>
+                                                
                                                     <form action="{{ route('producto.activar', ['id' => $p->id]) }}" method="post" enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
@@ -236,8 +236,46 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </form> 
+                                                </td>
+                                                <td scope="col" style="text-align: center;">
+                                                    <a href="{{ route('producto.editar', ['id' => $p->id]) }}"><i class="fa fa-edit text-success"></i></a>                                                                                                         
+                                                </td>
+                                                <td scope="col" style="text-align: center;">
+                                                    <i data-bs-toggle="modal"
+                                                        data-bs-target="#eliminarComplemento{{ $p->id }}"
+                                                        class="fa-solid fa-trash-can text-danger"
+                                                        style="color:crimson"></i>
+                                                    <form action="{{ route('producto.borrar', ['id' => $p->id]) }}"
+                                                        method="post" enctype="multipart/form-data">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <div class="modal fade"
+                                                            id="eliminarComplemento{{ $p->id }}"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="staticBackdropLabel">
+                                                                            Eliminar
+                                                                            producto</h5>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        ¿Está seguro de eliminar el complemento:
+                                                                        <strong>{{ $p->nombre }}</strong>?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Si</button>
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">No</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </form>
-                                                    
                                                 </td>
                                             </tr>
                                         @endif

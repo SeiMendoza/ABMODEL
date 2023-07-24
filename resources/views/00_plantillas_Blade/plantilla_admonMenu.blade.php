@@ -43,8 +43,9 @@
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         //DATATABLES para Menú
-        $(document).ready(function {}(
-            $('.menu').DataTable();));
+        $(document).ready(function(){
+            $('.menu').DataTable();
+        });
 
         //DATATABLES para Kiosko
         $(document).ready(function() {

@@ -128,7 +128,7 @@
                         <h2 class="font-weight-bolder text-white " style="margin:0">Villa Crisol</h2>
                     </nav>
                     <div class="collapse navbar-collapse " id="navbar">
-                        <div class="ms-md-auto pe-md-0 d-flex align-items-center"style="margin-top: 2.5%">
+                        <div class="ms-md-auto pe-md-2 d-flex align-items-center"style="margin-top: 2.5%">
                             <div class="input-group">
                                 <span class="input-group-text text-body"><i class="fas fa-search"
                                         aria-hidden="true"></i></span>
@@ -136,7 +136,7 @@
                             </div>
                         </div>
                        <ul class="navbar-nav  justify-content-end">
-                            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <li class="nav-item d-xl-none ps-6 d-flex align-items-center">
                                 <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                                     <div class="sidenav-toggler-inner">
                                         <i class="sidenav-toggler-line bg-white"></i>
@@ -145,11 +145,12 @@
                                     </div>
                                 </a>
                             </li>
+                            <!--
                             <li class="nav-item px-3 d-flex align-items-center">
                                 <a href="javascript:;" class="nav-link text-white p-0">
                                     <i class="ni ni-diamond fixed-plugin-button-nav cursor-pointer"></i>
                                 </a>
-                            </li>
+                            </li> -->
 
                             @php
                                 $colors = ['danger', 'success', 'primary', 'warning', 'info', 'secondary'];
@@ -531,6 +532,7 @@
 
 
     </main>
+    <!--
 
     <div class="fixed-plugin">
 
@@ -545,11 +547,13 @@
                         X
                     </button>
                 </div>
-                <!-- End Toggle Button -->
+                 End Toggle Button
             </div>
+
+            
             <hr class="horizontal dark my-1">
             <div class="card-body pt-sm-3 pt-0 overflow-auto">
-                <!-- Sidebar Backgrounds -->
+                Sidebar Backgrounds 
                 <div>
                     <h6 class="mb-0">Sidebar Colors</h6>
                 </div>
@@ -569,7 +573,7 @@
                             onclick="sidebarColor(this)"></span>
                     </div>
                 </a>
-                <!-- Sidenav Type -->
+                 Sidenav Type 
                 <div class="mt-3">
                     <h6 class="mb-0">Sidenav Type</h6>
                     <p class="text-sm">Choose between 2 different sidenav types.</p>
@@ -581,7 +585,7 @@
                         onclick="sidebarType(this)">Dark</button>
                 </div>
                 <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-                <!-- Navbar Fixed -->
+                Navbar Fixed 
                 <div class="d-flex my-3">
                     <h6 class="mb-0">Navbar Fixed</h6>
                     <div class="form-check form-switch ps-0 ms-auto my-auto">
@@ -596,7 +600,7 @@
                         <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version"
                             onclick="darkMode(this)">
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
