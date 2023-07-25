@@ -206,87 +206,68 @@ class PedidoUsuarioController extends Controller
             ->whereIn('tipo', ['0', '1', '2'])
             ->where('disponible', '>', 0)
             ->get();
-        foreach ($productos as $producto) {
-            if ($producto->tipo == 0) {
-                $producto->tipo = 'Complemento';
-            } elseif ($producto->tipo == 1) {
-                $producto->tipo = 'Bebida';
-            } elseif ($producto->tipo == 2) {
-                $producto->tipo = 'Platillo';
-            }
-        }
+            $detalles = DetallesPedido::where('pedido_id', $id)->get();
         // si no hay complementos muestra mensaje
         if ($productos->isEmpty()) {
             return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'No hay complementos disponibles');
         }
-        return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos'));
+        return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos','detalles'));
     }
     public function Acomple(Request $request, $id)
-    {
-        $producto_id = request('producto_id');
-        $producto = Producto::findOrFail($producto_id);
-        $disponible = $producto->disponible;
-        $rules = [
-            'producto_id' => 'required|exists:productos,id',
-            'cantidad' => 'required|numeric|min:1|max:' . $disponible,
-        ];
-        $mensaje = [
-            'producto_id.required' => 'El nombre no puede estar vacío',
-            'producto_id.exists' => 'El nombre no existe',
-            'cantidad.required' => 'La cantidad es obligatoria',
-            'cantidad.numeric' => 'Solo se aceptan números',
-            'cantidad.min' => 'Cantidad minima es 1',
-            'cantidad.max' => 'La cantidad maxima no debe ser mayor a ' . $disponible,
-        ];
-        $this->validate($request, $rules, $mensaje);
+{
+    // Obtener el pedido existente
+    $pedido = Pedido::find($id); 
+    // Obtener los datos enviados en el formulario
+    $producto_id = $request->input('producto');
+    $cantidad = $request->input('cantidad');
+    // Obtener el producto a partir de su ID
+    $producto = Producto::find($producto_id); 
+     //si ya existe un complemento con el mismo producto y precio 
+     $complemento_existente = $pedido->detalles()->where([
+         ['producto_id', '=', $producto_id],
+     ])->first();
 
-        $pedido = Pedido::findOrFail($id);
-        $cantidad = request('cantidad');
+     if ($complemento_existente) {
+         // Si el complemento ya existe solo suma la cantidad
+         $complemento_existente->cantidad += $cantidad;
+         $complemento_existente->estado = 1;
+         $complemento_existente->save();
+         // Actualizar el impuesto y el total del pedido general
+         $detalles = $pedido->detalles;
+         $total = 0;
+         foreach ($detalles as $detalle) {
+             $total += $detalle->cantidad * $detalle->precio;
+         }
+         $impuesto = $total * 0.15; // calcular el impuesto
+         $pedido->imp = $impuesto;
+         $pedido->total = $total;
+         $pedido->save();
+         //restar la cantidad disponible del producto
+         $producto->disponible -= $cantidad;
+         $producto->save();
 
-        //si ya existe un complemento con el mismo producto y precio
-        $precio = $producto->precio;
-        $complemento_existente = $pedido->detalles()->where([
-            ['producto_id', '=', $producto_id],
-            ['precio', '=', $precio],
-        ])->first();
+         return redirect()->route('ACompl', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
+     } else {
 
-        if ($complemento_existente) {
-            // Si el complemento ya existe solo suma la cantidad
-            $complemento_existente->cantidad += $cantidad;
-            // $complemento_existente->estado = 1;
-            $complemento_existente->save();
-            // Actualizar el impuesto y el total del pedido general
-            $detalles = $pedido->detalles;
-            $total = 0;
-            foreach ($detalles as $detalle) {
-                $total += $detalle->cantidad * $detalle->precio;
-            }
-            $impuesto = $total * 0.15; // calcular el impuesto
-            $pedido->imp = $impuesto;
-            $pedido->total = $total;
-            $pedido->save();
-            //restar la cantidad disponible del producto
-            $producto->disponible -= $cantidad;
-            $producto->save();
-
-            return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
-        } else {
-            //si no agrega un producto
-            $complemento = new DetallesPedido();
-            $complemento->pedido_id = $pedido->id;
-            $complemento->producto_id = $producto->id; // Obtener el nombre del producto
-            $complemento->precio = $producto->precio;
-            $complemento->cantidad = $cantidad;
-            $complemento->estado = 1; // cambia el estado del detalle del pedido
-            $complemento->save();
-
-            // Actualizar el impuesto y el total del pedido general
-            $detalles = $pedido->detalles;
-            $total = 0;
-            foreach ($detalles as $detalle) {
-                $total += $detalle->cantidad * $detalle->precio;
-            }
-            $impuesto = $total * 0.15; // calcular el impuesto
+    // Crear un nuevo detalle a partir del producto y la cantidad
+    if (!$producto) {
+        return redirect()->back()->with('mensaje', 'El producto no existe.');
+    }
+    $complemento = new DetallesPedido(); 
+    $complemento->pedido_id = $pedido->id;
+    $complemento->producto_id = $producto->id;
+    $complemento->cantidad = $request->input('cantidad');
+    $complemento->precio = $request->input('precio');
+    $complemento->estado = 1; // cambia el estado del detalle del pedido
+    $complemento->save();
+    
+    // Actualizar el impuesto y el total del pedido general
+    $detalles = $pedido->detalles;
+    $total = 0;
+    foreach ($detalles as $detalle) {
+        $total += $detalle->cantidad * $detalle->precio;
+    }
+    $impuesto = $total * 0.15; // calcular el impuesto
             $pedido->imp = $impuesto;
             $pedido->total = $total;
             $pedido->save();
@@ -294,9 +275,11 @@ class PedidoUsuarioController extends Controller
             //Restar la cantidad disponible del producto
             $producto->disponible -= $cantidad;
             $producto->save();
-            return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
-        }
-    }
+    // Redirigir al usuario a la página de detalles del pedido
+    return redirect()->route('ACompl', ['id' => $pedido->id])->with('mensaje', 'Producto añadido');
+}
+}
+    
     public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesPedido::where('pedido_id', $id)->get();
