@@ -20,7 +20,32 @@ class CartController extends Controller
     public function index()
     {
         $products = Producto::where('estado', '=', '1')->get();
-        return view('Menu.Pedido.Pedido', compact('products'));
+        $mesas = Mesa::where('estadoM', '=', '0')->get();
+        return view('Menu.Pedido.todoPedidos', compact('products', 'mesas'));
+    }
+
+    public function bebidas()
+    {
+        $products = Producto::where('estado', '=', '1')
+                    ->where('tipo', '=', '1')->get();
+        $mesas = Mesa::where('estadoM', '=', '0')->get();
+        return view('Menu.Pedido.bebidasPedido', compact('products', 'mesas'));
+    }
+
+    public function platillos()
+    {
+        $products = Producto::where('estado', '=', '1')
+                    ->where('tipo', '=', '2')->get();
+        $mesas = Mesa::where('estadoM', '=', '0')->get();
+        return view('Menu.Pedido.platillosPedido', compact('products', 'mesas'));
+    }
+
+    public function complementos()
+    {
+        $products = Producto::where('estado', '=', '1')
+                    ->where('tipo', '=', '0')->get();
+        $mesas = Mesa::where('estadoM', '=', '0')->get();
+        return view('Menu.Pedido.complementosPedido', compact('products' , 'mesas'));
     }
 
     /**
@@ -35,10 +60,6 @@ class CartController extends Controller
             'name' => $request->name,
             'price' =>$request->price,
             'quantity' => $request->quantity?$request->quantity:1,
-            'attributes' => array(
-                'color' => $request->color,
-                'size' => $request->tamano,
-            )
         ));
         return back();
     }
@@ -51,26 +72,24 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {   
-        /*$request->validate([
-            'nombre' => ['required'],
-            'mesa' => ['required'],
-            't' => ['min:1'],
+        $request->validate([
+            'nombreC' => ['required'],
+            'mesaP' => ['required'],
         ], [
-            'name.required' => 'No tiene un nombre ingresado',
-            'mesa.required' => 'Seleccione una mesa',
-            't.min' => 'El pedido esta vacio',
-        ]);*/
+            'nombreC.required' => 'No tiene un nombre ingresado',
+            'mesaP.required' => 'Seleccione una mesa',
+        ]);
 
-        //$kiosko = Mesa::findOrFail($request->input('mesa')); 
+        $m = Mesa::findOrFail($request->input('mesaP')); 
         $pedido = new Pedido();
 
         //if ($request->input('t') > 0) {
-            $pedido->quiosco = 1;
-            $pedido->nombreCliente = "Fulano";
+            $pedido->quiosco = $m->kiosko->id;
+            $pedido->nombreCliente = $request->input('nombreC');
             $pedido->imp = (Cart::getTotal() * 0.15 );
             $pedido->total = Cart::getTotal();
             $pedido->estado = 1;
-            $pedido->mesa_id = 1;
+            $pedido->mesa_id = $request->input('mesaP');
             $pedido->save();
 
             $mesa = Mesa::findOrFail($pedido->mesa_id);
@@ -89,11 +108,19 @@ class CartController extends Controller
             $detalle->save();
             }
 
+
+            foreach ($pedido->detalles as $value) {
+                $producto = Producto::findOrFail($value->producto_id);
+                $producto->disponible = $producto->disponible - $value->cantidad;
+                $producto->save();
+            }
+
             $a = $pedido->save();
             $b = $mesa->save();
             $c = $detalle->save();
+            $d = $producto->save();
 
-            if ($a & $b & $c ) {
+            if ($a & $b & $c & $d) {
                 return redirect()->route('cart.index')->with('success_msg', 'Pedido Realizado');
             } else {
                 return redirect()->route('cart.index')->with('success_msg', 'Pedido No Realizado');

@@ -397,8 +397,11 @@ Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::
 Route::get('/counter', [Counter::class, 'render'])
 ->name('counter.index');
 
-Route::resource('/cart', CartController::class);
-Route::post('/create', [CartController::class, 'create'])->name('cart.create');
-Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::resource('/cart', CartController::class)->middleware('auth');
+Route::post('/create', [CartController::class, 'create'])->middleware('auth')->name('cart.create');
+Route::post('/clear', [CartController::class, 'clear'])->middleware('auth')->name('cart.clear');
+Route::get('/bebidas', [CartController::class, 'bebidas'])->middleware('auth')->name('cart.bebidas');
+Route::get('/platillos', [CartController::class, 'platillos'])->middleware('auth')->name('cart.platillos');
+Route::get('/complementos', [CartController::class, 'complementos'])->middleware('auth')->name('cart.complementos');
 
 Route::resource('/pedido/todo', DetallesPedidoController::class);

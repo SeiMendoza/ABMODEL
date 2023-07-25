@@ -242,7 +242,7 @@
             <ul class="navbar-nav">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="margin: 4% 0 0 0">Restaurante</h6>
                 <li class="nav-item">
-                    <a class="nav-link " href={{ route('cliente_prueba') }}>
+                    <a class="nav-link " href={{ route('cart.index') }}>
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
@@ -345,7 +345,7 @@
             <div class="row pt-3" style="margin: 0; padding:0;">
                 <h4 style="margin-bottom: 15px; padding:0%;" class="bg-white text-warning font-robo font-weight-bolder">RESTAURANTE</h4>
                 <div class="row" style="margin: 0px; padding:0;">
-                    <a href="{{ route('cliente_prueba') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
+                    <a href="{{ route('cart.index') }}" class="card height-200 btn col-xl-3 mb-xl-0 mb-2"
                         data-id="" style="margin:0px; border-radius:0%;">
                         <div class="text-center" style="text-align:center; padding: 0px;">
                             <div class="" style="margin-top: 5%">

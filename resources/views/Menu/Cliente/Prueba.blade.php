@@ -73,9 +73,9 @@
 <body class="g-sidenav-show bg-gray-100" style="overflow-x:hidden;">
     <script>
         var msg = '{{Session::get('
-        mensaje ')}}';
+        success_msg ')}}';
         var exist = '{{Session::has('
-        mensaje ')}}';
+        success_msg ')}}';
         if (exist) {
             Swal.fire({
                 position: 'top-end'
@@ -371,7 +371,7 @@
                                         Mesa:</Label>
                                 </div>
                                 <div class="col-8">
-                                    <select name="mesa" id="mesa" class="form-control input--style-2 border-0 ps-2 font-robo">
+                                    <select name="mesa" id="mesa" class="ps-2 input--style-2 form-control border-0 border-radius-sm">
                                         @if (old('mesa'))
                                         <option disabled="disabled" value="">Seleccione una mesa</option>
                                         @foreach ($mesas as $c)

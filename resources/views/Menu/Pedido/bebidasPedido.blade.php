@@ -1,5 +1,6 @@
 @extends('Menu.Pedido.Pedido')
 @section('productos')
+    
     @foreach($products as $pro)
         <div class="" style="padding: 0px; margin:0px;">
             <form action="{{route('cart.create')}}" method="post">
@@ -11,7 +12,7 @@
                 
                 <div class="col d-flex justify-content-center mb-1">
                     <button class="card btn btnCard" id="btn" type="submit" 
-                        data-id="{{$pro->id}}" style="padding: 0px; width:215px; height:200px; margin:0px 5px 1px 5px; border-radius:0%;
+                        data-id="{{$pro->id}}" style="padding: 0px; width:215px; height:200px; margin:0px; border-radius:0%;
                         background: url('/{{ $pro->imagen}}') top center/cover no-repeat;">
                         <div class="text-center" 
                             style="text-align:center;  width: 11rem;">
@@ -33,4 +34,5 @@
             </form>
         </div> 
     @endforeach
+
 @endsection
