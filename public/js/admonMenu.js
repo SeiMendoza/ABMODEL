@@ -1,4 +1,31 @@
-function cambiarCheck(){
-    console.log('Cambio')
-    document.getElementById('activarPlatillo').innerHTML = '<div onclick="cambiarCheck()" id="activarPlatillo" class="form-check form-switch text-end"><input data-bs-toggle="modal" data-bs-target="#modalactivarPlatillo{{ $p->id }}" class="form-check-input" type="checkbox" name="chckBox_disponible" id="disponible" style="position:absolute; bottom: 90.5%; left: 290px"> </div>'
-}
+$('.deleteProduct').click(function(e){
+    
+    var id;
+    $.ajaxSetup({
+        headers:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    e.preventDefault();//evitar recargar la página
+    id = $(this).attr('id'); //recuperar el id del registro enviado
+    $('#modalDelete').modal('show'); //llamar a mostrar el modal de confirmacion de borrado
+
+    $('#btnConfirmDeleteProduct').click(function(){
+        
+        $.ajax({
+            url:'producto/'+ id +'/borrar',
+            method: 'GET',
+            beforeSend: function(){ $('#btnConfirmDeleteProduct').text('Eliminando...'); //por si se demora en borrar
+            },
+            success: function(data){
+                setTimeout(function(){$('#modalDelete').modal('hide');}, 80);
+                $('#btnConfirmDeleteProduct').text('Sí');
+                $('#complementosNoDisponibles').ajax.reload(null, false);
+            }
+        });
+
+    });
+
+    console.log("Hola Mundo"); 
+});

@@ -64,7 +64,7 @@
                 <!--Platillos Disponibles-->
                 <div class="tab-pane fade show active" id="PDisponibles" role="tabpanel" aria-labelledby="PDisponibles-tab">
                     <div class="table-responsive"> <br>
-                        <table class="table menu" id="example" style="">
+                        <table class="table menu" style="">
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center;">N</th>
@@ -172,7 +172,7 @@
                     <div class="table-responsive">
                         <br>
 
-                        <table class="table menu" class="example" id="example">
+                        <table class="table menu">
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center;">N</th>

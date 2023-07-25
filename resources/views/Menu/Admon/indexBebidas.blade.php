@@ -1,4 +1,7 @@
 @extends('00_plantillas_Blade.plantilla_admonMenu')
+@section('meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('b')
     <!-- Botón registrar -->
     <div>

@@ -89,24 +89,22 @@ Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])
 
 
 /* Rutas Administracion de Restaurante */
+Route::controller(HomeController::class)->middleware('auth')->group( function(){
+  Route::get('/admonRestauranteP', 'indexPlatillos')->name('menuAdmon.platillos');
+  Route::get('/admonRestauranteB', 'indexBebidas')->name('menuAdmon.bebidas');
+  Route::get('/admonRestauranteC', 'indexComplementos')->name('menuAdmon.complementos');
+  Route::get('/admonRestaurante', 'indexPlatillos')->name('menuAdmon.index');
+  Route::get('/pruebaAdmon','pruebaAdmon')->name('menuAdmon.prueba');
+}); 
 
-Route::get('/admonRestauranteP', [HomeController::class, 'indexPlatillos'])->middleware('auth')
-->name('menuAdmon.platillos');
-Route::get('/admonRestauranteB', [HomeController::class, 'indexBebidas'])->middleware('auth')
-->name('menuAdmon.bebidas');
-Route::get('/admonRestauranteC', [HomeController::class, 'indexComplementos'])->middleware('auth')
-->name('menuAdmon.complementos');
-
-
-Route::get('/admonRestaurante', [HomeController::class, 'indexPlatillos'])->middleware('auth')
-->name('menuAdmon.index');
 Route::put('producto/{id}/activar', [ProductoController::class, 'activar'])    
 ->name('producto.activar');
 
 
-/** Rutas de Prueba AmonMenu */
-Route::get('/pruebaAdmon', [HomeController::class, 'pruebaAdmon'])->middleware('auth')
-->name('menuAdmon.prueba');
+
+
+
+/** Rutas de administración de Productos */
 
 
 Route::get('/profile', [HomeController::class, 'p'])->middleware('auth')
@@ -222,18 +220,19 @@ Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])->middleware('
 /****************************************
   Rutas Para Editar Productos
 *****************************************/
+Route::controller(ProductoController::class)->middleware('auth')->group(function(){
 
-Route::get('producto/{id}/editar', [ProductoController::class, 'edit'])->middleware('auth')
-    ->name('producto.editar');
+  Route::get('producto/{id}/editar', 'edit')->name('producto.editar');
 
-Route::put('platillo/{id}/edicion', [ProductoController::class, 'updateP'])->middleware('auth')
-    ->name('productoP.update');
-  
-Route::put('bebida/{id}/edicion', [ProductoController::class, 'updateB'])->middleware('auth')
-    ->name('productoB.update');
+  Route::put('platillo/{id}/edicion', 'updateP')->name('productoP.update');  
+  Route::put('bebida/{id}/edicion', 'updateB')->name('productoB.update');
+  Route::put('complemento/{id}/edicion', 'updateC')->name('productoC.update');
 
-Route::put('complemento/{id}/edicion', [ProductoController::class, 'updateC'])->middleware('auth')
-    ->name('productoC.update');
+  Route::get('producto/{id}/borrar', 'destroy')->name('producto.borrar');
+  //Route::delete('bebida/{id}/borrar', 'destroy')->name('bebida.borrar');
+});
+
+
 
 /*lista de pedidos anteriores*/
 Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])->middleware('auth')
@@ -245,14 +244,6 @@ Route::delete('/EliminarDatos', [PedidoUsuarioController::class, 'borrarDatos'])
 Route::post('/menu/pedido/anterior/{id}', [PedidoUsuarioController::class, 'detalles_anteriores'])->middleware('auth')
 ->name('pedidoAnterior.detalle'); 
 
-
-/****************************************
-  Rutas Para eliminar Platillos y Bebidas
-*****************************************/
- Route::delete('producto/{id}/borrar', [ProductoController::class, 'destroy'])->middleware('auth')
-    ->name('producto.borrar');
- Route::delete('bebida/{id}/borrar', [BebidaController::class, 'destroy'])->middleware('auth')
-    ->name('bebida.borrar');
 
 /****************************************
   Rutas Para Kioskos

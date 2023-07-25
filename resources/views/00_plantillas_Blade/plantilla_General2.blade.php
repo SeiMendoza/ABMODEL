@@ -29,7 +29,7 @@
     <link href="/css/main.css" rel="stylesheet" media="all">
 
     <script src="{{ asset('/js/sweetalert2.all.min.js') }}"></script>
-
+    @yield('meta')
     <title>Villa Crisol - @yield('title') </title>
 
     <style media="screen">
@@ -357,6 +357,7 @@
         </div>
     </main>
 
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="/JQuery/jquery-3.7.0.js"></script>
     <script src="/JQuery/jquery-3.7.0.min.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
@@ -369,6 +370,16 @@
     responsive: true
         } );
     </script>
+        <script>
+            //DATATABLES para Menú
+            $('.menu').DataTable({});
+
+    
+            //DATATABLES para Kiosko
+            $('.kiosko').DataTable();
+
+    
+        </script>
     <script>
         @if (isset($idProducto))
         var numeroPagina;

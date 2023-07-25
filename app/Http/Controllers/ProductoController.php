@@ -192,9 +192,8 @@ class ProductoController extends Controller
         }
 
     }
-
-    public function destroy($id)
-    {
+    
+    public function destroy($id){
 
         $producto = Producto::findOrFail($id);
 
@@ -210,12 +209,11 @@ class ProductoController extends Controller
 
         $producto->delete();
 
-        return back()->with('mensaje', $tipo . $nombre . ' eliminado');
+        return response()->json(['message'=> $tipo.' eliminado correctamente']);
 
     }
 
-    public function edit($id)
-    {
+    public function edit($id){
 
         $producto = Producto::findOrFail($id);
 

@@ -250,4 +250,13 @@
         }
     </script>
 
+    <script>
+        $(document).ready(function{
+            $.a('#fecha').click(function(e){
+                e.preventDefault();
+                $("#fecha").load("Hola");
+            })
+        });
+    </script>
+
 @endsection

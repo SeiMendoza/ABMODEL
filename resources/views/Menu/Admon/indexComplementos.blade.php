@@ -1,4 +1,8 @@
 @extends('00_plantillas_Blade.plantilla_admonMenu')
+@section('meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('b')
     <!-- Botón registrar -->
     <div>
@@ -15,7 +19,6 @@
     </div>
 @endsection
 
-@routes()
 @section('selection')
     <div>
         <div>
@@ -66,6 +69,7 @@
 
             <div class="tab-content" id="myTabContent" style="height: 500px; overflow-x: hidden;">
                 <br>
+
                 <!--complementos Disponibles-->
 
                 <div class="tab-pane fade show active" id="CDisponibles" role="tabpanel" aria-labelledby="CDisponibles-tab">
@@ -189,7 +193,7 @@
 
                     <div class="table-responsive">
 
-                        <table class="table menu" class="table" id="complementosNoDisponibles" style="">
+                        <table class="table menu"  id="complementosNoDisponibles" style="">
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center;">N</th>
@@ -242,40 +246,9 @@
                                                     <a href="{{ route('producto.editar', ['id' => $p->id]) }}"><i class="fa fa-edit text-success"></i></a>                                                                                                         
                                                 </td>
                                                 <td scope="col" style="text-align: center;">
-                                                    <i data-bs-toggle="modal"
-                                                        data-bs-target="#eliminarComplemento{{ $p->id }}"
-                                                        class="fa-solid fa-trash-can text-danger"
-                                                        style="color:crimson"></i>
-                                                    <form action="{{ route('producto.borrar', ['id' => $p->id]) }}"
-                                                        method="post" enctype="multipart/form-data">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <div class="modal fade"
-                                                            id="eliminarComplemento{{ $p->id }}"
-                                                            data-bs-backdrop="static" data-bs-keyboard="false"
-                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="staticBackdropLabel">
-                                                                            Eliminar
-                                                                            producto</h5>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        ¿Está seguro de eliminar el complemento:
-                                                                        <strong>{{ $p->nombre }}</strong>?
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit"
-                                                                            class="btn btn-danger">Si</button>
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">No</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                    <i id="{{ $p->id }}"
+                                                        class=" deleteProduct fa-solid fa-trash-can text-danger"
+                                                        style="color:crimson"></i>                                                    
                                                 </td>
                                             </tr>
                                         @endif
@@ -286,6 +259,23 @@
                         </table>
 
                     </div>
+                        <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="staticBackdropLabel">Eliminar producto</h4>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <strong>¿Está seguro de eliminar el complemento?</strong>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" id="btnConfirmDeleteProduct" class="btn btn-danger">Si</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
 
@@ -297,6 +287,9 @@
 
     @section('scritps')
 
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/admonMenu.js"></script>
     <script>
         function activar(nombre, id, tipo) {
             Swal.fire({

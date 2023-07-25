@@ -37,21 +37,4 @@
     @yield('scritps')
 
 
-    <script src="/JQuery/jquery-3.7.0.js"></script>
-    <script src="/JQuery/jquery-3.7.0.min.js"></script>
-    <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
-    <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
-    <script>
-        //DATATABLES para Menú
-        $(document).ready(function(){
-            $('.menu').DataTable();
-        });
-
-        //DATATABLES para Kiosko
-        $(document).ready(function() {
-            $('.kiosko').DataTable();
-        });
-
-    </script>
-
 @endsection

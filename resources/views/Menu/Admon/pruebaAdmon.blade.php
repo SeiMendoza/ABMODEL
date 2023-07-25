@@ -75,7 +75,7 @@
         }
     </script>
 
-    <button onclick="boton();" id="boton" class="btn btn-danger">Boton de prueba</button>
+    <button id="boton" class="btn btn-danger">Boton de prueba</button>
 
     @php
         $colors = ['danger', 'success', 'primary', 'warning', 'info', 'secondary'];
@@ -121,6 +121,6 @@
             });
         }
     </script>
-
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
 @endsection
