@@ -1,6 +1,7 @@
 @extends('Menu.Pedido.Pedido')
 @section('productos')
     @foreach($products as $pro)
+        
         <div class="" style="padding: 0px; margin:0px;">
             <form action="{{route('cart.create')}}" method="post">
                 @csrf

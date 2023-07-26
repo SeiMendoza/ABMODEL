@@ -74,6 +74,7 @@ return array(
     'App\\Policies\\ComponentestemporalcomboPolicy' => $baseDir . '/app/Policies/ComponentestemporalcomboPolicy.php',
     'App\\Policies\\PiscinaPolicy' => $baseDir . '/app/Policies/PiscinaPolicy.php',
     'App\\Policies\\PlatillosyBebidasPolicy' => $baseDir . '/app/Policies/PlatillosyBebidasPolicy.php',
+    'App\\Policies\\UserPolicy' => $baseDir . '/app/Policies/UserPolicy.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

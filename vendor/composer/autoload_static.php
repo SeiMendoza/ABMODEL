@@ -655,6 +655,7 @@ class ComposerStaticInit4191fb8cd9db91586e276693d8f85b63
         'App\\Policies\\ComponentestemporalcomboPolicy' => __DIR__ . '/../..' . '/app/Policies/ComponentestemporalcomboPolicy.php',
         'App\\Policies\\PiscinaPolicy' => __DIR__ . '/../..' . '/app/Policies/PiscinaPolicy.php',
         'App\\Policies\\PlatillosyBebidasPolicy' => __DIR__ . '/../..' . '/app/Policies/PlatillosyBebidasPolicy.php',
+        'App\\Policies\\UserPolicy' => __DIR__ . '/../..' . '/app/Policies/UserPolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

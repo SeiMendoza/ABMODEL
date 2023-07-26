@@ -25,7 +25,7 @@
     <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script>
    
 </head>
-<body style="">
+<body class="" style="">
     <script>
         var msg = '{{Session::get('
         mensaje ')}}';
@@ -46,12 +46,12 @@
     </script>
     <div class="content-cell" style="margin: 0px; padding:0;">
         <div class="row" style="margin: 0px; padding:0;">
-            <div class="col-lg-12" style="margin: 0px; padding:0;">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-table-cell" style="margin: 0px; padding:0;">
                 <div class="row" style="margin: 0px; padding:0;">
-                    <div class="col-lg-7" style="margin: 0px; padding:0;">
-                        <div class="table-responsive-lg " style="margin: 0px; padding:0;">
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 col-xl-7 d-table-cell" style="margin: 0px; padding:0;">
+                        <div class="table-responsive-lg" style="margin: 0px; padding:0;">
                             <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;" class="bg-gradient-warning">
-                                <ol class="breadcrumb bg-gradient-faded-success" style="margin: 0; border-radius:0px; padding:0;">
+                                <ol class="breadcrumb bg-success" style="margin: 0; border-radius:0px; padding:0;">
                                     <li>
                                         <div class="col" style="padding: 0px;">
                                             <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
@@ -59,57 +59,93 @@
                                             </a>
                                         </div>
                                     </li>
-                                    <li class="d-flex justify-content-center" style="margin: 8px; width:770px">
+                                    <li class="d-flex justify-content-center" style="margin: 8px; width:80%">
                                         <H3 class="text-white"><strong>Menú del Día</strong></H3>
                                     </li>
                                 </ol>
                             </nav>
                         </div>
-                        <div class="table-responsive" 
-                            style="display:block; float:left; margin: 0px; margin-top:2px; padding:0; height:650px;">
+                        <div class="table-responsive " 
+                            style="display:block; float:left; margin: 0px; margin-top:2px; padding:0; height:630px;">
                             <section style="">
                                 <main class=" main-content">
                                     <div class="tab-content"  style="margin: 0px; padding:0; ">
-                                        <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin: 0px; padding:0;">
+                                        <div class="row row-cols-2 row-cols-xs-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4" style="margin: 0px; padding:0;">
                                             @yield('productos')
                                         </div>
                                     </div>
                                 </main>
                             </section>
                         </div>
-                        <div class="table-responsive-lg" style="text-align:center; margin: 0; padding:0;">
+                        <div class="table-responsive-sm table-responsive-md table-responsive-lg col-12" style="text-align:center; margin: 0; padding:0;">
                             <footer class="" style="padding: 0;">
-                                <ul class="nav d-flex justify-content-center bg-gradient-faded-success h4 m--1 text-center" role="tablist" style="width:100%; padding: 5px 3px 5px 3px;">
-                                    <li class="nav-item" role="button">
-                                        <a href="{{route('cart.index')}}" style="margin:1px 3px 1px 3px; padding:10px; width:160px; font-size:15px" type="button" 
+                                <ul class="nav navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg d-flex justify-content-center
+                                    h4 m--1 bg-success text-center" role="tablist" style="width:100%; padding: 5px 3px 5px 3px;">
+                                    <li class="nav-item item" role="button">
+                                        <a href="{{route('cart.index')}}" style="margin:1px 3px 1px 3px; padding:10px; width:10%px; font-size:15px" type="button" 
                                             class="bg-light border-radius-sm text-center">
                                             <i class="fa-solid fa-utensils text-success"></i> Menú completo 
                                         </a>
                                      </li>
-                                    <li class="nav-item" role="button">
+                                    <li class="nav-item d-none d-xl-table" role="button">
                                         <a href="{{route('cart.bebidas')}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" 
                                         class="bg-light border-radius-sm text-center">
                                         <i class="fa-solid fa-wine-glass text-info"></i> Bebidas
                                         </a> 
                                     </li>
-                                    <li class="nav-item" role="button">
+                                    <li class="nav-item d-none d-xl-table" role="button">
                                         <a href="{{route('cart.platillos')}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" 
                                         class="bg-light border-radius-sm text-center">
                                         <i class="fa-solid fa-drumstick-bite text-warning"></i> Platillos
                                         </a>
                                     </li>
-                                    <li class="nav-item" role="button">
+                                    <li class="nav-item d-none d-xl-table" role="button">
                                         <a href="{{route('cart.complementos')}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" 
                                             class="bg-light border-radius-sm text-center">
                                             <i class="fa-solid fa-plus-circle text-primary"></i> Complementos
                                         </a>
                                     </li>
+                                    <li class="nav-item d-xl-none d-flex align-items-center" style="">
+                                        <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                                            <div class="sidenav-toggler-inner">
+                                                
+                                                    <a href="javascript:;" class="nav-link 
+                                                        border-radius-sm text-center font-weight-bold px-0 bg-light" type="button" 
+                                                        style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px"
+                                                        id="dropdownMenuButton"  data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa-solid fa-plus"></i> Más
+                                                    </a>
+                                                    
+                                                    <!-- Usar Informacion -->
+                                                    <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in"
+                                                    aria-labelledby="userDropdown">
+                                                        <a class="dropdown-item" href="{{route('cart.bebidas')}}">
+                                                        <i class="fa-solid fa-wine-glass text-info"></i>
+                                                            Bebidas
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="{{route('cart.platillos')}}">
+                                                            <i class="fa-solid fa-drumstick-bite text-warning"></i>
+                                                            Platillos
+                                                        </a>
+                                                    
+                                                        <div class="dropdown-divider"></div>
+                                                
+                                                        <a class="dropdown-item" href="{{route('cart.complementos')}}" data-toggle="modal" data-target="logoutModal">
+                                                            <i class="fa-solid fa-plus-circle text-primary"></i>
+                                                            Complementos
+                                                        </a>
+                                                    </div>
+                                               
+                                            </div>
+                                        </a>
+                                    </li>
                                 </ul>
                             </footer>
                         </div>
+                        
                     </div>
-                    
-                    <div class="col-lg-5" style="display:block; float:right; margin: 0px; padding:0;">   
+                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5 d-table-cell" style="display:block; float:right; margin: 0px; padding:0;">   
                         <div class="row" style="margin: 0px; padding:0;">
                             <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
                                 <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" style="margin-bottom: 0; border-radius:0px;">
@@ -162,7 +198,7 @@
                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror
                             </div>
-                        <div style="height: 400px; margin:0px; overflow-y:auto;">
+                        <div style="height: 380px; margin:0px; overflow-y:auto;">
                             <div class="row" id="carrito" style="margin: 0; padding:0;">
                                 <table class="table " id="lista" style="margin: 0; padding:0;">
                                 <thead style="padding-top: 2px;">
@@ -226,7 +262,7 @@
                         </div>
                         
                         <div style="margin: 0; padding:0; margin-top:3px" class="col-12">
-                            <div class="row bg-gradient-faded-success " style="margin: 0; padding: 5px 3px 8px 3px;">
+                            <div class="row bg-gradient-faded-success" style="margin: 0; padding: 5px 3px 8px 3px;">
                                 <div class="col-6 d-flex justify-content-end" style="margin: 0; padding:0; padding-right:5px">
                                     <form action="{{ route('cart.clear') }}" method="POST">
                                         @csrf
@@ -261,8 +297,8 @@
     <script src={{ asset("js/core/bootstrap.bundle.min.js") }}></script>
     <script>   
         function nombre(){
-        a = document.getElementById("nombre").value;
-        b = document.getElementById("mesa").value;
+        a = document.getElementById("nombre").value || "";
+        b = document.getElementById("mesa").value || "";
 
         document.getElementById("nombreC").value = a;
         document.getElementById("mesaP").value = b;
