@@ -5,30 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="theme-color" content="#bla" />
     <title>
-        Villa Crisol
+        Menú | Villa Crisol
     </title>
-     
+
     <!-- Icons -->
     <link href={{ asset('/css/nucleo-icons.css') }} rel="stylesheet" type="text/css" />
     <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet" />
     <link href="/assets/css/fontawesome.css" rel="stylesheet">
     <link href="/assets/css/solid.css" rel="stylesheet">
+    <link href="/assets/css/brands.css" rel="stylesheet">
     <link href="/assets/fontawesome/css/font-awesome.min.css" rel="" media="all">
+    <link rel="stylesheet" href={{ url('css/app.css') }}>
 
     <!-- CSS Files -->
-    <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
+    <!-- <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"> -->
+    <link href="/css/argon-dashboard.min.css" rel="stylesheet" media="all">
     <link href="/css/main.css" rel="stylesheet" media="all">
 
-    
-</head>
-<script src="{{ asset(" js/sweetalert2.all.min.js") }}"></script>
+    <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script>
 
-<body class="g-sidenav-show bg-gray-100" style="overflow-x:hidden;">
+</head>
+
+<body style="">
     <script>
-        var msg = '{{Session::get('mensaje')}}';
-        var exist = '{{Session::has('mensaje')}}';
+        var msg = '{{Session::get('
+        mensaje ')}}';
+        var exist = '{{Session::has('
+        mensaje ')}}';
         if (exist) {
             Swal.fire({
                 position: 'top-end',
@@ -41,380 +45,240 @@
             })
         }
     </script>
-    <div class="row">
-        <div class="col" style="padding: 0px;">
-            <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
-                <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 100%; height:70px;">
-            </a>
-        </div>
-        <div class="col-10" style="padding: 0px;">
-            <nav class="navbar navbar-main navbar-expand-lg shadow-none bg-warning" style="height: 70px" id="navbarBlur" data-scroll="false" style="padding: 0;">
-                <h2 class="font-weight-bolder text-white" style="margin:0">Menú del día</h2>
-                 
-            </nav>
-        </div>
-    </div>
-    
-    <div class="container-fluid" style="padding: 0px; height: 99vh;">
-        <div class="row">
-            <div class="col-lg-8 col-xs-12 col-sm-12" style="padding: 0px;">
-                <div class="" style="margin: 0px; padding:0; width: 100%; display:block; float:left">
-                    <!-- Catalogo de Productos -->
-                    <div class="table-responsive" style="height: 99vh; overflow-y: auto; overflow-x: auto;
-                        scroll-behavior: smooth; margin-top:5px">
-                        <section class="NovidadesSection" style="">
-                            <main class="main-content position border-radius-lg">
-                                <div class="tab-content" id="pills-tabContent">
-                                    <!-- ========== Bebidas ========== -->
-                                    <div class="tab-pane fade " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                        <div class="container-fluid" style="padding: 0px">
-                                            <div class="productos" id="productos" name="productos" style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
-                                                @foreach($productos as $pro)
-                                                @if ($pro->tipo === 1)
-                                                <form action="{{route('Acomple', $pedido->id)}}" method="post">
-                                                    @csrf
-                                                    <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden>
-                                                    <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
-                                                    <input type="number" id="cantidad" name="cantidad" value="1" hidden>
-                                                    <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
-                                                    <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
-                                                    <div class="container-fluid agregarCarrito" id="carritoA" style="display:block; height: 200px; width: 200px; padding: 3px ">
-                                                        <button class="card h-100 btn btnCard" id="btn" type="submit" data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                                background: url('/{{ $pro->imagen }}') top center/cover no-repeat;">
-                                                            <div class="text-center" style="text-align:center; ">
-                                                                <!-- Nombre -->
-                                                                <p class="nombre card-title pt-2 text-center text-dark" id="nombre">
-                                                                    <strong style="font-size: 20px; width:194px;
-                                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                                    position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
-                                                                </p>
-                                                                <!-- Precio -->
-                                                                <p id="precio" class="text-dark text-decoration-line">
-                                                                    <strong class="precio" style="font-size: 15px; width:194px;
-                                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                                    position: absolute; bottom: 0; left:0;">L
-                                                                        {{number_format($pro->precio, 2, ".",
-                                                                        ",")}}</strong>
-                                                                </p>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                                @endif
-
-                                                @endforeach
-                                            </div>
+    <div class="content-cell" style="margin: 0px; padding:0;">
+        <div class="row" style="margin: 0px; padding:0;">
+            <div class="col-lg-12" style="margin: 0px; padding:0;">
+                <div class="row" style="margin: 0px; padding:0;">
+                    <div class="col-lg-7" style="margin: 0px; padding:0;">
+                        <div class="table-responsive-lg " style="margin: 0px; padding:0;">
+                            <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;" class="bg-gradient-warning">
+                                <ol class="breadcrumb bg-gradient-faded-success" style="margin: 0; border-radius:0px; padding:0;">
+                                    <li>
+                                        <div class="col" style="padding: 0px;">
+                                            <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
+                                                <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 100px; height: 49px; padding:0%; margin:0">
+                                            </a>
                                         </div>
-                                        <!-- ========== End Cards ========== -->
-                                    </div>
-                                    <!-- ========== Platillos ========== -->
-                                    <div class="tab-pane fade show active container" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="padding: 0px; margin:0px; border:0px">
-                                        <div class="container-fluid" style="padding: 0px">
-                                            <div class="productos" id="productos" name="productos" style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
-                                                @foreach($productos as $pro)
-                                                @if ($pro->tipo === 2)
-                                                <form action="{{route('Acomple', $pedido->id)}}" method="post">
-                                                    @csrf
-                                                    <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden>
-                                                    <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
-                                                    <input type="number" id="cantidad" name="cantidad" value="1" hidden>
-                                                    <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
-                                                    <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
-                                                    <div class="container-fluid agregarCarrito" id="carritoA" style="display:block; height: 200px; width: 200px; padding: 3px ">
-                                                        <button class="card h-100 btn btnCard" id="btn" type="submit" data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                                background: url('/{{ $pro->imagen }}') top center/cover no-repeat;">
-                                                            <div class="text-center" style="text-align:center; ">
-                                                                <!-- Nombre -->
-                                                                <p class="nombre card-title pt-2 text-center text-dark" id="nombre">
-                                                                    <strong style="font-size: 20px; width:194px;
-                                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                                    position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
-                                                                </p>
-                                                                <!-- Precio -->
-                                                                <p id="precio" class="text-dark text-decoration-line">
-                                                                    <strong class="precio" style="font-size: 15px; width:194px;
-                                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                                    position: absolute; bottom: 0; left:0;">L
-                                                                        {{number_format($pro->precio, 2, ".",
-                                                                        ",")}}</strong>
-                                                                </p>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                                @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <!-- ========== End Cards ========== -->
-                                    </div>
-                                    <!-- ========== Complementos ========== -->
-                                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                                        <div class="container-fluid" style="padding: 0px" id="xd">
-                                            <div class="productos" id="productos" name="productos" style="display: grid; grid-template-columns: 200px 200px 210px 200px 200px">
-                                                @foreach($productos as $pro)
-                                                @if ($pro->tipo === 0)
-                                                <form action="{{route('ACompl', $pedido->id)}}" method="post">
-                                                    @csrf
-                                                    <input type="text" id="pedido" name="pedido" value="{{$pedido->id}}" hidden>
-                                                    <input type="text" id="nombre" name="nombre" value="{{$pro->nombre}}" hidden>
-                                                    <input type="number" id="cantidad" name="cantidad" value="1" hidden> 
-                                                    <input type="text" id="producto" name="producto" value="{{$pro->id}}" hidden>
-                                                    <input type="text" id="precio" name="precio" value="{{$pro->precio}}" hidden>
-                                                    <div class="container-fluid agregarCarrito" id="carritoA" style="display:block; height: 200px; width: 200px; padding: 3px ">
-                                                        <button class="card h-100 btn btnCard" id="btn" type="submit" data-id="{{$pro->id}}" style="padding: 0px; width:100%; border-radius:0%;
-                                                                background: url('/{{ $pro->imagen }}') top center/cover no-repeat;">
-                                                            <div class="text-center" style="text-align:center; ">
-                                                                <!-- Nombre -->
-                                                                <p class="nombre card-title pt-2 text-center text-dark" id="nombre">
-                                                                    <strong style="font-size: 20px; width:194px;
-                                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                                    position: absolute; bottom: 12.5%; left:0;">{{$pro->nombre}}</strong>
-                                                                </p>
-                                                                <!-- Precio -->
-                                                                <p id="precio" class="text-dark text-decoration-line">
-                                                                    <strong class="precio" style="font-size: 15px; width:194px;
-                                                                    background-color:rgba(255, 255, 255, 0.677);
-                                                                    position: absolute; bottom: 0; left:0;">L
-                                                                        {{number_format($pro->precio, 2, ".",
-                                                                        ",")}}</strong>
-                                                                </p>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                                @endif
-
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <!-- ========== End Cards ========== -->
-                                    </div>
-                                </div>
-                            </main>
-                        </section>
-
-                    </div>
-                    <div class="row bg-warning" style="text-align:center; margin: 0; padding:0;">
-                        <footer class="" style="padding: 0">
-                            <ul class="nav d-flex justify-content-center h4 text-center" role="tablist" style="width:100%">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link text-white" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Bebidas</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link active text-white" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Platillos</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link text-white" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Complementos</a>
-                                </li>
-                            </ul>
-                        </footer>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-xs-12 col-sm-12" style="padding: 0px;">
-                <div class="bg-gradient-faded-white" style=" width: 100%; margin: 0; display:block; float:left">
-                    <div class="container-fluid" style="padding: 0px;">
-                        <div class="nav d-flex justify-content-center bg-gradient-warning" style="height: 60px; width: 99%">
-                            <h3 style="padding:0; margin:15px 0% 0 5px; " class="text-white title font-robo">Pedido</h3>
-                            <br><br>
+                                    </li>
+                                    <li class="d-flex justify-content-center" style="margin: 8px; width:670px">
+                                        <H3 class="text-white"><strong>Menú del Día</strong></H3>
+                                    </li>
+                                </ol>
+                            </nav>
                         </div>
-                        <br>
-                        <form action="{{ route('Acomple', $pedido->id) }}" id="formularioDetallesExistentes" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                                <div class="col-4">
-                                    <Label class="h6 col-form-label font-robo" for="mesa">Pedido de la Mesa:</Label>
-                                </div>
-                                <div class="col-8">
-                                    <input name="nombre" type="text" class="ps-2 input--style-2 form-control border-0 border-radius-sm" 
-                                    id="nombre" maxlength="50" minlength="3" placeholder="Ingrese el nombre"
-                                     value="{{$pedido->mesa_nombre->nombre}} - {{$pedido->mesa_nombre->kiosko->codigo}}">
+                        <div class="table-responsive" style="display:block; float:left; margin: 0px; margin-top:2px; padding:0; height:617px;">
+                            <section style="">
+                                <main class=" main-content">
+                                    <div class="tab-content" style="margin: 0px; padding:0; ">
+                                        <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin: 0px; padding:0;">
+                                            @foreach($productos as $pro)
+                                            @if($tipo === null || $pro->tipo == $tipo)
+                                            <div class="" style="padding: 0px; margin:0px;">
+                                                <form action="{{route('Acomple',$pedido->id)}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $pro->id }}" id="id" name="id">
+                                                    <input type="hidden" value="{{ $pro->nombre }}" id="name" name="name">
+                                                    <input type="hidden" value="{{ $pro->precio }}" id="price" name="price">
+                                                    <input type="hidden" value="1" id="quantity" name="quantity">
 
-                                    <input type="number" value="{{$pedido->id}}" id="pedido" name="pedido" hidden>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <label class="h6 font-robo col-form-label" for="nombre">Nombre del
-                                        cliente:</label>
-                                </div>
-                                <div class="col-8">
-                                    <div class="input-group">
-                                        <input name="nombre" type="text" class="ps-2 input--style-2 form-control border-0 border-radius-sm" id="nombre" maxlength="50" minlength="3" placeholder="Ingrese el nombre" value="{{old('nombre',$pedido->nombreCliente)}}">
-                                        <div class="invalid-feedback">
+                                                    <div class="col d-flex justify-content-center mb-1">
+                                                        <button class="card btn btnCard" id="btn" type="submit" data-id="{{$pro->id}}" style="padding: 0px; width:215px; height:200px; margin:0px; border-radius:0%;
+                        background: url('/{{ $pro->imagen}}') top center/cover no-repeat;">
+                                                            <div class="text-center" style="text-align:center;  width: 11rem;">
+                                                                <!-- Nombre -->
+                                                                <p class="nombre card-title pt-2 text-center text-dark" id="nombre">
+                                                                    <strong style="font-size: 20px; width:215px;
+                                background-color:rgba(255, 255, 255, 0.677);
+                                position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
+                                                                </p>
+                                                                <!-- Precio -->
+                                                                <p id="precio" class="text-dark text-decoration-line">
+                                                                    <strong class="precio" style="font-size: 15px; width:215px;
+                                background-color:rgba(255, 255, 255, 0.677);
+                                position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                                                </p>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            @endif
+                                            @endforeach
                                         </div>
-
                                     </div>
-                                </div>
-                            </div>
+                                </main>
+                            </section>
+                        </div>
+                        <div class="table-responsive-lg" style="text-align:center; margin: 0; padding:0;">
+                            <footer class="" style="padding: 0;">
+                                <ul class="nav d-flex justify-content-center bg-gradient-faded-success h4 m--1 text-center" role="tablist" style="width:100%; padding: 5px 3px 5px 3px;">
+                                    <li class="nav-item" role="button">
+                                        <a href="{{route('Agregar',$pedido->id)}}" style="margin:1px 3px 1px 3px; padding:10px; width:160px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
+                                            <i class="fa-solid fa-utensils text-success"></i> Menú completo
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="button">
+                                        <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 1])}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
+                                            <i class="fa-solid fa-wine-glass text-info"></i> Bebidas
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="button">
+                                        <a href="{{route('Agregar',['id' => $pedido->id, 'tipo' => 2])}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
+                                            <i class="fa-solid fa-drumstick-bite text-warning"></i> Platillos
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="button">
+                                        <a href="{{route('Agregar',['id' => $pedido->id, 'tipo' => 0])}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
+                                            <i class="fa-solid fa-plus-circle text-primary"></i> Complementos
+                                        </a>
+                                    </li>
+                                </ul>
+                            </footer>
+                        </div>
+                    </div>
 
-                            <div style="height: 50.8vh;  overflow-y:auto;">
+                    <div class="col-lg-5" style="display:block; float:right; margin: 0px; padding:0;">
+                        <div class="row" style="margin: 0px; padding:0;">
+                            <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
+                                <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" style="margin-bottom: 0; border-radius:0px;">
+                                    <H3 class="text-white"><strong>Detalles del Pedido</strong></H3>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div style="">
+                            <div class="input-group" style="margin: 0; border: 0; width: 99%">
+                                <Label class="h6 col-form-label font-robo" style="margin: 5px 5% 0 3px;" for="mesaP">Pedido de la Mesa:</Label>
+
+                                <select name="mesa" style="height:42px; border-radius:0; margin: 5px 0px 5px 23px;" id="mesa" class="form-control input--style-2 border-0 ps-2 font-robo" step="0.001" oninput="nombre()">
+                                    <option value="">Seleccione una mesa</option>
+                                    @foreach ($mesas as $mesa)
+                                    @if ($pedido->mesa_id == $mesa->id)
+                                    <option value="{{ $mesa->id }}" selected>{{ $mesa->nombre }} - Kiosko: {{ $mesa->kiosko->codigo }}</option>
+                                    @else
+                                    <option value="{{ $mesa->id }}">{{ $mesa->nombre }} - Kiosko: {{ $mesa->kiosko->codigo }}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('mesaP')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                @enderror
+                            </div>
+                            <div class="input-group" style="margin: 0; border: 0; width: 99%">
+                                <label class="h6 font-robo col-form-label" for="nombre" style="margin: 0 5% 0 3px;">Nombre del cliente:</label>
+                                <input name="nombre" type="text" class="ps-2 input--style-2 form-control border-0 border-radius-sm" id="nombre" maxlength="50" minlength="3" placeholder="Ingrese el nombre" step="0.001" oninput="nombre()" value="{{ old('nombre',$pedido->nombreCliente) }}" style="margin: 0px 0px 5px 20px; height:42px;">
+                                <div class="invalid-feedback">
+                                </div>
+                                @error('nombreC')
+                                <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                @enderror
+                            </div>
+                            <div style="height: 367px; margin:0px; overflow-y:auto;">
                                 <div class="row" id="carrito" style="margin: 0; padding:0;">
-                                    <table class="table overflow-auto" id="lista" style="margin: 0; padding:0;">
+                                    <table class="table " id="lista" style="margin: 0; padding:0;">
                                         <thead style="padding-top: 2px;">
                                             <tr class="text-dark">
                                                 <th scope="col" style="padding:3px;">Nombre</th>
                                                 <th scope="col" style="padding:3px; text-align:center;">Cantidad</th>
                                                 <th scope="col" style="padding:3px; text-align:right;">Precio</th>
                                                 <th scope="col" style="padding:3px; text-align:right;">Sub-total</th>
-                                                <th scope="col" colspan="2" style="padding:3px; text-align:center;">
-                                                    Elementos</th>
+                                                <th scope="col" colspan="2" style="padding:3px; text-align:center;">Elementos</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="col" id="">
+                                        <tbody class="col" id="" style="">
                                             @php
-                                            $sum = 0;
+                                            $total= 0;
+                                            $impuesto = 0;
                                             @endphp
-                                            @forelse($detalles as $detalle)
-                                            <tr style="">
-                                                <td scope="" class="" style="width:5%; text-align:left;">
-                                                    {{$detalle->producto->nombre}}
+                                            @foreach ($detalles as $detalle)
+                                            <tr>
+                                                <td style="text-align: left; padding-left:3px;">{{ $detalle->producto->nombre }}</td>
+                                                <td style="text-align: center">{{ $detalle->cantidad }}</td>
+                                                <td style="text-align: right">L {{ $detalle->producto->precio }}</td>
+                                                <td style="text-align: right">L {{ $detalle->cantidad * $detalle->producto->precio }}</td>
+                                                <td>
+                                                    <button type="submit"><i class="fa fa-edit"></i></button>
+                                                </td>
+                                                <td>
+                                                    <button type="submit"><i class="fa fa-trash"></i></button>
+
                                                 </td>
 
-                                                <td scope="" style="width:4%; text-align:center; ">
-                                                    <input readonly type="number" id="{{ "numb-".$detalle->id }}" name="numb" class="border-0 border-radius-sm" style="" min="1" max="2000" maxlength="4" minlength="1" value="{{old('numb', $detalle->cantidad) }}">
-                                                    @error('numb')
-                                                    <small class="invalid-feedback">
-                                                        <strong>{{ $message }}</strong>
-                                                    </small>
-                                                    @enderror
-                                                </td>
-                                                <td scope="col" style="text-align:right; width:4%; ">L {{
-                                                    number_format($detalle->precio, 2, ".", ",") }}</td>
-                                                <td scope="col" style="text-align:right; width:4%; ">L {{
-                                                    number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}
-                                                </td>
-                                              
-                                            @php
-                                            $sum += $detalle->precio*$detalle->cantidad;
-                                            @endphp
-                                            @empty
-                                            <tr>
-                                                <td colspan="8">Vacio</td>
                                             </tr>
-                                            @endforelse
+                                            <hr>
+                                            @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            <br>
 
-                            <div style="width: 99%" class="">
-                                @php
-                                $sub = number_format($sum - $sum*0.15, 2, ".", ",");
-                                $isv = number_format($sum*0.15, 2, ".", ",");
-                                $tot = number_format($sum, 2, ".", ",");
-                                @endphp
-                                @if ($sum > 0.00)
-                                <input type="number" name="t" id="t" value="{{$sum}}" hidden>
-                                @else
-                                <input type="number" name="t" id="t" value="" hidden>
-                                @error('t')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                @enderror
-                                @endif
-                                <div class="" style="margin: 0; margin-top:15px; padding:0">
-                                    <div class="input-group" style="margin: 0; border: 0;">
-                                        <label class="h6 font-robo col-form-label" for="sub" style="margin: 0 15% 0 0;">Sub-Total: L</label>
-                                        <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" id="sub" name="sub" type="text" style="height:42px; margin: 0px 0px 5px 20px; padding:0;
-                                            padding-right: 10px; text-align:right;" value="{{number_format($sum - $sum * 0.15, 2, " .", "," )}}" required readonly>
-                                    </div>
-                                    <div class="input-group" style="margin: 0;  border: 0;">
-                                        <label class="h6 text-xl-center col-form-label col-auto" for="isv" style="margin: 0 15% 0 0;">ISV 15%:
-                                            L</label>
-                                        <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" id="isv" name="isv" type="number" style="margin: 0px 0px 5px 30px; padding:0; text-align:right; height:42px;" value="{{number_format($sum * 0.15, 2, " .", "," )}}" required readonly>
-                                    </div>
-                                    <div class="input-group" style="margin: 0;  border: 0;">
-                                        <label class="h6 text-xl-center col-form-label col-auto" for="total" style="margin: 0 15% 0 0;">Total:
-                                            L</label>
-                                        <input class="ps-2 input--style-2 form-control border-0 border-radius-sm bg-gradient-faded-white" min="1" type="number" style=" margin: 0px 0px 4px 55px; padding:0; text-align:right; height:42px;" value="{{$sum}}" required readonly>
-                                    </div>
+                            <div class="d-flex justify-content-end">
+                                <div class="card">
+                                    @php
+                                    $total = 0;
+                                    $impuesto = 0;
+                                    foreach ($detalles as $detalle) {
+                                    $total += $detalle->precio * $detalle->cantidad;
+                                    }
+                                    $impuesto = $total * 0.15;
+                                    $subTotal = $total - $impuesto;
+                                    @endphp
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><b style="display: block; float:left;">SubTotal: &nbsp;&nbsp; </b>
+                                            <p style="display: block; float:right; text-align: right;">L{{$subTotal}} </p>
+                                        </li>
+                                        <li class="list-group-item"><b style="display: block; float:left;">ISV: </b>
+                                            <p style="display: block; float:right; text-align: right;">L {{ $impuesto }}</p>
+                                        </li>
+                                        <li class="list-group-item"><b style="display: block; float:left;">Total: </b>
+                                            <p style="display: block; float:right; text-align: right;">L {{ $total }}</p>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="bg-gradient-warning" style="text-align: center; width:99%; height:49px; margin:0;">
-                                <button type="button" onclick="cancelar('pedidos/caja/detalle/{{$pedido->id}}')" id="cancelar" class="btn btn-danger border-0 border-radius-sm" style="margin-top:5px">Cancelar</button>
-                                <button href="#"  id="cancelar" type="submit" class="btn btn-success border-0 border-radius-sm" style="margin-top:5px">Guardar</button>
+
+                            <div style="margin: 0; padding:0; margin-top:3px" class="col-12">
+                                <div class="row bg-gradient-faded-success " style="margin: 0; padding: 5px 3px 8px 3px;">
+                                    <div class="col-6 d-flex justify-content-end" style="margin: 0; padding:0; padding-right:5px">
+                                        <form action="{{ route('cart.clear') }}" method="POST">
+                                            @csrf
+                                            <button id="cancelar" type="submit" class="btn btn-danger border-0 border-radius-sm" style="margin:0;">Cancelar
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-6" style="margin: 0; padding:0; padding-left:5px;">
+                                        <form method="POST" action="{{route('Acomple',$pedido->id)}}">
+                                            @csrf
+                                            <input type="string" step="0.001" oninput="nombre()" value="{{ old('nombreC') }}" id="nombreC" name="nombreC" hidden>
+                                            <input type="string" step="0.001" oninput="nombre()" value="{{  old('mesaP')}}" id="mesaP" name="mesaP" hidden>
+                                            <button href="#" type="submit" role="button" id="guardar" class="btn btn-success border-0 border-radius-sm" style="margin:0; ;">Guardar</button>
+                                        </form>
+                                    </div>
+                                </div>
+
                             </div>
-                        </form>
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="/assets/jquery/jquery.js"></script>
-    <script src="/assets/jquery/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#myInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#productos button").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
+        <script src="/assets/jquery/jquery.js"></script>
+        <script src="/assets/jquery/jquery.min.js"></script>
+        <script src={{ asset("js/core/bootstrap.bundle.min.js") }}></script>
+        <script>
+            function nombre() {
+                a = document.getElementById("nombre").value;
+                b = document.getElementById("mesa").value;
 
-        var subMenu = document.getElementById('subMenu')
-        var fullPageMenu = document.getElementById('fullPageMenu')
-        subMenu.addEventListener('click', function() {
-            if (subMenu.className === 'menuClicked') {
-                subMenu.className = ""
-            } else {
-                subMenu.className = 'menuClicked'
-
-            }
-
-            var aside = document.getElementById("sidenav-main");
-            if (aside.classList.contains("mostrar")) {
-                aside.classList.remove("mostrar");
-                aside.classList.add("ocultar");
-            } else {
-                aside.classList.remove("ocultar");
-                aside.classList.add("mostrar");
-            }
-        })
-    </script>
-    <script src={{ asset("js/core/bootstrap.bundle.min.js") }}></script>
-
-    <script>
-        function guardar() {
-            var formul = document.getElementById("formulario");
-            formul.submit();
-        }
-
-        function borrar(id) {
-            var formul = document.getElementById("formularioEliminar-" + id);
-            formul.submit();
-        }
-
-        function editar(id) {
-            var formul = document.getElementById("formularioEditar-" + id);
-            document.getElementById('numb2-' + id).value = document.getElementById('numb-' + id).value;
-            formul.submit();
-        }
-
-        function cancelar(ruta) {
-            // var c = document.getElementById('cancelar');
-            Swal
-                .fire({
-                    title: "¿Cancelar pedido?",
-                    text: "¿Desea cancelar lo que esta haciendo?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: "Si",
-                    cancelButtonText: "No",
-                })
-                .then(resultado => {
-                    if (resultado.value) {
-                        // Hicieron click en "Sí"
-                        window.location.href = '/' + ruta;
-                    } else {
-                        // Dijeron que no
-                    }
-                });
-            localStorage.clear();
-        }
-    </script>
+                document.getElementById("nombreC").value = a;
+                document.getElementById("mesaP").value = b;
+            };
+        </script>
 </body>
 
 </html>

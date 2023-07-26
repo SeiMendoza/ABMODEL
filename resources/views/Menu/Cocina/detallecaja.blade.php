@@ -159,7 +159,7 @@
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
                 @if($pedido->estado_cocina == 0)
-                <a href="{{ route('ACompl', $pedido->id) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:62%;padding:5px; width:150px; z-index: 999;">
+                <a href="{{ route('Agregar',$pedido->id) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:62%;padding:5px; width:150px; z-index: 999;">
                     <i class="fa fa-plus-circle"></i> <strong>Nuevo</strong>
                 </a>
                 @endif
