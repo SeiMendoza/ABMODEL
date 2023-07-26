@@ -158,8 +158,13 @@ Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 
 Route::post('/precio-acompl',[PedidoUsuarioController::class, 'PrecioAcompl'])->middleware('auth')
 ->name('precio-acompl');
 //agrega el complemento al detalle del pedido
-Route::get('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::class,'ACompl'])->middleware('auth')
-->name('ACompl');
+Route::get('/pedido/caja/{id}/detalle/agregar', [PedidoUsuarioController::class,'Agregar'])->middleware('auth')
+->name('Agregar');
+//para los tipos en una misma vista 
+Route::get('/pedido/caja/detalle/{id}/agregar/{tipo?}', [PedidoUsuarioController::class,'Agregar'])->middleware('auth')
+->name('Agregar');
+/*Route::get('/pedido/caja/{id}/detalle/agrecompl', [PedidoUsuarioController::class,'ACompl'])->middleware('auth')
+->name('ACompl');*/
 Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple'])->middleware('auth')
 ->name('Acomple');
 // cambiar la mesa del pedido en detalles de caja
