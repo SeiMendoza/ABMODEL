@@ -46,10 +46,10 @@
                             <div>
                                 <img onclick="elegirImagen()" style="margin-left: 0;" src="/img/Perfil/usuario.png" alt="" width="240px" height="240px" id="imagenmostrada">
                                 <br><br>
-                                <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px;" class="btn btn-info text-center "> 
+                                <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="btn btn-info text-center "> 
 									<i class="fa fa-file-image"></i> Seleccionar imagen</label>
-                                <input  style="display:none; margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" required value="{{ old('imagenPrevisualizacion') }}" 
-                                onchange="colocarNombre();" style="color: white;width: 150px;">
+                                <input  style="display:none; margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" value="{{ old('imagenPrevisualizacion') }}" 
+                                onchange="colocarNombre();" style="color: white; width: 150px;">
                                 @error('imagen')
                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror

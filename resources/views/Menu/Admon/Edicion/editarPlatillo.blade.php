@@ -44,7 +44,7 @@
                         <div>
                             <img onclick="elegirImagen()" src="{{asset($producto->imagen)}}" alt="" width="240px" height="240px" id="imagenmostrada">
                             <br><br>
-                            <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px;" class="btn btn-info text-center "> <i class="fa fa-file-image"></i> Cambiar imagen</label>
+                            <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="btn btn-info text-center "> <i class="fa fa-file-image"></i> Cambiar imagen</label>
                             <input type="file" id="imagen" name="imagen" accept="images/*" value="{{ old('imagenPrevisualizacion', $producto->imagen) }}" onchange="colocarNombre();" style="display:none; margin-left: 0; color: white;width: 200px; ">
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>

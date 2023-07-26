@@ -28,7 +28,7 @@
                                 <div class="font-robo form-group">
                                     <img onclick="elegirImagen()" style="margin-left: 0;" src="/img/LoremKiosko.png" alt="" width="220px" height="220px" id="imagenmostrada">
                                     <br><br>
-                                    <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:200px;" class="btn btn-info text-center"> <i class="fa fa-file-image"></i> Seleccionar imagen</label>
+                                    <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:220px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="btn btn-info text-center"> <i class="fa fa-file-image"></i> Seleccionar imagen</label>
                                     <input type="file" class="files" id="imagen" name="imagen" accept="image/*"  value="{{ old('imagenPrevisualizacion') }}" onchange="colocarNombre();" style="display:none; color: rgb(0, 0, 0);">
                                     @error('imagen')
                                             <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>

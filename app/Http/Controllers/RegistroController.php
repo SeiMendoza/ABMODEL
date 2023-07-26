@@ -107,7 +107,7 @@ class RegistroController extends Controller
 
         if($creado){
            return redirect()->route('usuarios.users')
-           ->with('mensaje', 'Se creó exitosamente el usuario');
+           ->with('mensaje', 'Usuario creado exitosamente');
         }
     }
 
@@ -198,7 +198,7 @@ class RegistroController extends Controller
 
             if($creado){
                 return redirect()->route('usuarios.users')
-                ->with('mensaje', "Se actualizó exitosamente el usuario: ".$actualizarUser->name." ");
+                ->with('mensaje', "Usuario actualizado exitosamente: ".$actualizarUser->name." ");
             }
         }
 

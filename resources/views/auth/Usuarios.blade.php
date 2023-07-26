@@ -64,8 +64,10 @@
                 <td scope="col" style="text-align: left;">{{$l->email}} </td>
                 <td scope="col" style="text-align: right;">{{$l->telephone}}</td>
                 <td scope="col" style="text-align: right;">{{$l->address}}</td>
-
-                <td style="text-align: center;"><a href="{{ route('usuarios.editar', ['id' => $l->id]) }}"><i class="fa fa-edit text-success"></i></a></td>
+ 
+                <td style="text-align: center;">
+                        <a href="{{ route('usuarios.editar', ['id' => $l->id]) }}"><i class="fa fa-edit text-success"></i></a>
+                </td>
 
                 <td scope="col" style="text-align: center;">
                     @if ($l->is_default !== 'Administrador' && $l->id !== Auth::user()->id)
