@@ -374,11 +374,11 @@
             //DATATABLES para Menú
             $('.menu').DataTable({});
 
-    
+
             //DATATABLES para Kiosko
             $('.kiosko').DataTable();
 
-    
+
         </script>
     <script>
         @if (isset($idProducto))
@@ -393,9 +393,15 @@
 
                 }
 
-                if(parseFloat(data[2]) == 0){
+                if(parseFloat( data[2]) <= 5 && data[4] === 'Polvo'){
                     $(row).addClass('fila-marca-sin-existencia');
                 }
+
+                if(parseFloat( data[2]) <= 4 && data[4] === 'Liquido'){
+                    $(row).addClass('fila-marca-sin-existencia');
+                }
+
+                console.log(data[4]);
             },
             "pageLength": 10,
             "columnDefs": [
@@ -411,10 +417,15 @@
         let table = $('#examples').DataTable({
             "createdRow": function(row, data, dataIndex) {
 
-
-                if(parseFloat(data[2]) == 0){
+                if(parseFloat( data[2]) <= 5 && data[4] === 'Polvo'){
                     $(row).addClass('fila-marca-sin-existencia');
                 }
+
+                if(parseFloat( data[2]) <= 4 && data[4] === 'Liquido'){
+                    $(row).addClass('fila-marca-sin-existencia');
+                }
+
+                console.log(data[4]);
             },
             "displayStart": 0,
             "pageLength": 10,
