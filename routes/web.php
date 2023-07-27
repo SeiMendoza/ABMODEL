@@ -162,11 +162,12 @@ Route::get('/pedido/caja/{id}/detalle/agregar', [PedidoUsuarioController::class,
 ->name('Agregar');
 //para los tipos en una misma vista 
 Route::get('/pedido/caja/detalle/{id}/agregar/{tipo?}', [PedidoUsuarioController::class,'Agregar'])->middleware('auth')
-->name('Agregar');
-/*Route::get('/pedido/caja/{id}/detalle/agrecompl', [PedidoUsuarioController::class,'ACompl'])->middleware('auth')
-->name('ACompl');*/
+->name('Agregar'); 
 Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple'])->middleware('auth')
 ->name('Acomple');
+//guardar el pedido con los nuevos detalles 
+Route::post('/pedido/caja/{id}/guardar', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
+->name('guardarPedido');
 // cambiar la mesa del pedido en detalles de caja
 Route::post('/pedidos/{id}/cambiarmesa', [PedidoUsuarioController::class,'Cambiar_mesa'])
 ->name('cambiar_mesa');

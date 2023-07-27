@@ -29,10 +29,8 @@
 
 <body style="">
     <script>
-        var msg = '{{Session::get('
-        mensaje ')}}';
-        var exist = '{{Session::has('
-        mensaje ')}}';
+        var msg = "{{Session::get('mensaje ')}}";
+        var exist = "{{Session::has('mensaje ')}}";
         if (exist) {
             Swal.fire({
                 position: 'top-end',
@@ -150,13 +148,9 @@
                                 <Label class="h6 col-form-label font-robo" style="margin: 5px 5% 0 3px;" for="mesaP">Pedido de la Mesa:</Label>
 
                                 <select name="mesa" style="height:42px; border-radius:0; margin: 5px 0px 5px 23px;" id="mesa" class="form-control input--style-2 border-0 ps-2 font-robo" step="0.001" oninput="nombre()">
-                                    <option value="">Seleccione una mesa</option>
+                                    <option value="{{$pedido->mesa_nombre->id}}">{{$pedido->mesa_nombre->nombre}} - Kiosko: {{$pedido->mesa_nombre->kiosko->codigo}}</option>
                                     @foreach ($mesas as $mesa)
-                                    @if ($pedido->mesa_id == $mesa->id)
-                                    <option value="{{ $mesa->id }}" selected>{{ $mesa->nombre }} - Kiosko: {{ $mesa->kiosko->codigo }}</option>
-                                    @else
                                     <option value="{{ $mesa->id }}">{{ $mesa->nombre }} - Kiosko: {{ $mesa->kiosko->codigo }}</option>
-                                    @endif
                                     @endforeach
                                 </select>
                                 @error('mesaP')
@@ -241,14 +235,10 @@
                             <div style="margin: 0; padding:0; margin-top:3px" class="col-12">
                                 <div class="row bg-gradient-faded-success " style="margin: 0; padding: 5px 3px 8px 3px;">
                                     <div class="col-6 d-flex justify-content-end" style="margin: 0; padding:0; padding-right:5px">
-                                        <form action="{{ route('cart.clear') }}" method="POST">
-                                            @csrf
-                                            <button id="cancelar" type="submit" class="btn btn-danger border-0 border-radius-sm" style="margin:0;">Cancelar
-                                            </button>
-                                        </form>
+                                        <button onclick="cancelar('pedidos/caja/detalle/{{$pedido->id}}')" id="cancelar" type="submit" class="btn btn-danger border-0 border-radius-sm" style="margin:0;">Cancelar
                                     </div>
                                     <div class="col-6" style="margin: 0; padding:0; padding-left:5px;">
-                                        <form method="POST" action="{{route('Acomple',$pedido->id)}}">
+                                        <form method="POST" action="{{route('guardarPedido',$pedido->id)}}">
                                             @csrf
                                             <input type="string" step="0.001" oninput="nombre()" value="{{ old('nombreC') }}" id="nombreC" name="nombreC" hidden>
                                             <input type="string" step="0.001" oninput="nombre()" value="{{  old('mesaP')}}" id="mesaP" name="mesaP" hidden>
@@ -278,6 +268,28 @@
                 document.getElementById("nombreC").value = a;
                 document.getElementById("mesaP").value = b;
             };
+
+            function cancelar(ruta) {
+
+                Swal
+                    .fire({
+                        title: "Cancelar",
+                        text: "¿Desea cancelar lo que esta haciendo?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: "Si",
+                        cancelButtonText: "No",
+                    })
+                    .then(resultado => {
+                        if (resultado.value) {
+                            // Hicieron click en "Sí"
+                            window.location.href = '/' + ruta;
+                        } else {
+                            // Dijeron que no
+                        }
+                    });
+
+            }
         </script>
 </body>
 

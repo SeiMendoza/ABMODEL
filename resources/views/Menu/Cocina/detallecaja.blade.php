@@ -175,7 +175,7 @@
             </thead>
             <tbody class="col" style="overflow:auto;" id="">
                 @foreach ($detapedido as $detalle)
-                @if($detalle->estado === 0 || $detalle->estado === 1)
+                @if($detalle->estado === 1)
                 <td scope="col" style="width:20%; text-align:center; height:20%;">{{$detalle->producto->nombre}}</td>
                 <td scope="col" style=" width:20%; text-align:center; height:20%;">{{ $detalle->cantidad }}</td>
                 <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>

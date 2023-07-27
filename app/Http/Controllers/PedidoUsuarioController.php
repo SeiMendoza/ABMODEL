@@ -20,11 +20,11 @@ class PedidoUsuarioController extends Controller
     public function Cambiar_mesa(Request $request, $id)
     {
         $rules = [
-            'nueva_mesa' => 'exists:mesas,id', 
+            'nueva_mesa' => 'exists:mesas,id',
         ];
-        $mensaje = [ 
+        $mensaje = [
             'nueva_mesa.exists' => 'El nombre no existe',
-            
+
         ];
         $this->validate($request, $rules, $mensaje);
         $pedido = Pedido::findOrFail($id);
@@ -199,112 +199,147 @@ class PedidoUsuarioController extends Controller
         $tot = number_format($suma, 2, ".", ",");
         return view('Menu/Cocina/detallecaja', compact('pedido', 'detapedido', 'mesas', 'tot', 'sub', 'isv'));
     }
-
     public function Agregar($id, $tipo = null)
-    { 
-        $mesas = Mesa::where('estadoM','=','1')->get();
+    {
+        $mesas = Mesa::where('estadoM', '=', '0')->get();
         $pedido = Pedido::findOrFail($id);
         // Asignar nombres descriptivos a cada tipo
-    $tipos = [
-        0 => 'complementos',
-        1 => 'bebidas',
-        2 => 'platillos'
-    ];
-     // Si se proporciona un valor de tipo, utilizar el nombre descriptivo
-     $tipo_descriptivo = $tipo !== null ? $tipos[$tipo] : null;
-    
-     // Filtrar productos por tipo si se proporciona un valor de tipo
-     switch ($tipo) {
-         case 0: // complementos
-             $productos = Producto::where('estado', '=', '1')
-                 ->where('tipo', 0)
-                 ->where('disponible', '>', 0)
-                 ->get(); 
-             break;
-         case 1: // bebidas
-             $productos = Producto::where('estado', '=', '1')
-                 ->where('tipo', 1)
-                 ->where('disponible', '>', 0)
-                 ->get(); 
-             break;
-         case 2: // platillos
-             $productos = Producto::where('estado', '=', '1')
-                 ->where('tipo', 2)
-                 ->where('disponible', '>', 0)
-                 ->get(); 
-             break;
-             default: 
-             /* todos los productos*/
-        $productos = Producto::where('estado', '=', '1')
-            ->whereIn('tipo', ['0', '1', '2'])
-            ->where('disponible', '>', 0)
-            ->get(); 
+        $tipos = [
+            0 => 'complementos',
+            1 => 'bebidas',
+            2 => 'platillos'
+        ];
+        // Si se proporciona un valor de tipo, utilizar el nombre descriptivo
+        $tipo_descriptivo = $tipo !== null ? $tipos[$tipo] : null;
+
+        // Filtrar productos por tipo si se proporciona un valor de tipo
+        switch ($tipo) {
+            case 0: // complementos
+                $productos = Producto::where('estado', '=', '1')
+                    ->where('tipo', 0)
+                    ->where('disponible', '>', 0)
+                    ->get();
+                break;
+            case 1: // bebidas
+                $productos = Producto::where('estado', '=', '1')
+                    ->where('tipo', 1)
+                    ->where('disponible', '>', 0)
+                    ->get();
+                break;
+            case 2: // platillos
+                $productos = Producto::where('estado', '=', '1')
+                    ->where('tipo', 2)
+                    ->where('disponible', '>', 0)
+                    ->get();
+                break;
+            default:
+                /* todos los productos*/
+                $productos = Producto::where('estado', '=', '1')
+                    ->whereIn('tipo', ['0', '1', '2'])
+                    ->where('disponible', '>', 0)
+                    ->get();
         }
-            $detalles = DetallesPedido::where('pedido_id', $id)->get();
+        $detalles = DetallesPedido::where('pedido_id', $id)->get();
         // si no hay complementos muestra mensaje
-       /* if ($productos->isEmpty()) {
+        /* if ($productos->isEmpty()) {
             return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'No hay complementos disponibles');
         }*/
-        return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos','detalles','mesas','tipo'));
+        return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos', 'detalles', 'mesas', 'tipo'));
     }
-     public function Acomple(Request $request, $id)
-{
-    // Obtener el pedido existente
-    $pedido = Pedido::find($id); 
+    public function Acomple(Request $request, $id)
+    {
+        // Obtener los datos enviados en el formulario
+        $producto_id = $request->input('id');
+        $producto_nombre = $request->input('name');
+        $producto_precio = $request->input('price');
+        $cantidad = $request->input('quantity');
 
-    // Obtener los datos enviados en el formulario
-    $producto_id = $request->input('id');
-    $producto_nombre = $request->input('name');
-    $producto_precio = $request->input('price');
-    $cantidad = $request->input('quantity');
+        // Obtener el producto a partir de su ID
+        $producto = Producto::find($producto_id);
 
-    // Obtener el producto a partir de su ID
-    $producto = Producto::find($producto_id); 
+        // Verificar si ya existe un complemento con el mismo producto y precio 
+        $complemento_existente = DetallesPedido::where([
+            ['pedido_id', '=', $id],
+            ['producto_id', '=', $producto_id],
+            ['precio', '=', $producto_precio],
+        ])->first();
 
-    // Verificar si ya existe un complemento con el mismo producto y precio 
-    $complemento_existente = $pedido->detalles()->where([
-        ['producto_id', '=', $producto_id],
-        ['precio', '=', $producto_precio],
-    ])->first();
-
-    if ($complemento_existente) {
-        // Si el complemento ya existe solo se actualiza la cantidad
-        $complemento_existente->cantidad += $cantidad;
-        $complemento_existente->estado = 1;
-        $complemento_existente->save();
-    } else {
-        // Crear un nuevo detalle del pedido con el producto y la cantidad
-        if (!$producto) {
-            return redirect()->back()->with('mensaje', 'El producto no existe.');
+        if ($complemento_existente) {
+            // Si el complemento ya existe solo se actualiza la cantidad
+            $complemento_existente->cantidad += $cantidad;
+            $complemento_existente->save();
+        } else {
+            // Crear un nuevo detalle del pedido con el producto y la cantidad
+            if (!$producto) {
+                return redirect()->back()->with('mensaje', 'El producto no existe.');
+            }
+            $complemento = new DetallesPedido();
+            $complemento->pedido_id = $id;
+            $complemento->producto_id = $producto->id;
+            $complemento->cantidad = $cantidad;
+            $complemento->precio = $producto_precio;
+            $complemento->estado = 0;
+            $complemento->save();
         }
-        $complemento = new DetallesPedido(); 
-        $complemento->pedido_id = $pedido->id;
-        $complemento->producto_id = $producto->id; 
-        $complemento->cantidad = $cantidad;
-        $complemento->precio = $producto_precio;
-        $complemento->estado = 1; // cambia el estado del detalle del pedido
-        $complemento->save();
-    }
-    
-    // Actualizar el impuesto y el total del pedido general
-    $detalles = $pedido->detalles;
-    $total = 0;
-    foreach ($detalles as $detalle) {
-        $total += $detalle->cantidad * $detalle->precio;
-    }
-    $impuesto = $total * 0.15; // calcular el impuesto
-    $pedido->imp = $impuesto;
-    $pedido->total = $total;
-    $pedido->save();
 
-    // Restar la cantidad disponible del producto
-    $producto->disponible -= $cantidad;
-    $producto->save();
+        // Actualizar el impuesto y el total del pedido
+        $pedido = Pedido::find($id);
+        $detalles = $pedido->detalles;
+        $total = 0;
+        foreach ($detalles as $detalle) {
+            $total += $detalle->cantidad * $detalle->precio;
+        }
+        $impuesto = $total * 0.15; // calcular el impuesto
+        $pedido->imp = $impuesto;
+        $pedido->total = $total;
+        $pedido->save();
 
-    // Redirigir al usuario a la página de detalles del pedido con un mensaje de confirmación
-    return redirect()->route('Agregar', ['id' => $pedido->id])->with('mensaje', 'Producto agregado como complemento correctamente.');
-}
-  
+        // Restar la cantidad disponible del producto
+        $producto->disponible -= $cantidad;
+        $producto->save();
+
+        // Redirigir al usuario a la página de detalles del pedido con un mensaje de confirmación
+        return redirect()->route('Agregar', ['id' => $id])->with('mensaje', 'Complemento agregado correctamente.');
+    }
+
+    public function Guardar(Request $request, $id)
+    {
+        // Obtiene el pedido existente
+        $pedido_actual = Pedido::findorfail($id);
+
+        // Obtiene los detalles del pedido actual
+        $detalles_actual = $pedido_actual->detalles;
+
+        // Obtiene los datos del cliente
+        $nombre_cliente = $pedido_actual->nombreCliente;
+        $mesa_id = $pedido_actual->mesa_id;
+        $mesa = Mesa::findOrFail($mesa_id);
+        $quiosco = $mesa->kiosko->id;
+        // Crear un nuevo pedido con los datos del pedido actual y el nuevo detalle del pedido
+        $pedido_nuevo = new Pedido();
+        $pedido_nuevo->nombreCliente = $nombre_cliente;
+        $pedido_nuevo->mesa_id = $mesa_id;
+        $pedido_nuevo->quiosco = $quiosco;
+        $pedido_nuevo->imp = $pedido_actual->imp;
+        $pedido_nuevo->total = $pedido_actual->total;
+        $pedido_nuevo->save();
+
+        //agrega los detalles nuevos
+        foreach ($detalles_actual as $detalle_actual) {
+            $detalle_nuevo = new DetallesPedido();
+            $detalle_nuevo->pedido_id = $pedido_nuevo->id;
+            $detalle_nuevo->producto_id = $detalle_actual->producto_id;
+            $detalle_nuevo->cantidad = $detalle_actual->cantidad;
+            $detalle_nuevo->precio = $detalle_actual->precio;
+            $detalle_nuevo->estado = 1; // el estado del detalle pasa a estado 1 cuando es nuevo
+            $detalle_nuevo->save();
+        }
+
+        // Actualizar el estado del pedido actual pero cambio el estado para que no haya un duplicado
+        $pedido_actual->estado = '4';
+        $pedido_actual->save();
+        return redirect()->route('pedidost.detalle', ['id' => $pedido_nuevo->id])->with('mensaje', 'Pedido guardado correctamente.');
+    }
     public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesPedido::where('pedido_id', $id)->get();
