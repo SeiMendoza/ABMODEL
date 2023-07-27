@@ -1,11 +1,13 @@
+$.ajaxSetup({
+    headers:{
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
 $('.deleteProduct').click(function(e){
     
     var id;
-    $.ajaxSetup({
-        headers:{
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
     e.preventDefault();//evitar recargar la página
     id = $(this).attr('id'); //recuperar el id del registro enviado
@@ -21,7 +23,9 @@ $('.deleteProduct').click(function(e){
             success: function(data){
                 setTimeout(function(){$('#modalDelete').modal('hide');}, 80);
                 $('#btnConfirmDeleteProduct').text('Sí');
-                $('#complementosNoDisponibles').ajax.reload(null, false);
+                location.reload();
+                //$('#cDN').load(location.href+'#cND');
+                //$('.table').DataTable().ajax.reload(null, false);
             }
         });
 

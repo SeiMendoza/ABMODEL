@@ -10,6 +10,7 @@ use App\Models\PiscinaTipo;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use DataTables;
 
 
 class HomeController extends Controller
@@ -48,8 +49,8 @@ class HomeController extends Controller
         $productos = Producto::all();
         return view("/Menu/Admon/indexBebidas")->with(['productos' => $productos]);
     }
-    public function indexComplementos()
-    {
+    public function indexComplementos(Request $request){
+        
         $productos = Producto::all();
         return view("/Menu/Admon/indexComplementos")->with(['productos' => $productos]);
     }

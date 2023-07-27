@@ -233,6 +233,7 @@ Route::controller(ProductoController::class)->middleware('auth')->group(function
   Route::put('bebida/{id}/edicion', 'updateB')->name('productoB.update');
   Route::put('complemento/{id}/edicion', 'updateC')->name('productoC.update');
 
+  Route::delete('producto/{id}/borrar', 'destroy')->name('producto.borrar');
   Route::get('producto/{id}/borrar', 'destroy')->name('producto.borrar');
   //Route::delete('bebida/{id}/borrar', 'destroy')->name('bebida.borrar');
 });

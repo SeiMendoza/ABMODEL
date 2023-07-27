@@ -42,6 +42,8 @@ class ProductoController extends Controller
 
         $actualizacion = Producto::FindOrFail($id);
 
+        $oldImage = $actualizacion->imagen; //gurada la ruta de la imagen anterior
+
         $actualizacion->nombre = $request->input('nombre');
         $actualizacion->descripcion = $request->input('descripcion');
         $actualizacion->precio = $request->input('precio');
@@ -60,6 +62,12 @@ class ProductoController extends Controller
         }
 
         $creado = $actualizacion->save();
+        if (@getimagesize($oldImage) && ($oldImage != $actualizacion->imagen)){ //verifica si existe imagen anterior
+            
+            if(substr($oldImage, 0, 11) != 'https://via'){ // no es imagen del faker
+                unlink($oldImage); //elimina la imagen anterior
+            }   
+        }
 
         if ($creado) {
             return redirect()->route('menuAdmon.bebidas')
@@ -107,6 +115,8 @@ class ProductoController extends Controller
         $actualizacion->tamanio = $request->input('tamanio');
         $actualizacion->disponible = $request->input('cantidad');
 
+        $oldImage = $actualizacion->imagen; //gurada la ruta de la imagen anterior
+
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $destinationPath = 'images/';
@@ -119,6 +129,13 @@ class ProductoController extends Controller
         }
 
         $creado = $actualizacion->save();
+
+        if (@getimagesize($oldImage) && ($oldImage != $actualizacion->imagen)){ //verifica si existe imagen anterior
+            
+            if(substr($oldImage, 0, 11) != 'https://via'){ // no es imagen del faker
+                unlink($oldImage); //elimina la imagen anterior
+            }   
+        }
 
         if ($creado) {
             return redirect()->route('menuAdmon.platillos')
@@ -148,7 +165,10 @@ class ProductoController extends Controller
         $actualizacion->tamanio = $request->input('tamanio');
         $actualizacion->disponible = $request->input('cantidad');
 
+        $oldImage = $actualizacion->imagen; //gurada la ruta de la imagen anterior
+
         if ($request->hasFile('imagen')) {
+
             $file = $request->file('imagen');
             $destinationPath = 'images/';
             $filename = time() . '.' . $file->getClientOriginalName();
@@ -160,6 +180,13 @@ class ProductoController extends Controller
         }
 
         $creado = $actualizacion->save();
+
+        if (@getimagesize($oldImage) && ($oldImage != $actualizacion->imagen)){ //verifica si existe imagen anterior
+            
+            if(substr($oldImage, 0, 11) != 'https://via'){ // no es imagen del faker
+                unlink($oldImage); //elimina la imagen anterior
+            }   
+        }
 
         if ($creado) {
             return redirect()->route('menuAdmon.complementos')
@@ -209,7 +236,8 @@ class ProductoController extends Controller
 
         $producto->delete();
 
-        return response()->json(['message'=> $tipo.' eliminado correctamente']);
+        //return response()->json(['message'=> $tipo.' eliminado correctamente']);
+        return back()->with(['mensaje'=> $tipo.' eliminado correctamente']);
 
     }
 

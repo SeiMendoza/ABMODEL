@@ -3,3 +3,5 @@ node_modules
 codigo.blade.php
 /public/images
 pruebaAdmon.blade
+.env
+pruebaAdmon.blade.php

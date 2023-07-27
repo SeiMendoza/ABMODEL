@@ -1,6 +1,6 @@
 @extends('00_plantillas_Blade.plantilla_admonMenu')
 @section('meta')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('b')
@@ -100,14 +100,19 @@
                                             <tr>
                                                 <td scope="col" style="text-align: center;">@php echo $i @endphp</td>
                                                 <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
-                                                <td scope="col" style="text-align: end;">L {{number_format($p->precio, 2, ".", ",")}}</td>
+                                                <td scope="col" style="text-align: end;">L
+                                                    {{ number_format($p->precio, 2, '.', ',') }}</td>
                                                 <td scope="col" style="text-align: center;">
-                                                    <button data-bs-toggle="modal" data-bs-target="#activarComplemento{{ $p->id }}"><i class="fa fa-times-circle text-warning"></i> Desactivar</button>
+                                                    <button data-bs-toggle="modal"
+                                                        data-bs-target="#activarComplemento{{ $p->id }}"><i
+                                                            class="fa fa-times-circle text-warning"></i>
+                                                        Desactivar</button>
                                                     <form action="{{ route('producto.activar', ['id' => $p->id]) }}"
                                                         method="post" enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
-                                                        <div class="modal fade" id="activarComplemento{{ $p->id }}"
+                                                        <div class="modal fade"
+                                                            id="activarComplemento{{ $p->id }}"
                                                             data-bs-backdrop="static" data-bs-keyboard="false"
                                                             tabindex="-1" aria-labelledby="staticBackdropLabel"
                                                             aria-hidden="true">
@@ -191,9 +196,9 @@
 
                 <div class="tab-pane fade " id="CNoDisponibles" role="tabpanel" aria-labelledby="CNoDisponibles-tab">
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="cND">
 
-                        <table class="table menu"  id="complementosNoDisponibles" style="">
+                        <table class="table menu" id="complementosNoDisponibles" style="">
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center;">N</th>
@@ -213,68 +218,85 @@
                                             @php $i++; @endphp
                                             <tr>
                                                 <th scope="col" style="text-align: center;">@php echo $i @endphp</th>
-                                                <td scope="col" style="text-align: start;">{{ $p->nombre }}</td>
-                                                <td scope="col" style="text-align: end;">L {{number_format($p->precio, 2, ".", ",")}}</td>
+                                                <td scope="col" style="text-align: start;">{{ $p->nombre }}
+                                                </td>
+                                                <td scope="col" style="text-align: end;">L
+                                                    {{ number_format($p->precio, 2, '.', ',') }}</td>
                                                 <td scope="col" style="text-align: center;">
-                                                    <button data-bs-toggle="modal" data-bs-target="#activarComplemento{{ $p->id }}"><i class="fa fa-check-circle text-success"></i> Activar</button>
-                                                
-                                                    <form action="{{ route('producto.activar', ['id' => $p->id]) }}" method="post" enctype="multipart/form-data">
+                                                    <button data-bs-toggle="modal"
+                                                        data-bs-target="#activarComplemento{{ $p->id }}"><i
+                                                            class="fa fa-check-circle text-success"></i>
+                                                        Activar</button>
+
+                                                    <form action="{{ route('producto.activar', ['id' => $p->id]) }}"
+                                                        method="post" enctype="multipart/form-data">
                                                         @method('put')
                                                         @csrf
-                                                        <div class="modal fade" id="activarComplemento{{ $p->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal fade"
+                                                            id="activarComplemento{{ $p->id }}"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                            aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="staticBackdropLabel">Activar Complemento</h5>
+                                                                        <h5 class="modal-title" id="staticBackdropLabel">
+                                                                            Activar
+                                                                            Complemento</h5>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         ¿Está seguro de activar el complemento:
                                                                         <strong>{{ $p->nombre }}</strong>?
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input id="activar" name="activar" style="display:none" value="1">
-                                                                        <button type="submit" class="btn btn-danger">Si</button>
+                                                                        <input id="activar" name="activar"
+                                                                            style="display:none" value="1">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Si</button>
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">No</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </form> 
+                                                    </form>
                                                 </td>
                                                 <td scope="col" style="text-align: center;">
-                                                    <a href="{{ route('producto.editar', ['id' => $p->id]) }}"><i class="fa fa-edit text-success"></i></a>                                                                                                         
+                                                    <a href="{{ route('producto.editar', ['id' => $p->id]) }}"><i
+                                                            class="fa fa-edit text-success"></i></a>
                                                 </td>
                                                 <td scope="col" style="text-align: center;">
                                                     <i id="{{ $p->id }}"
                                                         class=" deleteProduct fa-solid fa-trash-can text-danger"
-                                                        style="color:crimson"></i>                                                    
+                                                        style="color:crimson"></i>
                                                 </td>
                                             </tr>
                                         @endif
-                                    @endif  
-                                @empty                              
+                                    @endif
+                                @empty
                                 @endforelse
                             </tbody>
                         </table>
 
                     </div>
-                        <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="staticBackdropLabel">Eliminar producto</h4>
-                                    </div>
-                                    <div class="modal-body text-center">
-                                        <strong>¿Está seguro de eliminar el complemento?</strong>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" id="btnConfirmDeleteProduct" class="btn btn-danger">Si</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                    </div>
+                    <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="staticBackdropLabel">Eliminar producto</h4>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <strong>¿Está seguro de eliminar el complemento?</strong>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" id="btnConfirmDeleteProduct"
+                                        class="btn btn-danger">Si</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </form>
 
                 </div>
@@ -286,32 +308,31 @@
     </div>
 
     @section('scritps')
-
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/admonMenu.js"></script>
-    <script>
-        function activar(nombre, id, tipo) {
-            Swal.fire({
-                title: "Desactivar "+ nombre,
-                text:  '...',
-                icon: 'question',
-                showDenyButton: true,
-                confirmButtonText: "Si",
-                allowOutsideClick: false,
-            }).then(resultado => {
-                if (resultado.value) {
-                    route('producto.activar', {id:id});
-                    console.log('Si se activó');
-                } else {
-                    console.log('No se activó');
-                }
-            });
-        }
-
-    </script>
-
-
+        <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="js/admonMenu.js"></script>
+        <script>
+            function activar(nombre, id, tipo) {
+                Swal.fire({
+                    title: "Desactivar " + nombre,
+                    text: '...',
+                    icon: 'question',
+                    showDenyButton: true,
+                    confirmButtonText: "Si",
+                    allowOutsideClick: false,
+                }).then(resultado => {
+                    if (resultado.value) {
+                        route('producto.activar', {
+                            id: id
+                        });
+                        console.log('Si se activó');
+                    } else {
+                        console.log('No se activó');
+                    }
+                });
+            }
+        </script>
     @endsection
 
 @endsection
