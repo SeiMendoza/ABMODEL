@@ -179,7 +179,7 @@ Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])-
 ->name('cliente_menu.details');
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])->middleware('auth')
 ->name('cliente_menu.qr');
-Route::get('/menu/prueba', [MenuUsuarioController::class, 'prueba'])->middleware('auth')
+Route::get('/menu/prueba/c', [MenuUsuarioController::class, 'prueba'])
 ->name('cliente_prueba');
 Route::get('/menu/usuario/pedido', [MenuUsuarioController::class, 'create'])->middleware('auth')
 ->name('usuario_pedido.create');

@@ -89,14 +89,14 @@
         }
 
     </script>
-    <div class="row">
+    <div class="row col-12">
         <div class="col" style="padding: 0px;">
             <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
-                <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 100%; height:70px;">
+                <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 90%; height:60px;">
             </a>
         </div>
         <div class="col-10" style="padding: 0px;">
-            <nav class="navbar navbar-main navbar-expand-lg shadow-none bg-warning" style="height: 70px" id="navbarBlur" data-scroll="false" style="padding: 0;">
+            <nav class="navbar navbar-main navbar-expand-lg shadow-none bg-warning" style="height: 60px" id="navbarBlur" data-scroll="false" style="padding: 0;">
                 <h2 class="font-weight-bolder text-white" style="margin:0">Menú del día</h2>
                 <div id="subMenu" style="padding-left: 15px">
                     <span class="hamLine"></span>
@@ -105,107 +105,99 @@
                 </div>
             </nav>
         </div>
+        <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 ocultar " id="sidenav-main" style="margin:70px 0 0 0">
+            <hr class="horizontal dark mt-0">
+            <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
+                <ul class="navbar-nav">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="margin: 4% 0 0 0">
+                        Restaurante</h6>
+                    <li class="nav-item">
+                        <a class="nav-link " href={{ route('cliente_prueba') }}>
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Pedido</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href={{ route('pedidos.caja') }}>
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-archive-2 text-warning text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Caja</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href={{ route('pedidosp.pedido') }}>
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-tablet-button text-warning text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Cocina</span>
+                        </a>
+                    </li>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
+                    <li class="nav-item">
+                        <a class="nav-link " href={{ route('kiosko_res.index') }}>
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-shop text-success text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Kioskos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('cliente.reservaLocal') }}">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-shop text-success text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Local</span>
+                        </a>
+                    </li>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Configuraciones</h6>
+                    <li class="nav-item">
+                        <a class="nav-link" href={{ route('menuAdmon.index') }}>
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-burger text-info text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Menú</span>
+                        </a>
+                    </li>
+                    <li cFlass="nav-item">
+                        <a class="nav-link " href="{{ route('mesas_reg.index') }}">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-table text-sm text-info opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Mesas</span>
+                        </a>
+                    </li>
+                    <li cFlass="nav-item">
+                        <a class="nav-link " href="{{ route('kiosko.index') }}">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-store text-sm text-info opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Kioskos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href={{ route('prodpiscina.index') }}>
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-water-ladder text-info text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Productos</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </aside>
     </div>
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 ocultar " id="sidenav-main" style="margin:70px 0 0 0">
-        <hr class="horizontal dark mt-0">
-        <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
-            <ul class="navbar-nav">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="margin: 4% 0 0 0">
-                    Restaurante</h6>
-                <li class="nav-item">
-                    <a class="nav-link " href={{ route('cliente_prueba') }}>
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Pedido</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href={{ route('pedidos.caja') }}>
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-archive-2 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Caja</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href={{ route('pedidosp.pedido') }}>
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tablet-button text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Cocina</span>
-                    </a>
-                </li>
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reservaciones</h6>
-                <li class="nav-item">
-                    <a class="nav-link " href={{ route('kiosko_res.index') }}>
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-shop text-success text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Kioskos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="{{ route('cliente.reservaLocal') }}">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-shop text-success text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Local</span>
-                    </a>
-                </li>
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Configuraciones</h6>
-                <li class="nav-item">
-                    <a class="nav-link" href={{ route('menuAdmon.index') }}>
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-burger text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Menú</span>
-                    </a>
-                </li>
-                <li cFlass="nav-item">
-                    <a class="nav-link " href="{{ route('mesas_reg.index') }}">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-table text-sm text-info opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Mesas</span>
-                    </a>
-                </li>
-                <li cFlass="nav-item">
-                    <a class="nav-link " href="{{ route('kiosko.index') }}">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-store text-sm text-info opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Kioskos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href={{ route('prodpiscina.index') }}>
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-water-ladder text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Productos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    @if(auth()->user()->isAdmin())  <!--Solo mostrar a usuarios con permisos de crear, editar y eliminar usuarios-->
-                    <a class="nav-link " href="{{ route('usuarios.users') }}">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-users text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Usuarios</span>
-                    </a>
-                    @endif
-                </li>
-            </ul>
-        </div>
-    </aside>
+    
 
-    <div class="container-fluid" style="padding: 0px; height: 95vh;">
+    <div class="container-fluid" style="padding: 0px; height:90vh;">
         <div class="row">
             <div class="col-lg-8 col-xs-12 col-sm-12" style="padding: 0px;">
                 <div class="" style="margin: 0px; padding:0; width: 100%; display:block; float:left">
                     <!-- Catalogo de Productos -->
-                    <div class="table-responsive" style="height: 87vh; overflow-y: auto; overflow-x: auto;
+                    <div class="table-responsive" style="height: 83vh; overflow-y: auto; overflow-x: auto;
                         scroll-behavior: smooth; margin-top:5px">
                         <section class="NovidadesSection" style="">
                             <main class="main-content position border-radius-lg">
@@ -360,10 +352,7 @@
             <div class="col-lg-4 col-xs-12 col-sm-12" style="padding: 0px;">
                 <div class="bg-gradient-faded-white" style=" width: 100%; margin: 0; display:block; float:left">
                     <div class="container-fluid" style="padding: 0px;">
-                        <div class="nav d-flex justify-content-center bg-gradient-warning" style="height: 60px; width: 99%">
-                            <h3 style="padding:0; margin:15px 0% 0 5px; " class="text-white title font-robo">Pedido</h3>
-                            <br><br>
-                        </div>
+                        
                         <br>
                         <form action="{{ route('cliente_pedido.store') }}" id="formulario" name="formulario" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -418,7 +407,7 @@
                                 </div>
                             </div>
 
-                            <div style="height: 50.8vh;  overflow-y:auto;">
+                            <div style="height: 43.5vh;  overflow-y:auto;">
                                 <div class="row" id="carrito" style="margin: 0; padding:0;">
                                     <table class="table overflow-auto" id="lista" style="margin: 0; padding:0;">
                                         <thead style="padding-top: 2px;">
