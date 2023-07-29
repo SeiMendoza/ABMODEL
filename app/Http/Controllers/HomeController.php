@@ -56,10 +56,15 @@ class HomeController extends Controller
     }
 
 
-    public function pruebaAdmon(){
+    public function pruebaAdmon(Request $request){
 
         $productos = Producto::all();
-        return view("/Menu/Admon/pruebaAdmon")->with(['productos' => $productos]);
+
+        if($request->ajax()){
+            return datatables()->of($productos)->toJson();
+        }
+
+        return view("/Menu/Admon/pruebaAdmon", compact('productos'))->with('mensaje', 'Kiosko actualizado correctamente');
     }
 
 

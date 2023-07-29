@@ -6,21 +6,6 @@
 @section('tit', 'Administración de menú')
 
 @section('content')
-    <script>
-        var msg = '{{ Session::get('mensaje') }}';
-        var exist = '{{ Session::has('mensaje') }}';
-        if (exist) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: msg,
-                showConfirmButton: false,
-                toast: true,
-                background: '#fff',
-                timer: 3000
-            })
-        }
-    </script>
     <div class="pt-2">
         @yield('selection')
     </div>
@@ -31,10 +16,10 @@
 
             @yield('show')
 
-        </div>
+        </div>  
     </div>
 
     @yield('scritps')
 
-
+    
 @endsection

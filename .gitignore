@@ -2,6 +2,5 @@
 node_modules
 codigo.blade.php
 /public/images
-pruebaAdmon.blade
+resources/views/Menu/Admon/pruebaAdmon.blade.php
 .env
-pruebaAdmon.blade.php

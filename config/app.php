@@ -198,6 +198,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
     /*

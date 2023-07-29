@@ -97,12 +97,6 @@ Route::controller(HomeController::class)->middleware('auth')->group( function(){
   Route::get('/pruebaAdmon','pruebaAdmon')->name('menuAdmon.prueba');
 }); 
 
-Route::put('producto/{id}/activar', [ProductoController::class, 'activar'])    
-->name('producto.activar');
-
-
-
-
 
 /** Rutas de administración de Productos */
 
@@ -229,6 +223,7 @@ Route::get('/busqueda', [BusquedaAdmonController::class, 'index'])->middleware('
 Route::controller(ProductoController::class)->middleware('auth')->group(function(){
 
   Route::get('producto/{id}/editar', 'edit')->name('producto.editar');
+  Route::put('producto/{id}/activar', 'activar')->name('producto.activar');
 
   Route::put('platillo/{id}/edicion', 'updateP')->name('productoP.update');  
   Route::put('bebida/{id}/edicion', 'updateB')->name('productoB.update');
