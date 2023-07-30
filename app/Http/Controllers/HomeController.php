@@ -53,14 +53,24 @@ class HomeController extends Controller
         $productos = Producto::all();
         return view("/Menu/Admon/indexBebidas")->with(['productos' => $productos]);
     }
+    
     public function indexComplementos(Request $request){
         
         $productos = Producto::whereTipo(0);
 
-        if($request->ajax())            
-            return datatables()->of($productos)->toJson();        
+        if($request->ajax()){
 
-        return view("/Menu/Admon/indexComplementos")->with(['productos' => $productos]);
+            $estado = intval($request->input('estado')); //recuperar y convertir el valor enviado por AJAX (data: { estado: 0 o 1})            
+
+            if ($estado)
+                $productos = $productos->whereEstado(1)->get();
+            else
+                $productos = $productos->whereEstado(0)->get();      
+
+            return datatables()->of($productos)->toJson();
+        }        
+
+        return view("/Menu/Admon/indexComplementos");
     }
 
 

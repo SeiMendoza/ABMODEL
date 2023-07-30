@@ -93,6 +93,7 @@ Route::controller(HomeController::class)->middleware('auth')->group( function(){
   Route::get('/admonRestauranteP', 'indexPlatillos')->name('menuAdmon.platillos');
   Route::get('/admonRestauranteB', 'indexBebidas')->name('menuAdmon.bebidas');
   Route::get('/admonRestauranteC', 'indexComplementos')->name('menuAdmon.complementos');
+  Route::post('/admonRestauranteC', 'indexComplementos')->name('menuAdmon.complementos');
   Route::get('/admonRestaurante', 'indexPlatillos')->name('menuAdmon.index');
   Route::get('/pruebaAdmon','pruebaAdmon')->name('menuAdmon.prueba');
 }); 

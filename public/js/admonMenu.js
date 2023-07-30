@@ -254,7 +254,11 @@ $(function(){
     };
 
     $('#complementosDisponibles').DataTable({
-        ajax: "/admonRestauranteC",
+        ajax: {
+            url: "/admonRestauranteC",
+            method: 'POST',
+            data: {estado: 1,}
+        },
         dataSrc: "",
         language: language,
         bProcessing: true,
@@ -268,7 +272,7 @@ $(function(){
             {data: 'id'},
             {data: 'nombre'},
             {data: 'precio',},
-            {defaultContent: '<button><a><i class="btnDesactivar fa fa-times-circle text-warning"></i>Desactivar</button>'},
+            {defaultContent: '<button class="btnActivar"><a><i class="fa fa-times-circle text-warning"></i>Desactivar</button>'},
             {defaultContent: '<a><i class="btnEditar fa fa-edit text-success"></i></a>'},
             {defaultContent: '<a><i class="btnEliminar fa-solid fa-trash-can text-danger"></i></a>'}
         ],
@@ -297,7 +301,11 @@ $(function(){
     
     //Inicialización de Datatables- Complementos No Disponibles
     $('#complementoNoDisponibles').DataTable({
-        ajax: "/admonRestauranteC",
+        ajax: {
+            url: "/admonRestauranteC",
+            method: 'POST',
+            data: {estado: 0,}
+        },
         dataSrc: "",
         language: language,
         bProcessing: true,
@@ -437,7 +445,7 @@ $(function(){
                 console.log('Cambiando Estado...');
                 console.log(e.type + e.action);
                 setTimeout(function(){$('#modalActivarComplementos').modal('hide');}, 40); //Ocultar modal
-                $('#complementoNoDisponibles').DataTable().ajax.reload(null, false); //recargar Datatable
+                $('.table').DataTable().ajax.reload(null, false); //recargar Datatable
 
                 //Alerta de borrado
                 Swal

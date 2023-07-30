@@ -120,16 +120,16 @@
 
     <!-- ========== Modal para eliminar ========== -->
     <div class="modal fade" id="modalDeleteComplementos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title font-weight-bolder" id="staticBackdropLabel">Eliminar producto</h4>
+                <div class="modal-header bg-danger">
+                    <h4 class="modal-title font-weight-bolder text-white" id="staticBackdropLabel"><i class="fa fa-trash pe-2"></i>Eliminar producto</h4>
                 </div>
                 <div class="modal-body">
                     <p class="modalStyle">¿Desea eliminar este producto?</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="btnConfirmDeleteProduct" class="btn btn-danger">Si</button>
+                <div class="modal-footer small">
+                    <button id="btnConfirmDeleteProduct" class="btn btn-danger">Si</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 </div>
             </div>
@@ -138,16 +138,16 @@
 
     <!-- ========== Modal para activar ========== -->
     <div class="modal fade" id="modalActivarComplementos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title font-weight-bolder" id="staticBackdropLabel">Disponibilidad</h4>
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title font-weight-bolder text-white" id="staticBackdropLabel"><i class="fa-solid fa-toggle-on pe-2"></i>Disponibilidad</h4>
                 </div>
                 <div class="modal-body">
                     <p class="modalStyle">¿Desea cambiar el estado del producto?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnConfirmarActivacion" class="btn btn-danger">Si</button>
+                    <button class="btn btn-info" type="button" id="btnConfirmarActivacion">Si</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 </div>
             </div>

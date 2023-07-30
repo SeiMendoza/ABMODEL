@@ -199,10 +199,10 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrfail($id);
 
-        if($producto->estado)
-            $producto->estado = 0;
-        else
+        if(!$producto->estado)
             $producto->estado = 1;
+        else
+            $producto->estado = 0;
         
         $create = $producto->save();
 
@@ -232,8 +232,10 @@ class ProductoController extends Controller
 
             ];
 
-            return response()->json( $response);
-            //return back()->with('mensaje', $tipo . $producto->nombre . ' desactivado');
+            if($request->ajax())
+                return response()->json( $response);
+
+            return back()->with('mensaje', $tipo . $producto->nombre . ' desactivado');
         }
 
     }
