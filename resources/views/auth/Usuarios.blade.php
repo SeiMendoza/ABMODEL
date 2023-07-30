@@ -18,6 +18,14 @@
 @section('content')
 
 <style>
+    .custom-error {
+      font-size: 15px;
+      font-weight: bold;
+      background-color: #f93e47c7;
+      color: #ffffff;
+      padding: 10px;
+      border-radius: 4px;
+    }  
     .custom-exit {
       font-size: 15px;
       font-weight: bold;
@@ -28,6 +36,18 @@
   
 </style>
 
+@if(session('error'))
+    <div id="error-message" class="alert alert-danger custom-error">
+        <strong>{{ session('error') }}</strong>
+    </div>
+
+    <script>
+        // Temporizador para ocultar el mensaje de error después de 3 segundos (3000 ms)
+        setTimeout(function() {
+            document.getElementById('error-message').style.display = 'none';
+        }, 3000);
+    </script>
+@endif
 
 @if(session('success'))
     <div id="error-success" class="alert alert-success custom-exit">
@@ -70,9 +90,9 @@
                 </td>
 
                 <td scope="col" style="text-align: center;">
-                    @if ($l->is_default !== 'Administrador' && $l->id !== Auth::user()->id)
+                    
                        <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$l->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
-                    @endif
+                  
                     <form action="{{route('usuarios.destroy', ['id' => $l->id])}}" method="post" enctype="multipart/form-data">
                         @method('delete')
                         @csrf

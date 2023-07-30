@@ -96,7 +96,8 @@
                                 <div class="col">
                                     <div class="font-robo form-group" style="margin-bottom: 5px">
                                         <label for="is_default" style="margin-left: 0;">Permisos: </label>
-                                        <select name="is_default"  id="is_default" required onchange="quitarerror()"  class="form-control border-radius-sm">
+                                        <select name="is_default"  id="is_default" onchange="quitarerror()"  class="form-control border-radius-sm"
+                                        @if (Auth::user()->isAdmin() && Auth::user()->id === $user->id) disabled @endif>
                                         @if (old('is_default', $user->is_default))
                                         <option disabled="disabled" selected="selected" value="">Seleccione</option>
                                             @if (old('is_default', $user->is_default) == 'Administrador')
@@ -112,9 +113,11 @@
                                         <option value="Administrador">Administrador</option>
                                         <option value="Usuario">Usuario</option>
                                         </select>
-                                        @error('is_default')
-                                            <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                        @enderror
+                                        @if (Auth::user()->id === $user->id)
+                                            @error('is_default')
+                                               <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                            @enderror
+                                        @endif
                                     </div>
                                 </div>
                             </div>
