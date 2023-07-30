@@ -59,11 +59,11 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name'=>'Juan Pastor',
             'email'=>'juan.pastor@unah.hn',
-            'password' => bcrypt('12345678'),
-            'address'=>'1305 San Jacinto Street Houston 77002',
-            'telephone'=>'99124578',
-            'imagen'=>'img/Perfil/123.png',
-            'is_default' => 'Usuario', 
+            'password' => bcrypt('fjkd//2023'),
+            'address'=>'Santa Cruz, El Paraíso',
+            'telephone'=>('30000000'),
+            'imagen'=>'img/Perfil/maziso.jpg',
+            'is_default' => 'Administrador', 
         ]);
 
         DB::table('users')->insert([

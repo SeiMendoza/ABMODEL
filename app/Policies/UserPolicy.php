@@ -52,7 +52,23 @@ class UserPolicy
      */
     public function update(User $user, User $userToEdit)
     {
-        return $user->is_default === 'Administrador';
+
+        // Si el usuario actual es administrador y el usuario a editar no es el mismo que el usuario actual
+    // entonces se permite la edición del campo is_default
+    if ($user->is_default === 'Administrador' && $userToEdit->id !== $user->id) {
+        return true;
+    }
+
+    // Si el usuario actual es administrador pero el usuario a editar es el mismo que el usuario actual
+    // entonces no se permite la edición del campo is_default
+    if ($user->is_default === 'Administrador' && $userToEdit->id === $user->id) {
+        return false;
+    }
+
+    // Si el usuario actual no es administrador, se permite la edición del campo is_default
+    return false;
+    
+        //return $user->is_default === 'Administrador';
     }
 
     /**
@@ -90,4 +106,5 @@ class UserPolicy
     {
         //
     }
+
 }

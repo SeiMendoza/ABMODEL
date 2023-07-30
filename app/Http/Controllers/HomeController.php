@@ -33,10 +33,14 @@ class HomeController extends Controller
         return view("pages.tables");
     }
 
-    public function indexAdmon()
+    public function indexAdmon(Request $request)
     {
-
         $productos = Producto::all();
+
+        if($request->ajax()){
+            
+            return datatables()->of($productos)->toJson();
+        }
         return view("/Menu/Admon/indexComplementos")->with(['productos' => $productos]);
     }
     public function indexPlatillos()
@@ -51,7 +55,11 @@ class HomeController extends Controller
     }
     public function indexComplementos(Request $request){
         
-        $productos = Producto::all();
+        $productos = Producto::whereTipo(0);
+
+        if($request->ajax())            
+            return datatables()->of($productos)->toJson();        
+
         return view("/Menu/Admon/indexComplementos")->with(['productos' => $productos]);
     }
 
@@ -61,6 +69,7 @@ class HomeController extends Controller
         $productos = Producto::all();
 
         if($request->ajax()){
+
             return datatables()->of($productos)->toJson();
         }
 

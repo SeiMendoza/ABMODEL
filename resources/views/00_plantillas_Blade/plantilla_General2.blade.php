@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Icons -->
-    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
     <link rel="icon" type="image/png" href="/img/faviconVillaCrisol.png">
     <link href="/assets/css/fontawesome.css" rel="stylesheet">
     <link href="/assets/css/solid.css" rel="stylesheet">
@@ -54,6 +53,11 @@
         .title,
         .t {
             color: rgb(111, 143, 175);
+        }
+
+        .modalStyle{
+            font-family: Calibri; 
+            font-size: 18px;
         }
 
         table {
@@ -367,19 +371,18 @@
     <script src="/assets/datepicker/daterangepicker.js"></script>
     <script>
         $('#example').DataTable( {
-    responsive: true
+            responsive: true
         } );
     </script>
-        <script>
-            //DATATABLES para Menú
-            $('.menu').DataTable({});
+    <script>
+        //DATATABLES para Menú
+        $('.menu').DataTable();
+
+        //DATATABLES para Kiosko
+        $('.kiosko').DataTable();
 
 
-            //DATATABLES para Kiosko
-            $('.kiosko').DataTable();
-
-
-        </script>
+    </script>
     <script>
         @if (isset($idProducto))
         var numeroPagina;

@@ -198,24 +198,42 @@ class ProductoController extends Controller
     public function activar(Request $request, $id)
     {
         $producto = Producto::findOrfail($id);
-        $producto->estado = $request->input('activar');
+
+        if($producto->estado)
+            $producto->estado = 0;
+        else
+            $producto->estado = 1;
+        
         $create = $producto->save();
 
         $tipo = '';
         if ($producto->tipo == 0) {
-            $tipo = 'Complemento ';
+            $tipo = 'Complemento';
         } else if ($producto->tipo == 1) {
-            $tipo = 'Bebida ';
+            $tipo = 'Bebida';
         } else {
-            $tipo = 'Platillo ';
+            $tipo = 'Platillo';
         }
+
+        $action = '';
 
         if ($create) {
             if ($producto->estado == 1) {
-                return back()->with('mensaje', $tipo . $producto->nombre . '  activado');
+                $action = 'Activado'; 
             } else {
-                return back()->with('mensaje', $tipo . $producto->nombre . ' desactivado');
+                $action = 'Desactivado'; 
             }
+
+            //arreglo de datos para enviar en formato JSON
+            $response = [
+                'name' => $producto->nombre,
+                'type' => $tipo,
+                'action' => $action,
+
+            ];
+
+            return response()->json( $response);
+            //return back()->with('mensaje', $tipo . $producto->nombre . ' desactivado');
         }
 
     }
@@ -236,14 +254,16 @@ class ProductoController extends Controller
 
         $producto->delete();
 
-        //return response()->json(['message'=> $tipo.' eliminado correctamente']);
-        return back()->with(['mensaje'=> $tipo.' eliminado correctamente']);
+        $mensaje = $tipo;
+
+        return response()->json(['message' => $mensaje]); //enviar mensaje en tipo JSON con el valor 'message'
+        //return back()->with(['mensaje'=> $tipo.' eliminado correctamente']);
 
     }
 
     public function edit($id){
 
-        $producto = Producto::findOrFail($id);
+        $producto = Producto::findOrFail($id    );
 
         if ($producto->tipo == 0) {
             return view('Menu/Admon/edicion/editarComplemento')->with('producto', $producto);
@@ -253,4 +273,4 @@ class ProductoController extends Controller
             return view('Menu/Admon/edicion/editarPlatillo')->with('producto', $producto);
         }
     }
-}
+}   

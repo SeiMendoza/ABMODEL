@@ -122,6 +122,7 @@ class RegistroController extends Controller
         }
 
         $user = User::findOrFail($id);
+
         return view('auth/EditarUser')->with('user', $user);
     }
 
@@ -130,7 +131,7 @@ class RegistroController extends Controller
         $this->validate($request, [
             'name' => 'required|min:3|max:40|regex:/^[a-zA-ZáÁéÉíÍóÓúÚñÑ]+\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?$/',
             'email' => 'required|string|email|max:50', Rule::unique('users')->ignore($id),
-            'is_default' => ['required', Rule::in(['Administrador', 'Usuario'])],
+            'is_default' => ['', Rule::in(['Administrador', 'Usuario'])],
             'address' => 'required|string|min:3|max:250',
             'telephone' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
             'imagen' => ''
@@ -165,7 +166,6 @@ class RegistroController extends Controller
         ];
 
         try{
-
             $actualizarUser = User::findOrFail($id);
 
             $actualizarUser->name=$request->input('name');
@@ -173,6 +173,8 @@ class RegistroController extends Controller
             $actualizarUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];
             $actualizarUser->address=$request->input('address');
             $actualizarUser->telephone=$request->input('telephone');
+
+        
 
             if ($request->filled('new_password')) {
                 $this->validate($request, [
@@ -224,12 +226,14 @@ class RegistroController extends Controller
         // Verifica si el usuario a eliminar existe
         $userToDelete = User::find($id);
 
-        // Elimina al usuario seleccionado
+        if (Auth::user()->isAdmin() && $userToDelete->id === Auth::user()->id) {
+            return redirect()->route('usuarios.users')->with('error', 'No puedes eliminarte a ti mismo.');
+        }
+    
         $userToDelete->delete();
-
         return redirect()->route('usuarios.users')->with('success', 'Usuario eliminado correctamente.');
-
     }
+    
      
 
     /**Vista de usuarios */

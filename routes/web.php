@@ -224,6 +224,7 @@ Route::controller(ProductoController::class)->middleware('auth')->group(function
 
   Route::get('producto/{id}/editar', 'edit')->name('producto.editar');
   Route::put('producto/{id}/activar', 'activar')->name('producto.activar');
+  Route::get('producto/{id}/activar', 'activar')->name('producto.activar');
 
   Route::put('platillo/{id}/edicion', 'updateP')->name('productoP.update');  
   Route::put('bebida/{id}/edicion', 'updateB')->name('productoB.update');
