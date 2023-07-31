@@ -191,7 +191,9 @@ class PedidoUsuarioController extends Controller
         $tasa_impuesto = 0.15;
 
         foreach ($detapedido as $detalle) {
+            if ($detalle->estado == 1) {
             $suma += $detalle->precio * $detalle->cantidad;
+            }
         }
 
         $sub = number_format($suma - $suma * $tasa_impuesto, 2, ".", ",");
@@ -203,15 +205,19 @@ class PedidoUsuarioController extends Controller
     {
         $mesas = Mesa::where('estadoM', '=', '0')->get();
         $pedido = Pedido::findOrFail($id);
+        if ($tipo === 'todos') {
+            $productos = Producto::where('estado', '=', '1')
+                ->where('disponible', '>', 0)
+                ->get();
+        } else {
         // Asignar nombres descriptivos a cada tipo
         $tipos = [
-            0 => 'complementos',
-            1 => 'bebidas',
-            2 => 'platillos'
+            'complementos' => 0,
+             'bebidas' => 1,
+             'platillos'=>2,
         ];
         // Si se proporciona un valor de tipo, utilizar el nombre descriptivo
-        $tipo_descriptivo = $tipo !== null ? $tipos[$tipo] : null;
-
+        $tipo = $tipos[$tipo] ?? null;
         // Filtrar productos por tipo si se proporciona un valor de tipo
         switch ($tipo) {
             case 0: // complementos
@@ -232,13 +238,8 @@ class PedidoUsuarioController extends Controller
                     ->where('disponible', '>', 0)
                     ->get();
                 break;
-            default:
-                /* todos los productos*/
-                $productos = Producto::where('estado', '=', '1')
-                    ->whereIn('tipo', ['0', '1', '2'])
-                    ->where('disponible', '>', 0)
-                    ->get();
         }
+    }
         $detalles = DetallesPedido::where('pedido_id', $id)->get();
         // si no hay complementos muestra mensaje
         /* if ($productos->isEmpty()) {
@@ -267,6 +268,7 @@ class PedidoUsuarioController extends Controller
         if ($complemento_existente) {
             // Si el complemento ya existe solo se actualiza la cantidad
             $complemento_existente->cantidad += $cantidad;
+            $complemento_existente->estado = 0; 
             $complemento_existente->save();
         } else {
             // Crear un nuevo detalle del pedido con el producto y la cantidad
@@ -292,54 +294,69 @@ class PedidoUsuarioController extends Controller
         $impuesto = $total * 0.15; // calcular el impuesto
         $pedido->imp = $impuesto;
         $pedido->total = $total;
-        $pedido->save();
+       // $pedido->save();
 
         // Restar la cantidad disponible del producto
         $producto->disponible -= $cantidad;
         $producto->save();
 
         // Redirigir al usuario a la página de detalles del pedido con un mensaje de confirmación
-        return redirect()->route('Agregar', ['id' => $id])->with('mensaje', 'Complemento agregado correctamente.');
+        return redirect()->route('Agregar',['id' => $pedido->id,'tipo' => 'todos','vista'=> 2])->with('mensaje', 'Complemento agregado correctamente.');
     }
 
-    public function Guardar(Request $request, $id)
+    public function Guardar(Request $request, $id, $detalle_id)
     {
         // Obtiene el pedido existente
         $pedido_actual = Pedido::findorfail($id);
-
         // Obtiene los detalles del pedido actual
         $detalles_actual = $pedido_actual->detalles;
-
+        $detalles_nuevo = $pedido_actual->detalles;
         // Obtiene los datos del cliente
-        $nombre_cliente = $pedido_actual->nombreCliente;
+       // $pedido_actual->nombreCliente = $request->input('nombreC');
+       // $pedido_actual->nombreCliente = $nombre_cliente_actualizado;
         $mesa_id = $pedido_actual->mesa_id;
         $mesa = Mesa::findOrFail($mesa_id);
         $quiosco = $mesa->kiosko->id;
-        // Crear un nuevo pedido con los datos del pedido actual y el nuevo detalle del pedido
-        $pedido_nuevo = new Pedido();
-        $pedido_nuevo->nombreCliente = $nombre_cliente;
-        $pedido_nuevo->mesa_id = $mesa_id;
-        $pedido_nuevo->quiosco = $quiosco;
-        $pedido_nuevo->imp = $pedido_actual->imp;
-        $pedido_nuevo->total = $pedido_actual->total;
-        $pedido_nuevo->save();
-
-        //agrega los detalles nuevos
+        // Actualizar los detalles del pedido existente
         foreach ($detalles_actual as $detalle_actual) {
-            $detalle_nuevo = new DetallesPedido();
-            $detalle_nuevo->pedido_id = $pedido_nuevo->id;
-            $detalle_nuevo->producto_id = $detalle_actual->producto_id;
-            $detalle_nuevo->cantidad = $detalle_actual->cantidad;
-            $detalle_nuevo->precio = $detalle_actual->precio;
-            $detalle_nuevo->estado = 1; // el estado del detalle pasa a estado 1 cuando es nuevo
-            $detalle_nuevo->save();
+            $detalle_id = $detalle_actual->id;
+            foreach ($detalle_actual as $detalle) {
+                if ($detalle_id == $detalle_id) {
+                    $detalle_actual->cantidad = $detalle_actual->cantidad;
+                    $detalle_actual->precio = $detalle_actual->precio;
+                    $detalle_actual->estado = 1;
+                    $detalle_actual->save();
+                    break;
+                }
+            }
         }
-
-        // Actualizar el estado del pedido actual pero cambio el estado para que no haya un duplicado
-        $pedido_actual->estado = '4';
-        $pedido_actual->save();
-        return redirect()->route('pedidost.detalle', ['id' => $pedido_nuevo->id])->with('mensaje', 'Pedido guardado correctamente.');
+        // Agregar nuevos detalles al pedido
+        foreach ($detalles_nuevo as $detalle) {
+            if (!isset($detalle['id'])) {
+                $detalle_nuevo = new DetallesPedido();
+                $detalle_nuevo->producto_id = $detalle['producto_id'];
+                $detalle_nuevo->cantidad = $detalle['cantidad'];
+                $detalle_nuevo->precio = $detalle['precio'];
+                $detalle_nuevo->estado = 1;
+                $pedido_actual->detalles()->save($detalle_nuevo);
+            }
+        }
+        // Actualizar el impuesto y el total del pedido
+        $pedido_actual = Pedido::find($id);
+        $detalles = $pedido_actual->detalles;
+        $total = 0;
+        foreach ($detalles as $detalle) {
+            $total += $detalle->cantidad * $detalle->precio;
+        }
+        $impuesto = $total * 0.15; // calcular el impuesto
+        $pedido_actual->imp = $impuesto;
+        $pedido_actual->total = $total;
+         
+       $a = $pedido_actual->save();
+     if($a){
+        return redirect()->route('pedidost.detalle', ['id' => $pedido_actual->id])->with('mensaje', 'Pedido guardado correctamente.');
     }
+}
     public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesPedido::where('pedido_id', $id)->get();
@@ -405,17 +422,18 @@ class PedidoUsuarioController extends Controller
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detallesPedAnteriores', compact('pedido'));
     }
-    public function destroy($id)
+    public function destroy($id,$vista)
     {
         $detalle = DetallesPedido::findOrfail($id);
         $pedido = $detalle->pedido;
         $detalle->estado = 0;
-        $detalle->delete();
+        $pedido->detalles()->where('id', $detalle->id)->delete();
 
         //sumar la cantidad disponible del producto borrado
         $producto = $detalle->producto;
         $producto->disponible += $detalle->cantidad;
         $producto->save();
+        if($vista == 1){
         // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
         if ($pedido->detalles->count() == 0) {
             $mesa = $pedido->mesa_nombre;
@@ -436,6 +454,28 @@ class PedidoUsuarioController extends Controller
             $pedido->save();
             return redirect()->route('pedidost.detalle', $pedido->id)->with('mensaje', 'Detalle borrado correctamente');
         }
+    } elseif ($vista == 2) {
+         // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
+         if ($pedido->detalles->count() == 0) {
+            $mesa = $pedido->mesa_nombre;
+            $mesa->estadoM = 0;
+            $mesa->save();
+            $pedido->delete();
+            return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
+        } else {
+            // Actualizar el impuesto y el total del pedido general
+            $detalles = $pedido->detalles;
+            $total = 0;
+            foreach ($detalles as $detalle) {
+                $total += $detalle->cantidad * $detalle->precio;
+            }
+            $impuesto = $total * 0.15; // calcular el impuesto
+            $pedido->imp = $impuesto;
+            $pedido->total = $total;
+            $pedido->save();
+            return redirect()->route('Agregar',['id' => $pedido->id,'tipo'=>'todos','vista'=>2])->with('mensaje', 'Detalle borrado correctamente');
+    }
+}
     }
     public function edit($pedido_id, $detalle_id)
     {
@@ -522,5 +562,9 @@ class PedidoUsuarioController extends Controller
         } else {
             return response()->json(null);
         }
+    }
+    public function cancelarPedido($pedido_id){
+        DetallesPedido::where('pedido_id', $pedido_id)->where('estado', 0)->delete();
+        return response()->json(['success' => true]);
     }
 }

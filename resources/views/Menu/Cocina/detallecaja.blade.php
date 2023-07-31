@@ -159,7 +159,7 @@
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
                 @if($pedido->estado_cocina == 0)
-                <a href="{{ route('Agregar',$pedido->id) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:62%;padding:5px; width:150px; z-index: 999;">
+                <a href="{{ route('Agregar',['id' => $pedido->id,'tipo'=>'todos','vista'=>2]) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:62%;padding:5px; width:150px; z-index: 999;">
                     <i class="fa fa-plus-circle"></i> <strong>Nuevo</strong>
                 </a>
                 @endif
@@ -187,7 +187,7 @@
                             <i class="fa-solid fa-edit text-success" style="color: rgb(33, 195, 247);"></i>
                         </a>
                         <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$detalle->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson;text-align:center;position: absolute; margin-left:20%; top: 50%;transform: translateY(-50%);"></i>
-                        <form action="{{route('detallep.destroy', ['id' => $detalle->id])}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('detallep.destroy', ['id' => $detalle->id,'vista'=>1])}}" method="post" enctype="multipart/form-data">
                             @method('delete')
                             @csrf
                             <div class="modal fade" id="staticBackdropE{{$detalle->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

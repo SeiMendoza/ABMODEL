@@ -139,7 +139,7 @@ Route::get('/menu/pedidost', [PedidoUsuarioController::class, 'search'])->middle
 ->name('pedidost.search');/*buscar pedidos terminados*/
 Route::get('/pedidos/caja/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])->middleware('auth')
 ->name('pedidost.detalle');/*detalle de pedidos pendientes de terminar en caja*/
-Route::delete('/pedidos/detalles/{id}/borrar', [PedidoUsuarioController::class, 'destroy'])->middleware('auth')
+Route::delete('/pedidos/detalles/{id}/borrar/{vista}', [PedidoUsuarioController::class, 'destroy'])->middleware('auth')
 ->name('detallep.destroy')->where('id','[0-9]+');/**borrar detalle de caja */
 Route::get('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'edit'])->middleware('auth')
     ->name('detallep.edit');
@@ -152,17 +152,16 @@ Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 
 //obtener el precio de los productos
 Route::post('/precio-acompl',[PedidoUsuarioController::class, 'PrecioAcompl'])->middleware('auth')
 ->name('precio-acompl');
-//agrega el complemento al detalle del pedido
-Route::get('/pedido/caja/{id}/detalle/agregar', [PedidoUsuarioController::class,'Agregar'])->middleware('auth')
-->name('Agregar');
 //para los tipos en una misma vista 
 Route::get('/pedido/caja/detalle/{id}/agregar/{tipo?}', [PedidoUsuarioController::class,'Agregar'])->middleware('auth')
 ->name('Agregar'); 
 Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::class,'Acomple'])->middleware('auth')
 ->name('Acomple');
 //guardar el pedido con los nuevos detalles 
-Route::post('/pedido/caja/{id}/guardar', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
+Route::post('/pedido/caja/{id}/guardar/{detalle_id}', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
 ->name('guardarPedido');
+Route::post('/cancelar-pedido/{pedido_id}', [PedidoUsuarioController::class, 'cancelarPedido'])->middleware('auth')
+->name('pedidos.cancelar');
 // cambiar la mesa del pedido en detalles de caja
 Route::post('/pedidos/{id}/cambiarmesa', [PedidoUsuarioController::class,'Cambiar_mesa'])
 ->name('cambiar_mesa');
