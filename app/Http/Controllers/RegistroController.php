@@ -170,11 +170,18 @@ class RegistroController extends Controller
 
             $actualizarUser->name=$request->input('name');
             $actualizarUser->email=$request->input('email');
-            $actualizarUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];
+            // $actualizarUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];    
             $actualizarUser->address=$request->input('address');
             $actualizarUser->telephone=$request->input('telephone');
 
-        
+            // Actualizar el campo 'is_default' solo si es realizado por otro administrador BD.
+            if (Auth::user()->isAdmin() && $actualizarUser->id !== Auth::user()->id) {
+               $actualizarUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];
+            }
+
+            // Actualizar los otros campos
+            $actualizarUser->update($request->except('is_default'));
+
 
             if ($request->filled('new_password')) {
                 $this->validate($request, [
@@ -226,15 +233,21 @@ class RegistroController extends Controller
         // Verifica si el usuario a eliminar existe
         $userToDelete = User::find($id);
 
-        if (Auth::user()->isAdmin() && $userToDelete->id === Auth::user()->id) {
+        // Verificar si el usuario logueado es un administrador
+        if (!auth()->user()->isAdmin()) {
+            return redirect()->route('usuarios.users')->with('error', 'No tienes permiso para eliminar este usuario.');
+        }
+
+        // Verificar si el usuario a eliminar es el mismo usuario autenticado
+        if (auth()->user()->id === $userToDelete->id) {
             return redirect()->route('usuarios.users')->with('error', 'No puedes eliminarte a ti mismo.');
         }
-    
+
         $userToDelete->delete();
+
         return redirect()->route('usuarios.users')->with('success', 'Usuario eliminado correctamente.');
     }
     
-     
 
     /**Vista de usuarios */
     public function users(Request $request)

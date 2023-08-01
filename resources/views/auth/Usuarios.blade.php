@@ -90,9 +90,11 @@
                 </td>
 
                 <td scope="col" style="text-align: center;">
-                    
-                       <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$l->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
-                  
+                    @if (Auth::user()->id !== $l->id)
+                    <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$l->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson"></i>
+                    @endif
+                   
+                    @if (Auth::user()->id !== $l->id)
                     <form action="{{route('usuarios.destroy', ['id' => $l->id])}}" method="post" enctype="multipart/form-data">
                         @method('delete')
                         @csrf
@@ -114,6 +116,7 @@
                             </div>
                         </div>
                     </form>
+                    @endif
                 </td>
             </tr>
 
