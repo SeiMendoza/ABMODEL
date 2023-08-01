@@ -95,24 +95,8 @@
                             <div class="col-6">
                                 <div class="font-robo form-group">
                                     <label for="kiosko" style="margin-left: 0;">Kiosko a reservar: </label>
-                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" class="form-control border-radius-sm" required>
-                                        @if (old('kiosko'))
-                                            <option disabled="disabled" value="">Seleccione un kiosko</option> 
-                                            @forelse ($kiosko as $c)
-                                                @if (old('kiosko') == $c->id)
-                                                    <option selected="selected" value="{{$c->id}}">{{$c->codigo}}</option>
-                                                @else
-                                                    <option value="{{$c->id}}">{{$c->codigo}}</option>
-                                                @endif
-                                            @empty
-                                                <option disabled="disabled" selected="selected" value="">No hay Kioskos diponibles</option> 
-                                            @endforelse 
-                                        @else
-                                            <option disabled="disabled" selected="selected" value="">Seleccione un kiosko</option> 
-                                            @foreach ($kiosko as $c)
-                                                <option value="{{$c->id}}">{{$c->codigo}}</option>
-                                            @endforeach 
-                                        @endif
+                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" class="form-control border-radius-sm" required>                                     
+                                        <option disabled="disabled" value="">Seleccione un kiosko</option>                                            
                                     </select>
                                     @error('kiosko')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -249,14 +233,39 @@
             }catch (e) {}
         }
     </script>
+    <!-- ========== Scrips ========== -->
+    <script src="/JQuery/jquery-3.7.0.js"></script>
+    <script src="/JQuery/jquery-3.7.0.min.js"></script>
+    <script src="/js/kiosko.js"></script>
 
-    <script>
-        $(document).ready(function{
-            $.a('#fecha').click(function(e){
-                e.preventDefault();
-                $("#fecha").load("Hola");
-            })
-        });
-    </script>
+
+    {{-- Codigo de select de kioskos (por si algo sale mal) --}}
+    {{-- <div class="col-6">
+        <div class="font-robo form-group">
+            <label for="kiosko" style="margin-left: 0;">Kiosko a reservar: </label>
+            <select name="kiosko" onchange="quitarerror()" id=" " class="form-control border-radius-sm" required>
+                @if (old('kiosko'))
+                    <option disabled="disabled" value="">Seleccione un kiosko</option> 
+                    @forelse ($kiosko as $c)
+                        @if (old('kiosko') == $c->id)
+                            <option selected="selected" value="{{$c->id}}">{{$c->codigo}}</option>
+                        @else
+                            <option value="{{$c->id}}">{{$c->codigo}}</option>
+                        @endif
+                    @empty
+                        <option disabled="disabled" selected="selected" value="">No hay Kioskos diponibles</option> 
+                    @endforelse 
+                @else
+                    <option disabled="disabled" selected="selected" value="">Seleccione un kiosko</option> 
+                    @foreach ($kiosko as $c)
+                        <option value="{{$c->id}}">{{$c->codigo}}</option>
+                    @endforeach 
+                @endif
+            </select>
+            @error('kiosko')
+                <strong class="menerr" style="color:red">{{ $message }}</strong>
+            @enderror
+        </div>
+    </div> --}}
 
 @endsection

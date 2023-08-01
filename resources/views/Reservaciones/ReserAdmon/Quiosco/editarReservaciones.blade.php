@@ -100,10 +100,7 @@
                                             <option disabled="disabled" value="">Seleccione un kiosko</option> 
                                             @foreach ($kiosko as $c)
                                                 @if (old('kiosko', $registro->kiosko_id) == $c->id)
-                                                    <option selected="selected" value="{{$c->id}}">{{$c->codigo}}</option>
-                                                @else @if ($c->disponible)                                                    
-                                                    <option value="{{$c->id}}">{{$c->codigo}}</option>
-                                                    @endif
+                                                    <option selected="selected" value="{{$c->id}}">{{$c->codigo}}</option>                                                
                                                 @endif
                                             @endforeach 
                                         @else

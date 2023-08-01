@@ -31,7 +31,6 @@ class KioskoController extends Controller
         $kiosko->codigo = $request->input('codigo');
         $kiosko->descripcion = $request->input('descripcion');
         $kiosko->ubicacion = $request->input('ubicacion');
-        $kiosko->disponible = 1;
         $kiosko->cantidad_de_Mesas = 0;
        
         //Imagen
@@ -51,11 +50,16 @@ class KioskoController extends Controller
 
     }
 
-    public function index(){
+    public function index(Request $request){
 
         $kioskos = Kiosko::all();
+        if($request->ajax()){
+            
+            $kioskos = Kiosko::select('id', 'codigo')->get();
+            return response()->json($kioskos);
+        }
 
-        return view('/Reservaciones/ReserAdmon/Kioskos/indexKioskos')->with(['kioskos' => $kioskos]);
+       return view('/Reservaciones/ReserAdmon/Kioskos/indexKioskos')->with(['kioskos' => $kioskos]);
     }
 
     public function create(){
@@ -126,14 +130,14 @@ class KioskoController extends Controller
     public function detalle($id){
 
         $kiosko = Kiosko::findOrFail($id);
-        $mesas = Mesa::where('kiosko_id', '=', $id)->get();
+        $mesas = Mesa::whereKiosko_id($id)->get();
         return view('Reservaciones.ReserAdmon.Kioskos.detalleKiosko', compact('kiosko', 'mesas'));
     }
 
     public function reservaciones($id){
         
         $kiosko = Kiosko::findOrFail($id);
-        $reservaciones = Reservacion::where('kiosko_id', '=', $id)->orderBy('fecha')->get();
+        $reservaciones = Reservacion::whereKiosko_id($id)->orderBy('fecha')->get();
         $now = Carbon::now()->format('Y-m-d');
 
         if(!$reservaciones->isEmpty())

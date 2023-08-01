@@ -1,9 +1,9 @@
-$(function(){
+$(function () {
 
     console.log('Iniiciando...');
 
     $.ajaxSetup({
-        headers:{
+        headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
@@ -257,88 +257,88 @@ $(function(){
         ajax: {
             url: "/admonRestauranteC",
             method: 'POST',
-            data: {estado: 1,}
+            data: { estado: 1, }
         },
         dataSrc: "",
         language: language,
         bProcessing: true,
         responsive: false,
         bAutoWidth: false,
-        scrollY: 320,
-        pageLength : 7,
-        lengthMenu: [[7, 10, 20, -1], [7, 10, 20, 'Todos']],
+        //scrollY: 320,
+        pageLength: 10,
+        lengthMenu: [[10, 20, -1], [10, 20, 'Todos']],
         // "bServerSide": true,
         "columns": [
-            {data: 'id'},
-            {data: 'nombre'},
-            {data: 'precio',},
-            {defaultContent: '<button class="btnActivar"><a><i class="fa fa-times-circle text-warning"></i>Desactivar</button>'},
-            {defaultContent: '<a><i class="btnEditar fa fa-edit text-success"></i></a>'},
-            {defaultContent: '<a><i class="btnEliminar fa-solid fa-trash-can text-danger"></i></a>'}
+            { data: 'id' },
+            { data: 'nombre' },
+            { data: 'precio', },
+            { defaultContent: '<button class="btnActivar"><a><i class="fa fa-times-circle text-warning"></i>Desactivar</button>' },
+            { defaultContent: '<a><i class="btnEditar fa fa-edit text-success"></i></a>' },
+            { defaultContent: '<a><i class="btnEliminar fa-solid fa-trash-can text-danger"></i></a>' }
         ],
         "columnDefs": [
             {
                 "targets": 0, // Tu primera columna
                 "className": "dt-body-center",
                 //"width": "4%"
-           },{
+            }, {
                 "targets": 2,
-                "render": DataTable.render.number( null, null, 2, 'L '),
+                "render": DataTable.render.number(null, null, 2, 'L '),
                 "className": "dt-body-right",
-           },{
+            }, {
                 "targets": 3,
                 "className": "dt-body-center",
-                
-            },{
+
+            }, {
                 "targets": 4,
                 "className": "dt-body-center",
-            },{
+            }, {
                 "targets": 5,
                 "className": "dt-body-center",
             },
         ],
     });
-    
+
     //Inicialización de Datatables- Complementos No Disponibles
     $('#complementoNoDisponibles').DataTable({
         ajax: {
             url: "/admonRestauranteC",
             method: 'POST',
-            data: {estado: 0,}
+            data: { estado: 0, }
         },
         dataSrc: "",
         language: language,
         bProcessing: true,
-        responsive: false,
+        responsive: true,
         bAutoWidth: false,
-        scrollY: 320,
-        pageLength : 7,
-        lengthMenu: [[7, 10, 20, -1], [7, 10, 20, 'Todos']],
+        //scrollY: 320,
+        pageLength: 10,
+        lengthMenu: [[10, 20, -1], [10, 20, 'Todos']],
         "columns": [
-            {data: 'id'},
-            {data: 'nombre'},
-            {data: 'precio',},
-            {defaultContent: '<button class="btnActivar"><a><i class="fa fa-check-circle text-success"></i> Activar</button>'},
-            {defaultContent: '<a><i class="btnEditar fa fa-edit text-success"></i></a>'},
-            {defaultContent: '<a><i class="btnEliminar fa-solid fa-trash-can text-danger"></i></a>'}
+            { data: 'id' },
+            { data: 'nombre' },
+            { data: 'precio', },
+            { defaultContent: '<button class="btnActivar"><a><i class="fa fa-check-circle text-success"></i> Activar</button>' },
+            { defaultContent: '<a><i class="btnEditar fa fa-edit text-success"></i></a>' },
+            { defaultContent: '<a><i class="btnEliminar fa-solid fa-trash-can text-danger"></i></a>' }
         ],
         "columnDefs": [
             {
                 "targets": 0, // Tu primera columna
                 "className": "dt-body-center",
                 //"width": "4%"
-           },{
+            }, {
                 "targets": 2,
-                "render": DataTable.render.number( null, null, 2, 'L '),
+                "render": DataTable.render.number(null, null, 2, 'L '),
                 "className": "dt-body-right",
-           },{
+            }, {
                 "targets": 3,
                 "className": "dt-body-center",
-                
-            },{
+
+            }, {
                 "targets": 4,
                 "className": "dt-body-center",
-            },{
+            }, {
                 "targets": 5,
                 "className": "dt-body-center",
             },
@@ -348,153 +348,161 @@ $(function(){
     console.log('Activar complememtos disponibles');
 
     //función para botón editar
-    $(document).on('click', '.btnEditar', function(e){
+    $(document).on('click', '.btnEditar', function (e) {
         fila = $(this).closest('tr');
         var id = parseInt(fila.find('td:eq(0)').text()) //captura el valor del campo[x] en el datatable
         $.ajax({
-            url: 'producto/'+ id +'/editar',
+            url: 'producto/' + id + '/editar',
             method: 'GET',
-            success: function(e){
+            success: function (e) {
                 console.log(id);
-                location.href ='producto/'+ id +'/editar';
-            }, error: function(e){
+                location.href = 'producto/' + id + '/editar';
+            }, error: function (e) {
                 errorAlert('Error al editar')
             }
-            
+
         })
     })
 
     var fila;
 
     //Eliminar Productos
-    $(document).on('click', '.btnEliminar', function(e){
+    $(document).on('click', '.btnEliminar', function (e) {
 
         e.preventDefault();
         fila = $(this).closest('tr');
-        console.log('Ha presionado eliminar Producto en la fila del producto '+fila.find('td:eq(0)').text()); 
+
+        //para resaltar la fila sobre la cual se está trabajando
+        //$(this).removeClass('resaltado');
+        // Agregar la clase "resaltado" a la fila seleccionada
+        fila.addClass('resaltado');
+
+        console.log('Ha presionado eliminar Producto en la fila del producto ' + fila.find('td:eq(0)').text());
 
         $('#modalDeleteComplementos').modal('show'); //Mostrar modal
-        
+
     })
 
     //Confirmar eliminación
-    $('#btnConfirmDeleteProduct').click(function(e){
-        
+    $('#btnConfirmDeleteProduct').click(function (e) {
+
         e.preventDefault();
         var id = parseInt(fila.find('td:eq(0)').text()); //captura el valor del campo[x] en el datatable
         var nombre = fila.find('td:eq(1)').text(); //captura el valor del nombre en el datatable
 
-        console.log('Comfirmar elimininacion del producto'+id);
+        console.log('Comfirmar elimininacion del producto' + id);
 
         $.ajax({
-            url: 'producto/'+ id +'/borrar',
+            url: 'producto/' + id + '/borrar',
             method: 'GET',
             cache: false,
-            beforeSend: function(){ $('#btnConfirmDeleteProduct').text('Eliminando...'); //por si se demora en borrar
-            },success: function(e){
+            beforeSend: function () {
+                $('#btnConfirmDeleteProduct').text('Eliminando...'); //por si se demora en borrar
+            }, success: function (e) {
 
-                console.log('¡Producto '+ e.message + ' eliminado!');
-                setTimeout(function(){$('#modalDeleteComplementos').modal('hide');}, 40); //Ocultar modal
+                console.log('¡Producto ' + e.message + ' eliminado!');
+                setTimeout(function () { $('#modalDeleteComplementos').modal('hide'); }, 40); //Ocultar modal
                 $('.table').DataTable().ajax.reload(null, false); //recargar Datatable
-                
+
                 //Alerta de borrado
                 Swal
-                .fire({
-                    title: '¡Eliminado!',
-                    text: 'Producto '+ nombre + ' eliminado corectamente',
-                    icon: 'success',
-                    confirmButtonText: "Ok",
-                })
-                
-                .then(resultado => {
-                    if (resultado.value){
-                        $('#btnConfirmDeleteProduct').text('Sí');
-                    }
-                    
-                });
+                    .fire({
+                        title: '¡Eliminado!',
+                        text: 'Producto ' + nombre + ' eliminado corectamente',
+                        icon: 'success',
+                        confirmButtonText: "Ok",
+                    })
 
-                
+                    .then(resultado => {
+                        if (resultado.value) {
+                            $('#btnConfirmDeleteProduct').text('Sí');
+                        }
 
-            }, error: function(e){
+                    });
+
+
+
+            }, error: function (e) {
                 errorAlert('Error al eliminar');
             }
-            
+
         })
     })
 
-    $(document).on('click', '.btnActivar', function(e){
+    $(document).on('click', '.btnActivar', function (e) {
 
         e.preventDefault();
         fila = $(this).closest('tr');
-        console.log('Ha presionado activar en la fila del producto '+fila.find('td:eq(0)').text()); 
+        console.log('Ha presionado activar en la fila del producto ' + fila.find('td:eq(0)').text());
         $('#modalActivarComplementos').modal('show');
     })
-    
-    $('#btnConfirmarActivacion').click(function(e){
-        
+
+    $('#btnConfirmarActivacion').click(function (e) {
+
         var id = parseInt(fila.find('td:eq(0)').text()); //captura el valor del campo[x] en el datatable
         var nombre = fila.find('td:eq(1)').text(); //captura el valor del nombre en el datatable
-        
+
         $.ajax({
-            url: 'producto/'+ id + '/activar',
+            url: 'producto/' + id + '/activar',
             method: 'GET',
             type: 'PUT',
             dataType: 'json',
-            beforeSend: function(){ $('#btnConfirmarActivacion').text('Cambiando...'); //por si se demora en borrar
-            },success: function(e){
+            beforeSend: function () {
+                $('#btnConfirmarActivacion').text('Cambiando...'); //por si se demora en borrar
+            }, success: function (e) {
                 console.log('Cambiando Estado...');
                 console.log(e.type + e.action);
-                setTimeout(function(){$('#modalActivarComplementos').modal('hide');}, 40); //Ocultar modal
+                setTimeout(function () { $('#modalActivarComplementos').modal('hide'); }, 40); //Ocultar modal
                 $('.table').DataTable().ajax.reload(null, false); //recargar Datatable
 
                 //Alerta de borrado
                 Swal
-                .fire({
-                    title: e.action,
-                    text: e.type + ' ' + e.name + ' ' + e.action,
-                    icon: 'success',
-                    confirmButtonText: "Ok",
-                })
-                
-                .then(resultado => {
-                    if (resultado.value){
-                        $('#btnConfirmarActivacion').text('Sí');
-                    }
-                    
-                });
+                    .fire({
+                        title: e.action,
+                        text: e.type + ' ' + e.name + ' ' + e.action,
+                        icon: 'success',
+                        confirmButtonText: "Ok",
+                    })
 
-            }, error: function(e){
+                    .then(resultado => {
+                        if (resultado.value) {
+                            $('#btnConfirmarActivacion').text('Sí');
+                        }
+
+                    });
+
+            }, error: function (e) {
                 errorAlert(e.responseText);
             }
-    
+
         });
     })
 
     console.log('Finalizado.');
 
-    
+
 });
 
 
 
 //errorAlert
-function errorAlert(msg){
+function errorAlert(msg) {
     Swal
-    .fire({
-        title: 'Error',
-        text: msg,
-        icon: 'error',
-        confirmButtonText: "Ok",
-    })
+        .fire({
+            title: 'Error',
+            text: msg,
+            icon: 'error',
+            confirmButtonText: "Ok",
+        })
 }
 
 //successAlert
-function successAlert(msg){
+function successAlert(msg) {
     Swal
-    .fire({
-        title: 'Error',
-        text: msg,
-        icon: 'error',
-        confirmButtonText: "Ok",
-    })
+        .fire({
+            title: 'Succes',
+            text: msg,
+            icon: 'success',
+            confirmButtonText: "Ok",
+        })
 }

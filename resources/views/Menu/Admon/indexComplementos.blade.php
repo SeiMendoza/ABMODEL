@@ -29,6 +29,12 @@
 @endsection
 
 @section('content')
+
+<style media="screen">
+    .resaltado {
+        background-color: yellow; /* O el estilo que desees para resaltar la fila */
+    }
+</style>
     <div class="pt-2">
         <div>
             <div>
@@ -75,7 +81,7 @@
         <div class="tab-content" id="myTabContent">
             <br>
             <!--Complementos Disponibles-->
-            <div class="tab-pane fade show active" id="CDisponibles" role="tabpanel" aria-labelledby="CDisponibles-tab">
+            <div class="tab-pane fade show active" id="CDisponibles" role="tabpanel" aria-labelledby="CDisponibles-tab" style="height: 450px; overflow-x: hidden;">
                 <table class="table" id="complementosDisponibles">
                     <thead>
                         <tr> 
@@ -94,7 +100,7 @@
             </div>
 
             <!--Complementos no Disponibles-->
-            <div class="tab-pane fade" id="CNoDisponibles" role="tabpanel" aria-labelledby="CNoDisponibles-tab">
+            <div class="tab-pane fade" id="CNoDisponibles" role="tabpanel" aria-labelledby="CNoDisponibles-tab" style="height: 450px; overflow-x: hidden;">
                 <table class="table" id="complementoNoDisponibles">
                     <thead>
                         <tr>
@@ -161,7 +167,7 @@
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/admonMenu.js"></script>
+    <script src="/js/admonMenu.js"></script>
 
 @endsection
 

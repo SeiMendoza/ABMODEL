@@ -240,7 +240,7 @@ class ProductoController extends Controller
 
     }
     
-    public function destroy($id){
+    public function destroy(Request $request, $id){
 
         $producto = Producto::findOrFail($id);
 
@@ -258,8 +258,12 @@ class ProductoController extends Controller
 
         $mensaje = $tipo;
 
-        return response()->json(['message' => $mensaje]); //enviar mensaje en tipo JSON con el valor 'message'
-        //return back()->with(['mensaje'=> $tipo.' eliminado correctamente']);
+        if ($request->ajax()) {
+            # code...
+            return response()->json(['message' => $mensaje]); //enviar mensaje en tipo JSON con el valor 'message'
+        }
+
+        return back()->with(['mensaje'=> $tipo.' eliminado correctamente']);
 
     }
 

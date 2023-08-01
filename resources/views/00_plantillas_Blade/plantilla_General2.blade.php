@@ -32,6 +32,10 @@
     <title>Villa Crisol - @yield('title') </title>
 
     <style media="screen">
+
+        .resaltado {
+            background-color: yellow; /* O el estilo que desees para resaltar la fila */
+        }
         li:active a,
         li:focus-visible,
         li:hover {

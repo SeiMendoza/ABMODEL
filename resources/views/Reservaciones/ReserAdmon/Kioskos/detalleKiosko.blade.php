@@ -50,12 +50,8 @@
                         <tr>
                             <td class="informacion"></td>
                             <td class="titulo"><strong>Estado</strong></td>
-                            <td class="informacion"></td>
-                                @if ($kiosko->disponible)
-                                <td class="titulo text-success">Disponible</td>
-                                @else
-                                <td class="titulo text-danger">Ocupado</td>
-                                @endif
+                            <td class="informacion"></td>                                
+                            <td class="titulo text-info">En progreso...</td>                               
                             <td class="informacion"></td>
                         </tr> 
 
