@@ -397,8 +397,7 @@ Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Rea
 Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])->middleware('auth')
 ->name('detalle.realizadas');
 
-Route::get('/counter', [Counter::class, 'render'])
-->name('counter.index');
+Route::resource('/counter', Counter::class);
 
 Route::resource('/cart', CartController::class)->middleware('auth');
 Route::post('/create', [CartController::class, 'create'])->middleware('auth')->name('cart.create');

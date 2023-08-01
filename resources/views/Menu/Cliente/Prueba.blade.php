@@ -98,7 +98,7 @@
         <div class="col-10" style="padding: 0px;">
             <nav class="navbar navbar-main navbar-expand-lg shadow-none bg-warning" style="height: 60px" id="navbarBlur" data-scroll="false" style="padding: 0;">
                 <h2 class="font-weight-bolder text-white" style="margin:0">Menú del día</h2>
-                <div id="subMenu" style="padding-left: 15px">
+                <div id="subMenu" style="">
                     <span class="hamLine"></span>
                     <span class="hamLine"></span>
                     <span class="hamLine"></span>

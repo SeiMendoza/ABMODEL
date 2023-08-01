@@ -2,6 +2,7 @@
 @section('productos')
     
     @foreach($products as $pro)
+    @if ($pro->disponible >= 1)
         <div class="" style="padding: 0px; margin:0px;">
             <form action="{{route('cart.create')}}" method="post">
                 @csrf
@@ -33,6 +34,7 @@
                 </div>
             </form>
         </div> 
+    @endif
     @endforeach
 
 @endsection

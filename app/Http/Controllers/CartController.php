@@ -19,7 +19,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $products = Producto::where('estado', '=', '1')->get();
+        $products = Producto::where('estado', '=', '1')->where('disponible', '>=', '1')->get();
         $mesas = Mesa::where('estadoM', '=', '0')->get();
         return view('Menu.Pedido.todoPedidos', compact('products', 'mesas'));
     }
@@ -27,7 +27,8 @@ class CartController extends Controller
     public function bebidas()
     {
         $products = Producto::where('estado', '=', '1')
-                    ->where('tipo', '=', '1')->get();
+                    ->where('tipo', '=', '1')
+                    ->where('disponible', '>=', '1')->get();
         $mesas = Mesa::where('estadoM', '=', '0')->get();
         return view('Menu.Pedido.bebidasPedido', compact('products', 'mesas'));
     }
@@ -35,7 +36,8 @@ class CartController extends Controller
     public function platillos()
     {
         $products = Producto::where('estado', '=', '1')
-                    ->where('tipo', '=', '2')->get();
+                    ->where('tipo', '=', '2')
+                    ->where('disponible', '>=', '1')->get();
         $mesas = Mesa::where('estadoM', '=', '0')->get();
         return view('Menu.Pedido.platillosPedido', compact('products', 'mesas'));
     }
@@ -43,7 +45,8 @@ class CartController extends Controller
     public function complementos()
     {
         $products = Producto::where('estado', '=', '1')
-                    ->where('tipo', '=', '0')->get();
+                    ->where('tipo', '=', '0')
+                    ->where('disponible', '>=', '1')->get();
         $mesas = Mesa::where('estadoM', '=', '0')->get();
         return view('Menu.Pedido.complementosPedido', compact('products' , 'mesas'));
     }
@@ -73,23 +76,23 @@ class CartController extends Controller
     public function store(Request $request)
     {   
         $request->validate([
-            'nombreC' => ['required'],
-            'mesaP' => ['required'],
+            'nombre' => ['required'],
+            'mesa' => ['required'],
         ], [
-            'nombreC.required' => 'No tiene un nombre ingresado',
-            'mesaP.required' => 'Seleccione una mesa',
+            'nombre.required' => 'No tiene un nombre ingresado',
+            'mesa.required' => 'Seleccione una mesa',
         ]);
 
-        $m = Mesa::findOrFail($request->input('mesaP')); 
+        $m = Mesa::findOrFail($request->input('mesa')); 
         $pedido = new Pedido();
 
         //if ($request->input('t') > 0) {
             $pedido->quiosco = $m->kiosko->id;
-            $pedido->nombreCliente = $request->input('nombreC');
+            $pedido->nombreCliente = $request->input('nombre');
             $pedido->imp = (Cart::getTotal() * 0.15 );
             $pedido->total = Cart::getTotal();
             $pedido->estado = 1;
-            $pedido->mesa_id = $request->input('mesaP');
+            $pedido->mesa_id = $request->input('mesa');
             $pedido->save();
 
             $mesa = Mesa::findOrFail($pedido->mesa_id);
@@ -121,9 +124,10 @@ class CartController extends Controller
             $d = $producto->save();
 
             if ($a & $b & $c & $d) {
-                return redirect()->route('cart.index')->with('success_msg', 'Pedido Realizado');
+                Cart::clear();
+                return redirect()->route('cart.index')->with('mensaje', 'Pedido Realizado');
             } else {
-                return redirect()->route('cart.index')->with('success_msg', 'Pedido No Realizado');
+                return redirect()->route('cart.index')->with('mensaje', 'Pedido No Realizado');
             }
             
         //}
@@ -164,7 +168,7 @@ class CartController extends Controller
     {
         Cart::update($request->id,
             array(
-                'quantity' => 1));
+                'quantity' => -1));
         return back();
     }
 
@@ -182,7 +186,7 @@ class CartController extends Controller
     
     public function clear(){
         Cart::clear();
-        return redirect()->route('cart.index')->with('success_msg', 'Car is cleared!');
+        return redirect()->route('cart.index')->with('mensaje', 'Pedido Cancelado');
     }
 
 }

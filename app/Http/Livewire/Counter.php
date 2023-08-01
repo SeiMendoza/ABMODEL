@@ -10,8 +10,8 @@ class Counter extends Component
     public function increment(){
         $this->count++;
     }
-    public function render()
+    public function index()
     {
-        return view('livewire.counter');
+        return view('livewire/counter');
     }
 }

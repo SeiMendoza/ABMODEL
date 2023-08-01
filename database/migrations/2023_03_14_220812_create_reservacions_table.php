@@ -20,8 +20,8 @@ return new class extends Migration
             $table->date('fecha');
             $table->time('horaI');
             $table->time('horaF');
-            $table->unsignedBigInteger('kiosko_id');
-            $table->foreign('kiosko_id')->references('id')->on('kioskos')->onUpdate('cascade')->onDelate('cascade');
+            //$table->unsignedBigInteger('kiosko_id');
+            //$table->foreign('kiosko_id')->references('id')->on('kioskos')->onUpdate('cascade')->onDelate('cascade');
             $table->string('tipo', 50);
             $table->integer('cantidadAdultos');
             $table->integer('precioAdultos');

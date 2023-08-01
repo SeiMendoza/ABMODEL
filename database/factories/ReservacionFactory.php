@@ -24,7 +24,7 @@ class ReservacionFactory extends Factory
             'fecha'=>$this->faker->date(),
             'horaI'=>$this->faker->time(),
             'horaF'=>$this->faker->time(),
-            'kiosko_id'=> Kiosko::get('id')->random(),
+            //'kiosko_id'=> Kiosko::get('id')->random(),
             'tipo'=>$this->faker->randomElement(['Reunión','Cumpleaños','Otro']),
             'cantidadAdultos'=>$this->faker->numberBetween(2,20),
             'cantidadNinios'=>$this->faker->numberBetween(0,20),
