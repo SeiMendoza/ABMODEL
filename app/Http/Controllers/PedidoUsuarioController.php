@@ -564,6 +564,12 @@ class PedidoUsuarioController extends Controller
         }
     }
     public function cancelarPedido($pedido_id){
+        $detalles = DetallesPedido::where('pedido_id', $pedido_id)->where('estado', 0)->get();
+        foreach ($detalles as $detalle) {
+            $producto = $detalle->producto;
+            $producto->disponible += $detalle->cantidad;
+            $producto->save();
+        }
         DetallesPedido::where('pedido_id', $pedido_id)->where('estado', 0)->delete();
         return response()->json(['success' => true]);
     }
