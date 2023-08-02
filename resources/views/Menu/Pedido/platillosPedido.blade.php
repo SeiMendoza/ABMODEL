@@ -2,15 +2,16 @@
 @section('productos')
     @foreach($products as $pro)
     @if ($pro->disponible >= 1)
-        <div class="" style="padding: 0px; margin:0px;">
+        <div class="col" style="padding: 0px; margin:0px;">
             <form action="{{route('cart.create')}}" method="post">
                 @csrf
                 <input type="hidden" value="{{ $pro->id }}" id="id" name="id">
                 <input type="hidden" value="{{ $pro->nombre }}" id="name" name="name">
                 <input type="hidden" value="{{ $pro->precio }}" id="price" name="price">
                 <input type="hidden" value="1" id="quantity" name="quantity">
+                <input type="hidden" value="-1" id="disponible" name="disponible">
                 
-                <div class="col d-flex justify-content-center mb-1">
+                <div class="d-flex justify-content-center mb-1">
                     <button class="card btn btnCard" id="btn" type="submit" 
                         data-id="{{$pro->id}}" style="padding: 0px; width:215px; height:200px; margin:0px; border-radius:0%;
                         background: url('/{{ $pro->imagen}}') top center/cover no-repeat;">
@@ -24,9 +25,12 @@
                             </p>                        
                             <!-- Precio -->
                             <p id="precio" class="text-dark text-decoration-line">
-                                <strong class="precio" style="font-size: 15px; width:215px;
-                                background-color:rgba(255, 255, 255, 0.677);
-                                position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                <strong class="precio" style="font-size: 15px; width:80px;
+                                    background-color:rgba(255, 255, 255, 0.677);
+                                    position: absolute; bottom: 0; right:0%">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                    <strong class="precio" style="font-size: 15px; width:130px;
+                                    background-color:rgba(255, 255, 255, 0.677);
+                                    position: absolute; bottom: 0; left:0;">Disponible: {{$pro->disponible}}</strong>
                             </p>                        
                         </div>
                     </button>

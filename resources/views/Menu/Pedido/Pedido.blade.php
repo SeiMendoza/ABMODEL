@@ -25,51 +25,15 @@
     <script src="{{ asset("js/sweetalert2.all.min.js") }}"></script>
 
     <style>
-     #subMenu {
-            display: inline-grid;
-            cursor: pointer;
-            z-index: 12;
-        }
-
-        .hamLine {
-            display: block;
-            width: 24px;
-            margin-top: 4px;
-            border-top: 1px solid #0c0a0a;
-            vertical-align: middle;
-            transform-origin: 15% 15%;
-            transition: all 200ms linear;
-        }
-
-        .menuClicked .hamLine:nth-child(1) {
-            transform: rotate(45deg);
-            border-top: 1px solid #f8f8f8;
-        }
-
-        .menuClicked .hamLine:nth-child(3) {
-            transform: rotate(-45deg);
-            border-top: 1px solid #ffffff;
-        }
-
-        .menuClicked .hamLine:nth-child(2) {
-            display: none;
-        }
-
-        #sidenav-main {
-            display: none;
-            transition: transform 0.3s ease-in-out !important;
-        }
-
         .mostrar {
             display: block !important;
             transform: translateX(100);
         }
 
         .ocultar {
-            transform: translateX(-50%);
+            transform: translateX(-0%);
         }
     </style>
-   
 </head>
 <body class="" style="">
     <div style="overflow: auto;" class=" h-100">
@@ -105,7 +69,7 @@
             <div class="row h-100vh" style="margin: 0px; padding:0;">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-table-cell" style="margin: 0px; padding:0; max-height: 100%;">
                     <div class="row" style="margin: 0px; padding:0;">
-                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 d-table-cell" style="margin: 0px; padding:0;">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 col-xl-7 d-table-cell" style="margin: 0px; padding:0;">
                             <div class="table-responsive-lg" style="margin: 0px; padding:0;">
                                 <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;" class="bg-gradient-warning">
                                     <ol class="breadcrumb bg-success" style="margin: 0; border-radius:0px; padding:0; width:100%">
@@ -116,14 +80,13 @@
                                                 </a>
                                             </div>
                                         </li>
-                                        <li class="d-flex justify-content-center" style="margin: 8px; width:50%">
+                                        <li class="d-flex justify-content-center" style="margin: 8px; width:52%">
                                             <H3 class="text-white"><strong>Menú del Día</strong></H3>
                                         </li>
-                                        <li class="nav-item d-md-none d-lg-none d-xl-none d-xs d-sm-table d-sm-table-cell d-flex align-items-center" style="margin: 8px; width:2%">
-                                            <div id="subMenu" style="padding-left: 15px">
-                                                <span class="hamLine"></span>
-                                                <span class="hamLine"></span>
-                                                <span class="hamLine"></span>
+                                        <li class="nav-item d-md-none d-lg-none d-xl-none d-xs d-sm-table d-sm-table-cell d-flex align-items-center" style="margin: 8px; width:1%">
+                                            <div id="" style="padding-left: 15px">
+                                                <button style="margin:0px; padding:4px; width:90px; font-size:15px" type="button" 
+                                                class="bg-light border-radius-sm text-center" id="subMenu"><i class="fa-solid fa-plus-circle text-primary"></i> Pedido</button>
                                             </div>
                                         </li>
                                     </ol>
@@ -134,7 +97,8 @@
                                 <section style="">
                                     <main class=" main-content">
                                         <div class="tab-content"  style="margin: 0px; padding:0; ">
-                                            <div class="row row-cols-2 row-cols-xs-2 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4" style="margin: 0px; padding:0;">
+                                            <div class="row row-cols-xs-6 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-auto" 
+                                                    style="margin: 0px; padding:0;">
                                                 @yield('productos')
                                             </div>
                                         </div>
@@ -209,8 +173,9 @@
                             </div>
                             
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 d-table-cell" style="display:block; float:right; margin: 0px; padding:0;">   
-                            <div class="row " style="margin: 0px; padding:0;">
+                        <div class="d-none d-sm-none d-md-table col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" 
+                                style="display:block; float: right; margin: 0px; padding:0;" id="pedido" name="pedido">   
+                            <div class="row" style="margin: 0px; padding:0;">
                                 <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
                                     <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" style="margin-bottom: 0; border-radius:0px;">
                                         <H3 class="text-white"><strong>Detalles del Pedido</strong></H3>
@@ -263,6 +228,9 @@
                                             <strong class="menerr" style="color:red">{{ $message }}</strong>
                                         @enderror
                                     </div>
+                                    @if (count(\Cart::getContent()) == 0)
+                                        <input type="number" name="t" id="t" value="" hidden>
+                                    @endif
                                 </form>
                             <div style="height: 380px; margin:0px; overflow-y:auto;">
                                 <div class="row" id="carrito" style="margin: 0; padding:0;">
@@ -289,6 +257,7 @@
                                                     @csrf
                                                     <div class="form-group row">
                                                         <input type="hidden" value="{{ $item->id}}" id="id" name="id">
+                                                        <input type="hidden" value="1" id="d" name="d">
                                                         <button type="submit"><i class="fa fa-edit"></i></button>
                                                     </div>
                                                 </form>
@@ -297,6 +266,8 @@
                                                 <form method="POST" action="{{route('cart.destroy',$item->id)}}">
                                                     @method('DELETE')
                                                     @csrf
+                                                    <input type="hidden" value="{{ $item->id}}" id="id" name="id">
+                                                    <input type="hidden" value="{{$item->quantity}}" id="disponible" name="disponible">
                                                     <button type="submit"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             </td>  
@@ -304,7 +275,9 @@
                                         </tr>
                                         <hr>
                                     @endforeach
-                                        
+                                    @error('t')
+                                    <strong class="menerr" style="color:red">{{ $message }}</strong>
+                                    @enderror
                                     </tbody>
                                     </table>
                                 </div>
@@ -365,8 +338,8 @@
         function eliminar(){
             Swal
             .fire({
-                title: "Eliminar",
-                text: "¿Desea eliminar el registro?",
+                title: "Cancelar",
+                text: "¿Desea cancelar el pedido?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: "Si",
@@ -384,45 +357,19 @@
         }
     </script>
     <script>
-        $(document).ready(function() {
-            $("#myInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#productos button").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-
         var subMenu = document.getElementById('subMenu')
         var fullPageMenu = document.getElementById('fullPageMenu')
         subMenu.addEventListener('click', function() {
-            if (subMenu.className === 'menuClicked') {
-                subMenu.className = ""
+            var div = document.getElementById("pedido");
+            if (div.classList.contains("mostrar")) {
+                div.classList.remove("mostrar");
+                div.classList.add("ocultar");
             } else {
-                subMenu.className = 'menuClicked'
-
-            }
-
-            var aside = document.getElementById("sidenav-main");
-            if (aside.classList.contains("mostrar")) {
-                aside.classList.remove("mostrar");
-                aside.classList.add("ocultar");
-            } else {
-                aside.classList.remove("ocultar");
-                aside.classList.add("mostrar");
+                div.classList.remove("ocultar");
+                div.classList.add("mostrar");
             }
         })
-
     </script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-          var options = {
-            damping: '0.5'
-          }
-          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-      </script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/argon-dashboard.min.js"></script>
     

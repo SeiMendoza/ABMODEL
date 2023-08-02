@@ -58,12 +58,21 @@ class CartController extends Controller
      */
     public function create(Request $request)
     {
+        $value = Producto::findOrFail($request->id);
+        $value->disponible = $value->disponible + $request->disponible;
+        $value->save();
+        
         Cart::add(array(
             'id' => $request->id, // inique row ID
             'name' => $request->name,
             'price' =>$request->price,
             'quantity' => $request->quantity?$request->quantity:1,
+           
+            'attributes' => array(
+                'disponible' => $value->disponible,
+            )
         ));
+
         return back();
     }
 
@@ -78,9 +87,11 @@ class CartController extends Controller
         $request->validate([
             'nombre' => ['required'],
             'mesa' => ['required'],
+            't' => ['min:1'],
         ], [
             'nombre.required' => 'No tiene un nombre ingresado',
             'mesa.required' => 'Seleccione una mesa',
+            't.min' =>'No hay detalles'
         ]);
 
         $m = Mesa::findOrFail($request->input('mesa')); 
@@ -107,6 +118,7 @@ class CartController extends Controller
             $detalle->pedido_id = $pedido->id;
             $detalle->producto_id = $row->id;
             $detalle->precio = $row->price;
+            $detalle->estado = 1;
             $detalle->cantidad = $row->quantity;
             $detalle->save();
             }
@@ -123,7 +135,7 @@ class CartController extends Controller
             $c = $detalle->save();
             $d = $producto->save();
 
-            if ($a & $b & $c & $d) {
+            if ($c) {
                 Cart::clear();
                 return redirect()->route('cart.index')->with('mensaje', 'Pedido Realizado');
             } else {
@@ -166,9 +178,31 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Cart::update($request->id,
-            array(
-                'quantity' => -1));
+       $cantidad = 0;
+            $item = Cart::get($request->id);
+            $cantidad = $item->quantity;
+
+            if ($cantidad > 1) {
+                $value = Producto::findOrFail($request->id);
+                $value->disponible = $value->disponible + $request->d;
+                $value->save();
+                
+            } elseif ($cantidad <= 1) {
+                $value = Producto::findOrFail($request->id);
+                $value->disponible = $value->disponible + $request->d;
+                $value->save();
+
+                Cart::remove($id);
+                return back();
+            }
+
+            Cart::update($request->id, 
+            array( 
+                'quantity' => -$request->d,
+            ));
+            
+            
+            
         return back();
     }
 
@@ -178,13 +212,24 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($cart)
+    public function destroy(Request $request, $cart)
     {
+        $value = Producto::findOrFail($request->id);
+        $value->disponible = $value->disponible + $request->disponible;
+        $value->save();
+
         Cart::remove($cart);
         return back();
     }
     
     public function clear(){
+        $items = Cart::getContent();
+            
+            foreach($items as $row) {
+                $value = Producto::findOrFail($row->id);
+                $value->disponible = $value->disponible + $row->quantity;
+                $value->save();
+            }
         Cart::clear();
         return redirect()->route('cart.index')->with('mensaje', 'Pedido Cancelado');
     }

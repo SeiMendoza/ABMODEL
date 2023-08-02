@@ -96,7 +96,8 @@
             </a>
         </div>
         <div class="col-10" style="padding: 0px;">
-            <nav class="navbar navbar-main navbar-expand-lg shadow-none bg-warning" style="height: 60px" id="navbarBlur" data-scroll="false" style="padding: 0;">
+            <nav class="navbar navbar-main navbar-expand-lg shadow-none bg-warning" style="height: 60px" 
+            id="navbarBlur" data-scroll="false" style="padding: 0;">
                 <h2 class="font-weight-bolder text-white" style="margin:0">Menú del día</h2>
                 <div id="subMenu" style="">
                     <span class="hamLine"></span>
@@ -105,7 +106,7 @@
                 </div>
             </nav>
         </div>
-        <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-top-end-0 ocultar " id="sidenav-main" style="margin:70px 0 0 0">
+        <aside class="sidenav bg-white navbar navbar-vertical navbar-expand border-0 border-radius-top-end-0 ocultar " id="sidenav-main" style="margin:70px 0 0 0">
             <hr class="horizontal dark mt-0">
             <div class="collapse navbar-collapse  h-auto " id="sidenav-collapse-main">
                 <ul class="navbar-nav">
