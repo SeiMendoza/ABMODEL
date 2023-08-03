@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>
-        Menú | Villa Crisol
-    </title>
-    <!-- Icons -->
-    <link rel="icon" type="image/png" href="/img/faviconVillaCrisol.png" />
-    <link href={{ asset('/css/nucleo-icons.css') }} rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Menú | Villa Crisol</title>
+    
+      <!-- Icons -->
+      <link rel="icon" type="image/png" href="/img/faviconVillaCrisol.png" />
+      <link href={{ asset('/css/nucleo-icons.css') }} rel="stylesheet" type="text/css" />
     <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet" />
     <link href="/assets/css/fontawesome.css" rel="stylesheet">
     <link href="/assets/css/solid.css" rel="stylesheet">
@@ -27,12 +25,10 @@
 
 </head>
 
-<body style="">
+<body style=""class=" h-100">
     <script>
-        var msg = '{{Session::get('
-        mensaje ')}}';
-        var exist = '{{Session::has('
-        mensaje ')}}';
+        var msg = '{{ Session::get('mensaje') }}';
+        var exist = '{{ Session::has('mensaje') }}';
         if (exist) {
             Swal.fire({
                 position: 'top-end',
@@ -42,7 +38,7 @@
                 toast: true,
                 background: '#fff',
                 timer: 3500
-            })
+            });
         }
     </script>
     <div class="content-cell" style="margin: 0px; padding:0;">
@@ -72,13 +68,14 @@
                                         <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                                             <div class="sidenav-toggler-inner">
                                                 <a href="javascript:;" class="nav-link 
-                           border-radius-sm text-center font-weight-bold px-0 bg-light" type="button" style="margin:4px 3px 1px 3px; padding:8px; width:100px; font-size:15px" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                           border-radius-sm text-center font-weight-bold px-0 bg-light" type="button" style="margin:4px 3px 1px 30px; padding:8px; width:100px; font-size:15px" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                                     Pedido
                                                 </a>
                                                 <!-- Usar Informacion -->
                                                 <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown" style="margin: 0%; padding:0%;">
                                                     <div class="dropdown-item col-4 d-table-cell border-radius-top-end-0 " style="display:block; float:right; margin: 0px; padding:0;">
                                                         <div style="">
+                                                         
                                                             <div class="input-group" style="margin: 0; border: 0; width: 99%">
                                                                 <Label class="h6 col-form-label font-robo" style="margin: 0px 5% 0 3px;" for="mesaP">Pedido de la Mesa:</Label>
 
@@ -128,7 +125,7 @@
                                                                                 </td>
                                                                                 <td>
                                                                                     <form method="POST" action="{{route('detallep.destroy', ['id' => $detalle->id,'vista'=>1])}}">
-                                                                                        @method('DELETE')
+                                                                                        @method('post')
                                                                                         @csrf
                                                                                         <button type="submit"><i class="fa fa-trash"></i></button>
                                                                                     </form>
@@ -171,13 +168,11 @@
                                                             <div style="margin: 0; padding:0; margin-top:3px" class="col-12">
                                                                 <div class="row bg-gradient-faded-success" style="margin: 0; padding: 5px 3px 8px 3px;">
                                                                     <div class="col-6 d-flex justify-content-end" style="margin: 0; padding:0; padding-right:5px">
-                                                                        <button onclick="cancelar('{{ $pedido->id }}','pedidos/caja/detalle/{{$pedido->id}}')" id="cancelar" type="submit" class="btn btn-danger border-0 border-radius-sm" style="margin:0;">Cancelar
+                                                                        <button onclick="cancelar('{{ $pedido->id }}','pedidos/caja/detalle/{{$pedido->id}}')" id="cancelar" type="submit" class="btn btn-danger border-0 border-radius-sm" style="margin:0;">Cancelar</button>
                                                                     </div>
                                                                     <div class="col-6" style="margin: 0; padding:0; padding-left:5px;">
-                                                                        <form method="POST" action="{{route('guardarPedido',[$pedido->id,'detalle_id' => $detalle->id])}}">
+                                                                    <form method="POST" action="{{route('guardarPedido',[$pedido->id,'detalle_id' => $detalle->id])}}">
                                                                             @csrf
-                                                                            <input type="string" step="0.001" oninput="nombre()" value="{{ old('nombreC') }}" id="nombreC" name="nombreC" hidden>
-                                                                            <input type="string" step="0.001" oninput="nombre()" value="{{  old('mesaP')}}" id="mesaP" name="mesaP" hidden>
                                                                             <button href="#" type="submit" role="button" id="guardar" class="btn btn-success border-0 border-radius-sm" style="margin:0; ;">Guardar</button>
                                                                         </form>
                                                                     </div>
@@ -217,9 +212,13 @@ position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
                                                                 </p>
                                                                 <!-- Precio -->
                                                                 <p id="precio" class="text-dark text-decoration-line">
-                                                                    <strong class="precio" style="font-size: 15px; width:215px;background-color:rgba(255, 255, 255, 0.677);
-                                position: absolute; bottom: 0; left:0;">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
-                                                                </p>
+                                <strong class="precio" style="font-size: 15px; width:80px;
+                                    background-color:rgba(255, 255, 255, 0.677);
+                                    position: absolute; bottom: 0; right:0%">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                    <strong class="precio" style="font-size: 15px; width:130px;
+                                    background-color:rgba(255, 255, 255, 0.677);
+                                    position: absolute; bottom: 0; left:0;">Disponible: {{$pro->disponible}}</strong>
+                            </p> 
                                                             </div>
                                                         </button>
                                                     </div>
@@ -298,6 +297,8 @@ position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
                             </nav>
                         </div>
                         <div style="">
+                        <form method="POST" action="{{route('guardarPedido',[$pedido->id,'detalle_id' => $detalle->id])}}">
+                                            @csrf
                             <div class="input-group" style="margin: 0; border: 0; width: 99%">
                                 <Label class="h6 col-form-label font-robo" style="margin: 5px 5% 0 3px;" for="mesaP">Pedido de la Mesa:</Label>
 
@@ -347,7 +348,7 @@ position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
                                                 </td>
                                                 <td>
                                                     <form method="POST" action="{{ route('detallep.destroy', ['id' => $detalle->id,'vista'=>2]) }}">
-                                                        @method('DELETE')
+                                                        @method('post')
                                                         @csrf
                                                         <button type="submit"><i class="fa fa-trash"></i></button>
                                                     </form>
@@ -390,13 +391,9 @@ position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
                             <div style="margin: 0; padding:0; margin-top:3px" class="col-12">
                                 <div class="row bg-gradient-faded-success " style="margin: 0; padding: 5px 3px 8px 3px;">
                                     <div class="col-6 d-flex justify-content-end" style="margin: 0; padding:0; padding-right:5px">
-                                        <button onclick="cancelar('{{ $pedido->id }}', 'pedidos/caja/detalle/{{$pedido->id}}')" id="cancelar" type="submit" class="btn btn-danger border-0 border-radius-sm" style="margin:0;">Cancelar
+                                        <a onclick="cancelar('{{ $pedido->id }}', 'pedidos/caja/detalle/{{$pedido->id}}')" id="cancelar" type="submit" class="btn btn-danger border-0 border-radius-sm" style="margin:0;">Cancelar</a>
                                     </div>
                                     <div class="col-6" style="margin: 0; padding:0; padding-left:5px;">
-                                        <form method="POST" action="{{route('guardarPedido',[$pedido->id,'detalle_id' => $detalle->id])}}">
-                                            @csrf
-                                            <input type="string" step="0.001" oninput="nombre()" value="{{ old('nombreC') }}" id="nombreC" name="nombreC" hidden>
-                                            <input type="string" step="0.001" oninput="nombre()" value="{{  old('mesaP')}}" id="mesaP" name="mesaP" hidden>
                                             <button href="#" type="submit" role="button" id="guardar" class="btn btn-success border-0 border-radius-sm" style="margin:0; ;">Guardar</button>
                                         </form>
                                     </div>
@@ -414,7 +411,7 @@ position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
         <script src={{ asset('/js/plugins/perfect-scrollbar.min.js') }}></script>
         <script src={{ asset('/js/plugins/smooth-scrollbar.min.js') }}></script>
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="/js/argon-dashboard.min.js"></script>
+        <script src="/js/argon-dashboard.min.js"></script> 
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
             if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -441,7 +438,6 @@ position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
             };
 
             function cancelar(pedido_id, ruta) {
-
                 Swal
                     .fire({
                         title: "Cancelar",

@@ -192,7 +192,7 @@ class PedidoUsuarioController extends Controller
 
         foreach ($detapedido as $detalle) {
             if ($detalle->estado == 1) {
-            $suma += $detalle->precio * $detalle->cantidad;
+                $suma += $detalle->precio * $detalle->cantidad;
             }
         }
 
@@ -210,36 +210,36 @@ class PedidoUsuarioController extends Controller
                 ->where('disponible', '>', 0)
                 ->get();
         } else {
-        // Asignar nombres descriptivos a cada tipo
-        $tipos = [
-            'complementos' => 0,
-             'bebidas' => 1,
-             'platillos'=>2,
-        ];
-        // Si se proporciona un valor de tipo, utilizar el nombre descriptivo
-        $tipo = $tipos[$tipo] ?? null;
-        // Filtrar productos por tipo si se proporciona un valor de tipo
-        switch ($tipo) {
-            case 0: // complementos
-                $productos = Producto::where('estado', '=', '1')
-                    ->where('tipo', 0)
-                    ->where('disponible', '>', 0)
-                    ->get();
-                break;
-            case 1: // bebidas
-                $productos = Producto::where('estado', '=', '1')
-                    ->where('tipo', 1)
-                    ->where('disponible', '>', 0)
-                    ->get();
-                break;
-            case 2: // platillos
-                $productos = Producto::where('estado', '=', '1')
-                    ->where('tipo', 2)
-                    ->where('disponible', '>', 0)
-                    ->get();
-                break;
+            // Asignar nombres descriptivos a cada tipo
+            $tipos = [
+                'complementos' => 0,
+                'bebidas' => 1,
+                'platillos' => 2,
+            ];
+            // Si se proporciona un valor de tipo, utilizar el nombre descriptivo
+            $tipo = $tipos[$tipo] ?? null;
+            // Filtrar productos por tipo si se proporciona un valor de tipo
+            switch ($tipo) {
+                case 0: // complementos
+                    $productos = Producto::where('estado', '=', '1')
+                        ->where('tipo', 0)
+                        ->where('disponible', '>', 0)
+                        ->get();
+                    break;
+                case 1: // bebidas
+                    $productos = Producto::where('estado', '=', '1')
+                        ->where('tipo', 1)
+                        ->where('disponible', '>', 0)
+                        ->get();
+                    break;
+                case 2: // platillos
+                    $productos = Producto::where('estado', '=', '1')
+                        ->where('tipo', 2)
+                        ->where('disponible', '>', 0)
+                        ->get();
+                    break;
+            }
         }
-    }
         $detalles = DetallesPedido::where('pedido_id', $id)->get();
         // si no hay complementos muestra mensaje
         /* if ($productos->isEmpty()) {
@@ -268,7 +268,7 @@ class PedidoUsuarioController extends Controller
         if ($complemento_existente) {
             // Si el complemento ya existe solo se actualiza la cantidad
             $complemento_existente->cantidad += $cantidad;
-            $complemento_existente->estado = 0; 
+            $complemento_existente->estado = 0;
             $complemento_existente->save();
         } else {
             // Crear un nuevo detalle del pedido con el producto y la cantidad
@@ -294,26 +294,44 @@ class PedidoUsuarioController extends Controller
         $impuesto = $total * 0.15; // calcular el impuesto
         $pedido->imp = $impuesto;
         $pedido->total = $total;
-       // $pedido->save();
+        // $pedido->save();
 
         // Restar la cantidad disponible del producto
         $producto->disponible -= $cantidad;
         $producto->save();
 
         // Redirigir al usuario a la página de detalles del pedido con un mensaje de confirmación
-        return redirect()->route('Agregar',['id' => $pedido->id,'tipo' => 'todos','vista'=> 2])->with('mensaje', 'Complemento agregado correctamente.');
+        return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Producto añadido.');
     }
 
     public function Guardar(Request $request, $id, $detalle_id)
     {
         // Obtiene el pedido existente
         $pedido_actual = Pedido::findorfail($id);
+        $rules=[
+            'nombreC' => 'required|regex:/^[\\pL\\s]+$/u',
+            'mesa' => 'required|exists:mesas,id',
+        ];
+        $mensaje=[
+            'nombreC.required' => 'El nombre no puede estar vacío',
+            'nombre.regex' => 'Solo se aceptan letras',
+             'mesa.required' => 'Debe seleccionar una mesa',
+             'mesa.exists' => 'La mesa seleccionada no existe'
+        ];
+
+        $this->validate($request,$rules,$mensaje);
+        // Obtener los nuevos valores del formulario
+        $nombreCliente = $request->input('nombreC');
+        $mesa = $request->input('mesa');
+
+        // Actualizar el registro del pedido con los nuevos valores
+        $pedido_actual->nombreCliente = $nombreCliente;
+        $pedido_actual->mesa_id = $mesa;
+        $pedido_actual->save();
         // Obtiene los detalles del pedido actual
         $detalles_actual = $pedido_actual->detalles;
         $detalles_nuevo = $pedido_actual->detalles;
-        // Obtiene los datos del cliente
-       // $pedido_actual->nombreCliente = $request->input('nombreC');
-       // $pedido_actual->nombreCliente = $nombre_cliente_actualizado;
+
         $mesa_id = $pedido_actual->mesa_id;
         $mesa = Mesa::findOrFail($mesa_id);
         $quiosco = $mesa->kiosko->id;
@@ -351,12 +369,12 @@ class PedidoUsuarioController extends Controller
         $impuesto = $total * 0.15; // calcular el impuesto
         $pedido_actual->imp = $impuesto;
         $pedido_actual->total = $total;
-         
-       $a = $pedido_actual->save();
-     if($a){
-        return redirect()->route('pedidost.detalle', ['id' => $pedido_actual->id])->with('mensaje', 'Pedido guardado correctamente.');
+
+        $a = $pedido_actual->save();
+        if ($a) {
+            return redirect()->route('pedidost.detalle', ['id' => $pedido_actual->id])->with('mensaje', 'Pedido guardado correctamente.');
+        }
     }
-}
     public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesPedido::where('pedido_id', $id)->get();
@@ -422,7 +440,7 @@ class PedidoUsuarioController extends Controller
         $pedido = Pedido::findOrfail($id);
         return view('Menu/Cocina/detallesPedAnteriores', compact('pedido'));
     }
-    public function destroy($id,$vista)
+    public function destroy($id, $vista)
     {
         $detalle = DetallesPedido::findOrfail($id);
         $pedido = $detalle->pedido;
@@ -433,49 +451,49 @@ class PedidoUsuarioController extends Controller
         $producto = $detalle->producto;
         $producto->disponible += $detalle->cantidad;
         $producto->save();
-        if($vista == 1){
-        // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
-        if ($pedido->detalles->count() == 0) {
-            $mesa = $pedido->mesa_nombre;
-            $mesa->estadoM = 0;
-            $mesa->save();
-            $pedido->delete();
-            return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
-        } else {
-            // Actualizar el impuesto y el total del pedido general
-            $detalles = $pedido->detalles;
-            $total = 0;
-            foreach ($detalles as $detalle) {
-                $total += $detalle->cantidad * $detalle->precio;
+        if ($vista == 1) {
+            // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
+            if ($pedido->detalles->count() == 0) {
+                $mesa = $pedido->mesa_nombre;
+                $mesa->estadoM = 0;
+                $mesa->save();
+                $pedido->delete();
+                return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
+            } else {
+                // Actualizar el impuesto y el total del pedido general
+                $detalles = $pedido->detalles;
+                $total = 0;
+                foreach ($detalles as $detalle) {
+                    $total += $detalle->cantidad * $detalle->precio;
+                }
+                $impuesto = $total * 0.15; // calcular el impuesto
+                $pedido->imp = $impuesto;
+                $pedido->total = $total;
+                $pedido->save();
+                return redirect()->route('pedidost.detalle', $pedido->id)->with('mensaje', 'Detalle borrado correctamente');
             }
-            $impuesto = $total * 0.15; // calcular el impuesto
-            $pedido->imp = $impuesto;
-            $pedido->total = $total;
-            $pedido->save();
-            return redirect()->route('pedidost.detalle', $pedido->id)->with('mensaje', 'Detalle borrado correctamente');
+        } elseif ($vista == 2) {
+            // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
+            if ($pedido->detalles->count() == 0) {
+                $mesa = $pedido->mesa_nombre;
+                $mesa->estadoM = 0;
+                $mesa->save();
+                $pedido->delete();
+                return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
+            } else {
+                // Actualizar el impuesto y el total del pedido general
+                $detalles = $pedido->detalles;
+                $total = 0;
+                foreach ($detalles as $detalle) {
+                    $total += $detalle->cantidad * $detalle->precio;
+                }
+                $impuesto = $total * 0.15; // calcular el impuesto
+                $pedido->imp = $impuesto;
+                $pedido->total = $total;
+                $pedido->save();
+                return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Detalle borrado correctamente');
+            }
         }
-    } elseif ($vista == 2) {
-         // si se eliminan todos los detalles del pedido se actualiza el estado de la mesa
-         if ($pedido->detalles->count() == 0) {
-            $mesa = $pedido->mesa_nombre;
-            $mesa->estadoM = 0;
-            $mesa->save();
-            $pedido->delete();
-            return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
-        } else {
-            // Actualizar el impuesto y el total del pedido general
-            $detalles = $pedido->detalles;
-            $total = 0;
-            foreach ($detalles as $detalle) {
-                $total += $detalle->cantidad * $detalle->precio;
-            }
-            $impuesto = $total * 0.15; // calcular el impuesto
-            $pedido->imp = $impuesto;
-            $pedido->total = $total;
-            $pedido->save();
-            return redirect()->route('Agregar',['id' => $pedido->id,'tipo'=>'todos','vista'=>2])->with('mensaje', 'Detalle borrado correctamente');
-    }
-}
     }
     public function edit($pedido_id, $detalle_id)
     {
@@ -563,7 +581,8 @@ class PedidoUsuarioController extends Controller
             return response()->json(null);
         }
     }
-    public function cancelarPedido($pedido_id){
+    public function cancelarPedido($pedido_id)
+    {
         $detalles = DetallesPedido::where('pedido_id', $pedido_id)->where('estado', 0)->get();
         foreach ($detalles as $detalle) {
             $producto = $detalle->producto;

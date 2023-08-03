@@ -145,7 +145,7 @@ Route::get('/menu/pedidost', [PedidoUsuarioController::class, 'search'])->middle
   ->name('pedidost.search'); /*buscar pedidos terminados*/
 Route::get('/pedidos/caja/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])->middleware('auth')
   ->name('pedidost.detalle'); /*detalle de pedidos pendientes de terminar en caja*/
-Route::delete('/pedidos/detalles/{id}/borrar/{vista}', [PedidoUsuarioController::class, 'destroy'])->middleware('auth')
+Route::post('/pedidos/detalles/{id}/borrar/{vista}', [PedidoUsuarioController::class, 'destroy'])->middleware('auth')
   ->name('detallep.destroy')->where('id', '[0-9]+'); /**borrar detalle de caja */
 Route::get('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'edit'])->middleware('auth')
   ->name('detallep.edit');

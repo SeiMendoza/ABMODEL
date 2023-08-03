@@ -188,7 +188,7 @@
                         </a>
                         <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$detalle->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson;text-align:center;position: absolute; margin-left:20%; top: 50%;transform: translateY(-50%);"></i>
                         <form action="{{route('detallep.destroy', ['id' => $detalle->id,'vista'=>1])}}" method="post" enctype="multipart/form-data">
-                            @method('delete')
+                            @method('post')
                             @csrf
                             <div class="modal fade" id="staticBackdropE{{$detalle->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
