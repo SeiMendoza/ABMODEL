@@ -17,10 +17,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $datosalerta = Piscina::select('piscinas.id','piscina_tipos.descripcion',DB::raw('COUNT(*) AS total'),DB::raw('SUM(piscinas.peso) AS peso'))
-        ->join('piscina_tipos','piscinas.tipo','=','piscina_tipos.id')->groupby('piscinas.id','piscina_tipos.descripcion')->get();
+        $datosalerta = Piscina::select('piscinas.id', 'piscina_tipos.descripcion', DB::raw('COUNT(*) AS total'), DB::raw('SUM(piscinas.peso) AS peso'))
+            ->join('piscina_tipos', 'piscinas.tipo', '=', 'piscina_tipos.id')->groupby('piscinas.id', 'piscina_tipos.descripcion')->get();
 
-        return view("index",compact('datosalerta'));
+        return view("index", compact('datosalerta'));
     }
 
     public function b()
@@ -37,48 +37,76 @@ class HomeController extends Controller
     {
         $productos = Producto::all();
 
-        if($request->ajax()){
-            
+        if ($request->ajax()) {
+
             return datatables()->of($productos)->toJson();
         }
         return view("/Menu/Admon/indexComplementos")->with(['productos' => $productos]);
     }
-    public function indexPlatillos()
+    public function indexPlatillos(Request $request)
     {
-        $productos = Producto::all();
-        return view("/Menu/Admon/indexPlatillos")->with(['productos' => $productos]);
-    }
-    public function indexBebidas()
-    {
-        $productos = Producto::all();
-        return view("/Menu/Admon/indexBebidas")->with(['productos' => $productos]);
-    }
-    
-    public function indexComplementos(Request $request){
-        
-        $productos = Producto::whereTipo(0);
+        $productos = Producto::whereTipo(2);
 
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             $estado = intval($request->input('estado')); //recuperar y convertir el valor enviado por AJAX (data: { estado: 0 o 1})            
 
             if ($estado)
                 $productos = $productos->whereEstado(1)->get();
             else
-                $productos = $productos->whereEstado(0)->get();      
+                $productos = $productos->whereEstado(0)->get();
 
             return datatables()->of($productos)->toJson();
-        }        
+        }
+
+        return view("/Menu/Admon/indexPlatillos");
+    }
+    public function indexBebidas(Request $request)
+    {
+        $productos = Producto::whereTipo(1);
+
+        if ($request->ajax()) {
+
+            $estado = intval($request->input('estado')); //recuperar y convertir el valor enviado por AJAX (data: { estado: 0 o 1})            
+
+            if ($estado)
+                $productos = $productos->whereEstado(1)->get();
+            else
+                $productos = $productos->whereEstado(0)->get();
+
+            return datatables()->of($productos)->toJson();
+        }
+
+        return view("/Menu/Admon/indexBebidas")->with(['productos' => $productos]);
+    }
+
+    public function indexComplementos(Request $request)
+    {
+
+        $productos = Producto::whereTipo(0);
+
+        if ($request->ajax()) {
+
+            $estado = intval($request->input('estado')); //recuperar y convertir el valor enviado por AJAX (data: { estado: 0 o 1})            
+
+            if ($estado)
+                $productos = $productos->whereEstado(1)->get();
+            else
+                $productos = $productos->whereEstado(0)->get();
+
+            return datatables()->of($productos)->toJson();
+        }
 
         return view("/Menu/Admon/indexComplementos");
     }
 
 
-    public function pruebaAdmon(Request $request){
+    public function pruebaAdmon(Request $request)
+    {
 
         $productos = Producto::all();
 
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             return datatables()->of($productos)->toJson();
         }

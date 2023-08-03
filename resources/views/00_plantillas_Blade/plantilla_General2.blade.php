@@ -32,10 +32,16 @@
     <title>Villa Crisol - @yield('title') </title>
 
     <style media="screen">
-
-        .resaltado {
-            background-color: yellow; /* O el estilo que desees para resaltar la fila */
+        .delete {
+            background-color: rgba(255, 0, 0, 0.16) !important;
+            /* O el estilo que desees para resaltar la fila */
         }
+
+        .activate {
+            background-color: rgba(111, 143, 175, 0.2) !important;
+            /* O el estilo que desees para resaltar la fila */
+        }
+
         li:active a,
         li:focus-visible,
         li:hover {
@@ -59,8 +65,8 @@
             color: rgb(111, 143, 175);
         }
 
-        .modalStyle{
-            font-family: Calibri; 
+        .modalStyle {
+            font-family: Calibri;
             font-size: 18px;
         }
 
@@ -88,64 +94,72 @@
         }
 
         .fila-marca {
-            background-color: #e06464 !important; /* Color de fondo rojo */
-            color: #FFFFFF; /* Texto en color blanco */
+            background-color: #e06464 !important;
+            /* Color de fondo rojo */
+            color: #FFFFFF;
+            /* Texto en color blanco */
         }
 
 
         .fila-marca-sin-existencia {
-            background-color: #fff700 !important; /* Color de fondo rojo */
-            color: #000000; /* Texto en color blanco */
+            background-color: #fff700 !important;
+            /* Color de fondo rojo */
+            color: #000000;
+            /* Texto en color blanco */
         }
 
-        .img-perfils, .topbar .nav-item .nav-link .img-perfils {
+        .img-perfils,
+        .topbar .nav-item .nav-link .img-perfils {
             height: 2.3rem;
             width: 2.3rem;
             margin-top: 20px;
             margin-left: 5px;
         }
+
         .rounded-circulo {
-            border-radius: 50%!important;
+            border-radius: 50% !important;
         }
 
-    .dropdown-menu {
-    --bs-dropdown-min-width: 5rem;
-    --bs-dropdown-spacer: 5px;
-    --bs-dropdown-font-size: 1rem;
-    --bs-dropdown-border-color: var(--bs-border-color-translucent);
-    --bs-dropdown-border-radius: 0.375rem;
-    --bs-dropdown-border-width: 1px;
-    --bs-dropdown-item-padding-y: 0.25rem;
-    position: absolute;
-    margin-right: 0.8px;
-    font-size: var(--bs-dropdown-font-size);
-    color: var(--bs-dropdown-color);
-    text-align: left;
-    list-style: none;
-    background-color: var(--bs-dropdown-bg);
-    background-clip: padding-box;
-    border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
-    border-radius: var(--bs-dropdown-border-radius);
-    }
+        .dropdown-menu {
+            --bs-dropdown-min-width: 5rem;
+            --bs-dropdown-spacer: 5px;
+            --bs-dropdown-font-size: 1rem;
+            --bs-dropdown-border-color: var(--bs-border-color-translucent);
+            --bs-dropdown-border-radius: 0.375rem;
+            --bs-dropdown-border-width: 1px;
+            --bs-dropdown-item-padding-y: 0.25rem;
+            position: absolute;
+            margin-right: 0.8px;
+            font-size: var(--bs-dropdown-font-size);
+            color: var(--bs-dropdown-color);
+            text-align: left;
+            list-style: none;
+            background-color: var(--bs-dropdown-bg);
+            background-clip: padding-box;
+            border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
+            border-radius: var(--bs-dropdown-border-radius);
+        }
 
-    .dropdown .dropdown-menu {
-      font-size: .85rem;
-    }
+        .dropdown .dropdown-menu {
+            font-size: .85rem;
+        }
 
-    .dropdown-divider {
-      height: 0;
-      margin: .6rem 0;
-      overflow: hidden;
-      border-top: 1px solid #eaecf4;
-    }
+        .dropdown-divider {
+            height: 0;
+            margin: .6rem 0;
+            overflow: hidden;
+            border-top: 1px solid #eaecf4;
+        }
 
-    .dropdown-menu.dropdown-menu-right {
-        margin-right: 10px;
-        right: 0; /* Posiciona el menú desplegable a la derecha */
-        left: auto; /* Asegura que el menú no se extienda a la izquierda */
-    }
-
+        .dropdown-menu.dropdown-menu-right {
+            margin-right: 10px;
+            right: 0;
+            /* Posiciona el menú desplegable a la derecha */
+            left: auto;
+            /* Asegura que el menú no se extienda a la izquierda */
+        }
     </style>
+
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -180,8 +194,8 @@
 
                             <li class="">
                                 <a href="javascript:;" class="nav-link text-white font-weight-bold px-0"
-                                     id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                     <img class="img-perfils rounded-circulo" src="/{{ Auth::user()->imagen}}" >
+                                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img class="img-perfils rounded-circulo" src="/{{ Auth::user()->imagen }}">
                                 </a>
                             </li>
 
@@ -292,14 +306,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    @if(auth()->user()->isAdmin())  <!--Solo mostrar a usuarios con permisos de crear, editar y eliminar usuarios-->
-                    <a class="nav-link " href="{{ route('usuarios.users') }}">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-users text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Usuarios</span>
-                    </a>
+                    @if (auth()->user()->isAdmin())
+                        <!--Solo mostrar a usuarios con permisos de crear, editar y eliminar usuarios-->
+                        <a class="nav-link " href="{{ route('usuarios.users') }}">
+                            <div
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-users text-info text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Usuarios</span>
+                        </a>
                     @endif
                 </li>
             </ul>
@@ -337,8 +352,7 @@
             }
         </script>
 
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in "
-            aria-labelledby="userDropdown">
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="userDropdown">
             <a class="dropdown-item" href="{{ route('usuarios.perfil') }}">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Perfil
@@ -350,9 +364,9 @@
 
             <div class="dropdown-divider"></div>
 
-            <a class="dropdown-item" href="{{ route('cerrarSes.cerrar') }}" >
+            <a class="dropdown-item" href="{{ route('cerrarSes.cerrar') }}">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Cerrar sesión
+                Cerrar sesión
             </a>
         </div>
 
@@ -363,9 +377,54 @@
         <div class="row container-fluid footer font-robo" style="padding: 0; margin:0;">
             @yield('pie')
         </div>
+
+
+        {{-- MODALES PARA MENÚ --}}
+
+        <!-- ========== Modal para eliminar ========== -->
+        <div class="modal fade" id="modalDeleteProductos" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h4 class="modal-title font-weight-bolder text-white" id="staticBackdropLabel"><i
+                                class="fa fa-trash pe-2"></i>Eliminar producto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modalStyle">¿Desea eliminar este producto?</p>
+                    </div>
+                    <div class="modal-footer small">
+                        <button id="btnConfirmDeleteProduct" class="btn btn-danger">Si</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== Modal para activar ========== -->
+        <div class="modal fade" id="modalActivarProductos" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-info">
+                        <h4 class="modal-title font-weight-bolder text-white" id="staticBackdropLabel"><i
+                                class="fa-solid fa-toggle-on pe-2"></i>Disponibilidad</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modalStyle">¿Desea cambiar el estado del producto?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="button" id="btnConfirmarActivacion">Si</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"></script>
     <script src="/JQuery/jquery-3.7.0.js"></script>
     <script src="/JQuery/jquery-3.7.0.min.js"></script>
     <script src="/DataTables/DataTables-1.13.4/js/jquery.dataTables.js"></script>
@@ -374,9 +433,9 @@
     <script src="/assets/datepicker/moment.min.js"></script>
     <script src="/assets/datepicker/daterangepicker.js"></script>
     <script>
-        $('#example').DataTable( {
+        $('#example').DataTable({
             responsive: true
-        } );
+        });
     </script>
     <script>
         //DATATABLES para Menú
@@ -384,78 +443,74 @@
 
         //DATATABLES para Kiosko
         $('.kiosko').DataTable();
-
-
     </script>
     <script>
         @if (isset($idProducto))
-        var numeroPagina;
-        let table = $('#examples').DataTable({
-            "createdRow": function(row, data, dataIndex) {
-                if (data[1] === '{{ $idProducto }}') {
-                    $(row).addClass('fila-marca');
+            var numeroPagina;
+            let table = $('#examples').DataTable({
+                "createdRow": function(row, data, dataIndex) {
+                    if (data[1] === '{{ $idProducto }}') {
+                        $(row).addClass('fila-marca');
 
-                    numeroPagina = Math.floor(dataIndex / 10);
-                    console.log("La fila " + (dataIndex + 1) + " se encuentra en la página: " + numeroPagina);
+                        numeroPagina = Math.floor(dataIndex / 10);
+                        console.log("La fila " + (dataIndex + 1) + " se encuentra en la página: " +
+                            numeroPagina);
 
-                }
+                    }
 
-                if(parseFloat( data[2]) <= 5 && data[4] === 'Polvo'){
-                    $(row).addClass('fila-marca-sin-existencia');
-                }
+                    if (parseFloat(data[2]) <= 5 && data[4] === 'Polvo') {
+                        $(row).addClass('fila-marca-sin-existencia');
+                    }
 
-                if(parseFloat( data[2]) <= 4 && data[4] === 'Liquido'){
-                    $(row).addClass('fila-marca-sin-existencia');
-                }
+                    if (parseFloat(data[2]) <= 4 && data[4] === 'Liquido') {
+                        $(row).addClass('fila-marca-sin-existencia');
+                    }
 
-                console.log(data[4]);
-            },
-            "pageLength": 10,
-            "columnDefs": [
-            {
-                "targets": [1,2], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
-                "visible": false
-            }
-        ]
-        });
+                    console.log(data[4]);
+                },
+                "pageLength": 10,
+                "columnDefs": [{
+                    "targets": [1,
+                        2
+                    ], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
+                    "visible": false
+                }]
+            });
 
-        table.page(numeroPagina).draw(false);
+            table.page(numeroPagina).draw(false);
         @else
-        let table = $('#examples').DataTable({
-            "createdRow": function(row, data, dataIndex) {
+            let table = $('#examples').DataTable({
+                "createdRow": function(row, data, dataIndex) {
 
-                if(parseFloat( data[2]) <= 5 && data[4] === 'Polvo'){
-                    $(row).addClass('fila-marca-sin-existencia');
-                }
+                    if (parseFloat(data[2]) <= 5 && data[4] === 'Polvo') {
+                        $(row).addClass('fila-marca-sin-existencia');
+                    }
 
-                if(parseFloat( data[2]) <= 4 && data[4] === 'Liquido'){
-                    $(row).addClass('fila-marca-sin-existencia');
-                }
+                    if (parseFloat(data[2]) <= 4 && data[4] === 'Liquido') {
+                        $(row).addClass('fila-marca-sin-existencia');
+                    }
 
-                console.log(data[4]);
-            },
-            "displayStart": 0,
-            "pageLength": 10,
-            "columnDefs": [
-            {
-                "targets": [1,2], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
-                "visible": false
-            }
-        ]
-        });
-
+                    console.log(data[4]);
+                },
+                "displayStart": 0,
+                "pageLength": 10,
+                "columnDefs": [{
+                    "targets": [1,
+                        2
+                    ], // Índice de la columna que deseas ocultar (supongamos que es la columna 2)
+                    "visible": false
+                }]
+            });
         @endif
-
     </script>
 
-<script>
-    // Agrega un evento de clic para mostrar el dropdown
-    document.getElementById('dropdownMenuButton').addEventListener('click', function() {
-        var dropdownMenu = document.querySelector('.dropdown-menu');
-        dropdownMenu.classList.toggle('show');
-    });
-</script>
-
+    <script>
+        // Agrega un evento de clic para mostrar el dropdown
+        document.getElementById('dropdownMenuButton').addEventListener('click', function() {
+            var dropdownMenu = document.querySelector('.dropdown-menu');
+            dropdownMenu.classList.toggle('show');
+        });
+    </script>
 
     <script>
         (function() {
@@ -584,9 +639,9 @@
                                 2)); // Muestra el sub_total con 2 decimales
                             $('#total').val(total.toFixed(
                                 2)); // Muestra la descripción del producto
-                                $('#descrip').text(descrip)
-                                // Actualiza la imagen del producto
-                    $('#imagen-producto').attr('src', response.imagen);
+                            $('#descrip').text(descrip)
+                            // Actualiza la imagen del producto
+                            $('#imagen-producto').attr('src', response.imagen);
                         }
                     },
                     error: function(xhr) {
@@ -599,7 +654,7 @@
         });
     </script>
     <script src="/js/global.js"></script>
-    <script src="/js/kiosko.js"></script>
+    {{-- <script src="/js/kiosko.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -620,6 +675,7 @@
 
     <script src="/js/argon-dashboard.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 
 </html>

@@ -16,8 +16,8 @@ class ReservacionController extends Controller
         $reservaciones = Reservacion::all();
 
         if ($request->ajax()) {
-            $freeKioskos = Kiosko::join('reservacions', 'reservacions.kiosko_id', '=', 'kioskos.id')->select('codigo as kiosko', 'nombreCliente', 'fecha')->get(); //join para obtener la fecha, el nombre y el codigo de los kiosko 
-            return response()->json($freeKioskos);
+            $reservacionesKioskos = Kiosko::join('reservacions', 'reservacions.kiosko_id', '=', 'kioskos.id')->select('codigo as kiosko', 'nombreCliente', 'fecha')->get(); //join para obtener la fecha, el nombre y el codigo de los kiosko 
+            return response()->json($reservacionesKioskos);
         }
 
         return view('Reservaciones.ReserAdmon.Quiosco.kioskoReservaciones', compact('reservaciones'));
