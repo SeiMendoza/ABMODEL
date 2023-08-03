@@ -413,3 +413,8 @@ Route::get('/platillos', [CartController::class, 'platillos'])->middleware('auth
 Route::get('/complementos', [CartController::class, 'complementos'])->middleware('auth')->name('cart.complementos');
 
 Route::resource('/pedido/todo', DetallesPedidoController::class);
+
+//Rutas para manejo de errores
+Route::get('error', function () {
+  abort(500);
+});
