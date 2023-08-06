@@ -19,16 +19,9 @@ class ReservacionTotalController extends Controller
     // busqueda
     public function reservaLocal(Request $request)
     {
-        /* $texto=trim($request->get('busqueda'));
-        $reservacion = reservacion_total::where('Nombre_Cliente', 'like', '%' . $texto . '%')->paginate(10); */
         $reservacion = reservacion_total::where('estado', 0)->orderby('Fecha', 'ASC')->get();
         return view('Reservaciones/ReserLocal/Localindex', compact('reservacion'));
     }
-
-    /* public function orden(){
-        $reservacion = reservacion_total::orderBy('Fecha', 'ASC')->get();
-        return view('/Reservaciones/ReserLocal/Localindex', compact('reservacion'));
-    } */
 
 
     public function create(){
@@ -50,9 +43,9 @@ class ReservacionTotalController extends Controller
             'Fecha' => 'required|date|after:'.$min,   
             'HoraEntrada' => 'required',
             'HoraSalida' => 'required|after:HoraEntrada', 
-            'Total' => 'required|min:1500|max:15000|numeric', 
+            'Total' => 'required|min:1000|max:15000|numeric', 
             'FormaPago' => 'required',
-            'Anticipo' => 'required|min:500|max:15000|numeric',
+            'Anticipo' => 'required|min:300|max:15000|numeric',
             'Pendiente' => 'required',
         ],[
 
@@ -152,9 +145,9 @@ class ReservacionTotalController extends Controller
             'Fecha' => 'required|date|after:'.$min,   
             'HoraEntrada' => 'required',
             'HoraSalida' => 'required|after:HoraEntrada',
-            'Total' => 'required|min:1500|max:15000|numeric', 
+            'Total' => 'required|min:1000|max:15000|numeric', 
             'FormaPago' => 'required',
-            'Anticipo' => 'required|min:500|max:15000|numeric',
+            'Anticipo' => 'required|min:300|max:15000|numeric',
             'Pendiente' => 'required',
         ],[
             'Nombre_Cliente.required' => 'El nombre es obligatorio',

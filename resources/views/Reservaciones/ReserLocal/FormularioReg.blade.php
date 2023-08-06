@@ -72,19 +72,19 @@
                             <label for="Tipo_Reservacion" style="margin-left: 0;" >Tipo de Reservación:</label>
                             <select name="Tipo_Reservacion" required onchange="quitarerror()" class="form-control border-radius-sm ">
                                     @if (old('Tipo_Reservacion'))
-                                        @if (old('Tipo_Reservacion') === 'De Día (Menor Costo)')
-                                            <option style="display: none" selected="selected" value="De Día (Menor Costo)">De Día (Menor Costo)</option>
+                                        @if (old('Tipo_Reservacion') === 'De Día')
+                                            <option style="display: none" selected="selected" value="De Día">De Día</option>
                                         @else
-                                            @if (old('Tipo_Reservacion') === 'De Noche (Mayor Costo)')
-                                                <option style="display: none" selected="selected" value="De Noche (Mayor Costo)">De Noche (Mayor Costo)</option>
+                                            @if (old('Tipo_Reservacion') === 'De Noche')
+                                                <option style="display: none" selected="selected" value="De Noche">De Noche</option>
                                             @else
                                             @endif
                                         @endif
                                     @else
                                         <option disabled="disabled" selected="selected" value="">-- Seleccione Uno --</option>
                                     @endif
-                                    <option value="De Día (Menor Costo)">De Día (Menor Costo)</option>
-                                    <option value="De Noche (Mayor Costo)">De Noche (Mayor Costo)</option>
+                                    <option value="De Día">De Día</option>
+                                    <option value="De Noche">De Noche</option>
                                 </select>
                             @error('Tipo_Reservacion')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
