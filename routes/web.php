@@ -40,56 +40,37 @@ use Illuminate\Support\Facades\Auth;
 /**Home */
 Route::get('/', [LoginController::class, 'show'])
   ->name('login');
-Route::get('/ab', [HomeController::class, 'index'])->middleware('auth')
-  ->name('index');
-
-Route::get('/tabla', [HomeController::class, 't'])
-  ->name('t');
-Route::get('/billing', [HomeController::class, 'b'])
-  ->name('b');
 
 /** REGISTRO Y LOGIN */
 
-Route::get('/listaUsuarios', [RegistroController::class, 'users'])->middleware('auth')
-  ->name('usuarios.users');
+Route::controller(RegistroController::class)->middleware('auth')->group(function () {
 
-Route::get('/usuarios/create', [RegistroController::class, 'create'])->middleware('auth')
-  ->name("usuarios.create");
+  Route::get('/listaUsuarios', 'users')->name('usuarios.users');
+  Route::get('/usuarios/create', 'create')->name("usuarios.create");
+  Route::post('/usuarios/create', 'store')->name("usuarios.store");
+  Route::get('/usuarios/{id}/edit', 'edit')->name("usuarios.editar")->where('id', '[0-9]+');
+  Route::put('/usuarios/{id}/edit', 'update')->name('usuarios.update')->where('id', '[0-9]+');
+  Route::delete('usuarios/{id}/borrar', 'destroy')->name('usuarios.destroy');
+});
 
-Route::post('/usuarios/create', [RegistroController::class, 'store'])->middleware('auth')
-  ->name("usuarios.store");
-
-Route::get('/usuarios/{id}/edit', [RegistroController::class, 'edit'])->middleware('auth')
-  ->name("usuarios.editar")->where('id', '[0-9]+');
-
-Route::put('/usuarios/{id}/edit', [RegistroController::class, 'update'])->middleware('auth')
-  ->name('usuarios.update')->where('id', '[0-9]+');
-
-Route::delete('usuarios/{id}/borrar', [RegistroController::class, 'destroy'])->middleware('auth')
-  ->name('usuarios.destroy');
 
 
 /**PERFIL USUARIO */
+
 Route::get('/login', [LoginController::class, 'show']);
-
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('auth')->name('cerrarSes.cerrar');
+Route::get('/perfil', [LoginController::class, 'perfil'])->middleware('auth')->name('usuarios.perfil');
+Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])->middleware('auth')->name("usuarios.editarPerfil");
+Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])->middleware('auth')->name('usuarios.updatePerfil');
 
-Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('auth')
-  ->name('cerrarSes.cerrar');
-
-Route::get('/perfil', [LoginController::class, 'perfil'])->middleware('auth')
-  ->name('usuarios.perfil');
-
-Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])->middleware('auth')
-  ->name("usuarios.editarPerfil");
-
-Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])->middleware('auth')
-  ->name('usuarios.updatePerfil');
 
 
 
 /* Rutas Administracion de Restaurante */
 Route::controller(HomeController::class)->middleware('auth')->group(function () {
+
+  Route::get('/ab', 'index')->name('index');
 
   Route::get('/admonRestauranteP', 'indexPlatillos')->name('menuAdmon.platillos');
   Route::post('/admonRestauranteP', 'indexPlatillos')->name('menuAdmon.platillos');
@@ -107,19 +88,11 @@ Route::controller(HomeController::class)->middleware('auth')->group(function () 
 
 /** Rutas de administración de Productos */
 
+Route::controller(HomeController::class)->middleware('auth')->group(function () {
 
-Route::get('/profile', [HomeController::class, 'p'])->middleware('auth')
-  ->name('p');
-Route::get('/sing', [HomeController::class, 's'])->middleware('auth')
-  ->name('s');
-Route::get('/rtl', [HomeController::class, 'r'])->middleware('auth')
-  ->name('r');
-Route::get('dashboard', [HomeController::class, 'd'])->middleware('auth')
-  ->name('d');
-Route::get('/sing-up', [HomeController::class, 'u'])->middleware('auth')
-  ->name('u');
-Route::get('/registro', [HomeController::class, 'registro'])->middleware('auth')
-  ->name('registro');
+
+});
+
 
 /*****************************
   Rutas Para Menú de usuario
@@ -416,5 +389,5 @@ Route::resource('/pedido/todo', DetallesPedidoController::class);
 
 //Rutas para manejo de errores
 Route::get('error', function () {
-  abort(500);
+  abort(503);
 });

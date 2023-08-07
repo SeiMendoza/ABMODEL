@@ -14,6 +14,7 @@ class ReservacionController extends Controller
     public function index2(Request $request)
     {
         $reservaciones = Reservacion::all();
+        $reservaciones = Reservacion::join('kioskos', 'reservacions.kiosko_id', '=', 'kioskos.id')->select('reservacions.*', 'codigo')->get();
 
         if ($request->ajax()) {
             $reservacionesKioskos = Kiosko::join('reservacions', 'reservacions.kiosko_id', '=', 'kioskos.id')->select('codigo as kiosko', 'nombreCliente', 'fecha')->get(); //join para obtener la fecha, el nombre y el codigo de los kiosko 
@@ -40,12 +41,12 @@ class ReservacionController extends Controller
         $min = date('d-m-Y', $min = strtotime($fecha_act));
 
         $request->validate([
-            'name' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'name' => 'required|regex:/^[\pL\s]+$/u|max:50|min:3',
             'celular' => 'required|numeric|regex:/^[2,3,8,9][0-9]{7}+$/|min_digits:8|max_digits:8|',
             'fecha' => 'required|date|after_or_equal:' . $min,
             'inicio' => 'required',
             'fin' => 'required|after:inicio',
-            'tipoE' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'tipoE' => 'required|regex:/^[\pL\s]+$/u|max:50|min:3',
             'kiosko' => 'required',
             'cantidadN' => 'min:0|max:20|numeric|min_digits:1|max_digits:3',
             'precioN' => 'min:30|max:100|numeric|min_digits:1|max_digits:3',
@@ -78,7 +79,7 @@ class ReservacionController extends Controller
             'tipoE.max' => 'El nombre es muy extenso',
             'tipoE.min' => 'El nombre es muy corto',
 
-            'kiosko.required' => 'La hora es obligatoria',
+            'kiosko.required' => 'El kisoko es obligatorio',
 
             'cantidad.required' => 'La cantidad no puede estar vacía',
             'cantidad.min' => 'La cantidad es muy baja',

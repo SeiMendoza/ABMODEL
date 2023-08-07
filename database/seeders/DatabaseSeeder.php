@@ -21,17 +21,18 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([UserSeeder::class,
-                        ProductoSeeder::class,
-                        PiscinaTipoSeeder::class,
-                        PiscinaUsoSeeder::class,
-                        PiscinaSeeder::class,
-                        //KioskoSeeder::class,
-                        //MesaSeeder::class,
-                        ReservacionSeeder::class,
-                        
-                        //PedidoSeeder::class,
-                        //DetallesUsuarioSeeder::class,
-                    ]);
+        $this->call([
+            UserSeeder::class,
+            ProductoSeeder::class,
+            PiscinaTipoSeeder::class,
+            PiscinaUsoSeeder::class,
+            PiscinaSeeder::class,
+            KioskoSeeder::class,
+                //MesaSeeder::class,
+            ReservacionSeeder::class,
+
+            //PedidoSeeder::class,
+            //DetallesUsuarioSeeder::class,
+        ]);
     }
 }

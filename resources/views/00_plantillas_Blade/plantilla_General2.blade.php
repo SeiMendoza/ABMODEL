@@ -334,7 +334,7 @@
                     showConfirmButton: false,
                     toast: true,
                     background: '#fff',
-                    timer: 5500
+                    timer: 2000
                 })
             }
             var ms = '¡Existe un error, revise los datos!';
@@ -685,6 +685,19 @@
 
     <script src="/js/argon-dashboard.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    {{-- <script>
+        $(document).on('click', '.eventModalPerfil', function(e) {
+            setTimeout(() => {
+                $('#modalPerfil').hide();
+            }, 0);
+
+        })
+
+        $('#modalOpen').click(function(e) {
+            $('#modalPerfil').show();
+        })
+    </script> --}}
 
 </body>
 

@@ -29,8 +29,8 @@
                                 <div class="font-robo form-group">
                                     <label for="name" style="margin-left: 0;">Nombre:</label>
                                     <input class="form-control border-radius-sm" type="text"
-                                        placeholder="Nombre del cliente" name="name" id="name" minlength="7"
-                                        maxlength="7" value="{{ old('name') }}" required>
+                                        placeholder="Nombre del cliente" name="name" id="name" minlength="3"
+                                        maxlength="30" value="{{ old('name') }}" required>
                                     @error('name')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror
@@ -40,7 +40,7 @@
                                 <div class="font-robo form-group">
                                     <label for="celular" style="margin-left: 0;">Celular: </label>
                                     <input name="celular" type="text" class="form-control border-radius-sm"
-                                        id="celular" maxlength="8" minlength="8" required
+                                        id="celular" maxlength="8" minlength="8" required numeric
                                         placeholder="Ingrese un número de celular" value="{{ old('celular') }}">
                                     @error('celular')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
@@ -119,7 +119,7 @@
                                     <label for="cantidadN" style="margin-left: 0;">Cantidad de niños: </label>
                                     <input name="cantidadN" type="number" class="form-control border-radius-sm"
                                         id="cantidadN" max="20" min="0" maxlength="3" minlength="1"
-                                        step="0.001" oninput="calcular()" required
+                                        step="1" oninput="calcular()" required
                                         placeholder="Cantidad de niños a asistir" value="{{ old('cantidadN') }}">
                                     @error('cantidadN')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
@@ -143,7 +143,7 @@
                                     <label for="cantidad" style="margin-left: 0;">Cantidad de Adultos: </label>
                                     <input name="cantidad" type="number" class="form-control border-radius-sm"
                                         id="cantidad" max="20" min="2" maxlength="3" minlength="1"
-                                        step="0.001" oninput="calcular()" required
+                                        step="1" oninput="calcular()" required
                                         placeholder="Cantidad de personas a asistir" value="{{ old('cantidad') }}">
                                     @error('cantidad')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>

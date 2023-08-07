@@ -3,6 +3,7 @@ $(function () {
     console.log('Document cargado'); // message start
     var comprobarNombre = $('#name').val();
 
+
     if (comprobarNombre.length == 0) { //comprobar si el nombre está vacío, en caso de estarlo cargar la fecha de hoy.
         var fechaActual = new Date();
         // Formatear la fecha actual para el campo de fecha (YYYY-MM-DD)
@@ -45,7 +46,16 @@ $(function () {
 })
 
 function addSelectKioskos(kiosko, fecha, nombre) {
+
+    $c = 1;
+
     //ajax anidado para obtener las fechas en que hay reservaciones
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $.ajax({
         url: '/kiosko/reservaciones',
         method: 'GET',
@@ -55,7 +65,7 @@ function addSelectKioskos(kiosko, fecha, nombre) {
             console.log(kiosko);
             var disponible = true;
 
-            if ($('#kiosko').html().trim() === '') { //para que no se repita 2 veces el ingreso en el select de kiosko (provicional)
+            if ($('#kiosko').html().trim() === '') { //para que no se repita 2 veces el ingreso en el select de kiosko (provisional)
 
                 for (let i = 0; i < kiosko.length; i++) {
                     for (let j = 0; j < reservacion.length; j++) {
@@ -64,10 +74,13 @@ function addSelectKioskos(kiosko, fecha, nombre) {
 
                             console.log('Reservacion de ' + reservacion[j].nombreCliente + ' en el kisoko ' + kiosko[i].codigo); //confirmacion
 
-                            if (!(nombre == reservacion[j].nombreCliente)) { // si la reservacion registrada es de la misma persona, dar disponibilidad al kisoko (edicion de reservación)
-                                disponible = false;
+                            if ((nombre == reservacion[j].nombreCliente)) { // si la reservacion registrada es de la misma persona, dar disponibilidad al kisoko (edicion de reservación)                                
+                                $('#kiosko').append(new Option("-- " + kiosko[i].codigo + " --", kiosko[i].id)); //Agregar opcion al select
+                                $c = kiosko[i].id; //obtener el value del kisoko seleccionado (edición)
                                 console.log('Misma!!');
                             }
+
+                            disponible = false;
 
                         }
                     }
@@ -80,6 +93,9 @@ function addSelectKioskos(kiosko, fecha, nombre) {
                     disponible = true;
                 }
             }
+
+            if (!nombre.trim() == '') //comprobamos si existe un nombre para evitar que se selccione un kisoko cuando es un registro nuevo
+                $('#kiosko').val($c);
 
             //Comprobación si después de iterar en todos los kisokos no hay ninguno disponible
             if ($('#kiosko').html().trim() === '')
