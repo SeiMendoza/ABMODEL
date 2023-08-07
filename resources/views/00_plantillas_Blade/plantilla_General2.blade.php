@@ -192,7 +192,7 @@
                                 @yield('b')
                             </li>
 
-                            <li class="">
+                            <li class="nav-item dropdown">
                                 <a href="javascript:;" class="nav-link text-white font-weight-bold px-0"
                                     id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img class="img-perfils rounded-circulo" src="/{{ Auth::user()->imagen }}">
@@ -352,15 +352,15 @@
             }
         </script>
 
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="userDropdown">
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="{{ route('usuarios.perfil') }}">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Perfil
             </a>
-            <a class="dropdown-item" href="#">
+            <!--<a class="dropdown-item" href="#">
                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                 Información
-            </a>
+            </a>-->
 
             <div class="dropdown-divider"></div>
 
@@ -432,6 +432,16 @@
     <script src="/assets/select2/select2.min.js"></script>
     <script src="/assets/datepicker/moment.min.js"></script>
     <script src="/assets/datepicker/daterangepicker.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Ocultar menú desplegable
+            $('.dropdown-menu a').click(function () {
+                $('.dropdown-menu').removeClass('show');
+            });
+        });
+    </script>
+
     <script>
         $('#example').DataTable({
             responsive: true

@@ -50,8 +50,8 @@
     }
 
     .img-perfil, .topbar .nav-item .nav-link .img-perfil {
-        height: 2rem;
-        width: 2rem;
+        height: 2.3rem;
+        width: 2.3rem;
     }
     .rounded-circ {
       border-radius: 50%!important;
@@ -212,10 +212,10 @@
                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                              Perfil
                                         </a>
-                                        <a class="dropdown-item" href="#">
+                                        <!--<a class="dropdown-item" href="#">
                                             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                               Información
-                                        </a>
+                                        </a>-->
                                       
                                         <div class="dropdown-divider"></div>
                                 
