@@ -88,7 +88,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
                         </a>
                     </td>
                     <td>
-                        <a href="{{ route('producto.edit', ['id' => $p->id]) }}">
+                        <a href="{{ route('prodpiscina.edit', ['id' => $p->id]) }}">
                             <i class="fa-solid fa-edit text-success" style="color:rgb(33, 195, 247)"></i>
                     </td>
                     <!----icono para borrar el producto------>
@@ -220,7 +220,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
             Swal.fire({
                 position: 'top-end'
                 , icon: 'warning'
-                , title: 'La cantidad es muy pequeño'
+                , title: 'La cantidad es muy pequeña'
                 , showConfirmButton: false
                 , toast: true
                 , background: '#fff'
@@ -270,7 +270,7 @@ style="position: absolute; top:100%;left:1%">Productos de piscina</h3>--->
             Swal.fire({
                 position: 'top-end'
                 , icon: 'warning'
-                , title: 'La cantidad es muy pequeño'
+                , title: 'La cantidad es muy pequeña'
                 , showConfirmButton: false
                 , toast: true
                 , background: '#fff'

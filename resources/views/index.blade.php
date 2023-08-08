@@ -50,8 +50,8 @@
     }
 
     .img-perfil, .topbar .nav-item .nav-link .img-perfil {
-        height: 2.3rem;
-        width: 2.3rem;
+        height: 2rem;
+        width: 2rem;
     }
     .rounded-circ {
       border-radius: 50%!important;
@@ -173,7 +173,7 @@
                                         </div>
                                     </div>
                                     @foreach($datosalerta as $index => $d)
-                                    <a class="dropdown-item border-radius-md" href="{{ Route('prodpiscina.index',['id_producto' => $d->id]) }}">
+                                    <a class="dropdown-item border-radius-md" href="{{ route('prodpiscina.edit', ['id' => $d->id]) }}">
                                         <div class="d-flex py-1">
                                             <div class="avatar avatar-sm me-3 my-auto bg-{{ $colors[$index % count($colors)] }}">
                                                 <i class="fas fa-swimmer text-white"></i>
@@ -212,10 +212,10 @@
                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                              Perfil
                                         </a>
-                                        <!--<a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="#">
                                             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                               Información
-                                        </a>-->
+                                        </a>
                                       
                                         <div class="dropdown-divider"></div>
                                 

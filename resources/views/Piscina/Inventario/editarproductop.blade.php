@@ -119,6 +119,10 @@
         } else {
             identificador.innerHTML = " "; // Si no se selecciona ninguna opción, se limpia el contenido del span
         }
+
+        function cancelar(ruta) {
+        window.location.href = "{{ route('prodpiscina.index') }}";
+    }
     }
 </script>
 @endsection

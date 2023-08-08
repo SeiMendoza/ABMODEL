@@ -257,7 +257,7 @@ Route::get('/piscina/create', [PiscinaController::class, 'create'])->middleware(
 Route::post('/piscina/create', [PiscinaController::class, 'store'])->middleware('auth')
   ->name('piscina.store');
 Route::get('piscina/{id}/editar', [PiscinaController::class, 'edit'])->middleware('auth')
-  ->name('producto.edit');
+  ->name('prodpiscina.edit');
 Route::delete('/piscina/{id}/borrar', [PiscinaController::class, 'destroy'])->middleware('auth')
   ->name('prodpiscina.destroy')->where('id', '[0-9]+');
 Route::put('piscina/{id}/edicion', [PiscinaController::class, 'update'])->middleware('auth')
