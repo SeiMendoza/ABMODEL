@@ -224,13 +224,13 @@ class PiscinaController extends Controller
         $piscina = Piscina::FindOrFail($id);
 
         $rules=[
-            'cantidad' => 'required|numeric|min:1|max:'.$piscina->peso
+            'cantidad' => 'required|numeric|min:0.4|max:'.$piscina->peso
         ];
 
         $mensaje=[
             'cantidad.required' => 'La cantidad no puede estar vacío',
             'cantidad.max' => 'La cantidad es mayor a la existente',
-            'cantidad.min' => 'La cantidad es muy pequeño',
+            'cantidad.min' => 'La cantidad es muy pequeña',
             'cantidad.numeric' => 'La cantidad debe de ser numerico',
         ];
         $this->validate($request,$rules,$mensaje);
