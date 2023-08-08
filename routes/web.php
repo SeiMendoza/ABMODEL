@@ -136,6 +136,9 @@ Route::get('/pedido/caja/detalle/{id}/agregar/{tipo?}', [PedidoUsuarioController
   ->name('Agregar');
 Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::class, 'Acomple'])->middleware('auth')
   ->name('Acomple');
+  //restar a los detalles agregados 
+Route::post('/detallep/{id}/restar/{vista}', [PedidoUsuarioController::class, 'restar'])->middleware('auth')
+->name('detallep.restar');
 //guardar el pedido con los nuevos detalles 
 Route::post('/pedido/caja/{id}/guardar/{detalle_id}', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
   ->name('guardarPedido');

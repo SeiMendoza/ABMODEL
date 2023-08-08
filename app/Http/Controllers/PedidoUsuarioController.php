@@ -335,6 +335,8 @@ class PedidoUsuarioController extends Controller
         $mesa_id = $pedido_actual->mesa_id;
         $mesa = Mesa::findOrFail($mesa_id);
         $quiosco = $mesa->kiosko->id;
+        $mesa->estadoM = 1;
+        $mesa->save();
         // Actualizar los detalles del pedido existente
         foreach ($detalles_actual as $detalle_actual) {
             $detalle_id = $detalle_actual->id;
@@ -563,6 +565,27 @@ class PedidoUsuarioController extends Controller
             $producto->save();
         }
         return redirect()->route('pedidost.detalle', ['id' => $pedido_id])->with('mensaje', 'El detalle del pedido ha sido actualizado exitosamente.');
+    }
+    public function restar($id, $vista)
+{
+    $detalles = DetallesPedido::findOrFail($id);
+    $pedido = $detalles->pedido;
+    $producto = $detalles->producto;
+
+    if ($detalles->cantidad > 1) {
+        $detalles->cantidad = $detalles->cantidad - 1;
+        $detalles->save();
+        if ($vista == 2) {
+            return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Producto actualizado.');
+        }
+    }else{
+    $detalles->delete();
+    }
+        $producto->disponible = $producto->disponible + 1;
+        $producto->save();
+        if ($vista == 2) {
+            return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Producto eliminado.');
+        }
     }
     /**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
     public function PrecioAcompl(Request $request)
