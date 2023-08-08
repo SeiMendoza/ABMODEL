@@ -113,5 +113,38 @@ class ProductoSeeder extends Seeder
             'estado' => 1,
             'tipo' => '0', 
         ]);
+
+        DB::table('productos')->insert([
+            'nombre' => 'Aderezo',
+            'descripcion' => 'Este aderezo agrega un toque especial a tus ensaladas y platillos favoritos.',
+            'precio' => '15',
+            'tamanio' => 'Mediano',
+            'imagen' => 'img/ProductosMenú/Aderezo.jpg',
+            'disponible' => '10',
+            'estado' => 1,
+            'tipo' => '0', 
+        ]);
+
+        DB::table('productos')->insert([
+            'nombre' => 'Salsa',
+            'descripcion' => 'La salsa perfecta para tu platillo favorito.',
+            'precio' => '10',
+            'tamanio' => 'Pequeño',
+            'imagen' => 'img/ProductosMenú/Salsa.jpg',
+            'disponible' => '10',
+            'estado' => 1,
+            'tipo' => '0', 
+        ]);
+
+        DB::table('productos')->insert([
+            'nombre' => 'Encurtido',
+            'descripcion' => 'Este encurtido añade un sabor único y sofisticado a tus platos, convirtiéndose en un acompañamiento versátil para carne asada y pescado frito.',
+            'precio' => '10',
+            'tamanio' => 'Pequeño',
+            'imagen' => 'img/ProductosMenú/Encurtido1.jpg',
+            'disponible' => '10',
+            'estado' => 1,
+            'tipo' => '0', 
+        ]);
     }
 }

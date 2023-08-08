@@ -12,9 +12,9 @@ class ProductoController extends Controller
     public function updateB(Request $request, $id){
 
         $request->validate([
-            'tipo' => 'required|in:3,2,1',
+            'tipo' => 'required|in:0,2,1',
             'nombre' => 'required|max:100|min:3|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/',
-            'descripcion' => 'required|max:100|min:3',
+            'descripcion' => 'required|max:1000|min:3',
             'precio' => 'required|min:1|max:1000|numeric',
             'tamanio' => 'required|max:100|min:3',
             'imagen' => '',
@@ -78,9 +78,9 @@ class ProductoController extends Controller
     public function updateP(Request $request, $id){
 
         $request->validate([
-            'tipo' => 'required|in:3,2,1',
+            'tipo' => 'required|in:0,2,1',
             'nombre' => 'required|max:100|min:3|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/',
-            'descripcion' => 'required|max:100|min:3',
+            'descripcion' => 'required|max:1000|min:3',
             'precio' => 'required|min:1|max:1000|numeric',
             'tamanio' => 'required|max:100|min:3',
             'imagen' => '',
@@ -147,9 +147,9 @@ class ProductoController extends Controller
     public function updateC(Request $request, $id){
 
         $request->validate([
-            'tipo' => 'required|in:3,2,1',
+            'tipo' => 'required|in:0,2,1',
             'nombre' => 'required|max:100|min:3|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/',
-            'descripcion' => 'required|max:100|min:3',
+            'descripcion' => 'required|max:1000|min:3',
             'precio' => 'required|min:1|max:1000|numeric',
             'tamanio' => 'required|max:100|min:3',
             'imagen' => '',

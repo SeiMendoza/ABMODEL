@@ -121,7 +121,7 @@
                                 <div class="col">
                                     <label for=""><strong>Descripción:</strong></label>
                                     <textarea class="form-control border-radius-sm" type="text" placeholder="Ingrese la descripción" name="descripcion"
-                                    maxlength="100" required style="resize:none;  height: 50px;"
+                                    maxlength="1000" required style="resize:none;  height: 50px;"
                                     onkeypress="quitarerror()">{{ old('descripcion', $producto->descripcion) }}</textarea>
                                     @error('descripcion')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>

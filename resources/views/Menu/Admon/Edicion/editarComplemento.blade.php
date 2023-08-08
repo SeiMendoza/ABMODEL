@@ -59,7 +59,7 @@
                             <div class="col">
                                 <label for=""><strong>Tipo de producto:</strong></label>
                                 <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control border-radius-sm">
-                                    <option @if (old('tipo') == 0) selected @endif value="3"{{$producto->tipo === "0" ? 'selected' : ''}}>Complemento</option>
+                                    <option @if (old('tipo') == 0) selected @endif value="0"{{$producto->tipo === "0" ? 'selected' : ''}}>Complemento</option>
                                     <option @if (old('tipo') == 1) selected @endif value="1"{{$producto->tipo === "1" ? 'selected' : ''}}>Bebida</option>
                                     <option @if (old('tipo') == 2) selected @endif value="2"{{$producto->tipo === "2" ? 'selected' : ''}}>Comida</option>
                                 </select>
@@ -122,7 +122,7 @@
                                 <div class="col">
                                     <label for=""><strong>Descripción:</strong></label>
                                     <textarea class="form-control border-radius-sm" type="text" placeholder="Ingrese la descripción" name="descripcion"
-                                    maxlength="100" required style="resize:none; height: 50px;"
+                                    maxlength="1000" required style="resize:none; height: 50px;"
                                     onkeypress="quitarerror()">{{ old('descripcion', $producto->descripcion) }}</textarea>
                                     @error('descripcion')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
