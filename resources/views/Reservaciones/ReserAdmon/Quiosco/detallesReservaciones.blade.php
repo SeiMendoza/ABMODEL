@@ -3,6 +3,8 @@
 @section('miga')
 <li class="breadcrumb-item text-sm " aria-current="page">  
     <a class="opacity-5 text-white" href="{{route('kiosko_res.index')}}">Reservacines de Kioskos</a></li>
+    <li class="breadcrumb-item text-sm " aria-current="page">  
+        <a class="opacity-5 text-white" href="{{route('kiosko_res_t.index')}}">Reservaciones Terminadas</a></li>
 <li class="breadcrumb-item text-sm"><a class="text-white ">Detalles de la reservación </a></li>
 @endsection
 
@@ -139,7 +141,7 @@
                                 $total = $reservacion->precioNinios * $reservacion->cantidadNinios +
                                 $reservacion->precioAdultos * $reservacion->cantidadAdultos;
                             @endphp
-                            <td class="titulo" style="text-align:right;"> L {{ number_format($total, 2, '.', ',') }}  </td>
+                            <td class="titulo"> L {{ number_format($total, 2, '.', ',') }}  </td>
                             <td class="informacion"></td>
                         </tr> 
 
@@ -147,7 +149,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Anticipo</td>
                             <td class="informacion"></td>
-                            <td class="titulo" style="text-align:right">L {{ number_format($reservacion->anticipo, 2, '.', ',') }} </td>
+                            <td class="titulo">L {{ number_format($reservacion->anticipo, 2, '.', ',') }} </td>
                             <td class="informacion"></td>
                         </tr> 
 
@@ -155,7 +157,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Pendiente</td>
                             <td class="informacion"></td>
-                            <td class="titulo" style="text-align:right">L {{ number_format($total - $reservacion->anticipo, 2, '.', ',') }}  </td>
+                            <td class="titulo">L 0.00</td>
                             <td class="informacion"></td>
                         </tr> 
 
@@ -176,7 +178,7 @@
                             <td class="informacion"></td>
                             <td class="titulo">Estado</td>
                             <td class="informacion"></td>
-                            <td class="titulo">Reservación Pendiente</td>
+                            <td class="titulo">Reservación Terminada</td>
                             <td class="informacion"></td>
                         </tr> 
 
@@ -184,7 +186,7 @@
                 </table>
 
                 <div style="text-align:center; font-size:16px">
-                    <a href="{{route('kiosko_res.index')}}" class="btn" 
+                    <a href="{{route('kiosko_res_t.index')}}" class="btn" 
                      style="background-color: rgba(111, 143, 175, 0.600);" ><strong>Regresar</strong></a>
                 </div>
 

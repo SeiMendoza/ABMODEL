@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Kiosko;
 use App\Models\Mesa;
 use PDF;
+use Illuminate\Validation\Rule as ValidationRule;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MesaController extends Controller
 {
@@ -54,24 +56,24 @@ class MesaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7',
-            'name' => 'required|regex:/^[a-zA-Z]{4}+[-][0-9][0-9]$/|max:7|min:7',
-            'cantidad' => 'required|min:6|max:8|numeric',
+            'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7|unique:mesas',
+            'name' => 'required|regex:/^[0-9][0-9]$/|max:2|min:2',
+            'cantidad' => ['required', Rule::in([6, 8]), 'numeric'],
             'kiosko' => 'required'
         ], [
             'codigo.required' => 'El código no puede estar vacío',
-            'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01-M01',
+            'codigo.regex' => 'El código no es válido, verifique la mesa',
             'codigo.max' => 'El código es muy extenso',
             'codigo.min' => 'El código es muy corto',
-            'name.required' => 'El nombre no puede estar vacío',
-            'name.regex' => 'El nombre no es válido, uno válido es: Mesa-00',
-            'name.max' => 'El nombre es muy extenso',
-            'name.min' => 'El nombre es muy corto',
+            'name.required' => 'La mesa no puede estar vacía',
+            'name.regex' => 'La mesa no es válida, uno válido es: 00',
+            'name.max' => 'La mesa es muy extensa',
+            'name.min' => 'La mesa es muy corta',
             'cantidad.required' => 'La cantidad no puede estar vacío',
-            'cantidad.max' => 'la cantidad es muy alta',
-            'cantidad.min' => 'La cantidad es muy baja',
+            'cantidad.in' => 'La cantidad debe ser 6 u 8',
             'cantidad.numeric' => 'La cantidad debe ser de tipo numérico',
             'kiosko.required' => 'Kiosko no puede estar vacío',
+            'codigo.unique' => 'El codigo debe ser unico',
         ]);
 
         $nuevo = new Mesa;
@@ -114,29 +116,30 @@ class MesaController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        $actualizacion = Mesa::findOrFail($id);
         $request->validate([
-            'codigo' => 'required|regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/|min:7|max:7',
-            'name' => 'required|regex:/^[M][e][s][a][-][0-9][0-9]$/|max:7|min:7',
-            'cantidad' => 'required|min:6|max:8|numeric',
+            'codigo' => ['required', 'regex:/^[K][0-9][0-9][-][M][0-9][0-9]$/', 'min:7', 'max:7', 
+            ValidationRule::unique('mesas')->ignore($actualizacion->id)],
+            'name' => 'required|regex:/^[0-9][0-9]$/|max:2|min:2',
+            'cantidad' => ['required', Rule::in([6, 8]), 'numeric'],
             'kiosko' => 'required'
         ], [
             'codigo.required' => 'El código no puede estar vacío',
-            'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01-M01',
+            'codigo.regex' => 'El código no es válido, verifique la mesa',
             'codigo.max' => 'El código es muy extenso',
             'codigo.min' => 'El código es muy corto',
+            'codigo.unique' => 'El código solo se puede registrar una vez',
             'name.required' => 'El nombre no puede estar vacío',
             'name.regex' => 'El nombre no es válido, uno válido es: Mesa-00',
             'name.max' => 'El nombre es muy extenso',
             'name.min' => 'El nombre es muy corto',
             'cantidad.required' => 'La cantidad no puede estar vacío',
-            'cantidad.max' => 'la cantidad es muy alta',
-            'cantidad.min' => 'La cantidad es muy baja',
+            'cantidad.in' => 'la cantidad debe ser 6 u 8',
             'cantidad.numeric' => 'La cantidad debe ser de tipo numérico',
             'kiosko.required' => 'Kiosko no puede estar vacío',
         ]);
 
-        $actualizacion = Mesa::findOrFail($id);
+        
 
         $actualizacion->codigo = $request->input('codigo');
         $actualizacion->nombre = $request->input('name');

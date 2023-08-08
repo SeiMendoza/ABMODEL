@@ -33,7 +33,7 @@
                         
                         <tr class="" style="text-align:center; height:46px">
                             <td scope="col" style="text-align: center; width:150px"><strong>{{$r->codigo}}</strong></td>
-                            <td scope="col" style="text-align: center; width:200px">{{$r->nombre}}</td> 
+                            <td scope="col" style="text-align: center; width:200px">Mesa-{{$r->nombre}}</td> 
                             <td scope="col">{{$r->cantidad}}</td>
                             <td scope="col">{{$r->kiosko_id}}</td>
                             <td scope="col" style="text-align: left">

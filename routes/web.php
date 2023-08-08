@@ -394,3 +394,19 @@ Route::resource('/pedido/todo', DetallesPedidoController::class);
 Route::get('error', function () {
   abort(503);
 });
+
+/**
+ * Reservaciones de kioskos
+ */
+
+Route::get('/kiosko/reservaciones/terminadas', [ReservacionController::class, 'indexT'])->middleware('auth')
+ ->name('kiosko_res_t.index');
+
+Route::put('/kiosko/reservaciones/terminadas/{id}/estado', [ReservacionController::class, 'estado'])->middleware('auth')
+ ->name('kiosko_res_t.estado')->where('id', '[0-9]+');
+
+Route::delete('/kiosko/reservaciones/terminadas/borrar', [ReservacionController::class, 'destroy2'])->middleware('auth')
+ ->name('kiosko_res_t.destroy');
+
+Route::get('/kiosko/reservaciones/terminadas/{id}/detalles', [ReservacionController::class, 'detalles'])->middleware('auth')
+ ->name('kiosko.detalles_t')->where('id', '[0-9]+');

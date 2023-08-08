@@ -8,16 +8,19 @@ use App\Models\Mesa;
 use App\Models\Reservacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReservacionController extends Controller
 {
     public function index2(Request $request)
     {
         $reservaciones = Reservacion::all();
-        $reservaciones = Reservacion::join('kioskos', 'reservacions.kiosko_id', '=', 'kioskos.id')->select('reservacions.*', 'codigo')->get();
+        $reservaciones = Reservacion::join('kioskos', 'reservacions.kiosko_id', '=', 'kioskos.id')
+        ->select('reservacions.*', 'codigo')->where('estado','=', 0)->get();
 
         if ($request->ajax()) {
-            $reservacionesKioskos = Kiosko::join('reservacions', 'reservacions.kiosko_id', '=', 'kioskos.id')->select('codigo as kiosko', 'nombreCliente', 'fecha')->get(); //join para obtener la fecha, el nombre y el codigo de los kiosko 
+            $reservacionesKioskos = Kiosko::join('reservacions', 'reservacions.kiosko_id', '=', 'kioskos.id')
+            ->select('codigo as kiosko', 'nombreCliente', 'fecha')->where('estado','=', 0)->get(); //join para obtener la fecha, el nombre y el codigo de los kiosko 
             return response()->json($reservacionesKioskos);
         }
 
@@ -138,7 +141,7 @@ class ReservacionController extends Controller
 
         if ($creado) {
             return redirect()->route('kiosko_res.index')
-                ->with('mensaje', "" . $nuevo->nombre . " Creada correctamente");
+                ->with('mensaje', "Reservacion de" . $nuevo->nombreCliente . " creada correctamente");
         }
 
     }
@@ -268,5 +271,39 @@ class ReservacionController extends Controller
     {
         $reservacion = Reservacion::findOrFail($id);
         return \view('Reservaciones.ReserAdmon.Quiosco.detailReservaciones', compact('reservacion'));
+    }
+
+    /**
+     * Reservaciones Terminadas
+     */
+
+     public function estado($id)
+    {
+        $cambiar = Reservacion::findOrFail($id);
+
+        $cambiar->estado = 1;
+        $cambiar->save();
+
+        return back()->with('mensaje', 'Reservación'. $cambiar->nombreCliente . 'terminada');
+    }
+
+    public function indexT()
+    {
+        $reservaciones = Reservacion::join('kioskos', 'reservacions.kiosko_id', '=', 'kioskos.id')
+        ->select('reservacions.*', 'codigo')->where('estado', '=', 1)->get();
+
+        return view('Reservaciones.ReserAdmon.Quiosco.reservacionesTerminadas', compact('reservaciones'));
+    }
+
+    public function detalles($id)
+    {
+        $reservacion = Reservacion::findOrFail($id);
+        return \view('Reservaciones.ReserAdmon.Quiosco.detallesReservaciones', compact('reservacion'));
+    }
+
+    public function destroy2()
+    {
+        DB::table('Reservacions')->where('estado', 1)->delete();
+        return back()->with('mensaje', 'Reservaciones borradas correctamente.');
     }
 }

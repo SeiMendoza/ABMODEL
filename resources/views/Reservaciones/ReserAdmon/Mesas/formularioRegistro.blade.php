@@ -27,16 +27,27 @@
                             <div class="col-6">
                                 <div class="font-robo form-group">
                                     <label for="kiosko" style="margin-left: 0;">Kiosko al que pertenece: </label>
-                                    <select name="kiosko" onchange="quitarerror()" id="kiosko"
+                                    @php
+                                        $cod = "";
+                                    @endphp
+                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" step="0.001" oninput="c($cod)"
                                         class="form-control border-radius-sm" required>
+                                        
                                         @if (old('kiosko'))
                                             <option disabled="disabled" value="">Seleccione un kiosko</option>
                                             @foreach ($kiosko as $c)
                                                 @if (old('kiosko') == $c->id)
                                                     <option selected="selected" value="{{ $c->id }}">
-                                                        {{ $c->codigo }}</option>
+                                                        {{ $c->codigo }}
+                                                    </option>
+                                                    @php
+                                                        $cod = $c->codigo;
+                                                    @endphp
                                                 @else
                                                     <option value="{{ $c->id }}">{{ $c->codigo }}</option>
+                                                    @php
+                                                        $cod = $c->codigo;
+                                                    @endphp
                                                 @endif
                                             @endforeach
                                         @else
@@ -44,6 +55,9 @@
                                                 kiosko</option>
                                             @foreach ($kiosko as $c)
                                                 <option value="{{ $c->id }}">{{ $c->codigo }}</option>
+                                                @php
+                                                    $cod = $c->codigo;
+                                                @endphp
                                             @endforeach
                                         @endif
                                     </select>
@@ -54,10 +68,10 @@
                             </div>
                             <div class="col-6">
                                 <div class="font-robo form-group">
-                                    <label for="name" style="margin-left: 0;">Nombre:</label>
-                                    <input class="form-control border-radius-sm" type="text" placeholder="Mesa-00"
-                                        name="name" id="name" minlength="7" maxlength="7"
-                                        value="{{ old('name') }}" required>
+                                    <label for="name" style="margin-left: 0;">Mesa:</label>
+                                    <input class="form-control border-radius-sm" type="text" placeholder="Ingrese el numero de mesa 00"
+                                        name="name" id="name" minlength="2" maxlength="2" step="0.001" oninput="c()"
+                                        value="{{ old('name')}}" required>
                                     @error('name')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror
@@ -69,8 +83,8 @@
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="codigo" style="margin-left: 0;">Código: </label>
                                     <input class="form-control border-radius-sm" type="text" placeholder="K00-M00"
-                                        name="codigo" id="codigo" minlength="7" maxlength="7"
-                                        value="{{ old('codigo') }}" required>
+                                        name="codigo" id="codigo" minlength="7" maxlength="7" step="0.001"
+                                        value="{{ old('codigo',)}}" required readonly>
                                     @error('codigo')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror
@@ -78,7 +92,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
-                                    <label for="cantidad" style="margin-left: 0;">Cantidad: </label>
+                                    <label for="cantidad" style="margin-left: 0;">Cantidad de personas: </label>
                                     <input class="form-control border-radius-sm" type="number"
                                         placeholder="Ingrese una cantidad" name="cantidad" id="cantidad"
                                         value="{{ old('cantidad') }}" minlength="1" maxlength="1" min="6"
@@ -100,5 +114,19 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function c($cod) {
+            try {
+               var  a = "",
+                    c = $cod,
+                    d = document.getElementById("name").value || "";
+                
+                    a = "K00" + "-M" + d;
+                
+                document.getElementById("codigo").value = a;
+            } catch (e) {}
+        }
+    </script>
 
 @endsection
