@@ -50,8 +50,8 @@
     }
 
     .img-perfil, .topbar .nav-item .nav-link .img-perfil {
-        height: 2rem;
-        width: 2rem;
+        height: 2.3rem;
+        width: 2.3rem;
     }
     .rounded-circ {
       border-radius: 50%!important;
