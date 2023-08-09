@@ -575,6 +575,8 @@ class PedidoUsuarioController extends Controller
     if ($detalles->cantidad > 1) {
         $detalles->cantidad = $detalles->cantidad - 1;
         $detalles->save();
+        $producto->disponible = $producto->disponible + 1;
+        $producto->save();
         if ($vista == 2) {
             return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Producto actualizado.');
         }

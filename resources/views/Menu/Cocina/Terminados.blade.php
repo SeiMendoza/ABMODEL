@@ -75,7 +75,7 @@
             @if(($p->estado)=="3")
             <tr class="" style="text-align:center;">
                 <td scope="col">{{++$i}}</td>
-                <td scope="col">{{$p->mesa_nombre->nombre}}</td>
+                <td scope="col">Mesa- {{$p->mesa_nombre->nombre}}</td>
                 <td scope="col">{{$p->mesa_nombre->kiosko->codigo}}</td>
                 <td scope="col">{{$p->nombreCliente}}</td>
                 <td>

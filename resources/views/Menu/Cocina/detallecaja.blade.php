@@ -40,7 +40,7 @@
         </h5>
         <tr>
             <td class="titulo">Número de mesa: </td>
-            <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
+            <td class="informacion">Mesa- {{$pedido->mesa_nombre->nombre}}</td>
             <td class="titulo">Kiosko:</td>
             <td class="informacion">{{$pedido->mesa_nombre->kiosko->codigo}}</td>
             <td class="titulo">Cambiar mesa:</td>
@@ -53,7 +53,7 @@
                         @else
                         <option>Selccione una mesa</option>
                         @foreach($mesas as $mesa)
-                        <option value="{{$mesa->id}}">{{$mesa->nombre}} - {{$mesa->kiosko->codigo}}</option>
+                        <option value="{{$mesa->id}}">Mesa- {{$mesa->nombre}} - {{$mesa->kiosko->codigo}}</option>
                         @endforeach
                         @endif
                     </select>

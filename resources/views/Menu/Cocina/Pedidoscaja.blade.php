@@ -36,7 +36,7 @@
             @if($p->estado==1 || $p->estado==2)
             <tr style="text-align:center">
                 <td scope="col">{{++$i}}</td>
-                <td scope="col">{{$p->mesa_nombre->nombre}}</td>
+                <td scope="col">Mesa- {{$p->mesa_nombre->nombre}}</td>
                 <td scope="col">{{$p->mesa_nombre->kiosko->codigo}}</td>
                 <td scope="col">
                     <!---enviar a cocina--si existe en la columna estado_cocina 1 o 2 mostrara un texto o mostrar un icono para enviar------>

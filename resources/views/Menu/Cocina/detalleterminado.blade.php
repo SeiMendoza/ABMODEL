@@ -42,7 +42,7 @@
             Detalle del pedido terminado: {{$pedido->nombreCliente}}</h5>
         <tr>
             <td class="titulo">Número de mesa: </td>
-            <td class="informacion">{{$pedido->mesa_nombre->nombre}}</td>
+            <td class="informacion">Mesa- {{$pedido->mesa_nombre->nombre}}</td>
             <td class="titulo">Kiosko:</td>
             <td class="informacion">{{$pedido->mesa_nombre->kiosko->codigo}}</td>
             <td class="titulo">Sub total:</td>

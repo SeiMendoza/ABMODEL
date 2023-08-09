@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Menú | Villa Crisol</title>
@@ -28,7 +28,7 @@
 
 <body style="overflow-y:hidden" class=" h-100">
     <script>
-         var msg = '{{ Session::get('mensaje') }}';
+        var msg = '{{ Session::get('mensaje') }}';
         var exist = '{{ Session::has('mensaje') }}';
         if (exist) {
             Swal.fire({
@@ -43,11 +43,11 @@
         }
     </script>
     <div class="content-cell" style="margin: 0px; padding:0;">
-    <div class="row h-100vh" style="margin: 0px; padding:0;">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-table-cell" style="margin: 0px; padding:0; max-height: 100%;">
-                    <div class="row" style="margin: 0px; padding:0;">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 col-xl-7 d-table-cell" style="margin: 0px; padding:0;">
-                            <div class="table-responsive-lg" style="margin: 0px; padding:0;">
+        <div class="row h-100vh" style="margin: 0px; padding:0;">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-table-cell" style="margin: 0px; padding:0; max-height: 100%;">
+                <div class="row" style="margin: 0px; padding:0;">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 col-xl-7 d-table-cell" style="margin: 0px; padding:0;">
+                        <div class="table-responsive-lg" style="margin: 0px; padding:0;">
                             <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;" class="bg-gradient-warning">
                                 <ol class="breadcrumb bg-gradient-faded-success" style="margin: 0; border-radius:0px; padding:0;">
                                     <li>
@@ -81,9 +81,9 @@
                                                                 <Label class="h6 col-form-label font-robo" style="margin: 0px 5% 0 3px;" for="mesaP">Pedido de la Mesa:</Label>
 
                                                                 <select name="mesa" style="height:42px; border-radius:0; margin: 5px 0px 5px 23px;" id="mesa" class="form-control input--style-2 border-0 ps-2 font-robo" step="0.001" oninput="nombre()">
-                                                                    <option value="{{$pedido->mesa_nombre->id}}">{{$pedido->mesa_nombre->nombre}} - Kiosko: {{$pedido->mesa_nombre->kiosko->codigo}}</option>
+                                                                    <option value="{{$pedido->mesa_nombre->id}}">Mesa- {{$pedido->mesa_nombre->nombre}} - Kiosko: {{$pedido->mesa_nombre->kiosko->codigo}}</option>
                                                                     @foreach ($mesas as $mesa)
-                                                                    <option value="{{ $mesa->id }}">{{ $mesa->nombre }} - Kiosko: {{ $mesa->kiosko->codigo }}</option>
+                                                                    <option value="{{ $mesa->id }}">Mesa- {{ $mesa->nombre }} - Kiosko: {{ $mesa->kiosko->codigo }}</option>
                                                                     @endforeach
                                                                 </select>
                                                                 @error('mesaP')
@@ -123,20 +123,20 @@
                                                                                 <td style="text-align: right">L {{ $detalle->producto->precio }}</td>
                                                                                 <td style="text-align: right">L {{ $detalle->cantidad * $detalle->producto->precio }}</td>
                                                                                 <td style="text-align:center; width:20%; height:20%;">
-                                                                                <div style="display: flex; justify-content: center; flex-direction: row;position: relative;">
-                                                        <form action="{{route('detallep.restar',['id' => $detalle->id,'vista'=>2])}}" method="POST">
-                                                            @method('post')
-                                                            @csrf
-                                                                <button style="margin-right: 10px;" type="submit"><i class="fa fa-edit"></i></button>
-                                                        </form>
-                                                     
-                                                        <form method="POST" action="{{ route('detallep.destroy', ['id' => $detalle->id,'vista'=>2]) }}">
-                                                            @method('post')
-                                                            @csrf
-                                                            <button type="submit"><i class="fa fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
-                                                    </td>
+                                                                                    <div style="display: flex; justify-content: center; flex-direction: row;position: relative;">
+                                                                                    <form method="POST" action="{{route('detallep.restar',['id' => $detalle->id,'vista'=>2])}}">
+                                                                                            @method('post')
+                                                                                            @csrf
+                                                                                            <button style="margin-right: 10px;" type="submit"><i class="fa fa-edit"></i></button>
+                                                                                        </form>
+
+                                                                                        <form method="POST" action="{{ route('detallep.destroy', ['id' => $detalle->id,'vista'=>2]) }}">
+                                                                                            @method('post')
+                                                                                            @csrf
+                                                                                            <button type="submit"><i class="fa fa-trash"></i></button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </td>
                                                                             </tr>
                                                                             <hr>
                                                                             @endforeach
@@ -197,7 +197,7 @@
                             <section style="">
                                 <main class=" main-content">
                                     <div class="tab-content" style="margin: 0px; padding:0; ">
-                                        <div class="row row-cols-xs-6 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-auto" style="margin: 0px; padding:0;">
+                                        <div class="row row-cols-xs-6 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-auto" style="margin: 2px; padding:0;">
                                             @foreach($productos as $pro)
                                             @if($tipo === 'todos' || $pro->tipo == $tipo)
                                             <div class="" style="padding: 0px; margin:0px;">
@@ -295,15 +295,14 @@ position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
                             </footer>
                         </div>
                     </div>
-                    <div class="d-none d-sm-none d-md-table col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" 
-                                style="display:block; float: right; margin: 0px; padding:0;" id="pedido" name="pedido">   
-                            <div class="row" style="margin: 0px; padding:0;">
-                                <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
-                                    <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" style="margin-bottom: 0; border-radius:0px;">
-                                        <H3 class="text-white"><strong>Detalles del Pedido</strong></H3>
-                                    </ol>
-                                </nav>
-                            </div> 
+                    <div class="d-none d-sm-none d-md-table col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" style="display:block; float: right; margin: 0px; padding:0;" id="pedido" name="pedido">
+                        <div class="row" style="margin: 0px; padding:0;">
+                            <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
+                                <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" style="margin-bottom: 0; border-radius:0px;">
+                                    <H3 class="text-white"><strong>Detalles del Pedido</strong></H3>
+                                </ol>
+                            </nav>
+                        </div>
                         <div style="">
                             <form method="POST" action="{{route('guardarPedido',[$pedido->id,'detalle_id' => $detalle->id])}}">
                                 @csrf
@@ -353,19 +352,19 @@ position: absolute; bottom: 12.3%; left:0;">{{$pro->nombre}}</strong>
                                                     <td style="text-align: right">L {{ $detalle->producto->precio }}</td>
                                                     <td style="text-align: right">L {{ $detalle->cantidad * $detalle->producto->precio }}</td>
                                                     <td style="text-align:center; width:20%; height:20%;">
-                                                    <div style="display: flex; justify-content: center; flex-direction: row;position: relative;">
-                                                        <form action="{{route('detallep.restar',['id' => $detalle->id,'vista'=>2])}}" method="POST">
-                                                            @method('post')
-                                                            @csrf
+                                                        <div style="display: flex; justify-content: center; flex-direction: row;position: relative;">
+                                                            <form action="{{route('detallep.restar',['id' => $detalle->id,'vista'=>2])}}" method="POST">
+                                                                @method('post')
+                                                                @csrf
                                                                 <button style="margin-right: 15px;" type="submit"><i class="fa fa-edit"></i></button>
-                                                        </form>
-                                                     
-                                                        <form method="POST" action="{{ route('detallep.destroy', ['id' => $detalle->id,'vista'=>2]) }}">
-                                                            @method('post')
-                                                            @csrf
-                                                            <button type="submit"><i class="fa fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
+                                                            </form>
+
+                                                            <form method="POST" action="{{ route('detallep.destroy', ['id' => $detalle->id,'vista'=>2]) }}">
+                                                                @method('post')
+                                                                @csrf
+                                                                <button type="submit"><i class="fa fa-trash"></i></button>
+                                                            </form>
+                                                        </div>
                                                     </td>
 
                                                 </tr>
