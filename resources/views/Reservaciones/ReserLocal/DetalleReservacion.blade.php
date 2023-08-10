@@ -16,143 +16,107 @@
 
 @section('content')
 <style>
-    .titulo{
-        width: 25%;
-        font-size: 17px;
-        height: 30px;
-        line-height: 30px;
-        color:rgba(111, 143, 175);
+    .data-value{
+        font-size: 15px;
+        color: rgba(111, 143, 175);
+    }
+ 
+    .data-label{
+        font-size: 15px;
+        color: rgb(111, 143, 175);
     }
 
-    
-    .informacion{
-        width: 20%;
-        height: 30px;
-        font-size: 17px;
-        line-height: 30px;
-    }
 </style>
 
-<div class="wrapper wrapper--w960">
-    <div class="row d-flex justify-content-center" >
-         <div class="card shadow items-center" style="margin: 0">
-            <div class="card-body">
-                <table class="table" >
-                    <thead style="background-color: rgba(111, 143, 175, 0.600)" >
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="text-white"><strong>Datos</strong></td>
-                            <td class="informacion"></td>
-                            <td class="text-white"><strong>Información</strong></td>
-                            <td class="informacion"></td>
-                        </tr>
-                    </thead>
+<div class="wrapper wrapper--w960" >
+    <div class="card">
+        <div class="card-body">
 
-                    <tbody>
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Cliente</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Nombre_Cliente}} {{$reservar->Apellido_Cliente}}</td>
-                            <td class="informacion"></td>
-                        </tr>
-                    
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Celular</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Contacto}} </td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Tipo de reservación</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Tipo_Reservacion}} </td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Evento</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Tipo_Evento}} </td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Cantidad de personas</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->Cantidad}} </td>
-                            <td class="informacion"></td>
-                        </tr> 
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Fecha</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{\Carbon\Carbon::parse($reservar->Fecha)->locale("es")->isoFormat("DD MMMM YYYY")}}</td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Hora de llegada</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->HoraEntrada}} </td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Hora de salida</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->HoraSalida}} </td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Forma de pago</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">{{$reservar->FormaPago}} </td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Costo de la reservación</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">L {{ number_format($reservar->Total, 2, '.', ',') }}</td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Anticipo</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">L {{ number_format($reservar->Anticipo, 2, '.', ',') }} </td>
-                            <td class="informacion"></td>
-                        </tr>
-
-                        <tr>
-                            <td class="informacion"></td>
-                            <td class="titulo">Saldo pendiente</td>
-                            <td class="informacion"></td>
-                            <td class="titulo">L {{ number_format($reservar->Pendiente, 2, '.', ',') }} </td>
-                            <td class="informacion"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="background-color: rgba(111, 143, 175, 0.600); text-align:center; font-size:17px">
-                    <a href="{{route('cliente.reservaLocal')}}" class="text-white " 
-                     style=" width:915px; " ><strong>Regresar</strong></a>
+            <h4 class="font-robo t" style="margin: 0; padding:0">Datos del cliente: </h4>
+                <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
+    
+                <div class="row row-spacer">
+                    <div class="col-md-8">
+                        <label class="data-label">Nombre:</label>
+                        <span class="data-value">{{ $reservar->Nombre_Cliente}} {{ $reservar->Apellido_Cliente}}</span>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <label class="data-label">Celular:</label>
+                        <span class="data-value">{{ $reservar->Contacto }}</span>
+                    </div>
                 </div>
 
-            </div>  
+                <h4 class="font-robo t" style="margin-top: 1%;">Datos de la reservación:</h4>
+                <hr class="m-1" style="border: 0.1px solid rgba(111, 143, 175, 0.600)">
+    
+                <div class="row row-spacer">
+                    <div class="col-md-4">
+                        <label class="data-label">Tipo de reservación:</label>
+                        <span class="data-value">{{ $reservar->Tipo_Reservacion}}</span>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <label class="data-label">Evento:</label>
+                        <span class="data-value">{{ $reservar->Tipo_Evento}}</span>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <label class="data-label">Cantidad de personas:</label>
+                        <span class="data-value">{{ $reservar->Cantidad }}</span>
+                    </div>
+                </div>
+
+                <div class="row row-spacer" >
+                    <div class="col-md-4"  >
+                        <label class="data-label"> Fecha: </label>
+                        <span class="data-value">{{\Carbon\Carbon::parse($reservar->Fecha)->locale("es")->isoFormat("DD MMMM YYYY")}}</span>
+                    </div>
+
+                    <div class="col-md-4"  >
+                        <label class="data-label"> Hora de llegada: </label>
+                        <span class="data-value">{{$reservar->HoraEntrada}} </span>
+                    </div> 
+
+                    <div class=" col-md-4"  >
+                        <label class="data-label"> Hora de salida: </label>
+                        <span class="data-value">{{$reservar->HoraSalida}} </span>
+                    </div>
+                </div>
+    
+                <h4 class="font-robo t" style="margin-top: 1%;">Costo de la reservación: </h4>
+                <hr class="m-1" style="border: 0.1px solid rgba(111, 143, 175, 0.600)">
+
+                <div class="row row-spacer" >
+                    <div class=" col-md-4"  >
+                        <label class="data-label"> Forma de pago: </label>
+                        <span class="data-value">{{$reservar->FormaPago}}</span>
+                    </div>
+
+                    <div class=" col-md-4"  >
+                        <label class="data-label"> Total: </label>
+                        <span class="data-value">L {{ number_format($reservar->Total, 2, '.', ',') }}</span>
+                    </div> 
+
+                    <div class=" col-md-4"  >
+                        <label class="data-label"> Anticipo: </label>
+                        <span class="data-value">L {{ number_format($reservar->Anticipo, 2, '.', ',') }}</span>
+                    </div> 
+                </div>
+
+                <div class="row row-spacer" >
+                    <div class=" col-md-4"  >
+                        <label class="data-label"> Saldo Pendiente: </label>
+                        <span class="data-value">L {{ number_format($reservar->Pendiente, 2, '.', ',') }}</span>
+                    </div>
+                </div>
+
+                <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600); margin-top: 10px;">
+    
+                <div class="d-flex justify-content-end mt-2">
+                    <a href="{{ route('cliente.reservaLocal') }}" class="btn btn-danger"><strong>Regresar</strong></a>
+                </div>
+            </div>
         </div>
     </div>
 @stop

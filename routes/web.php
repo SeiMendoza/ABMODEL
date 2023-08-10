@@ -42,7 +42,6 @@ Route::get('/', [LoginController::class, 'show'])
   ->name('login');
 
 /** REGISTRO Y LOGIN */
-
 Route::controller(RegistroController::class)->middleware('auth')->group(function () {
 
   Route::get('/listaUsuarios', 'users')->name('usuarios.users');
@@ -54,17 +53,13 @@ Route::controller(RegistroController::class)->middleware('auth')->group(function
 });
 
 
-
 /**PERFIL USUARIO */
-
 Route::get('/login', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('auth')->name('cerrarSes.cerrar');
 Route::get('/perfil', [LoginController::class, 'perfil'])->middleware('auth')->name('usuarios.perfil');
 Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])->middleware('auth')->name("usuarios.editarPerfil");
 Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])->middleware('auth')->name('usuarios.updatePerfil');
-
-
 
 
 /* Rutas Administracion de Restaurante */
@@ -90,14 +85,12 @@ Route::controller(HomeController::class)->middleware('auth')->group(function () 
 
 Route::controller(HomeController::class)->middleware('auth')->group(function () {
 
-
 });
 
 
 /*****************************
   Rutas Para Menú de usuario
 ******************************/
-
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class, 'terminarp'])->middleware('auth')
   ->name('terminar.terminarp')->where('id', '[0-9]+'); /*terminar pedidos en caja*/
 Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class, 'env_a_cocina'])->middleware('auth')
@@ -151,7 +144,6 @@ Route::post('/pedidos/{id}/cambiarmesa', [PedidoUsuarioController::class, 'Cambi
 /*****************************
  Rutas Para Menu de cliente
 ******************************/
-
 Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])->middleware('auth')
   ->name('cliente_menu.details');
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])->middleware('auth')
@@ -218,7 +210,6 @@ Route::controller(ProductoController::class)->middleware('auth')->group(function
 });
 
 
-
 /*lista de pedidos anteriores*/
 Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])->middleware('auth')
   ->name('pedidoant.pedidos_anteriores');
@@ -246,6 +237,7 @@ Route::controller(KioskoController::class)->middleware('auth')->group(function (
 });
 /*Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');*/
+
 
 /****************************************
 Rutas Para Piscina
@@ -279,17 +271,16 @@ Route::post('/piscina/restar/{id}', [PiscinaController::class, 'restar'])->middl
 /**
  * Reservaciones de mesas
  */
-
 Route::get('/mesas/reservaciones', [MesaController::class, 'indexR'])->middleware('auth')
   ->name('mesas_res.index');
 
 Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])->middleware('auth')
   ->name('mesas_res.show');
 
+
 /**
  * Registro de mesas
  */
-
 Route::get('/mesas/lista', [MesaController::class, 'index'])->middleware('auth')
   ->name('mesas_reg.index');
 /**ruta para qr por id de mesa */
@@ -317,10 +308,10 @@ Route::delete('/mesas/registro/{id}/borrar', [MesaController::class, 'destroy'])
 Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])->middleware('auth')
   ->name('mesas_reg.search');
 
+
 /**
  * Reservaciones de kioskos
  */
-
 Route::get('/kiosko/reservaciones', [ReservacionController::class, 'index2'])->middleware('auth')
   ->name('kiosko_res.index');
 
@@ -344,6 +335,7 @@ Route::get('/kiosko/reservaciones/buscar', [ReservacionController::class, 'searc
 
 Route::get('/kiosko/reservaciones/{id}/detail', [ReservacionController::class, 'detail'])->middleware('auth')
   ->name('kiosko.detail');
+
 
 /* Rutas para reservar local*/
 Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])->middleware('auth')
@@ -395,10 +387,10 @@ Route::get('error/{error}', function ($error) {
   abort($error);
 });
 
+
 /**
  * Reservaciones de kioskos
  */
-
 Route::get('/kiosko/reservaciones/terminadas', [ReservacionController::class, 'indexT'])->middleware('auth')
   ->name('kiosko_res_t.index');
 
