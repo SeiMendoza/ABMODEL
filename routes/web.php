@@ -136,9 +136,9 @@ Route::get('/pedido/caja/detalle/{id}/agregar/{tipo?}', [PedidoUsuarioController
   ->name('Agregar');
 Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::class, 'Acomple'])->middleware('auth')
   ->name('Acomple');
-  //restar a los detalles agregados 
+//restar a los detalles agregados 
 Route::post('/detallep/{id}/restar/{vista}', [PedidoUsuarioController::class, 'restar'])->middleware('auth')
-->name('detallep.restar');
+  ->name('detallep.restar');
 //guardar el pedido con los nuevos detalles 
 Route::post('/pedido/caja/{id}/guardar/{detalle_id}', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
   ->name('guardarPedido');
@@ -391,8 +391,8 @@ Route::get('/complementos', [CartController::class, 'complementos'])->middleware
 Route::resource('/pedido/todo', DetallesPedidoController::class);
 
 //Rutas para manejo de errores
-Route::get('error', function () {
-  abort(503);
+Route::get('error/{error}', function ($error) {
+  abort($error);
 });
 
 /**
@@ -400,13 +400,17 @@ Route::get('error', function () {
  */
 
 Route::get('/kiosko/reservaciones/terminadas', [ReservacionController::class, 'indexT'])->middleware('auth')
- ->name('kiosko_res_t.index');
+  ->name('kiosko_res_t.index');
 
 Route::put('/kiosko/reservaciones/terminadas/{id}/estado', [ReservacionController::class, 'estado'])->middleware('auth')
- ->name('kiosko_res_t.estado')->where('id', '[0-9]+');
+  ->name('kiosko_res_t.estado')->where('id', '[0-9]+');
 
 Route::delete('/kiosko/reservaciones/terminadas/borrar', [ReservacionController::class, 'destroy2'])->middleware('auth')
- ->name('kiosko_res_t.destroy');
+  ->name('kiosko_res_t.destroy');
 
 Route::get('/kiosko/reservaciones/terminadas/{id}/detalles', [ReservacionController::class, 'detalles'])->middleware('auth')
- ->name('kiosko.detalles_t')->where('id', '[0-9]+');
+  ->name('kiosko.detalles_t')->where('id', '[0-9]+');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

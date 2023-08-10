@@ -434,9 +434,9 @@
     <script src="/assets/datepicker/daterangepicker.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Ocultar menú desplegable
-            $('.dropdown-menu a').click(function () {
+            $('.dropdown-menu a').click(function() {
                 $('.dropdown-menu').removeClass('show');
             });
         });

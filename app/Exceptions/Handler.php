@@ -50,10 +50,12 @@ class Handler extends ExceptionHandler
 
     // public function render($request, Throwable $exception)
     // {
-    //     return response()->json(['message' => 'Ocurrió un error en la aplicación'], 500);
-    //     // return response()->view('errors.500', [], 400);
-    //     // Log::info('Se está llamando al método render');
-    //     // return response()->view('/Reservaciones/ReserAdmon/Kioskos/indexKioskos');
+    //     if ($exception instanceof NotFoundHttpException) {
+    //         return response()->view('errors.404', [], 404);
+    //     } else if ($exception instanceof \Exception) {
+    //         return response()->view('errors.500', [], 500);
+    //     }
 
+    //     return parent::render($request, $exception);
     // }
 }

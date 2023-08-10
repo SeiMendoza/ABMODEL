@@ -2,8 +2,30 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="/img/faviconVillaCrisol.png">
+    <link href="/assets/css/fontawesome.css" rel="stylesheet">
+    <link href="/assets/css/solid.css" rel="stylesheet">
+    <link href="/assets/css/brands.css" rel="stylesheet">
+    <link href={{ asset('/css/nucleo-icons.css') }} rel="stylesheet" type="text/css">
+    <link href={{ asset('/css/nucleo-svg.css') }} rel="stylesheet">
+
+    <!-- CSS Files -->
+
+    <link href="/assets/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/assets/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="/DataTables/DataTables-1.13.4/css/jquery.dataTables.css">
+    <link rel="" href="/DataTables/DataTables-1.13.4/css/jquery.dataTables.min.css">
+    <link href="/assets/mdi-font/css/material-design-iconic-font.min.css" rel="" media="all">
+    <link href="/assets/fontawesome/css/font-awesome.min.css" rel="" media="all">
+
+    <!-- Main CSS-->
+    <link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet" media="all">
 
     <title>@yield('title')</title>
 
@@ -533,22 +555,38 @@
 </head>
 
 <body class="antialiased">
-    <div
-        class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        <div class="max-w-xl mx-auto sm:px-8 lg:px-10">
-            <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
-                <div class="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
-                    @yield('code')
-                </div>
+    <div class="relative flex items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center sm:pt-0">
+        <div class="mx-auto sm:px-12 lg:px-12">
+            <div class="card dark:bg-gray-900 rounded">
+                <div class="row g-0">
+                    <div class="col-4" style="display: flex; justify-content: center; ">
+                        <img src="@yield('img')" class="rounded" width="100%">
+                        {{-- <img src="/img/errorHomero.gif" class="rounded" width="100%"> --}}
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h2 class=" text-white" style="margin:0">@yield('head')</h2><br>
+                            <h4 class=" text-white" style="font-family:  Arial Black">
+                                @yield('message')</h4><br>
+                            <a href="{{ route('index') }}" style=" padding:7px; width:200px;" type="button"
+                                class="bg-white border-radius-sm text-center pe-3 ">
+                                <i class="fa fa-arrow-left pe-3"></i> Regresar
+                            </a>
 
-                <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider">
-                    @yield('message')
+                            <br><br>
+                            <div class=" text-muted">
+                                Villa Crisol - 2023
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
+    <div class="flex justify-center dark:bg-gray-900">
 
+    </div>
 </body>
 
 </html>
