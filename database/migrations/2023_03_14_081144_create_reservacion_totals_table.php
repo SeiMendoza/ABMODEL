@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('reservacion_totals', function (Blueprint $table) {
             $table->id();
-            $table->string('Nombre_Cliente', 25);
-            $table->string('Apellido_Cliente', 25);
+            $table->string('Nombre_Cliente', 30);
+            $table->string('Apellido_Cliente', 30);
             $table->string('Contacto', 9);
             $table->integer('Cantidad');  
             $table->string('Tipo_Reservacion');

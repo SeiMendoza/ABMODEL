@@ -2,7 +2,7 @@
 @section('title', 'Detalles de la reservación')
 @section('miga')
 <li class="breadcrumb-item text-sm " aria-current="page">  
-    <a class="opacity-5 text-white" href="{{route('kiosko_res.index')}}">Reservacines de Kioskos</a></li>
+    <a class="opacity-5 text-white" href="{{route('kiosko_res.index')}}">Reservaciones de Kioskos</a></li>
 <li class="breadcrumb-item text-sm"><a class="text-white ">Detalles de la reservación </a></li>
 @endsection
 

@@ -44,7 +44,7 @@ class RegistroController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'address' => 'required|string|min:3|max:250',
             'telephone' => 'required|min_digits:8|max_digits:8|regex:/^[2,3,8,9][0-9]{7}+$/',
-            'imagen' => 'required|image|mimes:jpg,png,jpeg,gif,svg'
+            'imagen' => 'required|image'
         ], [
             'name.required' => '¡Debes ingresar tu nombre completo!',
             'name.min' => '¡Ingresa tu nombre completo, sin abreviaturas!',
@@ -75,7 +75,7 @@ class RegistroController extends Controller
 
             'image.required' => '¡Debes cargar una imagen!',
             'image.image' => '¡Debes seleccionar una imagen!',
-            'image.mimes' => '¡Debes seleccionar una imagen en el formato correcto!'
+            //'image.mimes' => '¡Debes seleccionar una imagen en el formato correcto!'
         ]);
 
         $isDefaultOptions = [

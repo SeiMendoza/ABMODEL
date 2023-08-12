@@ -95,19 +95,30 @@
 
                     <div class=" col-md-4"  >
                         <label class="data-label"> Total: </label>
-                        <span class="data-value">L {{ number_format($reservar->Total, 2, '.', ',') }}</span>
+                        <span class="data-value">L. {{ number_format($reservar->Total, 2, '.', ',') }}</span>
                     </div> 
 
                     <div class=" col-md-4"  >
                         <label class="data-label"> Anticipo: </label>
-                        <span class="data-value">L {{ number_format($reservar->Anticipo, 2, '.', ',') }}</span>
+                        <span class="data-value">L. {{ number_format($reservar->Anticipo, 2, '.', ',') }}</span>
                     </div> 
                 </div>
 
                 <div class="row row-spacer" >
                     <div class=" col-md-4"  >
                         <label class="data-label"> Saldo Pendiente: </label>
-                        <span class="data-value">L {{ number_format($reservar->Pendiente, 2, '.', ',') }}</span>
+                        <span class="data-value">L. {{ number_format($reservar->Pendiente, 2, '.', ',') }}</span>
+                    </div>
+
+                    <div class=" col-md-4"  >
+                        <label class="data-label"> Estado: </label>
+                        <span class="data-value">
+                            @if ($reservar->Estado == 0)
+                               Pendiente
+                            @else
+                               Cancelado
+                            @endif
+                        </span>
                     </div>
                 </div>
 

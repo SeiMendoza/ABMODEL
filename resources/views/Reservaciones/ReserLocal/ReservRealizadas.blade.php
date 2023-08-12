@@ -26,7 +26,7 @@
                      <th scope="col" style="text-align: right;width:15% ">Fecha</th>
                      <th scope="col" style="text-align: right;width:11% ">Total</th>
                      <th scope="col" style="text-align: right;">Pendiente</th>
-                     <th scope="col" style="text-align: center;">Realizado</th>
+                     <th scope="col" style="text-align: center;">Realizada</th>
                      <th scope="col" style="text-align: center;">Detalles</th>
                      <th scope="col"  style="text-align: center;">Eliminar</th>
                 </tr>
@@ -41,7 +41,7 @@
                         <td scope="col" style="text-align: right">{{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('DD') }} de
                             {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('MMMM') }},
                             {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('YYYY') }}</td> 
-                        <td scope="col" style="text-align: right;">L {{ number_format($r->Total, 2, '.', ',') }}</td>
+                        <td scope="col" style="text-align: right;">L. {{ number_format($r->Total, 2, '.', ',') }}</td>
                         <td scope="col" style="text-align: right;">L. {{ number_format($r->Pendiente, 2, '.', ',') }}</td>
                         <td scope="col" style="text-align: center;"><input disabled type="checkbox" id="list" name="list" {{ old('list') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$r->id}}" 
                             style="background:teal; width:15px; height:15px;"> </td>

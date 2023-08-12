@@ -40,7 +40,7 @@
                     <div class="row row-spacer ">
                         <div class="form-group col-md-4 ">
                             <label for="NombreCliente" style="margin-left: 0;">Nombre:</label>
-                                <input name="Nombre_Cliente" type="text" class=" form-control border-radius-sm" id="Nombre_Cliente" maxlength="20"
+                                <input name="Nombre_Cliente" type="text" class=" form-control border-radius-sm" id="Nombre_Cliente" maxlength="25"
                                         required placeholder="Ingrese el nombre" value="{{ old('Nombre_Cliente', $r->Nombre_Cliente) }}"
                                         onkeypress="return funcionConvLetrasMay(event);">
                                  @error('Nombre_Cliente')
@@ -50,7 +50,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="Apellido_Cliente" style="margin-left: 0;">Apellido:</label>
-                            <input name="Apellido_Cliente" type="text" class="form-control border-radius-sm" id="ApellidoCliente" 
+                            <input name="Apellido_Cliente" type="text" class="form-control border-radius-sm" id="ApellidoCliente" maxlength="25"
                               required placeholder="Ingrese el apellido" value="{{ old('Apellido_Cliente', $r->Apellido_Cliente) }}"
                               onkeypress="return funcionConvLetrasMay(event);">
                             @error('Apellido_Cliente')

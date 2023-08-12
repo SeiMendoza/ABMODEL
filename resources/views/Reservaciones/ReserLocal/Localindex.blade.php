@@ -29,7 +29,7 @@
                 <th scope="col" style="text-align: right;width:15% ">Fecha</th>
                 <th scope="col" style="text-align: right; width:12%  ">Total</th>
                 <th scope="col" style="text-align: right; ">Pendiente</th>
-                <th scope="col" style="text-align: center; ">Realizado</th>
+                <th scope="col" style="text-align: center; ">Realizada</th>
                 <th scope="col" style="text-align: center;">Detalles</th>
                 <th scope="col" style="text-align: center; width:10% ">Editar</th>
             </tr>
@@ -45,34 +45,36 @@
                 <td scope="col" style="text-align: right;">{{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('DD') }} de
                     {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('MMMM') }},
                     {{ \Carbon\Carbon::parse($r->Fecha)->isoFormat('YYYY') }}</td> 
-                <td scope="col" style="text-align: right;">L {{ number_format($r->Total, 2, '.', ',') }}</td>
-                <td scope="col" style="text-align: right;">L {{ number_format($r->Pendiente, 2, '.', ',') }}</td>
-                <td scope="col" style="text-align: center;"><input type="checkbox" id="list" name="list" {{!old('list') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$r->id}}" style="background:teal; width:15px; height:15px;">
-                   <div class="modal fade" id="staticBackdrop{{$r->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                       <div class="modal-dialog">
-                           <div class="modal-content">
+                <td scope="col" style="text-align: right;">L. {{ number_format($r->Total, 2, '.', ',') }}</td>
+                <td scope="col" style="text-align: right;">L. {{ number_format($r->Pendiente, 2, '.', ',') }}</td>
+                <td scope="col" style="text-align: center;">
+                    <input type="checkbox" id="list{{$r->id}}" name="list" {{!old('list') ?: 'checked'}} data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$r->id}}" style="background:teal; width:15px; height:15px;">
+                    <div class="modal fade" id="staticBackdrop{{$r->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Reservación Realizada</h1>
-                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                               </div>
-                               <div class="modal-body" style="color:teal">
-                                 <p>¿Está seguro que el evento de <strong>{{$r->Nombre_Cliente}}</strong> ya se realizó?</p>
-                               </div>
-                               <div class="modal-footer">
-                                   <form action="{{route('reservacionRealizada', ['id'=>$r->id])}}" method="POST">
-                                       @method('put')
-                                       @csrf
-                                       <div style="display: none">
-                                           <input type="text" id="estado" name="estado" value="1">
-                                       </div>
-                                       <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Sí</button>
-                                       <button onclick="setTimeout(function(){location.reload();}, 00);" type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
-                                   </div>
-                               </form>
-                           </div>
-                       </div>
-                   </div>
-               </td>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" style="color:teal">
+                                    <p>¿Está seguro que el evento de <strong>{{$r->Nombre_Cliente}}</strong> ya se realizó?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{{route('reservacionRealizada', ['id'=>$r->id])}}" method="POST">
+                                        @method('put')
+                                        @csrf
+                                        <div style="display: none">
+                                            <input type="text" id="estado" name="estado" value="1">
+                                        </div>
+                                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Sí</button>
+                                        <button onclick="cancelAction('staticBackdrop{{$r->id}}', 'list{{$r->id}}')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                
                 
                 <td scope="col" style="text-align: center;"><a type="buttom" href="{{ route('detalle.reservacion', ['id'=>$r->id]) }}">
                        <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
@@ -89,3 +91,16 @@
 
 </div>
 @endsection
+
+<script>
+    function cancelAction(modalId, checkboxId) {
+        // Desmarcar el checkbox
+        var checkbox = document.getElementById(checkboxId);
+        checkbox.checked = false;
+
+        // Cerrar el modal
+        var modal = document.getElementById(modalId);
+        var modalInstance = bootstrap.Modal.getInstance(modal);
+        modalInstance.hide();
+    }
+</script>

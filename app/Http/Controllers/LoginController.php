@@ -141,7 +141,7 @@ class LoginController extends Controller
 
             if ($creado) {
                 return redirect()->route('usuarios.perfil')
-                    ->with('mensaje', "Se actualizó exitosamente el perfil: " . $actualizarUser->name . " ");
+                    ->with('mensaje', "Perfil actualizado exitosamente.");
             }
         } catch (QueryException $exception) {
             $errorCode = $exception->errorInfo[1];
