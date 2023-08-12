@@ -30,7 +30,7 @@
                                     @php
                                         $cod = "";
                                     @endphp
-                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" step="0.001" oninput="c($cod)"
+                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" oninput="c($cod)"
                                         class="form-control border-radius-sm" required>
                                         
                                         @if (old('kiosko'))
@@ -70,7 +70,7 @@
                                 <div class="font-robo form-group">
                                     <label for="name" style="margin-left: 0;">Mesa:</label>
                                     <input class="form-control border-radius-sm" type="text" placeholder="Ingrese el numero de mesa 00"
-                                        name="name" id="name" minlength="2" maxlength="2" step="0.001" oninput="c()"
+                                        name="name" id="name" minlength="2" maxlength="2" oninput="c()"
                                         value="{{ old('name')}}" required>
                                     @error('name')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
@@ -83,7 +83,7 @@
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="codigo" style="margin-left: 0;">Código: </label>
                                     <input class="form-control border-radius-sm" type="text" placeholder="K00-M00"
-                                        name="codigo" id="codigo" minlength="7" maxlength="7" step="0.001"
+                                        name="codigo" id="codigo" minlength="7" maxlength="7"
                                         value="{{ old('codigo',)}}" required readonly>
                                     @error('codigo')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>

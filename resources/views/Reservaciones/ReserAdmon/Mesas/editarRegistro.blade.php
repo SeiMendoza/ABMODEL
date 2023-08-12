@@ -27,7 +27,7 @@
                             <div class="col-6">
                                 <div class="font-robo form-group">
                                     <label for="kiosko" style="margin-left: 0;">Kiosko al que pertenece: </label>
-                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" step="0.001" oninput="c()"
+                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" oninput="c()"
                                         class="form-control border-radius-sm">
                                         @if ($registro->kiosko_id)
                                             <option disabled="disabled" value="{{$registro->kiosko_id}}">Seleccione un kiosko</option> 
@@ -55,7 +55,7 @@
                                     <label for="birthday" style="margin-left: 0;">Nombre:</label>
                                     <input class="form-control border-radius-sm" type="text"  placeholder="Ingrese el numero de mesa 00"
                                      name="name" id="name"  minlength="2" maxlength="2" 
-                                     value="{{old('name', $registro->nombre)}}" required step="0.001" oninput="c()">
+                                     value="{{old('name', $registro->nombre)}}" required oninput="c()">
                                     @error('name')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror
@@ -77,7 +77,8 @@
                                 <div class="font-robo form-group" style="margin-bottom: 5px">
                                     <label for="class" style="margin-left: 0;">Cantidad: </label>
                                     <input class="form-control border-radius-sm" type="number" placeholder="Ingrese una cantidad"
-                                    name="cantidad" id="cantidad" minlength="1" maxlength="1" min="6" max="8" value="{{old('cantidad', $registro->cantidad)}}" required>
+                                    name="cantidad" id="cantidad" minlength="1" maxlength="1" min="6" max="8" 
+                                    value="{{old('cantidad', $registro->cantidad)}}" required>
                                     @error('cantidad')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror

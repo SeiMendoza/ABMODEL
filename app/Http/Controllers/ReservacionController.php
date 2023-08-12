@@ -43,6 +43,8 @@ class ReservacionController extends Controller
         $fecha_act = date("d-m-Y");
         $min = date('d-m-Y', $min = strtotime($fecha_act));
 
+        $t= $request->input('cantidadN') * $request->input('precioN') + $request->input('precio') * $request->input('cantidad');
+
         $request->validate([
             'name' => 'required|regex:/^[\pL\s]+$/u|max:50|min:3',
             'celular' => 'required|numeric|regex:/^[2,3,8,9][0-9]{7}+$/|min_digits:8|max_digits:8|',
@@ -55,7 +57,7 @@ class ReservacionController extends Controller
             'precioN' => 'min:30|max:100|numeric|min_digits:1|max_digits:3',
             'cantidad' => 'required|min:2|max:20|numeric|min_digits:1|max_digits:3',
             'precio' => 'required|min:80|max:200|numeric|min_digits:1|max_digits:3',
-            'anticipo' => 'required|numeric',
+            'anticipo' => 'required|numeric|min:0|max:'.$t,
             'formaPago' => 'required',
         ], [
             'name.required' => 'El nombre no puede estar vacío',
@@ -112,6 +114,8 @@ class ReservacionController extends Controller
 
             'anticipo.required' => 'El pago no puede estar vacío',
             'anticipo.numeric' => 'El pago debe de ser numérico',
+            'anticipo.max' => 'El pago no debe ser mayor al total',
+            'anticipo.min' => 'El pago no puede ser menor a cero',
 
             'formaPago.required' => 'La forma de pago no puede estar vacía',
         ]);
@@ -157,6 +161,8 @@ class ReservacionController extends Controller
         $fecha_act = date("d-m-Y");
         $min = date('d-m-Y', $min = strtotime($fecha_act));
 
+        $t= $request->input('cantidadN') * $request->input('precioN') + $request->input('precio') * $request->input('cantidad');
+
         $request->validate([
             'name' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
             'celular' => 'required|numeric|regex:/^[2,3,8,9][0-9]{7}+$/|min_digits:8|max_digits:8|',
@@ -169,7 +175,7 @@ class ReservacionController extends Controller
             'precioN' => 'min:30|max:100|numeric|min_digits:1|max_digits:3',
             'cantidad' => 'required|min:2|max:20|numeric|min_digits:1|max_digits:3',
             'precio' => 'required|min:80|max:200|numeric|min_digits:1|max_digits:3',
-            'anticipo' => 'required|numeric',
+            'anticipo' => 'required|numeric|min:0|max:'.$t,
             'formaPago' => 'required',
         ], [
             'name.required' => 'El nombre no puede estar vacío',
@@ -226,6 +232,8 @@ class ReservacionController extends Controller
 
             'anticipo.required' => 'El pago no puede estar vacío',
             'anticipo.numeric' => 'El pago debe de ser numérico',
+            'anticipo.max' => 'El pago no debe ser mayor al total',
+            'anticipo.min' => 'El pago no puede ser menor a cero',
 
             'formaPago.required' => 'La forma de pago no puede estar vacía',
         ]);
@@ -303,7 +311,13 @@ class ReservacionController extends Controller
 
     public function destroy2()
     {
-        DB::table('Reservacions')->where('estado', 1)->delete();
-        return back()->with('mensaje', 'Reservaciones borradas correctamente.');
+        $terminadas = DB::table('reservacions')->where('estado', '=', 1)->count();
+        if ($terminadas > 0) {
+            DB::table('reservacions')->where('estado', '=', 1)->delete();
+            return back()->with('mensaje', 'Reservaciones borradas correctamente');
+        } else {
+            return redirect()->route('kiosko_res_t.index')->with('errors', 'No hay reservaciones para borrar');
+        }
+       
     }
 }
