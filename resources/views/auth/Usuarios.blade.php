@@ -58,7 +58,7 @@
             // Temporizador para ocultar el mensaje de error después de 3 segundos (3000 ms)
             setTimeout(function() {
                 document.getElementById('error-success').style.display =
-                'none'; // none, hace que se oculte el mensaje de forma automática.
+                    'none'; // none, hace que se oculte el mensaje de forma automática.
             }, 3000);
         </script>
     @endif

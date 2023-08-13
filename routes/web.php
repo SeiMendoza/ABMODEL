@@ -404,5 +404,9 @@ Route::get('/kiosko/reservaciones/terminadas/{id}/detalles', [ReservacionControl
   ->name('kiosko.detalles_t')->where('id', '[0-9]+');
 
 Auth::routes();
-
+// GET|HEAD        password/confirm ............................. password.confirm › Auth\ConfirmPasswordController@showConfirmForm  
+// POST            password/confirm ........................................................ Auth\ConfirmPasswordController@confirm  
+// POST            password/email ............................... password.email › Auth\ForgotPasswordController@sendResetLinkEmail  
+// GET|HEAD        password/reset ............................ password.request › Auth\ForgotPasswordController@showLinkRequestForm  
+// POST            password/reset ............................................ password.update › Auth\ResetPasswordController@reset
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

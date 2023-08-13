@@ -1,4 +1,4 @@
-@extends('errors.layout')
+@extends('errors.layout2')
 
 @section('title', __('Service Unavailable'))
 @section('code', ' 200 ')

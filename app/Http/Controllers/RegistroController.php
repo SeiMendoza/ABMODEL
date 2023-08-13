@@ -13,7 +13,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 
 class RegistroController extends Controller
 {
- 
+
     /**public function show(){
         acceder solo autenticado
         if(Auth::check()){
@@ -42,7 +42,7 @@ class RegistroController extends Controller
             'email' => 'required|string|email|max:50|unique:users',
             'is_default' => ['required', Rule::in(['Administrador', 'Usuario'])],
             'password' => 'required|string|min:8|confirmed',
-            'address' => 'required|string|min:3|max:250',
+            'address' => 'required|string|min:3|max:250|nullable',
             'telephone' => 'required|min_digits:8|max_digits:8|regex:/^[2,3,8,9][0-9]{7}+$/',
             'imagen' => 'required|image'
         ], [
@@ -69,9 +69,9 @@ class RegistroController extends Controller
             'address.max' => '¡Has excedido el limite máximo de 250 letras!',
 
             'telephone.required' => '¡Debes ingresar tu número de teléfono!',
-            'telephone.min_digits'=>'¡El número telefónico debe tener minimo: 8 dígitos!',
-            'telephone.max_digits'=>'¡El número telefónico debe tener maximo: 8 dígitos!',
-            'telephone.regex'=>'¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!',
+            'telephone.min_digits' => '¡El número telefónico debe tener minimo: 8 dígitos!',
+            'telephone.max_digits' => '¡El número telefónico debe tener maximo: 8 dígitos!',
+            'telephone.regex' => '¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!',
 
             'image.required' => '¡Debes cargar una imagen!',
             'image.image' => '¡Debes seleccionar una imagen!',
@@ -89,25 +89,25 @@ class RegistroController extends Controller
 
         $nuevoUser = new User();
 
-        $nuevoUser->name=$request->input('name');
-        $nuevoUser->email=$request->input('email');
+        $nuevoUser->name = $request->input('name');
+        $nuevoUser->email = $request->input('email');
         $nuevoUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];
-        $nuevoUser->password= bcrypt($request->input('password'));
-        $nuevoUser->address=$request->input('address');
-        $nuevoUser->telephone=$request->input('telephone');
+        $nuevoUser->password = bcrypt($request->input('password'));
+        $nuevoUser->address = $request->input('address');
+        $nuevoUser->telephone = $request->input('telephone');
 
         $file = $request->file('imagen');
         $destinationPath = 'images/';
-        $filename = time().'.'.$file->getClientOriginalName();
-        $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
-        $nuevoUser->imagen = 'images/'.$filename; 
+        $filename = time() . '.' . $file->getClientOriginalName();
+        $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
+        $nuevoUser->imagen = 'images/' . $filename;
 
         /*Variable para guardar los nuevos registros*/
         $creado = $nuevoUser->save();
 
-        if($creado){
-           return redirect()->route('usuarios.users')
-           ->with('mensaje', 'Usuario creado exitosamente');
+        if ($creado) {
+            return redirect()->route('usuarios.users')
+                ->with('mensaje', 'Usuario creado exitosamente');
         }
     }
 
@@ -118,7 +118,7 @@ class RegistroController extends Controller
         try {
             $this->authorize('update', $user);
         } catch (AuthorizationException $e) {
-            return view('auth/PermisoDenegado'); 
+            return view('auth/PermisoDenegado');
         }
 
         $user = User::findOrFail($id);
@@ -154,9 +154,9 @@ class RegistroController extends Controller
             'address.max' => '¡Has excedido el limite máximo de 250 letras!',
 
             'telephone.required' => '¡Debes ingresar tu número de teléfono!',
-            'telephone.min'=>'¡El número telefónico debe tener minimo: 8 dígitos!',
-            'telephone.max'=>'¡El número telefónico debe tener maximo: 8 dígitos!',
-            'telephone.regex'=>'¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!',
+            'telephone.min' => '¡El número telefónico debe tener minimo: 8 dígitos!',
+            'telephone.max' => '¡El número telefónico debe tener maximo: 8 dígitos!',
+            'telephone.regex' => '¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!',
 
         ]);
 
@@ -165,18 +165,18 @@ class RegistroController extends Controller
             false => 'Usuario',
         ];
 
-        try{
+        try {
             $actualizarUser = User::findOrFail($id);
 
-            $actualizarUser->name=$request->input('name');
-            $actualizarUser->email=$request->input('email');
+            $actualizarUser->name = $request->input('name');
+            $actualizarUser->email = $request->input('email');
             // $actualizarUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];    
-            $actualizarUser->address=$request->input('address');
-            $actualizarUser->telephone=$request->input('telephone');
+            $actualizarUser->address = $request->input('address');
+            $actualizarUser->telephone = $request->input('telephone');
 
             // Actualizar el campo 'is_default' solo si es realizado por otro administrador BD.
             if (Auth::user()->isAdmin() && $actualizarUser->id !== Auth::user()->id) {
-               $actualizarUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];
+                $actualizarUser['is_default'] = $isDefaultOptions[$request->input('is_default') === 'Administrador'];
             }
 
             // Actualizar los otros campos
@@ -185,37 +185,35 @@ class RegistroController extends Controller
 
             if ($request->filled('new_password')) {
                 $this->validate($request, [
-                   'new_password' => 'confirmed|min:8',
+                    'new_password' => 'confirmed|min:8',
                 ], $this->customMessages);
-    
+
                 // Actualizar la contraseña con la nueva contraseña ingresada
                 $actualizarUser->password = bcrypt($request->input('new_password'));
             }
 
-            if($request->hasFile('imagen')){
-               $file = $request->file('imagen');
-               $destinationPath = 'images/';
-               $filename = time().'.'.$file->getClientOriginalName();
-               $uploadSuccess = $request->file('imagen')->move($destinationPath,$filename);
-               $actualizarUser->imagen = 'images/'.$filename;
-            }else{
+            if ($request->hasFile('imagen')) {
+                $file = $request->file('imagen');
+                $destinationPath = 'images/';
+                $filename = time() . '.' . $file->getClientOriginalName();
+                $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
+                $actualizarUser->imagen = 'images/' . $filename;
+            } else {
                 unset($actualizarUser['imagen']);
             }
 
             /*Variable para guardar los nuevos cambios*/
             $creado = $actualizarUser->save();
 
-            if($creado){
+            if ($creado) {
                 return redirect()->route('usuarios.users')
-                ->with('mensaje', "Usuario actualizado exitosamente: ".$actualizarUser->name." ");
+                    ->with('mensaje', "Usuario actualizado exitosamente: " . $actualizarUser->name . " ");
             }
-        }
-
-        catch (QueryException $exception) {
+        } catch (QueryException $exception) {
             $errorCode = $exception->errorInfo[1];
             if ($errorCode == 1062) {
-               // Código de error 1062: Entrada duplicada
-               return redirect()->back()->withErrors(['email' => 'El correo electrónico ya está en uso.'])->withInput();
+                // Código de error 1062: Entrada duplicada
+                return redirect()->back()->withErrors(['email' => 'El correo electrónico ya está en uso.'])->withInput();
             }
             throw $exception;
         }
@@ -226,8 +224,8 @@ class RegistroController extends Controller
         'new_password.min' => '¡Debes ingresar una contraseña segura, minimo 8 caracteres!',
     ];
 
-    
-    /*Borrar usuario con permisos*/ 
+
+    /*Borrar usuario con permisos*/
     public function destroy($id)
     {
         // Verifica si el usuario a eliminar existe
@@ -247,7 +245,7 @@ class RegistroController extends Controller
 
         return redirect()->route('usuarios.users')->with('success', 'Usuario eliminado correctamente.');
     }
-    
+
 
     /**Vista de usuarios */
     public function users(Request $request)
