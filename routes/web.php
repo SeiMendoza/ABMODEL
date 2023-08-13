@@ -1,18 +1,16 @@
 <?php
 
-use App\Http\Controllers\BebidaController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KioskoController;
 use App\Http\Controllers\PedidoUsuarioController;
 use App\Http\Controllers\MenuUsuarioController;
-use App\Http\Controllers\PlatilloController;
 use App\Http\Controllers\PlatillosyBebidasController;
 use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetallesPedidoController;
-use App\Http\Controllers\EditarPlatilloController;
-use App\Http\Controllers\EditarBebidaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PiscinaController;
 use App\Http\Controllers\MesaController;
@@ -42,6 +40,7 @@ Route::get('/', [LoginController::class, 'show'])
   ->name('login');
 
 /** REGISTRO Y LOGIN */
+
 Route::controller(RegistroController::class)->middleware('auth')->group(function () {
 
   Route::get('/listaUsuarios', 'users')->name('usuarios.users');
@@ -53,13 +52,17 @@ Route::controller(RegistroController::class)->middleware('auth')->group(function
 });
 
 
+
 /**PERFIL USUARIO */
+
 Route::get('/login', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('auth')->name('cerrarSes.cerrar');
 Route::get('/perfil', [LoginController::class, 'perfil'])->middleware('auth')->name('usuarios.perfil');
 Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])->middleware('auth')->name("usuarios.editarPerfil");
 Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])->middleware('auth')->name('usuarios.updatePerfil');
+
+
 
 
 /* Rutas Administracion de Restaurante */
@@ -85,12 +88,14 @@ Route::controller(HomeController::class)->middleware('auth')->group(function () 
 
 Route::controller(HomeController::class)->middleware('auth')->group(function () {
 
+
 });
 
 
 /*****************************
   Rutas Para Menú de usuario
 ******************************/
+
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class, 'terminarp'])->middleware('auth')
   ->name('terminar.terminarp')->where('id', '[0-9]+'); /*terminar pedidos en caja*/
 Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class, 'env_a_cocina'])->middleware('auth')
@@ -144,6 +149,7 @@ Route::post('/pedidos/{id}/cambiarmesa', [PedidoUsuarioController::class, 'Cambi
 /*****************************
  Rutas Para Menu de cliente
 ******************************/
+
 Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])->middleware('auth')
   ->name('cliente_menu.details');
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])->middleware('auth')
@@ -210,6 +216,7 @@ Route::controller(ProductoController::class)->middleware('auth')->group(function
 });
 
 
+
 /*lista de pedidos anteriores*/
 Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])->middleware('auth')
   ->name('pedidoant.pedidos_anteriores');
@@ -237,7 +244,6 @@ Route::controller(KioskoController::class)->middleware('auth')->group(function (
 });
 /*Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');*/
-
 
 /****************************************
 Rutas Para Piscina
@@ -271,16 +277,17 @@ Route::post('/piscina/restar/{id}', [PiscinaController::class, 'restar'])->middl
 /**
  * Reservaciones de mesas
  */
+
 Route::get('/mesas/reservaciones', [MesaController::class, 'indexR'])->middleware('auth')
   ->name('mesas_res.index');
 
 Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])->middleware('auth')
   ->name('mesas_res.show');
 
-
 /**
  * Registro de mesas
  */
+
 Route::get('/mesas/lista', [MesaController::class, 'index'])->middleware('auth')
   ->name('mesas_reg.index');
 /**ruta para qr por id de mesa */
@@ -308,10 +315,10 @@ Route::delete('/mesas/registro/{id}/borrar', [MesaController::class, 'destroy'])
 Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])->middleware('auth')
   ->name('mesas_reg.search');
 
-
 /**
  * Reservaciones de kioskos
  */
+
 Route::get('/kiosko/reservaciones', [ReservacionController::class, 'index2'])->middleware('auth')
   ->name('kiosko_res.index');
 
@@ -335,7 +342,6 @@ Route::get('/kiosko/reservaciones/buscar', [ReservacionController::class, 'searc
 
 Route::get('/kiosko/reservaciones/{id}/detail', [ReservacionController::class, 'detail'])->middleware('auth')
   ->name('kiosko.detail');
-
 
 /* Rutas para reservar local*/
 Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])->middleware('auth')
@@ -387,10 +393,10 @@ Route::get('error/{error}', function ($error) {
   abort($error);
 });
 
-
 /**
  * Reservaciones de kioskos
  */
+
 Route::get('/kiosko/reservaciones/terminadas', [ReservacionController::class, 'indexT'])->middleware('auth')
   ->name('kiosko_res_t.index');
 
@@ -408,5 +414,10 @@ Auth::routes();
 // POST            password/confirm ........................................................ Auth\ConfirmPasswordController@confirm  
 // POST            password/email ............................... password.email › Auth\ForgotPasswordController@sendResetLinkEmail  
 // GET|HEAD        password/reset ............................ password.request › Auth\ForgotPasswordController@showLinkRequestForm  
-// POST            password/reset ............................................ password.update › Auth\ResetPasswordController@reset
+// POST            password/reset ............................................ password.upda te › Auth\ResetPasswordController@reset
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// Route::get('password/reset', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// Route::get('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');

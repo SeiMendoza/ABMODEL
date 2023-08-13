@@ -31,18 +31,20 @@
                             <h4 style="text-align: center"><strong>Iniciar Sesión</strong></h4>
                         </div>
 
-                        <div>
-                            <div class="input-group mb-3">
-                                <div>
-                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                </div>
-                                <input type="email" name="email" class="form-control border-radius-sm input_user"
-                                    value="{{ old('email') }}" placeholder="Correo" style="width:255px; padding: 8px">
+                        <div class="input-group mb-3">
+                            <div>
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
-                            @error('email')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
+                            <input type="email" name="email" class="form-control border-radius-sm input_user"
+                                value="{{ old('email') }}" placeholder="Correo" required autofocus
+                                style="width:255px; padding: 8px">
                         </div>
+                        @error('email')
+                            <span class="menerr" role="alert" style="color:red">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
 
                         <div>
                             <div class="input-group mb-3">
@@ -50,7 +52,7 @@
                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                 </div>
                                 <input type="password" name="password" class="form-control border-radius-sm input_pass"
-                                    value="{{ old('password') }}" placeholder="Contraseña"
+                                    value="{{ old('password') }}" required placeholder="Contraseña"
                                     style="width:255px; padding: 8px">
                             </div>
                             @error('password')

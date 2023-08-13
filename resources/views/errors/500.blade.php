@@ -1,7 +1,6 @@
-@extends('errors.minimal')
+@extends('errors.layout')
 
-@section('title', __('Server Error'))
+@section('title', __('Alto ahí!'))
 @section('code', '500')
-@section('head', 'Alto ahí!')
-@section('img', '/img/errorWeb.jpg')
-@section('message', __('Problemas en el servidor :('))
+@section('img', '/img/serverError.gif')
+@section('message', __('Problemas de servidor, intenta de nuevo'))

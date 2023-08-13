@@ -1,7 +1,6 @@
-@extends('errors.minimal')
+@extends('errors.layout')
 
-@section('title', __('Not Found'))
+@section('title', __('Ooops!'))
 @section('code', '404')
-@section('head', 'Ooops!')
 @section('img', '/img/errorHomero.gif')
-@section('message', __('No se hemos encontrado el recurso'))
+@section('message', __('El recurso solicitado no se ha encontrado o no existe'))
