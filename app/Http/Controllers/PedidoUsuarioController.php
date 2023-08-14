@@ -88,7 +88,23 @@ class PedidoUsuarioController extends Controller
         $texto = "";
         return view('Menu/Cocina/Pedidoscaja', compact('pedido', 'texto', 'p'));
     }
+    // eliminar pedidos completos en caja
+    public function eliminar($id)
+    {
+        $pedido = Pedido::findorfail($id);
 
+        foreach ($pedido->detalles as $detalle) {
+            $producto = $detalle->producto;
+            $producto->disponible += $detalle->cantidad;
+            $producto->save();
+        }
+            $pedido->detalles()->delete();
+            $mesa = $pedido->mesa_nombre;
+            $mesa->estadoM = 0;
+            $mesa->save();
+            $pedido->delete();
+        return redirect()->route('pedidos.caja')->with('mensaje', 'Pedido borrado');
+    }
     public function terminados()
     {
         $pedido = Pedido::where('estado', 3)->orderby('id')->get();
@@ -96,34 +112,13 @@ class PedidoUsuarioController extends Controller
         $texto = "";
         return view('Menu/Cocina/Terminados', compact('pedido', 'texto', 'p',));
     }
-    public function search(Request $request)
-    {
-        //recuperar datos del filtro 
-        $texto = trim($request->get('busqueda'));
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
-            ->orWhere('quiosco', 'like', '%' . $texto . '%')
-            ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
-                $query->where('nombre', 'like', '%' . $texto . '%');
-            })->paginate(10);
-        return view('Menu/Cocina/Terminados', compact('pedido', 'texto'));
-    }
+
     public function pedido_pendientes()
     {
         $pedido = Pedido::where('estado_cocina', 1)->orderby('id')->get();
         //$pedido = Pedido::where('estado_cocina',1)->paginate(10); 
         $texto = "";
         //$pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')->paginate(5);
-        return view('Menu/Cocina/Pedidoscocina', compact('pedido', 'texto'));
-    }
-    public function pcsearch(Request $request)
-    {
-        //recuperar datos del filtro
-        $texto = trim($request->get('busqueda'));
-        $pedido = Pedido::where('nombreCliente', 'like', '%' . $texto . '%')
-            ->orWhere('quiosco', 'like', '%' . $texto . '%')
-            ->orWhereHas('mesa_nombre', function ($query) use ($texto) {
-                $query->where('nombre', 'like', '%' . $texto . '%');
-            })->paginate(10);
         return view('Menu/Cocina/Pedidoscocina', compact('pedido', 'texto'));
     }
 
@@ -241,10 +236,6 @@ class PedidoUsuarioController extends Controller
             }
         }
         $detalles = DetallesPedido::where('pedido_id', $id)->get();
-        // si no hay complementos muestra mensaje
-        /* if ($productos->isEmpty()) {
-            return redirect()->route('pedidost.detalle', ['id' => $pedido->id])->with('mensaje', 'No hay complementos disponibles');
-        }*/
         return view('Menu/Cocina/Nuevo_compl', compact('pedido', 'productos', 'detalles', 'mesas', 'tipo'));
     }
     public function Acomple(Request $request, $id)
@@ -304,22 +295,27 @@ class PedidoUsuarioController extends Controller
         return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Producto añadido.');
     }
 
-    public function Guardar(Request $request, $id, $detalle_id)
+    public function Guardar(Request $request, $id)
     {
         // Obtiene el pedido existente
         $pedido_actual = Pedido::findorfail($id);
-        $rules=[
+        // Obtén el ID de la mesa anterior
+        $mesa_anterior = $pedido_actual->mesa_id;
+        $rules = [
             'nombreC' => 'required|regex:/^[\\pL\\s]+$/u',
             'mesa' => 'required|exists:mesas,id',
         ];
-        $mensaje=[
+        $mensaje = [
             'nombreC.required' => 'El nombre no puede estar vacío',
             'nombre.regex' => 'Solo se aceptan letras',
-             'mesa.required' => 'Debe seleccionar una mesa',
-             'mesa.exists' => 'La mesa seleccionada no existe'
+            'mesa.required' => 'Debe seleccionar una mesa',
+            'mesa.exists' => 'La mesa seleccionada no existe'
         ];
 
-        $this->validate($request,$rules,$mensaje);
+        $this->validate($request, $rules, $mensaje);
+        // Obtiene los detalles del pedido actual
+        $detalles_actual = $pedido_actual->detalles;
+        $detalles_nuevo = $pedido_actual->detalles;
         // Obtener los nuevos valores del formulario
         $nombreCliente = $request->input('nombreC');
         $mesa = $request->input('mesa');
@@ -328,15 +324,16 @@ class PedidoUsuarioController extends Controller
         $pedido_actual->nombreCliente = $nombreCliente;
         $pedido_actual->mesa_id = $mesa;
         $pedido_actual->save();
-        // Obtiene los detalles del pedido actual
-        $detalles_actual = $pedido_actual->detalles;
-        $detalles_nuevo = $pedido_actual->detalles;
 
-        $mesa_id = $pedido_actual->mesa_id;
-        $mesa = Mesa::findOrFail($mesa_id);
-        $quiosco = $mesa->kiosko->id;
-        $mesa->estadoM = 1;
-        $mesa->save();
+        // Cambiar el estado de la mesa anterior a 0
+        $mesa_anterior = Mesa::findOrFail($mesa_anterior);
+        $mesa_anterior->estadoM = 0;
+        $mesa_anterior->save();
+
+        // Cambiar el estado de la nueva mesa a 1
+        $nueva_mesa = Mesa::findOrFail($mesa);
+        $nueva_mesa->estadoM = 1;
+        $nueva_mesa->save();
         // Actualizar los detalles del pedido existente
         foreach ($detalles_actual as $detalle_actual) {
             $detalle_id = $detalle_actual->id;
@@ -376,7 +373,7 @@ class PedidoUsuarioController extends Controller
         if ($a) {
             return redirect()->route('pedidost.detalle', ['id' => $pedido_actual->id])->with('mensaje', 'Pedido guardado correctamente.');
         }
-    }
+}
     public function detalle_pedido_pendientes($id)
     {
         $detapedido = DetallesPedido::where('pedido_id', $id)->get();
@@ -520,7 +517,7 @@ class PedidoUsuarioController extends Controller
         $cantidad_nueva = $request->input('cantidad');
 
         // si la cantidad nueva es mayo que la cantidad disponible hace la validacion
-        if ($cantidad_nueva != $cantidad_existente) {
+        if ($cantidad_nueva > $cantidad_existente) {
             $producto_id = $request->input('producto_id');
             $producto = Producto::where('id', $producto_id)->where('estado', '=', '1')
                 ->firstOrFail();
@@ -563,31 +560,60 @@ class PedidoUsuarioController extends Controller
             $producto = $detalle->producto;
             $producto->disponible -= $detalle->cantidad;
             $producto->save();
-        }
+            }else{ 
+        $diferencia = $cantidad_existente - $cantidad_nueva;
+        $producto = $detalle->producto;
+        $producto->disponible += $diferencia;
+        $producto->save();
+        $detalle = DetallesPedido::findOrfail($detalle_id);
+            $pedido = $detalle->pedido;
+            $detalle->producto_id = $producto->id;
+            $detalle->cantidad = $request->input('cantidad');
+            $detalle->precio = $request->input('precio');
+            $detalle->save();
+
+            // Actualizar los impuestos y totales correspondientes en el objeto Pedido
+            $detalles = $pedido->detalles;
+            $total = 0;
+            foreach ($detalles as $detalle) {
+                $total += $detalle->cantidad * $detalle->precio;
+            }
+            $impuesto = $total * 0.15;
+            $pedido->imp = $impuesto;
+            $pedido->total = $total;
+            $pedido->save();
+    }
         return redirect()->route('pedidost.detalle', ['id' => $pedido_id])->with('mensaje', 'El detalle del pedido ha sido actualizado exitosamente.');
     }
     public function restar($id, $vista)
-{
-    $detalles = DetallesPedido::findOrFail($id);
-    $pedido = $detalles->pedido;
-    $producto = $detalles->producto;
+    {
+        $detalles = DetallesPedido::findOrFail($id);
+        $pedido = $detalles->pedido;
+        $producto = $detalles->producto;
 
-    if ($detalles->cantidad > 1) {
-        $detalles->cantidad = $detalles->cantidad - 1;
-        $detalles->save();
-        $producto->disponible = $producto->disponible + 1;
-        $producto->save();
-        if ($vista == 2) {
-            return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Producto actualizado.');
+        if ($detalles->cantidad > 1) {
+            $detalles->cantidad = $detalles->cantidad - 1;
+            $detalles->save();
+            $producto->disponible = $producto->disponible + 1;
+            $producto->save();
+            if ($vista == 2) {
+                return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Producto actualizado.');
+            }
+        } else {
+            $detalles->delete();
+            if ($pedido->detalles->count() == 0) {
+                $mesa = $pedido->mesa_nombre;
+                $mesa->estadoM = 0;
+                $mesa->save();
+                $pedido->delete();
+                return redirect()->route('pedidos.caja')->with('mensaje', 'Detalles del pedido borrados');
+            }
         }
-    }else{
-    $detalles->delete();
-    }
         $producto->disponible = $producto->disponible + 1;
         $producto->save();
         if ($vista == 2) {
             return redirect()->route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos', 'vista' => 2])->with('mensaje', 'Producto eliminado.');
-        }
+        } 
     }
     /**Obtener el precio de los productos al seleccionarlos en el input nombre de la view editardetalles */
     public function PrecioAcompl(Request $request)

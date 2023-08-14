@@ -98,22 +98,19 @@ Route::controller(HomeController::class)->middleware('auth')->group(function () 
 
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class, 'terminarp'])->middleware('auth')
   ->name('terminar.terminarp')->where('id', '[0-9]+'); /*terminar pedidos en caja*/
+ // eliminar pedido completo
+ Route::post('/menu/{id}/eliminar', [PedidoUsuarioController::class, 'eliminar'])->middleware('auth')
+ ->name('eliminar.pedido')->where('id', '[0-9]+');
 Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class, 'env_a_cocina'])->middleware('auth')
   ->name('env.env_a_cocina')->where('id', '[0-9]+'); /*enviar a cocina*/
 Route::get('/pedidos/caja', [PedidoUsuarioController::class, 'pedido_terminados'])->middleware('auth')
   ->name('pedidos.caja'); /*lista de pedidos pendientes de terminar en caja*/
-Route::get('/pedidos/caja/search', [PedidoUsuarioController::class, 'psearch'])->middleware('auth')
-  ->name('pedidos.psearch'); /*buscar pedidos en caja*/
 Route::put('/pedidos/{id}/pendiente_cocina', [PedidoUsuarioController::class, 'pedidosPendientes_Cocina'])->middleware('auth')
   ->name('pedidosPendientes_Cocina.pedidosPendientes_Cocina')->where('id', '[0-9]+'); /*terminar pedido en cocina*/
 Route::get('/pedidos/cocina', [PedidoUsuarioController::class, 'pedido_pendientes'])->middleware('auth')
   ->name('pedidosp.pedido'); /*lista de pedidos pendientes en cocina*/
-Route::get('/menu/pedidop/cocina', [PedidoUsuarioController::class, 'pcsearch'])->middleware('auth')
-  ->name('pedidosp.pcsearch'); /*buscar pedidos en cocina*/
 Route::get('/pedidos/terminados', [PedidoUsuarioController::class, 'terminados'])->middleware('auth')
   ->name('terminados.terminados'); /*lista de pedidos terminados*/
-Route::get('/menu/pedidost', [PedidoUsuarioController::class, 'search'])->middleware('auth')
-  ->name('pedidost.search'); /*buscar pedidos terminados*/
 Route::get('/pedidos/caja/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])->middleware('auth')
   ->name('pedidost.detalle'); /*detalle de pedidos pendientes de terminar en caja*/
 Route::post('/pedidos/detalles/{id}/borrar/{vista}', [PedidoUsuarioController::class, 'destroy'])->middleware('auth')
@@ -138,7 +135,7 @@ Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::cla
 Route::post('/detallep/{id}/restar/{vista}', [PedidoUsuarioController::class, 'restar'])->middleware('auth')
   ->name('detallep.restar');
 //guardar el pedido con los nuevos detalles 
-Route::post('/pedido/caja/{id}/guardar/{detalle_id}', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
+Route::post('/pedido/caja/{id}/guardar', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
   ->name('guardarPedido');
 Route::post('/cancelar-pedido/{pedido_id}', [PedidoUsuarioController::class, 'cancelarPedido'])->middleware('auth')
   ->name('pedidos.cancelar');
