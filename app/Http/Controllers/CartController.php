@@ -19,7 +19,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $products = Producto::where('estado', '=', '1')->where('disponible', '>=', '1')->get();
+        $products = Producto::where('estado', '=', '1')->get();
         $mesas = Mesa::where('estadoM', '=', '0')->get();
         return view('Menu.Pedido.todoPedidos', compact('products', 'mesas'));
     }
@@ -62,8 +62,8 @@ class CartController extends Controller
         $value->disponible = $value->disponible + $request->disponible;
         $value->save();
         
-        Cart::add(array(
-            'id' => $request->id, // inique row ID
+        \Cart::add(array(
+            'id' => $request->id, // unique row ID
             'name' => $request->name,
             'price' =>$request->price,
             'quantity' => $request->quantity?$request->quantity:1,
@@ -164,9 +164,32 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        
+        $cantidad = 0;
+            $item = Cart::get($request->id);
+            $cantidad = $item->quantity;
+
+            if ($cantidad > 1) {
+                $value = Producto::findOrFail($request->id);
+                $value->disponible = $value->disponible + $request->d;
+                $value->save();
+                
+            } elseif ($cantidad <= 1) {
+                $value = Producto::findOrFail($request->id);
+                $value->disponible = $value->disponible + $request->d;
+                $value->save();
+
+                Cart::remove($id);
+                return back();
+            }
+
+            Cart::update($request->id, 
+            array( 
+                'quantity' => -$request->d,
+            ));  
+            
+        return back();
     }
 
     /**
@@ -199,9 +222,7 @@ class CartController extends Controller
             Cart::update($request->id, 
             array( 
                 'quantity' => -$request->d,
-            ));
-            
-            
+            ));  
             
         return back();
     }

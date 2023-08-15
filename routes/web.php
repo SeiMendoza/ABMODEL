@@ -21,6 +21,10 @@ use App\Http\Controllers\ReservacionTotalController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Counter;
+use App\Http\Livewire\Pedidos\Bebidas;
+use App\Http\Livewire\Pedidos\DetallesPedido;
+use App\Http\Livewire\Pedidos\Menu;
+use App\Http\Livewire\Pedidos\Pedido;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -371,7 +375,7 @@ Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Rea
 Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])->middleware('auth')
   ->name('detalle.realizadas');
 
-Route::resource('/counter', Counter::class);
+Route::view('/counter', 'livewire/home');
 
 Route::resource('/cart', CartController::class)->middleware('auth');
 Route::post('/create', [CartController::class, 'create'])->middleware('auth')->name('cart.create');
@@ -383,7 +387,7 @@ Route::get('/complementos', [CartController::class, 'complementos'])->middleware
 Route::resource('/pedido/todo', DetallesPedidoController::class);
 
 //Rutas para manejo de errores
-Route::get('error/{error}', function ($error) {
+Route::get('error/{error}', function ($error) {- 
   abort($error);
 });
 
@@ -406,3 +410,14 @@ Route::get('/kiosko/reservaciones/terminadas/{id}/detalles', [ReservacionControl
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/* 
+*Rutas livewire para pedidos
+ */
+
+ //Route::view('/pedido/menu', 'livewire/pedidos/menu')->name('menu');
+ Route::resource('/pedido/menu', Menu::class)->only('index', 'create', 'show', 'edit');
+ Route::get('/pedido/menu/bebidas', [Menu::class, 'bebidas'])->name('menu.bebidas');
+ Route::get('/pedido/menu/platillos', [Pedido::class, 'platillos'])->name('menu.platillos');
+ Route::get('/pedido/menu/complementos', [Pedido::class, 'complementos'])->name('menu.complementos');
+ //Route::get('/pedido/menu/detalles', [DetallesPedido::class]);

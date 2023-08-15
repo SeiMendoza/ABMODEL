@@ -33,28 +33,103 @@
         .ocultar {
             transform: translateX(-0%);
         }
-
-        @media screen and (min-width: 780px) {
+        .d{
+            padding: 0px; width:213px; 
+            height:213px; margin:0px 5px 2px 0;
+            border-radius:0%;
+            text-align:center;
+            overflow-x: hidden;
         }
 
-        @media all and (min-width: 576px) {
-
+        .clasemmlona{
+            width: 100%; 
+            background-color:rgba(255, 255, 255, 0.677); 
+            height:213px;
+            text-align:center; 
         }
 
-        @media all and (min-width: 768px) {
+        @media all and (min-height: 300px) {
+            #pedidoT{
+                height:30%; 
+            }
+            #productosP{
+                height:65%;
+            }
+        }
+        @media all and (min-height: 350px) {
+            #pedidoT{
+                height:35%; 
+            }
+            #productosP{
+                height:68%;
+            }
+        }
+        @media all and (min-height: 375px) {
+            #pedidoT{
+                height:35%; 
+            }
+            #productosP{
+                height:71%;
+            }
+        }
+        @media all and (min-height: 400px) {
+            #pedidoT{
+                height:40%; 
+            }
+            #productosP{
+                height:73%;
+            }
+        } 
+        @media all and (min-height: 450px) {
+            #pedidoT{
+                height:50%; 
+            }
+            #productosP{
+                height:75%;
+            }
+        } 
+        @media all and (min-height: 500px) {
+            #pedidoT{
+                height:55%; 
+            }
+            #productosP{
+                height:77%;
+            }
+        }
+        @media all and (min-height: 525px) {
+            #pedidoT{
+                height:60%; 
+            }
+            #productosP{
+                height:79%;
+            }
+        }
+        @media all and (min-height: 538px) {
+            #productosP{
+                height:81.5%;
+            }
+        }
+        @media all and (min-height: 550px) {
+            #pedidoT{
+                height:67%; 
+            }
 
+            #productosP{
+                height:84%; 
+            }
+        }
+        @media screen and (min-heigth: 600px) {
+            #pedidoT{ 
+                height:70%; 
+            }
+            #productosP{
+                height:85%;
+            }
         }
 
-        @media all and (min-width: 992px) { 
-
-        }
-
-        @media (min-width: 1200px) {
-
-        }
     </style>
 </head>
-<body class="" style="">
+<body class="" style="overflow-x: hidden;">
     <div style="overflow: auto;" class=" h-100">
         <script>
             var msg = '{{ Session::get('mensaje') }}';
@@ -117,13 +192,13 @@
                                     </ol>
                                 </nav>
                             </div>
-                            <div class="table-responsive " style="display:block; float:left;;
-                            margin: 0px; margin-top:2px; padding:0; height:87%; position:absolute; left:5px;">
+                            <div class="table-responsive " id="productosP" style="display:block; float:left;;
+                            margin: 0px; margin-top:2px; padding:0; position:absolute; left:5px;">
                                 <section style="">
                                     <main class=" main-content">
                                         <div class="tab-content" style="margin: 0px; padding:0; ">
                                             <div class="row row-cols-xs-6 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4" 
-                                                style="margin: 0px; padding:0;">
+                                                style="margin: 0px; padding:0; overflow-x:hidden;">
                                                 @yield('productos')
                                             </div>
                                         </div>
@@ -221,8 +296,8 @@
                                     </ol>
                                 </nav>
                             </div>                   
-                            <div style="margin:50px 0 0 0; padding:0;
-                                    width:100%; position:absolute; height:67%; overflow-y:auto;" class="bg-white">
+                            <div id="pedidoT" style="margin:50px 0 0 0; padding:0;
+                                    width:100%; position:absolute; overflow-y:auto;" class="bg-white">
                                 <div class="row" id="carrito" style="margin: 0; padding:0;
                                  ">
                                     <table class="table table-borderless" id="lista" style="margin: 0; 
@@ -233,11 +308,11 @@
                                             <th scope="col" style="padding:3px; text-align:center;">Cantidad</th>
                                             <th scope="col" style="padding:3px; text-align:right;">Precio</th>
                                             <th scope="col" style="padding:3px; text-align:right;">Sub-total</th>
-                                            <th scope="col" colspan="2" style="padding:3px; text-align:center;">Elementos</th>
+                                            <th scope="col" colspan="3" style="padding:3px; text-align:center;">Elementos</th>
                                         </tr>
                                     </thead>
                                     <tbody class="col"  id=""  style="">
-                                        @foreach(\Cart::getContent() as $item)
+                                        @foreach(\Cart::getContent()->sortBy('id') as $key => $item)
 
                                         <tr>
                                             <td style="text-align: left; padding-left:3px;">{{ $item->name }}</td>
@@ -251,11 +326,22 @@
                                                     
                                                         <input type="hidden" value="{{ $item->id}}" id="id" name="id">
                                                         <input type="hidden" value="1" id="d" name="d">
-                                                        <button type="submit"><i class="fa fa-edit"></i></button>
+                                                        <button onclick="update()"><i class="fa-solid fa-circle-minus"></i></button>
                                                     
                                                 </form>
                                             </td>    
                                             <td style="text-align: center">
+                                                <form action="{{route('cart.update',$item->id)}}" method="POST">
+                                                    @method('put')
+                                                    @csrf
+                                                    
+                                                        <input type="hidden" value="{{ $item->id}}" id="id" name="id">
+                                                        <input type="hidden" value="-1" id="d" name="d">
+                                                        <button onclick="update()"><i class="fa-solid fa-circle-plus"></i></button>
+                                                    
+                                                </form>
+                                            </td>
+                                            <td style="text-align: left">
                                                 <form method="POST" action="{{route('cart.destroy',$item->id)}}">
                                                     @method('DELETE')
                                                     @csrf
@@ -384,6 +470,44 @@
         function enviar() {
             var formul = document.getElementById("formulario");
             formul.submit();
+        }
+        function proenviar(id) {
+            try {
+                var c = parseFloat(document.getElementById("dis-" + id).value) || 0;
+                if (c <= 0) {
+                    var ms = 'No hay productos disponibles';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: ms,
+                        showConfirmButton: false,
+                        toast: true,
+                        background: '#fff',
+                        timer: 5500
+                    })
+                    var but = document.getElementById("p-" + id);
+                    but.classList.add("clasemmlona");
+                } else {
+                    if (c >= 1) {
+                    var formul = document.getElementById("producto-" + id);
+                    formul.submit(); 
+                    }
+                    
+                }
+
+            } catch (e) {
+                var ms = 'Ups!! hubo un problema';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: ms,
+                        showConfirmButton: false,
+                        toast: true,
+                        background: '#fff',
+                        timer: 5500
+                    })
+            }
+            
         }
         function eliminar(){
             Swal
