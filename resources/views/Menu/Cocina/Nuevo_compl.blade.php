@@ -65,7 +65,7 @@
                 })
             }
             var ms = '¡Existe un error, revise los datos!';
-            var exis = '{{ Session::has('errors') }}';
+            var exis = '{{ Session::has('errors ') }}';
             if (exis) {
                 Swal.fire({
                     position: 'top-end',
@@ -130,7 +130,7 @@
 
                                                         <div class="d-flex justify-content-center mb-1">
                                                             <button class="card btn btnCard col" id="btn" type="submit" data-id="{{$pro->id}}" style="padding: 0px; width:216px; height:200px; margin:0px 5px 1px 0; border-radius:0%;
-                        background: url('/{{ $pro->imagen}}') top center/cover no-repeat;">
+                    background: url('/{{ $pro->imagen}}') top center/cover no-repeat;">
                                                                 <div class="text-center" style="text-align:center;  width: 11rem;">
                                                                     <!-- Nombre -->
                                                                     <p class="nombre card-title pt-2 text-center text-dark" id="nombre">
@@ -141,11 +141,11 @@
                                                                     <!-- Precio -->
                                                                     <p id="precio" class="text-dark text-decoration-line">
                                                                         <strong class="precio" style="font-size: 15.3px; width:35%;
-                                    background-color:rgba(255, 255, 255, 0.677);
-                                    position: absolute; bottom: 0; right:0%">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
+                                background-color:rgba(255, 255, 255, 0.677);
+                                position: absolute; bottom: 0; right:0%">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
                                                                         <strong class="precio" style="font-size: 15.3px; width:65%;
-                                    background-color:rgba(255, 255, 255, 0.677);
-                                    position: absolute; bottom: 0; left:0;">Disponible: {{$pro->disponible}}</strong>
+                                background-color:rgba(255, 255, 255, 0.677);
+                                position: absolute; bottom: 0; left:0%;">Disponible: {{$pro->disponible}}</strong>
                                                                     </p>
                                                                 </div>
                                                             </button>
@@ -153,7 +153,6 @@
                                                     </form>
                                                 </div>
                                                 @endif
-
                                                 @endforeach
                                             </div>
                                         </div>
@@ -219,7 +218,6 @@
                                     </ol>
                                 </nav>
                             </div>
-
                         </div>
                         <div class="d-none d-sm-none d-md-table bg-white ;
                             col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" style="display:block; margin: 0px; height:100%; 
@@ -251,7 +249,7 @@
                                                 <th scope="col" colspan="2" style="padding:3px; text-align:center;">Elementos</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="col" id="" style="">
+                                        <tbody class="col" id="">
                                             @php
                                             $total= 0;
                                             $impuesto = 0;
@@ -259,17 +257,20 @@
                                             @foreach ($detalles as $detalle)
                                             <tr>
                                                 <td style="text-align: left; padding-left:3px;">{{ $detalle->producto->nombre }}</td>
-                                                <td style="text-align: center">{{ $detalle->cantidad }}</td>
+                                                <td style="text-align: center" id="detalle-{{ $detalle->id }}">{{ $detalle->cantidad }}</td>
                                                 <td style="text-align: right">L {{ $detalle->producto->precio }}</td>
                                                 <td style="text-align: right">L {{ $detalle->cantidad * $detalle->producto->precio }}</td>
-                                                <td style="text-align: right">
+                                                <td style="text-align: center; display: flex; justify-content: center;">
                                                     <form action="{{route('detallep.restar',['id' => $detalle->id,'vista'=>2])}}" method="POST">
                                                         @method('post')
                                                         @csrf
-                                                        <button style="margin-right: 15px;" type="submit"><i class="fa fa-edit"></i></button>
+                                                        <button style="margin-right: 15px;" name="restar" type="submit"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
                                                     </form>
-                                                </td>
-                                                <td style="text-align: center">
+                                                    <form action="{{route('detallep.sumar',['id' => $detalle->id,'vista'=>2])}}" method="POST">
+                                                        @method('post')
+                                                        @csrf
+                                                        <button style="margin-right: 15px;" name="sumar" type="submit"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                                    </form>
                                                     <form method="POST" action="{{ route('detallep.destroy', ['id' => $detalle->id,'vista'=>2]) }}">
                                                         @method('post')
                                                         @csrf
@@ -368,7 +369,6 @@
     <script src={{ asset('/js/plugins/smooth-scrollbar.min.js') }}></script>
     <script>
         // contar cuantos productos hay en el carrito
-
         window.onload = function() {
             // Obtiene la tabla y la lista de productos
             var tabla = document.getElementById("lista");

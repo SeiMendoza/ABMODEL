@@ -31,12 +31,12 @@ class MesaController extends Controller
     {
         $mesa = Mesa::findOrFail($id);
         $datos = [
-            'Titulo' => 'Código QR: ' . $mesa->nombre,
+            'Titulo' => 'Código QR: Mesa-'. $mesa->nombre,
             'Qr' => $mesa->mesa_qr, // Pasa la ruta de la imagen a la vista
         ];
         $pdf = PDF::loadView('Reservaciones.ReserAdmon.Mesas.mesa_qr_pdf', $datos); //Muestra la vista que contiene el Qr
 
-        return $pdf->download('Qr_' . $mesa->nombre . '.pdf');
+        return $pdf->download('Qr_Mesa-' . $mesa->nombre . '.pdf');
     }
     public function search(Request $request)
     {

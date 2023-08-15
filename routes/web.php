@@ -134,6 +134,9 @@ Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::cla
 //restar a los detalles agregados 
 Route::post('/detallep/{id}/restar/{vista}', [PedidoUsuarioController::class, 'restar'])->middleware('auth')
   ->name('detallep.restar');
+  //sumar a los detalles agregados 
+Route::post('/detallep/{id}/sumar/{vista}', [PedidoUsuarioController::class, 'sumar'])->middleware('auth')
+->name('detallep.sumar');
 //guardar el pedido con los nuevos detalles 
 Route::post('/pedido/caja/{id}/guardar', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
   ->name('guardarPedido');

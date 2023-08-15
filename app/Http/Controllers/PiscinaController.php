@@ -149,7 +149,7 @@ class PiscinaController extends Controller
             'tipo' => 'required|exists:piscina_tipos,id',
             'uso' => 'required|exists:piscina_usos,id',
            // 'expiracion' => 'required|date|after:'.$minima,
-            'kilos' => 'required|numeric|min:1|max:1000'
+            'kilos' => 'required|numeric|min:0.5|max:1000'
         ];
 
         $mensaje=[

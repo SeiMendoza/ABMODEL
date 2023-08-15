@@ -25,7 +25,7 @@
     <div class="card border-radius-sm border-0">
         <div class="card-body border-radius-sm border-0"> <BR><BR>
             <h3 class="border-radius-md h-6 text-center text-gray font-weight-bolder" style="text-align:right">
-            Código Qr: {{$mesa->nombre}} </h3><br>
+            Código Qr: Mesa-{{$mesa->nombre}} </h3><br>
             <div style="text-align:center;">
                 <img src="{{$Qr}}" />
             </div>
