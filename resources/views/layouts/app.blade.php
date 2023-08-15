@@ -1,3 +1,5 @@
+<link id="pagestyle" href="/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+<link href="/css/main.css" rel="stylesheet" media="all">
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -11,11 +13,21 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
+    <link rel="icon" type="image/png" href="/img/faviconVillaCrisol.png">
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="/assets/css/fontawesome.css" rel="stylesheet">
+    <link href="/assets/css/solid.css" rel="stylesheet">
+    <link href="/assets/css/brands.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/login.css">
 
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+    {{-- @vite(['public/manifest.json', 'resources/sass/app.scss', 'resources/js/app.js']) --}}
+    {{-- @vite('main') --}}
+    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="{{ mix('js/app.js') }}"></script> --}}
+
 </head>
 
 <body>
@@ -47,11 +59,11 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            {{-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

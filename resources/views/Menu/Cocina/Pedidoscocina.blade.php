@@ -24,7 +24,7 @@
                     <th scope="col" style="text-align:center;text-transform:initial;">Nombre del cliente</th>
                     <th scope="col" style="text-align:center;text-transform:initial;">Tiempo transcurrido</th>
                     <th scope="col" style="text-align:center;text-transform:initial;">Enviar a caja</th>
-                    <th scope="col" style="text-align:center">Detalles</th>
+                    <th scope="col" style="text-align:center">Elementos</th>
                 </tr>
             </thead>
             <tbody>
@@ -100,10 +100,33 @@
                         </div>
                     </form>
                     </td>
-                    <td>
+                    <td style="text-align:center; width:20%; height:20%;">
+                    <div style="display: flex; justify-content: center; flex-direction: row;position: relative;">
                         <a type="buttom" href="{{route('pedidosp.detalle',['id'=>$p->id])}}">
                             <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
-                        </a>
+                        </a> 
+                        <i data-bs-toggle="modal" data-bs-target="#stat{{$p->id}}" class="fa-solid fa-trash-can text-danger" style="font-size:15px;text-align:center;position: absolute; margin-left:20%; top: 50%;transform: translateY(-50%);"></i>
+                        <form action="{{route('eliminar.pedido', ['id'=>$p->id])}}" method="POST">
+                        @method('post')
+                        @csrf
+                        <div class="modal fade" id="stat{{$p->id}}" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar pedido</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro de eliminar el pedido de: {{$p->nombreCliente}}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Si</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
                     </td>
                 </tr>
                 @endif

@@ -45,6 +45,17 @@ return [
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
 
+        'outlook' => [
+            'transport' => 'smtp',
+            'host' => 'smtp.office365.com',
+            'port' => 587,
+            'encryption' => 'tls',
+            'username' => env('OUTLOOK_MAIL_USERNAME'),
+            'password' => env('OUTLOOK_MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],

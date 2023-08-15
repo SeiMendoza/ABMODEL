@@ -1,47 +1,84 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <style>
+        .custom-error {
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #f93e47c7;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+        }
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        .custom-exit {
+            font-size: 15px;
+            font-weight: bold;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-md-10 col-sm-10">
+                <div class="card">
+                    <div class="card-header">
+                        @if (session('status'))
+                            <div class="alert alert-success custom-exit text-center" role="alert" id="error-success">
+                                {{ session('status') }}
                             </div>
-                        </div>
+                        @endif
+                    </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
+                    <div>
+                        <h4 style="text-align: center"><strong>{{ __('Restablecer Contraseña') }}</strong></h4>
+                    </div>
+
+                    <div class="pt-3" style="text-align: center">
+                        Enviaremos un email con la información para restablecer tu
+                        contraseña
+                    </div>
+
+                    <div class="card-body">
+
+                        <form method="POST" action="{{ route('password.email') }}">
+                            @csrf
+
+                            <div class="row justify-content-center">
+                                <div class="col-xl-6 col-md-10 col-sm-10">
+                                    <div class="input-group mb-3">
+                                        <div class="text-md-end">
+                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        </div>
+                                        <input type="email" name="email" id="email"
+                                            class="form-control border-radius-sm input_user
+                                            @error('email') is-invalid @enderror"
+                                            value="{{ old('email') }}" required autocomplete="email" placeholder="Correo"
+                                            style="width:255px; padding: 8px" autofocus>
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+
+
+                            <div class="row justify-content-center">
+                                <div class="col-xl-6 col-md-10 col-sm-10">
+                                    <button type="submit" class="justify-content-center btn login_btn">
+                                        {{ __('Enviar') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

@@ -1,18 +1,16 @@
 <?php
 
-use App\Http\Controllers\BebidaController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KioskoController;
 use App\Http\Controllers\PedidoUsuarioController;
 use App\Http\Controllers\MenuUsuarioController;
-use App\Http\Controllers\PlatilloController;
 use App\Http\Controllers\PlatillosyBebidasController;
 use App\Http\Controllers\ComboController;
 use App\Http\Controllers\BusquedaAdmonController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetallesPedidoController;
-use App\Http\Controllers\EditarPlatilloController;
-use App\Http\Controllers\EditarBebidaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PiscinaController;
 use App\Http\Controllers\MesaController;
@@ -46,6 +44,7 @@ Route::get('/', [LoginController::class, 'show'])
   ->name('login');
 
 /** REGISTRO Y LOGIN */
+
 Route::controller(RegistroController::class)->middleware('auth')->group(function () {
 
   Route::get('/listaUsuarios', 'users')->name('usuarios.users');
@@ -57,13 +56,17 @@ Route::controller(RegistroController::class)->middleware('auth')->group(function
 });
 
 
+
 /**PERFIL USUARIO */
+
 Route::get('/login', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('auth')->name('cerrarSes.cerrar');
 Route::get('/perfil', [LoginController::class, 'perfil'])->middleware('auth')->name('usuarios.perfil');
 Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])->middleware('auth')->name("usuarios.editarPerfil");
 Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])->middleware('auth')->name('usuarios.updatePerfil');
+
+
 
 
 /* Rutas Administracion de Restaurante */
@@ -89,30 +92,29 @@ Route::controller(HomeController::class)->middleware('auth')->group(function () 
 
 Route::controller(HomeController::class)->middleware('auth')->group(function () {
 
+
 });
 
 
 /*****************************
   Rutas Para Menú de usuario
 ******************************/
+
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class, 'terminarp'])->middleware('auth')
   ->name('terminar.terminarp')->where('id', '[0-9]+'); /*terminar pedidos en caja*/
+ // eliminar pedido completo
+ Route::post('/menu/{id}/eliminar', [PedidoUsuarioController::class, 'eliminar'])->middleware('auth')
+ ->name('eliminar.pedido')->where('id', '[0-9]+');
 Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class, 'env_a_cocina'])->middleware('auth')
   ->name('env.env_a_cocina')->where('id', '[0-9]+'); /*enviar a cocina*/
 Route::get('/pedidos/caja', [PedidoUsuarioController::class, 'pedido_terminados'])->middleware('auth')
   ->name('pedidos.caja'); /*lista de pedidos pendientes de terminar en caja*/
-Route::get('/pedidos/caja/search', [PedidoUsuarioController::class, 'psearch'])->middleware('auth')
-  ->name('pedidos.psearch'); /*buscar pedidos en caja*/
 Route::put('/pedidos/{id}/pendiente_cocina', [PedidoUsuarioController::class, 'pedidosPendientes_Cocina'])->middleware('auth')
   ->name('pedidosPendientes_Cocina.pedidosPendientes_Cocina')->where('id', '[0-9]+'); /*terminar pedido en cocina*/
 Route::get('/pedidos/cocina', [PedidoUsuarioController::class, 'pedido_pendientes'])->middleware('auth')
   ->name('pedidosp.pedido'); /*lista de pedidos pendientes en cocina*/
-Route::get('/menu/pedidop/cocina', [PedidoUsuarioController::class, 'pcsearch'])->middleware('auth')
-  ->name('pedidosp.pcsearch'); /*buscar pedidos en cocina*/
 Route::get('/pedidos/terminados', [PedidoUsuarioController::class, 'terminados'])->middleware('auth')
   ->name('terminados.terminados'); /*lista de pedidos terminados*/
-Route::get('/menu/pedidost', [PedidoUsuarioController::class, 'search'])->middleware('auth')
-  ->name('pedidost.search'); /*buscar pedidos terminados*/
 Route::get('/pedidos/caja/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_terminados'])->middleware('auth')
   ->name('pedidost.detalle'); /*detalle de pedidos pendientes de terminar en caja*/
 Route::post('/pedidos/detalles/{id}/borrar/{vista}', [PedidoUsuarioController::class, 'destroy'])->middleware('auth')
@@ -136,8 +138,11 @@ Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::cla
 //restar a los detalles agregados 
 Route::post('/detallep/{id}/restar/{vista}', [PedidoUsuarioController::class, 'restar'])->middleware('auth')
   ->name('detallep.restar');
+  //sumar a los detalles agregados 
+Route::post('/detallep/{id}/sumar/{vista}', [PedidoUsuarioController::class, 'sumar'])->middleware('auth')
+->name('detallep.sumar');
 //guardar el pedido con los nuevos detalles 
-Route::post('/pedido/caja/{id}/guardar/{detalle_id}', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
+Route::post('/pedido/caja/{id}/guardar', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
   ->name('guardarPedido');
 Route::post('/cancelar-pedido/{pedido_id}', [PedidoUsuarioController::class, 'cancelarPedido'])->middleware('auth')
   ->name('pedidos.cancelar');
@@ -148,6 +153,7 @@ Route::post('/pedidos/{id}/cambiarmesa', [PedidoUsuarioController::class, 'Cambi
 /*****************************
  Rutas Para Menu de cliente
 ******************************/
+
 Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])->middleware('auth')
   ->name('cliente_menu.details');
 Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])->middleware('auth')
@@ -214,6 +220,7 @@ Route::controller(ProductoController::class)->middleware('auth')->group(function
 });
 
 
+
 /*lista de pedidos anteriores*/
 Route::get('/menu/pedidos/anteriores', [PedidoUsuarioController::class, 'pedidos_anteriores'])->middleware('auth')
   ->name('pedidoant.pedidos_anteriores');
@@ -241,7 +248,6 @@ Route::controller(KioskoController::class)->middleware('auth')->group(function (
 });
 /*Route::post('/kiosko/{id}/destroy', [KioskoController::class, 'destroy'])->
 name('kiosko.destroy');*/
-
 
 /****************************************
 Rutas Para Piscina
@@ -275,16 +281,17 @@ Route::post('/piscina/restar/{id}', [PiscinaController::class, 'restar'])->middl
 /**
  * Reservaciones de mesas
  */
+
 Route::get('/mesas/reservaciones', [MesaController::class, 'indexR'])->middleware('auth')
   ->name('mesas_res.index');
 
 Route::get('/mesas/reservaciones/detalles', [MesaController::class, 'show'])->middleware('auth')
   ->name('mesas_res.show');
 
-
 /**
  * Registro de mesas
  */
+
 Route::get('/mesas/lista', [MesaController::class, 'index'])->middleware('auth')
   ->name('mesas_reg.index');
 /**ruta para qr por id de mesa */
@@ -312,10 +319,10 @@ Route::delete('/mesas/registro/{id}/borrar', [MesaController::class, 'destroy'])
 Route::get('/mesas/registro/buscar', [MesaController::class, 'search'])->middleware('auth')
   ->name('mesas_reg.search');
 
-
 /**
  * Reservaciones de kioskos
  */
+
 Route::get('/kiosko/reservaciones', [ReservacionController::class, 'index2'])->middleware('auth')
   ->name('kiosko_res.index');
 
@@ -339,7 +346,6 @@ Route::get('/kiosko/reservaciones/buscar', [ReservacionController::class, 'searc
 
 Route::get('/kiosko/reservaciones/{id}/detail', [ReservacionController::class, 'detail'])->middleware('auth')
   ->name('kiosko.detail');
-
 
 /* Rutas para reservar local*/
 Route::get('Reser/Local', [ReservacionTotalController::class, 'reservaLocal'])->middleware('auth')
@@ -391,10 +397,10 @@ Route::get('error/{error}', function ($error) {-
   abort($error);
 });
 
-
 /**
  * Reservaciones de kioskos
  */
+
 Route::get('/kiosko/reservaciones/terminadas', [ReservacionController::class, 'indexT'])->middleware('auth')
   ->name('kiosko_res_t.index');
 
@@ -408,8 +414,17 @@ Route::get('/kiosko/reservaciones/terminadas/{id}/detalles', [ReservacionControl
   ->name('kiosko.detalles_t')->where('id', '[0-9]+');
 
 Auth::routes();
-
+// GET|HEAD        password/confirm ............................. password.confirm › Auth\ConfirmPasswordController@showConfirmForm  
+// POST            password/confirm ........................................................ Auth\ConfirmPasswordController@confirm  
+// POST            password/email ............................... password.email › Auth\ForgotPasswordController@sendResetLinkEmail  
+// GET|HEAD        password/reset ............................ password.request › Auth\ForgotPasswordController@showLinkRequestForm  
+// POST            password/reset ............................................ password.upda te › Auth\ResetPasswordController@reset
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// Route::get('password/reset', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// Route::get('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
 /* 
 *Rutas livewire para pedidos
