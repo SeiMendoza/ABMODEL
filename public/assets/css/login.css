@@ -3,8 +3,18 @@
         margin: 0;
         padding: 0;
         height: 100%;
-        background: rgba(226, 238, 251, 0.655) !important;
+        background-image: url('/img/balneario2.jpg');
+        background-size: cover; /* Ajustar la imagen al ancho del contenedor y ajustar la altura automáticamente */
+        background-repeat: no-repeat; /* Evitar que la imagen se repita */
     }
+
+    /* Media Query para ajustar la imagen en pantallas más pequeñas */
+    @media (max-width: 768px) {
+        body {
+            background-size: cover; /* Ajustar la imagen para que cubra completamente el contenedor */
+        }
+    }
+    
     .user_card {
         height: 400px;
         width: 700px;
@@ -85,4 +95,13 @@
     }
     .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
         background-color: rgb(111, 143, 175) !important;
+    }
+
+    .custom-aler t{
+        font-size: 15px;
+        font-weight: bold;
+        background-color: #f93e47c7;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 4px;
     }

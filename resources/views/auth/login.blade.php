@@ -28,37 +28,32 @@
                     <form action="/login" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <h4 style="text-align: center"><strong>Iniciar Sesión</strong></h4>
+                            <h4 style="text-align: center"><strong>Iniciar sesión</strong></h4>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <div>
+                        <div class=" input-group mb-3">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
                             <input type="email" name="email" class="form-control border-radius-sm input_user"
-                                value="{{ old('email') }}" placeholder="Correo" required autofocus
+                                value="{{ old('email') }}" placeholder="Correo" 
                                 style="width:255px; padding: 8px">
                         </div>
-                        @error('email')
-                            <span class="menerr" role="alert" style="color:red">
-                                <strong>{{ $message }}</strong>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                                <input type="password" name="password" class="form-control border-radius-sm input_pass"
+                                    value="{{ old('password') }}"  placeholder="Contraseña" 
+                                    style="width:255px; padding: 8px">
+                        </div>
+                        
+                        @error('password')
+                            <span class="menerr" role="alert" style="color:red;display: block; width: 255px; margin: 1px 0; ">
+                                <strong >Estos campos son obligatorios.</strong>
                             </span>
                         @enderror
-
-
-                        <div>
-                            <div class="input-group mb-3">
-                                <div>
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                </div>
-                                <input type="password" name="password" class="form-control border-radius-sm input_pass"
-                                    value="{{ old('password') }}" required placeholder="Contraseña"
-                                    style="width:255px; padding: 8px">
-                            </div>
-                            @error('password')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                            @enderror
-                        </div>
 
                         <div class="form-group">
                         </div>
@@ -70,11 +65,8 @@
 
                 <div class="mt-1">
                     <hr>
-                    {{-- <div class="d-flex justify-content-center links">
-                        ¿Olvidó Su Contraseña?
-                    </div> --}}
                     <div class="d-flex justify-content-center links">
-                        <a type="buttom" href="{{ route('password.update') }}">¿Olvidó Su Contraseña?</a>
+                        <a type="button" href="{{ route('password.update') }}">¿Olvidó su contraseña?</a>
                     </div>
                 </div>
             </div>
