@@ -75,12 +75,25 @@
 
                     <div class="col-md-4"  >
                         <label class="data-label"> Hora de llegada: </label>
-                        <span class="data-value">{{$reservar->HoraEntrada}} </span>
+                        <span class="data-value">{{ date('h:i A', strtotime($reservar->HoraEntrada)) }}</span>
                     </div> 
 
                     <div class=" col-md-4"  >
                         <label class="data-label"> Hora de salida: </label>
-                        <span class="data-value">{{$reservar->HoraSalida}} </span>
+                        <span class="data-value">{{ date('h:i A', strtotime($reservar->HoraSalida)) }}</span>
+                    </div>
+                </div>
+
+                <div class="row row-spacer" >
+                    <div class=" col-md-4"  >
+                        <label class="data-label"> Estado: </label>
+                        <span class="data-value">
+                            @if ($reservar->Estado == 0)
+                               Pendiente
+                            @else
+                               Cancelado
+                            @endif
+                        </span>
                     </div>
                 </div>
     
@@ -109,23 +122,12 @@
                         <label class="data-label"> Saldo Pendiente: </label>
                         <span class="data-value">L. {{ number_format($reservar->Pendiente, 2, '.', ',') }}</span>
                     </div>
-
-                    <div class=" col-md-4"  >
-                        <label class="data-label"> Estado: </label>
-                        <span class="data-value">
-                            @if ($reservar->Estado == 0)
-                               Pendiente
-                            @else
-                               Cancelado
-                            @endif
-                        </span>
-                    </div>
                 </div>
 
                 <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600); margin-top: 10px;">
     
                 <div class="d-flex justify-content-end mt-2">
-                    <a href="{{ route('cliente.reservaLocal') }}" class="btn btn-danger"><strong>Regresar</strong></a>
+                    <a href="{{ route('cliente.reservaLocal') }}" class="btn btn-secondary"><strong>Regresar</strong></a>
                 </div>
             </div>
         </div>

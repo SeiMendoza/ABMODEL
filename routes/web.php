@@ -63,7 +63,7 @@ Route::controller(RegistroController::class)->middleware('auth')->group(function
 /**PERFIL USUARIO */
 
 Route::get('/login', [LoginController::class, 'show']);
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('auth')->name('cerrarSes.cerrar');
 Route::get('/perfil', [LoginController::class, 'perfil'])->middleware('auth')->name('usuarios.perfil');
 Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])->middleware('auth')->name("usuarios.editarPerfil");

@@ -189,7 +189,7 @@
                         <div class="form-group col-md-6 " style="margin-bottom: 5px">
                             <label for="Pendiente" style="margin-left: 0;" >Saldo Pendiente:</label>
                             <input name="Pendiente" type="number"  class="form-control border-radius-sm" step="0.001" id="Pendiente" 
-                                placeholder="Saldo pendiente" value="{{ old('Pendiente')}}" required>
+                                placeholder="Saldo pendiente" value="{{ old('Pendiente')}}" required readonly>
                             @error('Pendiente')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror

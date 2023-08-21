@@ -48,14 +48,13 @@ class Handler extends ExceptionHandler
         });
     }
 
-    // public function render($request, Throwable $exception)
-    // {
-    //     if ($exception instanceof NotFoundHttpException) {
-    //         return response()->view('errors.404', [], 404);
-    //     } else if ($exception instanceof \Exception) {
-    //         return response()->view('errors.500', [], 500);
-    //     }
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+           //Redirigir al inicio de sesión en caso de no encontrar una ruta
+           return redirect()->route('login');
+        }
 
-    //     return parent::render($request, $exception);
-    // }
+        return parent::render($request, $exception);
+    }
 }

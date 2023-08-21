@@ -118,7 +118,7 @@ class RegistroController extends Controller
         try {
             $this->authorize('update', $user);
         } catch (AuthorizationException $e) {
-            return view('auth/PermisoDenegado');
+            return redirect()->route('index');
         }
 
         $user = User::findOrFail($id);

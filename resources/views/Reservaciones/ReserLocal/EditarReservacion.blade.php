@@ -127,7 +127,7 @@
                         <div class="form-group col-md-4 ">
                             <label for="HoraEntrada" style="margin-left: 0;">Hora de Llegada:</label>
                             <input name="HoraEntrada" type="time"  class="form-control border-radius-sm" id="HoraEntrada" min="08:00" max="18:00"
-                                placeholder="Ingrese la hora de llegada" value="{{ old('HoraEntrada', $r->HoraEntrada) }}" required>
+                                placeholder="Ingrese la hora de llegada" value="{{ old('HoraEntrada', $r->HoraEntrada ) }}" required>
                             @error('HoraEntrada')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -136,7 +136,7 @@
                         <div class="form-group col-md-4 ">
                             <label for="HoraSalida" style="margin-left: 0;">Hora de Salida:</label>
                             <input name="HoraSalida" type="time"  class="form-control border-radius-sm" id="HoraSalida" max="22:00"
-                                placeholder="Ingrese la hora de salida" value="{{ old('HoraSalida', $r->HoraSalida) }}" required>
+                                placeholder="Ingrese la hora de salida" value="{{ old('HoraSalida',  $r->HoraSalida) }}" required>
                             @error('HoraSalida')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -188,12 +188,12 @@
                             @error('Anticipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
-                        </div>
+                        </div> 
 
                         <div class="form-group col-md-6 " style="margin-bottom: 5px">
                             <label for="Pendiente" style="margin-left: 0;">Saldo Pendiente:</label>
                             <input name="Pendiente" type="number"  class="form-control border-radius-sm" step="0.001" id="Pendiente" 
-                                placeholder="Saldo pendiente" value="{{ old('Pendiente', $r->Pendiente) }}" required>
+                                placeholder="Saldo pendiente" value="{{ old('Pendiente', $r->Pendiente) }}" required readonly>
                             @error('Pendiente')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror

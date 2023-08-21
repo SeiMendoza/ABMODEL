@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\reservacion_total;
 use Illuminate\Support\Facades\DB;
-use Carbon\carbon;
 
 class ReservacionTotalController extends Controller
 {
@@ -33,19 +32,21 @@ class ReservacionTotalController extends Controller
         $fecha_act = date("d-m-Y");
         $min = date('d-m-Y',$min = strtotime($fecha_act));
 
+        $total = $request->input('Total'); //obtener valor del input
+
         $request -> validate([
             'Nombre_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:3',
             'Apellido_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:3',
             'Contacto' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
             'Cantidad' => 'required|min:20|max:1000|numeric',
             'Tipo_Reservacion' => 'required',
-            'Tipo_Evento' => 'required|max:50',
+            'Tipo_Evento' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ,;:.]+$/|max:50|min:3',
             'Fecha' => 'required|date|after:'.$min,   
-            'HoraEntrada' => 'required',
-            'HoraSalida' => 'required|after:HoraEntrada', 
-            'Total' => 'required|min:1000|max:15000|numeric', 
+            'HoraEntrada' => 'required|date_format:H:i',
+            'HoraSalida' => 'required|date_format:H:i|after:HoraEntrada', 
+            'Total' => 'required|min:500|max:15000|numeric', 
             'FormaPago' => 'required',
-            'Anticipo' => 'required|min:300|max:15000|numeric',
+            'Anticipo' => 'required|numeric|min:300|max:' .$total,
             'Pendiente' => 'required',
         ],[
 
@@ -72,7 +73,9 @@ class ReservacionTotalController extends Controller
             'Tipo_Reservacion.required' => 'El tipo no puede estar vacío',
 
             'Tipo_Evento.required' => 'El tipo no puede estar vacío',
+            'Tipo_Evento.regex'=> 'Existen caracteres no permitidos',
             'Tipo_Evento.max' => 'El nombre es muy largo',
+            'Tipo_Evento.min'=> 'Solo se aceptan al menos 3 letras',
 
             'Fecha.required'=> 'La fecha de asistencia es obligatoria',
             'Fecha.date' => 'La fecha de expiracion debe de ser una fecha mayor a la de hoy',
@@ -92,6 +95,8 @@ class ReservacionTotalController extends Controller
 
             'Anticipo.required' =>'El anticipo no puede estar vacío',
             'Anticipo.numeric' => 'El anticipo debe ser de tipo numérico',
+            'Anticipo.min' => 'El anticipo debe ser mayor a L. 300.00',
+            'Anticipo.max' => 'El anticipo no debe ser mayor a ' .$total,
 
             'Pendiente.required' =>'El saldo pendiente es obligatorio',
         ]);
@@ -135,19 +140,25 @@ class ReservacionTotalController extends Controller
         $fecha_act = date("d-m-Y");
         $min = date('d-m-Y',$min = strtotime($fecha_act));
 
+        $request->merge(['HoraEntrada' => date('H:i', strtotime($request->HoraEntrada))]);
+        $request->merge(['HoraSalida' => date('H:i', strtotime($request->HoraSalida))]);
+
+
+        $total = $request->input('Total'); //obtener valor del input
+
         $request -> validate([
             'Nombre_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:3',
             'Apellido_Cliente' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:25|min:3',
             'Contacto' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
             'Cantidad' => 'required|min:20|max:1000|numeric',
             'Tipo_Reservacion' => 'required',
-            'Tipo_Evento' => 'required|max:50',
+            'Tipo_Evento' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ,;:.]+$/|max:50|min:3',
             'Fecha' => 'required|date|after:'.$min,   
-            'HoraEntrada' => 'required',
-            'HoraSalida' => 'required|after:HoraEntrada',
-            'Total' => 'required|min:1000|max:15000|numeric', 
+            'HoraEntrada' => 'required|date_format:H:i',
+            'HoraSalida' => 'required|after:HoraEntrada|date_format:H:i',
+            'Total' => 'required|min:500|max:15000|numeric', 
             'FormaPago' => 'required',
-            'Anticipo' => 'required|min:300|max:15000|numeric',
+            'Anticipo' => 'required|min:300|numeric|max:' .$total,
             'Pendiente' => 'required',
         ],[
             'Nombre_Cliente.required' => 'El nombre es obligatorio',
@@ -174,7 +185,9 @@ class ReservacionTotalController extends Controller
             'Tipo_Reservacion.required' => 'El tipo no puede estar vacío',
 
             'Tipo_Evento.required' => 'El tipo no puede estar vacío',
+            'Tipo_Evento.regex'=> 'Existen caracteres no permitidos',
             'Tipo_Evento.max' => 'El nombre es muy largo',
+            'Tipo_Evento.min'=> 'Solo se aceptan al menos 3 letras',
 
             'Fecha.required'=> 'La fecha de asistencia es obligatoria',
             'Fecha.date' => 'La fecha de expiracion debe de ser una fecha',
@@ -194,6 +207,8 @@ class ReservacionTotalController extends Controller
 
             'Anticipo.required' =>'El anticipo no puede estar vacío',
             'Anticipo.numeric' => 'El anticipo debe ser de tipo numérico',
+            'Anticipo.min' => 'El anticipo debe ser mayor a L. 300.00',
+            'Anticipo.max' => 'El anticipo no debe ser mayor a ' .$total,
 
             'Pendiente.required' =>'El saldo pendiente es obligatorio',
         ]);
