@@ -2,19 +2,18 @@
 
 namespace App\Http\Livewire\Pedidos;
 
-use App\Models\Mesa;
 use App\Models\Producto;
-use Cart;
 use Livewire\Component;
 
-class Menu extends Component
+class Bebidas extends Component
 {
     protected $listeners = ['eliminar_item', 'cambiar_Cant', 'cambiar_Cant2', 'editar', 'vaciar', 'guardar'];
     
     public function render()
     {  
-        return view('livewire.pedidos.menu')->with([
-            'products' => Producto::where('estado', '=', '1')->get()
+        return view('livewire.pedidos.bebidas')->with([
+            'products' => Producto::where('estado', '=', '1')
+            ->where('tipo', '=', '1')->get()
         ])->extends('livewire.pedidos.pedido')
           ->section('productos');
     }

@@ -20,9 +20,12 @@ use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Counter;
 use App\Http\Livewire\Pedidos\Bebidas;
+use App\Http\Livewire\Pedidos\Complementos;
 use App\Http\Livewire\Pedidos\DetallesPedido;
 use App\Http\Livewire\Pedidos\Menu;
+use App\Http\Livewire\Pedidos\MenuCompleto;
 use App\Http\Livewire\Pedidos\Pedido;
+use App\Http\Livewire\Pedidos\Platillos;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -431,8 +434,13 @@ Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordCo
  */
 
  //Route::view('/pedido/menu', 'livewire/pedidos/menu')->name('menu');
- Route::resource('/pedido/menu', Menu::class)->only('index', 'create', 'show', 'edit');
- Route::get('/pedido/menu/bebidas', [Menu::class, 'bebidas'])->name('menu.bebidas');
- Route::get('/pedido/menu/platillos', [Pedido::class, 'platillos'])->name('menu.platillos');
- Route::get('/pedido/menu/complementos', [Pedido::class, 'complementos'])->name('menu.complementos');
+
+ //Route::resource('/pedido/menu', Menu::class)->only('bebidas', 'platillos', 'complementos');
+ //Route::get('/pedido/menu/completo', [Menu::class, 'render'])->name('menu');
+ Route::post('/pedido/menu/guardar', [DetallesPedido::class, 'guardar'])->name('menu.store');
+ Route::post('/pedido/menu/vaciar', [DetallesPedido::class, 'vaciar'])->name('menu.clear'); 
+ Route::get('/pedido/menu', Menu::class)->name('menu.menu');
+ Route::get('/pedido/menu/bebidas', Bebidas::class)->name('menu.bebidas');
+ Route::get('/pedido/menu/platillos', Platillos::class)->name('menu.platillos');
+ Route::get('/pedido/menu/complementos', Complementos::class)->name('menu.complementos');
  //Route::get('/pedido/menu/detalles', [DetallesPedido::class]);

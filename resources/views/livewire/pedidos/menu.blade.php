@@ -1,9 +1,11 @@
-<div class="row row-cols-xs-2 row-cols-sm-3 row-cols-md-auto row-cols-lg-auto row-cols-xl-auto m-1 d-flex justify-content-start" 
-    style="margin: 0px; padding:0;">
+<div class="row row-cols-auto row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4" style="margin: 0px; padding:0;">
     @foreach($products as $pro)
-        <div class="d-flex justify-content-center" style="padding: 0px; margin:0px;" id x-data="{ open: true }">
-            <div class="agregarCarrito" style="width:213px; margin:1px 1px 1px 0px" style="">
-                <button class="card btnCard btn col d" role="button" data-id="" wire:click="addTodo({{$pro->id}})" style="background: url('/{{ $pro->imagen}}') top center/cover no-repeat;">
+        <div class="" style="padding: 0px; margin:0px;" id x-data="{ open: true }">
+            <div class="agregarCarrito" style="width:213px; margin:1px 1px 1px 0px">
+                <input type="hidden" value="{{$pro->disponible}}" id={{"dis-$pro->id"}} name="dis">
+                <button class="card btnCard btn d" role="button" 
+                    data-id="{{$pro->id}}" wire:click="addTodo({{$pro->id}})" onclick="proenviar({{$pro->id}})"
+                    style="background: url('/{{ $pro->imagen}}') top center/cover no-repeat;">
                     <div class="" id={{"p-$pro->id"}} 
                         style="text-align: center" >
                         <!-- Nombre --> 
@@ -19,12 +21,18 @@
                                 position: absolute; bottom: 0; right:0%">L {{number_format($pro->precio, 2, ".", ",")}}</strong>
                                 <strong class="precio" style="font-size: 15.3px; width:65%; 
                                 background-color:rgba(255, 255, 255, 0.677); 
-                                position: absolute; bottom: 0; left:0;" id="disponible">Disponible: {{$pro->disponible}}</strong>
+                                position: absolute; bottom: 0; left:0;" id="disponible">Disponible: 
+                                @if ($pro->disponible >= 1)
+                                {{$pro->disponible}}
+                                @else
+                                0
+                                @endif    
+                            </strong>
                         </p>                        
                     </div>
                 </button>
             </div>  
         </div> 
-    @endforeach
-    
+    @endforeach 
 </div>
+

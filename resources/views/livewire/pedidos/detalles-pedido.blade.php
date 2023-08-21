@@ -20,14 +20,12 @@
         </nav>
     </div>                   
     <div id="pedidoT" style="margin:50px 0 0 0; padding:0;
-            width:100%; position:absolute; overflow-y:auto;" class="bg-white">
-        <div class="row" id="carrito" style="margin: 0; padding:0;
-            ">
+            width:100%; position:absolute; top:0; bottom:171px; overflow-y:auto;" class="bg-white">
+        <div class="row" id="carrito" style="margin: 0; padding:0;">
             <table class="table table-borderless" id="lista" style="margin: 0; 
                 margin-bottom:0px; padding:0;">
             <thead style="padding-top: 2px;">
                 <tr class="text-dark">
-                    <th scope="col" style="padding:3px; text-align:;">N</th>
                     <th scope="col" style="padding:3px; text-align:;">Nombre</th>
                     <th scope="col" colspan="3" style="padding:3px; text-align:center;">Cantidad</th>
                     <th scope="col" style="padding:3px; text-align:right;">Precio</th>
@@ -36,16 +34,13 @@
                 </tr>
             </thead>
             <tbody class="col"  id=""  style="">
-                @foreach($productos->sortByDesc('id') as $i => $item)
-                    @php
-                        $o =+ 1;
-                    @endphp
+                @foreach($productos->sortByDesc('attributes') as $i => $item)
                 <tr>
-                    
-                    <td style="text-align: left; padding-left:3px;">{{ $item->id }}</td>
                     <td style="text-align: left; padding-left:3px;">{{ $item->name }}</td>
                     <td style="text-align: right">
-                        <button><i class="fa-solid fa-circle-minus text-danger"></i></button>
+                        <button type="button" wire:click="cambiar_Cant({{$item->id}}, {{$item->quantity}})">
+                            <i class="fa-solid fa-circle-minus text-danger"></i>
+                        </button>
                     </td>
                     <td style="text-align: center; width:20%;" >
                         <input type="number" id="cant-{{$item->id}}" style="height:20px; text-align: right;"
@@ -54,7 +49,9 @@
                         >
                     </td>
                     <td style="text-align: center">
-                        <button><i class="fa-solid fa-circle-plus text-success"></i></button>
+                        <button type="button" wire:click="cambiar_Cant2({{$item->id}}, {{$item->quantity}})" onclick="proenviar({{$item->id}})">
+                            <i class="fa-solid fa-circle-plus text-success"></i>
+                        </button>
                     </td>
                     <td style="text-align: right">L {{ $item->price }}</td>
                     <td style="text-align: right">L {{ \Cart::get($item->id)->getPriceSum() }}</td>
@@ -74,7 +71,7 @@
         <div class="col col-8 d-flex justify-content-start bg-gray-100" 
                 style="display:block; float:left; margin:0; padding:0; position:absolute; 
                 bottom:50px; width:100%; left:3px;">
-            <form method="POST" action="{{route('cart.store')}}" id="formulario" name="formulario" enctype="multipart/form-data">
+            <form method="POST" action="{{route('menu.store')}}" id="formul" name="formul" enctype="multipart/form-data">
                     @csrf
                 <div class="row form-group" style="margin: 0; border: 0; width:100%">
                     <Label class="font-robo" style="margin:0%; padding:3px 0 0 3px;
@@ -151,10 +148,13 @@
         padding: 9px 3px 9px 3px; position:absolute; bottom:0%; right:0%; width:100%">
         <div class="d-flex justify-content-center" style="margin: 0; display:block; float:left;
             padding:0; padding-right:5px;">
-                @csrf
-                <bu id="eliminarF" role="button" class="btn btn-danger border-0 border-radius-sm"
-                    style="margin:0;" onclick="eliminar()" >Cancelar
-                </bu> 
+                <form action="{{ route('menu.clear') }}" method="POST" id="Fcancelar" name="Fcancelar" enctype="multipart/form-data">
+                    @csrf
+                </form>
+                    <button id="eliminar" role="button" class="btn btn-danger border-0 border-radius-sm"
+                        style="margin:0;" onclick="eliminar()" >Cancelar
+                    </button> 
+                
         </div>    
         <div class="" style="margin: 0; padding:0; padding-left:5px; display:block; float:left">
             <button  role="button" id="guardar" onclick="enviar()"
