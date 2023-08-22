@@ -12,7 +12,8 @@ class Platillos extends Component
     {  
         return view('livewire.pedidos.platillos')->with([
             'products' => Producto::where('estado', '=', '1')
-            ->where('tipo', '=', '2')->get()
+            ->where('tipo', '=', '2')->get(),
+            'items' => \Cart::getContent()
         ])->extends('livewire.pedidos.pedido')
           ->section('productos');
     }
@@ -60,6 +61,7 @@ class Platillos extends Component
         }
         
         $this->emitTo('pedidos.detalles-pedido', 'addTodo');
+        $this->emitTo('pedidos.mostrar', 'addTodo');
     }
     public function eliminar_item(){
     }

@@ -30,7 +30,7 @@
                                     @php
                                         $cod = "";
                                     @endphp
-                                    <select name="kiosko" onchange="quitarerror()" id="kiosko" oninput="c($cod)"
+                                    <select name="kiosko" onchange="quitarerror()" id="kiosko"
                                         class="form-control border-radius-sm" required>
                                         
                                         @if (old('kiosko'))
@@ -116,15 +116,16 @@
     </div>
 
     <script type="text/javascript">
-        function c($cod) {
+        function c() {
             try {
-               var  a = "",
-                    c = $cod,
+               var  e = '',
+                    a = document.getElementById("kiosko"),
+                    c = a.options[a.selectedIndex].text,
                     d = document.getElementById("name").value || "";
                 
-                    a = "K00" + "-M" + d;
+                    e = c + "-M" + d;
                 
-                document.getElementById("codigo").value = a;
+                document.getElementById("codigo").value = e;
             } catch (e) {}
         }
     </script>

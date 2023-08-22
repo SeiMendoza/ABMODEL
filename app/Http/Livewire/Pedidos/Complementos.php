@@ -14,7 +14,8 @@ class Complementos extends Component
     {  
         return view('livewire.pedidos.complementos')->with([
             'products' => Producto::where('estado', '=', '1')
-            ->where('tipo', '=', '0')->get()
+            ->where('tipo', '=', '0')->get(),
+            'items' => \Cart::getContent()
         ])->extends('livewire.pedidos.pedido')
           ->section('productos');
     }
@@ -62,6 +63,7 @@ class Complementos extends Component
         }
         
         $this->emitTo('pedidos.detalles-pedido', 'addTodo');
+        $this->emitTo('pedidos.mostrar', 'addTodo');
     }
     public function eliminar_item(){
     }

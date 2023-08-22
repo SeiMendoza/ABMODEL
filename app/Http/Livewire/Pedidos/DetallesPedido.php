@@ -30,24 +30,17 @@ class DetallesPedido extends Component
 
         $item = \Cart::get($id);
         $value = Producto::findOrFail($id);
-        $r = $item->quantity + $value->disponible;
         if ($q >= 1 & $value->disponible >= 1) {
-            if ($q > $r) {
+            if ($q > $value->disponible) {
                 return back();
-            } elseif ($q <= $r & $q > $item->quantity) {
-                $s = $q - $item->quantity;
-                $value->disponible = $value->disponible - $s;
-                $value->save();
+            } elseif ($q <= $value->disponible & $q > $item->quantity) {
                 \Cart::update($id, array(
                 'quantity' => array(
                     'relative' => false,
                     'value' => $q
                     )   
                 ));
-            }elseif ($q <= $r & $q < $item->quantity) {
-                $s = $item->quantity - $q;
-                $value->disponible = $value->disponible + $s;
-                $value->save();
+            }elseif ($q <= $value->disponible & $q < $item->quantity) {
                 \Cart::update($id, array(
                 'quantity' => array(
                     'relative' => false,
@@ -55,38 +48,31 @@ class DetallesPedido extends Component
                     )   
                 ));
             }   
-        } elseif ($q <= 1) {
-            $value->disponible = $value->disponible + $item->quantity;
-            $value->save();
-            \Cart::remove($id);
+        } elseif ($q <= 0) {
+            return back();
         }
         $this->emitTo('pedidos.menu', 'editar');
         $this->emitTo('pedidos.complementos', 'editar');
+        $this->emitTo('pedidos.platillos', 'editar');
+        $this->emitTo('pedidos.bebidas', 'editar');
     }
 
     public function eliminar_item($id, $q){
-        $value = Producto::findOrFail($id);
-        $value->disponible = $value->disponible + $q;
-        $value->save();
-
         \Cart::remove($id);
 
         $this->emitTo('pedidos.menu', 'eliminar_item');
         $this->emitTo('pedidos.complementos', 'eliminar_item');
+        $this->emitTo('pedidos.platillos', 'eliminar_item');
+        $this->emitTo('pedidos.bebidas', 'eliminar_item');
     }
 
     public function vaciar(){
-        $items = \Cart::getContent();
-            
-            foreach($items as $row) {
-                $value = Producto::findOrFail($row->id);
-                $value->disponible = $value->disponible + $row->quantity;
-                $value->save();
-            }
         \Cart::clear();
         
         $this->emitTo('pedidos.menu', 'vaciar');
         $this->emitTo('pedidos.complementos', 'vaciar');
+        $this->emitTo('pedidos.platillos', 'vaciar');
+        $this->emitTo('pedidos.bebidas', 'vaciar');
         
         return back()->with('mensaje', 'Pedido Cancelado');  
     }
@@ -94,10 +80,7 @@ class DetallesPedido extends Component
     public function cambiar_Cant($id, $q)
     {
         $item = \Cart::get($id);
-        $value = Producto::findOrFail($id);
         if ($item->quantity > 1) {
-            $value->disponible = $value->disponible + 1;
-            $value->save();
             \Cart::update($id, array(
                 'quantity' => array(
                     'relative' => true,
@@ -106,22 +89,20 @@ class DetallesPedido extends Component
             ));
             
         } elseif ($item->quantity <= 1) {
-            $value->disponible = $value->disponible + 1;
-            $value->save();
-            \Cart::remove($id);
+            return back();
         }
 
           
         $this->emitTo('pedidos.menu', 'cambiar_Cant');
         $this->emitTo('pedidos.complementos', 'cambiar_Cant');
+        $this->emitTo('pedidos.platillos', 'cambiar_Cant');
+        $this->emitTo('pedidos.bebidas', 'cambiar_Cant');
     }
     public function cambiar_Cant2($id, $q)
     {
         $item = \Cart::get($id);
         $value = Producto::findOrFail($id);
-        if ($item->quantity >= 1 & $value->disponible >=1) {
-            $value->disponible = $value->disponible - 1;
-            $value->save();
+        if ($item->quantity >= 1 & $q < $value->disponible) {
             \Cart::update($id, array(
                 'quantity' => array(
                     'relative' => true,
@@ -133,6 +114,8 @@ class DetallesPedido extends Component
         }
         $this->emitTo('pedidos.menu', 'cambiar_Cant2');
         $this->emitTo('pedidos.complementos', 'cambiar_Cant2');
+        $this->emitTo('pedidos.platillos', 'cambiar_Cant2');
+        $this->emitTo('pedidos.bebidas', 'cambiar_Cant2');
     }
 
     public function guardar(Request $request)
@@ -176,21 +159,23 @@ class DetallesPedido extends Component
             }
 
 
-           /* foreach ($pedido->detalles as $value) {
+           foreach ($pedido->detalles as $value) {
                 $producto = Producto::findOrFail($value->producto_id);
                 $producto->disponible = $producto->disponible - $value->cantidad;
                 $producto->save();
-            }*/
+            }
 
             $a = $pedido->save();
             $b = $mesa->save();
             $c = $detalle->save();
-           // $d = $producto->save();
+            $d = $producto->save();
 
-            if ($c & $a & $b) {
+            if ($c & $a & $b & $d) {
                 \Cart::clear();
                 $this->emitTo('pedidos.menu', 'guardar');
                 $this->emitTo('pedidos.complementos', 'guardar');
+                $this->emitTo('pedidos.platillos', 'guardar');
+                $this->emitTo('pedidos.bebidas', 'guardar');
                 return back()->with('mensaje', 'Pedido realizado');
             } else {
                 #...
