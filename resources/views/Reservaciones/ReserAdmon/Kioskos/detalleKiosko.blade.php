@@ -80,7 +80,7 @@
                                 <td class="informacion"></td>
                                 <td class="titulo">
                                     @forelse ($mesas as $m)
-                                        <a href="{{ route('mesas_reg.edit', ['id' => $m->id]) }}">{{ $m->nombre }}, </a>
+                                        <a href="{{ route('mesas_reg.edit', ['id' => $m->id]) }}">{{ $m->codigo }}, </a>
                                     @empty
                                         <div class="row">
                                             <div class="col">

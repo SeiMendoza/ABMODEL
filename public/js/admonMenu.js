@@ -434,12 +434,13 @@ function tableInit(tableId, url, estado) {
             { data: 'id' },
             { data: 'nombre' },
             { data: 'precio', },
+            { data: 'disponible' },
             {
                 data: 'estado',
                 render: function (data) {
                     // Aquí evaluamos la condición y devolvemos el contenido deseado dependiendo del valor de estado (1: activado, 0:desactivado)
                     if (data === 1) {
-                        return '<button class="btnActivar"><a><i class="fa fa-times-circle text-warning"></i>Desactivar</button>';
+                        return '<button class="btnActivar"><a><i class="fa fa-times-circle text-warning"></i> Desactivar</button>';
                     } else {
                         return '<button class="btnActivar"><a><i class="fa fa-check-circle text-success"></i> Activar</button>';
                     }
@@ -449,6 +450,11 @@ function tableInit(tableId, url, estado) {
             { defaultContent: '<a><i class="btnEliminar fa-solid fa-trash-can text-danger"></i></a>' }
         ],
         "columnDefs": [
+            // {
+            //     "searchable": false,
+            //     "orderable": false,
+            //     "targets": 0
+            // } ,
             {
                 "targets": 0,
                 "className": "dt-body-center",
@@ -461,10 +467,15 @@ function tableInit(tableId, url, estado) {
                 "className": "dt-body-center",
 
             }, {
+            }, {
                 "targets": 4,
                 "className": "dt-body-center",
+
             }, {
                 "targets": 5,
+                "className": "dt-body-center",
+            }, {
+                "targets": 6,
                 "className": "dt-body-center",
             },
         ],

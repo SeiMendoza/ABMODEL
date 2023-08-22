@@ -86,6 +86,7 @@
                             <th scope="col" style="text-align: center;">N</th>
                             <th scope="col" style="text-align: start;">Nombre</th>
                             <th scope="col" style="text-align: end;">Precio</th>
+                            <th scope="col" style="text-align: center;">Disponibles</th>
                             <th scope="col" style="text-align: center;">Acción</th>
                             <th scope="col" style="text-align: center;">Editar</th>
                             <th scope="col" style="text-align: center;">Eliminar</th>
@@ -106,6 +107,7 @@
                             <th scope="col" style="text-align: center;">N</th>
                             <th scope="col" style="text-align: satar;">Nombre</th>
                             <th scope="col" style="text-align: end;">Precio</th>
+                            <th scope="col" style="text-align: center;">Disponibles</th>
                             <th scope="col" style="text-align: center;">Acción</th>
                             <th scope="col" style="text-align: center;">Editar</th>
                             <th scope="col" style="text-align: center;">Eliminar</th>

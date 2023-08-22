@@ -105,9 +105,9 @@ Route::controller(HomeController::class)->middleware('auth')->group(function () 
 
 Route::put('/menu/{id}/terminar', [PedidoUsuarioController::class, 'terminarp'])->middleware('auth')
   ->name('terminar.terminarp')->where('id', '[0-9]+'); /*terminar pedidos en caja*/
- // eliminar pedido completo
- Route::post('/menu/{id}/eliminar', [PedidoUsuarioController::class, 'eliminar'])->middleware('auth')
- ->name('eliminar.pedido')->where('id', '[0-9]+');
+// eliminar pedido completo
+Route::post('/menu/{id}/eliminar', [PedidoUsuarioController::class, 'eliminar'])->middleware('auth')
+  ->name('eliminar.pedido')->where('id', '[0-9]+');
 Route::put('/menu/{id}/envcocina', [PedidoUsuarioController::class, 'env_a_cocina'])->middleware('auth')
   ->name('env.env_a_cocina')->where('id', '[0-9]+'); /*enviar a cocina*/
 Route::get('/pedidos/caja', [PedidoUsuarioController::class, 'pedido_terminados'])->middleware('auth')
@@ -141,9 +141,9 @@ Route::post('/pedido/caja/detalle/{id}/agrecompl', [PedidoUsuarioController::cla
 //restar a los detalles agregados 
 Route::post('/detallep/{id}/restar/{vista}', [PedidoUsuarioController::class, 'restar'])->middleware('auth')
   ->name('detallep.restar');
-  //sumar a los detalles agregados 
+//sumar a los detalles agregados 
 Route::post('/detallep/{id}/sumar/{vista}', [PedidoUsuarioController::class, 'sumar'])->middleware('auth')
-->name('detallep.sumar');
+  ->name('detallep.sumar');
 //guardar el pedido con los nuevos detalles 
 Route::post('/pedido/caja/{id}/guardar', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
   ->name('guardarPedido');
@@ -396,8 +396,9 @@ Route::get('/complementos', [CartController::class, 'complementos'])->middleware
 Route::resource('/pedido/todo', DetallesPedidoController::class);
 
 //Rutas para manejo de errores
-Route::get('error/{error}', function ($error) {- 
-  abort($error);
+Route::get('error/{error}', function ($error) {
+  -
+    abort($error);
 });
 
 /**
@@ -430,17 +431,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
 /* 
-*Rutas livewire para pedidos
+ *Rutas livewire para pedidos
  */
 
- //Route::view('/pedido/menu', 'livewire/pedidos/menu')->name('menu');
+//Route::view('/pedido/menu', 'livewire/pedidos/menu')->name('menu');
 
- //Route::resource('/pedido/menu', Menu::class)->only('bebidas', 'platillos', 'complementos');
- //Route::get('/pedido/menu/completo', [Menu::class, 'render'])->name('menu');
- Route::post('/pedido/menu/guardar', [DetallesPedido::class, 'guardar'])->name('menu.store');
- Route::post('/pedido/menu/vaciar', [DetallesPedido::class, 'vaciar'])->name('menu.clear'); 
- Route::get('/pedido/menu', Menu::class)->name('menu.menu');
- Route::get('/pedido/menu/bebidas', Bebidas::class)->name('menu.bebidas');
- Route::get('/pedido/menu/platillos', Platillos::class)->name('menu.platillos');
- Route::get('/pedido/menu/complementos', Complementos::class)->name('menu.complementos');
- //Route::get('/pedido/menu/detalles', [DetallesPedido::class]);
+//Route::resource('/pedido/menu', Menu::class)->only('bebidas', 'platillos', 'complementos');
+//Route::get('/pedido/menu/completo', [Menu::class, 'render'])->name('menu');
+Route::post('/pedido/menu/guardar', [DetallesPedido::class, 'guardar'])->name('menu.store');
+Route::post('/pedido/menu/vaciar', [DetallesPedido::class, 'vaciar'])->name('menu.clear');
+Route::get('/pedido/menu', Menu::class)->name('menu.menu');
+Route::get('/pedido/menu/bebidas', Bebidas::class)->name('menu.bebidas');
+Route::get('/pedido/menu/platillos', Platillos::class)->name('menu.platillos');
+Route::get('/pedido/menu/complementos', Complementos::class)->name('menu.complementos');
+//Route::get('/pedido/menu/detalles', [DetallesPedido::class]);

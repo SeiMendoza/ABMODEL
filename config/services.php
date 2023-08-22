@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // 'gmail' => [
+    //     'redirect' => '',
+    //     // No es necesario para XOAUTH2
+    //     'client_id' => env('GMAIL_CLIENT_ID'),
+    //     'client_secret' => env('GMAIL_CLIENT_SECRET'),
+    //     'refresh_token' => env('GMAIL_REFRESH_TOKEN'),
+    // ],
+
 ];
