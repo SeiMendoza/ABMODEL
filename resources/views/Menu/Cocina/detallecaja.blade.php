@@ -159,11 +159,11 @@
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
                 @if($pedido->estado_cocina == 0)
-                <a href="{{ route('Agregar',['id' => $pedido->id,'tipo'=>'todos','vista'=>2]) }}" class="border-radius-sm text-center" style="background:rgba(255,179,71,0.6);position:absolute;left:62%;padding:5px; width:150px; z-index: 999;">
+                <a href="{{ route('Agregar',['id' => $pedido->id,'tipo'=>'todos','vista'=>2]) }}" class="border-radius-sm text-center text-white " style="background:rgba(49,167,79);position:absolute;left:62%;padding:5px; width:150px; z-index: 999;">
                     <i class="fa fa-plus-circle"></i> <strong>Nuevo</strong>
                 </a>
                 @endif
-                <tr class="text-dark" style="background:rgba(255,179,71,0.6);">
+                <tr>
                     <th scope="col" style="width:20%;text-align:center;">Nombre</th>
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
                     <th scope="col" style="width:20%; text-align:center;">Precio</th>

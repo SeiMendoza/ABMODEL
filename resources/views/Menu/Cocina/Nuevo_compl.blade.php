@@ -65,7 +65,7 @@
                 })
             }
             var ms = '¡Existe un error, revise los datos!';
-            var exis = '{{ Session::has('errors ') }}';
+            var exis = '{{ Session::has('errors') }}';
             if (exis) {
                 Swal.fire({
                     position: 'top-end',
@@ -114,7 +114,7 @@
                                         <div class="tab-content" style="margin: 0px; padding:0; ">
                                             @php
                                             $cantidadProductos = count($productos);
-                                            $rowClass = ($cantidadProductos > 1) ? 'row-cols-xs-6 row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4' : 'row-cols-1';
+                                            $rowClass = ($cantidadProductos > 1) ? 'row row-cols-auto row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4' : 'row-cols-1';
                                             @endphp
                                             <div class="row {{ $rowClass }}" style="margin: 0px; padding:0;">
                                                 @foreach($productos as $pro)
@@ -219,34 +219,39 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="d-none d-sm-none d-md-table bg-white ;
-                            col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" style="display:block; margin: 0px; height:100%; 
-                            padding:0%; position:fixed; right:0%; top:0%" id="pedido" name="pedido">
-                            <div class="row" style="margin: 0px; padding:0; position:absolute; width:100%; top:0%; right:0%">
-                                <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
-                                    <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" style="margin-bottom: 0; border-radius:0px; margin:0;">
-                                        <H3 class="text-white"><strong>Detalles del Pedido</strong></H3>
-                                        <li class=" d-md-none d-lg-none d-xl-none d-xs d-sm-table d-sm-table-cell d-flex align-items-center" style="margin: 0px;">
-                                            <div id="" style="padding-left: 15px;">
-                                                <button style="margin:0px; padding:4px; font-size:15px; position:absolute; right:1%; top:15%;" type="button" class="bg-light border-radius-sm text-center subMenu" id="cerrar" name="cerrar">
-                                                    <i class="fa-solid fa-square-xmark text-danger"></i></button>
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </nav>
-                            </div>
-                            <div style="margin:50px 0 0 0; padding:0;
-                                    width:100%; position:absolute; height:67%; overflow-y:auto;" class="bg-white">
-                                <div class="row" id="carrito" style="margin: 0; padding:0;">
+                        <div   class="d-none d-sm-none d-md-table bg-white ;
+    col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" 
+    style="display:block; margin: 0px; height:100%; 
+    padding:0%; position:fixed; right:0%; top:0%"
+    id="pedido" name="pedido">
+    <div class="row" style="margin: 0px; padding:0; position:absolute; width:100%; top:0%; right:0%">
+        <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
+            <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" 
+                style="margin-bottom: 0; border-radius:0px; margin:0;">
+                <H3 class="text-white"><strong>Detalles del Pedido</strong></H3>
+                <li class=" d-md-none d-lg-none d-xl-none d-xs d-sm-table d-sm-table-cell d-flex align-items-center" 
+                    style="margin: 0px;">
+                    <div id="" style="padding-left: 15px;">
+                        <button style="margin:0px; padding:4px; font-size:15px; position:absolute; right:1%; top:15%;" type="button" 
+                        class="bg-light border-radius-sm text-center subMenu" id="cerrar" name="cerrar">
+                        <i class="fa-solid fa-square-xmark text-danger"></i></button>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>                   
+    <div id="pedidoT" style="margin:50px 0 0 0; padding:0;
+            width:100%; position:absolute; top:0; bottom:171px; overflow-y:auto;" class="bg-white">
+        <div class="row" id="carrito" style="margin: 0; padding:0;">
                                     <table class="table table-borderless" id="lista" style="margin: 0; 
-                                     margin-bottom:0px; padding:0;">
+                margin-bottom:0px; padding:0;">
                                         <thead style="padding-top: 2px;">
                                             <tr class="text-dark">
                                                 <th scope="col" style="padding:3px; text-align:;">Nombre</th>
-                                                <th scope="col" style="padding:3px; text-align:center;">Cantidad</th>
+                                                <th scope="col" colspan="3" style="padding:3px; text-align:center;">Cantidad</th>
                                                 <th scope="col" style="padding:3px; text-align:right;">Precio</th>
                                                 <th scope="col" style="padding:3px; text-align:right;">Sub-total</th>
-                                                <th scope="col" colspan="2" style="padding:3px; text-align:center;">Elementos</th>
+                                                <th scope="col" style="padding:3px; text-align:center;">Eliminar</th>
                                             </tr>
                                         </thead>
                                         <tbody class="col" id="">
@@ -257,27 +262,40 @@
                                             @foreach ($detalles as $detalle)
                                             <tr>
                                                 <td style="text-align: left; padding-left:3px;">{{ $detalle->producto->nombre }}</td>
-                                                <td style="text-align: center" id="detalle-{{ $detalle->id }}">{{ $detalle->cantidad }}</td>
-                                                <td style="text-align: right">L {{ $detalle->producto->precio }}</td>
-                                                <td style="text-align: right">L {{ $detalle->cantidad * $detalle->producto->precio }}</td>
-                                                <td style="text-align: center; display: flex; justify-content: center;">
-                                                    <form action="{{route('detallep.restar',['id' => $detalle->id,'vista'=>2])}}" method="POST">
+                                                <td style="text-align: right">
+                                                <!---restar la cantidad--->
+                                                    <form action="{{ route('detallep.restar', ['id' => $detalle->id, 'vista' => 2]) }}" method="POST">
                                                         @method('post')
                                                         @csrf
-                                                        <button style="margin-right: 15px;" name="restar" type="submit"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
-                                                    </form>
-                                                    <form action="{{route('detallep.sumar',['id' => $detalle->id,'vista'=>2])}}" method="POST">
-                                                        @method('post')
-                                                        @csrf
-                                                        <button style="margin-right: 15px;" name="sumar" type="submit"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-                                                    </form>
-                                                    <form method="POST" action="{{ route('detallep.destroy', ['id' => $detalle->id,'vista'=>2]) }}">
-                                                        @method('post')
-                                                        @csrf
-                                                        <button type="submit"><i class="fa fa-trash"></i></button>
+                                                        <button style="margin-right: 15px;" name="restar" type="submit"><i class="fa fa-minus-circle text-danger" aria-hidden="true"></i></button>
                                                     </form>
                                                 </td>
-
+                                                <!----Cambiar la cantidad----->
+                                                <td style="text-align: center; width: 20%;">
+                                                    <!---<form id="cantidadForm{{ $detalle->id }}" action="" method="POST">
+                                                        @method('post')
+                                                        @csrf---->
+                                                        <input type="text" name="cantidad" id="cantidad{{ $detalle->id }}" style="height:20px; text-align: right;" class="form-control" value="{{ $detalle->cantidad }}">
+                                                    <!--</form>--->
+                                                </td>
+                                                <!---Sumar la cantidad---->
+                                                <td style="text-align: center">
+                                                    <form action="{{ route('detallep.sumar', ['id' => $detalle->id, 'vista' => 2]) }}" method="POST">
+                                                        @method('post')
+                                                        @csrf
+                                                        <button style="margin-right: 15px;" name="sumar" type="submit"><i class="fa fa-plus-circle text-success " aria-hidden="true"></i></button>
+                                                    </form>
+                                                </td>
+                                                <td style="text-align: right">L {{ $detalle->producto->precio }}</td>
+                                                <td style="text-align: right">L {{ $detalle->cantidad * $detalle->producto->precio }}</td>
+                                                <!---Eliminar----->
+                                                <td style="text-align: center">
+                                                    <form method="POST" action="{{ route('detallep.destroy', ['id' => $detalle->id, 'vista' => 2]) }}">
+                                                        @method('post')
+                                                        @csrf
+                                                        <button type="submit"><i class="fa fa-trash text-danger"></i></button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                             <hr>
                                             @endforeach
@@ -367,6 +385,11 @@
     <script src={{ asset("js/core/bootstrap.bundle.min.js") }}></script>
     <script src={{ asset('/js/plugins/perfect-scrollbar.min.js') }}></script>
     <script src={{ asset('/js/plugins/smooth-scrollbar.min.js') }}></script>
+   <!-- <script>
+            document.getElementById('cantidad{{ $detalle->id }}').addEventListener('change', function() {
+            document.getElementById('cantidadForm{{ $detalle->id }}').submit();
+        });
+    </script>--->
     <script>
         // contar cuantos productos hay en el carrito
         window.onload = function() {

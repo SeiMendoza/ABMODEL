@@ -667,4 +667,52 @@ class PedidoUsuarioController extends Controller
         DetallesPedido::where('pedido_id', $pedido_id)->where('estado', 0)->delete();
         return response()->json(['success' => true]);
     }
+    //para mostrar usando livewire
+    public function cantidad(Request $request, $id, $vista)
+    {
+        $detalle = DetallesPedido::findOrFail($id); 
+        $producto = Producto::where('estado', '=', '1')
+        ->firstOrFail(); 
+            //$disponible = $producto->disponible;
+        $request->validate([
+            'cantidad' => ['required', 'numeric', 'min:0'],
+        ], [
+            'cantidad.required' => 'La cantidad es obligatoria',
+            'cantidad.numeric' => 'Solo se aceptan números',
+            'cantidad.min' => 'La cantidad es muy pequeña',
+        ]);
+    
+        $cantidad_nueva = $request->input('cantidad');
+        $cantidad_existente = $detalle->cantidad;
+        $diferencia = $cantidad_existente - $cantidad_nueva;
+    
+        $producto = $detalle->producto;
+    
+        if ($cantidad_nueva > 0 && $producto->disponible > 0) {
+            $detalle->cantidad = $cantidad_nueva;
+            $detalle->save();
+    
+            // Actualizar la disponibilidad del producto
+            $producto->disponible += $diferencia;
+            $producto->save();
+        } 
+        else{
+            $detalle->cantidad = $cantidad_nueva;
+            $diferencia = $cantidad_existente - $cantidad_nueva;
+            $producto = $detalle->producto;
+            $producto->disponible += $diferencia;
+            $producto->save();
+        }
+         
+        // esta funciona ala perfeccion
+        if ($cantidad_nueva == 0) {
+            $detalle->delete();
+            $producto = $detalle->producto;
+            $producto->disponible += $detalle->cantidad;
+            $producto->save();
+        }
+        if ($vista == 2) {
+            return redirect()->back()->with('mensaje', 'Producto actualizado');
+        }
+    }
 }

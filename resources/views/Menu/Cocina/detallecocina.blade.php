@@ -100,7 +100,7 @@
     <div class="mb-0 col-9 text-start" style="position:absolute;top:260%;width:100%;">
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
-                <tr class="text-dark" style="background:rgba(255,179,71,0.6);">
+                <tr>
                     <th scope="col" style="width:20%; text-align:center;">Nombre</th>
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
                     <th scope="col" style="width:20%; text-align:center;">Precio</th>
@@ -114,10 +114,10 @@
                 @forelse($detapedido as $i => $detalle)
 
                 <tr>
-                    <td scope="" class="" style="width:20%; text-align:center; height:32px;">{{$detalle->producto->nombre}}</td>
-                    <td scope="" style=" width:20%; text-align:center; height:42px;">{{ $detalle->cantidad }}</td>
-                    <td scope="col" style="text-align:right; width:20%; height:30px;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
-                    <td scope="col" style="text-align:right; width:20%; height:30px;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
+                    <td scope="" class="" style="width:20%; text-align:center; height:20px;">{{$detalle->producto->nombre}}</td>
+                    <td scope="" style=" width:20%; text-align:center; height:20px;">{{ $detalle->cantidad }}</td>
+                    <td scope="col" style="text-align:right; width:20%; height:20px;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
+                    <td scope="col" style="text-align:right; width:20%; height:20px;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
 
                 </tr>
                 @php

@@ -9,7 +9,7 @@
 </li>
 @endsection
 
-
+@section('tit','Detalles del pedido')
 @section('b')
 <div>
     <a href="{{route('terminados.terminados')}}" style="margin:0; padding:5px; width:150px;" type="button" class="bg-light border-radius-sm text-center"> <i class="fa fa-arrow-left"></i> Regresar</a>
@@ -38,8 +38,7 @@
         @php
         $sum = 0;
         @endphp
-        <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;">
-            Detalle del pedido terminado: {{$pedido->nombreCliente}}</h5>
+        <h5 class="card class-4 text-lg text-center" style="background:rgb(255,179,71); color:#fff;"></h5>
         <tr>
             <td class="titulo">Número de mesa: </td>
             <td class="informacion">Mesa- {{$pedido->mesa_nombre->nombre}}</td>
@@ -67,7 +66,7 @@
             @endif--->
             </td>
             <td class="titulo">Impuesto: </td>
-            <td class="informacion">L. <?= number_format($isv, 2, ".", ",") ?></td>
+            <td class="informacion">L. {{$isv}}</td>
         </tr>
         <tr>
             <td class="titulo">Hora del pedido: </td>
@@ -75,7 +74,7 @@
             <td class="titulo">Hora de entrega:</td>
             <td class="informacion" id="tiempo"> {{date('h:i:s a',strtotime($pedido->updated_at))}} </td>
             <td class="titulo">Total:</td>
-            <td class="informacion">L. <?= number_format($tot, 2, ".", ",") ?> </td>
+            <td class="informacion">L. {{$tot}}</td>
         </tr>
         </tbody>
     </table>
@@ -85,7 +84,7 @@
             $sum = 0;
             @endphp
             <thead>
-                <tr class="text-dark" style="background:rgba(255,179,71,0.6);">
+                <tr>
                     <th scope="col" style="width:20%; text-align:center;">Nombre</th>
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
                     <th scope="col" style="width:20%; text-align:center;">Precio</th>

@@ -145,6 +145,9 @@ Route::post('/detallep/{id}/restar/{vista}', [PedidoUsuarioController::class, 'r
 //sumar a los detalles agregados 
 Route::post('/detallep/{id}/sumar/{vista}', [PedidoUsuarioController::class, 'sumar'])->middleware('auth')
   ->name('detallep.sumar');
+  /*sumar o restar desde el input cantidad
+Route::post('/detallep/{id}/cantidad/{vista}', [PedidoUsuarioController::class, 'cantidad'])->middleware('auth')
+->name('detallep.cantidad');*/
 //guardar el pedido con los nuevos detalles 
 Route::post('/pedido/caja/{id}/guardar', [PedidoUsuarioController::class, 'Guardar'])->middleware('auth')
   ->name('guardarPedido');
