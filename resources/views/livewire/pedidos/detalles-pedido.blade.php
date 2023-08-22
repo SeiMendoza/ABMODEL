@@ -1,5 +1,5 @@
 <div  class="d-none d-sm-none d-md-table bg-white ;
-    col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" 
+    col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell" 
     style="display:block; margin: 0px; height:100%; 
     padding:0%; position:fixed; right:0%; top:0%"
     id="pedido" name="pedido">

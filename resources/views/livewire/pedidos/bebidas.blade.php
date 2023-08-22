@@ -12,7 +12,7 @@
             <input type="hidden" value="{{$pro->disponible - $c}}" id={{"dis-$pro->id"}} name="dis">
             <button class="card btnCard btn d col" role="button" 
                 data-id="{{$pro->id}}" wire:click="addTodo({{$pro->id}})" onclick="proenviar({{$pro->id}})"
-                style="background: url('/{{ $pro->imagen}}') top center/cover no-repeat;" >
+                style="background: url('/{{ $pro->imagen}}') top center/cover no-repeat; display:block; column-span:all;" >
                 <div class="" id={{"p-$pro->id"}} 
                     style="text-align: center" >
                     <!-- Nombre --> 

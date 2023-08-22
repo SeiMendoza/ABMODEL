@@ -1,4 +1,4 @@
-<div class="row" style="margin: 0px; padding:0;">
+<div class="row d-flex justify-content-center" style="margin: 0px; padding:0;">
     @foreach($products as $pro)
         @php
         $c = 0;

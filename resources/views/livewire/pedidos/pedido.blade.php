@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" &amp; gt;>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>
        Menú | Villa Crisol
@@ -143,7 +143,7 @@
                                             </a> 
                                         </li>
                                         <li class="" role="button">
-                                            <a href="{{route('menu.platillos')}}"style="margin:1px 3px 1px 3px; padding:10px; width:90px; font-size:14px" type="button" 
+                                            <a href="{{route('menu.platillos')}}"style="margin:1px 3px 1px 3px; padding:10px; width:85px; font-size:14px" type="button" 
                                             class="bg-light border-radius-sm text-center">
                                             <i class="fa-solid fa-drumstick-bite text-warning"></i> Platillos
                                             </a>
@@ -164,7 +164,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <livewire:pedidos.detalles-pedido />
+                       <livewire:pedidos.detalles-pedido />
                     </div>
                 </div>
             </div>

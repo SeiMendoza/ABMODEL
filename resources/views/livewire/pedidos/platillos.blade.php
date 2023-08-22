@@ -1,4 +1,4 @@
-<div class="row" style="margin: 0px; padding:0;">
+<div class="row d-flex justify-content-center" style="margin: 0px; padding:0;">
     @foreach($products as $pro)
         @php
         $c = 0;
@@ -8,7 +8,7 @@
                 @php $c = $item->quantity @endphp
             @endif
         @endforeach
-        <div class="col col-auto col-xs-6 col-sm-4 col-md-6 col-lg-4 col-xl-3" style=" margin:0px; padding:0;" style="">
+        <div class="col col-auto col-xs-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 " style=" margin:0px; padding:0;" style="">
             <input type="hidden" value="{{$pro->disponible - $c}}" id={{"dis-$pro->id"}} name="dis">
             <button class="card btnCard btn d col" role="button" 
                 data-id="{{$pro->id}}" wire:click="addTodo({{$pro->id}})" onclick="proenviar({{$pro->id}})"

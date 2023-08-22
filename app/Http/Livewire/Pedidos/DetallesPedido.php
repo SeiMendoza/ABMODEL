@@ -91,8 +91,7 @@ class DetallesPedido extends Component
         } elseif ($item->quantity <= 1) {
             return back();
         }
-
-          
+  
         $this->emitTo('pedidos.menu', 'cambiar_Cant');
         $this->emitTo('pedidos.complementos', 'cambiar_Cant');
         $this->emitTo('pedidos.platillos', 'cambiar_Cant');
