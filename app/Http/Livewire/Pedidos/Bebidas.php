@@ -32,9 +32,6 @@ class Bebidas extends Component
                     $it = $v->attributes->it + $it;
                 } 
             }
-            
-            $value->disponible = $value->disponible - 1;
-            $value->save();
 
             \Cart::add(array(
                 'id' => $pro->id, // inique row ID
@@ -47,9 +44,7 @@ class Bebidas extends Component
                 'associatedModel' => $pro
             ));
         } else {
-            if ($value->disponible >=1) {
-                $value->disponible = $value->disponible - 1;
-                $value->save();
+            if ($value->disponible >=1 & $c->quantity < $value->disponible) {
                 \Cart::update($pro->id, array(
                     'quantity' => array(
                         'relative' => true,
@@ -62,6 +57,7 @@ class Bebidas extends Component
         }
         
         $this->emitTo('pedidos.detalles-pedido', 'addTodo');
+        $this->emitTo('pedidos.mostrar', 'addTodo');
     }
     public function eliminar_item(){
     }

@@ -31,9 +31,6 @@ class Platillos extends Component
                     $it = $v->attributes->it + $it;
                 } 
             }
-            
-            $value->disponible = $value->disponible - 1;
-            $value->save();
 
             \Cart::add(array(
                 'id' => $pro->id, // inique row ID
@@ -46,9 +43,7 @@ class Platillos extends Component
                 'associatedModel' => $pro
             ));
         } else {
-            if ($value->disponible >=1) {
-                $value->disponible = $value->disponible - 1;
-                $value->save();
+            if ($value->disponible >=1 & $c->quantity < $value->disponible) {
                 \Cart::update($pro->id, array(
                     'quantity' => array(
                         'relative' => true,

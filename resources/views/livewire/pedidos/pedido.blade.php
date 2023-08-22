@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>
        Menú | Villa Crisol
@@ -36,7 +36,7 @@
         }
 
         .d{
-            padding: 0px; width:98%; 
+            padding: 0px; width:210px; 
             height:210px; margin:0px 2px 2px 0;
             border-radius:0%;
             text-align:center; 
@@ -133,23 +133,29 @@
                                         <li class= role="button" style="display:block;">
                                             <a href="{{route('menu.menu')}}" style="margin:1px 3px 1px 3px; padding:10px; font-size:15px" type="button" 
                                                 class="bg-light border-radius-sm text-center">
-                                                <i class="fa-solid fa-utensils text-success"></i> Menú completo 
+                                                <i class="fa-solid fa-utensils text-success"></i> Menú 
                                             </a>
                                         </li>
                                         <li class="" role="button">
-                                            <a href="{{route('menu.bebidas')}}" style="margin:1px 3px 1px 3px; padding:10px 0px 10px 0px; width:85px; font-size:15px" type="button" 
+                                            <a href="{{route('menu.bebidas')}}" style="margin:1px 3px 1px 3px; padding:10px; width:85px; font-size:14px" type="button" 
                                             class="bg-light border-radius-sm text-center">
                                             <i class="fa-solid fa-wine-glass text-info"></i> Bebidas
                                             </a> 
                                         </li>
                                         <li class="" role="button">
-                                            <a href="{{route('menu.platillos')}}"style="margin:1px 3px 1px 3px; padding:10px; width:90px; font-size:15px" type="button" 
+                                            <a href="{{route('menu.platillos')}}"style="margin:1px 3px 1px 3px; padding:10px; width:90px; font-size:14px" type="button" 
                                             class="bg-light border-radius-sm text-center">
                                             <i class="fa-solid fa-drumstick-bite text-warning"></i> Platillos
                                             </a>
                                         </li>
-                                        <li class="" role="button">
-                                            <a href="{{route('menu.complementos')}}" style="margin:1px 3px 1px 3px; padding:10px; width:140px; font-size:15px" type="button" 
+                                        <li class="d-sm-table d-md-table d-lg-none d-xl-none d-md-table-cell" role="button">
+                                            <a href="{{route('menu.complementos')}}" style="margin:1px 3px 1px 3px; padding:10px; width:85px; font-size:14px" type="button" 
+                                                class="bg-light border-radius-sm text-center">
+                                                <i class="fa-solid fa-plus-circle text-primary"></i> Comp
+                                            </a>
+                                        </li>
+                                        <li class="d-none d-sm-none d-md-none d-lg-table d-xl-table" role="button">
+                                            <a href="{{route('menu.complementos')}}" style="margin:1px 3px 1px 3px; padding:10px; width:130px; font-size:14px" type="button" 
                                                 class="bg-light border-radius-sm text-center">
                                                 <i class="fa-solid fa-plus-circle text-primary"></i> Complementos
                                             </a>
