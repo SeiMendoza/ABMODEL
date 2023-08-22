@@ -185,7 +185,7 @@
                         <h2 class="font-weight-bolder text-white " style="margin:0">@yield('tit')</h2>
                     </nav>
                     <div class="collapse navbar-collapse " id="navbar" style="">
-                        <ul class="navbar-nav justify-content-end" style="position:fixed; right:0%; top:9px">
+                        <ul class="navbar-nav justify-content-end" style="position:fixed; right:5px; top:9px">
                             <li class="nav-item d-flex align-items-center" style="margin-top: 23px">
                                 @yield('b')
                             </li>
@@ -197,7 +197,7 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item d-xl-none ps-3 d-flex align-items-center" style="margin-top: 23px">
+                            <li class="nav-item d-xl-none ps-2 d-flex align-items-center" style="margin-top: 23px">
                                 <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                                     <div class="sidenav-toggler-inner">
                                         <i class="sidenav-toggler-line bg-white"></i>
