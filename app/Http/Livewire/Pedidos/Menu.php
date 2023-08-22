@@ -45,7 +45,7 @@ class Menu extends Component
                 'associatedModel' => $pro
             ));
         } else {
-            if ($value->disponible >=1 & $c->quantity < $value->disponible) {
+            if ($value->disponible > 0 && $c->quantity < $value->disponible) {
                 \Cart::update($pro->id, array(
                     'quantity' => array(
                         'relative' => true,

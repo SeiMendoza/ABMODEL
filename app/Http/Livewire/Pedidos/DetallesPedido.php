@@ -160,8 +160,12 @@ class DetallesPedido extends Component
 
            foreach ($pedido->detalles as $value) {
                 $producto = Producto::findOrFail($value->producto_id);
-                $producto->disponible = $producto->disponible - $value->cantidad;
-                $producto->save();
+                if ($producto->disponible > 0 & $value->cantidad <= $producto->disponible) {
+                    $producto->disponible = $producto->disponible - $value->cantidad;
+                    $producto->save();
+                }else{
+                    return back()->with('errors', 'No hay productos');
+                } 
             }
 
             $a = $pedido->save();
