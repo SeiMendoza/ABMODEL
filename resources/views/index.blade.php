@@ -109,14 +109,14 @@
         }
     </script>
     <header id="main-header" class="" style="background-color: rgb(111, 143, 175);">
-        <div class="" style="margin:0 0 0 0%; width:16.4%; padding:0%; display:block; float:left">
+        <div class="" style="margin:0 0 0 0%; width:250px; padding:0%; display:block; float:left">
             <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
                 <div style="width: 100%; height:90px; text-align:center; background-color: white;">
                     <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo" style="width: 150px; height:90px;">
                 </div>
             </a>
         </div>
-        <div class="" style="margin:1% 0% 0 1%; width:81.6%; padding:0%; display:block; float:left">
+        <div class="" style="margin:1% 0% 0 1%; padding:0%; display:block; float:left">
             <nav class="navbar navbar-main navbar-expand-lg shadow-none border-radius-xl " id="navbarBlur"
                 data-scroll="false" style="padding: 0;">
                 <div class="container-fluid" style="padding: 0; height:70px;">
@@ -127,16 +127,16 @@
                         </ol>
                         <h2 class="font-weight-bolder text-white " style="margin:0">Villa Crisol</h2>
                     </nav>
-                    <div class="collapse navbar-collapse " id="navbar">
-                        <div class="ms-md-auto pe-md-2 d-flex align-items-center"style="margin-top: 2.5%">
+                    <div class="collapse navbar-collapse " id="navbar" >
+                        <div class="ms-md-auto pe-md-2 d-none d-lg-table align-items-end"style="position: fixed; right:200px; top:30px;">
                             <div class="input-group">
                                 <span class="input-group-text text-body"><i class="fas fa-search"
                                         aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" placeholder="Busqueda..." name="buscar" id="buscar">
                             </div>
                         </div>
-                       <ul class="navbar-nav  justify-content-end">
-                            <li class="nav-item d-xl-none ps-6 d-flex align-items-center">
+                        <ul class="navbar-nav d-flex justify-content-end" style="position: fixed; right:5px; top:27px;">
+                            <li class="nav-item d-xl-none ps-6 d-flex align-items-center" style="margin: 10px">
                                 <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                                     <div class="sidenav-toggler-inner">
                                         <i class="sidenav-toggler-line bg-white"></i>
@@ -156,7 +156,7 @@
                                 $colors = ['danger', 'success', 'primary', 'warning', 'info', 'secondary'];
                             @endphp
 
-                            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <li class="nav-item dropdown pe-2 d-flex align-items-center" style="margin: 5px;">
                                 <a href="#" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="ni ni-bell-55 cursor-pointer"></i>
                                     <span class="position-absolute top-10 start-80 translate-middle badge rounded-pill bg-danger">
@@ -339,7 +339,7 @@
         </div>
     </aside>
 
-    <main class="main-content" id="indice" style="padding:0; margin: 90px 1% 0% 17.4%;">
+    <main class="main-content" id="indice" style="padding:0; margin: 90px 1% 0% 260px;">
         <div class="content-cell" style="padding:0; margin:0">
             <!-- Cards Restaurante -->
             <div class="row pt-3" style="margin: 0; padding:0;">

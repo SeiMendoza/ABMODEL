@@ -164,7 +164,7 @@
 
 <body class="g-sidenav-show   bg-gray-100">
     <header id="main-header" class="he-ma" style="background-color: rgb(111, 143, 175);">
-        <div class="" style="margin:0 0 0 0%; width:16.4%; padding:0%; display:block; float:left">
+        <div class="" style="margin:0 0 0 0%; width:250px; padding:0%; display:block; float:left">
             <a class="navbar-brand m-0" href={{ route('index') }} style="padding:0%; margin:0">
                 <div style="width: 100%; height:90px; text-align:center; background-color: white;">
                     <img src="/img/Villacrisol.png" class="navbar-brand-img" alt="main_logo"
@@ -172,7 +172,7 @@
                 </div>
             </a>
         </div>
-        <div class="" style="margin:1% 0% 0 1%; width:81.6%; padding:0%; display:block; float:left">
+        <div class="" style="margin:1% 0% 0 1%; padding:0%; display:block; float:left">
             <nav class="navbar navbar-main navbar-expand-lg shadow-none border-radius-xl " id="navbarBlur"
                 data-scroll="false" style="padding: 0;">
                 <div class="container-fluid" style="padding: 0; height:70px;">
@@ -184,10 +184,8 @@
                         </ol>
                         <h2 class="font-weight-bolder text-white " style="margin:0">@yield('tit')</h2>
                     </nav>
-                    <div class="collapse navbar-collapse " id="navbar">
-                        <div class="ms-md-auto pe-md-3 d-flex align-items-center"style="margin-top: 2.5%">
-                        </div>
-                        <ul class="navbar-nav justify-content-end">
+                    <div class="collapse navbar-collapse " id="navbar" style="">
+                        <ul class="navbar-nav justify-content-end" style="position:fixed; right:0%; top:9px">
                             <li class="nav-item d-flex align-items-center" style="margin-top: 23px">
                                 @yield('b')
                             </li>
@@ -321,7 +319,7 @@
         </div>
     </aside>
 
-    <main class="main-content" style="padding: 0px; margin: 93px 1% 0% 17.2%;">
+    <main class="main-content" style="padding: 0px; margin: 93px 1% 0% 260px;">
 
         <script>
             var msg = '{{ Session::get('mensaje') }}';
