@@ -18,12 +18,13 @@ use App\Http\Controllers\ReservacionController;
 use App\Http\Controllers\ReservacionTotalController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController;
-use App\Http\Livewire\Counter;
 use App\Http\Livewire\Pedidos\Bebidas;
 use App\Http\Livewire\Pedidos\Complementos;
 use App\Http\Livewire\Pedidos\DetallesPedido;
 use App\Http\Livewire\Pedidos\Menu;
+use App\Http\Livewire\Pedidos\Counter;
 use App\Http\Livewire\Pedidos\MenuCompleto;
+use App\Http\Livewire\Pedidos\Mostrar;
 use App\Http\Livewire\Pedidos\Pedido;
 use App\Http\Livewire\Pedidos\Platillos;
 use Illuminate\Support\Facades\Route;
@@ -384,7 +385,7 @@ Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Rea
 Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])->middleware('auth')
   ->name('detalle.realizadas');
 
-Route::view('/counter', 'livewire/home');
+Route::get('pedido/menu/mostrar', Mostrar::class); 
 
 Route::resource('/cart', CartController::class)->middleware('auth');
 Route::post('/create', [CartController::class, 'create'])->middleware('auth')->name('cart.create');

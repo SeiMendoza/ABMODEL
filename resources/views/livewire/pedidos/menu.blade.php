@@ -22,11 +22,19 @@
                                 <strong class="precio" style="font-size: 15.3px; width:65%; 
                                 background-color:rgba(255, 255, 255, 0.677); 
                                 position: absolute; bottom: 0; left:0;" id="disponible">Disponible: 
+                                @php
+                                    $c = 0;
+                                @endphp
+                                @foreach ($items as $item)
+                                    @if ($pro->id == $item->id)
+                                        @php $c = $item->quantity @endphp
+                                    @endif
+                                @endforeach
                                 @if ($pro->disponible >= 1)
-                                {{$pro->disponible}}
+                                    {{$pro->disponible - $c}}
                                 @else
-                                0
-                                @endif    
+                                    0
+                                @endif
                             </strong>
                         </p>                        
                     </div>

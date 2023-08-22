@@ -14,7 +14,8 @@ class Menu extends Component
     public function render()
     {  
         return view('livewire.pedidos.menu')->with([
-            'products' => Producto::where('estado', '=', '1')->get()
+            'products' => Producto::where('estado', '=', '1')->get(),
+            'items' => \Cart::getContent()
         ])->extends('livewire.pedidos.pedido')
           ->section('productos');
     }
@@ -33,8 +34,8 @@ class Menu extends Component
                 } 
             }
             
-            $value->disponible = $value->disponible - 1;
-            $value->save();
+            //$value->disponible = $value->disponible - 1;
+            //$value->save();
 
             \Cart::add(array(
                 'id' => $pro->id, // inique row ID
@@ -48,8 +49,8 @@ class Menu extends Component
             ));
         } else {
             if ($value->disponible >=1) {
-                $value->disponible = $value->disponible - 1;
-                $value->save();
+               // $value->disponible = $value->disponible - 1;
+               // $value->save();
                 \Cart::update($pro->id, array(
                     'quantity' => array(
                         'relative' => true,
@@ -62,6 +63,7 @@ class Menu extends Component
         }
         
         $this->emitTo('pedidos.detalles-pedido', 'addTodo');
+        $this->emitTo('pedidos.mostrar', 'addTodo');
     }
     public function eliminar_item(){
     }

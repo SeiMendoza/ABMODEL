@@ -46,12 +46,12 @@ class ReservacionController extends Controller
         $t= $request->input('cantidadN') * $request->input('precioN') + $request->input('precio') * $request->input('cantidad');
 
         $request->validate([
-            'name' => 'required|regex:/^[\pL\s]+$/u|max:50|min:3',
+            'name' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:50|min:3',
             'celular' => 'required|numeric|regex:/^[2,3,8,9][0-9]{7}+$/|min_digits:8|max_digits:8|',
             'fecha' => 'required|date|after_or_equal:' . $min,
             'inicio' => 'required',
             'fin' => 'required|after:inicio',
-            'tipoE' => 'required|regex:/^[\pL\s]+$/u|max:50|min:3',
+            'tipoE' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:50|min:3',
             'kiosko' => 'required',
             'cantidadN' => 'min:0|max:20|numeric|min_digits:1|max_digits:3',
             'precioN' => 'min:30|max:100|numeric|min_digits:1|max_digits:3',
@@ -145,7 +145,7 @@ class ReservacionController extends Controller
 
         if ($creado) {
             return redirect()->route('kiosko_res.index')
-                ->with('mensaje', "Reservacion de" . $nuevo->nombreCliente . " creada correctamente");
+                ->with('mensaje', "Reservacion de " . $nuevo->nombreCliente . " creada correctamente");
         }
 
     }
@@ -164,12 +164,12 @@ class ReservacionController extends Controller
         $t= $request->input('cantidadN') * $request->input('precioN') + $request->input('precio') * $request->input('cantidad');
 
         $request->validate([
-            'name' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'name' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:50|min:3',
             'celular' => 'required|numeric|regex:/^[2,3,8,9][0-9]{7}+$/|min_digits:8|max_digits:8|',
             'fecha' => 'required|date|after_or_equal:' . $min,
             'inicio' => 'required',
             'fin' => 'required|after:inicio',
-            'tipoE' => 'required|regex:/^[a-zA-Z\s\pLñÑ\.]+$/|max:50|min:3',
+            'tipoE' => 'required|regex:/^[a-zA-Z\s\áÁéÉíÍóÓpLñÑ\.]+$/|max:50|min:3',
             'kiosko' => 'required',
             'cantidadN' => 'min:0|max:20|numeric|min_digits:1|max_digits:3',
             'precioN' => 'min:30|max:100|numeric|min_digits:1|max_digits:3',

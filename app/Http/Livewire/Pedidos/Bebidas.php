@@ -13,7 +13,8 @@ class Bebidas extends Component
     {  
         return view('livewire.pedidos.bebidas')->with([
             'products' => Producto::where('estado', '=', '1')
-            ->where('tipo', '=', '1')->get()
+            ->where('tipo', '=', '1')->get(),
+            'items' => \Cart::getContent()
         ])->extends('livewire.pedidos.pedido')
           ->section('productos');
     }
