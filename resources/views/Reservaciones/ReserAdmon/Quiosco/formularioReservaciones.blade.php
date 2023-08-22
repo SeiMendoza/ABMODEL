@@ -30,7 +30,8 @@
                                     <label for="name" style="margin-left: 0;">Nombre:</label>
                                     <input class="form-control border-radius-sm" type="text"
                                         placeholder="Nombre del cliente" name="name" id="name" minlength="3"
-                                        maxlength="30" value="{{ old('name') }}" required>
+                                        maxlength="50" value="{{ old('name') }}" required 
+                                        onkeypress="return funcionConvLetrasMay(event);">
                                     @error('name')
                                         <strong class="menerr" style="color:red">{{ $message }}</strong>
                                     @enderror
@@ -285,3 +286,40 @@
     </div> --}}
 
 @endsection
+
+
+
+<script type="">
+	function funcionConvLetrasMay(evt) {
+		var code = (evt.which) ? evt.which : evt.keyCode;
+		var input = evt.target.value;
+
+		// No permitir símbolos, ni numeros
+		if (code >= 33 && code <= 64 || code >= 186 && code <= 222 || code >= 91 && code <= 96) {
+			return false;
+		}
+
+		// No permitir espacios al inicio
+		if (code == 32 && input.length === 0) {
+			return false;
+		}
+
+		// Cambiar la primera letra de cada palabra a mayúscula
+		var words = input.split(" ");
+		for (var i = 0; i < words.length; i++) {
+			words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+		}
+		var modifiedInput = words.join(" ");
+		evt.target.value = modifiedInput;
+
+		// Permitir separar palabras (min una vez, max tres)
+		if (code == 32) {
+			var spaceCount = (input.match(/ /g) || []).length;
+			if (spaceCount >= 3) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+</script>

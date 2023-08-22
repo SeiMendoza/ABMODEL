@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             PiscinaUsoSeeder::class,
             PiscinaSeeder::class,
             KioskoSeeder::class,
-                //MesaSeeder::class,
+            //MesaSeeder::class,
             ReservacionSeeder::class,
 
             //PedidoSeeder::class,
