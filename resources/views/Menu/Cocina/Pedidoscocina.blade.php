@@ -91,6 +91,7 @@
                                     <div style="display: none">
                                         <input type="text" id="estado" name="estado" value="2">
                                         <input type="text" id="estado_cocina" name="estado_cocina" value="2">
+                                        <input type="text" id="estC" name="estC" value="1">
                                     </div>
                                         <button type="submit" class="btn btn-danger">Si</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>

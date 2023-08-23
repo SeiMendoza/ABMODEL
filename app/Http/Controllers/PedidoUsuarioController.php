@@ -79,11 +79,11 @@ class PedidoUsuarioController extends Controller
     }
     public function pedido_terminados()
     {
-        $pedido = Pedido::where('estado', 0)
+        $pedido = Pedido::with('detalles')->where('estado', 0)
             ->orwhere('estado', 1)
             ->orwhere('estado', 2)
             ->orderby('id')
-            ->get();
+            ->get(); 
         $p = Mesa::all();
         $texto = "";
         return view('Menu/Cocina/Pedidoscaja', compact('pedido', 'texto', 'p'));
@@ -164,14 +164,18 @@ class PedidoUsuarioController extends Controller
         $request->validate([
             'estado' => 'required|in:2', // El campo estado es obligatorio y solo puede ser 1
             'estado_cocina' => 'required|in:2',
+            'estC'  =>  'required|in:1'
         ]);
 
-        $activar = Pedido::findOrfail($id);
+        $activar = Pedido::findOrfail($id); 
         $activar->estado = $request->input('estado');
         $activar->estado_cocina = $request->input('estado_cocina');
-
         $create = $activar->save();
-
+        $detallesPedido = DetallesPedido::where('pedido_id', $id)->get();
+        foreach ($detallesPedido as $detalle) {
+            $detalle->estC = $request->input('estC');
+            $detalle->save();
+        }
         if ($create) {
             return redirect()->route('pedidosp.pedido')->with('mensaje', 'Pedido enviado a caja!');
         }
@@ -180,7 +184,7 @@ class PedidoUsuarioController extends Controller
     {
 
         $pedido = Pedido::findOrFail($id);
-        $detapedido = DetallesPedido::where('pedido_id', $id)->get();
+        $detapedido = DetallesPedido::where('pedido_id', $id)->get();//para mostrar los detalles de este pedido
         $mesas = Mesa::where('estadoM', 0)->get();
         $suma = 0;
         $tasa_impuesto = 0.15;
@@ -256,11 +260,12 @@ class PedidoUsuarioController extends Controller
                 ['precio', '=', $producto_precio],
             ])->first();
 
-            if ($complemento_existente) {
+            if ($complemento_existente) { 
                 // Si el complemento ya existe solo se actualiza la cantidad
                 $complemento_existente->cantidad += $cantidad;
                 $complemento_existente->estado = 0;
-                $complemento_existente->save();
+                $complemento_existente->estC = 0;
+                $complemento_existente->save(); 
             } else {
                 // Crear un nuevo detalle del pedido con el producto y la cantidad
                 if (!$producto) {

@@ -112,7 +112,7 @@
                 $sum = 0;
                 @endphp
                 @forelse($detapedido as $i => $detalle)
-
+                @if($detalle->estC === 0)
                 <tr>
                     <td scope="" class="" style="width:20%; text-align:center; height:20px;">{{$detalle->producto->nombre}}</td>
                     <td scope="" style=" width:20%; text-align:center; height:20px;">{{ $detalle->cantidad }}</td>
@@ -120,6 +120,7 @@
                     <td scope="col" style="text-align:right; width:20%; height:20px;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
 
                 </tr>
+                @endif
                 @php
                 $sum += $detalle->precio*$detalle->cantidad;
                 @endphp

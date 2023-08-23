@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('cantidad')->default(1);
             $table->float('precio');
             $table->boolean('estado')->default(0);
-
+            $table->boolean('estC')->default(0); 
             $table->timestamps();
         });
     }

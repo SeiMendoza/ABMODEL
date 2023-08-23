@@ -40,13 +40,14 @@
                 <td scope="col">{{$p->mesa_nombre->kiosko->codigo}}</td>
                 <td scope="col">
                     <!---enviar a cocina--si existe en la columna estado_cocina 1 o 2 mostrara un texto o mostrar un icono para enviar------>
-                    @if ($p->estado_cocina == 1)
+                    <!--@if ($p->estado_cocina == 1)-->
                     <!--Enviado-->
-                    <i class="fa fa-check text-success"></i>
-                    @elseif($p->estado_cocina == 2 || $p->estado==2)
+                    <!--<i class="fa fa-check text-success"></i>--->
+                    <!--@elseif($p->estado_cocina == 2 || $p->estado==2)--->
                     <!--Entregar-->
-                    <i class="fa fa-check-double text-success"></i>
-                    @else
+                    <!--<i class="fa fa-check-double text-success"></i>--->
+                    <!--@endif--->
+                    @if ($p->detalles->where('estC', 0)->isNotEmpty())
                     <!--- <a href="#" id="envia_a_cocina" name="envia_a_cocina" data-bs-toggle="modal" data-bs-target="#static{{$p->id}}">
                         <i class="fa-solid fa-truck-fast text-success"></i> 
                     </a>--->
@@ -75,6 +76,8 @@
                             </div>
                         </div>
                     </form>
+                    @else
+                    <i class="fa fa-check-double text-success"></i>
                     @endif
                 </td>
                 <!--- enviado de cocina--si existe en la columna estado_cocina 1 o 2 mostrara un texto------>
@@ -91,7 +94,7 @@
                 </td>
                 <td scope="col">
                     <!---terminar en caja--si existe en la columna estado_cocina 2 mostrara un icono para terminar el pedido------>
-                    @if($p->estado_cocina == 2)
+                    @if($p->estado_cocina == 2 && $p->detalles->every(function ($detalle) { return $detalle->estC == 1; }))
                     <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$p->id}}">
                         <i class="fa-solid fa-truck-fast text-success"></i>
                     </a>-->
@@ -123,8 +126,9 @@
                     @elseif($p->estado_cocina == 1)
                     <!--Esperando de cocina-->
                     <i class="fa fa-check"></i>
-                    @else
+                    @else 
                     @endif
+                </td>
                 <td style="text-align:center; width:20%; height:20%;">
                     <div style="display: flex; justify-content: center; flex-direction: row;position: relative;">
                         <a href="{{route('pedidost.detalle',['id'=>$p->id])}}">

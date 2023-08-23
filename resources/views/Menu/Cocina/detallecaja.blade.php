@@ -158,7 +158,7 @@
     <div class="mb-0 col-9 text-start" style="position:absolute;top:330%;width:100%;">
         <table class="table" id="example" style="width:100%;height:100%;">
             <thead>
-                @if($pedido->estado_cocina == 0)
+                @if($pedido->estado != 3)
                 <a href="{{ route('Agregar',['id' => $pedido->id,'tipo'=>'todos','vista'=>2]) }}" class="border-radius-sm text-center text-white " style="background:rgba(49,167,79);position:absolute;left:62%;padding:5px; width:150px; z-index: 999;">
                     <i class="fa fa-plus-circle"></i> <strong>Nuevo</strong>
                 </a>
@@ -168,6 +168,7 @@
                     <th scope="col" style="width:20%; text-align:center;">Cantidad</th>
                     <th scope="col" style="width:20%; text-align:center;">Precio</th>
                     <th scope="col" style="width:20%; text-align:center;">Sub total</th>
+                    <th scope="col" style="width:20%; text-align:center;">Terminado</th>
                     @if($pedido->estado_cocina == 0)
                     <th scope="col" style="width:20%; text-align:center;">Acciones</th>
                     @endif
@@ -180,10 +181,15 @@
                 <td scope="col" style=" width:20%; text-align:center; height:20%;">{{ $detalle->cantidad }}</td>
                 <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio, 2, ".", ",") }}</td>
                 <td scope="col" style="text-align:right; width:20%; height:20%;">L. {{ number_format($detalle->precio*$detalle->cantidad, 2, ".", ",") }}</td>
+                @if($detalle->estC==1)
+                <td scope="col" style="width:20%; text-align:center; height:20%;">Si</td>
+                @else
+                <td scope="col" style="width:20%; text-align:center; height:20%;">No</td>
+                @endif
                 @if($pedido->estado_cocina == 0 )
                 <td scope="col" style="text-align:center; width:20%; height:20%;">
                     <div style="display: flex; justify-content: center; flex-direction: row;position: relative;">
-                        <a href="{{ route('detallep.edit', ['pedido_id' => $pedido->id, 'detalle_id' => $detalle->id]) }}" style="margin-right: 10px;">
+                        <a href="{{ route('detallep.edit', ['pedido_id' => $pedido->id, 'detalle_id' => $detalle->id]) }}" style="margin-right: 20px;">
                             <i class="fa-solid fa-edit text-success" style="color: rgb(33, 195, 247);"></i>
                         </a>
                         <i data-bs-toggle="modal" data-bs-target="#staticBackdropE{{$detalle->id}}" class="fa-solid fa-trash-can text-danger" style="color:crimson;text-align:center;position: absolute; margin-left:20%; top: 50%;transform: translateY(-50%);"></i>
