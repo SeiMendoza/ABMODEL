@@ -16,6 +16,26 @@
 
 <body>
 
+    <style>
+        .custom-error {
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #f93e47c7;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+
+        .custom-exit {
+            font-size: 15px;
+            font-weight: bold;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+
     <div class="">
         <div class="d-flex justify-content-center h-100">
             <div class="reg_card">
@@ -52,13 +72,13 @@
                             </span>
                         @enderror
 
-                        <!--<div class="">
+                        <div class="">
                             @if (session('status'))
                                 <div class="alert alert-success custom-exit text-center" role="alert" id="error-success">
                                     {{ session('status') }}
                                 </div>
                             @endif
-                        </div>-->                                      
+                        </div>                                     
               
                         <div class="form-group">
                         </div>
