@@ -56,16 +56,17 @@
                     <div class="col">
 
                         <div class="row" style="margin-left:20px">
-                            <div class="col">
-                                <label for=""><strong>Tipo de producto:</strong></label>
-                                <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control border-radius-sm">
-                                    <option @if (old('tipo') == 1) selected @endif value="1"{{$producto->tipo === "1" ? 'selected' : ''}}>Bebida</option>
-                                    <option @if (old('tipo') == 2) selected @endif value="2"{{$producto->tipo === "2" ? 'selected' : ''}}>Comida</option>
-                                    <option @if (old('tipo') == 3) selected @endif value="3"{{$producto->tipo === "3" ? 'selected' : ''}}>Complemento</option>
-                                </select>
-                                @error('tipo')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                @enderror
+                            <div class="col" >
+                                @php
+                                    $tipo = '';
+                                @endphp
+                               <label for=""><strong>Tipo de producto:</strong></label>
+                                @if($producto->tipo === 1)
+                                  @php $tipo = 'Bebida' @endphp
+                                @endif
+                                <input class="form-control border-radius-sm" type="text"
+                                    value="{{$tipo}}" maxlength="25" required onkeypress="quitarerror()" readonly>
+                                <input type="number" name="tipo" id="tipo" value="{{$producto->tipo}}" hidden>
                             </div>
 
                             <div class="col">
