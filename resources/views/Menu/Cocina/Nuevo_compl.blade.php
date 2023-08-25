@@ -61,7 +61,7 @@
                     showConfirmButton: false,
                     toast: true,
                     background: '#fff',
-                    timer: 5500
+                    timer: 3000
                 })
             }
             var ms = '¡Existe un error, revise los datos!';
@@ -74,7 +74,7 @@
                     showConfirmButton: false,
                     toast: true,
                     background: '#fff',
-                    timer: 5500
+                    timer: 3000
                 })
             }
         </script>
@@ -107,16 +107,17 @@
                                     </ol>
                                 </nav>
                             </div>
-                            <div class="table-responsive " style="display:block; float:left;;
-                            margin: 0px; margin-top:2px; padding:0; height:87%; position:absolute; left:5px;">
-                                <section style="">
-                                    <main class=" main-content">
-                                        <div class="tab-content" style="margin: 0px; padding:0; ">
-                                            @php
+                            <div class="table-responsive"
+                            id="productosP" style="display:block; float:left; text-align:center; 
+                            margin: 0; top:49px; padding:0; position:absolute; bottom:59px; left:2px;">
+                                <section id="pedidos" style="">
+                                    <main class=" main-content" style="margin: 0px; padding:0;">
+                                        <div class="tab-content" style="margin: 0px; padding:0; overflow-x: hidden;">
+                                        @php
                                             $cantidadProductos = count($productos);
                                             $rowClass = ($cantidadProductos > 1) ? 'row row-cols-auto row-cols-sm-3 row-cols-md-2 row-cols-lg-3 row-cols-xl-4' : 'row-cols-1';
                                             @endphp
-                                            <div class="row {{ $rowClass }}" style="margin: 0px; padding:0;">
+                                            <div class="row justify-content-center {{ $rowClass }}" style="margin: 0px; padding:0;">
                                                 @foreach($productos as $pro)
                                                 @if($tipo === 'todos' || $pro->tipo == $tipo)
                                                 <div class="col" style="padding: 0px; margin:0px;">
@@ -154,95 +155,70 @@
                                                 </div>
                                                 @endif
                                                 @endforeach
-                                            </div>
                                         </div>
                                     </main>
                                 </section>
                             </div>
-                            <div class="table-responsive-sm table-responsive-md table-responsive-lg col-12" style="text-align:center;margin: 0; padding:0; position:fixed;">
+                            <div class="table-responsive col-12" 
+                                style="text-align:center;margin: 0; padding:0; ">
                                 <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;" class="bg-gradient-warning">
                                     <ol class="breadcrumb nav navbar-expand bg-success d-flex justify-content-center
-                                    d-sm-flex col col-12 col-sm-12 col-md-6 col-lg-7 col-xl-7 d-table-cell" style="margin: 0; border-radius:0px; padding: 5px 3px 7px 3px; position:fixed; bottom:0%">
-                                        <li class="" role="button" style="display:block;">
-                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
-                                                <i class="fa-solid fa-utensils text-success"></i> Menú completo
+                                        d-sm-flex col col-12 col-sm-12 col-md-6 col-lg-7 col-xl-7 d-table-cell" 
+                                         style="margin: 0; border-radius:0px; padding: 5px 3px 7px 3px; position:fixed; 
+                                         left:0%; bottom:0%; height:58px;">
+                                        <li class= role="button" style="display:block;">
+                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; font-size:15px" type="button" 
+                                                class="bg-light border-radius-sm text-center">
+                                                <i class="fa-solid fa-utensils text-success"></i> Menú 
                                             </a>
                                         </li>
-                                        <li class=" d-none d-xl-table" role="button">
-                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'bebidas','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
-                                                <i class="fa-solid fa-wine-glass text-info"></i> Bebidas
+                                        <li class="" role="button">
+                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'bebidas','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; width:85px; font-size:14px" type="button" 
+                                            class="bg-light border-radius-sm text-center">
+                                            <i class="fa-solid fa-wine-glass text-info"></i> Bebidas
+                                            </a> 
+                                        </li>
+                                        <li class="" role="button">
+                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'platillos','vista'=>2])}}"style="margin:1px 3px 1px 3px; padding:10px; width:85px; font-size:14px" type="button" 
+                                            class="bg-light border-radius-sm text-center">
+                                            <i class="fa-solid fa-drumstick-bite text-warning"></i> Platillos
                                             </a>
                                         </li>
-                                        <li class="d-none d-xl-table" role="button">
-                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'platillos','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
-                                                <i class="fa-solid fa-drumstick-bite text-warning"></i> Platillos
+                                        <li class="d-sm-table d-md-table d-lg-none d-xl-none d-md-table-cell" role="button">
+                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'complementos','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; width:85px; font-size:14px" type="button" 
+                                                class="bg-light border-radius-sm text-center">
+                                                <i class="fa-solid fa-plus-circle text-primary"></i> Comp
                                             </a>
                                         </li>
-                                        <li class="d-none d-xl-table" role="button">
-                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'complementos','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; width:150px; font-size:15px" type="button" class="bg-light border-radius-sm text-center">
+                                        <li class="d-none d-sm-none d-md-none d-lg-table d-xl-table" role="button">
+                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'complementos','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; width:130px; font-size:14px" type="button" 
+                                                class="bg-light border-radius-sm text-center">
                                                 <i class="fa-solid fa-plus-circle text-primary"></i> Complementos
-                                            </a>
-                                        </li>
-                                        <li class=" d-xl-none d-flex align-items-center" style="display:block; float: right;">
-                                            <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                                                <div class="sidenav-toggler-inner">
-
-                                                    <a href="javascript:;" class="nav-link 
-                                                            border-radius-sm text-center font-weight-bold px-0 bg-light" type="button" style="margin:1px 3px 1px 3px; padding:10px; width:100px; font-size:15px" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fa-solid fa-plus"></i> Más
-                                                    </a>
-
-                                                    <!-- Usar Informacion -->
-                                                    <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown">
-                                                        <a class="dropdown-item" href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'bebidas','vista'=>2])}}">
-                                                            <i class="fa-solid fa-wine-glass text-info"></i>
-                                                            Bebidas
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'platillos','vista'=>2])}}">
-                                                            <i class="fa-solid fa-drumstick-bite text-warning"></i>
-                                                            Platillos
-                                                        </a>
-
-                                                        <div class="dropdown-divider"></div>
-
-                                                        <a class="dropdown-item" href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'complementos','vista'=>2])}}" data-toggle="modal" data-target="logoutModal">
-                                                            <i class="fa-solid fa-plus-circle text-primary"></i>
-                                                            Complementos
-                                                        </a>
-                                                    </div>
-
-                                                </div>
                                             </a>
                                         </li>
                                     </ol>
                                 </nav>
                             </div>
                         </div>
-                        <div   class="d-none d-sm-none d-md-table bg-white ;
-    col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" 
-    style="display:block; margin: 0px; height:100%; 
-    padding:0%; position:fixed; right:0%; top:0%"
-    id="pedido" name="pedido">
-    <div class="row" style="margin: 0px; padding:0; position:absolute; width:100%; top:0%; right:0%">
-        <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
-            <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" 
-                style="margin-bottom: 0; border-radius:0px; margin:0;">
-                <H3 class="text-white"><strong>Detalles del Pedido</strong></H3>
-                <li class=" d-md-none d-lg-none d-xl-none d-xs d-sm-table d-sm-table-cell d-flex align-items-center" 
-                    style="margin: 0px;">
-                    <div id="" style="padding-left: 15px;">
-                        <button style="margin:0px; padding:4px; font-size:15px; position:absolute; right:1%; top:15%;" type="button" 
-                        class="bg-light border-radius-sm text-center subMenu" id="cerrar" name="cerrar">
-                        <i class="fa-solid fa-square-xmark text-danger"></i></button>
-                    </div>
-                </li>
-            </ol>
-        </nav>
-    </div>                   
-    <div id="pedidoT" style="margin:50px 0 0 0; padding:0;
+                        <div class="d-none d-sm-none d-md-table bg-white ;
+    col-md-6 d-lg-table col-lg-5 d-xl-table col-xl-5 d-table-cell ocultar" style="display:block; margin: 0px; height:100%; 
+    padding:0%; position:fixed; right:0%; top:0%" id="pedido" name="pedido">
+                            <div class="row" style="margin: 0px; padding:0; position:absolute; width:100%; top:0%; right:0%">
+                                <nav aria-label="breadcrumb" style=" margin: 0px; padding:0;">
+                                    <ol class="breadcrumb d-flex justify-content-center bg-gradient-faded-success" style="margin-bottom: 0; border-radius:0px; margin:0;">
+                                        <H3 class="text-white"><strong>Detalles del Pedido</strong></H3>
+                                        <li class=" d-md-none d-lg-none d-xl-none d-xs d-sm-table d-sm-table-cell d-flex align-items-center" style="margin: 0px;">
+                                            <div id="" style="padding-left: 15px;">
+                                                <button style="margin:0px; padding:4px; font-size:15px; position:absolute; right:1%; top:15%;" type="button" class="bg-light border-radius-sm text-center subMenu" id="cerrar" name="cerrar">
+                                                    <i class="fa-solid fa-square-xmark text-danger"></i></button>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div id="pedidoT" style="margin:50px 0 0 0; padding:0;
             width:100%; position:absolute; top:0; bottom:171px; overflow-y:auto;" class="bg-white">
-        <div class="row" id="carrito" style="margin: 0; padding:0;">
+                                <div class="row" id="carrito" style="margin: 0; padding:0;">
                                     <table class="table table-borderless" id="lista" style="margin: 0; 
                 margin-bottom:0px; padding:0;">
                                         <thead style="padding-top: 2px;">
@@ -263,7 +239,7 @@
                                             <tr>
                                                 <td style="text-align: left; padding-left:3px;">{{ $detalle->producto->nombre }}</td>
                                                 <td style="text-align: right">
-                                                <!---restar la cantidad--->
+                                                    <!---restar la cantidad--->
                                                     <form action="{{ route('detallep.restar', ['id' => $detalle->id, 'vista' => 2]) }}" method="POST">
                                                         @method('post')
                                                         @csrf
@@ -275,7 +251,7 @@
                                                     <!---<form id="cantidadForm{{ $detalle->id }}" action="" method="POST">
                                                         @method('post')
                                                         @csrf---->
-                                                        <input type="text" name="cantidad" id="cantidad{{ $detalle->id }}" style="height:20px; text-align: right;" class="form-control" value="{{ $detalle->cantidad }}">
+                                                    <input type="text" name="cantidad" id="cantidad{{ $detalle->id }}" style="height:20px; text-align: right;" class="form-control" value="{{ $detalle->cantidad }}">
                                                     <!--</form>--->
                                                 </td>
                                                 <!---Sumar la cantidad---->
@@ -385,7 +361,7 @@
     <script src={{ asset("js/core/bootstrap.bundle.min.js") }}></script>
     <script src={{ asset('/js/plugins/perfect-scrollbar.min.js') }}></script>
     <script src={{ asset('/js/plugins/smooth-scrollbar.min.js') }}></script>
-   <!-- <script>
+    <!-- <script>
             document.getElementById('cantidad{{ $detalle->id }}').addEventListener('change', function() {
             document.getElementById('cantidadForm{{ $detalle->id }}').submit();
         });
