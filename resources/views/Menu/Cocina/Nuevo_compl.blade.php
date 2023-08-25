@@ -167,7 +167,7 @@
                                          style="margin: 0; border-radius:0px; padding: 5px 3px 7px 3px; position:fixed; 
                                          left:0%; bottom:0%; height:58px;">
                                         <li class= role="button" style="display:block;">
-                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; font-size:15px" type="button" 
+                                            <a href="{{route('Agregar', ['id' => $pedido->id, 'tipo' => 'todos','vista'=>2])}}" style="margin:1px 3px 1px 3px; padding:10px; font-size:14px" type="button" 
                                                 class="bg-light border-radius-sm text-center">
                                                 <i class="fa-solid fa-utensils text-success"></i> Menú 
                                             </a>
