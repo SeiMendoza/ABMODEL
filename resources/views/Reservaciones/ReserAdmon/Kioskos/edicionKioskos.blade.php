@@ -37,14 +37,30 @@
                                         style=" display:block ;margin:0; padding:5px; width:220px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
                                         class="btn btn-info text-center "> <i class="fa fa-file-image"></i> Cambiar
                                         imagen</label>
-                                    <input type="file" class="files" id="imagen" name="imagen" accept="image/*"
-                                        value="{{ old('imagenPrevisualizacion') }}" onchange="colocarNombre();"
-                                        style="display:none; color: rgb(0, 0, 0);">
+                                        <input type="file" class="files" id="imagen" name="imagen" accept="image/*" value="{{ old('imagenPrevisualizacion') }}" onchange="cambiarImagen(event);colocarNombre();" style="display:none; color: rgb(0, 0, 0);">
+                                
                                     @error('imagen')
                                         <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+                            <script>
+                            function cambiarImagen(event) {
+                                var imagenMostrada = document.getElementById('imagenmostrada');
+                                var file = event.target.files[0];
+                                var reader = new FileReader();
+
+                                reader.onload = function(e) {
+                                    imagenMostrada.src = e.target.result;
+                                };
+
+                                reader.readAsDataURL(file);
+                            }
+
+                            function elegirImagen() {
+                                document.getElementById('imagen').click();
+                            }
+                        </script>
                             <div class="col-9">
                                 <div class="form-group col" style="margin-left: 0;">
                                     <label for="codigo">Código</label>
