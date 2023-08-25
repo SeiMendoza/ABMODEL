@@ -427,7 +427,7 @@ Auth::routes();
 // POST            password/email ............................... password.email › Auth\ForgotPasswordController@sendResetLinkEmail  
 // GET|HEAD        password/reset ............................ password.request › Auth\ForgotPasswordController@showLinkRequestForm  
 // POST            password/reset ............................................ password.upda te › Auth\ResetPasswordController@reset
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 // Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 // Route::get('password/reset', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 // Route::get('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
