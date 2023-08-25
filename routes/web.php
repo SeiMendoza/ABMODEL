@@ -437,11 +437,11 @@ Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordCo
 /* 
  *Rutas livewire para pedidos
  */
-
-//Route::view('/pedido/menu', 'livewire/pedidos/menu')->name('menu');
+//Route::view('/pedido/menu/detalles', 'livewire/pedidos/menu')->name('menu.detalles');
 
 //Route::resource('/pedido/menu', Menu::class)->only('bebidas', 'platillos', 'complementos');
 //Route::get('/pedido/menu/completo', [Menu::class, 'render'])->name('menu');
+//Route::get('/pedido/menu/detalles', [DetallesPedido::class, 'render'])->name('menu.detalles');
 Route::post('/pedido/menu/guardar', [DetallesPedido::class, 'guardar'])->name('menu.store');
 Route::post('/pedido/menu/vaciar', [DetallesPedido::class, 'vaciar'])->name('menu.clear');
 Route::get('/pedido/menu', Menu::class)->name('menu.menu');

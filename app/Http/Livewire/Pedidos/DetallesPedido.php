@@ -26,6 +26,14 @@ class DetallesPedido extends Component
         $mesas = Mesa::where('estadoM', '=', 0)->get();
         return view('livewire.pedidos.detalles-pedido', compact('mesas','productos'));
     }
+    public function index()
+    {  
+        return view('livewire.pedidos.detalles-pedido')->with([
+            'products' => Producto::where('estado', '=', '1')->get(),
+            'items' => \Cart::getContent()
+        ])->extends('livewire.pedidos.pedido')
+          ->section('productos');
+    }
     public function editar($id, $q){
 
         $item = \Cart::get($id);
@@ -55,6 +63,7 @@ class DetallesPedido extends Component
         $this->emitTo('pedidos.complementos', 'editar');
         $this->emitTo('pedidos.platillos', 'editar');
         $this->emitTo('pedidos.bebidas', 'editar');
+        $this->emitTo('pedidos.mostrar', 'editar');
     }
 
     public function eliminar_item($id, $q){
@@ -64,6 +73,7 @@ class DetallesPedido extends Component
         $this->emitTo('pedidos.complementos', 'eliminar_item');
         $this->emitTo('pedidos.platillos', 'eliminar_item');
         $this->emitTo('pedidos.bebidas', 'eliminar_item');
+        $this->emitTo('pedidos.mostrar', 'eliminar_item');
     }
 
     public function vaciar(){
@@ -73,6 +83,7 @@ class DetallesPedido extends Component
         $this->emitTo('pedidos.complementos', 'vaciar');
         $this->emitTo('pedidos.platillos', 'vaciar');
         $this->emitTo('pedidos.bebidas', 'vaciar');
+        $this->emitTo('pedidos.mostrar', 'vaciar');
         
         return back()->with('mensaje', 'Pedido Cancelado');  
     }
@@ -96,6 +107,7 @@ class DetallesPedido extends Component
         $this->emitTo('pedidos.complementos', 'cambiar_Cant');
         $this->emitTo('pedidos.platillos', 'cambiar_Cant');
         $this->emitTo('pedidos.bebidas', 'cambiar_Cant');
+        $this->emitTo('pedidos.mostrar', 'cambiar_Cant');
     }
     public function cambiar_Cant2($id, $q)
     {
@@ -115,6 +127,7 @@ class DetallesPedido extends Component
         $this->emitTo('pedidos.complementos', 'cambiar_Cant2');
         $this->emitTo('pedidos.platillos', 'cambiar_Cant2');
         $this->emitTo('pedidos.bebidas', 'cambiar_Cant2');
+        $this->emitTo('pedidos.mostrar', 'cambiar_Cant2');
     }
 
     public function guardar(Request $request)
@@ -179,6 +192,7 @@ class DetallesPedido extends Component
                 $this->emitTo('pedidos.complementos', 'guardar');
                 $this->emitTo('pedidos.platillos', 'guardar');
                 $this->emitTo('pedidos.bebidas', 'guardar');
+                $this->emitTo('pedidos.mostrar', 'guardar');
                 return back()->with('mensaje', 'Pedido realizado');
             } else {
                 #...
