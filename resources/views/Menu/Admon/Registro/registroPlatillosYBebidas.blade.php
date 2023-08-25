@@ -58,10 +58,13 @@
                                 <div class="col">
                                 <label for=""><strong>Tipo de producto:</strong></label>
                                 <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control border-radius-sm">
-                                    <option value="0">Seleccione el tipo de producto</option>
-                                    <option @if (old('tipo') == 1) selected @endif value="1">Bebida</option>
+                                    <option value="">Seleccione el tipo de producto</option>
+                                    <option value="1" @if(old('Tipo') == "1") {{ 'selected' }} @endif>Bebida</option>
+                                    <option value="2" @if(old('Tipo') == "2") {{ 'selected' }} @endif>Comida</option>
+                                    <option value="0" @if(old('Tipo') == "0") {{ 'selected' }} @endif>Complemento</option>
+                                  <!--  <option @if (old('tipo') == 1) selected @endif value="1">Bebida</option>
                                     <option @if (old('tipo') == 2) selected @endif value="2">Comida</option>
-                                    <option @if (old('tipo') == 0) selected @endif value="0">Complemento</option>
+                                    <option @if (old('tipo') == 0) selected @endif value="0">Complemento</option>-->
                                 </select>
                                 @error('tipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
