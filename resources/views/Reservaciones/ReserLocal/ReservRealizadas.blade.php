@@ -68,11 +68,12 @@
                                             <h4 class="modal-title" id="exampleModalLongTitle"><strong>Eliminar Reservación</strong></h4>
                                         </div>
                                         <div class="modal-body">
-                                            ¿Esta seguro de eliminar la reservación de {{$r->Nombre_Cliente}}?             
+                                            ¿Esta seguro de eliminar la reservación de: <br> {{$r->Nombre_Cliente}}?             
                                         </div>
                                         <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">NO</button>
-                                        <button type="submit" class="btn btn-danger" >SÍ</button>
+                                            <button type="submit" class="btn btn-danger" >Si</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </div>
                                         </div>
                                     </div>
                                 </div>

@@ -59,6 +59,7 @@ class Menu extends Component
         
         $this->emitTo('pedidos.detalles-pedido', 'addTodo');
         $this->emitTo('pedidos.mostrar', 'addTodo');
+        session()->flash('message', 'Producto añadido');
     }
     public function eliminar_item(){
     }

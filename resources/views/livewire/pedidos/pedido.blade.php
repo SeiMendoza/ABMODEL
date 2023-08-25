@@ -63,7 +63,7 @@
                     showConfirmButton: false,
                     toast: true,
                     background: '#fff',
-                    timer: 5500
+                    timer: 3000
                 })
             }
             var ms = '¡Existe un error, revise los datos!';
@@ -76,7 +76,7 @@
                     showConfirmButton: false,
                     toast: true,
                     background: '#fff',
-                    timer: 5500
+                    timer: 3000
                 })
             }
         </script>
@@ -188,6 +188,20 @@
         function proenviar(id) {
             try {
                 var c = parseFloat(document.getElementById("dis-" + id).value) || 0;
+                if (c >= 1) {
+                    var ms = 'Producto agregado';
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: ms,
+                        showConfirmButton: false,
+                        toast: true,
+                        background: '#fff',
+                        timer: 1500
+                    })
+                    var but = document.getElementById("p-" + id);
+                    but.classList.add("clasemmlona");
+                }
                 if (c <= 0) {
                     var ms = 'No hay productos disponibles';
                     Swal.fire({
@@ -197,7 +211,7 @@
                         showConfirmButton: false,
                         toast: true,
                         background: '#fff',
-                        timer: 5500
+                        timer: 1500
                     })
                     var but = document.getElementById("p-" + id);
                     but.classList.add("clasemmlona");

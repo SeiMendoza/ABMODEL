@@ -133,11 +133,14 @@ class DetallesPedido extends Component
     public function guardar(Request $request)
     {   
         $request->validate([
-            'name' => ['required'],
+            'name' => ['required', 'min:3','max:50', 'regex:/^[a-zA-ZáÁéÉíÍóÓúÚñÑ]+\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?$/'],
             'mesa' => ['required'],
             't' => ['min:1'],
         ], [
-            'nombre.required' => 'No tiene un nombre ingresado',
+            'name.required' => 'No tiene un nombre ingresado',
+            'name.min' => 'El nombre es corto',
+            'name.max' => 'El nombre es largo',
+            'name.regex' => 'El nombre tiene datos erroneos',
             'mesa.required' => 'Seleccione una mesa',
             't.min' =>'No hay detalles'
         ]);

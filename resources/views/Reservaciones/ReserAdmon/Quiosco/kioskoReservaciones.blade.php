@@ -71,8 +71,8 @@
                                                         Reservación Terminada</h5>
                                                 </div>
                                                 <div class="modal-body">
-                                                    ¿Esta seguro de terminar la reservación de: 
-                                                    <br>{{ $r->nombreCliente }}?
+                                                    ¿Esta seguro de terminar la reservación de: <br>
+                                                     {{ $r->nombreCliente }}?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-danger">Si</button>
@@ -109,7 +109,7 @@
                                                     Eliminar Reservación</h5>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Esta seguro de eliminar la reservación de: {{ $r->nombreCliente }}?
+                                                ¿Esta seguro de eliminar la reservación de: <br> {{ $r->nombreCliente }}?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-danger">Si</button>
