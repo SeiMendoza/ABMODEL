@@ -86,47 +86,43 @@ class KioskoController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $rules = [
-            'descripcion' => 'required|max:100|min:5',
-            'ubicacion' => 'required|max:100|min:5',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+            'descripcion' => 'required|max:100|min:5|regex:/^[\\pL\\s]+$/u',
+            'ubicacion' => 'required|max:100|min:5|regex:/^[\\pL\\s]+$/u',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ];
-
+    
         $messages = [
             'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01',
+            'descripcion.regex'=>'Solo se permiten letras'
         ];
-
+    
         $this->validate($request, $rules, $messages);
-
+    
         $kioskoUpdate = Kiosko::findOrFail($id);
         $kioskoUpdate->descripcion = $request->input('descripcion');
         $kioskoUpdate->ubicacion = $request->input('ubicacion');
-
-
+    
+        $oldImage = $kioskoUpdate->imagen; // Guarda la ruta de la imagen anterior
+    
         if ($request->hasFile('imagen')) {
-
-            $oldImage = $kioskoUpdate->imagen; //gurada la ruta de la imagen anterior
-
             $file = $request->file('imagen');
             $destinationPath = 'images/kioskos/';
             $filename = time() . '.' . $file->getClientOriginalName();
             $uploadSuccess = $file->move($destinationPath, $filename);
             $kioskoUpdate->imagen = 'images/kioskos/' . $filename;
-
+    
+            if ($oldImage && substr($oldImage, 0, 11) != 'https://via') { // Verifica si existe imagen anterior
+                unlink($oldImage); // Elimina la imagen anterior
+            }
         }
-
+    
         $kioskoUpdate->save();
-        if (@getimagesize($oldImage) && ($oldImage != $kioskoUpdate->imagen)) { //verifica si existe imagen anterior
-
-            if (substr($oldImage, 0, 11) != 'https://via') // no es imagen del faker
-                unlink($oldImage); //elimina la imagen anterior  
-        }
-
+    
         $url = $request->header('referer');
         $url = parse_url($url)['path'];
-
-        return to_route('kiosko.index', compact('url'))->with('mensaje', 'Kiosko actualizado correctamente');
+    
+        return redirect()->route('kiosko.index')->with('mensaje', 'Kiosko actualizado correctamente');
     }
 
     public function destroy($id)

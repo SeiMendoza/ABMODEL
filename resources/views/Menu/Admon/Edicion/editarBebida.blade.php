@@ -46,7 +46,7 @@
                             <img onclick="elegirImagen()" src="{{asset($producto->imagen)}}" alt="" width="240px" height="240px" id="imagenmostrada">
                             <br><br>
                             <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="btn btn-info text-center "> <i class="fa fa-file-image"></i> Cambiar imagen</label>
-                            <input type="file" id="imagen" name="imagen" accept="images/*" value="{{ old('imagenPrevisualizacion', $producto->imagen) }}" onchange="colocarNombre();" style="display:none; margin-left: 0; color: white;width: 200px; ">
+                            <input type="file" id="imagen" name="imagen" accept="images/*" value="{{ old('imagenPrevisualizacion', $producto->imagen) }}" onchange="colocarNombre();cambiarImagen(event);" style="display:none; margin-left: 0; color: white;width: 200px; ">
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -174,4 +174,21 @@
             </div>
         </div>
     </div>
+    <script>
+    function cambiarImagen(event) {
+        var imagenMostrada = document.getElementById('imagenmostrada');
+        var file = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            imagenMostrada.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    function elegirImagen() {
+        document.getElementById('imagen').click();
+    }
+</script>
 @stop
