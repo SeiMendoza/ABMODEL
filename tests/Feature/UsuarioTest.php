@@ -196,5 +196,124 @@ class UsuarioTest extends TestCase
     ]);
     }
 
+    public function test_13_RequiereMaxCuarentaCaracteres()
+    {
+    $user = User::find(1);
+
+    $response = $this->actingAs($user)->post('/usuarios/create', [
+        'name' => 'Evelyn swdknIUAFHASDFJHSDUFIHSDNFJSHDFIUHDISJDFHYUSDFGBHSDGCYSDFHGBSYDFGBSYDCBSDYCVGSBDVFHEFGBYDFGBYSCHNAISCKNSICHFNUWBFYDGVCBSYDHN', 
+        'email' => 'evyrodriguez03@gmail.com',
+        'is_default' => 'Usuario',
+        'password' => '03roxana.',
+        'password_confirmation' => '03roxana.',
+        'address' => 'Las Flores',
+        'telephone' => '94567892',
+        'imagen' => 'img/imagen.png'
+    ]);
+
+    $response->assertInvalid([
+        'name' => '¡Has excedido el limite máximo de letras!'
+    ]);
+    }
+
+    public function test_14_RequiereregexCaracteres()
+    {
+    $user = User::find(1);
+ 
+    $response = $this->actingAs($user)->post('/usuarios/create', [
+        'name' => 'EVELYM', 
+        'email' => 'evyrodriguez03@gmail.com',
+        'is_default' => 'Usuario',
+        'password' => '03roxana.',
+        'password_confirmation' => '03roxana.',
+        'address' => 'Las Flores',
+        'telephone' => '94567892',
+        'imagen' => 'img/imagen.png'
+    ]);
+
+    $response->assertInvalid([
+        'name' => '¡Debes ingresar de 2 a 4 nombres, sin incluir símbolos ni números!'
+    ]);
+    }
+
+        public function test_15_RequiereRegexConNumero()
+    {
+    $user = User::find(1);
+
+    $response = $this->actingAs($user)->post('/usuarios/create', [
+        'name' => 'EVELYM 202932833', 
+        'email' => 'evyrodriguez03@gmail.com',
+        'is_default' => 'Usuario',
+        'password' => '03roxana.',
+        'password_confirmation' => '03roxana.',
+        'address' => 'Las Flores',
+        'telephone' => '94567892',
+        'imagen' => 'img/imagen.png'
+    ]);
+
+    $response->assertInvalid([
+        'name' => '¡Debes ingresar de 2 a 4 nombres, sin incluir símbolos ni números!'
+    ]);
+    }
+
+    public function test_16_RequiereEmailSinIngresarCorreo()
+    {
+    $user = User::find(1);
+
+    $response = $this->actingAs($user)->post('/usuarios/create', [
+        'name' => 'Evelyn Roxana Rodriguez Maradiaga', 
+        'email' => '',
+        'is_default' => 'Usuario',
+        'password' => '03roxana.',
+        'password_confirmation' => '03roxana.',
+        'address' => 'Las Flores',
+        'telephone' => '94567892',
+        'imagen' => 'img/imagen.png'
+    ]);
+
+    $response->assertInvalid([
+        'name' => '¡Debes ingresar tu correo electrónico, verifica la información!'
+    ]);
+    }
+
+    public function test_17_RequiereEmailIngresandoCorreoInvalido()
+    {
+    $user = User::find(1);
+
+    $response = $this->actingAs($user)->post('/usuarios/create', [
+        'name' => 'Evelyn Roxana Rodriguez Maradiaga', 
+        'email' => 'evyrodriguez09@gmail.com',
+        'is_default' => 'Usuario',
+        'password' => '03roxana.',
+        'password_confirmation' => '03roxana.',
+        'address' => 'Las Flores',
+        'telephone' => '94567892',
+        'imagen' => 'img/imagen.png'
+    ]);
+
+    $response->assertInvalid([
+        'name' => '¡Debes ingresar un correo electrónico válido!'
+    ]);
+    }
+
+    public function test_18_RequiereEmailIngresandoMaxCaracter()
+    {
+    $user = User::find(1);
+
+    $response = $this->actingAs($user)->post('/usuarios/create', [
+        'name' => 'Evelyn Roxana Rodriguez Maradiaga', 
+        'email' => 'evyroxanarodriguezmaradiagaehdfgsydfhbsjdnasdjhasdbsacbjxcbhxcnjcdskjfhdfbdncmaradiagahgahsgvayhsdb099283748@gmail.com',
+        'is_default' => 'Usuario',
+        'password' => '03roxana.',
+        'password_confirmation' => '03roxana.',
+        'address' => 'Las Flores',
+        'telephone' => '94567892',
+        'imagen' => 'img/imagen.png'
+    ]);
+
+    $response->assertInvalid([
+        'name' => '¡Has excedido el limite máximo de letras!'
+    ]);
+    }
 
 }
