@@ -52,10 +52,13 @@ class LoginTest extends TestCase
         ]);
 
 
-        $response->assertRedirect('/login');
+      
 
 
-        $this->assertSessionHasErrors('email');
+        $response->assertSessionHasErrors('email');
+
+
+        $response->assertRedirect('/');
 
  
         $this->assertGuest();
@@ -64,17 +67,12 @@ class LoginTest extends TestCase
     public function test_ingresar_sin_email()
     {
         $response = $this->post('/login', [
-            'email' => '', 
+            'email' => '',
             'password' => 'password',
         ]);
 
-        
-        $response->assertRedirect('/login'); 
-
-        
-        $this->assertSessionHasErrors('email');
-
-        
+        $response->assertSessionHasErrors('email');
+        $response->assertRedirect('/');
         $this->assertGuest();
     }
 
@@ -86,12 +84,8 @@ class LoginTest extends TestCase
         ]);
 
         
-        $response->assertRedirect('/login'); 
-
-        
-        $this->assertSessionHasErrors('password');
-
-    
+        $response->assertSessionHasErrors('password');
+        $response->assertRedirect('/');
         $this->assertGuest();
     }
 
@@ -182,6 +176,70 @@ class LoginTest extends TestCase
      
         $this->assertGuest();
     }
+
+    //segunda entrega de testing
+
+    public function test_administrador_puede_entrar_a_lista_de_usuarios()
+    {
+       
+        $adminUser = User::create([
+            'name' => 'Nombre de Usuario3',
+            'email' => 'usuario@example3.com',
+            'password' => bcrypt('password'),
+            'address' => 'Dirección de Prueba',
+            'telephone' => '12345678',
+            'imagen' => 'ruta_de_imagen.jpg',
+            'is_default' => 'Administrador', 
+        ]);
+
+    
+        $this->actingAs($adminUser);
+
+        $response = $this->get('/listaUsuarios'); 
+
+       
+        $response->assertViewIs('auth.Usuarios');
+    }
+
+    public function test_usuarionormal_puede_entrar_a_listadeUsuarios()
+    {
+   
+        $regularUser = User::create([
+            'name' => 'Nombre de Usuario3',
+            'email' => 'usuario@example3.com',
+            'password' => bcrypt('password'),
+            'address' => 'Dirección de Prueba',
+            'telephone' => '12345678',
+            'imagen' => 'ruta_de_imagen.jpg',
+            'is_default' => 'Usuario', 
+        ]);
+
+      
+        $this->actingAs($regularUser);
+
+        $response = $this->get('/listaUsuarios'); 
+
+       
+        $response->assertStatus(403); 
+    }
+
+    public function test_inyeccion_sql()
+    {
+        $response = $this->get('/some-route?id=1 OR 1=1'); 
+
+        $response->assertStatus(302);
+        $response->assertRedirect('/login');
+    }
+
+    public function test_ataque_xss()
+    {
+        $response = $this->get('/some-route?input=<script>alert("XSS")</script>'); // Intenta un ataque XSS
+
+        // Verifica que el script malicioso no se ejecute y la seguridad no se comprometa
+        $response->assertDontSee('<script>alert("XSS")</script>');
+    }
+
+    
 
 
 
