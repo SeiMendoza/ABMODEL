@@ -557,7 +557,7 @@ class UserTest extends TestCase
             'password' => '03roxana.',
             'password_confirmation' => '03roxana.',
             'address' => 'Barrio Las Flores',
-            'telephone' => '9786657893883838474887',
+            'telephone' => '978665789388383847999899899099899898994887',
             'imagen' => 'img/imagen.png'
         ]);
     
@@ -597,7 +597,7 @@ class UserTest extends TestCase
             'password' => '03roxana.',
             'password_confirmation' => '03roxana.',
             'address' => 'Barrio Las Flores',
-            'telephone' => '99876860',
+            'telephone' => '29876860',
             'imagen' => 'img/imagen.png'
         ]);
     

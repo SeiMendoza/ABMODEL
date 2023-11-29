@@ -62,7 +62,6 @@ Route::controller(RegistroController::class)->middleware('auth')->group(function
 
 
 /**PERFIL USUARIO */
-
 Route::get('/login', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('auth')->name('cerrarSes.cerrar');
