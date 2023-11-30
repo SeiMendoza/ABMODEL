@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KioskoController;
 use App\Http\Controllers\PedidoUsuarioController;
@@ -22,10 +20,7 @@ use App\Http\Livewire\Pedidos\Bebidas;
 use App\Http\Livewire\Pedidos\Complementos;
 use App\Http\Livewire\Pedidos\DetallesPedido;
 use App\Http\Livewire\Pedidos\Menu;
-use App\Http\Livewire\Pedidos\Counter;
-use App\Http\Livewire\Pedidos\MenuCompleto;
 use App\Http\Livewire\Pedidos\Mostrar;
-use App\Http\Livewire\Pedidos\Pedido;
 use App\Http\Livewire\Pedidos\Platillos;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +55,6 @@ Route::controller(RegistroController::class)->middleware('auth')->group(function
 });
 
 
-
 /**PERFIL USUARIO */
 Route::get('/login', [LoginController::class, 'show']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -68,8 +62,6 @@ Route::get('/CerrarSesión', [LoginController::class, 'cerrar'])->middleware('au
 Route::get('/perfil', [LoginController::class, 'perfil'])->middleware('auth')->name('usuarios.perfil');
 Route::get('/usuarios/{id}/editando/perfil', [LoginController::class, 'edit'])->middleware('auth')->name("usuarios.editarPerfil");
 Route::put('/usuarios/{id}/editando/perfil', [LoginController::class, 'update'])->middleware('auth')->name('usuarios.updatePerfil');
-
-
 
 
 /* Rutas Administracion de Restaurante */
@@ -421,16 +413,8 @@ Route::get('/kiosko/reservaciones/terminadas/{id}/detalles', [ReservacionControl
   ->name('kiosko.detalles_t')->where('id', '[0-9]+');
 
 Auth::routes();
-// GET|HEAD        password/confirm ............................. password.confirm › Auth\ConfirmPasswordController@showConfirmForm  
-// POST            password/confirm ........................................................ Auth\ConfirmPasswordController@confirm  
-// POST            password/email ............................... password.email › Auth\ForgotPasswordController@sendResetLinkEmail  
-// GET|HEAD        password/reset ............................ password.request › Auth\ForgotPasswordController@showLinkRequestForm  
-// POST            password/reset ............................................ password.upda te › Auth\ResetPasswordController@reset
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
-// Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-// Route::get('password/reset', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-// Route::get('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
 /* 
