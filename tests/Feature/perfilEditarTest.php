@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
-class perfilEditarForm extends TestCase
+class perfilEditarTest extends TestCase
 {
     use RefreshDatabase;
     public function test_EditarPerfilFormulario_CargaCorrectamente()
@@ -24,7 +24,7 @@ class perfilEditarForm extends TestCase
         ]);
 
         
-        $response = $this->actingAs($usuario)->get("/usuarios/{$usuario->id}/edit");
+        $response = $this->actingAs($usuario)->get("/usuarios/{$usuario->id}/editando/perfil");
 
         
         $response->assertViewIs('auth.EditarUserPrin');
@@ -46,7 +46,7 @@ class perfilEditarForm extends TestCase
         ]);
 
 
-        $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nuevo Nombre',
             'email' => 'usuario@example.com',
             'address' => 'NuevaDireccion',
@@ -75,7 +75,7 @@ class perfilEditarForm extends TestCase
         ]);
 
       
-        $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nombre de Usuario',
             'email' => 'usuario@example.com',
             'address' => 'Dirección de Prueba',
@@ -102,7 +102,7 @@ class perfilEditarForm extends TestCase
         ]);
 
     
-        $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nombre de Usuario',
             'email' => 'usuario@example.com',
             'current_password' => 'password', 
@@ -111,10 +111,10 @@ class perfilEditarForm extends TestCase
             'telephone' => '32345678',
         ]);
 
-        // Recargar el usuario desde la base de datos después de la actualización
+     
         $usuarioActualizado = \App\Models\User::find($usuario->id);
 
-        // Verificar que la contraseña se haya actualizado correctamente
+       
         $this->assertTrue(Hash::check('nuevacontrasena', $usuarioActualizado->password));
     }
 
@@ -130,7 +130,7 @@ class perfilEditarForm extends TestCase
             'is_default' => 'Usuario', 
         ]);
 
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => '',
             'email' => 'usuario@example.com',
             'address' => 'Dirección de Prueba',
@@ -161,7 +161,7 @@ class perfilEditarForm extends TestCase
             'is_default' => 'Usuario', 
         ]); 
         
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nombre de Usuario',
             'email' => '',
             'address' => 'Dirección de Prueba',
@@ -190,7 +190,7 @@ class perfilEditarForm extends TestCase
             'is_default' => 'Usuario', 
         ]);   
 
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nombre de Usuario',
             'email' => 'usuario@example.com',
             'address' => '',
@@ -218,7 +218,7 @@ class perfilEditarForm extends TestCase
             'is_default' => 'Usuario', 
         ]);   
 
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nombre de Usuario',
             'email' => 'usuario@example.com',
             'address' => 'Dirección de Prueba',
@@ -236,7 +236,7 @@ class perfilEditarForm extends TestCase
     }
     public function testEdicionDePerfilParaOtroUsuario()
     {
-        // Crear dos usuarios de prueba
+       
         $usuario1 = User::create([
             'name' => 'Nombre de Usuario1',
             'email' => 'usuario1@example.com',
@@ -258,7 +258,7 @@ class perfilEditarForm extends TestCase
         ]);   
 
      
-        $response = $this->actingAs($usuario1)->get("/usuarios/{$usuario2->id}/edit");
+        $response = $this->actingAs($usuario1)->get("/usuarios/{$usuario2->id}/editando/perfil");
 
        
         $response->assertStatus(403);
@@ -279,7 +279,7 @@ class perfilEditarForm extends TestCase
         ]);  
 
       
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nuevo Nombre',
             'email' => 'nuevo@example.com',
             'address' => 'NuevaDirección',
@@ -287,10 +287,10 @@ class perfilEditarForm extends TestCase
         ]);
 
      
-        $response->assertRedirect("/perfil/{$usuario->id}");
+        $response->assertRedirect("/perfil");
 
-      
-        $response->assertSee('Perfil actualizado con éxito');
+        $response->assertSee('Perfil actualizado exitosamente.');
+
     }
 
     public function testCamposPrellenados()
@@ -306,7 +306,7 @@ class perfilEditarForm extends TestCase
         ]);  
 
         
-        $response = $this->actingAs($usuario)->get("/usuarios/{$usuario->id}/edit");
+        $response = $this->actingAs($usuario)->get("/usuarios/{$usuario->id}/editando/perfil");
 
       
         $response->assertSee('value="Nombre de Usuario"');
@@ -325,7 +325,7 @@ class perfilEditarForm extends TestCase
         ]);  
     
 
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'NombreInvalido',
             'email' => 'usuario@example.com',
             'address' => 'Dirección de Prueba',
@@ -354,7 +354,7 @@ class perfilEditarForm extends TestCase
         ]); 
 
         
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Ab',
              'email' => 'usuario@example.com',
             'address' => 'Dirección de Prueba',
@@ -382,7 +382,7 @@ class perfilEditarForm extends TestCase
         ]); 
 
      
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nombre Excediendo ElLimite MaximoDeCaracteresssssssssssssss',
             'email' => 'usuario@example.com',
             'address' => 'Dirección de Prueba',
@@ -407,7 +407,7 @@ class perfilEditarForm extends TestCase
         ]); 
 
         
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name'=> 'Nombre de Usuario',
             'email' => 'correo_invalido',
             'address' => 'Dirección de Prueba',
@@ -432,7 +432,7 @@ class perfilEditarForm extends TestCase
         ]); 
 
         
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'email' => 'correo'.str_repeat('a', 46).'@dominio.com',
             'address' => 'Dirección de Prueba',
             'telephone' => '87654321',
@@ -469,7 +469,7 @@ class perfilEditarForm extends TestCase
         ]); 
 
        
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'email' => $otrousuario->email,
             'address' => 'Dirección de Prueba',
             'telephone' => '87654321',
@@ -494,7 +494,7 @@ class perfilEditarForm extends TestCase
             'is_default' => 'Usuario', 
         ]);
 
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name'=> 'Nombre de Usuario',
             'email' => 'usuario@example.com',
             'address' => '',
@@ -518,7 +518,7 @@ class perfilEditarForm extends TestCase
     ]);
 
         
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'address' => 'Aa',
             'name'=> 'Nombre de Usuario',
             'email' => 'usuario@example.com',
@@ -541,7 +541,7 @@ class perfilEditarForm extends TestCase
         ]);
 
        
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'address' => str_repeat('a', 252), 
             'name'=> 'Nombre de Usuario',
             'email' => 'usuario@example.com',
@@ -565,7 +565,7 @@ class perfilEditarForm extends TestCase
         ]);
 
         
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'address' => 'Direccion de prueba',
             'name'=> 'Nombre de Usuario',
             'email' => 'usuario@example.com',
@@ -589,7 +589,7 @@ class perfilEditarForm extends TestCase
         ]);
 
         
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'telephone' => '1234567',
             'address' => 'Direccion de prueba',
             'name'=> 'Nombre de Usuario',
@@ -613,7 +613,7 @@ class perfilEditarForm extends TestCase
         ]);
 
        
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'telephone' => '123456789', 
             'address' => 'Direccion de prueba',
             'name'=> 'Nombre de Usuario',
@@ -638,7 +638,7 @@ class perfilEditarForm extends TestCase
         ]);
 
         
-        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/edit", [
+        $response = $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'telephone' => '123a5678', 
             'address' => 'Direccion de prueba',
             'name'=> 'Nombre de Usuario',
