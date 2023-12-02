@@ -11,6 +11,105 @@ use Tests\TestCase;
 class perfilEditarTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_perfil_ingresarsinloguearse()
+    {
+        $response = $this->get('/perfil');
+        $response->assertStatus(302);
+    }
+
+    public function test_perfil_ingresaryredireccionallogin()
+    {
+        $response = $this->get('/perfil');
+        $response->assertRedirect('/login');
+    }
+
+    
+
+    public function test_perfil_ingresarlogueado()
+    {
+        $user = User::create([
+            'name' => 'Nombre de Usuario',
+            'email' => 'usuario@example.com',
+            'password' => bcrypt('password'),
+            'address' => 'Dirección de Prueba',
+            'telephone' => '12345678',
+            'imagen' => 'ruta_de_imagen.jpg',
+            'is_default' => 'Usuario', 
+        ]);
+        $this->actingAs($user);
+
+        $response = $this->actingAs(User::find(1))->get('/perfil');
+        $response->assertStatus(200);
+    }
+
+    public function test_perfilLabel1()
+    {
+        $user = User::create([
+            'name' => 'Nombre de Usuario',
+            'email' => 'usuario@example.com',
+            'password' => bcrypt('password'),
+            'address' => 'Dirección de Prueba',
+            'telephone' => '12345678',
+            'imagen' => 'ruta_de_imagen.jpg',
+            'is_default' => 'Usuario', 
+        ]);
+        $this->actingAs($user);
+        $response = $this->actingAs(User::find(1))->get('/perfil');
+        $response->assertSee('Nombre Completo:');
+    }
+
+    public function test_perfilLabel2()
+    {
+        $user = User::create([
+            'name' => 'Nombre de Usuario',
+            'email' => 'usuario@example.com',
+            'password' => bcrypt('password'),
+            'address' => 'Dirección de Prueba',
+            'telephone' => '12345678',
+            'imagen' => 'ruta_de_imagen.jpg',
+            'is_default' => 'Usuario', 
+        ]);
+        $response = $this->actingAs(User::find(1))->get('/perfil');
+        $response->assertSee('Correo:');
+    }
+
+    public function test_perfilLabel3()
+    {
+        $user = User::create([
+            'name' => 'Nombre de Usuario',
+            'email' => 'usuario@example.com',
+            'password' => bcrypt('password'),
+            'address' => 'Dirección de Prueba',
+            'telephone' => '12345678',
+            'imagen' => 'ruta_de_imagen.jpg',
+            'is_default' => 'Usuario', 
+        ]);
+        $response = $this->actingAs(User::find(1))->get('/perfil');
+        $response->assertSee('Telefono:');
+    }
+
+    public function test_perfilLabel4()
+    {
+        $user = User::create([
+            'name' => 'Nombre de Usuario',
+            'email' => 'usuario@example.com',
+            'password' => bcrypt('password'),
+            'address' => 'Dirección de Prueba',
+            'telephone' => '12345678',
+            'imagen' => 'ruta_de_imagen.jpg',
+            'is_default' => 'Usuario', 
+        ]);
+        $response = $this->actingAs(User::find(1))->get('/perfil');
+        $response->assertSee('Telefono:');
+    }
+
+
+
+
+
+
+
     public function test_EditarPerfilFormulario_CargaCorrectamente()
     {
         $usuario = User::create([
@@ -105,8 +204,8 @@ class perfilEditarTest extends TestCase
         $this->actingAs($usuario)->put("/usuarios/{$usuario->id}/editando/perfil", [
             'name' => 'Nombre de Usuario',
             'email' => 'usuario@example.com',
-            'current_password' => 'password', 
-            'new_password' => 'nuevacontrasena', 
+            'new_password' => 'password', 
+            'new_password_confirmation' => 'nuevacontrasena', 
             'address' => 'Dirección de Prueba',
             'telephone' => '32345678',
         ]);
