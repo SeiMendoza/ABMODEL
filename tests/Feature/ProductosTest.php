@@ -1709,3 +1709,157 @@ class ProductosTest extends TestCase
         ]);
     }
 
+    // Terminación de pruebas(alejandro)
+    public function test_update_producto_tipo_complemento_validacion_cantidad_max_1000_87()
+    {
+        $var = $this->cargar_datos();
+
+        $response = $this->actingAs(User::find(1))->put('complemento/'.$var['id_producto'].'/edicion', [
+            'nombre' => 'Salsa Roja',
+            'descripcion' => 'da un sabor mas agradable',
+            'precio' => 20,
+            'tamanio' => 'pequenio',
+            'imagen' => 'img/ProductosMenú/Limón.jpg',
+            'cantidad' => 157878787878,
+            'estado' => 1,
+            'tipo' => 2,
+        ]);
+
+        $this->eliminar_datos($var);
+
+        $response->assertInvalid([
+            'cantidad' => 'El numero de complementos disponibles es muy grande',
+        ]);
+    }
+
+    public function test_update_producto_tipo_complemento_validacion_cantidad_min_1_88()
+    {
+        $var = $this->cargar_datos();
+
+        $response = $this->actingAs(User::find(1))->put('complemento/'.$var['id_producto'].'/edicion', [
+            'nombre' => 'Salsa Roja',
+            'descripcion' => 'da un sabor mas agradable',
+            'precio' => 20,
+            'tamanio' => 'pequenio',
+            'imagen' => 'img/ProductosMenú/Limón.jpg',
+            'cantidad' => 0,
+            'estado' => 1,
+            'tipo' => 2,
+        ]);
+
+        $this->eliminar_datos($var);
+
+        $response->assertInvalid([
+            'cantidad' => 'El numero de complementos disponibles es muy pequeño',
+        ]);
+    }
+
+    public function test_update_producto_tipo_complemento_validacion_cantidad_numeric_89()
+    {
+        $var = $this->cargar_datos();
+
+        $response = $this->actingAs(User::find(1))->put('complemento/'.$var['id_producto'].'/edicion', [
+            'nombre' => 'Salsa Roja',
+            'descripcion' => 'da un sabor mas agradable',
+            'precio' => 20,
+            'tamanio' => 'pequenio',
+            'imagen' => 'img/ProductosMenú/Limón.jpg',
+            'cantidad' => 'can',
+            'estado' => 1,
+            'tipo' => 2,
+        ]);
+
+        $this->eliminar_datos($var);
+
+        $response->assertInvalid([
+            'cantidad' => 'El numero de complementos disponibles debe de ser numerico',
+        ]);
+    }
+
+    public function test_destroy_producto_eliminado_correctamente_90()
+    {
+        $var = $this->cargar_datos();
+
+        $response = $this->actingAs(User::find(1))->delete('producto/'.$var['id_producto'].'/borrar');
+
+        $response->assertSessionHas(['mensaje']);
+
+        $this->assertFalse(Producto::where('id',$var['id_producto'])->count() > 0);
+    }
+
+
+    public function test_destroy_pedidos_anteriores_eliminado_correctamente_91()
+    {
+        $var = $this->cargar_datos();
+
+        $response = $this->actingAs(User::find(1))->delete('/EliminarDatos');
+
+        $response->assertSessionHas(['mensaje']);
+    }
+
+
+
+
+    public function test_pedidos_anteriores_ingresar_status_302_sin_usuario_logueado_92()
+    {
+        $response = $this->get('/menu/pedidos/anteriores');
+        $response->assertStatus(302);
+    }
+
+    public function test_pedidos_anteriores_ingresar_retorno_login_sin_usuario_logueado_93()
+    {
+        $response = $this->get('/menu/pedidos/anteriores');
+        $response->assertRedirect('/login');
+    }
+
+    public function test_pedidos_anteriores_ingresar_status_200_usuario_logueado_94()
+    {
+
+        $response = $this->actingAs(User::find(1))->get('/menu/pedidos/anteriores');
+        $response->assertStatus(200);
+    }
+
+    public function test_pedidos_anteriores_ingresar_vista_95()
+    {
+
+        $response = $this->actingAs(User::find(1))->get('/menu/pedidos/anteriores');
+        $response->assertViewIs('Menu.Cocina.PedidosAnteriores');
+    }
+
+    public function test_pedidos_anteriores_ingresar_vista_componentes_1_label_96()
+    {
+        $response = $this->actingAs(User::find(1))->get('/menu/pedidos/anteriores');
+        $response->assertSee('PEDIDOS ANTERIORES');
+    }
+
+    public function test_pedidos_anteriores_ingresar_vista_componentes_2_label_97()
+    {
+        $response = $this->actingAs(User::find(1))->get('/menu/pedidos/anteriores');
+        $response->assertSee('Nombre del Cliente');
+    }
+
+    public function test_pedidos_anteriores_ingresar_vista_componentes_3_label_98()
+    {
+        $response = $this->actingAs(User::find(1))->get('/menu/pedidos/anteriores');
+        $response->assertSee('Entregado');
+    }
+
+    public function test_pedidos_anteriores_ingresar_vista_componentes_4_label_99()
+    {
+        $response = $this->actingAs(User::find(1))->get('/menu/pedidos/anteriores');
+        $response->assertSee('Pagado');
+    }
+
+    public function test_pedidos_anteriores_ingresar_vista_componentes_5_label_100()
+    {
+        $response = $this->actingAs(User::find(1))->get('/menu/pedidos/anteriores');
+        $response->assertSee('Total');
+    }
+
+    public function test_pedidos_anteriores_ingresar_vista_componentes_6_label_101()
+    {
+        $response = $this->actingAs(User::find(1))->get('/menu/pedidos/anteriores');
+        $response->assertSee('Detalles');
+    }
+
+}
