@@ -15,7 +15,7 @@ class LoginController extends Controller
 {
     //
     public function show()
-    {
+    { 
         //acceder solo autenticado
         if (Auth::check()) {
             return redirect('/');
@@ -112,18 +112,10 @@ class LoginController extends Controller
 
             if ($request->filled('new_password')) {
                 $this->validate($request, [
-                    'current_password' => 'required',
                     'new_password' => 'confirmed|min:8',
                 ], $this->customMessages);
 
-                // Verificar si la contraseña actual coincide
-                if (Hash::check($request->input('current_password'), $actualizarUser->password)) {
-                    // La contraseña actual coincide, se puede cambiar la contraseña
-                    $actualizarUser->password = bcrypt($request->input('new_password'));
-                } else {
-                    // La contraseña actual no coincide, se mantiene la contraseña anterior
-                    return redirect()->back()->withErrors(['current_password' => 'La contraseña actual no es correcta.']);
-                }
+                $actualizarUser->password = bcrypt($request->input('new_password'));
             }
 
             if ($request->hasFile('imagen')) {
@@ -154,7 +146,6 @@ class LoginController extends Controller
     }
 
     private $customMessages = [
-        'current_password.required' => '¡Este campo es obligatorio, si deseas cambiar la contraseña!',
         'new_password.confirmed' => '¡Debes confirmar tu contraseña!',
         'new_password.min' => '¡Debes ingresar una contraseña segura, minimo 8 caracteres!',
     ];

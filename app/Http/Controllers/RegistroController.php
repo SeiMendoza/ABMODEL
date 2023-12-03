@@ -14,21 +14,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 class RegistroController extends Controller
 {
 
-    /**public function show(){
-        acceder solo autenticado
-        if(Auth::check()){
-            return redirect('/');
-        }
-        return view('auth/registro');
-    }*/
-
-    /**validacion del registr
-    public function registro(RegistroRequest $request){
-        $user = User::create($request->validated());
-        redirigir
-        return redirect('/login')->with('success', 'Cuenta creada con éxito');
-    } */
-
 
     public function create()
     {
@@ -250,6 +235,8 @@ class RegistroController extends Controller
     /**Vista de usuarios */
     public function users(Request $request)
     {
+        $this->authorize('viewUsers', User::class);
+        
         $listaUs = User::all();
         return view('auth/Usuarios', compact('listaUs'));
     }
