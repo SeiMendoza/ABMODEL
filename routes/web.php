@@ -114,7 +114,8 @@ Route::get('/pedidos/caja', [PedidoUsuarioController::class, 'pedido_terminados'
   ->name('pedidos.caja'); /*lista de pedidos pendientes de terminar en caja*/
 Route::put('/pedidos/{id}/pendiente_cocina', [PedidoUsuarioController::class, 'pedidosPendientes_Cocina'])->middleware('auth')
   ->name('pedidosPendientes_Cocina.pedidosPendientes_Cocina')->where('id', '[0-9]+'); /*terminar pedido en cocina*/
-Route::get('/pedidos/cocina', [PedidoUsuarioController::class, 'pedido_pendientes'])->middleware('auth')
+
+  Route::get('/pedidos/cocina', [PedidoUsuarioController::class, 'pedido_pendientes'])->middleware('auth')
   ->name('pedidosp.pedido'); /*lista de pedidos pendientes en cocina*/
 Route::get('/pedidos/terminados', [PedidoUsuarioController::class, 'terminados'])->middleware('auth')
   ->name('terminados.terminados'); /*lista de pedidos terminados*/
@@ -126,7 +127,8 @@ Route::get('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioCo
   ->name('detallep.edit');
 Route::put('/pedidos/{pedido_id}/detalles/{detalle_id}/editar', [PedidoUsuarioController::class, 'update'])->middleware('auth')
   ->name('detallep.update')->where('id', '[0-9]+'); /**editar detalle de caja */
-Route::get('/pedidos/cocina/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_pendientes'])->middleware('auth')
+
+  Route::get('/pedidos/cocina/detalle/{id}', [PedidoUsuarioController::class, 'detalle_pedido_pendientes'])->middleware('auth')
   ->name('pedidosp.detalle'); /*detalle de pedidos pendientes en cocina*/
 Route::get('/pedidos/terminados/detalle/{id}', [PedidoUsuarioController::class, 'detalle_terminados'])->middleware('auth')
   ->name('terminados.detalle'); /*lista de pedidos terminados*/
@@ -144,6 +146,7 @@ Route::post('/detallep/{id}/restar/{vista}', [PedidoUsuarioController::class, 'r
 //sumar a los detalles agregados 
 Route::post('/detallep/{id}/sumar/{vista}', [PedidoUsuarioController::class, 'sumar'])->middleware('auth')
   ->name('detallep.sumar');
+  
   /*sumar o restar desde el input cantidad
 Route::post('/detallep/{id}/cantidad/{vista}', [PedidoUsuarioController::class, 'cantidad'])->middleware('auth')
 ->name('detallep.cantidad');*/
