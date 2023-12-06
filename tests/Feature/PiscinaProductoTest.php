@@ -108,7 +108,7 @@ class PiscinaProductoTest extends TestCase
         $response = $this->actingAs(User::find(1))->get('/piscina/create');
         $response->assertViewIs('Piscina.registrarPiscina');
     }
-
+//debe de autenticarse
     public function test_create_exitosamente()
     {
       
@@ -131,7 +131,7 @@ class PiscinaProductoTest extends TestCase
             'uso' => $usoExistente->id,
         ]);
     }
-
+// debe de autenticarse
     public function test_create_con_nombre_invalido()
 {
     $tipoExistente = PiscinaTipo::first();
@@ -147,7 +147,7 @@ class PiscinaProductoTest extends TestCase
 
     $response->assertSessionHasErrors(['nombre']);
 }
-
+// debe de autenticarse
 public function test_create_con_peso_invalido()
 {
     $tipoExistente = PiscinaTipo::first();
@@ -163,7 +163,7 @@ public function test_create_con_peso_invalido()
 
     $response->assertSessionHasErrors(['peso']);
 }
-
+// debe de autenticarse
 public function test_create_con_tipo_invalido()
 {
     $tipoExistente = PiscinaTipo::first();
@@ -179,7 +179,7 @@ public function test_create_con_tipo_invalido()
 
     $response->assertSessionHasErrors(['tipo']);
 }
-
+// debe de autenticarse
 public function test_create_con_uso_invalido()
 {
     $tipoExistente = PiscinaTipo::first();
@@ -229,13 +229,13 @@ public function test_editar_piscina_in_sin_usuario_logueado_1()
     public function test_editar_piscina__label_1()
     {
         $response = $this->actingAs(User::find(1))->get('/piscina/1/editar');
-        $response->assertSee('Nombre del productos:');
+        $response->assertSee('Nombre del productos:');// es producto comprobar en vista
     }
 
     public function test_editar_piscina__label_2()
     {
         $response = $this->actingAs(User::find(1))->get('/piscina/1/editar');
-        $response->assertSee('Tipo de productos:');
+        $response->assertSee('Tipo de productos:');// es producto comprobar en vista
     }
 
     public function test_editar_piscina__label_3()
@@ -247,9 +247,9 @@ public function test_editar_piscina_in_sin_usuario_logueado_1()
     public function test_editar_piscina__label_4()
     {
         $response = $this->actingAs(User::find(1))->get('/piscina/1/editar');
-        $response->assertSee('ingrese el peso:');
+        $response->assertSee('ingrese el peso:');// es Ingrese comprobar en vista
     }
-
+//debe de autenticarse para actualizar
     public function test_editar_exitosamente()
 {
     
@@ -275,10 +275,12 @@ public function test_editar_piscina_in_sin_usuario_logueado_1()
         'uso' => $piscinaExistente->uso,
     ]);
 }
-
+// el usuario no esta autenticado por que no puede realizar la actualización
 public function test_editar_invalido_nombre()
 {
-    
+    // Autenticar un usuario
+    $user = User::factory()->create();
+    $this->actingAs($user);
     $piscinaExistente = Piscina::first();
 
     
@@ -292,7 +294,7 @@ public function test_editar_invalido_nombre()
     $response->assertSessionHasErrors(['nombre']);
     
 }
-
+// el usuario no esta autenticado por que no puede realizar la actualización
 public function test_editar_invalido_Peso()
 {
     
@@ -306,10 +308,10 @@ public function test_editar_invalido_Peso()
         'uso' => $piscinaExistente->uso,
     ]);
 
-    $response->assertSessionHasErrors(['Peso']);
+    $response->assertSessionHasErrors(['Peso']); // input es kilos
     
 }
-
+// el usuario no esta autenticado por que no puede realizar la actualización
 public function test_editar_invalido_Tipo()
 {
     
@@ -323,13 +325,12 @@ public function test_editar_invalido_Tipo()
         'uso' => $piscinaExistente->uso,
     ]);
 
-    $response->assertSessionHasErrors(['Tipo']);
+    $response->assertSessionHasErrors(['Tipo']); // en minuscula 
     
 }
-
+// el usuario no esta autenticado por que no puede realizar la actualización
 public function test_editar_invalido_uso()
-{
-    
+{  
     $piscinaExistente = Piscina::first();
 
     
@@ -345,11 +346,10 @@ public function test_editar_invalido_uso()
 }
 
 //eliminar
-
+// el usuario no esta autenticado y no puede eliminar
 public function test_eliminar_exitosamente()
 {
-   
-    $piscinaExistente = Piscina::first();
+     $piscinaExistente = Piscina::first();
 
    
     $response = $this->delete("/piscina/{$piscinaExistente->id}/borrar");
