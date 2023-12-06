@@ -59,10 +59,10 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar producto</h5>
+                                                        <h5 class="modal-title  font-weight-bolder" id="staticBackdropLabel">Eliminar Mesa</h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        ¿Esta seguro de borrar el producto: {{$r->nombre}}?
+                                                        ¿Esta seguro de borrar la mesa: {{$r->nombre}}?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-danger">Si</button>

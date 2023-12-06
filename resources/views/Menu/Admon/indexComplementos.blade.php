@@ -22,7 +22,7 @@
         </a>
     </div>
     <div>
-        <a href="{{ route('cliente_prueba') }}" style="margin:0; padding:5px; width:160px;" type="button"
+        <a href="{{ route('menu.menu') }}" style="margin:0; padding:5px; width:160px;" type="button"
             class="bg-light border-radius-sm text-center ">
             <i class="fa fa-users"></i> Menú cliente
         </a>
@@ -30,7 +30,7 @@
 @endsection
 
 @section('content')
-    <div class="pt-2">
+    <div >
         <div>
             <div>
                 <ul class="nav nav-tabs nav-justified h5 " role="tablist"

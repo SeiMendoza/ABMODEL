@@ -14,21 +14,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 class RegistroController extends Controller
 {
 
-    /**public function show(){
-        acceder solo autenticado
-        if(Auth::check()){
-            return redirect('/');
-        }
-        return view('auth/registro');
-    }*/
-
-    /**validacion del registr
-    public function registro(RegistroRequest $request){
-        $user = User::create($request->validated());
-        redirigir
-        return redirect('/login')->with('success', 'Cuenta creada con éxito');
-    } */
-
 
     public function create()
     {
@@ -44,7 +29,7 @@ class RegistroController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'address' => 'required|string|min:3|max:250|nullable',
             'telephone' => 'required|min_digits:8|max_digits:8|regex:/^[2,3,8,9][0-9]{7}+$/',
-            'imagen' => 'required|image'
+           // 'imagen' => 'required|image'
         ], [
             'name.required' => '¡Debes ingresar tu nombre completo!',
             'name.min' => '¡Ingresa tu nombre completo, sin abreviaturas!',
@@ -73,9 +58,9 @@ class RegistroController extends Controller
             'telephone.max_digits' => '¡El número telefónico debe tener maximo: 8 dígitos!',
             'telephone.regex' => '¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!',
 
-            'image.required' => '¡Debes cargar una imagen!',
-            'image.image' => '¡Debes seleccionar una imagen!',
-            //'image.mimes' => '¡Debes seleccionar una imagen en el formato correcto!'
+           //'image.required' => '¡Debes cargar una imagen!',
+           //'image.image' => '¡Debes seleccionar una imagen!',
+           // 'image.mimes' => '¡Debes seleccionar una imagen en el formato correcto!'
         ]);
 
         $isDefaultOptions = [
@@ -96,11 +81,11 @@ class RegistroController extends Controller
         $nuevoUser->address = $request->input('address');
         $nuevoUser->telephone = $request->input('telephone');
 
-        $file = $request->file('imagen');
+     /*   $file = $request->file('imagen');
         $destinationPath = 'images/';
         $filename = time() . '.' . $file->getClientOriginalName();
-        $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
-        $nuevoUser->imagen = 'images/' . $filename;
+        $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename); */
+        $nuevoUser->imagen = 'images/' ;
 
         /*Variable para guardar los nuevos registros*/
         $creado = $nuevoUser->save();
@@ -250,6 +235,8 @@ class RegistroController extends Controller
     /**Vista de usuarios */
     public function users(Request $request)
     {
+        $this->authorize('viewUsers', User::class);
+        
         $listaUs = User::all();
         return view('auth/Usuarios', compact('listaUs'));
     }

@@ -21,7 +21,7 @@
         </a>
     </div>
     <div>
-        <a href="{{ route('cliente_prueba') }}" style="margin:0; padding:5px; width:160px;" type="button"
+        <a href="{{ route('menu.menu') }}" style="margin:0; padding:5px; width:160px;" type="button"
             class="bg-light border-radius-sm text-center ">
             <i class="fa fa-users"></i> Menú cliente
         </a>
@@ -84,6 +84,7 @@
                             <th scope="col" style="text-align: center;">N</th>
                             <th scope="col" style="text-align: start;">Nombre</th>
                             <th scope="col" style="text-align: end;">Precio</th>
+                            <th scope="col" style="text-align: center;">Disponibles</th>
                             <th scope="col" style="text-align: center;">Acción</th>
                             <th scope="col" style="text-align: center;">Editar</th>
                             <th scope="col" style="text-align: center;">Eliminar</th>

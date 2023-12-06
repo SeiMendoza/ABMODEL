@@ -48,13 +48,32 @@
                                 <br><br>
                                 <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="btn btn-info text-center "> 
 									<i class="fa fa-file-image"></i> Seleccionar imagen</label>
-                                <input  style="display:none; margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" value="{{ old('imagenPrevisualizacion') }}" 
-                                onchange="colocarNombre();" style="color: white; width: 150px;">
+                                <input  class="files" style="display:none; margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" value="{{ old('imagenPrevisualizacion') }}" 
+                                onchange="cambiarImagen(event);colocarNombre();" style="color: white; width: 150px;">
                                 @error('imagen')
                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror
                             </div>
                         </div>
+
+                        <script>
+                            function cambiarImagen(event) {
+                                var imagenMostrada = document.getElementById('imagenmostrada');
+                                var file = event.target.files[0];
+                                var reader = new FileReader();
+
+                                reader.onload = function(e) {
+                                    imagenMostrada.src = e.target.result;
+                                };
+
+                                reader.readAsDataURL(file);
+                            }
+
+                            function elegirImagen() {
+                                document.getElementById('imagen').click();
+                            }
+                        </script>
+
 
                         <div class="col">
 

@@ -107,4 +107,8 @@ class UserPolicy
         //
     }
 
+    public function viewUsers(User $user)
+    {
+        return $user->is_default === 'Administrador';
+    }
 }

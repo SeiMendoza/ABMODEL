@@ -45,12 +45,30 @@
                                 <img onclick="elegirImagen()" style="margin-left: 0;" src="/img/Loremplatillo.png" alt="" width="240px" height="240px" id="imagenmostrada">
                                 <br><br>
                                 <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="btn btn-info text-center "> <i class="fa fa-file-image"></i> Seleccionar imagen</label>
-                                <input  style="display:none; margin-left: 0;" type="file" id="imagen" name="imagen" accept="image/*" required value="{{ old('imagenPrevisualizacion') }}" onchange="colocarNombre();" style="color: white;width: 150px;">
+                                <input type="file" class="files" id="imagen" name="imagen" accept="image/*" value="{{ old('imagenPrevisualizacion') }}" onchange="cambiarImagen(event);colocarNombre();" style="display:none; color: rgb(0, 0, 0);">
                                 @error('imagen')
                                     <strong class="menerr" style="color:red">{{ $message }}</strong>
                                 @enderror
                             </div>
                         </div>
+
+                        <script>
+                            function cambiarImagen(event) {
+                                var imagenMostrada = document.getElementById('imagenmostrada');
+                                var file = event.target.files[0];
+                                var reader = new FileReader();
+
+                                reader.onload = function(e) {
+                                    imagenMostrada.src = e.target.result;
+                                };
+
+                                reader.readAsDataURL(file);
+                            }
+
+                            function elegirImagen() {
+                                document.getElementById('imagen').click();
+                            }
+                        </script>
 
                         <div class="col">
 
@@ -58,10 +76,13 @@
                                 <div class="col">
                                 <label for=""><strong>Tipo de producto:</strong></label>
                                 <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control border-radius-sm">
-                                    <option value="0">Seleccione el tipo de producto</option>
-                                    <option @if (old('tipo') == 1) selected @endif value="1">Bebida</option>
+                                    <option value="">Seleccione el tipo de producto</option>
+                                    <option value="1" @if(old('Tipo') == "1") {{ 'selected' }} @endif>Bebida</option>
+                                    <option value="2" @if(old('Tipo') == "2") {{ 'selected' }} @endif>Comida</option>
+                                    <option value="0" @if(old('Tipo') == "0") {{ 'selected' }} @endif>Complemento</option>
+                                  <!--  <option @if (old('tipo') == 1) selected @endif value="1">Bebida</option>
                                     <option @if (old('tipo') == 2) selected @endif value="2">Comida</option>
-                                    <option @if (old('tipo') == 0) selected @endif value="0">Complemento</option>
+                                    <option @if (old('tipo') == 0) selected @endif value="0">Complemento</option>-->
                                 </select>
                                 @error('tipo')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>

@@ -46,7 +46,7 @@
                             <img onclick="elegirImagen()" src="{{asset($producto->imagen)}}" alt="" width="240px" height="240px" id="imagenmostrada">
                             <br><br>
                             <label id="label" for="imagen" style=" display:block ;margin:0; padding:5px; width:240px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="btn btn-info text-center "> <i class="fa fa-file-image"></i> Cambiar imagen</label>
-                            <input type="file" id="imagen" name="imagen" accept="images/*" value="{{ old('imagenPrevisualizacion', $producto->imagen) }}" onchange="colocarNombre();" style="display:none; margin-left: 0; color: white;width: 200px; ">
+                            <input type="file" id="imagen" name="imagen" accept="images/*" value="{{ old('imagenPrevisualizacion', $producto->imagen) }}" onchange="colocarNombre();cambiarImagen(event);" style="display:none; margin-left: 0; color: white;width: 200px; ">
                             @error('imagen')
                                 <strong class="menerr" style="color:red">{{ $message }}</strong>
                             @enderror
@@ -57,16 +57,17 @@
 
                         <div class="row" style="margin-left:20px">
                             <div class="col">
+                                @php
+                                    $tipo = '';
+                                @endphp
                                 <label for=""><strong>Tipo de producto:</strong></label>
-                                <select name="tipo" id="tipo" required onchange="producto();quitarerror()" class="form-control border-radius-sm">
-                                    <option @if (old('tipo') == 0) selected @endif value="0"{{$producto->tipo === "0" ? 'selected' : ''}}>Complemento</option>
-                                    <option @if (old('tipo') == 1) selected @endif value="1"{{$producto->tipo === "1" ? 'selected' : ''}}>Bebida</option>
-                                    <option @if (old('tipo') == 2) selected @endif value="2"{{$producto->tipo === "2" ? 'selected' : ''}}>Comida</option>
-                                </select>
-                                @error('tipo')
-                                <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                @enderror
-                            </div>
+                                @if($producto->tipo === 0)
+                                    @php $tipo = 'Complemento' @endphp
+                                @endif
+                                <input class="form-control border-radius-sm" type="text"
+                                    value="{{$tipo}}" maxlength="25" required onkeypress="quitarerror()" readonly>
+                                <input type="number" name="tipo" id="tipo" value="{{$producto->tipo}}" hidden>
+                            </div> 
 
                             <div class="col">
                                 <label for=""><strong>Tamaño:</strong></label>
@@ -173,4 +174,21 @@
             </div>
         </div>
     </div>
+    <script>
+    function cambiarImagen(event) {
+        var imagenMostrada = document.getElementById('imagenmostrada');
+        var file = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            imagenMostrada.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    function elegirImagen() {
+        document.getElementById('imagen').click();
+    }
+</script>
 @stop
