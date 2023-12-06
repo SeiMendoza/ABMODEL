@@ -55,7 +55,7 @@ class LoginController extends Controller
 
     public function perfil(Request $request)
     {
-        $user = auth()->user();
+        $user = auth()->user(); 
 
         $url = $request->header('referer');
         $url = parse_url($url)['path'];
@@ -67,8 +67,19 @@ class LoginController extends Controller
     /**Editar Usuario - en vista de perfil*/
     public function edit($id)
     {
+        $usuarioAutenticado = Auth::user();
+
+        //Comprobar que el id en la URL coincide con el id del usuario autenticado
+        if ($id != $usuarioAutenticado->id) {
+            //Si no coincide, denegar el acceso
+            return redirect('/perfil')
+                ->with('mensaje', 'Acceso no autorizado.')
+                ->setStatusCode(403);
+
+        }
+
         $user = User::findOrFail($id);
-        return view('auth.EditarUserPrin')->with('user', $user);
+        return view('auth.EditarUserPrin', compact('usuarioAutenticado', 'user'));
     }
 
     public function update(Request $request, $id)
@@ -101,6 +112,12 @@ class LoginController extends Controller
             'telephone.regex' => '¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!',
         ]);
 
+        $usuarioAutenticado = Auth::user();
+
+        if ($id != $usuarioAutenticado->id) {
+            abort(403, 'Acceso no autorizado');
+        }
+        
         try {
 
             $actualizarUser = User::findOrFail($id);

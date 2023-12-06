@@ -261,7 +261,7 @@ class UserTest extends TestCase
         $response = $this->actingAs($user)->post('/usuarios/create', [
             'name' => 'Evelyn Roxana Rodriguez Maradiaga', 
             'email' => '',
-            'is_default' => 'Usuario',
+            'is_default' => 'Usuario', 
             'password' => '03roxana.',
             'password_confirmation' => '03roxana.',
             'address' => 'Las Flores',
@@ -270,7 +270,7 @@ class UserTest extends TestCase
         ]);
     
         $response->assertInvalid([
-            'email' => '¡Debes ingresar tu correo electrónico, verifica la información!'
+            'email' => '¡Debes ingresar tu correo electrónico, verifica la información!'   //mensaje de error no es el esperado para required "ver controlador"
         ]);
         }
     
@@ -280,7 +280,7 @@ class UserTest extends TestCase
     
         $response = $this->actingAs($user)->post('/usuarios/create', [
             'name' => 'Evelyn Roxana Rodriguez Maradiaga', 
-            'email' => 'evyrodriguez09@gmail.com',
+            'email' => 'evyrodriguez09@gmail.com',   //este es un correo valido y para que el mensaje se muestre debe ser algo como este evyrodriguez09@
             'is_default' => 'Usuario',
             'password' => '03roxana.',
             'password_confirmation' => '03roxana.',
@@ -470,7 +470,7 @@ class UserTest extends TestCase
         ]);
     
         $response->assertInvalid([
-            'address' => '¡Ingresa tu dirección completa, sin abreviaturas!'
+            'address' => '¡Ingresa tu dirección completa, sin abreviaturas!'        //verificar en el controlador address min:3 para que sea mostrado este mensaje
         ]);
         }
     
@@ -602,7 +602,7 @@ class UserTest extends TestCase
         ]);
     
         $response->assertInvalid([
-            'telephone' => '¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!'
+            'telephone' => '¡El número telefónico debe iniciar con (2),(3),(8) ó (9)!'   //Para que este mensaje sea mostrado, en  'telephone' debe iniciar con cualquier numero menos con (2),(3),(8) ó (9)
         ]);
         }
     

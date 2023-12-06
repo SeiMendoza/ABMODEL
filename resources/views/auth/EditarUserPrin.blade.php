@@ -31,6 +31,15 @@
         }
     </script>
 
+@if(session())
+    <script>
+        setTimeout(function() {
+            window.location.href = '/perfil';
+        }, 5000); // Redirigir después de 5 segundos
+    </script>
+@endif
+
+
     <div class="wrapper wrapper--w960"> <!--aquí iria el wrapper-->
         <div class="card border-radius-sm border-0" style="">
             <div class="card-body border-radius-sm border-0">
@@ -41,7 +50,7 @@
                     <h4 class="font-robo t" style="margin: 0; padding:0">Datos del registro</h4>
                     <hr class="m-1" style="border: 0.5px solid rgba(111, 143, 175, 0.600)">
                     
-                    <div class="row row-space">
+                    <div class="row row-space"> 
                         <div class="col-3">
                             <BR>	
                             <div>
@@ -93,14 +102,7 @@
                                     @enderror
                                 </div>  
 
-                                <div class="col">
-                                    <label for="current_password"><strong>Contraseña Actual:</strong></label>
-                                    <input class="form-control border-radius-sm" type="password" placeholder="Ingrese la contraseña actual" name="current_password" 
-                                       value="{{ old('current_password') }}" onkeypress="quitarerror()" >
-                                    @error('current_password')
-                                        <strong class="menerr" style="color:red">{{ $message }}</strong>
-                                    @enderror
-                                </div>
+                                
                         </div>
 
                         <BR>

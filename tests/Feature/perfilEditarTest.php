@@ -86,7 +86,7 @@ class perfilEditarTest extends TestCase
             'is_default' => 'Usuario', 
         ]);
         $response = $this->actingAs(User::find(1))->get('/perfil');
-        $response->assertSee('Telefono:');
+        $response->assertSee('Telefono:');    //Telefono esta mal escrito en la vista se muestra como Teléfono
     }
 
     public function test_perfilLabel4()
@@ -101,7 +101,7 @@ class perfilEditarTest extends TestCase
             'is_default' => 'Usuario', 
         ]);
         $response = $this->actingAs(User::find(1))->get('/perfil');
-        $response->assertSee('Telefono:');
+        $response->assertSee('Telefono:');  //Telefono esta mal escrito en la vista se muestra como Teléfono
     }
 
 
@@ -205,7 +205,7 @@ class perfilEditarTest extends TestCase
             'name' => 'Nombre de Usuario',
             'email' => 'usuario@example.com',
             'new_password' => 'password', 
-            'new_password_confirmation' => 'nuevacontrasena', 
+            'new_password_confirmation' => 'nuevacontrasena', //para cambiar la contraseña el new_password y new_password_confirmation debe ser la misma
             'address' => 'Dirección de Prueba',
             'telephone' => '32345678',
         ]);
@@ -363,7 +363,7 @@ class perfilEditarTest extends TestCase
         $response->assertStatus(403);
 
         
-        $response->assertRedirect("/perfil");
+        $response->assertRedirect("/perfil");    //resuelta 
     }
     public function testRedireccionDespuesDeActualizacion()
     {
@@ -388,7 +388,7 @@ class perfilEditarTest extends TestCase
      
         $response->assertRedirect("/perfil");
 
-        $response->assertSee('Perfil actualizado exitosamente.');
+        $response->assertSee('Perfil actualizado exitosamente.'); //al usar assertSessionHas si pasa la prueba para verificar mensaje de sesión (controlador: with('mensaje', "Perfil actualizado exitosamente.");)
 
     }
 
@@ -408,7 +408,7 @@ class perfilEditarTest extends TestCase
         $response = $this->actingAs($usuario)->get("/usuarios/{$usuario->id}/editando/perfil");
 
       
-        $response->assertSee('value="Nombre de Usuario"');
+        $response->assertSee('value="Nombre de Usuario"');  
     }
 
     public function testValidacionNombre()
