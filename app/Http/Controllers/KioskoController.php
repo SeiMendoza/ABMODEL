@@ -10,16 +10,14 @@ use App\Models\Reservacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class KioskoController extends Controller
-{
-    public function store(Request $request)
-    {
+class KioskoController extends Controller {
+    public function store(Request $request) {
 
         $rules = [
             'codigo' => 'required|unique:kioskos|regex:/^[K][0-9][0-9]$/|min:3|max:3',
-            'descripcion' => 'required|max:100|min:5',
-            'ubicacion' => 'required|max:100|min:5',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+            'descripcion' => 'required|max:100|min:5|regex:/^[\\pL\\s]+$/u',
+            'ubicacion' => 'required|max:100|min:5|regex:/^[\\pL\\s]+$/u',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ];
 
         $messages = [
@@ -34,29 +32,34 @@ class KioskoController extends Controller
         $kiosko->ubicacion = $request->input('ubicacion');
         $kiosko->cantidad_de_Mesas = 0;
 
-        //Imagen
-        $file = $request->file('imagen');
-        $destinationPath = 'images/kioskos/';
-        $filename = time() . '.' . $file->getClientOriginalName();
-        $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
-        $kiosko->imagen = 'images/kioskos/' . $filename;
+
+        if($request->hasFile('imagen')) {
+            //Imagen
+            $file = $request->file('imagen');
+            $destinationPath = 'images/kioskos/';
+            $filename = time().'.'.$file->getClientOriginalName();
+            $uploadSuccess = $request->file('imagen')->move($destinationPath, $filename);
+            $kiosko->imagen = 'images/kioskos/'.$filename;
+
+        } else {
+            $kiosko->imagen = "/img/LoremKiosko.png";
+        }
 
         $create = $kiosko->save();
 
 
-        if ($create) {
+        if($create) {
             return to_route('kiosko.index')->with('mensaje', 'Kiosko registrado correctamente');
         }
 
 
     }
 
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
 
         $kioskos = Kiosko::all();
 
-        if ($request->ajax()) {
+        if($request->ajax()) {
 
             $kioskos = Kiosko::select('id', 'codigo')->get();
             return response()->json($kioskos);
@@ -65,16 +68,14 @@ class KioskoController extends Controller
         return view('/Reservaciones/ReserAdmon/Kioskos/indexKioskos')->with(['kioskos' => $kioskos]);
     }
 
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
         $url = $request->header('referer');
         $url = parse_url($url)['path'];
 
         return view('/Reservaciones/ReserAdmon/Kioskos/registroKioskos', compact('url'));
     }
 
-    public function edit(Request $request, $id)
-    {
+    public function edit(Request $request, $id) {
 
         $kiosko = Kiosko::findOrFail($id);
 
@@ -84,49 +85,47 @@ class KioskoController extends Controller
         return \view('Reservaciones.ReserAdmon.Kioskos.edicionKioskos', compact('kiosko', 'url'));
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $rules = [
             'descripcion' => 'required|max:100|min:5|regex:/^[\\pL\\s]+$/u',
             'ubicacion' => 'required|max:100|min:5|regex:/^[\\pL\\s]+$/u',
             'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ];
-    
+
         $messages = [
             'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01',
-            'descripcion.regex'=>'Solo se permiten letras'
+            // 'descripcion.regex' => 'Solo se permiten letras'
         ];
-    
+
         $this->validate($request, $rules, $messages);
-    
+
         $kioskoUpdate = Kiosko::findOrFail($id);
         $kioskoUpdate->descripcion = $request->input('descripcion');
         $kioskoUpdate->ubicacion = $request->input('ubicacion');
-    
+
         $oldImage = $kioskoUpdate->imagen; // Guarda la ruta de la imagen anterior
-    
-        if ($request->hasFile('imagen')) {
+
+        if($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $destinationPath = 'images/kioskos/';
-            $filename = time() . '.' . $file->getClientOriginalName();
+            $filename = time().'.'.$file->getClientOriginalName();
             $uploadSuccess = $file->move($destinationPath, $filename);
-            $kioskoUpdate->imagen = 'images/kioskos/' . $filename;
-    
-            if ($oldImage && substr($oldImage, 0, 11) != 'https://via') { // Verifica si existe imagen anterior
+            $kioskoUpdate->imagen = 'images/kioskos/'.$filename;
+
+            if($oldImage && substr($oldImage, 0, 11) != 'https://via' && $oldImage != '/img/LoremKiosko.png') { // Verifica si existe imagen anterior
                 unlink($oldImage); // Elimina la imagen anterior
             }
         }
-    
+
         $kioskoUpdate->save();
-    
+
         $url = $request->header('referer');
         $url = parse_url($url)['path'];
-    
+
         return redirect()->route('kiosko.index')->with('mensaje', 'Kiosko actualizado correctamente');
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id) {
 
         $k = Kiosko::findOrFail($id);
         $k->reservaciones()->delete();
@@ -140,8 +139,7 @@ class KioskoController extends Controller
 
     }
 
-    public function detalle(Request $request, $id)
-    {
+    public function detalle(Request $request, $id) {
 
         $kiosko = Kiosko::findOrFail($id);
         $mesas = Mesa::whereKiosko_id($id)->get();
@@ -154,8 +152,7 @@ class KioskoController extends Controller
         return view('Reservaciones.ReserAdmon.Kioskos.detalleKiosko', compact('kiosko', 'mesas', 'reservacion', 'now', 'url'));
     }
 
-    public function reservaciones(Request $request, $id)
-    {
+    public function reservaciones(Request $request, $id) {
 
         $kiosko = Kiosko::findOrFail($id);
         $reservaciones = Reservacion::whereKiosko_id($id)->orderBy('fecha')->get();
@@ -168,14 +165,13 @@ class KioskoController extends Controller
         $url = $request->header('referer');
         $url = parse_url($url)['path'];
 
-        if (!$reservaciones->isEmpty())
+        if(!$reservaciones->isEmpty())
             return view('Reservaciones.ReserAdmon.Kioskos.detallesReservacionKiosko', compact('todayReservaciones', 'pastReservaciones', 'futureReservaciones', 'kiosko', 'now', 'url'));
         else
-            return back()->with(['mensaje' => 'No hay reservaciones en ' . $kiosko->codigo], ['icon' => 'info']);
+            return back()->with(['mensaje' => 'No hay reservaciones en '.$kiosko->codigo], ['icon' => 'info']);
     }
 
-    public function reservacionesHistorial(Request $request, $id)
-    {
+    public function reservacionesHistorial(Request $request, $id) {
 
         $kiosko = Kiosko::findOrFail($id);
         $now = Carbon::now()->format('Y-m-d');
@@ -184,7 +180,7 @@ class KioskoController extends Controller
         $url = $request->header('referer');
         $url = parse_url($url)['path'];
 
-        if (!$reservaciones->isEmpty())
+        if(!$reservaciones->isEmpty())
             return view('Reservaciones.ReserAdmon.Kioskos.detallesReservacionesAnterioresKiosko', compact('reservaciones', 'kiosko', 'now', 'url'));
         else
             return back()->with(['mensaje' => 'No hay historial de reservaciones'], ['icon' => 'info']);

@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group col">
                                 <label for="description">Descripcion</label>
-                                <textarea name="descripcion" style="resize:none" type="tex-area" class="form-control text-area" id="descripcion" required placeholder="Descripcion del Kiosko">{{ old('descripcion') }}</textarea>
+                                <textarea name="descripcion" maxlength="100" style="resize:none" type="tex-area" class="form-control text-area" id="descripcion" required placeholder="Descripcion del Kiosko">{{ old('descripcion') }}</textarea>
                                 @error('descripcion')
                                 <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                 @enderror
@@ -75,7 +75,7 @@
 
                             <div class="form-group col">
                                 <label for="ubicacion">Ubicación</label>
-                                <input name="ubicacion" type="text" class="form-control border-radius-sm" id="ubicacion" required placeholder="Ubicacion del Kiosko" value="{{ old('ubicacion') }}">
+                                <input name="ubicacion" maxlength="50" type="text" class="form-control border-radius-sm" id="ubicacion" required placeholder="Ubicacion del Kiosko" value="{{ old('ubicacion') }}">
                                 @error('ubicacion')
                                 <span class="menerr" class="menerr" style="color:red">{{ $message }}</span>
                                 @enderror
