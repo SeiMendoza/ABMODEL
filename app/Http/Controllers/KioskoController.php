@@ -79,7 +79,7 @@ class KioskoController extends Controller {
 
         $kiosko = Kiosko::findOrFail($id);
 
-        $url = $request->header('referer');
+        $url = $request->header('referer'); 
         $url = parse_url($url)['path'];
 
         return \view('Reservaciones.ReserAdmon.Kioskos.edicionKioskos', compact('kiosko', 'url'));
@@ -95,7 +95,7 @@ class KioskoController extends Controller {
         $messages = [
             'codigo.regex' => 'El código no es válido, un ejemplo válido es: K01',
             // 'descripcion.regex' => 'Solo se permiten letras'
-        ];
+        ]; 
 
         $this->validate($request, $rules, $messages);
 

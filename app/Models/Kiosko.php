@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Kiosko extends Model
 {
     use HasFactory;
+    protected $fillable = ['codigo'];
 
-    public function mesas(){
+    public function mesas()
+    {
         return $this->hasMany(Mesa::class);
     }
 
