@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class DetallesPedidoTest extends TestCase
 {
+
+    //El pedido no esta logeado, se puede acceder a las vistas y realizar las acciones sin ser un usuario registrado en el sistema
     public function cargar_datos()
     {
         $producto = new Producto();
