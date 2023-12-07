@@ -133,7 +133,6 @@ class DetallesPedido extends Component
 
     public function guardar(Request $request)
     {   
-        Mesa::findOrFail($request->input('mesa'));
 
         $request->validate([
             'name' => ['required', 'min:3','max:50', 'regex:/^[a-zA-ZáÁéÉíÍóÓúÚñÑ]+\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?$/'],

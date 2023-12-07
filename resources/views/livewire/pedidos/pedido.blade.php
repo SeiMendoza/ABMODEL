@@ -180,8 +180,9 @@
     <script src={{ asset('/js/plugins/perfect-scrollbar.min.js') }}></script>
     <script src={{ asset('/js/plugins/smooth-scrollbar.min.js') }}></script>
     <script>   
+
         function enviar() {
-            var formul = document.getElementById("formul");
+            var formul = document.getElementById("formul1");
             formul.submit();
         }
 

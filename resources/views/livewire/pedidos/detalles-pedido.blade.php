@@ -74,7 +74,7 @@
         <div class="col col-8 d-flex justify-content-start bg-gray-100" 
                 style="display:block; float:left; margin:0; padding:0; position:absolute; 
                 bottom:50px; width:100%; left:3px;">
-            <form method="POST" action="{{route('menu.store')}}" id="formul" name="formul" enctype="multipart/form-data">
+            <form method="POST" action="{{route('menu.store')}}" id="formul1" name="formul1" enctype="multipart/form-data">
                     @csrf
                 <div class="row form-group" style="margin: 0; border: 0; width:100%">
                     <Label class="font-robo" style="margin:0%; padding:3px 0 0 3px;
