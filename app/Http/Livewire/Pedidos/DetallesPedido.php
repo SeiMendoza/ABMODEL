@@ -8,6 +8,7 @@ use App\Models\Pedido;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Cart;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class DetallesPedido extends Component
@@ -132,17 +133,22 @@ class DetallesPedido extends Component
 
     public function guardar(Request $request)
     {   
+        Mesa::findOrFail($request->input('mesa'));
+
         $request->validate([
             'name' => ['required', 'min:3','max:50', 'regex:/^[a-zA-ZáÁéÉíÍóÓúÚñÑ]+\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?$/'],
-            'mesa' => ['required'],
-            't' => ['min:1'],
+            'mesa' => ['required', 'numeric', 'min: 1'],
+            't' => ['min:1', 'numeric'],
         ], [
             'name.required' => 'No tiene un nombre ingresado',
             'name.min' => 'El nombre es corto',
             'name.max' => 'El nombre es largo',
             'name.regex' => 'El nombre tiene datos erroneos',
             'mesa.required' => 'Seleccione una mesa',
-            't.min' =>'No hay detalles'
+            'mesa.numeric' => 'El id de mesa es un numero',
+            'mesa.min' => 'El id de mesa debe ser mayor a 0',
+            't.min' =>'No hay detalles',
+            't.numeric' =>'Debe ser un numero',
         ]);
 
         $m = Mesa::findOrFail($request->input('mesa')); 

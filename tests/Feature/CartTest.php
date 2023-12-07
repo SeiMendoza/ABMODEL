@@ -7,7 +7,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 
-class CartTest extends TestCase
+/**
+ * Estos casos de prueba no aplican a nada en el sistema
+ * Esta parte del sistema ya no esta ahora.
+  */
+
+class CartTest extends TestCase 
 {
     /**
      * A basic feature test example.

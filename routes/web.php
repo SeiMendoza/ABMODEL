@@ -151,27 +151,6 @@ Route::post('/cancelar-pedido/{pedido_id}', [PedidoUsuarioController::class, 'ca
 Route::post('/pedidos/{id}/cambiarmesa', [PedidoUsuarioController::class, 'Cambiar_mesa'])
   ->name('cambiar_mesa');
 
-/*****************************
- Rutas Para Menu de cliente
-******************************/
-
-Route::post('/menu/pedido/detalles', [MenuUsuarioController::class, 'details'])->middleware('auth')
-  ->name('cliente_menu.details');
-Route::get('/menu/qr', [MenuUsuarioController::class, 'qr'])->middleware('auth')
-  ->name('cliente_menu.qr');
-Route::get('/menu/prueba/c', [MenuUsuarioController::class, 'prueba'])
-  ->name('cliente_prueba');
-Route::get('/menu/usuario/pedido', [MenuUsuarioController::class, 'create'])->middleware('auth')
-  ->name('usuario_pedido.create');
-Route::post('/menu/usuario/pedido', [MenuUsuarioController::class, 'store'])->middleware('auth')
-  ->name('cliente_pedido.store');
-Route::put('/menu/detalles/{id}/editar', [MenuUsuarioController::class, 'edit'])->middleware('auth')
-  ->name('cliente_detalles.edit')->where('id', '[0-9]+');
-Route::delete('/menu/detalles/{id}/borrar', [MenuUsuarioController::class, 'destroy'])->middleware('auth')
-  ->name('cliente_detalles.destroy')->where('id', '[0-9]+');
-
-//Route::get('/menu', [MenuUsuarioController::class,'search'])
-//->name('menu.search');
 
 /*****************************
   Rutas Para Platillos y Bebidas
@@ -382,17 +361,6 @@ Route::get('/Reservaciones/Realizadas', [ReservacionTotalController::class, 'Rea
 Route::get('/Reservacion/{id}/Realizada/Detalles', [ReservacionTotalController::class, 'detalleRealizadas'])->middleware('auth')
   ->name('detalle.realizadas');
 
-Route::get('pedido/menu/mostrar', Mostrar::class); 
-
-Route::resource('/cart', CartController::class)->middleware('auth');
-Route::post('/create', [CartController::class, 'create'])->middleware('auth')->name('cart.create');
-Route::post('/clear', [CartController::class, 'clear'])->middleware('auth')->name('cart.clear');
-Route::get('/bebidas', [CartController::class, 'bebidas'])->middleware('auth')->name('cart.bebidas');
-Route::get('/platillos', [CartController::class, 'platillos'])->middleware('auth')->name('cart.platillos');
-Route::get('/complementos', [CartController::class, 'complementos'])->middleware('auth')->name('cart.complementos');
-
-Route::resource('/pedido/todo', DetallesPedidoController::class);
-
 //Rutas para manejo de errores
 Route::get('error/{error}', function ($error) {
   -
@@ -423,15 +391,10 @@ Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordCo
 /* 
  *Rutas livewire para pedidos
  */
-//Route::view('/pedido/menu/detalles', 'livewire/pedidos/menu')->name('menu.detalles');
 
-//Route::resource('/pedido/menu', Menu::class)->only('bebidas', 'platillos', 'complementos');
-//Route::get('/pedido/menu/completo', [Menu::class, 'render'])->name('menu');
-//Route::get('/pedido/menu/detalles', [DetallesPedido::class, 'render'])->name('menu.detalles');
 Route::post('/pedido/menu/guardar', [DetallesPedido::class, 'guardar'])->name('menu.store');
 Route::post('/pedido/menu/vaciar', [DetallesPedido::class, 'vaciar'])->name('menu.clear');
 Route::get('/pedido/menu', Menu::class)->name('menu.menu');
 Route::get('/pedido/menu/bebidas', Bebidas::class)->name('menu.bebidas');
 Route::get('/pedido/menu/platillos', Platillos::class)->name('menu.platillos');
 Route::get('/pedido/menu/complementos', Complementos::class)->name('menu.complementos');
-//Route::get('/pedido/menu/detalles', [DetallesPedido::class]);

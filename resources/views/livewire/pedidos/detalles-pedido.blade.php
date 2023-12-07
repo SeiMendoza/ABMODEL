@@ -65,7 +65,10 @@
             @endforeach
             </tbody>
             </table>
-        </div>
+        </div> 
+        @error('t')
+        <strong class="menerr" style="color:red">{{ $message }}</strong>
+        @enderror
     </div>
     <div class="bg-white col-12" style="margin:0; padding:0;">
         <div class="col col-8 d-flex justify-content-start bg-gray-100" 

@@ -11,6 +11,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+/*
+Estos casos de prueba no aplican a nada en el sistema
+Esta parte del sistema y ano esta funcionando ahora
+*/
 class MenuUsuarioTest extends TestCase
 {
     use WithFaker;
