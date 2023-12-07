@@ -43,11 +43,13 @@ class ReservarLocalTest extends TestCase
         $response->assertStatus(302);
     }
     //4
-  
+    /**Desde esta function hasta test_Reservacion_local_11 la ruta es Reser/Local 
+    oh puede usar el name de la ruta haciendo uso del metodo route       get(route('cliente.reservaLocal'))*/ 
+
     public function test_Reservacion_local_1()
     {
         $response = $this->actingAs(User::find(1))->get('/cliente/reservaLocal');
-        $response->assertSee('Resrvaccion del Local');
+        $response->assertSee('Resrvaccion del Local');                              //Verificar el el nombre en la vista ya que es 'Reservaciones del Local'
     }
     //5
     public function test_Reservacion_local_2()
@@ -125,6 +127,9 @@ class ReservarLocalTest extends TestCase
         $response->assertRedirect('/login');
     }
       //17
+      /**Desde esta function hasta test_nueva_Reservacion_local_create17 la ruta es /Local/create
+        oh puede usar el name de la ruta haciendo uso del metodo route       get(route('ReserLocal.create'))*/ 
+
       public function test_nueva_Reservacion_local_logueado()
       {
           $user = User::find(1);
@@ -137,7 +142,7 @@ class ReservarLocalTest extends TestCase
     public function test_nueva_Reservacion_local_create1()
     {
         $response = $this->actingAs(User::find(1))->get('ReserLocal.create');
-        $response->assertSee('Nueva Reservacion del Local');
+        $response->assertSee('Nueva Reservacion del Local');                   //es 'Nueva Reservación del Local' verificar en la vista
     }
   
     //12
@@ -168,7 +173,7 @@ class ReservarLocalTest extends TestCase
      public function test_nueva_Reservacion_local_create6()
      {
          $response = $this->actingAs(User::find(1))->get('ReserLocal.create');
-         $response->assertSee('Datos de la reservacion:');
+         $response->assertSee('Datos de la reservacion:');                //es 'Datos de la reservación:' verificar en la vista
      }
       //15
     public function test_nueva_Reservacion_local_create7()
@@ -198,7 +203,7 @@ class ReservarLocalTest extends TestCase
        public function test_nueva_Reservacion_local_create11()
        {
            $response = $this->actingAs(User::find(1))->get('ReserLocal.create');
-           $response->assertSee('Hora de llegada:');
+           $response->assertSee('Hora de llegada:');                   //es 'Hora de Llegada:' verificar en la vista         
        }
           //20
     public function test_nueva_Reservacion_local_create00()
@@ -210,13 +215,13 @@ class ReservarLocalTest extends TestCase
        public function test_nueva_Reservacion_local_create12()
        {
            $response = $this->actingAs(User::find(1))->get('ReserLocal.create');
-           $response->assertSee('Costo de la Reservacion:');
+           $response->assertSee('Costo de la Reservacion:');           //es 'Costo de la Reservación:' verificar en la vista    
        }
           //22
     public function test_nueva_Reservacion_local_create13()
     {
         $response = $this->actingAs(User::find(1))->get('ReserLocal.create');
-        $response->assertSee('Costo de la reservacion:');
+        $response->assertSee('Costo de la reservacion:');           //es 'Costo de la Reservación:' verificar en la vista   
     }
        //23
        public function test_nueva_Reservacion_local_create14()
@@ -228,7 +233,7 @@ class ReservarLocalTest extends TestCase
     public function test_nueva_Reservacion_local_create15()
     {
         $response = $this->actingAs(User::find(1))->get('ReserLocal.create');
-        $response->assertSee('Pago anticipado:');
+        $response->assertSee('Pago anticipado:');                //es 'Pago Anticipado:' verificar en la vista   
     }
        //25
        public function test_nueva_Reservacion_local_create16()
@@ -262,7 +267,7 @@ public function test_editar_Reservacion_local_status_200_usuario3()
     $user = User::find(1);
     $this->actingAs($user);
 
-    $response = $this->actingAs(User::find(1))->get('/ResCliente/1/editar');
+    $response = $this->actingAs(User::find(1))->get('/ResCliente/1/editar');           //La ruta es Cliente/{id}/Editando  (Cliente/1/Editando)
     $response->assertStatus(200);
 }
 //19

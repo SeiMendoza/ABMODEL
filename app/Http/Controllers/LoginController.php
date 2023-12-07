@@ -72,10 +72,7 @@ class LoginController extends Controller
         //Comprobar que el id en la URL coincide con el id del usuario autenticado
         if ($id != $usuarioAutenticado->id) {
             //Si no coincide, denegar el acceso
-            return redirect('/perfil')
-                ->with('mensaje', 'Acceso no autorizado.')
-                ->setStatusCode(403);
-
+            abort(403, 'Acceso no autorizado');
         }
 
         $user = User::findOrFail($id);
@@ -114,7 +111,9 @@ class LoginController extends Controller
 
         $usuarioAutenticado = Auth::user();
 
+        //Comprobar que el id en la URL coincide con el id del usuario autenticado
         if ($id != $usuarioAutenticado->id) {
+            //Si no coincide, denegar el acceso
             abort(403, 'Acceso no autorizado');
         }
         

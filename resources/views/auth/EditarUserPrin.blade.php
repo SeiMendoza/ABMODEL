@@ -31,15 +31,6 @@
         }
     </script>
 
-@if(session())
-    <script>
-        setTimeout(function() {
-            window.location.href = '/perfil';
-        }, 5000); // Redirigir después de 5 segundos
-    </script>
-@endif
-
-
     <div class="wrapper wrapper--w960"> <!--aquí iria el wrapper-->
         <div class="card border-radius-sm border-0" style="">
             <div class="card-body border-radius-sm border-0">

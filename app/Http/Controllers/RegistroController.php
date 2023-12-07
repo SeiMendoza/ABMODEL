@@ -27,7 +27,7 @@ class RegistroController extends Controller
             'email' => 'required|string|email|max:50|unique:users',
             'is_default' => ['required', Rule::in(['Administrador', 'Usuario'])],
             'password' => 'required|string|min:8|confirmed',
-            'address' => 'required|string|min:3|max:250|nullable',
+            'address' => 'required|string|min:3|max:250|regex:/^[a-zA-Z0-9\s.,\-]+$/|nullable',
             'telephone' => 'required|min_digits:8|max_digits:8|regex:/^[2,3,8,9][0-9]{7}+$/',
            // 'imagen' => 'required|image'
         ], [
@@ -52,6 +52,7 @@ class RegistroController extends Controller
             'address.string' => '¡Debes ingresar tu dirección, verifica la información!',
             'address.min' => '¡Ingresa tu dirección completa, sin abreviaturas!',
             'address.max' => '¡Has excedido el limite máximo de 250 letras!',
+            'address.regex' => '¡La dirección no puede contener solo caracteres especiales!',
 
             'telephone.required' => '¡Debes ingresar tu número de teléfono!',
             'telephone.min_digits' => '¡El número telefónico debe tener minimo: 8 dígitos!',
@@ -117,7 +118,7 @@ class RegistroController extends Controller
             'name' => 'required|min:3|max:40|regex:/^[a-zA-ZáÁéÉíÍóÓúÚñÑ]+\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?(\s[a-zA-ZáÁéÉíÍóÓúÚñÑ]+)?$/',
             'email' => 'required|string|email|max:50', Rule::unique('users')->ignore($id),
             'is_default' => ['', Rule::in(['Administrador', 'Usuario'])],
-            'address' => 'required|string|min:3|max:250',
+            'address' => 'required|string|min:3|max:250|regex:/^[a-zA-Z0-9\s.,\-]+$/',
             'telephone' => 'required|min:8|max:8|regex:/^[2,3,8,9][0-9]{7}+$/',
             'imagen' => ''
         ], [
@@ -137,6 +138,7 @@ class RegistroController extends Controller
             'address.string' => '¡Debes ingresar tu dirección, verifica la información!',
             'address.min' => '¡Ingresa tu dirección completa, sin abreviaturas!',
             'address.max' => '¡Has excedido el limite máximo de 250 letras!',
+            'address.regex' => '¡La dirección no puede contener solo caracteres especiales!',
 
             'telephone.required' => '¡Debes ingresar tu número de teléfono!',
             'telephone.min' => '¡El número telefónico debe tener minimo: 8 dígitos!',

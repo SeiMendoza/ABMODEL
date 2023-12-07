@@ -363,7 +363,7 @@ class perfilEditarTest extends TestCase
         $response->assertStatus(403);
 
         
-        $response->assertRedirect("/perfil");    //resuelta 
+        $response->assertRedirect("/perfil");    
     }
     public function testRedireccionDespuesDeActualizacion()
     {
