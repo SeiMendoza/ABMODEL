@@ -152,7 +152,7 @@
 
                             <div class="col">
                                 <div id="bebida" style="display:">
-                                    <label for=""><strong>Cantidad disponible</strong></label>
+                                    <label for=""><strong>Cantidad disponible:</strong></label>
                                     <input class="form-control border-radius-sm" type="number" placeholder="Ingrese la cantidad disponible"
                                         name="cantidad" id="cantidad" value="{{ old('cantidad') }}" style="height: 50px"
                                         onkeypress="quitarerror()"
